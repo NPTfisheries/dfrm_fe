@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from "rxjs";
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 import { User } from "src/_models/user";
 
@@ -24,15 +24,15 @@ export class UserService {
         return this.userSubject.value;
     }
 
-    login(username: string, password: string) {
+    login(email: string, password: string) {
+        var postData = {'user': { 'email':email, 'password':password }} 
         
-        console.log('you fired User.login()', username, password);
-        // return this.http.post<User>('http://localhost:8000/account/api/users/login/', { username, password })
-        //     .pipe(map(user => {
-        //         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        //         localStorage.setItem('user', JSON.stringify(user));
-        //         this.userSubject.next(user);
-        //         return user;
-        //     }))
+        console.log('Login fired:', postData);
+            // return this.httpClient.get('http://jsonplaceholder.typicode.com/posts');
+        return this.http.post('/api/users/login/', postData)
+            .pipe(map(user => {
+                // this.userSubject.next(user);
+                return user;
+            }))
     }
 }

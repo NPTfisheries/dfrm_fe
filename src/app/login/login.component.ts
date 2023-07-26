@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs';
 
 import { UserService } from 'src/_services/user.service';
 
@@ -9,7 +10,7 @@ import { UserService } from 'src/_services/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   form!: FormGroup;
   loading = false;
   submitted = false;
@@ -40,7 +41,18 @@ export class LoginComponent {
     }
 
     this.loading = true;
-    this.userService.login(this.f['username'].value, this.f['password'].value);
+
+    
+    this.userService.login(this.f['username'].value, this.f['password'].value)
+    .pipe(first())
+    .subscribe({
+      next: () => {
+        this.router.navigateByUrl('home');
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
   }
 
 }
