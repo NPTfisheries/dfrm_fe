@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -42,17 +42,26 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
 
-    
+
     this.userService.login(this.f['username'].value, this.f['password'].value)
-    .pipe(first())
-    .subscribe({
-      next: () => {
-        this.router.navigateByUrl('home');
-      },
-      error: error => {
-        console.log(error);
-      }
-    });
-  }
+      .subscribe(
+        (response: any) => {
+          const user = response.user;
+
+          localStorage.setItem('user', JSON.stringify(user));
+
+          this.loading = false;
+          this.router.navigateByUrl('home');
+        },
+        (error: any) => {
+          console.log(error);
+          this.loading = false;
+        }
+      )
+    }
+
+
+
+
 
 }

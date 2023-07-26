@@ -25,14 +25,9 @@ export class UserService {
     }
 
     login(email: string, password: string) {
-        var postData = {'user': { 'email':email, 'password':password }} 
+        var credentials = {'user': { 'email':email, 'password':password }} 
         
-        console.log('Login fired:', postData);
-            // return this.httpClient.get('http://jsonplaceholder.typicode.com/posts');
-        return this.http.post('/api/users/login/', postData)
-            .pipe(map(user => {
-                // this.userSubject.next(user);
-                return user;
-            }))
+        console.log('Login fired:', credentials);
+        return this.http.post('/api/users/login/', credentials)
     }
 }

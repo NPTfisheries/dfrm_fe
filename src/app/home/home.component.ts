@@ -6,5 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  currentUser?: any;
+
+
+  constructor( ) {
+    const storedUser = localStorage.getItem('user');
+    this.currentUser = storedUser ? JSON.parse(storedUser) : null;
+   }
+
+   clickFunc(){
+    console.log('clickadoo');
+    console.log(this.currentUser);
+   }
 
 }
