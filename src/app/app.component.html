@@ -1,18 +1,13 @@
-<nav>
-  <h3>DFRM Angular FE</h3><img src='./assets/images/DFRM.png' height="50px" />
+<ul class="nav p-3">
+  <img class="nav-link" src='./assets/images/DFRM.png' height="50px" />
   <div *ngFor="let tab of tabs">
-    <li >
-      <a routerLink="/{{tab | lowercase}}" routerLinkActive="active"
-        ariaCurrentWhenActive="page">{{tab}}</a>
-    </li>
+    <a class="nav-link" routerLink="/{{tab | lowercase}}" routerLinkActive="active"
+      ariaCurrentWhenActive="page">{{tab}}</a>
   </div>
-  <li>
-    <a routerLink="login" routerlinkActive="active">Login</a>
-  </li>
-</nav>
+  <a class="nav-link ms-auto" routerLink="login" routerlinkActive="active">Login</a>
+</ul>
 
-
-<router-outlet></router-outlet>
-
-
+<div class="container py-5">
+  <router-outlet></router-outlet>
+</div>
 <footer>Footer</footer>
