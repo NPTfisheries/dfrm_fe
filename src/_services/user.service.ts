@@ -10,7 +10,8 @@ import { User } from "src/_models/user";
 @Injectable({ providedIn: 'root' })
 export class UserService {
     private userSubject: BehaviorSubject<User | null>;
-    private user: Observable<User | null>;
+    public user: Observable<User | null>;
+    public loggedIn$: Observable<boolean>;
 
     constructor(
         private router: Router,
@@ -18,6 +19,7 @@ export class UserService {
     ) {
         this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
         this.user = this.userSubject.asObservable();
+        this.loggedIn$ = this.user.pipe(map(user => !!user));
     }
 
     public get userValue() {
@@ -25,9 +27,20 @@ export class UserService {
     }
 
     login(email: string, password: string) {
-        var credentials = {'user': { 'email':email, 'password':password }} 
-        
+        var credentials = { 'user': { 'email': email, 'password': password } }
+
         console.log('Login fired:', credentials);
         return this.http.post('/api/users/login/', credentials)
+            .pipe(map(user => {
+                console.log(user);
+                this.userSubject.next(user);
+                return user;
+            }));
     }
+
+    logout() {
+        // this.currentUser = null;
+        this.userSubject.next(null);
+    }
+
 }

@@ -33,35 +33,24 @@ export class LoginComponent implements OnInit {
   get f() { return this.form.controls; }
 
   onSubmit() {
-    this.submitted = true;
+    // this.submitted = true;
 
     // stop here if form is invalid
     if (this.form.invalid) {
       return;
     }
 
-    this.loading = true;
+    // this.loading = true;
 
-
-    this.userService.login(this.f['username'].value, this.f['password'].value)
-      .subscribe(
-        (response: any) => {
-          const user = response.user;
-
-          localStorage.setItem('user', JSON.stringify(user));
-
-          this.loading = false;
-          this.router.navigateByUrl('home');
-        },
-        (error: any) => {
-          console.log(error);
-          this.loading = false;
-        }
+    this.userService.login(this.f['username'].value, this.f['password'].value).subscribe(
+      (user) => {
+        console.log(user);
+      } // ,
+      // (error) => {
+      //   console.log(error);
+      // }
       )
-    }
 
-
-
-
+  }
 
 }

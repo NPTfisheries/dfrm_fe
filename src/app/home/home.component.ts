@@ -1,22 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/_services/user.service';
+
+import { User } from 'src/_models/user';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  currentUser?: any;
+export class HomeComponent implements OnInit {
+  currentUser?: User | null;
+  loggedIn: boolean = false;
 
 
-  constructor( ) {
-    const storedUser = localStorage.getItem('user');
-    this.currentUser = storedUser ? JSON.parse(storedUser) : null;
-   }
+  constructor(
+    private userService: UserService
+  ) {
+    // const storedUser = localStorage.getItem('user');
+    // this.currentUser = storedUser ? JSON.parse(storedUser) : null;
+  }
+
+  ngOnInit() {
+    // Subscribe to the user observable
+    this.userService.user.subscribe(user => {
+      this.currentUser = user;
+    });
+    this.userService.loggedIn$.subscribe(loggedIn => {
+      this.loggedIn = loggedIn;
+    });
+  }
+
 
    clickFunc(){
-    console.log('clickadoo');
+    console.log('currentUser:');
     console.log(this.currentUser);
    }
+
+   clickFunc2(){
+    console.log('loggedIn$:');
+    console.log(this.loggedIn);
+   }
+   
 
 }
