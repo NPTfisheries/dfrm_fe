@@ -6,10 +6,10 @@
             
             <div class="mb-3">
                 <label class="form-label">Email</label>
-                <input type="text" formControlName="username" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
-                <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
-                    <div *ngIf="f['username'].errors['required']">Username is required</div>
+                <input type="text" formControlName="email" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                    <div *ngIf="f['email'].errors['required']">Email is required</div>
                 </div>
             </div>
             
@@ -29,5 +29,6 @@
                 </button>
             </div>
         </form>
+        <button (click)="click1()">auth</button>
     </div>
 </div>

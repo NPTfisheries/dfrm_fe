@@ -1,4 +1,4 @@
-// AUTH SERVICE:  login, logout, permissions?, sharing JWT.
+// AUTH SERVICE:  login, logout, permissions, JWT.
 // https://angular.io/guide/architecture-services
 
 import { Injectable } from "@angular/core";
@@ -9,26 +9,31 @@ import { tap, map, catchError } from 'rxjs/operators';
 
 import { User } from "src/_models/user";
 
+class Auth {
+    token?: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-    private userSubject: BehaviorSubject<User | null>;
-    public user$: Observable<User | null>;
+    
+    // private authSubject: BehaviorSubject<Auth | null>;
+    // public auth$: Observable<Auth | null>;
     public loggedIn$: Observable<boolean>;
-    public token$: Subject<string>;
+    private tokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+    public token$: Observable<string> = this.tokenSubject.asObservable();
 
     constructor(
         private router: Router,
         private http: HttpClient
     ) {
-        this.userSubject = new BehaviorSubject<User | null>(null);
-        this.user$ = this.userSubject.asObservable();
-        this.loggedIn$ = this.user$.pipe(map(user => !!user));
-        this.token$ = new Subject<string>;
+        // this.authSubject = new BehaviorSubject<Auth | null>(null);
+        // this.auth$ = this.authSubject.asObservable();
+        this.loggedIn$ = this.token$.pipe(map(token => !!token));
     }
 
-    public get userValue() {
-        return this.userSubject.value;
-    }
+    // public get authValue() {
+    //     return this.authSubject.value;
+    // }
 
     login(email: string, password: string) {
         var credentials = { 'user': { 'email': email, 'password': password } }
@@ -36,20 +41,16 @@ export class AuthService {
         return this.http.post('/api/users/login/', credentials)
             .pipe(
                 tap((response) => {
-                    this.token$.next(Object.values(response)[0].token);
-                    console.log('token$: ', this.token$);
+                    this.tokenSubject.next(Object.values(response)[0].token);
                 }),
-                map((user: User) => {
+                // map((auth: Auth) => {
 
-                    // console.log('Inside service: ', Object.entries(user)); // Obj.entries returns an array.
-                    console.log('MAP:', user);
+                //     // console.log('Inside service: ', Object.entries(auth)); // Obj.entries returns an array.
+                //     // console.log('MAP:', auth);
+                //     this.authSubject.next(auth);
 
-                    // this.token$ = user.token;
-                    // this.userSubject.next(tokenlessUser);
-                    this.userSubject.next(user);
-
-                    // return user; // not sure this does anything.
-                }),
+                //     // return user; // not sure this does anything.
+                // }),
                 catchError((error) => {
                     // console.error('Login failed:', error);
                     return throwError(() => error);
@@ -59,7 +60,8 @@ export class AuthService {
 
     logout() {
         console.log('Logging out.');
-        this.userSubject.next(null);
+        // this.authSubject.next(null);
+        this.tokenSubject.next('');
         // logout should send you to home page
         this.router.navigate(['home']);
     }
