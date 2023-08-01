@@ -8,7 +8,6 @@ import { UserService } from 'src/_services/user.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  title = 'dfrm_fe';
   tabs = ['Home',]
   loggedIn: boolean = false;
 

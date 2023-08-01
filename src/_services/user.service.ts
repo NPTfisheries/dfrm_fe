@@ -29,17 +29,16 @@ export class UserService {
     login(email: string, password: string) {
         var credentials = { 'user': { 'email': email, 'password': password } }
 
-        console.log('Login fired:', credentials);
+        // console.log('Login fired:', credentials);
         return this.http.post('/api/users/login/', credentials)
             .pipe(map(user => {
-                console.log(user);
+                // console.log(user);
                 this.userSubject.next(user);
                 return user;
             }));
     }
 
     logout() {
-        // this.currentUser = null;
         this.userSubject.next(null);
     }
 

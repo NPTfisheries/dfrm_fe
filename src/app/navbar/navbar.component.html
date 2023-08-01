@@ -4,6 +4,21 @@
       <a class="nav-link" routerLink="/{{tab | lowercase}}" routerLinkActive="active"
         ariaCurrentWhenActive="page">{{tab}}</a>
     </div>
-    <a class="nav-link ms-auto" routerLink="login" routerlinkActive="active">Login</a>
-    <button class="nav-link ms-auto" (click)='logout()' routerlinkActive="active">Logout</button>
+    
+    <a *ngIf="!loggedIn; else profileNav" class="nav-link ms-auto" routerLink="login" routerlinkActive="active">DFRM Login</a>
   </ul>
+
+
+  
+  <ng-template #profileNav>
+    <li ngbDropdown class="nav-item ms-auto" role="presentation">
+		<button type="button" class="nav-link" ngbDropdownToggle>Welcome User?Dropdown</button>
+		<div ngbDropdownMenu>
+			<button ngbDropdownItem>Profile</button>
+			<button ngbDropdownItem>Another action</button>
+			<button ngbDropdownItem>Something else here</button>
+			<div class="dropdown-divider"></div>
+			<button ngbDropdownItem (click)="logout()">Logout</button>
+		</div>
+	</li>
+  </ng-template>

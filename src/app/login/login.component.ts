@@ -40,15 +40,17 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    // this.loading = true;
+    this.loading = true;
 
-    this.userService.login(this.f['username'].value, this.f['password'].value).subscribe(
-      (user) => {
-        console.log(user);
-      } // ,
-      // (error) => {
-      //   console.log(error);
-      // }
+    this.userService.login(this.f['username'].value, this.f['password'].value)
+      // you have to subscribe to make this work
+      .subscribe(
+        // (user) => {
+        //   console.log(user);
+        // } // ,
+        // (error) => {
+        //   console.log(error);
+        // }
       )
 
   }
