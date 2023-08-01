@@ -1,14 +1,7 @@
-<ul class="nav p-3">
-  <img class="nav-link" src='./assets/images/DFRM.png' height="50px" />
-  <div *ngFor="let tab of tabs">
-    <a class="nav-link" routerLink="/{{tab | lowercase}}" routerLinkActive="active"
-      ariaCurrentWhenActive="page">{{tab}}</a>
-  </div>
-  <a class="nav-link ms-auto" routerLink="login" routerlinkActive="active">Login</a>
-  <button class="nav-link ms-auto" (click)='logout()' routerlinkActive="active">Logout</button>
-</ul>
+<app-navbar></app-navbar>
 
 <div class="container py-5">
   <router-outlet></router-outlet>
 </div>
+
 <footer>Footer</footer>
