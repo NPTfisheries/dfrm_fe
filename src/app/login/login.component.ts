@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs';
 
-import { UserService } from 'src/_services/user.service';
+import { AuthService } from 'src/_services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +16,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
+    // private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -33,7 +32,7 @@ export class LoginComponent implements OnInit {
   get f() { return this.form.controls; }
 
   onSubmit() {
-    // this.submitted = true;
+    this.submitted = true; // not sure of value here.
 
     // stop here if form is invalid
     if (this.form.invalid) {
@@ -42,15 +41,21 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
 
-    this.userService.login(this.f['username'].value, this.f['password'].value)
-      // you have to subscribe to make this work
-      .subscribe(
-        // (user) => {
-        //   console.log(user);
-        // } // ,
-        // (error) => {
-        //   console.log(error);
-        // }
+    // we pass credentials to the userservice and it does the work.
+    this.authService.login(this.f['username'].value, this.f['password'].value)
+      // subscribe actually executes the function, and is necessary.
+      .subscribe( 
+        // how do we react if success (i.e., user returned)
+        (user) => {
+          this.loading = false;
+          this.router.navigate(['home'])
+        },
+        // ... or error?
+        (error) => {
+          this.loading = false;
+          alert('Try again.')  // improve the errors.
+        }
+
       )
 
   }

@@ -9,34 +9,30 @@ import { User } from 'src/_models/user';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  currentUser?: User | null;
+  user?: User | null;
   loggedIn: boolean = false;
+  info?: string | null;
 
 
   constructor(
     private userService: UserService
-  ) {  }
+  ) {
+  }
 
   ngOnInit() {
-    // Subscribe to observables
-    this.userService.user.subscribe(user => {
-      this.currentUser = user;
+    // Subscribe to the user observable
+    this.userService.user$.subscribe(user => {
+      this.user = user;
     });
-    this.userService.loggedIn$.subscribe(loggedIn => {
-      this.loggedIn = loggedIn;
-    });
+    this.userService.user$.subscribe(user => {
+      this.info = JSON.stringify(user);
+    })
   }
 
 
    clickFunc(){
-    console.log('currentUser:');
-    console.log(this.currentUser);
-   }
-
-   clickFunc2(){
-    console.log('loggedIn$:');
-    console.log(this.loggedIn);
-   }
-   
+    console.log('User$:');
+    console.log(this.user);
+   }   
 
 }

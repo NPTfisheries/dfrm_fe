@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { UserService } from 'src/_services/user.service';
+import { AuthService } from 'src/_services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,19 +13,18 @@ export class NavbarComponent implements OnInit {
 
 
   constructor(
-    private userService: UserService
+    private authService: AuthService
   ) {  }
 
   ngOnInit() {
     // Subscribe to the user observable
-    this.userService.loggedIn$.subscribe(loggedIn => {
+    this.authService.loggedIn$.subscribe(loggedIn => {
       this.loggedIn = loggedIn;
     });
   }
 
   logout(){
-    console.log('LOGOUT CLICKED');
-    this.userService.logout();
+    this.authService.logout();
    }
 
 }
