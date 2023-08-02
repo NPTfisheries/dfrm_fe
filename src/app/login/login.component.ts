@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     // we pass credentials to the userservice and it does the work.
     this.authService.login(this.f['username'].value, this.f['password'].value)
       // subscribe actually executes the function, and is necessary.
-      .subscribe( 
+      .subscribe(
         // how do we react if success (i.e., user returned)
         (user) => {
           this.loading = false;
