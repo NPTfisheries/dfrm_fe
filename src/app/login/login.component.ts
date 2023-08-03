@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs';
 
 import { AuthService } from 'src/_services/auth.service';
+import { AlertService } from 'src/_services/alert.service';
+
 
 @Component({
   selector: 'app-login',
@@ -16,15 +19,16 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    // private route: ActivatedRoute,
+    private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
+    private alertService: AlertService,
   ) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(255)]]
     });
   }
 
@@ -32,7 +36,9 @@ export class LoginComponent implements OnInit {
   get f() { return this.form.controls; }
 
   onSubmit() {
-    this.submitted = true; // works into html form
+    this.submitted = true; // enables validation messages
+
+    this.alertService.clear();
 
     // stop here if form is invalid
     if (this.form.invalid) {
@@ -42,20 +48,17 @@ export class LoginComponent implements OnInit {
     this.loading = true; // spinner
 
     this.authService.login(this.f['username'].value, this.f['password'].value)
-      // subscribe actually executes the function, and is necessary.
-      .subscribe(
-        // how do we react if success (i.e., user returned)
-        (user) => {
-          this.loading = false;
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          // this.loading = false;
           this.router.navigate(['home'])
         },
-        // ... or error?
-        (error) => {
-          this.loading = false;
-          alert('Try again.')  // improve the errors.
+        error: error => {
+          this.alertService.error(error);
+          this.loading=false;
         }
-      );
-
+      });
   }
 
 }

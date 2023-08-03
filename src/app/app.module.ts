@@ -16,10 +16,12 @@ import { ProfileComponent } from './profile/profile.component';
 
 import { AuthService } from 'src/_services/auth.service';
 import { UserService } from 'src/_services/user.service';
+import { AlertComponent } from 'src/_components/alert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AlertComponent,
     NavbarComponent,
     LoginComponent,
     HomeComponent,
