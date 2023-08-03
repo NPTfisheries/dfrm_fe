@@ -12,23 +12,16 @@ import { User } from 'src/_models/user';
 export class NavbarComponent implements OnInit {
   tabs = ['Home',]
 
-  user?: any | null = null; 
+  user?: User | null = null; 
 
   constructor(
-    private authService: AuthService
-  ) {  
-    this.user = this.authService.user$.getValue();
-  }
+    public authService: AuthService
+  ) {  }
 
   ngOnInit() {
     this.authService.user$.subscribe(user => {
       this.user = user;
     });
-
   }
-
-  logout(){
-    this.authService.logout();
-   }
 
 }

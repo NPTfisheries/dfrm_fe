@@ -26,12 +26,22 @@ export class UserService {
     ) {
         this.userSubject = new BehaviorSubject<User | null>(null);
         this.user$ = this.userSubject.asObservable();
-        this.authService.token$.subscribe((token: string) => {
-            this.headers = {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            }
-        })
+        // this.authService.token$.subscribe((token: string) => {
+        //     this.headers = {
+        //         "Content-Type": "application/json",
+        //         "Authorization": `Bearer ${token}`
+        //     }
+        // })
+    }
+
+    ngOnInit() {
+        this.authService.token$.subscribe((token) => {
+            console.log(token);
+            //     this.headers = {
+            //         "Content-Type": "application/json",
+            //         "Authorization": `Bearer ${token}`
+            //     }
+        });
     }
 
     public get userValue() {
@@ -72,7 +82,7 @@ export class UserService {
                     return throwError(() => error);
                 })
             );
-        
+
     }
 
 

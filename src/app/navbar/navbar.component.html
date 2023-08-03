@@ -11,13 +11,13 @@
 
 <ng-template #profileNav>
   <li ngbDropdown class="nav-item ms-auto" role="presentation">
-    <button type="button" class="nav-link" ngbDropdownToggle>Greetings, {{user.user.username}}</button>
+    <button type="button" class="nav-link" ngbDropdownToggle>Greetings, {{user?.username}}</button>
     <div ngbDropdownMenu>
       <button ngbDropdownItem routerLink="profile">Profile</button>
       <button ngbDropdownItem routerLink="register">Register New User</button>
       <button ngbDropdownItem>Something else here</button>
       <div class="dropdown-divider"></div>
-      <button ngbDropdownItem (click)="logout()">Logout</button>
+      <button ngbDropdownItem (click)="authService.logout()">Logout</button>
     </div>
   </li>
 </ng-template>
