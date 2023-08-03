@@ -19,6 +19,10 @@ export class AuthService {
         private http: HttpClient
     ) { }
 
+    getUser(): User | null {
+        return this.user$.getValue();
+    }
+
     // Login will set user$ and token$ values to be shared
     login(email: string, password: string) {
         var credentials = { 'user': { 'email': email, 'password': password } }
@@ -42,7 +46,7 @@ export class AuthService {
         // console.log('Logging out.');
         this.user$.next(null);
         this.token$.next(null);
-        this.router.navigate(['home']);
+        // this.router.navigate(['home']);
     }
 
 
