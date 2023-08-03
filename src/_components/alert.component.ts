@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { Alert, AlertType } from 'src/_models/alerts';
+import { Alert, AlertType, AlertOptions } from 'src/_models/alerts';
 import { AlertService } from 'src/_services/alert.service';
 
 @Component({ selector: 'alert', templateUrl: 'alert.component.html' })
@@ -93,4 +93,5 @@ export class AlertComponent implements OnInit, OnDestroy {
 
         return classes.join(' ');
     }
+
 }

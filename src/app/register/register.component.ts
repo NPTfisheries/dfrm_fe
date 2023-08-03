@@ -47,7 +47,6 @@ export class RegisterComponent implements OnInit {
     }
 
     this.userService.register(this.form.value)
-      // this.userService.register(this.f['email'].value, this.f['password'].value)
       .pipe(first())
       .subscribe({
         next: () => {

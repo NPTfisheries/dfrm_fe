@@ -20,6 +20,7 @@ export class AlertService {
     }
 
     error(message: string, options?: AlertOptions) {
+        console.log('alert service fired!');
         this.alert(new Alert({ ...options, type: AlertType.Error, message }));
     }
 
@@ -41,4 +42,5 @@ export class AlertService {
     clear(id = this.defaultId) {
         this.subject.next(new Alert({ id }));
     }
+
 }

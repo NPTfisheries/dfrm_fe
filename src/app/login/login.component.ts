@@ -45,18 +45,23 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.loading = true; // spinner
+    this.loading = true;
 
     this.authService.login(this.f['username'].value, this.f['password'].value)
       .pipe(first())
       .subscribe({
         next: () => {
-          // this.loading = false;
           this.router.navigate(['home'])
         },
-        error: error => {
-          this.alertService.error(error);
-          this.loading=false;
+        error: response => {
+          console.log(response);
+          // console.log(response.error);
+          // console.log(response.error.errors);
+          // console.log(response.error.errors.non_field_errors);
+          // this.alertService.error(response.error);
+          this.alertService.error(response.message);
+
+          this.loading = false;
         }
       });
   }

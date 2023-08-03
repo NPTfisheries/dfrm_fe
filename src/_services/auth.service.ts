@@ -29,12 +29,12 @@ export class AuthService {
                 map((response) => {
                     // console.log('login return:', response);
                     // console.log('user...', response.user);
-                    this.user$.next(response.user);  // next is the correct way to update a value of BehaviorSubject
-
                     // console.log('token? ', response.user.token);
+                    
+                    this.user$.next(response.user);  // next is the correct way to update a value of BehaviorSubject
                     this.token$.next(response.user.token);
-                }),
-                catchError(this.handleError)
+                })//,
+                // catchError(this.handleError)
             );
     }
 
