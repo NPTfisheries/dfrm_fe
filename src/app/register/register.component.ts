@@ -17,11 +17,9 @@ export class RegisterComponent implements OnInit {
   form!: FormGroup;
   loading = false;
   submitted = false;
-  token: string | null = null
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
     private userService: UserService,
   ) { }
 
@@ -30,25 +28,14 @@ export class RegisterComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
-
-    this.authService.token$.subscribe(token =>
-      this.token = token);
-
   }
 
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
 
   onSubmit() {
-    // console.log('SUBMIT REG', this.f['email'].value, this.f['password'].value);
-
     this.userService.register(this.f['email'].value, this.f['password'].value)
-      .subscribe()
-  }
-
-
-  click1() {
-    console.log('token: ', this.token)
+      .subscribe() // do we need a return here?
   }
 
 }

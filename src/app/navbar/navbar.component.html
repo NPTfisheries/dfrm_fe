@@ -1,24 +1,23 @@
 <ul class="nav p-3">
-    <img class="nav-link" src='./assets/images/DFRM.png' height="50px" />
-    <div *ngFor="let tab of tabs">
-      <a class="nav-link" routerLink="/{{tab | lowercase}}" routerLinkActive="active"
-        ariaCurrentWhenActive="page">{{tab}}</a>
+  <img class="nav-link" src='./assets/images/DFRM.png' height="50px" />
+  <div *ngFor="let tab of tabs">
+    <a class="nav-link" routerLink="/{{tab | lowercase}}" routerLinkActive="active"
+      ariaCurrentWhenActive="page">{{tab}}</a>
+  </div>
+
+  <a *ngIf="!user; else profileNav" class="nav-link ms-auto" routerLink="login" routerlinkActive="active">DFRM
+    Login</a>
+</ul>
+
+<ng-template #profileNav>
+  <li ngbDropdown class="nav-item ms-auto" role="presentation">
+    <button type="button" class="nav-link" ngbDropdownToggle>Greetings, {{user.user.username}}</button>
+    <div ngbDropdownMenu>
+      <button ngbDropdownItem routerLink="profile">Profile</button>
+      <button ngbDropdownItem routerLink="register">Register New User</button>
+      <button ngbDropdownItem>Something else here</button>
+      <div class="dropdown-divider"></div>
+      <button ngbDropdownItem (click)="logout()">Logout</button>
     </div>
-    
-    <a *ngIf="!loggedIn; else profileNav" class="nav-link ms-auto" routerLink="login" routerlinkActive="active">DFRM Login</a>
-  </ul>
-
-
-  
-  <ng-template #profileNav>
-    <li ngbDropdown class="nav-item ms-auto" role="presentation">
-		<button type="button" class="nav-link" ngbDropdownToggle>HELLO CONSUMER</button>
-		<div ngbDropdownMenu>
-			<button ngbDropdownItem>Profile</button>
-			<button ngbDropdownItem routerLink="register">Register New User</button>
-			<button ngbDropdownItem>Something else here</button>
-			<div class="dropdown-divider"></div>
-			<button ngbDropdownItem (click)="logout()">Logout</button>
-		</div>
-	</li>
-  </ng-template>
+  </li>
+</ng-template>

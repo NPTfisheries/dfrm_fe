@@ -17,7 +17,7 @@ import { AuthService } from "./auth.service";
 export class UserService {
     private userSubject: BehaviorSubject<User | null>;
     public user$: Observable<User | null>;
-    private token: string|null = null;
+    private headers: any;
 
     constructor(
         private router: Router,
@@ -27,7 +27,10 @@ export class UserService {
         this.userSubject = new BehaviorSubject<User | null>(null);
         this.user$ = this.userSubject.asObservable();
         this.authService.token$.subscribe((token: string) => {
-            this.token = token;
+            this.headers = {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
         })
     }
 
@@ -36,18 +39,11 @@ export class UserService {
     }
 
     register(email: string, password: string) {
+        const headers = new HttpHeaders(this.headers);
 
-        const headers = new HttpHeaders({
-            "Content-Type":"application/json",
-            "Authorization": `Bearer ${this.token}`
-        })
-        console.log('headers:', headers);
+        const packet = { 'user': { 'email': email, 'username': email, 'password': password } };
 
-        const packet = { 'user': { 'email': email, 'username': email, 'password': password } }
-        console.log('packet:', packet);
-
-        // authentication required, so token needed.
-        return this.http.post('/api/users/register/', packet, {headers})
+        return this.http.post('/api/users/register/', packet, { headers })
             .pipe(
                 tap((response) => {
                     console.log(response);
@@ -60,6 +56,23 @@ export class UserService {
         // if passwords match, fire away
         // create, clear form, send alert.
 
+    }
+
+    getUser() {
+        const headers = new HttpHeaders(this.headers);
+
+        return this.http.get('/api/user/', { headers })
+            .pipe(
+                tap((response) => {
+                    this.userSubject.next(response);
+                    // return response;
+                }),
+                catchError((error) => {
+                    // console.error('Login failed:', error);
+                    return throwError(() => error);
+                })
+            );
+        
     }
 
 

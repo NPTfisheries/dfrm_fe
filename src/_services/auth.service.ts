@@ -3,71 +3,62 @@
 
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject, throwError } from "rxjs";
-import { tap, map, catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 import { User } from "src/_models/user";
 
-class Auth {
-    token?: string;
-}
-
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-    
-    // private authSubject: BehaviorSubject<Auth | null>;
-    // public auth$: Observable<Auth | null>;
-    public loggedIn$: Observable<boolean>;
-    private tokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
+    private tokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>(''); // user will have token
     public token$: Observable<string> = this.tokenSubject.asObservable();
+
+    public user$ = new BehaviorSubject<User | null>(null);
 
     constructor(
         private router: Router,
         private http: HttpClient
-    ) {
-        // this.authSubject = new BehaviorSubject<Auth | null>(null);
-        // this.auth$ = this.authSubject.asObservable();
-        this.loggedIn$ = this.token$.pipe(map(token => !!token));
-    }
+    ) {  }
 
-    // public get authValue() {
-    //     return this.authSubject.value;
-    // }
+    token() {
+        if (!this.user$) {
+            return null;
+        } else {
+            return Object.values(this.user$)[0].token;
+        }
+    }
 
     login(email: string, password: string) {
         var credentials = { 'user': { 'email': email, 'password': password } }
 
-        return this.http.post('/api/users/login/', credentials)
+        // https://angular.io/guide/http-server-communication
+        return this.http.post<User>('/api/users/login/', credentials)
             .pipe(
-                tap((response) => {
-                    this.tokenSubject.next(Object.values(response)[0].token);
-                }),
-                // map((auth: Auth) => {
-
-                //     // console.log('Inside service: ', Object.entries(auth)); // Obj.entries returns an array.
-                //     // console.log('MAP:', auth);
-                //     this.authSubject.next(auth);
-
-                //     // return user; // not sure this does anything.
-                // }),
-                catchError((error) => {
-                    // console.error('Login failed:', error);
-                    return throwError(() => error);
-                })
+                map((user) => {
+                    // console.log('login return:', user);
+                    this.user$.next(user);  // next is the correct way to update a value of BehaviorSubject
+                                }),
+                catchError(this.handleError)
             );
     }
 
     logout() {
         console.log('Logging out.');
-        // this.authSubject.next(null);
-        this.tokenSubject.next('');
-        // logout should send you to home page
-        this.router.navigate(['home']);
+        this.user$.next(null); // reset token
+        this.router.navigate(['home']); // nav home
     }
 
 
-    // need to build an error handler
-    // https://angular.io/tutorial/tour-of-heroes/toh-pt6
+    // https://angular.io/guide/http-handle-request-errors
+    private handleError(error: HttpErrorResponse) {
+        if (error.status === 0) {
+            console.error('Client error:', error.error);
+        } else {
+            console.error('Console error:', error.error);
+        }
+        return throwError(() => new Error('Error. Please try again later.'));
+    }
 
 }

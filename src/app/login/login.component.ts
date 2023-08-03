@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from 'src/_services/auth.service';
+// import { User } from 'src/_models/user';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    // private route: ActivatedRoute,
+    private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
   ) { }
@@ -41,7 +42,6 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
 
-    // we pass credentials to the userservice and it does the work.
     this.authService.login(this.f['username'].value, this.f['password'].value)
       // subscribe actually executes the function, and is necessary.
       .subscribe(
@@ -55,8 +55,7 @@ export class LoginComponent implements OnInit {
           this.loading = false;
           alert('Try again.')  // improve the errors.
         }
-
-      )
+      );
 
   }
 

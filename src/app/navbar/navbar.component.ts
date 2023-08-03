@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from 'src/_services/auth.service';
+import { User } from 'src/_models/user';
+
 
 @Component({
   selector: 'app-navbar',
@@ -9,18 +11,20 @@ import { AuthService } from 'src/_services/auth.service';
 })
 export class NavbarComponent implements OnInit {
   tabs = ['Home',]
-  loggedIn: boolean = false;
 
+  user?: any | null = null; 
 
   constructor(
     private authService: AuthService
-  ) {  }
+  ) {  
+    this.user = this.authService.user$.getValue();
+  }
 
   ngOnInit() {
-    // Subscribe to the user observable
-    this.authService.loggedIn$.subscribe(loggedIn => {
-      this.loggedIn = loggedIn;
+    this.authService.user$.subscribe(user => {
+      this.user = user;
     });
+
   }
 
   logout(){
