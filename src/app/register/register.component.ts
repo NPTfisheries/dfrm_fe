@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/_services/auth.service';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { first } from 'rxjs';
 
 import { UserService } from 'src/_services/user.service';
@@ -24,9 +23,14 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.pattern("@nezperce.org$")]],
-      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(255)]]
+      email: ['', [Validators.required, Validators.pattern(/^[\w-]+(\.[\w-]+)*@nezperce\.org$/)]],
+      username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(255)]],
+      confirmPassword: ['', Validators.required]
     });
+
+    // add custom password match validation
+    this.form.get('confirmPassword')?.setValidators([Validators.required, this.passwordMatchValidator]);
   }
 
   // convenience getter for easy access to form fields
@@ -38,21 +42,30 @@ export class RegisterComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.form.invalid) {
-      this.loading=false;
+      this.loading = false;
       return;
     }
 
-    this.userService.register(this.f['email'].value, this.f['password'].value)
+    this.userService.register(this.form.value)
+      // this.userService.register(this.f['email'].value, this.f['password'].value)
       .pipe(first())
       .subscribe({
         next: () => {
           this.alertService.success('Registration successful!');
+          this.form.reset();
         },
         error: error => {
           this.alertService.error(error);
           this.loading = false;
         }
       })
+  }
+
+  // Custom validator to check if passwords match
+  passwordMatchValidator(control: AbstractControl): { [key: string]: any } | null {
+    const password = control.root.get('password')?.value;
+    const confirmPassword = control.value;
+    return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
 }
