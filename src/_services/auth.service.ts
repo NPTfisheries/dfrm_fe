@@ -1,4 +1,3 @@
-// AUTH SERVICE:  login, logout, permissions, JWT.
 // https://angular.io/guide/architecture-services
 
 import { Injectable } from "@angular/core";
@@ -29,7 +28,7 @@ export class AuthService {
             .pipe(
                 map((response) => {
                     // console.log('login return:', response);
-                    console.log('user...', response.user);
+                    // console.log('user...', response.user);
                     this.user$.next(response.user);  // next is the correct way to update a value of BehaviorSubject
 
                     // console.log('token? ', response.user.token);

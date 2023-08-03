@@ -20,7 +20,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {  
     this.authService.user$.subscribe((user) => {
       this.user = user;
-      this.token = user?.token;
+    });
+    this.authService.token$.subscribe((token) => {
+      this.token = token;
     });
   }
 
@@ -32,5 +34,8 @@ export class HomeComponent implements OnInit {
     console.log('Token', this.token)
   }
 
+  getTokenVal() {
+    console.log(this.authService.token$.getValue());
+  }
 
 }

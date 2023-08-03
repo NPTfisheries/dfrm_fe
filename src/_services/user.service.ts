@@ -15,43 +15,29 @@ import { AuthService } from "./auth.service";
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-    private userSubject: BehaviorSubject<User | null>;
-    public user$: Observable<User | null>;
-    private headers: any;
+    // current user (i.e., user$) available through authService
+    public userList$ = new BehaviorSubject<User[] | null>(null);
 
     constructor(
         private router: Router,
         private http: HttpClient,
         private authService: AuthService,
-    ) {
-        this.userSubject = new BehaviorSubject<User | null>(null);
-        this.user$ = this.userSubject.asObservable();
-        // this.authService.token$.subscribe((token: string) => {
-        //     this.headers = {
-        //         "Content-Type": "application/json",
-        //         "Authorization": `Bearer ${token}`
-        //     }
-        // })
-    }
+    ) {  }
 
-    ngOnInit() {
-        this.authService.token$.subscribe((token) => {
-            console.log(token);
-            //     this.headers = {
-            //         "Content-Type": "application/json",
-            //         "Authorization": `Bearer ${token}`
-            //     }
-        });
-    }
-
-    public get userValue() {
-        return this.userSubject.value;
-    }
+    ngOnInit() {}
 
     register(email: string, password: string) {
-        const headers = new HttpHeaders(this.headers);
+        // const headers = new HttpHeaders(this.headers);
+        const headers = new HttpHeaders({
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${this.authService.token$.getValue()}`
+                    });
+        
 
         const packet = { 'user': { 'email': email, 'username': email, 'password': password } };
+
+        console.log("REG INTOSDK");
+        console.log(this.authService.token$.getValue());
 
         return this.http.post('/api/users/register/', packet, { headers })
             .pipe(
@@ -59,7 +45,7 @@ export class UserService {
                     console.log(response);
                 }),
                 catchError((error) => {
-                    // console.error('Login failed:', error);
+                    // console.error('Registration failed:', error);
                     return throwError(() => error);
                 })
             );
@@ -68,22 +54,21 @@ export class UserService {
 
     }
 
-    getUser() {
-        const headers = new HttpHeaders(this.headers);
+    // getUser() {
+    //     const headers = new HttpHeaders(this.headers);
 
-        return this.http.get('/api/user/', { headers })
-            .pipe(
-                tap((response) => {
-                    this.userSubject.next(response);
-                    // return response;
-                }),
-                catchError((error) => {
-                    // console.error('Login failed:', error);
-                    return throwError(() => error);
-                })
-            );
-
-    }
+    //     return this.http.get('/api/user/', { headers })
+    //         .pipe(
+    //             tap((response) => {
+    //                 this.userSubject.next(response);
+    //                 // return response;
+    //             }),
+    //             catchError((error) => {
+    //                 // console.error('Login failed:', error);
+    //                 return throwError(() => error);
+    //             })
+    //         );
+    // }
 
 
     // need to build an error handler
