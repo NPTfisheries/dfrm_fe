@@ -3,7 +3,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject, throwError } from "rxjs";
+import { BehaviorSubject, throwError } from "rxjs";
 import { map, catchError } from 'rxjs/operators';
 
 import { User } from "src/_models/user";
@@ -39,10 +39,10 @@ export class AuthService {
     }
 
     logout(): void {
-        console.log('Logging out.');
-        this.user$.next(null); // reset token
+        // console.log('Logging out.');
+        this.user$.next(null);
         this.token$.next(null);
-        this.router.navigate(['home']); // nav home
+        this.router.navigate(['home']);
     }
 
 

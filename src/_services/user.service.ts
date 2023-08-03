@@ -6,38 +6,31 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, throwError } from "rxjs";
-import { tap, map, catchError } from 'rxjs/operators';
-
-import { User } from "src/_models/user";
+import { BehaviorSubject, throwError } from "rxjs";
+import { tap, catchError } from 'rxjs/operators';
 
 import { AuthService } from "./auth.service";
+import { User } from "src/_models/user";
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-    // current user (i.e., user$) available through authService
     public userList$ = new BehaviorSubject<User[] | null>(null);
 
     constructor(
         private router: Router,
         private http: HttpClient,
-        private authService: AuthService,
+        private authService: AuthService, // user$ and token$
     ) {  }
 
     ngOnInit() {}
 
     register(email: string, password: string) {
-        // const headers = new HttpHeaders(this.headers);
         const headers = new HttpHeaders({
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${this.authService.token$.getValue()}`
                     });
-        
 
         const packet = { 'user': { 'email': email, 'username': email, 'password': password } };
-
-        console.log("REG INTOSDK");
-        console.log(this.authService.token$.getValue());
 
         return this.http.post('/api/users/register/', packet, { headers })
             .pipe(
