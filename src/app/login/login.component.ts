@@ -54,13 +54,10 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['home'])
         },
         error: response => {
-          console.log(response);
-          // console.log(response.error);
-          // console.log(response.error.errors);
-          // console.log(response.error.errors.non_field_errors);
+          // console.log(response);
+          this.alertService.error(response.error.errors.non_field_errors);
           // this.alertService.error(response.error);
-          this.alertService.error(response.message);
-
+          // this.alertService.error(response.message);
           this.loading = false;
         }
       });

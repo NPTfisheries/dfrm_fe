@@ -51,10 +51,14 @@ export class RegisterComponent implements OnInit {
       .subscribe({
         next: () => {
           this.alertService.success('Registration successful!');
+          // reset the form to allow for another round.
           this.form.reset();
+          this.loading = false;
+          this.submitted = false;
         },
-        error: error => {
-          this.alertService.error(error);
+        error: response => {
+          // console.log(response);
+          this.alertService.error('Register New User Failed! Check your fields and try again.');
           this.loading = false;
         }
       })
