@@ -13,6 +13,7 @@ export class AuthService {
 
     public user$ = new BehaviorSubject<User | null>(null);
     public token$ = new BehaviorSubject<string |null>(null);
+    public isLoggedIn$ = new BehaviorSubject<boolean>(false);
 
     constructor(
         private router: Router,
@@ -21,6 +22,10 @@ export class AuthService {
 
     getUser(): User | null {
         return this.user$.getValue();
+    }
+
+    getIsLoggedIn(): boolean | null {
+        return this.isLoggedIn$.getValue();
     }
 
     // Login will set user$ and token$ values to be shared
@@ -37,6 +42,7 @@ export class AuthService {
                     
                     this.user$.next(response.user);  // next is the correct way to update a value of BehaviorSubject
                     this.token$.next(response.user.token);
+                    this.isLoggedIn$.next(true);
                 })//,
                 // catchError(this.handleError)
             );
@@ -46,6 +52,7 @@ export class AuthService {
         // console.log('Logging out.');
         this.user$.next(null);
         this.token$.next(null);
+        this.isLoggedIn$.next(false);
         // this.router.navigate(['home']);
     }
 

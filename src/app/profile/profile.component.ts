@@ -11,21 +11,17 @@ import { AuthService } from 'src/_services/auth.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  
+
   user$: Observable<User | null>;
 
   constructor(
     private authService: AuthService,
     private router: Router,
-  ) { 
+  ) {
     this.user$ = authService.user$;
   }
 
   ngOnInit() {
-    // redirect to home if not logged in
-    // if (!this.authService.userValue) {
-    //   this.router.navigate(['home']);
-    // };
   }
 
   click1() {

@@ -38,7 +38,7 @@ import { UserService } from 'src/_services/user.service';
   ],
   providers: [
     AuthService,
-    UserService
+    UserService,
   ], 
   bootstrap: [AppComponent]
 })
