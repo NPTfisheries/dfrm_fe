@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs';
 
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { AuthService } from 'src/_services/auth.service';
 import { AlertService } from 'src/_services/alert.service';
 
@@ -23,6 +25,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private alertService: AlertService,
+    public activeModal: NgbActiveModal,
   ) { }
 
   ngOnInit() {
@@ -51,7 +54,8 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          this.router.navigate(['home'])
+          this.activeModal.close();
+          this.router.navigate(['home']);
         },
         error: response => {
           console.log('Error response: ', response);

@@ -5,8 +5,7 @@
       ariaCurrentWhenActive="page">{{tab}}</a>
   </div>
 
-  <a *ngIf="!token; else profileNav" class="nav-link ms-auto" routerLink="login" routerlinkActive="active">DFRM
-    Login</a>
+  <button *ngIf="!token; else profileNav" class="nav-link ms-auto" (click)="openLoginModal()">Login</button>
 </ul>
 
 <ng-template #profileNav>

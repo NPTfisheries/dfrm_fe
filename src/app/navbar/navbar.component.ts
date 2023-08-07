@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthService } from 'src/_services/auth.service';
 import { User } from 'src/_models/user';
+
+import { LoginComponent } from '../login/login.component';
 
 
 @Component({
@@ -16,7 +19,8 @@ export class NavbarComponent implements OnInit {
   token: string | null = null;
 
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    private modalService: NgbModal,
   ) {  }
 
   ngOnInit() {
@@ -28,4 +32,7 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  openLoginModal() {
+    this.modalService.open(LoginComponent);
+  }
 }
