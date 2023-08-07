@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit {
   tabs = ['Home',]
 
   user?: User | null = null; 
+  token: string | null = null;
 
   constructor(
     public authService: AuthService
@@ -21,6 +22,9 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.authService.user$.subscribe(user => {
       this.user = user;
+    });
+    this.authService.token$.subscribe(token => {
+      this.token = token;
     });
   }
 

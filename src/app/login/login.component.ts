@@ -55,10 +55,7 @@ export class LoginComponent implements OnInit {
         },
         error: response => {
           console.log(response);
-          // this.alertService.error(response.error.errors.non_field_errors);
           this.alertService.error(response.error.detail);
-          // this.alertService.error(response.error);
-          // this.alertService.error(response.message);
           this.loading = false;
         }
       });

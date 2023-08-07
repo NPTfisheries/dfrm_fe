@@ -5,13 +5,14 @@
       ariaCurrentWhenActive="page">{{tab}}</a>
   </div>
 
-  <a *ngIf="!user; else profileNav" class="nav-link ms-auto" routerLink="login" routerlinkActive="active">DFRM
+  <a *ngIf="!token; else profileNav" class="nav-link ms-auto" routerLink="login" routerlinkActive="active">DFRM
     Login</a>
 </ul>
 
 <ng-template #profileNav>
   <li ngbDropdown class="nav-item ms-auto" role="presentation">
-    <button type="button" class="nav-link" ngbDropdownToggle>Greetings, {{user?.username}}</button>
+    <!-- <button type="button" class="nav-link" ngbDropdownToggle>Greetings, {{user?.username}}</button> -->
+    <button type="button" class="nav-link" ngbDropdownToggle>Greetings, NO USER NAME</button>
     <div ngbDropdownMenu>
       <button ngbDropdownItem routerLink="profile">Profile</button>
       <button ngbDropdownItem routerLink="register">Register New User</button>

@@ -24,23 +24,20 @@ export class UserService {
 
     ngOnInit() {}
 
-    register(user: User) {
+    register(newUser: User) {
     // register(email: string, password: string) {
         const headers = new HttpHeaders({
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${this.authService.token$.getValue()}`
                     });
 
-        // const packet = { 'user': { 'email': email, 'username': email, 'password': password } };
-
-        // return this.http.post('/api/users/register/', packet, { headers })
-        return this.http.post('/api/users/register/', {"user": user}, { headers })
+        return this.http.post('/api/v1/register/', newUser, { headers })
             .pipe(
                 tap((response) => {
                     console.log(response);
                 }),
                 catchError((error) => {
-                    // console.error('Registration failed:', error);
+                    console.error('Registration failed:', error);
                     return throwError(() => error);
                 })
             );

@@ -24,13 +24,15 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(/^[\w-]+(\.[\w-]+)*@nezperce\.org$/)]],
-      username: ['', Validators.required],
+      // username: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(255)]],
-      confirmPassword: ['', Validators.required]
+      password2: ['', Validators.required]
     });
 
     // add custom password match validation
-    this.form.get('confirmPassword')?.setValidators([Validators.required, this.passwordMatchValidator]);
+    this.form.get('password2')?.setValidators([Validators.required, this.passwordMatchValidator]);
   }
 
   // convenience getter for easy access to form fields
@@ -67,8 +69,8 @@ export class RegisterComponent implements OnInit {
   // Custom validator to check if passwords match
   passwordMatchValidator(control: AbstractControl): { [key: string]: any } | null {
     const password = control.root.get('password')?.value;
-    const confirmPassword = control.value;
-    return password === confirmPassword ? null : { passwordMismatch: true };
+    const password2 = control.value;
+    return password === password2 ? null : { passwordMismatch: true };
   }
 
 }

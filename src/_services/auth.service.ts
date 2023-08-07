@@ -40,7 +40,7 @@ export class AuthService {
                 map((response) => {
                     console.log('login return:', response);
                     // console.log('refresh: ', response.refresh);
-                    console.log('access: ', response.access);
+                    // console.log('access: ', response.access);
                     const decoded = jwtDecode(response.access);
                     console.log('access decoded:', decoded);
                     
