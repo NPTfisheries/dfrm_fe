@@ -43,7 +43,6 @@ export class AuthService {
             .pipe(
                 map((response) => {
                     console.log('login return:', response);
-                    // console.log('refresh: ', response.refresh);
                     // console.log('access: ', response.access);
                     const decoded = jwtDecode(response.access);
                     console.log('access decoded:', decoded);
@@ -61,7 +60,10 @@ export class AuthService {
         this.user$.next(null);
         this.token$.next(null);
         this.isLoggedIn$.next(false);
-        // this.router.navigate(['home']);
+
+        console.log('token:', this.token$);
+        console.log('isLoggedIn$:', this.isLoggedIn$);
+        this.router.navigate(['home']);
     }
 
 

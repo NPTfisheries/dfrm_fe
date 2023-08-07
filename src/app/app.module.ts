@@ -15,8 +15,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 
-import { AuthService } from 'src/_services/auth.service';
-import { UserService } from 'src/_services/user.service';
 import { CustomHttpInterceptor } from 'src/_helpers/http-interceptor';
 
 @NgModule({
@@ -38,13 +36,12 @@ import { CustomHttpInterceptor } from 'src/_helpers/http-interceptor';
     ReactiveFormsModule,
   ],
   providers: [
-    AuthService,
-    UserService,
+    // services with @Injectable({ providedIn: 'root' }) don't need to be listed here. They are singleton, available throughout app.
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CustomHttpInterceptor,
       multi: true,
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })

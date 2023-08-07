@@ -9,7 +9,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, throwError } from "rxjs";
 import { map, catchError } from 'rxjs/operators';
 
-import { AuthService } from "./auth.service";
 import { User } from "src/_models/user";
 
 @Injectable({ providedIn: 'root' })

@@ -10,7 +10,7 @@ import { User } from 'src/_models/user';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  tabs = ['Home',]
+  tabs = ['Home', 'Register']
 
   user?: User | null = null; 
   token: string | null = null;
