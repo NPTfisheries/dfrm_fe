@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app.routing.module';
@@ -17,6 +17,7 @@ import { ProfileComponent } from './profile/profile.component';
 
 import { AuthService } from 'src/_services/auth.service';
 import { UserService } from 'src/_services/user.service';
+import { CustomHttpInterceptor } from 'src/_helpers/http-interceptor';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,12 @@ import { UserService } from 'src/_services/user.service';
   providers: [
     AuthService,
     UserService,
-  ], 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomHttpInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

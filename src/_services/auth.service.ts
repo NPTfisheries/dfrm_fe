@@ -13,7 +13,7 @@ import { User } from "src/_models/user";
 export class AuthService {
 
     public user$ = new BehaviorSubject<User | null>(null);
-    public token$ = new BehaviorSubject<string |null>(null);
+    public token$ = new BehaviorSubject<string | null>(null);
     public isLoggedIn$ = new BehaviorSubject<boolean>(false);
 
     constructor(
@@ -27,6 +27,10 @@ export class AuthService {
 
     getIsLoggedIn(): boolean | null {
         return this.isLoggedIn$.getValue();
+    }
+
+    getToken(): string | null {
+        return this.token$.getValue();
     }
 
     // Login will set user$ and token$ values to be shared
@@ -43,7 +47,7 @@ export class AuthService {
                     // console.log('access: ', response.access);
                     const decoded = jwtDecode(response.access);
                     console.log('access decoded:', decoded);
-                    
+
                     // this.user$.next(response.user);  // next is the correct way to update a value of BehaviorSubject
                     this.token$.next(response.access);
                     this.isLoggedIn$.next(true);

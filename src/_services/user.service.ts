@@ -7,7 +7,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, throwError } from "rxjs";
-import { tap, catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 import { AuthService } from "./auth.service";
 import { User } from "src/_models/user";
@@ -19,31 +19,18 @@ export class UserService {
     constructor(
         private router: Router,
         private http: HttpClient,
-        private authService: AuthService, // user$ and token$
     ) {  }
 
     ngOnInit() {}
 
     register(newUser: User) {
-    // register(email: string, password: string) {
-        const headers = new HttpHeaders({
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${this.authService.token$.getValue()}`
-                    });
-
-        return this.http.post('/api/v1/register/', newUser, { headers })
+        // password check happens in register component and server.
+        return this.http.post('/api/v1/register/', newUser)
             .pipe(
-                tap((response) => {
+                map((response) => {
                     console.log(response);
-                }),
-                catchError((error) => {
-                    console.error('Registration failed:', error);
-                    return throwError(() => error);
                 })
             );
-        // if passwords match, fire away
-        // create, clear form, send alert.
-
     }
 
     // getUser() {
