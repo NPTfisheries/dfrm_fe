@@ -1,4 +1,4 @@
-export interface Department {
+export interface Division {
     id?: string;
     name?: string;
     manager?: string;

@@ -1,0 +1,26 @@
+<div>
+    <div class="modal-header">
+        <h4 class="modal-title">Add/Edit Department</h4>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div *ngFor="let key of fieldsKeys; trackBy: trackByFn">
+                <div class="mb-3">
+                    <label class="form-label">{{ formatLabel(key) }}</label>
+                    <input [type]="fields[key]" [formControlName]="key" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f[key].errors }" />
+                    <!-- <div *ngIf="submitted && f[key].errors" class="invalid-feedback">
+                        <div *ngIf="f[key].errors['required']">Email is required</div>
+                    </div> -->
+                </div>
+            </div>
+
+            <div>
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

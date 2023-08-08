@@ -15,6 +15,7 @@ export class BackendService {
             .pipe(
                 map((response) => {
                     console.log(response);
+                    return response;
                 })
             );
     }
@@ -24,6 +25,7 @@ export class BackendService {
             .pipe(
                 map((response) => {
                     console.log(response);
+                    return response;
                 })
             );
     }

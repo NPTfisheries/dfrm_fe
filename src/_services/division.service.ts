@@ -3,29 +3,33 @@ import { Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
 
 import { BackendService } from "./backend.service";
-import { Department } from "src/_models/department";
+import { Division } from "src/_models/division";
 
 @Injectable({ providedIn: 'root' })
-export class DepartmentService {
+export class DivisionService {
 
-    private url: string = 'api/v1/department/';
+    private url: string = 'api/v1/division/';
 
-    public department$ = new BehaviorSubject<Department | null>(null);
-    public departmentList$ = new BehaviorSubject<Department[] | null>(null);
+    // public division$ = new BehaviorSubject<Division | null>(null);
+    public divisionList$ = new BehaviorSubject<Division[] | null>(null);
 
     constructor(
         private backendService: BackendService,
     ) { }
 
-    getDepartment(id: Number) {
+    getDivision(id: Number) {
         // return this.backendService.get()
     }
 
-    getDepartmentList() {
+    getDivisionList() {
         return this.backendService.get(this.url);
     }
 
-    updateDepartment() {
+    createDivision() {
+
+    }
+
+    updateDivision() {
 
     }
 

@@ -18,6 +18,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { CustomHttpInterceptor } from 'src/_helpers/http-interceptor';
 import { ProfileUpdateComponent } from './profile-update/profile-update.component';
 import { DivisionsComponent } from './divisions/divisions.component';
+import { ListPageComponent } from './list-page/list-page.component';
+import { DepartmentUpdateComponent } from './department-update/department-update.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { DivisionsComponent } from './divisions/divisions.component';
     ProfileComponent,
     ProfileUpdateComponent,
     DivisionsComponent,
+    ListPageComponent,
+    DepartmentUpdateComponent,
   ],
   imports: [
     BrowserModule,
