@@ -33,9 +33,8 @@ export class UserService {
     }
 
     // getUser() {
-    //     const headers = new HttpHeaders(this.headers);
 
-    //     return this.http.get('/api/user/', { headers })
+    //     return this.http.get('/api/user/')
     //         .pipe(
     //             tap((response) => {
     //                 this.userSubject.next(response);

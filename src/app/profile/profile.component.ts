@@ -6,6 +6,9 @@ import { Observable } from 'rxjs';
 import { User } from 'src/_models/user';
 import { AuthService } from 'src/_services/auth.service';
 
+import { Profile } from 'src/_models/profile';
+import { ProfileService } from 'src/_services/profile.service';
+
 import { ProfileUpdateComponent } from '../profile-update/profile-update.component';
 
 @Component({
@@ -16,10 +19,11 @@ import { ProfileUpdateComponent } from '../profile-update/profile-update.compone
 export class ProfileComponent implements OnInit {
 
   user$: Observable<User | null>;
-  // profile$: Observable<Profile | null>;
+  profile$: Profile | null = null;
 
   constructor(
     private authService: AuthService,
+    private profileService: ProfileService,
     public modalService: NgbModal,
     private router: Router,
   ) {
@@ -28,9 +32,12 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.profileService.getProfile().subscribe(profile => {
+      console.log('profilecomp:', profile);
+    })
   }
 
   updateProfile() {
-    this.modalService.open(ProfileUpdateComponent);
+    this.modalService.open(ProfileUpdateComponent, { size: 'xl'});
   }
 }

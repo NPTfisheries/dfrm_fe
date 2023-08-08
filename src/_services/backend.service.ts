@@ -8,10 +8,18 @@ export class BackendService {
 
     constructor(
         private http: HttpClient,
-    ) {  }
+    ) { }
+
+    options(url: string) {
+        return this.http.get(url)
+            .pipe(
+                map((response) => {
+                    console.log(response);
+                })
+            );
+    }
 
     get(url: string) {
-        // password check happens in register component and server.
         return this.http.get(url)
             .pipe(
                 map((response) => {
@@ -21,7 +29,6 @@ export class BackendService {
     }
 
     post(url: string, object: Object) {
-        // password check happens in register component and server.
         return this.http.post(url, object)
             .pipe(
                 map((response) => {
@@ -31,7 +38,6 @@ export class BackendService {
     }
 
     put(url: string, object: Object) {
-        // password check happens in register component and server.
         return this.http.put(url, object)
             .pipe(
                 map((response) => {

@@ -13,7 +13,7 @@ import { LoginComponent } from '../login/login.component';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  tabs = ['Home', 'Register']
+  tabs = ['Home',  'Divisions', 'Profile']
 
   user?: User | null = null; 
   token: string | null = null;

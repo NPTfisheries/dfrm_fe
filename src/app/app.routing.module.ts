@@ -7,12 +7,14 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 
 import { AuthGuard } from 'src/_helpers/auth-guard';
+import { DivisionsComponent } from './divisions/divisions.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'home', component: HomeComponent},
+    { path: 'divisions', component: DivisionsComponent},
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
-    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+    { path: 'profile', component: ProfileComponent}, //, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

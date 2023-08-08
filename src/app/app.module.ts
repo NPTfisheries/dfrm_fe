@@ -17,6 +17,7 @@ import { ProfileComponent } from './profile/profile.component';
 
 import { CustomHttpInterceptor } from 'src/_helpers/http-interceptor';
 import { ProfileUpdateComponent } from './profile-update/profile-update.component';
+import { DivisionsComponent } from './divisions/divisions.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ProfileUpdateComponent } from './profile-update/profile-update.componen
     RegisterComponent,
     ProfileComponent,
     ProfileUpdateComponent,
+    DivisionsComponent,
   ],
   imports: [
     BrowserModule,
