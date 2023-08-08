@@ -17,8 +17,8 @@ export class DepartmentService {
         private backendService: BackendService,
     ) { }
 
-    getDepartment(id: Number) {
-        // return this.backendService.get()
+    getDepartment(slug: string) {
+        return this.backendService.get(this.url+slug);
     }
 
     getDepartmentList() {
