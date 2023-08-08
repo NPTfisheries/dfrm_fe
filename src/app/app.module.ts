@@ -16,6 +16,7 @@ import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 
 import { CustomHttpInterceptor } from 'src/_helpers/http-interceptor';
+import { ProfileUpdateComponent } from './profile-update/profile-update.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CustomHttpInterceptor } from 'src/_helpers/http-interceptor';
     HomeComponent,
     RegisterComponent,
     ProfileComponent,
+    ProfileUpdateComponent,
   ],
   imports: [
     BrowserModule,
