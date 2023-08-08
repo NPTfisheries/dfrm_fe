@@ -11,6 +11,7 @@ import { DivisionsComponent } from './divisions/divisions.component';
 import { DepartmentComponent } from './department/department.component';
 import { DepartmentDetailComponent } from './department-detail/department-detail.component';
 import { ListPageComponent } from './list-page/list-page.component';
+import { DetailPageComponent } from './detail-page/detail-page.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent},
@@ -27,13 +28,16 @@ const routes: Routes = [
     // { path: 'division', component: DivisionComponent}, //, canActivate: [AuthGuard]},
     // { path: 'department', component: DepartmentComponent}, //, canActivate: [AuthGuard]},
 
-    { path: 'department', component: ListPageComponent}, //, canActivate: [AuthGuard]},
-    { path: 'project', component: ListPageComponent}, //, canActivate: [AuthGuard]},
-    { path: 'user', component: ListPageComponent}, //, canActivate: [AuthGuard]},
+    { path: 'department', component: ListPageComponent, canActivate: [AuthGuard]},
+    { path: 'division', component: ListPageComponent, canActivate: [AuthGuard]},
+    { path: 'project', component: ListPageComponent, canActivate: [AuthGuard]},
+    { path: 'user', component: ListPageComponent, canActivate: [AuthGuard]},
 
     // wildcard for detail pages
-    { path: 'department/:slug', component: DepartmentDetailComponent}, //, canActivate: [AuthGuard]},
-    
+    { path: 'department/:slug', component: DetailPageComponent},
+    { path: 'division/:slug', component: DetailPageComponent},
+    { path: 'project/:slug', component: DetailPageComponent},
+    { path: 'user/:slug', component: DetailPageComponent},
 
 ];
 

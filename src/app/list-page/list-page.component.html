@@ -13,7 +13,9 @@
                         <th *ngFor="let col of columns">{{ col | titlecase}}</th>
                     </tr>
                 </thead>
-                <tbody>
+
+
+                <tbody *ngIf="routeType !== 'user'">
                     <tr *ngFor="let x of list">
                         <td>{{ x.name }}</td>
                         <td>{{ x.description }}</td>
@@ -23,14 +25,17 @@
                         <td><button [routerLink]="x.slug">View</button></td>
                     </tr>
                 </tbody>
+
+                <tbody *ngIf="routeType === 'user'">
+                    <tr *ngFor="let x of list">
+                        <td>{{ x.first_name }}</td>
+                        <td>{{ x.last_name }}</td>
+                        <td>{{ x.email }}</td>
+                        <td><button [routerLink]="x.slug">View</button></td>
+                    </tr>
+                </tbody>
+
+
             </table>
         </div>
     </div>
-
-    <!-- <div *ngIf="routeType === 'project'">
-        <h1>Project List</h1>
-      </div>
-      
-      <div *ngIf="routeType === 'user'">
-        <h1>User List</h1>
-      </div> -->

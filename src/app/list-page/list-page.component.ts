@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { BackendService } from 'src/_services/backend.service';
 import { AddEditPageComponent } from '../add-edit-page/add-edit-page.component';
@@ -15,6 +15,7 @@ export class ListPageComponent implements OnInit {
   list: any | undefined;
   options: any | undefined;
   columns: string[] = [];
+  url: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -28,13 +29,14 @@ export class ListPageComponent implements OnInit {
       if (urlSegments.length > 0) {
         this.routeType = urlSegments[0].path;
         this.populateFieldsArray();
+        this.url = '/api/v1/' + this.routeType + '/';
       }
 
-      this.backendService.get('/api/v1/' + this.routeType + '/').subscribe(list => {
+      this.backendService.get(this.url).subscribe(list => {
         this.list = list;
       });
 
-      this.backendService.options('/api/v1/' + this.routeType + '/').subscribe(options => {
+      this.backendService.options(this.url).subscribe(options => {
         this.options = options;
       });
 
@@ -44,7 +46,19 @@ export class ListPageComponent implements OnInit {
   }
 
   add() {
-    this.modalService.open(AddEditPageComponent, { size: 'xl' });
+    const modalOptions: NgbModalOptions = {
+      size: 'xl',
+        };
+      
+    const modalRef = this.modalService.open(AddEditPageComponent, modalOptions);
+    
+    modalRef.componentInstance.url = this.url;
+
+    modalRef.result.then((result) => {
+      if (result) {
+        console.log('modalRef result:', result);
+      }
+    });
   }
 
   clicky() {
@@ -57,7 +71,7 @@ export class ListPageComponent implements OnInit {
       case 'department':
       case 'division':
       case 'project':
-        this.columns = ['name', 'manager', 'deputy', 'assistant', 'is_active'];
+        this.columns = ['name', 'description', 'manager', 'deputy', 'assistant'];
         break;
       case 'user':
         this.columns = ['first_name', 'last_name', 'email'];

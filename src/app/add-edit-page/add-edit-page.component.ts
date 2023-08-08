@@ -21,6 +21,8 @@ export class AddEditPageComponent {
   submitted = false;
   data: any | null = null;
 
+  url: string | undefined;
+
   fields: Fields = {
     name: 'text',
     description: 'text',
@@ -47,6 +49,7 @@ export class AddEditPageComponent {
   get f() { return this.form.controls; }
 
   ngOnInit() {
+    console.log('MODAL:', this.url)
     this.form = this.formBuilder.group({});
 
     // Adding form controls dynamically based on fields
