@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { BackendService } from 'src/_services/backend.service';
+import { AddEditPageComponent } from '../add-edit-page/add-edit-page.component';
 
 @Component({
   selector: 'app-list-page',
@@ -15,6 +17,7 @@ export class ListPageComponent implements OnInit {
   constructor (
     private route: ActivatedRoute,
     private backendService: BackendService,
+    private modalService: NgbModal,
   ) { }
   
   
@@ -31,4 +34,10 @@ export class ListPageComponent implements OnInit {
 
     });
   }
+
+  add() {
+    this.modalService.open(AddEditPageComponent, { size: 'xl'});
+  }
+
+
 }

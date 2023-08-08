@@ -22,6 +22,8 @@ import { DepartmentComponent } from './department/department.component';
 import { DepartmentUpdateComponent } from './department-update/department-update.component';
 import { DepartmentDetailComponent } from './department-detail/department-detail.component';
 import { ListPageComponent } from './list-page/list-page.component';
+import { DetailPageComponent } from './detail-page/detail-page.component';
+import { AddEditPageComponent } from './add-edit-page/add-edit-page.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { ListPageComponent } from './list-page/list-page.component';
     DepartmentUpdateComponent,
     DepartmentDetailComponent,
     ListPageComponent,
+    DetailPageComponent,
+    AddEditPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,31 +1,40 @@
-
 <h1>{{ routeType | titlecase }} List</h1>
+
+
+<button (click)="add()">Add {{ routeType | titlecase }}</button>
 
 <div class="container">
     <div class="card m-5 p-3">
         <div class="card-body">
             <table class="table table-bordered table-striped table-hover">
                 <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Manager</th>
-                    <th>Deputy</th>
-                    <th>Assistant</th>
-                    <th>Slug</th>
-                </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Manager</th>
+                        <th>Deputy</th>
+                        <th>Assistant</th>
+                        <th>Slug</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let x of list">
-                    <td>{{ x.name }}</td>
-                    <td>{{ x.description }}</td>
-                    <td>{{ x.manager }}</td>
-                    <td>{{ x.deputy }}</td>
-                    <td>{{ x.assistant }} </td>
-                    <td><button [routerLink]=" routeType + x.slug">View</button></td>
-                </tr>
+                    <tr *ngFor="let x of list">
+                        <td>{{ x.name }}</td>
+                        <td>{{ x.description }}</td>
+                        <td>{{ x.manager }}</td>
+                        <td>{{ x.deputy }}</td>
+                        <td>{{ x.assistant }} </td>
+                        <td><button [routerLink]="x.slug">View</button></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
-
     </div>
+
+    <!-- <div *ngIf="routeType === 'project'">
+        <h1>Project List</h1>
+      </div>
+      
+      <div *ngIf="routeType === 'user'">
+        <h1>User List</h1>
+      </div> -->
