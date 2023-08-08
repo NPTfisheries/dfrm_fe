@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs';
 
+import { AlertService } from 'src/_services/alert.service';
 import { DepartmentService } from 'src/_services/department.service';
 import { Department } from 'src/_models/department';
 
@@ -29,7 +31,6 @@ export class DepartmentUpdateComponent {
     manager: 'text',
     deputy: 'text',
     assistant: 'text',
-    department: 'text',
   };
 
   get fieldsKeys(): string[] {
@@ -44,6 +45,7 @@ export class DepartmentUpdateComponent {
     private formBuilder: FormBuilder,
     private activeModal: NgbActiveModal,
     private departmentService: DepartmentService,
+    private alertService: AlertService,
   ) { }
 
   get f() { return this.form.controls; }
@@ -65,7 +67,32 @@ export class DepartmentUpdateComponent {
 
   onSubmit() {
     console.log('clicked update department');
-    // this.profileService.updateProfile();
+    this.submitted = true;
+    this.loading = true;
+
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      this.loading = false;
+      return;
+    }
+
+    this.departmentService.createDepartment(this.form.value)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.alertService.success('Department creation successful!');
+          // reset the form to allow for another round.
+          this.form.reset();
+          this.loading = false;
+          this.submitted = false;
+        },
+        error: response => {
+          // console.log(response);
+          this.alertService.error('Error: Department Creation Failed!');
+          this.loading = false;
+        }
+      })
+    ;
     this.activeModal.close();
   }
 }

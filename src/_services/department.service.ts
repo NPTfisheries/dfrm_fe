@@ -25,6 +25,10 @@ export class DepartmentService {
         return this.backendService.get(this.url);
     }
 
+    createDepartment(object: Department) {
+        return this.backendService.post(this.url, object);
+
+    }
     updateDepartment() {
 
     }

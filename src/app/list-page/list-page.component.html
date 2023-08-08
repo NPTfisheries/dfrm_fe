@@ -1,3 +1,33 @@
 <p>list-page works!</p>
 
 <button (click)="addDepartment()">Add Department</button>
+
+<div class="container">
+    <div class="card m-5 p-3">
+        <div class="card-body">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Manager</th>
+                    <th>Deputy</th>
+                    <th>Assistant</th>
+                    <th>Slug</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let dep of departmentList">
+                    <td>{{ dep.name }}</td>
+                    <td>{{ dep.description }}</td>
+                    <td>{{ dep.manager }}</td>
+                    <td>{{ dep.deputy }}</td>
+                    <td>{{ dep.assistant }} </td>
+                    <td>{{ dep.slug }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
