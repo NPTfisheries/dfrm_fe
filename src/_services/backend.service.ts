@@ -11,7 +11,7 @@ export class BackendService {
     ) { }
 
     options(url: string) {
-        return this.http.get(url)
+        return this.http.options(url)
             .pipe(
                 map((response) => {
                     console.log(response);
