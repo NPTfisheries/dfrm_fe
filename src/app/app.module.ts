@@ -21,6 +21,7 @@ import { DivisionsComponent } from './divisions/divisions.component';
 import { DepartmentComponent } from './department/department.component';
 import { DepartmentUpdateComponent } from './department-update/department-update.component';
 import { DepartmentDetailComponent } from './department-detail/department-detail.component';
+import { ListPageComponent } from './list-page/list-page.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { DepartmentDetailComponent } from './department-detail/department-detail
     DepartmentComponent,
     DepartmentUpdateComponent,
     DepartmentDetailComponent,
+    ListPageComponent,
   ],
   imports: [
     BrowserModule,
