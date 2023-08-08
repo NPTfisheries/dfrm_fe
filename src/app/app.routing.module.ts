@@ -8,15 +8,30 @@ import { ProfileComponent } from './profile/profile.component';
 
 import { AuthGuard } from 'src/_helpers/auth-guard';
 import { DivisionsComponent } from './divisions/divisions.component';
-import { ListPageComponent } from './list-page/list-page.component';
+import { DepartmentComponent } from './department/department.component';
+import { DepartmentDetailComponent } from './department-detail/department-detail.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'home', component: HomeComponent},
-    { path: 'divisions', component: DivisionsComponent},
-    { path: 'department-list', component: ListPageComponent}, //, canActivate: [AuthGuard]},
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
     { path: 'profile', component: ProfileComponent}, //, canActivate: [AuthGuard]},
+
+    // plural is for the public-facing card pages
+    // { path: 'departments', component: DepartmentsComponent},
+    { path: 'divisions', component: DivisionsComponent},
+    // { path: 'projects', component: ProjectsComponent},
+    
+    // singular is for the list page, similar to django return for API
+    // { path: 'division', component: DivisionComponent}, //, canActivate: [AuthGuard]},
+    { path: 'department', component: DepartmentComponent}, //, canActivate: [AuthGuard]},
+    // { path: 'project', component: ProjectComponent}, //, canActivate: [AuthGuard]},
+    // { path: 'user', component: UserComponent}, //, canActivate: [AuthGuard]},
+
+    // wildcard for detail pages
+    { path: 'department/:slug', component: DepartmentDetailComponent}, //, canActivate: [AuthGuard]},
+    
+
 ];
 
 @NgModule({

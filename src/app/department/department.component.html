@@ -1,6 +1,6 @@
-<p>list-page works!</p>
+<h1>{{title}} List</h1>
 
-<button (click)="addDepartment()">Add Department</button>
+<button (click)="addDepartment()">Add {{title}}</button>
 
 <div class="container">
     <div class="card m-5 p-3">
@@ -23,7 +23,8 @@
                     <td>{{ dep.manager }}</td>
                     <td>{{ dep.deputy }}</td>
                     <td>{{ dep.assistant }} </td>
-                    <td>{{ dep.slug }}</td>
+                    <td><button [routerLink]="'/department/' + dep.slug">View</button></td>
+                    <!-- <td><button routerLink="{{dep.slug}}">Edit</button></td> -->
                 </tr>
                 </tbody>
             </table>

@@ -8,10 +8,12 @@ import { Department } from 'src/_models/department';
 
 @Component({
   selector: 'app-list-page',
-  templateUrl: './list-page.component.html',
-  styleUrls: ['./list-page.component.css']
+  templateUrl: './department.component.html',
+  styleUrls: ['./department.component.css']
 })
-export class ListPageComponent implements OnInit {
+export class DepartmentComponent implements OnInit {
+
+  title = 'Department'
 
   departmentList:any;
 
@@ -27,6 +29,10 @@ export class ListPageComponent implements OnInit {
 
   addDepartment() {
     this.modalService.open(DepartmentUpdateComponent, { size: 'xl'});
+  }
+
+  clicky() {
+    console.log('clicky');
   }
 
 }
