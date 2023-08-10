@@ -16,6 +16,7 @@ import { DetailPageComponent } from './detail-page/detail-page.component';
 const routes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'home', component: HomeComponent},
+    { path: '', redirectTo: 'home', pathMatch:'full' },
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
     { path: 'profile', component: ProfileComponent}, //, canActivate: [AuthGuard]},
 
