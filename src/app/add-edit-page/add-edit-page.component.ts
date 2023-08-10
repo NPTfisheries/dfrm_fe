@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -17,6 +17,9 @@ interface Fields {
   styleUrls: ['./add-edit-page.component.css']
 })
 export class AddEditPageComponent {
+
+  @Output() refreshList: EventEmitter<void> = new EventEmitter<void>();
+
   form!: FormGroup;
   formatLabel = formatLabel
   loading = false;
@@ -79,11 +82,20 @@ export class AddEditPageComponent {
       return;
     }
 
-    console.log('You submitted on the Add/Edit page!')
-    this.backendService.post(this.url, this.form.value).subscribe(response =>
-      console.log('ADD/EDIT response:', response)
-      );
+    if (this.addOrEdit === 'add') {
+      this.backendService.post(this.url, this.form.value).subscribe(response => {
+        console.log('Add response:', response);
+        this.refreshList.emit();
+      });
+    }
+    if (this.addOrEdit === 'edit') {
+      this.backendService.patch(this.url, this.form.value).subscribe(response => {
+        console.log('Edit response:', response);
+        this.refreshList.emit();
+      });
+    }
+    
 
-    this.activeModal.close();
+    this.activeModal.close('success');
   }
 }

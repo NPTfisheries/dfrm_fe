@@ -30,6 +30,16 @@ export class BackendService {
             );
     }
 
+    patch(url: string, object: Object) {
+        return this.http.patch(url, object)
+            .pipe(
+                map((response) => {
+                    console.log(`${url} response:`, response);
+                    return response;
+                })
+            );
+    }
+
     post(url: string, object: Object) {
         return this.http.post(url, object)
             .pipe(

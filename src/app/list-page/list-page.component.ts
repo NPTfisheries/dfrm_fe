@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { BackendService } from 'src/_services/backend.service';
@@ -12,6 +12,8 @@ type Action = 'add' | 'edit';
   styleUrls: ['./list-page.component.css']
 })
 export class ListPageComponent implements OnInit {
+
+  @ViewChild(AddEditPageComponent) addEditComponent!: AddEditPageComponent;
 
   routeType: string | undefined;
   list: any | undefined;
@@ -57,13 +59,21 @@ export class ListPageComponent implements OnInit {
     modalRef.componentInstance.routeType = this.routeType;
     modalRef.componentInstance.addOrEdit = action;
 
-    // modalRef.result.then((result) => {
-    //   if (result) {
-    //     console.log('modalRef result:', result);
-    //   }
-    // });
+    modalRef.result.then((result) => {
+      console.log(result);
+      if (result === 'success') {
+        console.log('modalRef result:', result);
+        this.refreshListData();
+      }
+    }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
 
+  refreshListData() {
+    this.backendService.get(this.url).subscribe(list => {
+      this.list = list;
+    });
+  }
+  
   clicky() {
     console.log('list:', this.list);
   }
