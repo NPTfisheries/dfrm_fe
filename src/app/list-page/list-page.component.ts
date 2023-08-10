@@ -15,7 +15,6 @@ export class ListPageComponent implements OnInit {
 
   routeType: string | undefined;
   list: any | undefined;
-  // options: any | undefined;
   columns: string[] = [];
   url: string = '';
 
@@ -38,10 +37,6 @@ export class ListPageComponent implements OnInit {
         this.list = list;
       });
 
-      // this.backendService.options(this.url).subscribe(options => {
-      //   this.options = options;
-      // });
-
     });
   }
 
@@ -58,20 +53,19 @@ export class ListPageComponent implements OnInit {
     if (action == 'edit') {
       modalRef.componentInstance.url = this.url+slug+'/';
     }
-    
+
     modalRef.componentInstance.routeType = this.routeType;
     modalRef.componentInstance.addOrEdit = action;
 
-    modalRef.result.then((result) => {
-      if (result) {
-        console.log('modalRef result:', result);
-      }
-    });
+    // modalRef.result.then((result) => {
+    //   if (result) {
+    //     console.log('modalRef result:', result);
+    //   }
+    // });
   }
 
   clicky() {
     console.log('list:', this.list);
-    // console.log('opts:', this.options);
   }
 
   populateFieldsArray() {

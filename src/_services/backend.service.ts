@@ -14,7 +14,7 @@ export class BackendService {
         return this.http.options(url)
             .pipe(
                 map((response) => {
-                    console.log(response);
+                    console.log(`${url} response:`, response);
                     return response;
                 })
             );
@@ -24,7 +24,7 @@ export class BackendService {
         return this.http.get(url)
             .pipe(
                 map((response) => {
-                    console.log(response);
+                    console.log(`${url} response:`, response);
                     return response;
                 })
             );
@@ -34,7 +34,8 @@ export class BackendService {
         return this.http.post(url, object)
             .pipe(
                 map((response) => {
-                    console.log(response);
+                    console.log(`${url} response:`, response);
+                    return response;
                 })
             );
     }
@@ -43,7 +44,8 @@ export class BackendService {
         return this.http.put(url, object)
             .pipe(
                 map((response) => {
-                    console.log(response);
+                    console.log(`${url} response:`, response);
+                    return response;
                 })
             );
     }

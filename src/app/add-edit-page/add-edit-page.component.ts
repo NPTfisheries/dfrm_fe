@@ -21,24 +21,32 @@ export class AddEditPageComponent {
   formatLabel = formatLabel
   loading = false;
   submitted = false;
-  data: any | null = null;
+  data: any | undefined;
 
   url: string | undefined;
   // slug: string | undefined;
   addOrEdit: string | undefined;
   routeType: string | undefined;
 
-  fields: Fields = {
-    name: 'text',
-    description: 'text',
-    manager: 'text',
-    deputy: 'text',
-    assistant: 'text',
-  };
+  fields: string[] = [
+    'name',
+    'description',
+    'manager',
+    'deputy',
+    'assistant'
+  ];
 
-  get fieldsKeys(): string[] {
-    return Object.keys(this.fields);
-  }
+  // fields: Fields = {
+  //   name: 'text',
+  //   description: 'text',
+  //   manager: 'text',
+  //   deputy: 'text',
+  //   assistant: 'text',
+  // };
+
+  // get fieldsKeys(): string[] {
+  //   return Object.keys(this.fields);
+  // }
 
   trackByFn(index: number, item: string): string {
     return item;
@@ -54,26 +62,22 @@ export class AddEditPageComponent {
   get f() { return this.form.controls; }
 
   ngOnInit() {
-    console.log('MODAL:', this.url)
-    this.form = this.formBuilder.group({});
+    // console.log('MODAL:', this.url);
 
-    if (this.url !== undefined) {
+    if (this.url !== undefined && this.addOrEdit === 'edit') {
       this.backendService.get(this.url).subscribe(data => {
-        this.data = data
+        this.data = data;
       });
-
     }
 
-    // Adding form controls dynamically based on fields
+    this.form = this.formBuilder.group({
+      name: [this.data?.name || '', Validators.required],
+      description: ['y', Validators.required],
+      manager: ['', Validators.required],
+      deputy: ['z', Validators.required],
+      assistant: ['', Validators.required],
+    });
 
-    for (const key of this.fieldsKeys) {
-      const validators = this.fields[key] === 'text' ? [Validators.required] : [];
-      this.form.addControl(key, this.formBuilder.control('', validators));
-    }
-
-    // this.backendService.get(data => {
-    //   this.data = data;
-    // });
   }
 
   onSubmit() {

@@ -4,16 +4,74 @@
     </div>
     <div class="modal-body">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div *ngFor="let key of fieldsKeys; trackBy: trackByFn">
+            <!-- <div *ngFor="let key of fieldsKeys; trackBy: trackByFn">
                 <div class="mb-3">
                     <label class="form-label">{{ formatLabel(key) }}</label>
                     <input [type]="fields[key]" [formControlName]="key" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && f[key].errors }" />
-                    <!-- <div *ngIf="submitted && f[key].errors" class="invalid-feedback">
+                    <div *ngIf="submitted && f[key].errors" class="invalid-feedback">
                         <div *ngIf="f[key].errors['required']">Email is required</div>
-                    </div> -->
+                    </div>
                 </div>
-            </div>
+            </div> -->
+
+            <ng-container [ngSwitch]="routeType">
+
+                <ng-container *ngSwitchCase="'department'">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" formControlName="name" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
+                        <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                            <div *ngIf="f['name'].errors['required']">Name is required</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <input type="text" formControlName="description" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f['description'].errors }" />
+                        <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                            <div *ngIf="f['description'].errors['required']">Description is required</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Manager</label>
+                        <input type="text" formControlName="manager" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f['manager'].errors }" />
+                        <div *ngIf="submitted && f['manager'].errors" class="invalid-feedback">
+                            <div *ngIf="f['manager'].errors['required']">Manager is required</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Deputy</label>
+                        <input type="text" formControlName="deputy" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f['deputy'].errors }" />
+                        <div *ngIf="submitted && f['deputy'].errors" class="invalid-feedback">
+                            <div *ngIf="f['deputy'].errors['required']">Deputy is required</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Assistant</label>
+                        <input type="text" formControlName="assistant" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f['assistant'].errors }" />
+                        <div *ngIf="submitted && f['assistant'].errors" class="invalid-feedback">
+                            <div *ngIf="f['assistant'].errors['required']">Assistant is required</div>
+                        </div>
+                    </div>
+                </ng-container>
+                
+                <ng-container *ngSwitchCase="'user'">
+                    <div class="mb-3">
+                        <label class="form-label">USER</label>
+                        <input type="text" formControlName="username" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
+                        <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                            <div *ngIf="f['username'].errors['required']">Email is required</div>
+                        </div>
+                    </div>
+                </ng-container>
+
+            </ng-container>
 
             <div>
                 <button [disabled]="loading" class="btn btn-primary">
@@ -24,3 +82,4 @@
         </form>
     </div>
 </div>
+
