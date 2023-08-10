@@ -1,27 +1,21 @@
-<h2>Register a new User!</h2>
-<div class="card container-sm px-0">
-    <h4 class="card-header">Please fill in the form.</h4>
-    <div class="card-body">
+<div>
+    <div class="modal-header">
+        <h4 class="modal-title">Register a new User!</h4>
+    </div>
+    <alert id="alert-modal"></alert>
+    <div class="modal-body">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            
+
             <div class="mb-3">
                 <label class="form-label">Email</label>
                 <input type="text" formControlName="email" class="form-control"
                     [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
                 <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                     <div *ngIf="f['email'].errors['required']">Email is required</div>
-                    <div *ngIf="f['email'].errors['pattern']">Only DFRM employee emails are accepted (@nezperce.org)</div>
+                    <div *ngIf="f['email'].errors['pattern']">Only DFRM employee emails are accepted (@nezperce.org)
+                    </div>
                 </div>
-            </div>      
-
-            <!-- <div class="mb-3">
-                <label class="form-label">Username</label>
-                <input type="text" formControlName="username" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
-                <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
-                    <div *ngIf="f['username'].errors['required']">Username is required</div>
-                </div>
-            </div> -->
+            </div>
 
             <div class="mb-3">
                 <label class="form-label">First Name</label>
@@ -40,7 +34,7 @@
                     <div *ngIf="f['last_name'].errors['required']">Last name is required</div>
                 </div>
             </div>
-            
+
             <div class="mb-3">
                 <label class="form-label">Password</label>
                 <input type="password" formControlName="password" class="form-control"
@@ -61,7 +55,7 @@
                     <div *ngIf="f['password2'].errors['passwordMismatch']">Passwords do not match</div>
                 </div>
             </div>
-            
+
             <div>
                 <button [disabled]="loading" class="btn btn-primary">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>

@@ -2,22 +2,10 @@
     <div class="modal-header">
         <h4 class="modal-title">{{ addOrEdit | titlecase }} {{ routeType | titlecase }}</h4>
     </div>
+    <alert id="alert-modal"></alert>
     <div class="modal-body">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <!-- <div *ngFor="let key of fieldsKeys; trackBy: trackByFn">
-                <div class="mb-3">
-                    <label class="form-label">{{ formatLabel(key) }}</label>
-                    <input [type]="fields[key]" [formControlName]="key" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f[key].errors }" />
-                    <div *ngIf="submitted && f[key].errors" class="invalid-feedback">
-                        <div *ngIf="f[key].errors['required']">Email is required</div>
-                    </div>
-                </div>
-            </div> -->
 
-            <ng-container [ngSwitch]="routeType">
-
-                <ng-container *ngSwitchCase="'department'">
                     <div class="mb-3">
                         <label class="form-label">Name</label>
                         <input type="text" formControlName="name" class="form-control"
@@ -58,20 +46,18 @@
                             <div *ngIf="f['assistant'].errors['required']">Assistant is required</div>
                         </div>
                     </div>
-                </ng-container>
-                
-                <ng-container *ngSwitchCase="'user'">
-                    <div class="mb-3">
-                        <label class="form-label">USER</label>
-                        <input type="text" formControlName="username" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
-                        <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
-                            <div *ngIf="f['username'].errors['required']">Email is required</div>
-                        </div>
-                    </div>
-                </ng-container>
 
+            <ng-container *ngIf="routeType == 'division'">
+                <div class="mb-3">
+                    <label class="form-label">Department</label>
+                    <input type="text" formControlName="department" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f['department'].errors }" />
+                    <div *ngIf="submitted && f['department'].errors" class="invalid-feedback">
+                        <div *ngIf="f['department'].errors['required']">Department is required</div>
+                    </div>
+                </div>
             </ng-container>
+
 
             <div>
                 <button [disabled]="loading" class="btn btn-primary">

@@ -28,7 +28,7 @@ export class AddEditPageComponent {
 
   url: string = '';
   addOrEdit: string | undefined;
-  routeType: string | undefined;
+  routeType: string | undefined; // project, division, department
 
   trackByFn(index: number, item: string): string {
     return item;
@@ -37,14 +37,14 @@ export class AddEditPageComponent {
   constructor(
     private formBuilder: FormBuilder,
     private activeModal: NgbActiveModal,
-    private backendService: BackendService,
     private alertService: AlertService,
+    private backendService: BackendService,
   ) { }
 
   get f() { return this.form.controls; }
 
   ngOnInit() {
-    // console.log('MODAL:', this.url);
+    console.log('MODAL:', this.url);
 
     if (this.url !== undefined) {
       if (this.addOrEdit === 'edit') {
@@ -68,16 +68,18 @@ export class AddEditPageComponent {
       manager: [this.data?.manager || '', Validators.required],
       deputy: [this.data?.deputy || '', Validators.required],
       assistant: [this.data?.assistant || '', Validators.required],
+      ...(this.routeType === 'division' ? { department: [this.data?.department || '', Validators.required] } : {}),
     });
   }
 
   onSubmit() {
-    console.log('clicked update department');
+    console.log(`Attempting to ${this.addOrEdit} a ${this.routeType}`);
     this.submitted = true;
     this.loading = true;
 
     // stop here if form is invalid
     if (this.form.invalid) {
+      this.alertService.error('Error: please check your values and try again.', { id: 'alert-modal', autoClose: true });
       this.loading = false;
       return;
     }
@@ -94,7 +96,6 @@ export class AddEditPageComponent {
         this.refreshList.emit();
       });
     }
-    
 
     this.activeModal.close('success');
   }

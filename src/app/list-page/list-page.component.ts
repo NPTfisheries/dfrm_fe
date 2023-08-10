@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
 import { AddEditPageComponent } from '../add-edit-page/add-edit-page.component';
+import { RegisterComponent } from '../register/register.component';
 
 type Action = 'add' | 'edit';
 
@@ -63,11 +64,27 @@ export class ListPageComponent implements OnInit {
     modalRef.componentInstance.addOrEdit = action;
 
     modalRef.result.then((result) => {
-      console.log(result);
+      console.log('modal result:', result);
       if (result === 'success') {
         console.log('modalRef result:', result);
         this.refreshListData();
         this.alertService.success(`${this.routeType} added/edited.`);
+      }
+    }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
+  }
+  
+  registerUser() {
+    console.log('reg user"');
+    const modalOptions: NgbModalOptions = {
+      size: 'xl',
+        };
+      
+    const modalRef = this.modalService.open(RegisterComponent, modalOptions);
+
+    modalRef.result.then((result) => {
+      console.log(result);
+      if (result === 'success') {
+        
       }
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
@@ -78,14 +95,14 @@ export class ListPageComponent implements OnInit {
     });
   }
   
-  clicky() {
-    console.log('list:', this.list);
-  }
-
   populateFieldsArray() {
     switch (this.routeType) {
       case 'department':
+        this.columns = ['name', 'description', 'manager', 'deputy', 'assistant'];
+        break;
       case 'division':
+        this.columns = ['name', 'description', 'manager', 'deputy', 'assistant', 'department'];
+        break;
       case 'project':
         this.columns = ['name', 'description', 'manager', 'deputy', 'assistant'];
         break;
@@ -96,8 +113,6 @@ export class ListPageComponent implements OnInit {
         this.columns = [];
         break;
     }
-
-
   }
 
 }
