@@ -15,15 +15,23 @@ export class AuthService {
     public user$ = new BehaviorSubject<User | null>(null);
     public token$ = new BehaviorSubject<string | null>(null);
     public isLoggedIn$ = new BehaviorSubject<boolean>(false);
+    private _userId : number | null;
 
     constructor(
         private router: Router,
         private http: HttpClient
-    ) { }
+    ) { 
+        this._userId = null;
+    }
 
     getUser(): User | null {
         return this.user$.getValue();
     }
+    
+    get userId(): number | null {
+        return this._userId;
+    }
+
 
     getIsLoggedIn(): boolean | null {
         return this.isLoggedIn$.getValue();
@@ -42,12 +50,14 @@ export class AuthService {
         return this.http.post<any>('/api/v1/login/', credentials)
             .pipe(
                 map((response) => {
-                    // console.log('login return:', response);
+                    console.log('login return:', response);
                     // console.log('access: ', response.access);
-                    const decoded = jwtDecode(response.access);
-                    // console.log('access decoded:', decoded);
+                    const decoded: any = jwtDecode(response.access);
+                    console.log('access decoded:', decoded);
+                    
 
                     // this.user$.next(response.user);  // next is the correct way to update a value of BehaviorSubject
+                    this._userId = Number(decoded.user_id);
                     this.token$.next(response.access);
                     this.isLoggedIn$.next(true);
                 })//,

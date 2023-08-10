@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthService } from 'src/_services/auth.service';
 import { User } from 'src/_models/user';
 
 import { LoginComponent } from '../login/login.component';
+import { PasswordUpdateComponent } from '../password-update/password-update.component';
 
 
 @Component({
@@ -34,5 +35,20 @@ export class NavbarComponent implements OnInit {
 
   openLoginModal() {
     this.modalService.open(LoginComponent);
+  }
+
+  updatePassword() {
+    const modalOptions: NgbModalOptions = {
+      size: 'sm',
+        };
+      
+    const modalRef = this.modalService.open(PasswordUpdateComponent, modalOptions);
+
+    modalRef.result.then((result) => {
+      console.log(result);
+      if (result === 'success') {
+        
+      }
+    }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
 }
