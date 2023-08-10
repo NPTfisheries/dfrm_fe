@@ -23,30 +23,9 @@ export class AddEditPageComponent {
   submitted = false;
   data: any | undefined;
 
-  url: string | undefined;
-  // slug: string | undefined;
+  url: string = '';
   addOrEdit: string | undefined;
   routeType: string | undefined;
-
-  fields: string[] = [
-    'name',
-    'description',
-    'manager',
-    'deputy',
-    'assistant'
-  ];
-
-  // fields: Fields = {
-  //   name: 'text',
-  //   description: 'text',
-  //   manager: 'text',
-  //   deputy: 'text',
-  //   assistant: 'text',
-  // };
-
-  // get fieldsKeys(): string[] {
-  //   return Object.keys(this.fields);
-  // }
 
   trackByFn(index: number, item: string): string {
     return item;
@@ -64,20 +43,29 @@ export class AddEditPageComponent {
   ngOnInit() {
     // console.log('MODAL:', this.url);
 
-    if (this.url !== undefined && this.addOrEdit === 'edit') {
-      this.backendService.get(this.url).subscribe(data => {
-        this.data = data;
-      });
+    if (this.url !== undefined) {
+      if (this.addOrEdit === 'edit') {
+        this.backendService.get(this.url).subscribe(data => {
+          this.data = data;
+
+          this.initializeFormWithData();
+        });
+      } else {
+        this.initializeFormWithData();
+      }
+
     }
 
+  }
+
+  initializeFormWithData() {
     this.form = this.formBuilder.group({
       name: [this.data?.name || '', Validators.required],
-      description: ['y', Validators.required],
-      manager: ['', Validators.required],
-      deputy: ['z', Validators.required],
-      assistant: ['', Validators.required],
+      description: [this.data?.description || '', Validators.required],
+      manager: [this.data?.manager || '', Validators.required],
+      deputy: [this.data?.deputy || '', Validators.required],
+      assistant: [this.data?.assistant || '', Validators.required],
     });
-
   }
 
   onSubmit() {
@@ -92,7 +80,10 @@ export class AddEditPageComponent {
     }
 
     console.log('You submitted on the Add/Edit page!')
+    this.backendService.post(this.url, this.form.value).subscribe(response =>
+      console.log('ADD/EDIT response:', response)
+      );
 
-    // this.activeModal.close();
+    this.activeModal.close();
   }
 }

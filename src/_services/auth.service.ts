@@ -42,10 +42,10 @@ export class AuthService {
         return this.http.post<any>('/api/v1/login/', credentials)
             .pipe(
                 map((response) => {
-                    console.log('login return:', response);
+                    // console.log('login return:', response);
                     // console.log('access: ', response.access);
                     const decoded = jwtDecode(response.access);
-                    console.log('access decoded:', decoded);
+                    // console.log('access decoded:', decoded);
 
                     // this.user$.next(response.user);  // next is the correct way to update a value of BehaviorSubject
                     this.token$.next(response.access);
