@@ -2,7 +2,7 @@
 
 <button (click)="clicky()">list/ops</button>
 
-<button (click)="add()">Add {{ routeType | titlecase }}</button>
+<button (click)="addOrEdit('add', undefined)">Add {{ routeType | titlecase }}</button>
 
 <div class="container">
     <div class="card m-5 p-3">
@@ -11,6 +11,8 @@
                 <thead>
                     <tr>
                         <th *ngFor="let col of columns">{{ col | titlecase}}</th>
+                        <th>View</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
 
@@ -22,7 +24,8 @@
                         <td>{{ x.manager }}</td>
                         <td>{{ x.deputy }}</td>
                         <td>{{ x.assistant }} </td>
-                        <td><button [routerLink]="x.slug">View</button></td>
+                        <td><button class="btn btn-success" [routerLink]="x.slug">View</button></td>
+                        <td><button class="btn btn-warning" (click)="addOrEdit('edit', x.slug)">Edit</button></td>
                     </tr>
                 </tbody>
 

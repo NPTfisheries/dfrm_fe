@@ -1,0 +1,4 @@
+<select class="form-control" id="select-employee"> <!--[(ngModel)]="selected"> -->
+    <option value=null>''</option>
+    <option *ngFor="let user in userList" value={{user.id}}> {{user.first_name}} {{user.last_name}} </option>
+</select>

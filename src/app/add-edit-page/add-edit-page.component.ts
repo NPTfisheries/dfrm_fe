@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
 
+import { formatLabel } from 'src/_helpers/formatLabel';
+
 interface Fields {
   [key: string]: string;
 }
@@ -16,12 +18,15 @@ interface Fields {
 })
 export class AddEditPageComponent {
   form!: FormGroup;
-  // formatLabel = formatLabel
+  formatLabel = formatLabel
   loading = false;
   submitted = false;
   data: any | null = null;
 
   url: string | undefined;
+  // slug: string | undefined;
+  addOrEdit: string | undefined;
+  routeType: string | undefined;
 
   fields: Fields = {
     name: 'text',
@@ -52,6 +57,13 @@ export class AddEditPageComponent {
     console.log('MODAL:', this.url)
     this.form = this.formBuilder.group({});
 
+    if (this.url !== undefined) {
+      this.backendService.get(this.url).subscribe(data => {
+        this.data = data
+      });
+
+    }
+
     // Adding form controls dynamically based on fields
 
     for (const key of this.fieldsKeys) {
@@ -76,7 +88,7 @@ export class AddEditPageComponent {
     }
 
     console.log('You submitted on the Add/Edit page!')
-    
+
     // this.activeModal.close();
   }
 }

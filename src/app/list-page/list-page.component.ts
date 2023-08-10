@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { BackendService } from 'src/_services/backend.service';
 import { AddEditPageComponent } from '../add-edit-page/add-edit-page.component';
 
+type Action = 'add' | 'edit';
+
 @Component({
   selector: 'app-list-page',
   templateUrl: './list-page.component.html',
@@ -13,7 +15,7 @@ export class ListPageComponent implements OnInit {
 
   routeType: string | undefined;
   list: any | undefined;
-  options: any | undefined;
+  // options: any | undefined;
   columns: string[] = [];
   url: string = '';
 
@@ -36,23 +38,29 @@ export class ListPageComponent implements OnInit {
         this.list = list;
       });
 
-      this.backendService.options(this.url).subscribe(options => {
-        this.options = options;
-      });
-
-
+      // this.backendService.options(this.url).subscribe(options => {
+      //   this.options = options;
+      // });
 
     });
   }
 
-  add() {
+  addOrEdit(action: Action, slug: string|undefined) {
     const modalOptions: NgbModalOptions = {
       size: 'xl',
         };
       
     const modalRef = this.modalService.open(AddEditPageComponent, modalOptions);
     
-    modalRef.componentInstance.url = this.url;
+    if (action == 'add') {
+      modalRef.componentInstance.url = this.url;
+    } 
+    if (action == 'edit') {
+      modalRef.componentInstance.url = this.url+slug+'/';
+    }
+    
+    modalRef.componentInstance.routeType = this.routeType;
+    modalRef.componentInstance.addOrEdit = action;
 
     modalRef.result.then((result) => {
       if (result) {
@@ -63,7 +71,7 @@ export class ListPageComponent implements OnInit {
 
   clicky() {
     console.log('list:', this.list);
-    console.log('opts:', this.options);
+    // console.log('opts:', this.options);
   }
 
   populateFieldsArray() {
