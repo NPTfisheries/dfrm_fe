@@ -43,8 +43,8 @@ export class PasswordUpdateComponent {
 
   onSubmit() {
     console.log('updat pw fird', this.form.value);
-    this.backendService.put(`/api/v1/change_password/${this.user_id}/`, this.form.value).subscribe(response => {
-      this.alertService.success('Password updated!');
+    this.backendService.put(`/api/v1/change_password/`, this.form.value).subscribe(response => {
+      this.alertService.success('Password updated!', { autoClose: true });
       this.activeModal.close('success');
     });
   }

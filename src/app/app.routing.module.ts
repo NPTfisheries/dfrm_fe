@@ -18,7 +18,7 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent},
     { path: '', redirectTo: 'home', pathMatch:'full' },
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
-    { path: 'profile', component: ProfileComponent}, //, canActivate: [AuthGuard]},
+    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
 
     // plural is for the public-facing card pages
     // { path: 'departments', component: DepartmentsComponent},

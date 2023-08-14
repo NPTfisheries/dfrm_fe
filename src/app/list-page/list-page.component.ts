@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 
@@ -28,6 +28,7 @@ export class ListPageComponent implements OnInit {
     private backendService: BackendService,
     private alertService: AlertService,
     private modalService: NgbModal,
+    private cdRef: ChangeDetectorRef
   ) { }
 
 
@@ -68,7 +69,7 @@ export class ListPageComponent implements OnInit {
       if (result === 'success') {
         console.log('modalRef result:', result);
         this.refreshListData();
-        this.alertService.success(`${this.routeType} added/edited.`);
+        this.alertService.success(`${this.routeType} added/edited.`, { autoClose: true });
       }
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
@@ -92,6 +93,7 @@ export class ListPageComponent implements OnInit {
   refreshListData() {
     this.backendService.get(this.url).subscribe(list => {
       this.list = list;
+      this.cdRef.detectChanges();
     });
   }
   

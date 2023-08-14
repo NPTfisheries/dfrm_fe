@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
+import { BackendService } from 'src/_services/backend.service';
 import { User } from 'src/_models/user';
-import { AuthService } from 'src/_services/auth.service';
-
 import { Profile } from 'src/_models/profile';
-import { ProfileService } from 'src/_services/profile.service';
 
 import { ProfileUpdateComponent } from '../profile-update/profile-update.component';
 
@@ -18,26 +15,28 @@ import { ProfileUpdateComponent } from '../profile-update/profile-update.compone
 })
 export class ProfileComponent implements OnInit {
 
-  user$: Observable<User | null>;
-  profile$: Profile | null = null;
+  user: any | undefined;
 
   constructor(
-    private authService: AuthService,
-    private profileService: ProfileService,
+    private backendService: BackendService,
     public modalService: NgbModal,
     private router: Router,
-  ) {
-    this.user$ = authService.user$;
-    // this.profile$ = profileService.profile$;
-  }
+  ) {  }
 
   ngOnInit() {
-    this.profileService.getProfile().subscribe(profile => {
-      console.log('profilecomp:', profile);
-    })
+    this.backendService.get('./api/v1/user').subscribe(user => {
+      this.user = user;
+    });
+    
   }
 
   updateProfile() {
-    this.modalService.open(ProfileUpdateComponent, { size: 'xl'});
+    const modalRef = this.modalService.open(ProfileUpdateComponent, { size: 'xl'});
+    modalRef.componentInstance.user = this.user; // pass user to modal
+
+    modalRef.componentInstance.userUpdated.subscribe((updatedUser: any) => {
+      this.user = updatedUser;
+    });
   }
+
 }

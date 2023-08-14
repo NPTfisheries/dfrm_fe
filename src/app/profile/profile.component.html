@@ -1,14 +1,15 @@
 <p>profile works!</p>
-<!-- <div *ngIf="(user$ | async) as user; else noUser">
-    <p>user$ loaded!</p>
-    <h1>{{ user.id }}</h1>
-    <h2>{{ user.email }}</h2>
-    <h2>{{ user.token }}</h2>
-</div> -->
+
+<h1>{{ user.id }}</h1>
+<h2>{{ user.email }}</h2>
+<h2>{{ user.first_name }}</h2>
+<h2>{{ user.last_name }}</h2>
+<h2>{{ user.profile.bio}}</h2>
+<h2>{{ user.profile.city }}</h2>
+<h2>{{ user.profile.state }}</h2>
+<h2>{{ user.profile.mobile_phone }}</h2>
+<h2>{{ user.profile.work_phone }}</h2>
+
 
 <h1></h1>
 <button (click)="updateProfile()">Update Profile</button>
-
-<!-- <ng-template #noUser>
-    <p>No user logged in.</p>
-</ng-template> -->

@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { ProfileService } from 'src/_services/profile.service';
+import { BackendService } from 'src/_services/backend.service';
 import { Profile } from 'src/_models/profile';
 
-import { formatLabel } from 'src/_helpers/formatLabel';
+import { AlertService } from 'src/_services/alert.service';
 
 interface Fields {
   [key: string]: string;
@@ -17,57 +17,71 @@ interface Fields {
   styleUrls: ['./profile-update.component.css']
 })
 export class ProfileUpdateComponent {
+
+  @Input() user: any | undefined; // received from profile component
+  @Output() userUpdated = new EventEmitter<any>();
+
   form!: FormGroup;
-  formatLabel = formatLabel
   loading = false;
   submitted = false;
-  profile: Profile | null = null;
-
-  fields: Fields = {
-    user: 'text',
-    work_phone: 'text',
-    mobile_phone: 'text',
-    city: 'text',
-    state: 'text',
-    bio: 'text',
-    photo: 'text',
-  };
-
-  get fieldsKeys(): string[] {
-    return Object.keys(this.fields);
-  }
-
-  trackByFn(index: number, item: string): string {
-    return item;
-  }
+  profile: any | undefined;
 
   constructor(
+    private backendService: BackendService,
+    private alertService: AlertService,
     private formBuilder: FormBuilder,
     private activeModal: NgbActiveModal,
-    private profileService: ProfileService,
   ) { }
 
   get f() { return this.form.controls; }
 
   ngOnInit() {
-    this.form = this.formBuilder.group({});
-
-    // Adding form controls dynamically based on fields
-
-    for (const key of this.fieldsKeys) {
-      const validators = this.fields[key] === 'text' ? [Validators.required] : [];
-      this.form.addControl(key, this.formBuilder.control('', validators));
-    }
-    
-    this.profileService.profile$.subscribe(profile => {
-      this.profile = profile;
+    this.form = this.formBuilder.group({
+      email: [this.user.email, Validators.required],
+      first_name: [this.user.first_name, Validators.required],
+      last_name: [this.user.last_name, Validators.required],
+      profile: this.formBuilder.group({
+        title: [this.user.profile.title],
+        bio: [this.user.profile.bio],
+        city: [this.user.profile.city],
+        state: [this.user.profile.state],
+        mobile_phone: [this.user.profile.mobile_phone, [Validators.maxLength(10)]],
+        work_phone: [this.user.profile.work_phone] //,
+        // photo: [this.user.profile.photo]
+      })
     });
+
   }
 
   onSubmit() {
-    console.log('clicked update profile');
-    // this.profileService.updateProfile();
-    this.activeModal.close();
+    this.submitted = true;
+    this.loading = true;
+
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      this.loading = false;
+      return;
+    }
+    console.log('Updating Profile...', this.form.value);
+    this.backendService.put('/api/v1/user/', this.form.value).subscribe(user => {
+      console.log(user);
+    });
+    this.backendService.put('/api/v1/user/', this.form.value)
+    .subscribe({
+      next: (updatedUser) => {
+        this.userUpdated.emit(updatedUser);  // send back updated user information to ProfileComponent
+        this.alertService.success('Profile updated!', { autoClose: true });
+        this.loading = false;
+        this.submitted = false;
+        this.activeModal.close();
+      },
+      error: (response) => {
+        console.log(response);
+        this.alertService.error('Register New User Failed! Check your fields and try again.', { id: 'alert-modal', autoClose: true });
+        this.loading = false;
+      }
+    })
   }
 
 }
+
