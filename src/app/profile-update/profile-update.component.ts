@@ -7,10 +7,6 @@ import { Profile } from 'src/_models/profile';
 
 import { AlertService } from 'src/_services/alert.service';
 
-interface Fields {
-  [key: string]: string;
-}
-
 @Component({
   selector: 'app-profile-update',
   templateUrl: './profile-update.component.html',
@@ -22,6 +18,7 @@ export class ProfileUpdateComponent {
   @Output() userUpdated = new EventEmitter<any>();
 
   form!: FormGroup;
+  profileFormGroup!: FormGroup;
   loading = false;
   submitted = false;
   profile: any | undefined;
@@ -33,22 +30,26 @@ export class ProfileUpdateComponent {
     private activeModal: NgbActiveModal,
   ) { }
 
+  // helpers for form and nested form
   get f() { return this.form.controls; }
+  get fp() { return this.profileFormGroup.controls; }
 
   ngOnInit() {
+    this.profileFormGroup = this.formBuilder.group({
+      title: [this.user.profile.title], //, Validators.required],
+      bio: [this.user.profile.bio],
+      city: [this.user.profile.city],
+      state: [this.user.profile.state],
+      mobile_phone: [this.user.profile.mobile_phone, [Validators.maxLength(10)]],
+      work_phone: [this.user.profile.work_phone] //,
+      // photo: [this.user.profile.photo]
+    })
+
     this.form = this.formBuilder.group({
       email: [this.user.email, Validators.required],
       first_name: [this.user.first_name, Validators.required],
       last_name: [this.user.last_name, Validators.required],
-      profile: this.formBuilder.group({
-        title: [this.user.profile.title],
-        bio: [this.user.profile.bio],
-        city: [this.user.profile.city],
-        state: [this.user.profile.state],
-        mobile_phone: [this.user.profile.mobile_phone, [Validators.maxLength(10)]],
-        work_phone: [this.user.profile.work_phone] //,
-        // photo: [this.user.profile.photo]
-      })
+      profile: this.profileFormGroup,
     });
 
   }
@@ -59,13 +60,13 @@ export class ProfileUpdateComponent {
 
     // stop here if form is invalid
     if (this.form.invalid) {
+      // console.log('form invalid');
       this.loading = false;
       return;
     }
+
     console.log('Updating Profile...', this.form.value);
-    this.backendService.put('/api/v1/user/', this.form.value).subscribe(user => {
-      console.log(user);
-    });
+
     this.backendService.put('/api/v1/user/', this.form.value)
     .subscribe({
       next: (updatedUser) => {
@@ -80,7 +81,8 @@ export class ProfileUpdateComponent {
         this.alertService.error('Register New User Failed! Check your fields and try again.', { id: 'alert-modal', autoClose: true });
         this.loading = false;
       }
-    })
+    });
+
   }
 
 }
