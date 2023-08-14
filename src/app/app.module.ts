@@ -25,6 +25,7 @@ import { ListPageComponent } from './list-page/list-page.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
 import { AddEditPageComponent } from './add-edit-page/add-edit-page.component';
 import { PasswordUpdateComponent } from './password-update/password-update.component';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { PasswordUpdateComponent } from './password-update/password-update.compo
     DetailPageComponent,
     AddEditPageComponent,
     PasswordUpdateComponent,
+    ImageUploadComponent,
   ],
   imports: [
     BrowserModule,

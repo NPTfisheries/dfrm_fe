@@ -6,27 +6,33 @@ import {
 } from '@angular/common/http';
 import { AuthService } from 'src/_services/auth.service';
 
-
-// This class intercepts outgoing HTTP requests and inserts header information
-
 @Injectable()
 export class CustomHttpInterceptor implements HttpInterceptor {
-
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler) {
-
         const token = this.authService.getToken();
 
-        // Clone the request and add custom headers
-        const modifiedRequest = request.clone({
-            setHeaders: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-        });
+        // Check if the request is a file upload
+        if (request.body instanceof FormData) {
+            // Clone the request and add the Authorization header only
+            const modifiedRequest = request.clone({
+                setHeaders: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
 
-        // Pass the modified request to the next interceptor or HttpClient
-        return next.handle(modifiedRequest);
+            return next.handle(modifiedRequest);
+        } else {
+            // For other requests, add both Content-Type and Authorization headers
+            const modifiedRequest = request.clone({
+                setHeaders: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+
+            return next.handle(modifiedRequest);
+        }
     }
 }

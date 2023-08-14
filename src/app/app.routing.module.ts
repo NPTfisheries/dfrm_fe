@@ -12,6 +12,7 @@ import { DepartmentComponent } from './department/department.component';
 import { DepartmentDetailComponent } from './department-detail/department-detail.component';
 import { ListPageComponent } from './list-page/list-page.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent},
@@ -19,6 +20,8 @@ const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch:'full' },
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+    { path: 'image', component: ImageUploadComponent, canActivate: [AuthGuard]},
+
 
     // plural is for the public-facing card pages
     // { path: 'departments', component: DepartmentsComponent},
@@ -38,7 +41,7 @@ const routes: Routes = [
     { path: 'department/:slug', component: DetailPageComponent},
     { path: 'division/:slug', component: DetailPageComponent},
     { path: 'project/:slug', component: DetailPageComponent},
-    { path: 'users/:slug', component: DetailPageComponent},
+    { path: 'users/:id', component: DetailPageComponent},
 
 ];
 
