@@ -32,13 +32,13 @@ const routes: Routes = [
     { path: 'department', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'division', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'project', component: ListPageComponent, canActivate: [AuthGuard]},
-    { path: 'user', component: ListPageComponent, canActivate: [AuthGuard]},
+    { path: 'users', component: ListPageComponent, canActivate: [AuthGuard]},
 
     // wildcard for detail pages
     { path: 'department/:slug', component: DetailPageComponent},
     { path: 'division/:slug', component: DetailPageComponent},
     { path: 'project/:slug', component: DetailPageComponent},
-    { path: 'user/:slug', component: DetailPageComponent},
+    { path: 'users/:slug', component: DetailPageComponent},
 
 ];
 

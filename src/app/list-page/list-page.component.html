@@ -1,7 +1,7 @@
 <h1>{{ routeType | titlecase }} List</h1>
 
-<button *ngIf="routeType == 'user'" (click)="registerUser()">Register User</button>
-<button *ngIf="routeType != 'user'" (click)="addOrEdit('add', undefined)">Add {{ routeType | titlecase }}</button>
+<button *ngIf="routeType == 'users'" (click)="registerUser()">Register User</button>
+<button *ngIf="routeType != 'users'" (click)="addOrEdit('add', undefined)">Add {{ routeType | titlecase }}</button>
 
 <div class="container">
     <div class="card m-5 p-3">
@@ -27,11 +27,15 @@
                     </tr>
                 </tbody>
 
-                <tbody *ngIf="routeType === 'user'">
+                <tbody *ngIf="routeType === 'users'">
                     <tr *ngFor="let x of list">
                         <td>{{ x.first_name }}</td>
                         <td>{{ x.last_name }}</td>
                         <td>{{ x.email }}</td>
+                        <td>{{ x.profile.work_phone }}</td>
+                        <td>{{ x.profile.mobile_phone }}</td>
+                        <td>{{ x.profile.title }}</td>
+                        <td>{{ x.city }}</td>
                         <td><button [routerLink]="x.slug">View</button></td>
                     </tr>
                 </tbody>

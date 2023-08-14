@@ -100,7 +100,7 @@ export class ListPageComponent implements OnInit {
   populateFieldsArray() {
     switch (this.routeType) {
       case 'department':
-        this.columns = ['name', 'description', 'manager', 'deputy', 'assistant'];
+        this.columns = ['name', 'description', 'manager', 'deputy', 'assistant', 'staff'];
         break;
       case 'division':
         this.columns = ['name', 'description', 'manager', 'deputy', 'assistant', 'department'];
@@ -109,7 +109,7 @@ export class ListPageComponent implements OnInit {
         this.columns = ['name', 'description', 'manager', 'deputy', 'assistant'];
         break;
       case 'user':
-        this.columns = ['first_name', 'last_name', 'email'];
+        this.columns = ['first_name', 'last_name', 'email', 'work_phone', 'mobile_phone', 'title'];
         break;
       default:
         this.columns = [];

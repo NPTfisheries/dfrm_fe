@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { first } from 'rxjs';
 
-import { UserService } from 'src/_services/user.service';
+import { AuthService } from 'src/_services/auth.service';
 import { AlertService } from 'src/_services/alert.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService,
+    private authService: AuthService,
     private alertService: AlertService,
   ) { }
 
@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern(/^[\w-]+(\.[\w-]+)*@nezperce\.org$/)]],
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
+      role: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(255)]],
       password2: ['', Validators.required]
     });
@@ -47,11 +48,11 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this.userService.register(this.form.value)
+    this.authService.register(this.form.value)
       .pipe(first())
       .subscribe({
         next: () => {
-          this.alertService.success('Registration successful!');
+          this.alertService.success('Registration successful!', { id: 'register-modal', autoClose: true });
           // reset the form to allow for another round.
           this.form.reset();
           this.loading = false;

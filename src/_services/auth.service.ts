@@ -76,6 +76,15 @@ export class AuthService {
         this.router.navigate(['home']);
     }
 
+    register(newUser: User) {
+        // password check happens in register component and server.
+        return this.http.post('/api/v1/register/', newUser)
+            .pipe(
+                map((response) => {
+                    console.log(response);
+                })
+            );
+    }
 
     // https://angular.io/guide/http-handle-request-errors
     private handleError(error: HttpErrorResponse) {
