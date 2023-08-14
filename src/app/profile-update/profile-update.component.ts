@@ -6,6 +6,7 @@ import { BackendService } from 'src/_services/backend.service';
 import { Profile } from 'src/_models/profile';
 
 import { AlertService } from 'src/_services/alert.service';
+import { phoneFormatValidator } from 'src/_validators/phone-format-validator';
 
 @Component({
   selector: 'app-profile-update',
@@ -40,8 +41,8 @@ export class ProfileUpdateComponent {
       bio: [this.user.profile.bio],
       city: [this.user.profile.city],
       state: [this.user.profile.state],
-      mobile_phone: [this.user.profile.mobile_phone, [Validators.maxLength(10)]],
-      work_phone: [this.user.profile.work_phone] //,
+      mobile_phone: [this.user.profile.mobile_phone, [phoneFormatValidator()]],
+      work_phone: [this.user.profile.work_phone, [phoneFormatValidator()]] //,
       // photo: [this.user.profile.photo]
     })
 
