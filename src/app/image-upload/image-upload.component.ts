@@ -57,6 +57,8 @@ export class ImageUploadComponent implements OnInit {
       next: () => {
         this.alertService.success('Image successfully uploaded!.', { autoClose: true });
         this.imageForm.reset();
+        this.selectedImage = undefined;
+        this.imagePreview = undefined;
       },
       error: (err) => {
         this.alertService.error('Failed to upload image.', { autoClose: true })

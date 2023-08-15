@@ -22,6 +22,7 @@
                         <td>{{ x.manager }}</td>
                         <td>{{ x.deputy }}</td>
                         <td>{{ x.assistant }} </td>
+                        <td>{{ x.staff }} </td>
                         <td><button class="btn btn-success" [routerLink]="x.slug">View</button></td>
                         <td><button class="btn btn-warning" (click)="addOrEdit('edit', x.slug)">Edit</button></td>
                     </tr>

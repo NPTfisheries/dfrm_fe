@@ -29,7 +29,7 @@ export class AddEditPageComponent {
   submitted = false;
   data: any | undefined;
 
-  url: string = '';
+  url: string = ''; // passed from list-page
   addOrEdit: string | undefined;
   routeType: string | undefined; // project, division, department
 
@@ -47,8 +47,11 @@ export class AddEditPageComponent {
   get f() { return this.form.controls; }
 
   ngOnInit() {
-    console.log('MODAL:', this.url);
+    // console.log('MODAL:', this.url);
+    this.loadData();
+  }
 
+  loadData() {
     if (this.url !== undefined) {
       if (this.addOrEdit === 'edit') {
         this.backendService.get(this.url).subscribe(data => {
@@ -61,7 +64,6 @@ export class AddEditPageComponent {
       }
 
     }
-
   }
 
   initializeFormWithData() {
