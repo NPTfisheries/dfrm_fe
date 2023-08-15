@@ -7,12 +7,10 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 
 import { AuthGuard } from 'src/_helpers/auth-guard';
-import { DivisionsComponent } from './divisions/divisions.component';
-import { DepartmentComponent } from './department/department.component';
-import { DepartmentDetailComponent } from './department-detail/department-detail.component';
 import { ListPageComponent } from './list-page/list-page.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { CardPageComponent } from './card-page/card-page.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch:'full' },
@@ -24,14 +22,11 @@ const routes: Routes = [
 
 
     // plural is for the public-facing card pages
-    // { path: 'departments', component: DepartmentsComponent},
-    { path: 'divisions', component: DivisionsComponent},
-    // { path: 'projects', component: ProjectsComponent},
+    { path: 'departments', component: CardPageComponent },
+    { path: 'divisions', component: CardPageComponent },
+    { path: 'projects', component: CardPageComponent },
     
     // singular is for the list page, similar to django return for API
-    // { path: 'division', component: DivisionComponent}, //, canActivate: [AuthGuard]},
-    // { path: 'department', component: DepartmentComponent}, //, canActivate: [AuthGuard]},
-
     { path: 'department', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'division', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'project', component: ListPageComponent, canActivate: [AuthGuard]},

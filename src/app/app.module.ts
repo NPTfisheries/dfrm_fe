@@ -17,10 +17,6 @@ import { ProfileComponent } from './profile/profile.component';
 
 import { CustomHttpInterceptor } from 'src/_helpers/http-interceptor';
 import { ProfileUpdateComponent } from './profile-update/profile-update.component';
-import { DivisionsComponent } from './divisions/divisions.component';
-import { DepartmentComponent } from './department/department.component';
-import { DepartmentUpdateComponent } from './department-update/department-update.component';
-import { DepartmentDetailComponent } from './department-detail/department-detail.component';
 import { ListPageComponent } from './list-page/list-page.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
 import { AddEditPageComponent } from './add-edit-page/add-edit-page.component';
@@ -29,6 +25,7 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { CustomSelectComponent } from '../_inputs/custom-select/custom-select.component';
 import { MultiSelectComponent } from '../_inputs/multi-select/multi-select.component';
 import { FooterComponent } from './footer/footer.component';
+import { CardPageComponent } from './card-page/card-page.component';
 
 @NgModule({
   declarations: [
@@ -40,10 +37,6 @@ import { FooterComponent } from './footer/footer.component';
     RegisterComponent,
     ProfileComponent,
     ProfileUpdateComponent,
-    DivisionsComponent,
-    DepartmentComponent,
-    DepartmentUpdateComponent,
-    DepartmentDetailComponent,
     ListPageComponent,
     DetailPageComponent,
     AddEditPageComponent,
@@ -52,6 +45,7 @@ import { FooterComponent } from './footer/footer.component';
     CustomSelectComponent,
     MultiSelectComponent,
     FooterComponent,
+    CardPageComponent,
   ],
   imports: [
     BrowserModule,
