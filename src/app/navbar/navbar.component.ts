@@ -16,8 +16,8 @@ import { PasswordUpdateComponent } from '../password-update/password-update.comp
 export class NavbarComponent implements OnInit {
   tabs = ['Home',  'Divisions', 'Profile']
 
-  user?: User | null = null; 
-  token: string | null = null;
+  username?: string | null = null; 
+  isLoggedIn: boolean | null = false;
 
   constructor(
     public authService: AuthService,
@@ -25,11 +25,12 @@ export class NavbarComponent implements OnInit {
   ) {  }
 
   ngOnInit() {
-    this.authService.user$.subscribe(user => {
-      this.user = user;
+    this.authService.username$.subscribe(username => {
+      this.username = username;
     });
-    this.authService.token$.subscribe(token => {
-      this.token = token;
+
+    this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
     });
   }
 

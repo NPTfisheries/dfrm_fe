@@ -12,34 +12,21 @@ import { User } from "src/_models/user";
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-    public user$ = new BehaviorSubject<User | null>(null);
-    public token$ = new BehaviorSubject<string | null>(null);
+    public username$ = new BehaviorSubject<string | null>(null);
+    public token$ = new BehaviorSubject<string | null>(null); // for http interceptor
     public isLoggedIn$ = new BehaviorSubject<boolean>(false);
-    private _userId : number | null;
 
     constructor(
         private router: Router,
         private http: HttpClient
     ) { 
-        this._userId = null;
     }
 
-    getUser(): User | null {
-        return this.user$.getValue();
-    }
-    
-    get userId(): number | null {
-        return this._userId;
-    }
+    // getIsLoggedIn(): boolean | null {
+    //     return this.isLoggedIn$.getValue();
+    // }
 
-
-    getIsLoggedIn(): boolean | null {
-        return this.isLoggedIn$.getValue();
-    }
-
-    getToken(): string | null {
-        return this.token$.getValue();
-    }
+    getToken(): string | null { return this.token$.getValue(); } // for http interceptor
 
     // Login will set user$ and token$ values to be shared
     login(email: string, password: string) {
@@ -53,11 +40,10 @@ export class AuthService {
                     console.log('login return:', response);
                     // console.log('access: ', response.access);
                     const decoded: any = jwtDecode(response.access);
-                    console.log('access decoded:', decoded);
+                    // console.log('access decoded:', decoded);
                     
 
-                    // this.user$.next(response.user);  // next is the correct way to update a value of BehaviorSubject
-                    this._userId = Number(decoded.user_id);
+                    this.username$.next(`${response.first_name} ${response.last_name}`);
                     this.token$.next(response.access);
                     this.isLoggedIn$.next(true);
                 })//,
@@ -67,7 +53,7 @@ export class AuthService {
 
     logout(): void {
         // console.log('Logging out.');
-        this.user$.next(null);
+        this.username$.next(null);
         this.token$.next(null);
         this.isLoggedIn$.next(false);
 

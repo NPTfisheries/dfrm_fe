@@ -5,13 +5,12 @@
       ariaCurrentWhenActive="page">{{tab}}</a>
   </div>
 
-  <button *ngIf="!token; else profileNav" class="nav-link ms-auto" (click)="openLoginModal()">Login</button>
+  <button *ngIf="!isLoggedIn; else profileNav" class="nav-link ms-auto" (click)="openLoginModal()">Login</button>
 </ul>
 
 <ng-template #profileNav>
   <li ngbDropdown class="nav-item ms-auto" role="presentation">
-    <!-- <button type="button" class="nav-link" ngbDropdownToggle>Greetings, {{user?.username}}</button> -->
-    <button type="button" class="nav-link" ngbDropdownToggle>Greetings, NO USER NAME</button>
+    <button type="button" class="nav-link" ngbDropdownToggle>{{ username }}</button>
     <div ngbDropdownMenu>
       <button ngbDropdownItem routerLink="profile">Profile</button>
       <button ngbDropdownItem (click)="updatePassword()">Update Password</button>

@@ -4,7 +4,6 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 
 
 import { BackendService } from 'src/_services/backend.service';
-import { AuthService } from 'src/_services/auth.service';
 import { AlertService } from 'src/_services/alert.service';
 
 @Component({
@@ -16,10 +15,8 @@ export class PasswordUpdateComponent {
   form!: FormGroup;
   loading = false;
   submitted = false;
-  user_id: number | null = null;
 
   constructor(
-    private authService: AuthService,
     private backendService: BackendService,
     private formBuilder: FormBuilder,
     private alertService: AlertService,
@@ -29,8 +26,6 @@ export class PasswordUpdateComponent {
   get f() { return this.form.controls; }
 
   ngOnInit() {
-    this.user_id = this.authService.userId;
-
     this.form = this.formBuilder.group({
       old_password: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(255)]],

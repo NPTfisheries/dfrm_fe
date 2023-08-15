@@ -10,28 +10,16 @@ import { User } from 'src/_models/user';
 })
 export class HomeComponent implements OnInit {
 
-  user: any | null = null;
   token: any | null = null;
 
   constructor(
     private authService: AuthService,
-  ) {  }
+  ) { }
 
-  ngOnInit() {  
-    this.authService.user$.subscribe((user) => {
-      this.user = user;
-    });
+  ngOnInit() {
     this.authService.token$.subscribe((token) => {
       this.token = token;
     });
-  }
-
-  showUser() {
-    console.log(this.user);
-    console.log(typeof(this.user));
-    console.log(this.user.id);
-    console.log(this.user.username);
-    console.log('Token', this.token)
   }
 
   getTokenVal() {
