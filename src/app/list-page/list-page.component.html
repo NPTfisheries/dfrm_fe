@@ -11,7 +11,7 @@
                     <tr>
                         <th *ngFor="let col of columns">{{ col | titlecase}}</th>
                         <th>View</th>
-                        <th>Edit</th>
+                        <th *ngIf="routeType !== 'users'">Edit</th>
                     </tr>
                 </thead>
 
@@ -35,7 +35,6 @@
                         <td>{{ x.profile.mobile_phone }}</td>
                         <td>{{ x.profile.title }}</td>
                         <td><button class="btn btn-success" [routerLink]="x.id">View</button></td>
-                        <td><button class="btn btn-warning" (click)="addOrEdit('edit', x.id)">Edit</button></td>
                     </tr>
                 </tbody>
 

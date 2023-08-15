@@ -33,15 +33,30 @@ export class ListPageComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.route.url.subscribe(urlSegments => {
-      if (urlSegments.length > 0) {
-        this.routeType = urlSegments[0].path;
-        this.populateFieldsArray();
-        this.url = '/api/v1/' + this.routeType + '/';
-      }
+    // this.route.url.subscribe(urlSegments => {
+    //   if (urlSegments.length > 0) {
+    //     this.routeType = urlSegments[0].path;
+    //     this.populateFieldsArray();
+    //     this.url = '/api/v1/' + this.routeType + '/';
+    //   }
 
-      this.backendService.get(this.url).subscribe(list => {
-        this.list = list;
+    //   this.backendService.get(this.url).subscribe(list => {
+    //     this.list = list;
+    //   });
+
+    // });
+    this.getList();
+  }
+
+  getList() {
+    this.route.url.subscribe(params => {
+      this.routeType = params[0].path;
+      this.url = `/api/v1/${this.routeType}/`;
+      this.populateFieldsArray(this.routeType);
+
+      this.backendService.get(this.url).subscribe(response => {
+        console.log(response);
+        this.list = response;
       });
 
     });
@@ -54,12 +69,8 @@ export class ListPageComponent implements OnInit {
       
     const modalRef = this.modalService.open(AddEditPageComponent, modalOptions);
     
-    if (action == 'add') {
-      modalRef.componentInstance.url = this.url;
-    } 
-    if (action == 'edit') {
-      modalRef.componentInstance.url = this.url+slug+'/';
-    }
+    if (action == 'add') { modalRef.componentInstance.url = this.url; } 
+    if (action == 'edit') { modalRef.componentInstance.url = this.url+slug+'/'; }
 
     modalRef.componentInstance.routeType = this.routeType;
     modalRef.componentInstance.addOrEdit = action;
@@ -97,8 +108,8 @@ export class ListPageComponent implements OnInit {
     });
   }
   
-  populateFieldsArray() {
-    switch (this.routeType) {
+  populateFieldsArray(routeType: string) {
+    switch (routeType) {
       case 'department':
         this.columns = ['name', 'description', 'manager', 'deputy', 'assistant', 'staff'];
         break;
