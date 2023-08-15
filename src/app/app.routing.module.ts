@@ -15,9 +15,9 @@ import { DetailPageComponent } from './detail-page/detail-page.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 
 const routes: Routes = [
+    { path: '', redirectTo: 'home', pathMatch:'full' },
     { path: 'login', component: LoginComponent},
     { path: 'home', component: HomeComponent},
-    { path: '', redirectTo: 'home', pathMatch:'full' },
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
     { path: 'image', component: ImageUploadComponent, canActivate: [AuthGuard]},

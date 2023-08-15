@@ -1,0 +1,33 @@
+.nav-link {
+    font-size:x-large;
+    color:#5492b4;
+}
+
+.nav-link:hover {
+    color:#cfd7db;
+}
+
+.nav-link.active {
+    color:#f9f906
+}
+
+.dropdown-item {
+    font-size:large;
+    font-weight:200;
+    color:#5492b4;
+}
+
+.dropdown-item:hover {
+    background-color:#cfd7db;
+    color:#0d1b1f;
+}
+
+
+.dropdown-menu {
+    background-color: #0d1b1f;
+    border-color: #cfd7db;;
+}
+
+.dropdown-divider {
+    border-color:#cfd7db; 
+}
