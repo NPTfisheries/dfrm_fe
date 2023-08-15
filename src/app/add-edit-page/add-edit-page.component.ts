@@ -7,6 +7,8 @@ import { BackendService } from 'src/_services/backend.service';
 
 import { formatLabel } from 'src/_helpers/formatLabel';
 
+import { CustomSelectComponent } from 'src/_inputs/custom-select/custom-select.component';
+
 interface Fields {
   [key: string]: string;
 }
@@ -14,7 +16,8 @@ interface Fields {
 @Component({
   selector: 'app-add-edit-page',
   templateUrl: './add-edit-page.component.html',
-  styleUrls: ['./add-edit-page.component.css']
+  styleUrls: ['./add-edit-page.component.css'],
+  entryComponents: [CustomSelectComponent],
 })
 export class AddEditPageComponent {
 

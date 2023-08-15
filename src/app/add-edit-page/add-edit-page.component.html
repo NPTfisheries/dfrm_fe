@@ -46,6 +46,9 @@
                             <div *ngIf="f['assistant'].errors['required']">Assistant is required</div>
                         </div>
                     </div>
+                    <ng-container>
+                        <app-custom-select></app-custom-select>
+                    </ng-container>
 
             <ng-container *ngIf="routeType == 'division'">
                 <div class="mb-3">

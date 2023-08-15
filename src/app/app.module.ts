@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app.routing.module';
 
@@ -26,6 +26,7 @@ import { DetailPageComponent } from './detail-page/detail-page.component';
 import { AddEditPageComponent } from './add-edit-page/add-edit-page.component';
 import { PasswordUpdateComponent } from './password-update/password-update.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { CustomSelectComponent } from '../_inputs/custom-select/custom-select.component';
 
 @NgModule({
   declarations: [
@@ -46,11 +47,13 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
     AddEditPageComponent,
     PasswordUpdateComponent,
     ImageUploadComponent,
+    CustomSelectComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule,
     AppRoutingModule,
+    FormsModule,
     NgbModule,
     HttpClientModule,
     ReactiveFormsModule,
