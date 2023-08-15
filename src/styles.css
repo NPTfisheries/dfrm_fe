@@ -1,3 +1,19 @@
 * {
     font-family: 'Times New Roman', Times, serif;
 }
+
+.dfrm-button {
+    background-color: #0d1b1f;
+    color:#f9f906;
+    padding: 6px;
+    border-radius: 10px;
+    border-color: #5492b4;
+}
+
+.grow {
+    transition: all .2s ease-in-out; 
+}
+
+.grow:hover {
+    transform: scale(1.1);
+}

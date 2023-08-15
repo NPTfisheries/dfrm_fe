@@ -1,0 +1,22 @@
+#footer {
+    background-color: #0d1b1f;
+}
+
+li.nav-item {
+    color:#cdf7db;
+}
+
+h5 {
+    color:#f9f906;
+    font-size: x-large;
+}
+
+.nav-link, address, p, a {
+    color:#5492b4 !important;
+    font-size: larger;
+}
+
+.nav-link:hover {
+    color:#cfd7db !important;
+
+}

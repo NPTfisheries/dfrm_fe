@@ -1,7 +1,7 @@
 <h1>{{ routeType | titlecase }} List</h1>
 
 <button *ngIf="routeType == 'users'" (click)="registerUser()">Register User</button>
-<button *ngIf="routeType != 'users'" (click)="addOrEdit('add', undefined)">Add {{ routeType | titlecase }}</button>
+<button *ngIf="routeType != 'users'" class="dfrm-button" (click)="addOrEdit('add', undefined)">Add {{ routeType | titlecase }}</button>
 
 <div class="container">
     <div class="card m-5 p-3">

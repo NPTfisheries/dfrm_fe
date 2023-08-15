@@ -6,7 +6,7 @@
         ariaCurrentWhenActive="page">{{tab}}</a>
     </div>
 
-    <button *ngIf="!isLoggedIn; else profileNav" class="nav-link ms-auto" (click)="openLoginModal()">Login</button>
+    <button *ngIf="!isLoggedIn; else profileNav" class="nav-link ms-auto grow" (click)="openLoginModal()">Login</button>
   </div>
 </nav>
 
@@ -14,7 +14,7 @@
   <li ngbDropdown class="nav-item ms-auto" role="presentation">
     <button type="button" class="nav-link" ngbDropdownToggle>{{ username }}</button>
     <div ngbDropdownMenu>
-      <button class="nav-link" ngbDropdownItem routerLink="profile">Profile</button>
+      <button  ngbDropdownItem routerLink="profile">Profile</button>
       <button ngbDropdownItem (click)="updatePassword()">Update Password</button>
 
       <div class="dropdown-divider"></div>
