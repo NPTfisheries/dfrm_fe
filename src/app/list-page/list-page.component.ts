@@ -108,8 +108,8 @@ export class ListPageComponent implements OnInit {
       case 'project':
         this.columns = ['name', 'description', 'manager', 'deputy', 'assistant'];
         break;
-      case 'user':
-        this.columns = ['first_name', 'last_name', 'email', 'work_phone', 'mobile_phone', 'title'];
+      case 'users':
+        this.columns = ['name', 'email', 'work_phone', 'mobile_phone', 'title'];
         break;
       default:
         this.columns = [];

@@ -15,7 +15,7 @@
                     </tr>
                 </thead>
 
-                <tbody *ngIf="routeType !== 'user'">
+                <tbody *ngIf="routeType !== 'users'">
                     <tr *ngFor="let x of list">
                         <td>{{ x.name }}</td>
                         <td>{{ x.description }}</td>
@@ -29,14 +29,13 @@
 
                 <tbody *ngIf="routeType === 'users'">
                     <tr *ngFor="let x of list">
-                        <td>{{ x.first_name }}</td>
-                        <td>{{ x.last_name }}</td>
+                        <td>{{ x.first_name }} {{ x.last_name }}</td>
                         <td>{{ x.email }}</td>
                         <td>{{ x.profile.work_phone }}</td>
                         <td>{{ x.profile.mobile_phone }}</td>
                         <td>{{ x.profile.title }}</td>
-                        <td>{{ x.city }}</td>
-                        <td><button [routerLink]="x.slug">View</button></td>
+                        <td><button class="btn btn-success" [routerLink]="x.id">View</button></td>
+                        <td><button class="btn btn-warning" (click)="addOrEdit('edit', x.id)">Edit</button></td>
                     </tr>
                 </tbody>
 
