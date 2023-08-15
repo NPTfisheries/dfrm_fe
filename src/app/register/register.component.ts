@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { first } from 'rxjs';
 
@@ -19,6 +20,7 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private alertService: AlertService,
+    private activeModal: NgbActiveModal,
   ) { }
 
   ngOnInit() {
@@ -57,6 +59,7 @@ export class RegisterComponent implements OnInit {
           this.form.reset();
           this.loading = false;
           this.submitted = false;
+          this.activeModal.close();
         },
         error: response => {
           // console.log(response);

@@ -21,7 +21,7 @@ interface Fields {
 })
 export class AddEditPageComponent {
 
-  @Output() refreshList: EventEmitter<void> = new EventEmitter<void>();
+  @Output() updateList: EventEmitter<void> = new EventEmitter<void>();
 
   form!: FormGroup;
   formatLabel = formatLabel
@@ -87,19 +87,23 @@ export class AddEditPageComponent {
       return;
     }
 
-    if (this.addOrEdit === 'add') {
-      this.backendService.post(this.url, this.form.value).subscribe(response => {
-        console.log('Add response:', response);
-        this.refreshList.emit();
-      });
-    }
-    if (this.addOrEdit === 'edit') {
-      this.backendService.patch(this.url, this.form.value).subscribe(response => {
-        console.log('Edit response:', response);
-        this.refreshList.emit();
-      });
-    }
+    this.backendService.patch(this.url, this.form.value).subscribe(response => {
+      console.log('Edit response:', response);
+    });
+    // if (this.addOrEdit === 'add') {
+    //   this.backendService.post(this.url, this.form.value).subscribe(response => {
+    //     console.log('Add response:', response);
+    //     this.updateList.emit();
+    //   });
+    // }
+    // if (this.addOrEdit === 'edit') {
+    //   this.backendService.patch(this.url, this.form.value).subscribe(response => {
+    //     console.log('Edit response:', response);
+    //     this.updateList.emit();
+    //   });
+    // }
 
     this.activeModal.close('success');
+    this.updateList.emit();
   }
 }

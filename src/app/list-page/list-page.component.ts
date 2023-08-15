@@ -17,6 +17,7 @@ type Action = 'add' | 'edit';
 export class ListPageComponent implements OnInit {
 
   @ViewChild(AddEditPageComponent) addEditComponent!: AddEditPageComponent;
+  @ViewChild(RegisterComponent) registerComponent!: AddEditPageComponent;
 
   routeType: string | undefined;
   list: any | undefined;
@@ -33,18 +34,6 @@ export class ListPageComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.route.url.subscribe(urlSegments => {
-    //   if (urlSegments.length > 0) {
-    //     this.routeType = urlSegments[0].path;
-    //     this.populateFieldsArray();
-    //     this.url = '/api/v1/' + this.routeType + '/';
-    //   }
-
-    //   this.backendService.get(this.url).subscribe(list => {
-    //     this.list = list;
-    //   });
-
-    // });
     this.getList();
   }
 
@@ -60,6 +49,10 @@ export class ListPageComponent implements OnInit {
       });
 
     });
+  }
+
+  updateList() {
+    this.getList();
   }
 
   addOrEdit(action: Action, slug: string|undefined) {
@@ -79,14 +72,13 @@ export class ListPageComponent implements OnInit {
       console.log('modal result:', result);
       if (result === 'success') {
         console.log('modalRef result:', result);
-        this.refreshListData();
+        this.updateList();
         this.alertService.success(`${this.routeType} added/edited.`, { autoClose: true });
       }
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
   
   registerUser() {
-    console.log('reg user"');
     const modalOptions: NgbModalOptions = {
       size: 'xl',
         };
@@ -95,17 +87,11 @@ export class ListPageComponent implements OnInit {
 
     modalRef.result.then((result) => {
       console.log(result);
-      if (result === 'success') {
-        
-      }
+      // if (result === 'success') {
+        this.updateList();
+        this.alertService.success(`New user registered!`, { autoClose: true });
+      // }
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
-  }
-
-  refreshListData() {
-    this.backendService.get(this.url).subscribe(list => {
-      this.list = list;
-      this.cdRef.detectChanges();
-    });
   }
   
   populateFieldsArray(routeType: string) {
