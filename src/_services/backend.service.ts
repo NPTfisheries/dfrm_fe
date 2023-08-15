@@ -77,6 +77,15 @@ export class BackendService {
             );
     }
 
+    // getUserName(id:number): Observable<any> {
+    //     const url = `${this.url_users}/${id}`
+    //     return this.http.get<User>(url)
+    //         .pipe(
+    //             map(user => `${user.first_name || ''} ${user.last_name || ''}`),
+    //             catchError(this.handleError<User>(`getUser id=${id}`))
+    //         );
+    // }
+
     getUsers(): Observable<User[]> {
         return this.http.get<User[]>(this.url_users)
             .pipe(

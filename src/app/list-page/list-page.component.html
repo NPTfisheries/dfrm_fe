@@ -19,10 +19,20 @@
                     <tr *ngFor="let x of list">
                         <td>{{ x.name }}</td>
                         <td>{{ x.description }}</td>
-                        <td>{{ x.manager }}</td>
+                        <td>{{ x.manager.first_name }} {{ x.manager.last_name }}</td>
+                        <td>{{ x.deputy.first_name }} {{ x.deputy.last_name }}</td>
+                        <td>{{ x.assistant.first_name }} {{ x.assistant.last_name }}</td>
+                        <td>
+                            <ul>
+                                <li *ngFor="let staffMember of x.staff">
+                                    {{ staffMember.first_name }} {{ staffMember.last_name}}
+                                </li>
+                            </ul>
+                        </td>
+                        <!-- <td> {{ x.manager }}</td>
                         <td>{{ x.deputy }}</td>
-                        <td>{{ x.assistant }} </td>
-                        <td>{{ x.staff }} </td>
+                        <td>{{ x.assistant }} </td> 
+                        <td>{{ x.staff }} </td> -->
                         <td><button class="btn btn-success" [routerLink]="x.slug">View</button></td>
                         <td><button class="btn btn-warning" (click)="addOrEdit('edit', x.slug)">Edit</button></td>
                     </tr>

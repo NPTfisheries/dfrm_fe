@@ -5,13 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
 
-import { formatLabel } from 'src/_helpers/formatLabel';
-
 import { CustomSelectComponent } from 'src/_inputs/custom-select/custom-select.component';
 
-interface Fields {
-  [key: string]: string;
-}
 
 @Component({
   selector: 'app-add-edit-page',
@@ -24,7 +19,6 @@ export class AddEditPageComponent {
   @Output() updateList: EventEmitter<void> = new EventEmitter<void>();
 
   form!: FormGroup;
-  formatLabel = formatLabel
   loading = false;
   submitted = false;
   data: any | undefined;
@@ -92,6 +86,7 @@ export class AddEditPageComponent {
     this.backendService.patch(this.url, this.form.value).subscribe(response => {
       console.log('Edit response:', response);
     });
+
     // if (this.addOrEdit === 'add') {
     //   this.backendService.post(this.url, this.form.value).subscribe(response => {
     //     console.log('Add response:', response);
@@ -108,4 +103,5 @@ export class AddEditPageComponent {
     this.activeModal.close('success');
     this.updateList.emit();
   }
+  
 }

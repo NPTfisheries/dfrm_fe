@@ -1,8 +1,6 @@
-<div>
-    <label class="form-label">Custom Select</label>
-</div>
 <div class="mb-3">
-    <select [(ngModel)]="selectedId">
+    <label class="form-label">{{ label }}</label>
+    <select class='form-select' [(ngModel)]="selectedId" (change)="onChange(selectedId)" >
         <option disabled selected value="">Select an employee</option> <!-- Default disabled option -->
         <option *ngFor="let user of users" [value]="user.id">{{ user.first_name }} {{ user.last_name }}</option>
     </select>

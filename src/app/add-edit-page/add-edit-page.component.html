@@ -6,49 +6,27 @@
     <div class="modal-body">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-                    <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <input type="text" formControlName="name" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
-                        <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
-                            <div *ngIf="f['name'].errors['required']">Name is required</div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Description</label>
-                        <input type="text" formControlName="description" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f['description'].errors }" />
-                        <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
-                            <div *ngIf="f['description'].errors['required']">Description is required</div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Manager</label>
-                        <input type="text" formControlName="manager" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f['manager'].errors }" />
-                        <div *ngIf="submitted && f['manager'].errors" class="invalid-feedback">
-                            <div *ngIf="f['manager'].errors['required']">Manager is required</div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Deputy</label>
-                        <input type="text" formControlName="deputy" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f['deputy'].errors }" />
-                        <div *ngIf="submitted && f['deputy'].errors" class="invalid-feedback">
-                            <div *ngIf="f['deputy'].errors['required']">Deputy is required</div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Assistant</label>
-                        <input type="text" formControlName="assistant" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f['assistant'].errors }" />
-                        <div *ngIf="submitted && f['assistant'].errors" class="invalid-feedback">
-                            <div *ngIf="f['assistant'].errors['required']">Assistant is required</div>
-                        </div>
-                    </div>
-                    <ng-container>
-                        <app-custom-select></app-custom-select>
-                    </ng-container>
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" formControlName="name" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
+                <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                    <div *ngIf="f['name'].errors['required']">Name is required</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <input type="text" formControlName="description" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['description'].errors }" />
+                <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                    <div *ngIf="f['description'].errors['required']">Description is required</div>
+                </div>
+            </div>
+            <!-- <ng-container> -->
+            <app-custom-select formControlName="manager" label="Manager"></app-custom-select>
+            <app-custom-select formControlName="deputy" label="Deputy"></app-custom-select>
+            <app-custom-select formControlName="assistant" label="Assistant"></app-custom-select>
+            <!-- </ng-container> -->
 
             <ng-container *ngIf="routeType == 'division'">
                 <div class="mb-3">
@@ -61,14 +39,13 @@
                 </div>
             </ng-container>
 
-
+            <br />
             <div>
                 <button [disabled]="loading" class="btn btn-primary">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
-                    Submit Form
+                    Add {{routeType | titlecase}}
                 </button>
             </div>
         </form>
     </div>
 </div>
-
