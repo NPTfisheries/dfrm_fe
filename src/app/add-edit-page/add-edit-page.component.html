@@ -22,11 +22,16 @@
                     <div *ngIf="f['description'].errors['required']">Description is required</div>
                 </div>
             </div>
-            <!-- <ng-container> -->
-            <app-custom-select formControlName="manager" label="Manager"></app-custom-select>
-            <app-custom-select formControlName="deputy" label="Deputy"></app-custom-select>
-            <app-custom-select formControlName="assistant" label="Assistant"></app-custom-select>
-            <!-- </ng-container> -->
+            <ng-container *ngIf="routeType !== 'project'">
+                <app-custom-select formControlName="manager" label="Manager"></app-custom-select>
+                <app-custom-select formControlName="deputy" label="Deputy"></app-custom-select>
+                <app-custom-select formControlName="assistant" label="Assistant"></app-custom-select>
+                <app-multi-select formControlName="staff" label="Staff"></app-multi-select>
+            </ng-container>
+
+            <ng-container *ngIf="routeType === 'project'">
+                <app-multi-select formControlName="project_leader" label="Project Leader"></app-multi-select>
+            </ng-container>
 
             <ng-container *ngIf="routeType == 'division'">
                 <div class="mb-3">

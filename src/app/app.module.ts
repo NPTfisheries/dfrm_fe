@@ -27,6 +27,7 @@ import { AddEditPageComponent } from './add-edit-page/add-edit-page.component';
 import { PasswordUpdateComponent } from './password-update/password-update.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { CustomSelectComponent } from '../_inputs/custom-select/custom-select.component';
+import { MultiSelectComponent } from '../_inputs/multi-select/multi-select.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { CustomSelectComponent } from '../_inputs/custom-select/custom-select.co
     PasswordUpdateComponent,
     ImageUploadComponent,
     CustomSelectComponent,
+    MultiSelectComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,13 +6,13 @@ import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
 
 import { CustomSelectComponent } from 'src/_inputs/custom-select/custom-select.component';
-
+import { MultiSelectComponent } from 'src/_inputs/multi-select/multi-select.component';
 
 @Component({
   selector: 'app-add-edit-page',
   templateUrl: './add-edit-page.component.html',
   styleUrls: ['./add-edit-page.component.css'],
-  entryComponents: [CustomSelectComponent],
+  entryComponents: [CustomSelectComponent, MultiSelectComponent],
 })
 export class AddEditPageComponent {
 
@@ -61,14 +61,23 @@ export class AddEditPageComponent {
   }
 
   initializeFormWithData() {
-    this.form = this.formBuilder.group({
-      name: [this.data?.name || '', Validators.required],
-      description: [this.data?.description || '', Validators.required],
-      manager: [this.data?.manager || '', Validators.required],
-      deputy: [this.data?.deputy || '', Validators.required],
-      assistant: [this.data?.assistant || '', Validators.required],
-      ...(this.routeType === 'division' ? { department: [this.data?.department || '', Validators.required] } : {}),
-    });
+    if (this.routeType !== 'project') {
+      this.form = this.formBuilder.group({
+        name: [this.data?.name || '', Validators.required],
+        description: [this.data?.description || '', Validators.required],
+        manager: [this.data?.manager || '', Validators.required],
+        deputy: [this.data?.deputy || '', Validators.required],
+        assistant: [this.data?.assistant || '', Validators.required],
+        staff: [this.data?.staff || [], Validators.required],
+        ...(this.routeType === 'division' ? { department: [this.data?.department || '', Validators.required] } : {}),
+      });
+    } else {
+      this.form = this.formBuilder.group({
+        name: [this.data?.name || '', Validators.required],
+        description: [this.data?.description || '', Validators.required],
+        project_leader: [this.data?.project_leader || '', Validators.required],
+      });
+    }
   }
 
   onSubmit() {
@@ -83,22 +92,16 @@ export class AddEditPageComponent {
       return;
     }
 
-    this.backendService.patch(this.url, this.form.value).subscribe(response => {
-      console.log('Edit response:', response);
-    });
-
-    // if (this.addOrEdit === 'add') {
-    //   this.backendService.post(this.url, this.form.value).subscribe(response => {
-    //     console.log('Add response:', response);
-    //     this.updateList.emit();
-    //   });
-    // }
-    // if (this.addOrEdit === 'edit') {
-    //   this.backendService.patch(this.url, this.form.value).subscribe(response => {
-    //     console.log('Edit response:', response);
-    //     this.updateList.emit();
-    //   });
-    // }
+    if (this.addOrEdit === 'add') {
+      this.backendService.post(this.url, this.form.value).subscribe(response => {
+        console.log('Add response:', response);
+      });
+    }
+    if (this.addOrEdit === 'edit') {
+      this.backendService.put(this.url, this.form.value).subscribe(response => {
+        console.log('Edit response:', response);
+      });
+    }
 
     this.activeModal.close('success');
     this.updateList.emit();

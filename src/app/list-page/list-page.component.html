@@ -15,10 +15,30 @@
                     </tr>
                 </thead>
 
-                <tbody *ngIf="routeType !== 'users'">
+                <tbody *ngIf="routeType === 'department'">
                     <tr *ngFor="let x of list">
                         <td>{{ x.name }}</td>
                         <td>{{ x.description }}</td>
+                        <td>{{ x.manager.first_name }} {{ x.manager.last_name }}</td>
+                        <td>{{ x.deputy.first_name }} {{ x.deputy.last_name }}</td>
+                        <td>{{ x.assistant.first_name }} {{ x.assistant.last_name }}</td>
+                        <td>
+                            <ul>
+                                <li *ngFor="let staffMember of x.staff">
+                                    {{ staffMember.first_name }} {{ staffMember.last_name}}
+                                </li>
+                            </ul>
+                        </td>
+                        <td><button class="btn btn-success" [routerLink]="x.slug">View</button></td>
+                        <td><button class="btn btn-warning" (click)="addOrEdit('edit', x.slug)">Edit</button></td>
+                    </tr>
+                </tbody>
+
+                <tbody *ngIf="routeType === 'division'">
+                    <tr *ngFor="let x of list">
+                        <td>{{ x.name }}</td>
+                        <td>{{ x.description }}</td>
+                        <td>{{ x.department.name }}</td>
                         <td>{{ x.manager.first_name }} {{ x.manager.last_name }}</td>
                         <td>{{ x.deputy.first_name }} {{ x.deputy.last_name }}</td>
                         <td>{{ x.assistant.first_name }} {{ x.assistant.last_name }}</td>
@@ -38,6 +58,22 @@
                     </tr>
                 </tbody>
 
+                <tbody *ngIf="routeType === 'project'">
+                    <tr *ngFor="let x of list">
+                        <td>{{ x.name }}</td>
+                        <td>{{ x.description }}</td>
+                        <td>
+                            <ul>
+                                <li *ngFor="let pl of x.project_leader">
+                                    {{ pl.first_name }} {{ pl.last_name}}
+                                </li>
+                            </ul>
+                        </td>
+                        <td><button class="btn btn-success" [routerLink]="x.slug">View</button></td>
+                        <td><button class="btn btn-warning" (click)="addOrEdit('edit', x.slug)">Edit</button></td>
+                    </tr>
+                </tbody>
+
                 <tbody *ngIf="routeType === 'users'">
                     <tr *ngFor="let x of list">
                         <td>{{ x.first_name }} {{ x.last_name }}</td>
@@ -48,6 +84,8 @@
                         <td><button class="btn btn-success" [routerLink]="x.id">View</button></td>
                     </tr>
                 </tbody>
+
+
 
             </table>
         </div>
