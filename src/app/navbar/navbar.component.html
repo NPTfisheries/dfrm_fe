@@ -1,12 +1,14 @@
-<ul class="nav p-3">
-  <img class="nav-link" src='./assets/images/DFRM.png' height="50px" />
-  <div *ngFor="let tab of tabs">
-    <a class="nav-link" routerLink="/{{tab | lowercase}}" routerLinkActive="active"
-      ariaCurrentWhenActive="page">{{tab}}</a>
-  </div>
+<nav class="nav navbar navbar-dark bg-dark py-3 mx-auto">
+  <div class="container">
+    <img class="nav-link" src='./assets/images/DFRM.png' height="90px" style="padding:0;" />
+    <div *ngFor="let tab of tabs">
+      <a class="nav-link" routerLink="/{{tab | lowercase}}" routerLinkActive="active"
+        ariaCurrentWhenActive="page">{{tab}}</a>
+    </div>
 
-  <button *ngIf="!isLoggedIn; else profileNav" class="nav-link ms-auto" (click)="openLoginModal()">Login</button>
-</ul>
+    <button *ngIf="!isLoggedIn; else profileNav" class="nav-link ms-auto" (click)="openLoginModal()">Login</button>
+  </div>
+</nav>
 
 <ng-template #profileNav>
   <li ngbDropdown class="nav-item ms-auto" role="presentation">
@@ -16,12 +18,12 @@
       <button ngbDropdownItem (click)="updatePassword()">Update Password</button>
 
       <div class="dropdown-divider"></div>
-    
+
       <button ngbDropdownItem routerLink="department">Department List</button>
       <button ngbDropdownItem routerLink="division">Division List</button>
       <button ngbDropdownItem routerLink="project">Project List</button>
       <button ngbDropdownItem routerLink="users">User List</button>
-  
+
       <button ngbDropdownItem routerLink="image">Image Upload</button>
 
       <div class="dropdown-divider"></div>

@@ -56,9 +56,7 @@ export class AuthService {
         this.username$.next(null);
         this.token$.next(null);
         this.isLoggedIn$.next(false);
-
-        // console.log('token:', this.token$);
-        // console.log('isLoggedIn$:', this.isLoggedIn$);
+        
         this.router.navigate(['home']);
     }
 

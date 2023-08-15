@@ -28,6 +28,7 @@ import { PasswordUpdateComponent } from './password-update/password-update.compo
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { CustomSelectComponent } from '../_inputs/custom-select/custom-select.component';
 import { MultiSelectComponent } from '../_inputs/multi-select/multi-select.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { MultiSelectComponent } from '../_inputs/multi-select/multi-select.compo
     ImageUploadComponent,
     CustomSelectComponent,
     MultiSelectComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
