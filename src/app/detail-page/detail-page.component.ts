@@ -11,7 +11,7 @@ import { BackendService } from 'src/_services/backend.service';
 })
 export class DetailPageComponent implements OnInit {
 
-  data: object | null = null;
+  detail: any | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,13 +19,19 @@ export class DetailPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      const slug = params['slug'];
-      // fetch data based on slug
-      this.backendService.get(slug).subscribe(data => {
-        console.log('DEP DETAIL:', data);
-        this.data = data
+    this.getDetail();
+  }
+
+  getDetail() {
+    this.route.url.subscribe(params => {
+      console.log('params', params);
+      const url = `/api/v1/${params[0].path}/${params[1].path}/`;
+      console.log('url', url);
+      this.backendService.get(url).subscribe(response => {
+        console.log(response);
+        this.detail = response;
       });
+
     });
   }
 
