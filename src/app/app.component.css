@@ -1,0 +1,5 @@
+.router-content {
+    min-height: calc(100vh - 90px - 379px);
+    padding-top: 15px;
+    padding-bottom: 15px;
+}

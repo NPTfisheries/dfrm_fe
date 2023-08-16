@@ -26,6 +26,7 @@ import { CustomSelectComponent } from '../_inputs/custom-select/custom-select.co
 import { MultiSelectComponent } from '../_inputs/multi-select/multi-select.component';
 import { FooterComponent } from './footer/footer.component';
 import { CardPageComponent } from './card-page/card-page.component';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { CardPageComponent } from './card-page/card-page.component';
     MultiSelectComponent,
     FooterComponent,
     CardPageComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,

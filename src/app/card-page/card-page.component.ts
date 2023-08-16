@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BackendService } from 'src/_services/backend.service';
 
+import { CardComponent } from '../card/card.component';
+
 @Component({
   selector: 'app-card-page',
   templateUrl: './card-page.component.html',
@@ -10,6 +12,8 @@ import { BackendService } from 'src/_services/backend.service';
 export class CardPageComponent implements OnInit {
 
   list: any | undefined;
+  routeType: string | undefined;
+  // bannerImage: any | undefined = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -17,15 +21,33 @@ export class CardPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getList();    
+    this.getList();
+    this.getImage();
   }
 
   getList() {
     this.route.url.subscribe(params => {
-      this.backendService.get(`/api/v1/${params[0].path}/`).subscribe(response => {
-        console.log(response);
+      this.routeType = params[0].path;
+      this.backendService.get(`/api/v1/${this.routeType.slice(0, -1)}/`).subscribe(response => {
         this.list = response;
       });
+    });
+  }
+
+  //   interface ImageResponse {
+  //     id: number;
+  //     slug: string;
+  //     name: string;
+  //     description: string;
+  //     photographer: string;
+  //     source: string;
+  //     image: string; // Add the 'image' property here
+  // }
+
+  getImage() {
+    this.backendService.get('/api/v1/image/saturn/').subscribe((response: any) => {
+      // this.bannerImage = response.image;
+      console.log(response.image);
     });
   }
 

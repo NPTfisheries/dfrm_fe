@@ -13,6 +13,11 @@ export class CustomHttpInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler) {
         const token = this.authService.getToken();
 
+        if(!token) {
+            // if no token, send the request without the modified auth. e.g., common get requests not requiring auth
+            return next.handle(request);
+        }
+
         // Check if the request is a file upload
         if (request.body instanceof FormData) {
             // Clone the request and add the Authorization header only
