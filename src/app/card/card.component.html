@@ -1,5 +1,5 @@
 <div class="card" style="width: 25rem;">
-    <img src="..." class="card-img-top" alt="...">
+    <!-- <img src="..." class="card-img-top" alt="..."> -->
     <div class="card-body">
         <h5 class="card-title">{{ data.name }}</h5>
         <p class="card-text">{{ data.description }}</p>
@@ -10,7 +10,8 @@
       <li class="list-group-item">A third item</li>
     </ul>
     <div class="card-body">
-      <a href="#" class="card-link">{{ data.slug }}</a>
+      <a href="" class="card-link">{{ data.slug }}</a>
+      <button class="btn btn-success" (click)="navigateToDetail(data.slug)">View</button>
       <a href="#" class="card-link">Another link</a>
     </div>
   </div>

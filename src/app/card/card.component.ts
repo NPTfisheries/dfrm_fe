@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card',
@@ -10,5 +11,12 @@ export class CardComponent {
   @Input() routeType: string = '';
   @Input() data: any | undefined;
 
-  
+  constructor(
+    private router: Router,
+  ) { }
+
+  navigateToDetail(slug: string) {
+    this.router.navigateByUrl(this.routeType + '/' + slug);
+  };
+
 }

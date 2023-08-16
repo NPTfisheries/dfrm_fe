@@ -13,7 +13,7 @@ export class CardPageComponent implements OnInit {
 
   list: any | undefined;
   routeType: string | undefined;
-  // bannerImage: any | undefined = '';
+  bannerImage: any | undefined = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -27,8 +27,8 @@ export class CardPageComponent implements OnInit {
 
   getList() {
     this.route.url.subscribe(params => {
-      this.routeType = params[0].path;
-      this.backendService.get(`/api/v1/${this.routeType.slice(0, -1)}/`).subscribe(response => {
+      this.routeType = params[0].path.slice(0, -1);
+      this.backendService.get(`/api/v1/${this.routeType}/`).subscribe(response => {
         this.list = response;
       });
     });
@@ -46,8 +46,7 @@ export class CardPageComponent implements OnInit {
 
   getImage() {
     this.backendService.get('/api/v1/image/saturn/').subscribe((response: any) => {
-      // this.bannerImage = response.image;
-      console.log(response.image);
+      this.bannerImage = response.image;
     });
   }
 
