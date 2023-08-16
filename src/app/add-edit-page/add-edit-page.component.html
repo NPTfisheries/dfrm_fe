@@ -16,17 +16,19 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Description</label>
-                <input type="text" formControlName="description" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f['description'].errors }" />
+                <!-- <input type="text" formControlName="description" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['description'].errors }" /> -->
+                <textarea formControlName="description" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['description'].errors }" ></textarea>
                 <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
                     <div *ngIf="f['description'].errors['required']">Description is required</div>
                 </div>
             </div>
             <ng-container *ngIf="routeType !== 'project'">
-                <app-custom-select formControlName="manager" label="Manager"></app-custom-select>
-                <app-custom-select formControlName="deputy" label="Deputy"></app-custom-select>
-                <app-custom-select formControlName="assistant" label="Assistant"></app-custom-select>
-                <app-multi-select formControlName="staff" label="Staff"></app-multi-select>
+                <app-custom-select formControlName="manager" label="Manager" [existingValue]="data.manager.id" ></app-custom-select>
+                <app-custom-select formControlName="deputy" label="Deputy" [existingValue]="data.deputy.id"></app-custom-select>
+                <app-custom-select formControlName="assistant" label="Assistant" [existingValue]="data.deputy.id"></app-custom-select>
+                <app-multi-select formControlName="staff" label="Staff" ></app-multi-select>
             </ng-container>
 
             <ng-container *ngIf="routeType === 'project'">
@@ -48,7 +50,8 @@
             <div>
                 <button [disabled]="loading" class="btn btn-primary">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
-                    Add {{routeType | titlecase}}
+                    <!-- {{ addOrEdit | titlecase }} {{routeType | titlecase}} -->
+                    Submit
                 </button>
             </div>
         </form>

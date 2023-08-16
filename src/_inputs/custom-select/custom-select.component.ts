@@ -19,7 +19,9 @@ import { User } from 'src/_models/user';
 export class CustomSelectComponent implements OnInit, ControlValueAccessor {
 
   @Input() label: string = '';
-  selectedId!: number;
+  @Input() existingValue: number | null = null;
+
+  selectedId!: number | null;
   users: User[] = [];
 
   // Implement ControlValueAccessor methods
@@ -50,7 +52,8 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor {
     this.backendService.getUsers()
       .subscribe(users => {
         console.log('custom select!', users);
-        this.users = users
+        this.users = users;
+        this.selectedId = this.existingValue;
       });
   }
 

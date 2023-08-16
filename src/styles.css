@@ -2,6 +2,9 @@
     font-family: 'Times New Roman', Times, serif;
 }
 
+.dfrm-page-title {
+    font-size:58px;  
+}
 .dfrm-button {
     background-color: #0d1b1f;
     color:#f9f906;

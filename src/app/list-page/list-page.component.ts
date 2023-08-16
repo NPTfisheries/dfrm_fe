@@ -69,10 +69,10 @@ export class ListPageComponent implements OnInit {
     modalRef.componentInstance.addOrEdit = action;
 
     modalRef.result.then((result) => {
+      this.updateList(); // regardless of result, re-populate list. Maybe not the most efficient, but effective?
       console.log('modal result:', result);
       if (result === 'success') {
         console.log('modalRef result:', result);
-        this.updateList();
         this.alertService.success(`${this.routeType} added/edited.`, { autoClose: true });
       }
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
