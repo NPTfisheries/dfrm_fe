@@ -2,93 +2,108 @@
     <h1>{{ routeType | titlecase }} List</h1>
 
     <button *ngIf="routeType == 'users'" (click)="registerUser()">Register User</button>
-    <button *ngIf="routeType != 'users'" class="dfrm-button" (click)="addOrEdit('add', undefined)">Add {{ routeType |
+    <button *ngIf="routeType == 'image'" (click)="uploadImage()">Upload Image</button>
+    <button *ngIf="routeType != 'users' && routeType !== 'image'" class="dfrm-button grow" (click)="addOrEdit('add', undefined)">Add {{ routeType |
         titlecase }}</button>
 
+    <div class="table-container">
+        <table *ngIf="list" class="table table-dark table-bordered table-hover mb-0">
+            <thead>
+                <tr>
+                    <th *ngFor="let col of columns">{{ col | titlecase}}</th>
+                    <th style="text-align: center;">View</th>
+                    <th *ngIf="routeType !== 'users' && routeType !== 'image'" style="text-align: center;">Edit</th>
+                </tr>
+            </thead>
 
-    <div class="card m-5 p-3">
-        <div class="card-body">
-            <table *ngIf="list" class="table table-bordered table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th *ngFor="let col of columns">{{ col | titlecase}}</th>
-                        <th>View</th>
-                        <th *ngIf="routeType !== 'users'">Edit</th>
-                    </tr>
-                </thead>
+            <tbody class="table-group-divider" *ngIf="routeType === 'department'">
+                <tr *ngFor="let x of list">
+                    <td>{{ x.name }}</td>
+                    <td>{{ x.description }}</td>
+                    <td>{{ x.manager.first_name }} {{ x.manager.last_name }}</td>
+                    <td>{{ x.deputy.first_name }} {{ x.deputy.last_name }}</td>
+                    <td>{{ x.assistant.first_name }} {{ x.assistant.last_name }}</td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let staffMember of x.staff">
+                                {{ staffMember.first_name }} {{ staffMember.last_name}}
+                            </li>
+                        </ul>
+                    </td>
+                    <td><button class="btn btn-success" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
+                    </td>
+                    <td><button class="btn btn-warning" (click)="addOrEdit('edit', x.slug)"><i
+                                class="fa-regular fa-pen-to-square"></i></button></td>
+                </tr>
+            </tbody>
 
-                <tbody *ngIf="routeType === 'department'">
-                    <tr *ngFor="let x of list">
-                        <td>{{ x.name }}</td>
-                        <td>{{ x.description }}</td>
-                        <td>{{ x.manager.first_name }} {{ x.manager.last_name }}</td>
-                        <td>{{ x.deputy.first_name }} {{ x.deputy.last_name }}</td>
-                        <td>{{ x.assistant.first_name }} {{ x.assistant.last_name }}</td>
-                        <td>
-                            <ul>
-                                <li *ngFor="let staffMember of x.staff">
-                                    {{ staffMember.first_name }} {{ staffMember.last_name}}
-                                </li>
-                            </ul>
-                        </td>
-                        <td><button class="btn btn-success" [routerLink]="x.slug">View</button></td>
-                        <td><button class="btn btn-warning" (click)="addOrEdit('edit', x.slug)">Edit</button></td>
-                    </tr>
-                </tbody>
-
-                <tbody *ngIf="routeType === 'division'">
-                    <tr *ngFor="let x of list">
-                        <td>{{ x.name }}</td>
-                        <td>{{ x.description }}</td>
-                        <td>{{ x.department.name }}</td>
-                        <td>{{ x.manager.first_name }} {{ x.manager.last_name }}</td>
-                        <td>{{ x.deputy.first_name }} {{ x.deputy.last_name }}</td>
-                        <td>{{ x.assistant.first_name }} {{ x.assistant.last_name }}</td>
-                        <td>
-                            <ul>
-                                <li *ngFor="let staffMember of x.staff">
-                                    {{ staffMember.first_name }} {{ staffMember.last_name}}
-                                </li>
-                            </ul>
-                        </td>
-                        <!-- <td> {{ x.manager }}</td>
+            <tbody class="table-group-divider" *ngIf="routeType === 'division'">
+                <tr *ngFor="let x of list">
+                    <td>{{ x.name }}</td>
+                    <td>{{ x.description }}</td>
+                    <td>{{ x.manager.first_name }} {{ x.manager.last_name }}</td>
+                    <td>{{ x.deputy.first_name }} {{ x.deputy.last_name }}</td>
+                    <td>{{ x.assistant.first_name }} {{ x.assistant.last_name }}</td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let staffMember of x.staff">
+                                {{ staffMember.first_name }} {{ staffMember.last_name}}
+                            </li>
+                        </ul>
+                    </td>
+                    <!-- <td> {{ x.manager }}</td>
                         <td>{{ x.deputy }}</td>
                         <td>{{ x.assistant }} </td> 
                         <td>{{ x.staff }} </td> -->
-                        <td><button class="btn btn-success" [routerLink]="x.slug">View</button></td>
-                        <td><button class="btn btn-warning" (click)="addOrEdit('edit', x.slug)">Edit</button></td>
-                    </tr>
-                </tbody>
+                    <td><button class="btn btn-success" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
+                    </td>
+                    <td><button class="btn btn-warning" (click)="addOrEdit('edit', x.slug)"><i
+                                class="fa-regular fa-pen-to-square"></i></button></td>
+                </tr>
+            </tbody>
 
-                <tbody *ngIf="routeType === 'project'">
-                    <tr *ngFor="let x of list">
-                        <td>{{ x.name }}</td>
-                        <td>{{ x.description }}</td>
-                        <td>
-                            <ul>
-                                <li *ngFor="let pl of x.project_leader">
-                                    {{ pl.first_name }} {{ pl.last_name}}
-                                </li>
-                            </ul>
-                        </td>
-                        <td><button class="btn btn-success" [routerLink]="x.slug">View</button></td>
-                        <td><button class="btn btn-warning" (click)="addOrEdit('edit', x.slug)">Edit</button></td>
-                    </tr>
-                </tbody>
+            <tbody class="table-group-divider" *ngIf="routeType === 'project'">
+                <tr *ngFor="let x of list">
+                    <td>{{ x.name }}</td>
+                    <td>{{ x.description }}</td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let pl of x.project_leader">
+                                {{ pl.first_name }} {{ pl.last_name}}
+                            </li>
+                        </ul>
+                    </td>
+                    <td><button class="btn btn-success" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
+                    </td>
+                    <td><button class="btn btn-warning" (click)="addOrEdit('edit', x.slug)"><i
+                                class="fa-regular fa-pen-to-square"></i></button></td>
+                </tr>
+            </tbody>
 
-                <tbody *ngIf="routeType === 'users'">
-                    <tr *ngFor="let x of list">
-                        <td>{{ x.first_name }} {{ x.last_name }}</td>
-                        <td>{{ x.email }}</td>
-                        <td>{{ x.profile.work_phone }}</td>
-                        <td>{{ x.profile.mobile_phone }}</td>
-                        <td>{{ x.profile.title }}</td>
-                        <td><button class="btn btn-success" [routerLink]="x.id">View</button></td>
-                    </tr>
-                </tbody>
+            <tbody *ngIf="routeType === 'users'">
+                <tr *ngFor="let x of list">
+                    <td>{{ x.first_name }} {{ x.last_name }}</td>
+                    <td>{{ x.email }}</td>
+                    <td>{{ x.profile.work_phone }}</td>
+                    <td>{{ x.profile.mobile_phone }}</td>
+                    <td>{{ x.profile.title }}</td>
+                    <td><button class="btn btn-success" [routerLink]="x.id"><i class="fa-regular fa-eye"></i></button>
+                    </td>
+                </tr>
+            </tbody>
 
+            <tbody *ngIf="routeType === 'image'">
+                <tr *ngFor="let x of list">
+                    <td>{{ x.name }}</td>
+                    <td>{{ x.description }}</td>
+                    <td>{{ x.photographer }}</td>
+                    <td>{{ x.photo_date }}</td>
+                    <td>{{ x.source }}</td>
+                    <td><button class="btn btn-success" [routerLink]="x.id"><i class="fa-regular fa-eye"></i></button>
+                    </td>
+                </tr>
+            </tbody>
 
-
-            </table>
-        </div>
+        </table>
     </div>
+</div>

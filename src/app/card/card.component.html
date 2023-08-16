@@ -1,18 +1,19 @@
 <div class="card text-white bg-dark mb-3 dfrm-card grow" (click)="navigateToDetail(data.slug)" style="width: 25rem;">
-    <!-- <img src="..." class="card-img-top" alt="..."> -->
-    <div class="card-body">
+    <div class="card-image-container">
+        <img [src]="imageUrl" class="card-img-top card-image" alt="...">
+    </div>
+    <div class="card-body ">
         <h5 class="card-title">{{ data.name }}</h5>
-        <p class="card-text">{{ data.description }}</p>
         <hr class="card-hr" />
-        <ul class="list-group list-group-flush">
-            <div class="card-footer" *ngIf="routeType !== 'project'">
-                <li class="list-group-item">Manager: {{ data.manager }}</li>
-                <li class="list-group-item">Deputy: {{ data.deputy }}</li>
-                <li class="list-group-item">Assistant: {{ data.assistant}}</li>
-            </div>
-            <div class="card-footer" *ngIf="routeType === 'project'">
-                <p class="card-text" *ngFor="let pl of data.project_leader">Project Leader: {{pl.id}}</p>
-            </div>
-        </ul>
+
+        <div class="card-footer" *ngIf="routeType !== 'project'">
+            <p class="card-text">Manager: {{ data.manager.first_name }} {{ data.manager.last_name }}</p>
+            <!-- <p class="card-text">Deputy: {{ data.deputy.first_name }} {{ data.deputy.last_name }}</p>
+            <p class="card-text">Assistant: {{ data.assistant.first_name }} {{ data.assistant.last_name }}</p> -->
+        </div>
+        <div class="card-footer" *ngIf="routeType === 'project'">
+            <p class="card-text" *ngFor="let pl of data.project_leader">Project Leader: {{pl.first_name}}
+                {{pl.last_name}}</p>
+        </div>
     </div>
 </div>

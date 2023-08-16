@@ -2,7 +2,7 @@
   <div class="container">
     <img class="nav-link" src='./assets/images/DFRM.png' height="90px" style="padding:0;" />
     <div *ngFor="let tab of tabs">
-      <a class="nav-link" routerLink="{{tab | lowercase}}" routerLinkActive="active"
+      <a class="nav-link grow" routerLink="{{tab | lowercase}}" routerLinkActive="active"
         ariaCurrentWhenActive="page">{{tab}}</a>
     </div>
 
@@ -23,8 +23,7 @@
       <button ngbDropdownItem routerLink="division">Division List</button>
       <button ngbDropdownItem routerLink="project">Project List</button>
       <button ngbDropdownItem routerLink="users">User List</button>
-
-      <button ngbDropdownItem routerLink="image">Image Upload</button>
+      <button ngbDropdownItem routerLink="image">Images</button>
 
       <div class="dropdown-divider"></div>
       <button ngbDropdownItem (click)="authService.logout()">Logout</button>

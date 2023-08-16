@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
 
@@ -10,6 +10,9 @@ import { BackendService } from 'src/_services/backend.service';
   styleUrls: ['./image-upload.component.css']
 })
 export class ImageUploadComponent implements OnInit {
+
+  @Output() updateList: EventEmitter<void> = new EventEmitter<void>();
+
   imageForm!: FormGroup;
   selectedImage: File | undefined;
   imagePreview: string | undefined;
@@ -18,6 +21,7 @@ export class ImageUploadComponent implements OnInit {
     private formBuilder: FormBuilder,
     private backendService: BackendService,
     private alertService: AlertService,
+    private activeModal: NgbActiveModal,
   ) { }
 
   ngOnInit(): void {
@@ -25,7 +29,8 @@ export class ImageUploadComponent implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
       photographer: ['', Validators.required],
-      source: ['', Validators.required]
+      source: ['', Validators.required],
+      photo_date: ['', Validators.required]
     })
   }
 
@@ -51,6 +56,7 @@ export class ImageUploadComponent implements OnInit {
     formData.append('description', this.f['description'].value);
     formData.append('photographer', this.f['photographer'].value);
     formData.append('source', this.f['source'].value);
+    formData.append('photo_date', this.f['photo_date'].value);
     formData.append('image', this.selectedImage);
 
     this.backendService.post('/api/v1/image/', formData).subscribe({
@@ -59,6 +65,8 @@ export class ImageUploadComponent implements OnInit {
         this.imageForm.reset();
         this.selectedImage = undefined;
         this.imagePreview = undefined;
+        this.activeModal.close('success');
+        this.updateList.emit();
       },
       error: (err) => {
         this.alertService.error('Failed to upload image.', { autoClose: true })

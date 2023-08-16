@@ -6,6 +6,7 @@ import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
 import { AddEditPageComponent } from '../add-edit-page/add-edit-page.component';
 import { RegisterComponent } from '../register/register.component';
+import { ImageUploadComponent } from '../image-upload/image-upload.component';
 
 type Action = 'add' | 'edit';
 
@@ -55,15 +56,15 @@ export class ListPageComponent implements OnInit {
     this.getList();
   }
 
-  addOrEdit(action: Action, slug: string|undefined) {
+  addOrEdit(action: Action, slug: string | undefined) {
     const modalOptions: NgbModalOptions = {
       size: 'xl',
-        };
-      
+    };
+
     const modalRef = this.modalService.open(AddEditPageComponent, modalOptions);
-    
-    if (action == 'add') { modalRef.componentInstance.url = this.url; } 
-    if (action == 'edit') { modalRef.componentInstance.url = this.url+slug+'/'; }
+
+    if (action == 'add') { modalRef.componentInstance.url = this.url; }
+    if (action == 'edit') { modalRef.componentInstance.url = this.url + slug + '/'; }
 
     modalRef.componentInstance.routeType = this.routeType;
     modalRef.componentInstance.addOrEdit = action;
@@ -77,36 +78,52 @@ export class ListPageComponent implements OnInit {
       }
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
-  
+
+  uploadImage() {
+    const modalOptions: NgbModalOptions = {
+      size: 'xl',
+    };
+
+    const modalRef = this.modalService.open(ImageUploadComponent, modalOptions);
+
+    modalRef.result.then((result) => {
+      console.log(result);
+      this.updateList();
+      this.alertService.success(`Image uploaded!`, { autoClose: true });
+    }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
+  }
+
   registerUser() {
     const modalOptions: NgbModalOptions = {
       size: 'xl',
-        };
-      
+    };
+
     const modalRef = this.modalService.open(RegisterComponent, modalOptions);
 
     modalRef.result.then((result) => {
       console.log(result);
       // if (result === 'success') {
-        this.updateList();
-        this.alertService.success(`New user registered!`, { autoClose: true });
+      this.updateList();
+      this.alertService.success(`New user registered!`, { autoClose: true });
       // }
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
-  
+
+
   populateFieldsArray(routeType: string) {
     switch (routeType) {
       case 'department':
-        this.columns = ['name', 'description', 'manager', 'deputy', 'assistant', 'staff'];
-        break;
       case 'division':
-        this.columns = ['name', 'description', 'department', 'manager', 'deputy', 'assistant', 'staff'];
+        this.columns = ['name', 'description', 'manager', 'deputy', 'assistant', 'staff'];
         break;
       case 'project':
         this.columns = ['name', 'description', 'Project Leader(s)'];
         break;
       case 'users':
         this.columns = ['name', 'email', 'work_phone', 'mobile_phone', 'title'];
+        break;
+      case 'image':
+        this.columns = ['name', 'description', 'photographer', 'photo_date', 'source'];
         break;
       default:
         this.columns = [];

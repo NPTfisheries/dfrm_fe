@@ -1,33 +1,44 @@
-<form [formGroup]="imageForm" (ngSubmit)="onSubmit()">
-    <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" formControlName="name" class="form-control">
-    </div>
-    <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <input type="text" formControlName="description" class="form-control">
-    </div>
-    <div class="mb-3">
-        <label for="photographer" class="form-label">Photographer</label>
-        <input type="text" formControlName="photographer" class="form-control">
-    </div>
-    <div class="mb-3">
-        <label for="source" class="form-label">Source</label>
-        <input type="text" formControlName="source" class="form-control">
-    </div>
-    <div class="mb-3">
-        <!-- <label for="image" class="form-label">Image</label> -->
-        <input type="file" (change)="onFileChange($event)" class="form-control-file">
-    </div>
+<div class="container">
+    <br />
+    <h2 style="text-align: center;">Upload an Image</h2>
+    <form [formGroup]="imageForm" (ngSubmit)="onSubmit()">
 
+        <div class="mb-3">
+            <input type="file" (change)="onFileChange($event)" class="form-control form-control-lg">
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" formControlName="name" class="form-control form-control-lg">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" formControlName="description" class="form-control form-control-lg">
+        </div>
+        <div class="mb-3">
+            <label for="photographer" class="form-label">Photographer</label>
+            <input type="text" formControlName="photographer" class="form-control form-control-lg">
+        </div>
+        <div class="mb-3">
+            <label for="source" class="form-label">Source</label>
+            <input type="text" formControlName="source" class="form-control form-control-lg">
+        </div>
+        <div class="mb-3">
+            <label for="photo_date" class="form-label">Photo Date</label>
+            <input type="date" formControlName="photo_date" class="form-control form-control-date form-control-lg" />
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="imageForm.invalid || !selectedImage">Upload
+            Image</button>
+            
+    </form>
+    <br />
+    <h4><em>Uploaded images must be original and not violate copyrights. By uploading here you are providing metadata
+            about
+            the image and
+            verify the image is original and useable by the Nez Perce Tribe. Violations are punishable by DEATH.</em>
+    </h4>
     <!-- image preview -->
     <div *ngIf="selectedImage" class="mb-3">
         <label class="form-label">Image Preview</label>
         <img [src]="imagePreview" alt="Image Preview" class="img-thumbnail">
     </div>
-
-    <button type="submit" class="btn btn-primary" [disabled]="imageForm.invalid || !selectedImage">Upload Image</button>
-</form>
-<h4><em>Uploaded images must be original and not violate copyrights. By uploading here you are providing metadata about
-        the image and
-        verify the image is original and useable by the Nez Perce Tribe. Violations are punishable by DEATH.</em></h4>
+</div>

@@ -1,3 +1,5 @@
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
 * {
     font-family: 'Times New Roman', Times, serif;
 }
@@ -13,6 +15,7 @@
     border-color: #5492b4;
 }
 
+/* IMAGES */
 .banner-container {
     height: 500px;
     width: 100%;
@@ -34,4 +37,9 @@
 
 .grow:hover {
     transform: scale(1.1);
+}
+
+/* FORMS */
+.form-label {
+    font-size: larger;
 }

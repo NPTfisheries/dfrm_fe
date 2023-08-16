@@ -4,6 +4,13 @@
     border-radius: 15px;
     border-color: #5492b4;
     border-width: 2px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body {
+    flex:1;
 }
 
 .dfrm-card:hover {
@@ -25,4 +32,25 @@
 
 .card-text {
     font-size: larger;
+    color: #cfd7db;
+
+}
+
+.card-footer {
+    margin-top: auto;
+}
+
+.card-image-container {
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.card-image {
+    min-height: 300px;
+    min-width: 100%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
 }

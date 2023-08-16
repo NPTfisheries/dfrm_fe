@@ -9,7 +9,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from 'src/_helpers/auth-guard';
 import { ListPageComponent } from './list-page/list-page.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
-import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { CardPageComponent } from './card-page/card-page.component';
 
 const routes: Routes = [
@@ -18,7 +17,7 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent},
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-    { path: 'image', component: ImageUploadComponent, canActivate: [AuthGuard]},
+    // { path: 'image', component: ImageUploadComponent, canActivate: [AuthGuard]},
 
 
     // plural is for the public-facing card pages
@@ -31,6 +30,7 @@ const routes: Routes = [
     { path: 'division', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'project', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'users', component: ListPageComponent, canActivate: [AuthGuard]},
+    { path: 'image', component: ListPageComponent, canActivate: [AuthGuard]},
 
     // wildcard for detail pages
     { path: 'department/:slug', component: DetailPageComponent},
