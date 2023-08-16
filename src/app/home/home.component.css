@@ -1,0 +1,14 @@
+.dfrm-title {
+    color:black;
+    text-align: center;
+    font-weight: bold;
+    font-size: 4rem;
+    padding-top:15px;
+}
+
+.home-p {
+    font-size: x-large;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-align: justify;
+}
