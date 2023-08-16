@@ -46,7 +46,8 @@ export class CardPageComponent implements OnInit {
 
   getImage() {
     this.backendService.get('/api/v1/image/saturn/').subscribe((response: any) => {
-      this.bannerImage = response.image;
+      // this.bannerImage = response.image;
+      this.bannerImage = '../../assets/images/saturn.jpg';
     });
   }
 

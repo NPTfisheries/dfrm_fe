@@ -1,9 +1,15 @@
-<h1 class="dfrm-page-title">{{ routeType | titlecase }}s</h1>
-<!-- <div class="container"> -->
-    <!-- <img [src]="bannerImage" alt="Banner Image" /> -->
-<!-- </div> -->
-<div class="card-container">
-    <ng-container *ngFor="let item of list; let i = index">
-        <app-card [routeType]="routeType ? routeType : ''" [data]="item" ></app-card>
-    </ng-container>
+<div class="banner-container">
+    <img class="banner-image" [src]="bannerImage" alt="Banner Image" />
+</div>
+
+<div class="container">
+    <h1 class="dfrm-page-title">{{ routeType | titlecase }}s</h1>
+    <div class="container"> -->
+
+    </div>
+    <div class="card-container">
+        <ng-container *ngFor="let item of list; let i = index">
+            <app-card [routeType]="routeType ? routeType : ''" [data]="item"></app-card>
+        </ng-container>
+    </div>
 </div>
