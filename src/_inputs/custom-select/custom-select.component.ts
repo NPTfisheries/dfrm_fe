@@ -20,7 +20,7 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor {
 
   @Input() label: string = '';
   @Input() existingValue: number | null = null;
-  @Input() controlName: string | null = null;
+  @Input() formControlName: string | null = null;
 
   selectedId!: number | null;
   users: User[] = [];

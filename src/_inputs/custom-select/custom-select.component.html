@@ -1,5 +1,5 @@
 <div class="mb-3">
-    <label [formControlName]="controlName" class="form-label">{{ label }}</label>
+    <label [formControlName]="formControlName" class="form-label">{{ label }}</label>
     <select class='form-select form-control-lg' [(ngModel)]="selectedId" (change)="onChange(selectedId)" >
         <option disabled selected value="">Select an employee</option> 
         <option *ngFor="let user of users" [value]="user.id">{{ user.first_name }} {{ user.last_name }}</option>

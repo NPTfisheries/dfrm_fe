@@ -46,29 +46,30 @@ export class AddEditPageComponent {
   }
 
   loadData() {
+    console.log('LOADING DATA ADDEDIT!');
     if (this.url !== undefined) {
       if (this.addOrEdit === 'edit') {
         this.backendService.get(this.url).subscribe(data => {
           this.data = data;
           console.log('ADDEDITDATA: ', data);
-          this.initializeFormWithData();
+          this.initializeFormWithData(data);
         });
       } else {
-        this.initializeFormWithData();
+        this.initializeFormWithData(null);
       }
     }
   }
 
-  initializeFormWithData() {
+  initializeFormWithData(data:any) {
     switch (this.routeType) {
       case 'department':
-        this.departmentForm;
+        this.departmentForm(data);
         break;
       case 'division':
-        this.divisionForm;
+        this.divisionForm();
         break;
       case 'project':
-        this.projectForm;
+        this.projectForm();
         break;
       default:
         break;
@@ -83,6 +84,7 @@ export class AddEditPageComponent {
     // stop here if form is invalid
     if (this.form.invalid) {
       this.alertService.error('Error: please check your values and try again.', { id: 'alert-modal', autoClose: true });
+      console.log(this.form.value);
       this.loading = false;
       return;
     }
@@ -102,14 +104,21 @@ export class AddEditPageComponent {
     this.updateList.emit();
   }
 
-  private departmentForm() {
+  private departmentForm(data: any) {
     this.form = this.formBuilder.group({
-      name: [this.data?.name || '', Validators.required],
-      description: [this.data?.description || '', Validators.required],
-      manager: [this.data?.manager?.id || '', Validators.required],
-      deputy: [this.data?.deputy?.id || '', Validators.required],
-      assistant: [this.data?.assistant?.id || '', Validators.required],
-      staff: [this.data?.staff || [], Validators.required],
+      // name: [this.data?.name || '', Validators.required],
+      // description: [this.data?.description || '', Validators.required],
+      // manager: [this.data?.manager?.id || '', Validators.required],
+      // deputy: [this.data?.deputy?.id || '', Validators.required],
+      // assistant: [this.data?.assistant?.id || '', Validators.required],
+      // staff: [this.data?.staff || [], Validators.required],
+      
+      name: [data ? data.name : '', Validators.required],
+      description: [data ? data.description : '', Validators.required],
+      manager: [data ? data.manager.id : '', Validators.required],
+      deputy: [data ? data.deputy.id : '', Validators.required],
+      assistant: [data ? data.assistant.id : '', Validators.required],
+      staff: [data ? data.staff : [], Validators.required],
     });
   }
 
@@ -121,7 +130,7 @@ export class AddEditPageComponent {
       deputy: [this.data?.deputy?.id || '', Validators.required],
       assistant: [this.data?.assistant?.id || '', Validators.required],
       staff: [this.data?.staff || [], Validators.required],
-      department: ['1', Validators.required],
+      department: ['1'],
     });
   }
 
@@ -130,7 +139,7 @@ export class AddEditPageComponent {
       name: [this.data?.name || '', Validators.required],
       description: [this.data?.description || '', Validators.required],
       project_leader: [this.data?.project_leader || '', Validators.required],
-      department: ['1', Validators.required],
+      department: ['1'],
     });
   }
 }

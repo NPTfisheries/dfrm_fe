@@ -4,54 +4,112 @@
     </div>
     <alert id="alert-modal"></alert>
     <div class="modal-body">
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-            <div class="mb-3">
-                <label class="form-label">Name</label>
-                <input type="text" formControlName="name" class="form-control form-control-lg"
-                    [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
-                <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
-                    <div *ngIf="f['name'].errors['required']">Name is required</div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Description</label>
-                <textarea rows="3" formControlName="description" class="form-control form-control-lg"
-                    [ngClass]="{ 'is-invalid': submitted && f['description'].errors }" ></textarea>
-                <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
-                    <div *ngIf="f['description'].errors['required']">Description is required</div>
-                </div>
-            </div>
 
-            <ng-container [ngSwitch]="routeType">
-                <ng-container *ngSwitchCase="'department'"> 
-                    <app-custom-select controlName="manager" label="Manager" [existingValue]="data.manager.id" ></app-custom-select>
-                    <app-custom-select controlName="deputy" label="Deputy" [existingValue]="data.deputy.id"></app-custom-select>
-                    <app-custom-select controlName="assistant" label="Assistant" [existingValue]="data.deputy.id"></app-custom-select>
-                    <app-multi-select controlName="staff" label="Staff" ></app-multi-select>
-                </ng-container>
 
-                <ng-container *ngSwitchCase="'division'"> 
-                    <app-custom-select controlName="manager" label="Manager" [existingValue]="data.manager.id" ></app-custom-select>
-                    <app-custom-select controlName="deputy" label="Deputy" [existingValue]="data.deputy.id"></app-custom-select>
-                    <app-custom-select controlName="assistant" label="Assistant" [existingValue]="data.deputy.id"></app-custom-select>
-                    <app-multi-select controlName="staff" label="Staff" ></app-multi-select>
-                    <input type="hidden" formControlName="department" [value]="1" />
-                </ng-container>
-    
-                <ng-container *ngSwitchCase="'project'">
-                    <app-multi-select formControlName="project_leader" label="Project Leader"></app-multi-select>
-                    <input type="hidden" formControlName="department" [value]="1" />
-                </ng-container>
+        <ng-container [ngSwitch]="routeType">
+            <ng-container *ngSwitchCase="'department'">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" [formControlName]="'name'" class="form-control form-control-lg"
+                            [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
+                        <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                            <div *ngIf="f['name'].errors['required']">Name is required</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea rows="3" [formControlName]="'description'" class="form-control form-control-lg"
+                            [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"></textarea>
+                        <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                            <div *ngIf="f['description'].errors['required']">Description is required</div>
+                        </div>
+                    </div>
+                    <app-custom-select [formControlName]="'manager'" label="Manager"
+                        [existingValue]="data?.manager?.id"></app-custom-select>
+                    <app-custom-select [formControlName]="'deputy'" label="Deputy"
+                        [existingValue]="data?.deputy?.id"></app-custom-select>
+                    <app-custom-select [formControlName]="'assistant'" label="Assistant"
+                        [existingValue]="data?.assistant?.id"></app-custom-select>
+                    <app-multi-select [formControlName]="'staff'" label="Staff"></app-multi-select>
+                    <br />
+                    <div>
+                        <button [disabled]="loading" class="btn btn-primary">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                            Submit
+                        </button>
+                    </div>
+                </form>
             </ng-container>
 
-            <br />
-            <div>
-                <button [disabled]="loading" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
-                    Submit
-                </button>
-            </div>
-        </form>
+            <ng-container *ngSwitchCase="'division'">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" [formControlName]="'name'" class="form-control form-control-lg"
+                            [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
+                        <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                            <div *ngIf="f['name'].errors['required']">Name is required</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea rows="3" [formControlName]="'description'" class="form-control form-control-lg"
+                            [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"></textarea>
+                        <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                            <div *ngIf="f['description'].errors['required']">Description is required</div>
+                        </div>
+                    </div>
+                    <app-custom-select [formControlName]="'manager'" label="Manager"
+                        [existingValue]="data?.manager?.id"></app-custom-select>
+                    <app-custom-select [formControlName]="'deputy'" label="Deputy"
+                        [existingValue]="data?.deputy?.id"></app-custom-select>
+                    <app-custom-select [formControlName]="'assistant'" label="Assistant"
+                        [existingValue]="data?.assistant?.id"></app-custom-select>
+                    <app-multi-select [formControlName]="'staff'" label="Staff"></app-multi-select>
+                    <input type="hidden" [formControlName]="'department'" [value]="1" />
+                    <br />
+                    <div>
+                        <button [disabled]="loading" class="btn btn-primary">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'project'">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" [formControlName]="'name'" class="form-control form-control-lg"
+                            [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
+                        <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                            <div *ngIf="f['name'].errors['required']">Name is required</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea rows="3" [formControlName]="'description'" class="form-control form-control-lg"
+                            [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"></textarea>
+                        <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                            <div *ngIf="f['description'].errors['required']">Description is required</div>
+                        </div>
+                    </div>
+                    <app-multi-select [formControlName]="'project_leader'" label="Project Leader"></app-multi-select>
+                    <input type="hidden" [formControlName]="'department'" [value]="1" />
+                    <br />
+                    <div>
+                        <button [disabled]="loading" class="btn btn-primary">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </ng-container>
+        </ng-container>
+
+
     </div>
 </div>
