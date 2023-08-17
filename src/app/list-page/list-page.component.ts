@@ -48,7 +48,6 @@ export class ListPageComponent implements OnInit {
         console.log(response);
         this.list = response;
       });
-
     });
   }
 
@@ -102,10 +101,10 @@ export class ListPageComponent implements OnInit {
 
     modalRef.result.then((result) => {
       console.log(result);
-      // if (result === 'success') {
+      if (result === 'success') {
       this.updateList();
       this.alertService.success(`New user registered!`, { autoClose: true });
-      // }
+      }
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
 

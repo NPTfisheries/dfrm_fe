@@ -25,7 +25,7 @@ export class AddEditPageComponent {
 
   url: string = ''; // passed from list-page
   addOrEdit: string | undefined;
-  routeType: string | undefined; // project, division, department
+  routeType: string | undefined; // department, division, project
 
   trackByFn(index: number, item: string): string {
     return item;
@@ -50,33 +50,28 @@ export class AddEditPageComponent {
       if (this.addOrEdit === 'edit') {
         this.backendService.get(this.url).subscribe(data => {
           this.data = data;
-
+          console.log('ADDEDITDATA: ', data);
           this.initializeFormWithData();
         });
       } else {
         this.initializeFormWithData();
       }
-
     }
   }
 
   initializeFormWithData() {
-    if (this.routeType !== 'project') {
-      this.form = this.formBuilder.group({
-        name: [this.data?.name || '', Validators.required],
-        description: [this.data?.description || '', Validators.required],
-        manager: [this.data?.manager || '', Validators.required],
-        deputy: [this.data?.deputy || '', Validators.required],
-        assistant: [this.data?.assistant || '', Validators.required],
-        staff: [this.data?.staff || [], Validators.required],
-        ...(this.routeType === 'division' ? { department: [this.data?.department || '', Validators.required] } : {}),
-      });
-    } else {
-      this.form = this.formBuilder.group({
-        name: [this.data?.name || '', Validators.required],
-        description: [this.data?.description || '', Validators.required],
-        project_leader: [this.data?.project_leader || '', Validators.required],
-      });
+    switch (this.routeType) {
+      case 'department':
+        this.departmentForm;
+        break;
+      case 'division':
+        this.divisionForm;
+        break;
+      case 'project':
+        this.projectForm;
+        break;
+      default:
+        break;
     }
   }
 
@@ -106,5 +101,36 @@ export class AddEditPageComponent {
     this.activeModal.close('success');
     this.updateList.emit();
   }
-  
+
+  private departmentForm() {
+    this.form = this.formBuilder.group({
+      name: [this.data?.name || '', Validators.required],
+      description: [this.data?.description || '', Validators.required],
+      manager: [this.data?.manager?.id || '', Validators.required],
+      deputy: [this.data?.deputy?.id || '', Validators.required],
+      assistant: [this.data?.assistant?.id || '', Validators.required],
+      staff: [this.data?.staff || [], Validators.required],
+    });
+  }
+
+  private divisionForm() {
+    this.form = this.formBuilder.group({
+      name: [this.data?.name || '', Validators.required],
+      description: [this.data?.description || '', Validators.required],
+      manager: [this.data?.manager?.id || '', Validators.required],
+      deputy: [this.data?.deputy?.id || '', Validators.required],
+      assistant: [this.data?.assistant?.id || '', Validators.required],
+      staff: [this.data?.staff || [], Validators.required],
+      department: ['1', Validators.required],
+    });
+  }
+
+  private projectForm() {
+    this.form = this.formBuilder.group({
+      name: [this.data?.name || '', Validators.required],
+      description: [this.data?.description || '', Validators.required],
+      project_leader: [this.data?.project_leader || '', Validators.required],
+      department: ['1', Validators.required],
+    });
+  }
 }
