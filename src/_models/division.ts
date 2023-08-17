@@ -1,12 +1,17 @@
+import { User } from "./user";
+import { Image } from "./image";
+import { Department } from "./department";
+
 export interface Division {
+    assistant?: number | User;
+    department?: number| Department;
+    deputy?: number | User;
+    description?: string;
     id?: string;
+    img_banner?: number | Image;
+    img_card?: number | Image;
+    manager?: number | User;
     name?: string;
-    manager?: string;
-    deputy?: string;
-    assistant?: string;
-    created_at?: string;
-    created_by?: string;
-    updated_at?: string;
-    updated_by?: string;
-    is_active?: string;
+    slug?: string;
+    staff?: number[] | User[];
 }
