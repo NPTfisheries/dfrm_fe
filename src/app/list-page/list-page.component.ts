@@ -12,6 +12,7 @@ import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 import { ProjectFormComponent } from '../forms/project-form/project-form.component';
 import { DepartmentFormComponent } from '../forms/department-form/department-form.component';
 import { DivisionFormComponent } from '../forms/division-form/division-form.component';
+import { FormContainerComponent } from 'src/_forms/form-container/form-container.component';
 
 type Action = 'add' | 'edit';
 
@@ -40,7 +41,7 @@ export class ListPageComponent implements OnInit {
     private backendService: BackendService,
     private alertService: AlertService,
     private modalService: NgbModal,
-    private cdRef: ChangeDetectorRef
+    // private cdRef: ChangeDetectorRef
   ) { }
 
 
@@ -65,7 +66,7 @@ export class ListPageComponent implements OnInit {
     this.getList();
   }
 
-  addOrEdit(action: Action, slug: string | undefined) {
+  addOrEdit(action: Action, slug: string | undefined, detailSlug?: string | undefined) {
     const modalOptions: NgbModalOptions = {
       size: 'xl',
     };
@@ -73,22 +74,22 @@ export class ListPageComponent implements OnInit {
     let modalRef: any = undefined;
 
     switch (slug) {
-      case 'department':
-        modalRef = this.modalService.open(DepartmentFormComponent, modalOptions);
-        break;
-      case 'division':
-        modalRef = this.modalService.open(DivisionFormComponent, modalOptions);
-        break;
-      case 'project':
-        modalRef = this.modalService.open(ProjectFormComponent, modalOptions);
-        break;
+      // case 'department':
+      //   modalRef = this.modalService.open(DepartmentFormComponent, modalOptions);
+      //   break;
+      // case 'division':
+      //   modalRef = this.modalService.open(DivisionFormComponent, modalOptions);
+      //   break;
+      // case 'project':
+      //   modalRef = this.modalService.open(ProjectFormComponent, modalOptions);
+      //   break;
       default:
-        modalRef = this.modalService.open(AddEditPageComponent, modalOptions);
+        // modalRef = this.modalService.open(AddEditPageComponent, modalOptions);
+        modalRef = this.modalService.open(FormContainerComponent, modalOptions);
     }
 
-
     if (action == 'add') { modalRef.componentInstance.url = this.url; }
-    if (action == 'edit') { modalRef.componentInstance.url = this.url + slug + '/'; }
+    if (action == 'edit') { modalRef.componentInstance.url = this.url + detailSlug + '/'; }
 
     modalRef.componentInstance.routeType = this.routeType;
     modalRef.componentInstance.addOrEdit = action;

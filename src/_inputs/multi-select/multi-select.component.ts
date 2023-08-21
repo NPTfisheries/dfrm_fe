@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormGroup, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { BackendService } from 'src/_services/backend.service';
 import { User } from 'src/_models/user';
@@ -17,7 +17,11 @@ import { User } from 'src/_models/user';
   ],
 })
 export class MultiSelectComponent implements OnInit, ControlValueAccessor {
+
   @Input() label: string = '';
+  @Input() form!: FormGroup;
+
+  
   selectedIds: number[] = []; // Changed to an array of selected IDs
   users: User[] = [];
 

@@ -1,7 +1,7 @@
 <div class="container">
     <form (ngSubmit)="onSubmit()" [formGroup]="form">
 
-        <div *ngFor="let input of inputs" class="form-row">
+        <div *ngFor="let input of inputs" class="form-row mb-3">
             <app-dynamic-form-input [input]="input" [form]="form"></app-dynamic-form-input>
         </div>
 

@@ -6,15 +6,14 @@ import { InputBase } from 'src/_inputs/input-base';
 import { InputService } from 'src/_services/input.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-form-container',
+  templateUrl: './form-container.component.html',
+  styleUrls: ['./form-container.component.css']
 })
-export class HomeComponent {
+export class FormContainerComponent {
 
-  token: any | null = null;
   inputs$: Observable<InputBase<any>[]>;
-
+  
   constructor(
     private backendService: BackendService,
     private inputService: InputService,
@@ -24,12 +23,6 @@ export class HomeComponent {
     // this.inputs$ = this.inputService.getDepartmentInputs();
     this.inputs$ = this.inputService.getDivisionInputs();
 
-  }
-
-  hitAPI() {
-    this.backendService.options('/api/v1/division/1/').subscribe(response => {
-      console.log(response);
-    })
   }
 
 }

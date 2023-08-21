@@ -21,7 +21,7 @@
                     <div *ngIf="f['description'].errors['required']">Description is required</div>
                 </div>
             </div>
-            <app-multi-select [formControlName]="'project_leader'" label="Project Leader"></app-multi-select>
+            <app-multi-select [formControlName]="'project_leader'" label="Project Leader" [form]="form" ></app-multi-select>
             <input type="hidden" [formControlName]="'department'" [value]="1" />
             <br />
             <div>

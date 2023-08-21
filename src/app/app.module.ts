@@ -32,6 +32,7 @@ import { DynamicFormInputComponent } from '../_forms/dynamic-form-input/dynamic-
 import { ProjectFormComponent } from './forms/project-form/project-form.component';
 import { DivisionFormComponent } from './forms/division-form/division-form.component';
 import { DepartmentFormComponent } from './forms/department-form/department-form.component';
+import { FormContainerComponent } from '../_forms/form-container/form-container.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { DepartmentFormComponent } from './forms/department-form/department-form
     ProjectFormComponent,
     DivisionFormComponent,
     DepartmentFormComponent,
+    FormContainerComponent,
   ],
   imports: [
     BrowserModule,

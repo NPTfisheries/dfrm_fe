@@ -1,0 +1,12 @@
+<div>
+    <div class="modal-header">
+        <!-- <h4 class="modal-title">{{ addOrEdit | titlecase }} {{ routeType | titlecase }}</h4> -->
+        <h1>FORM CONTAINER COMPONENT</h1>
+    </div>
+    <alert id="alert-modal"></alert>
+    <div class="modal-body">
+
+        <app-dynamic-form [inputs]="inputs$ | async"></app-dynamic-form>
+
+    </div>
+</div>
