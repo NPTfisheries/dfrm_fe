@@ -19,15 +19,12 @@ import { CustomHttpInterceptor } from 'src/_helpers/http-interceptor';
 import { ProfileUpdateComponent } from './forms/profile-update/profile-update.component';
 import { ListPageComponent } from './list-page/list-page.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
-import { AddEditPageComponent } from './add-edit-page/add-edit-page.component';
 import { PasswordUpdateComponent } from './forms/password-update/password-update.component';
 import { ImageUploadComponent } from './forms/image-upload/image-upload.component';
-import { CustomSelectComponent } from '../_inputs/custom-select/custom-select.component';
-import { MultiSelectComponent } from '../_inputs/multi-select/multi-select.component';
 import { FooterComponent } from './footer/footer.component';
 import { CardPageComponent } from './card-page/card-page.component';
 import { CardComponent } from './card/card.component';
-import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
+import { DynamicFormComponent } from '../_forms/dynamic-form/dynamic-form.component';
 import { DynamicFormInputComponent } from '../_forms/dynamic-form-input/dynamic-form-input.component';
 import { FormContainerComponent } from '../_forms/form-container/form-container.component';
 
@@ -43,11 +40,8 @@ import { FormContainerComponent } from '../_forms/form-container/form-container.
     ProfileUpdateComponent,
     ListPageComponent,
     DetailPageComponent,
-    AddEditPageComponent,
     PasswordUpdateComponent,
     ImageUploadComponent,
-    CustomSelectComponent,
-    MultiSelectComponent,
     FooterComponent,
     CardPageComponent,
     CardComponent,

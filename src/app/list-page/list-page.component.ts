@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
-import { AddEditPageComponent } from '../add-edit-page/add-edit-page.component';
 import { RegisterComponent } from '../forms/register/register.component';
 import { ImageUploadComponent } from '../forms/image-upload/image-upload.component';
 
@@ -18,11 +17,7 @@ import { FormContainerComponent } from 'src/_forms/form-container/form-container
 export class ListPageComponent implements OnInit {
   
   @ViewChild(FormContainerComponent) formContainerComponent!: FormContainerComponent;
-
-
-
-  @ViewChild(AddEditPageComponent) addEditComponent!: AddEditPageComponent;
-  @ViewChild(RegisterComponent) registerComponent!: AddEditPageComponent;
+  @ViewChild(RegisterComponent) registerComponent!: RegisterComponent;
 
   routeType: string | undefined;
   list: any | undefined;

@@ -60,7 +60,8 @@ export class InputService {
         key: 'staff',
         label: 'Staff',
         idArray: this.getIdArray(data?.staff) || [],
-        valueArray: this.getValueArray(data?.staff) || [],        required: true,
+        // valueArray: this.getValueArray(data?.staff) || [],        
+        required: true,
         options: this.buildEmployeeOptions(),
         order: 6
       })
@@ -113,7 +114,7 @@ export class InputService {
         key: 'staff',
         label: 'Staff',
         idArray: this.getIdArray(data?.staff) || [],
-        valueArray: this.getValueArray(data?.staff) || [],
+        // valueArray: this.getValueArray(data?.staff) || [],
         required: true,
         options: this.buildEmployeeOptions(),
         order: 6
@@ -153,7 +154,7 @@ export class InputService {
         key: 'project_leader',
         label: 'Project Leaders',
         idArray: this.getIdArray(data?.project_leader) || [],
-        valueArray: this.getValueArray(data?.project_leader) || [],
+        // valueArray: this.getValueArray(data?.project_leader) || [],
         required: true,
         options: this.buildEmployeeOptions(),
         order: 3
@@ -195,16 +196,16 @@ export class InputService {
     return ids;
   }
 
-  getValueArray(data: any) {
-    if(!data) { return undefined; } // if no data, don't run the function.
+  // getValueArray(data: any) {
+  //   if(!data) { return undefined; } // if no data, don't run the function.
 
-    let ids:string[] = [];
-    for (let x of data) {
-      ids.push(String(x.id));
-    }
+  //   let ids:string[] = [];
+  //   for (let x of data) {
+  //     ids.push(String(x.id));
+  //   }
 
-    console.log('getValueArray:', ids);
-    return ids;
-  }
+  //   console.log('getValueArray:', ids);
+  //   return ids;
+  // }
 
 }
