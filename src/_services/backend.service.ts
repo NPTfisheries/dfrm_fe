@@ -25,7 +25,7 @@ export class BackendService {
     }
 
     get(url: string) {
-        return this.http.get(url)
+        return this.http.get(url) //, { observe: 'response' })
             .pipe(
                 map((response) => {
                     console.log(`${url} response:`, response);

@@ -9,24 +9,29 @@ import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
 import { AlertComponent } from 'src/_components/alert.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './forms/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './forms/register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 
 import { CustomHttpInterceptor } from 'src/_helpers/http-interceptor';
-import { ProfileUpdateComponent } from './profile-update/profile-update.component';
+import { ProfileUpdateComponent } from './forms/profile-update/profile-update.component';
 import { ListPageComponent } from './list-page/list-page.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
 import { AddEditPageComponent } from './add-edit-page/add-edit-page.component';
-import { PasswordUpdateComponent } from './password-update/password-update.component';
-import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { PasswordUpdateComponent } from './forms/password-update/password-update.component';
+import { ImageUploadComponent } from './forms/image-upload/image-upload.component';
 import { CustomSelectComponent } from '../_inputs/custom-select/custom-select.component';
 import { MultiSelectComponent } from '../_inputs/multi-select/multi-select.component';
 import { FooterComponent } from './footer/footer.component';
 import { CardPageComponent } from './card-page/card-page.component';
 import { CardComponent } from './card/card.component';
+import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
+import { DynamicFormInputComponent } from '../_forms/dynamic-form-input/dynamic-form-input.component';
+import { ProjectFormComponent } from './forms/project-form/project-form.component';
+import { DivisionFormComponent } from './forms/division-form/division-form.component';
+import { DepartmentFormComponent } from './forms/department-form/department-form.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +53,11 @@ import { CardComponent } from './card/card.component';
     FooterComponent,
     CardPageComponent,
     CardComponent,
+    DynamicFormComponent,
+    DynamicFormInputComponent,
+    ProjectFormComponent,
+    DivisionFormComponent,
+    DepartmentFormComponent,
   ],
   imports: [
     BrowserModule,

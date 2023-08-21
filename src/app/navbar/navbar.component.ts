@@ -3,8 +3,8 @@ import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthService } from 'src/_services/auth.service';
 
-import { LoginComponent } from '../login/login.component';
-import { PasswordUpdateComponent } from '../password-update/password-update.component';
+import { LoginComponent } from '../forms/login/login.component';
+import { PasswordUpdateComponent } from '../forms/password-update/password-update.component';
 
 
 @Component({

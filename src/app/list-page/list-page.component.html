@@ -1,6 +1,10 @@
 <div class="container">
     <h1>{{ routeType | titlecase }} List</h1>
 
+    <button *ngIf="routeType == 'department'" (click)="addOrEdit('add', 'department')" class="dfrm-button grow">ADD DEPARTMENT</button>
+    <button *ngIf="routeType == 'division'" (click)="addOrEdit('add', 'division')" class="dfrm-button grow">ADD DIVISION</button>
+    <button *ngIf="routeType == 'project'" (click)="addOrEdit('add', 'project')" class="dfrm-button grow">ADD PROJECT</button>
+    
     <button *ngIf="routeType == 'users'" (click)="registerUser()">Register User</button>
     <button *ngIf="routeType == 'image'" (click)="uploadImage()">Upload Image</button>
     <button *ngIf="routeType != 'users' && routeType !== 'image'" class="dfrm-button grow" (click)="addOrEdit('add', undefined)">Add {{ routeType |

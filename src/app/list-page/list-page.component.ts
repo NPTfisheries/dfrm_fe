@@ -5,8 +5,13 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
 import { AddEditPageComponent } from '../add-edit-page/add-edit-page.component';
-import { RegisterComponent } from '../register/register.component';
-import { ImageUploadComponent } from '../image-upload/image-upload.component';
+import { RegisterComponent } from '../forms/register/register.component';
+import { ImageUploadComponent } from '../forms/image-upload/image-upload.component';
+
+import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
+import { ProjectFormComponent } from '../forms/project-form/project-form.component';
+import { DepartmentFormComponent } from '../forms/department-form/department-form.component';
+import { DivisionFormComponent } from '../forms/division-form/division-form.component';
 
 type Action = 'add' | 'edit';
 
@@ -16,6 +21,11 @@ type Action = 'add' | 'edit';
   styleUrls: ['./list-page.component.css']
 })
 export class ListPageComponent implements OnInit {
+
+  @ViewChild(DepartmentFormComponent) departmentFormComponent!: DepartmentFormComponent;
+  @ViewChild(DivisionFormComponent) divisionFormComponent!: DivisionFormComponent;
+  @ViewChild(ProjectFormComponent) projectFormComponent!: ProjectFormComponent;
+
 
   @ViewChild(AddEditPageComponent) addEditComponent!: AddEditPageComponent;
   @ViewChild(RegisterComponent) registerComponent!: AddEditPageComponent;
@@ -60,7 +70,22 @@ export class ListPageComponent implements OnInit {
       size: 'xl',
     };
 
-    const modalRef = this.modalService.open(AddEditPageComponent, modalOptions);
+    let modalRef: any = undefined;
+
+    switch (slug) {
+      case 'department':
+        modalRef = this.modalService.open(DepartmentFormComponent, modalOptions);
+        break;
+      case 'division':
+        modalRef = this.modalService.open(DivisionFormComponent, modalOptions);
+        break;
+      case 'project':
+        modalRef = this.modalService.open(ProjectFormComponent, modalOptions);
+        break;
+      default:
+        modalRef = this.modalService.open(AddEditPageComponent, modalOptions);
+    }
+
 
     if (action == 'add') { modalRef.componentInstance.url = this.url; }
     if (action == 'edit') { modalRef.componentInstance.url = this.url + slug + '/'; }
@@ -68,14 +93,14 @@ export class ListPageComponent implements OnInit {
     modalRef.componentInstance.routeType = this.routeType;
     modalRef.componentInstance.addOrEdit = action;
 
-    modalRef.result.then((result) => {
+    modalRef.result.then((result: any) => {
       this.updateList(); // regardless of result, re-populate list. Maybe not the most efficient, but effective?
       console.log('modal result:', result);
       if (result === 'success') {
         console.log('modalRef result:', result);
         this.alertService.success(`${this.routeType} added/edited.`, { autoClose: true });
       }
-    }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
+    }).catch((reason: any) => { }); // prevents error on exiting modal by clicking outside.
   }
 
   uploadImage() {
@@ -102,8 +127,8 @@ export class ListPageComponent implements OnInit {
     modalRef.result.then((result) => {
       console.log(result);
       if (result === 'success') {
-      this.updateList();
-      this.alertService.success(`New user registered!`, { autoClose: true });
+        this.updateList();
+        this.alertService.success(`New user registered!`, { autoClose: true });
       }
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }

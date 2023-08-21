@@ -6,7 +6,7 @@ import { BackendService } from 'src/_services/backend.service';
 import { User } from 'src/_models/user';
 import { Profile } from 'src/_models/profile';
 
-import { ProfileUpdateComponent } from '../profile-update/profile-update.component';
+import { ProfileUpdateComponent } from '../forms/profile-update/profile-update.component';
 
 @Component({
   selector: 'app-profile',
