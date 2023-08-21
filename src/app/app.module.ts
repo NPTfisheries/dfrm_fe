@@ -29,9 +29,6 @@ import { CardPageComponent } from './card-page/card-page.component';
 import { CardComponent } from './card/card.component';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { DynamicFormInputComponent } from '../_forms/dynamic-form-input/dynamic-form-input.component';
-import { ProjectFormComponent } from './forms/project-form/project-form.component';
-import { DivisionFormComponent } from './forms/division-form/division-form.component';
-import { DepartmentFormComponent } from './forms/department-form/department-form.component';
 import { FormContainerComponent } from '../_forms/form-container/form-container.component';
 
 @NgModule({
@@ -56,9 +53,6 @@ import { FormContainerComponent } from '../_forms/form-container/form-container.
     CardComponent,
     DynamicFormComponent,
     DynamicFormInputComponent,
-    ProjectFormComponent,
-    DivisionFormComponent,
-    DepartmentFormComponent,
     FormContainerComponent,
   ],
   imports: [

@@ -1,14 +1,12 @@
 <div class="container">
     <h1>{{ routeType | titlecase }} List</h1>
 
-    <button *ngIf="routeType == 'department'" (click)="add('department')" class="dfrm-button grow">ADD DEPARTMENT</button>
-    <button *ngIf="routeType == 'division'" (click)="add('division')" class="dfrm-button grow">ADD DIVISION</button>
-    <button *ngIf="routeType == 'project'" (click)="add('project')" class="dfrm-button grow">ADD PROJECT</button>
-    
+    <button *ngIf="routeType == 'department'" (click)="add('department')" class="dfrm-button grow">Add New Department</button>
+    <button *ngIf="routeType == 'division'" (click)="add('division')" class="dfrm-button grow">Add New Division</button>
+    <button *ngIf="routeType == 'project'" (click)="add('project')" class="dfrm-button grow">Add New Project</button>
+
     <button *ngIf="routeType == 'users'" (click)="registerUser()">Register User</button>
     <button *ngIf="routeType == 'image'" (click)="uploadImage()">Upload Image</button>
-    <button *ngIf="routeType != 'users' && routeType !== 'image'" class="dfrm-button grow" (click)="addOrEdit('add', undefined)">Add {{ routeType |
-        titlecase }}</button>
 
     <div class="table-container">
         <table *ngIf="list" class="table table-dark table-bordered table-hover mb-0">
@@ -36,7 +34,7 @@
                     </td>
                     <td><button class="btn btn-success" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="btn btn-warning" (click)="edit('department', x.slug)"><i
+                    <td><button class="btn btn-warning" (click)="edit('department', x.id)"><i
                                 class="fa-regular fa-pen-to-square"></i></button></td>
                 </tr>
             </tbody>
@@ -57,7 +55,7 @@
                     </td>
                     <td><button class="btn btn-success" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="btn btn-warning" (click)="edit('division', x.slug)"><i
+                    <td><button class="btn btn-warning" (click)="edit('division', x.id)"><i
                                 class="fa-regular fa-pen-to-square"></i></button></td>
                 </tr>
             </tbody>
@@ -75,7 +73,7 @@
                     </td>
                     <td><button class="btn btn-success" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="btn btn-warning" (click)="edit('project', x.slug)"><i
+                    <td><button class="btn btn-warning" (click)="edit('project', x.id)"><i
                                 class="fa-regular fa-pen-to-square"></i></button></td>
                 </tr>
             </tbody>

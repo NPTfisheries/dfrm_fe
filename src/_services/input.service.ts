@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, of } from 'rxjs';
+import { of } from 'rxjs';
 
 import { InputBase } from 'src/_inputs/input-base';
 import { InputText } from 'src/_inputs/input-text';
@@ -15,18 +15,6 @@ export class InputService {
 
   constructor(private backendService: BackendService) { }
 
-  // getInputs(routeType: string, data?: any) {
-  //   switch(routeType):
-  //   case 'department':
-  //     return this.getDepartmentInputs(data);
-  //   case 'division':
-  //     return this.getDivisionInputs(data);
-  //   case 'project':
-  //     return this.getProjectInputs(data);
-  //   default:
-  //     return of([]);
-  // }
-
   // TODO: get from a remote source of question metadata
   getDepartmentInputs(data?: any) {
     console.log('Getting Department Inputs...');
@@ -40,13 +28,14 @@ export class InputService {
       }),
       new InputTextarea({
         key: 'description',
-        label: data?.description || 'Description',
+        label: 'Description',
+        value: data?.description || '',
         order: 2
       }),
       new InputSelect({
         key: 'manager',
         label: 'Manager',
-        value: '',
+        value: data?.manager.id || '',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 3
@@ -54,7 +43,7 @@ export class InputService {
       new InputSelect({
         key: 'deputy',
         label: 'Deputy',
-        value: '',
+        value: data?.deputy.id || '',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 4
@@ -62,7 +51,7 @@ export class InputService {
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
-        value: '',
+        value: data?.assistant.id || '',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 5
@@ -70,7 +59,9 @@ export class InputService {
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
-        value: "",
+        // value: data?.staff || '',
+        // idArray: this.getIdArray(data?.staff) || '',
+        idArray: [1,2],
         required: true,
         options: this.buildEmployeeOptions(),
         order: 6
@@ -86,19 +77,20 @@ export class InputService {
       new InputText({
         key: 'name',
         label: 'Name',
-        value: '',
+        value: data?.name || '',
         required: true,
         order: 1
       }),
       new InputTextarea({
         key: 'textarea',
         label: 'Description',
+        value: data?.description || '',
         order: 2
       }),
       new InputSelect({
         key: 'manager',
         label: 'Manager',
-        value: '',
+        value: data?.manager.id || '',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 3
@@ -106,7 +98,7 @@ export class InputService {
       new InputSelect({
         key: 'deputy',
         label: 'Deputy',
-        value: '',
+        value: data?.deputy.id || '',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 4
@@ -114,7 +106,7 @@ export class InputService {
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
-        value: '',
+        value: data?.assistant.id ||'',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 5
@@ -122,7 +114,8 @@ export class InputService {
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
-        value: '',
+        // value: data?.staff || '',
+        // idArray: this.getIdArray(data?.staff) || '',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 6
@@ -149,15 +142,16 @@ export class InputService {
         order: 1
       }),
       new InputTextarea({
-        key: 'textarea',
-        label: data?.description || 'Description',
-        value: '',
+        key: 'description',
+        label: 'Description',
+        value: data?.description || '',
         order: 2
       }),
       new InputMultiSelect({
         key: 'project_leader',
         label: 'Project Leaders',
-        value: "",
+        // value: data?.project_leader || '',
+        // value: this.getIdArray(data?.project_leader) || '',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 3
@@ -185,6 +179,22 @@ export class InputService {
     })
 
     return options;
+  }
+
+  getIdArray(data: any) {
+    if(!data) { return undefined; } // if no data, don't run the function.
+
+    let ids:number[] = [];
+    for (let x of data) {
+      ids.push(x.id);
+    }
+
+    console.log('ARRAY IDS', ids);
+
+    return ids;
+    // console.log('ids', ids);
+    // console.log(ids.join(','));
+    // return ids.join(',');
   }
 
 }

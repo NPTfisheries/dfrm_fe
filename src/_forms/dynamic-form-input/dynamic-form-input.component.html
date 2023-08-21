@@ -4,7 +4,7 @@
     <div [ngSwitch]="input.controlType">
 
         <!-- HIDDEN -->
-        <input type="hidden" [formControlName]="'department'" [value]="input.value" />
+        <input type="hidden" [formControlName]="input.key" [value]="input.key"  [id]="input.key" />
 
         <!-- TEXT -->
         <input *ngSwitchCase="'text'" [formControlName]="input.key" [id]="input.key" [type]="input.type"
@@ -23,7 +23,7 @@
         <!-- SELECT MULTIPLE -->
         <select [id]="input.key" *ngSwitchCase="'multi-select'" [formControlName]="input.key"
             class="form-select form-control-lg" multiple>
-            <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
+            <option *ngFor="let opt of input.options" selected [value]="opt.key">{{opt.value}}</option>
         </select>
 
         <!-- DATE -->

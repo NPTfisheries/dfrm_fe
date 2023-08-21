@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BackendService } from 'src/_services/backend.service';
 
 import { InputBase } from 'src/_inputs/input-base';
 import { InputService } from 'src/_services/input.service';
@@ -10,32 +9,28 @@ import { InputService } from 'src/_services/input.service';
   templateUrl: './form-container.component.html',
   styleUrls: ['./form-container.component.css']
 })
-export class FormContainerComponent {
+export class FormContainerComponent implements OnInit {
+
+  @Input() routeType: string | undefined;  // always provided...?
+  @Input() data?: any | undefined;
+  @Input() url?: string | undefined;
 
   inputs$!: Observable<InputBase<string>[]> | undefined;
-  routeType: string | undefined;
-  data?: any | undefined;
+  addOrEdit: string = 'Add';
 
   constructor(
-    private backendService: BackendService,
     private inputService: InputService,
-  ) {
-    // this.inputs$ = this.getInputs(this.routeType, this.data);
-    // this.inputs$ = this.inputService.getDepartmentInputs(this.data);
-    // this.inputs$ = this.inputService.getDivisionInputs(this.data);
+  ) { }
+
+  ngOnInit(): void {
+    this.inputs$ = this.getInputs(this.routeType, this.data);
+    if(this.data) { this.addOrEdit == 'Edit'};
   }
 
-  getInputs(routeType: any, data?:any) {
+  getInputs(routeType: any, data?: any) {
+    console.log('getInputs', routeType, data)
+
     switch (routeType) {
-      // case 'department':
-      //   this.inputs$ = this.inputService.getDepartmentInputs(data);
-      //   break;
-      // case 'division':
-      //   this.inputs$ = this.inputService.getDivisionInputs(data);
-      //   break;
-      // case 'project':
-      //   this.inputs$ = this.inputService.getProjectInputs(data);
-      //   break;
       case 'department':
         return this.inputService.getDepartmentInputs(data);
       case 'division':
@@ -45,6 +40,11 @@ export class FormContainerComponent {
       default:
         return
     }
+  }
+
+  button() {
+    console.log(this.data);
+    console.log(this.url);
   }
 
 }

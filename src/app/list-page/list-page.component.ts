@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 
@@ -8,13 +8,7 @@ import { AddEditPageComponent } from '../add-edit-page/add-edit-page.component';
 import { RegisterComponent } from '../forms/register/register.component';
 import { ImageUploadComponent } from '../forms/image-upload/image-upload.component';
 
-import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
-import { ProjectFormComponent } from '../forms/project-form/project-form.component';
-import { DepartmentFormComponent } from '../forms/department-form/department-form.component';
-import { DivisionFormComponent } from '../forms/division-form/division-form.component';
 import { FormContainerComponent } from 'src/_forms/form-container/form-container.component';
-
-type Action = 'add' | 'edit';
 
 @Component({
   selector: 'app-list-page',
@@ -22,11 +16,7 @@ type Action = 'add' | 'edit';
   styleUrls: ['./list-page.component.css']
 })
 export class ListPageComponent implements OnInit {
-
-  @ViewChild(DepartmentFormComponent) departmentFormComponent!: DepartmentFormComponent;
-  @ViewChild(DivisionFormComponent) divisionFormComponent!: DivisionFormComponent;
-  @ViewChild(ProjectFormComponent) projectFormComponent!: ProjectFormComponent;
-
+  
   @ViewChild(FormContainerComponent) formContainerComponent!: FormContainerComponent;
 
 
@@ -44,7 +34,6 @@ export class ListPageComponent implements OnInit {
     private backendService: BackendService,
     private alertService: AlertService,
     private modalService: NgbModal,
-    // private cdRef: ChangeDetectorRef
   ) { }
 
 
@@ -69,44 +58,6 @@ export class ListPageComponent implements OnInit {
     this.getList();
   }
 
-  addOrEdit(action: Action, slug: string | undefined, detailSlug?: string | undefined) {
-    const modalOptions: NgbModalOptions = {
-      size: 'xl',
-    };
-
-    let modalRef: any = undefined;
-
-    switch (slug) {
-      // case 'department':
-      //   modalRef = this.modalService.open(DepartmentFormComponent, modalOptions);
-      //   break;
-      // case 'division':
-      //   modalRef = this.modalService.open(DivisionFormComponent, modalOptions);
-      //   break;
-      // case 'project':
-      //   modalRef = this.modalService.open(ProjectFormComponent, modalOptions);
-      //   break;
-      default:
-        // modalRef = this.modalService.open(AddEditPageComponent, modalOptions);
-        modalRef = this.modalService.open(FormContainerComponent, modalOptions);
-    }
-
-    if (action == 'add') { modalRef.componentInstance.url = this.url; }
-    if (action == 'edit') { modalRef.componentInstance.url = this.url + detailSlug + '/'; }
-
-    modalRef.componentInstance.routeType = this.routeType;
-    modalRef.componentInstance.addOrEdit = action;
-
-    modalRef.result.then((result: any) => {
-      this.updateList(); // regardless of result, re-populate list. Maybe not the most efficient, but effective?
-      console.log('modal result:', result);
-      if (result === 'success') {
-        console.log('modalRef result:', result);
-        this.alertService.success(`${this.routeType} added/edited.`, { autoClose: true });
-      }
-    }).catch((reason: any) => { }); // prevents error on exiting modal by clicking outside.
-  }
-
   // add & edit for department, division, and project
   add(routeType: string | undefined) {
     console.log('add:', routeType);
@@ -117,15 +68,13 @@ export class ListPageComponent implements OnInit {
     const modalRef = this.modalService.open(FormContainerComponent, modalOptions);
 
     modalRef.componentInstance.routeType = routeType;
-    
+
   }
 
-  edit(routeType: string | undefined, slug: string | undefined) {
-    console.log('edit:', routeType, slug);
-    const data = this.backendService.get('/api/v1/' + routeType + '/' + slug + '/').subscribe(data => {
-      console.log('edit form data:', data);
-      return data;
-    });
+  edit(routeType: string | undefined, id: any) {
+    console.log('edit:', routeType, id);
+
+    const data = this.getRecordById(id);
 
     const modalOptions: NgbModalOptions = {
       size: 'xl',
@@ -133,8 +82,9 @@ export class ListPageComponent implements OnInit {
 
     const modalRef = this.modalService.open(FormContainerComponent, modalOptions);
 
-    modalRef.componentInstance.routeType = this.routeType;
+    modalRef.componentInstance.routeType = routeType;
     modalRef.componentInstance.data = data;
+    modalRef.componentInstance.url = this.url + data.slug + '/';
   }
 
   uploadImage() {
@@ -186,6 +136,15 @@ export class ListPageComponent implements OnInit {
       default:
         this.columns = [];
         break;
+    }
+  }
+
+  getRecordById(id: number) {
+    for (let item of this.list) {
+      if (item.id === id) {
+        console.log('returning', item);
+        return item;
+      }
     }
   }
 
