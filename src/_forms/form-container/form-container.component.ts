@@ -14,9 +14,9 @@ export class FormContainerComponent implements OnInit {
   @Input() routeType: string | undefined;  // always provided...?
   @Input() data?: any | undefined;
   @Input() url!: string;
+  @Input() addOrEdit!: string;
 
   inputs$!: Observable<InputBase<string>[]> | undefined;
-  addOrEdit: string = 'Add';
 
   constructor(
     private inputService: InputService,
@@ -24,7 +24,6 @@ export class FormContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.inputs$ = this.getInputs(this.routeType, this.data);
-    if(this.data) { this.addOrEdit == 'Edit'};
   }
 
   getInputs(routeType: any, data?: any) {

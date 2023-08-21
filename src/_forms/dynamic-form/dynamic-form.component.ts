@@ -15,6 +15,7 @@ export class DynamicFormComponent implements OnInit {
 
   @Input() inputs: InputBase<string>[] | null = [];
   @Input() url!: string;
+  @Input() addOrEdit!: string;
   form!: FormGroup;
   payload = '';
 
@@ -34,11 +35,18 @@ export class DynamicFormComponent implements OnInit {
     console.log(this.form.value);
     console.log(this.url);
 
-    this.backendService.post(this.url, this.form.value).subscribe(response => {
-      console.log(response);
-      
-      this.activeModal.close();
-    });
+    if(this.addOrEdit === 'add') {
+      this.backendService.post(this.url, this.form.value).subscribe(response => {
+        console.log(response);
+        this.activeModal.close();
+      });
+    }
 
+    if(this.addOrEdit === 'edit') {
+      this.backendService.put(this.url, this.form.value).subscribe(response => {
+        console.log(response);
+        this.activeModal.close();
+      });
+    }
   }
 }
