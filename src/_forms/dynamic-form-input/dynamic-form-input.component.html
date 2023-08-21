@@ -6,6 +6,17 @@
         <!-- HIDDEN -->
         <input type="hidden" [formControlName]="input.key" [value]="input.key" [id]="input.key" />
 
+        <!-- IMAGE -->
+        <select [id]="input.key" *ngSwitchCase="'image'" [formControlName]="input.key"
+            class="form-control form-select form-select-lg">
+            <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
+            <!-- image preview -->
+            <!-- <div *ngIf="selectedImage" class="mb-3">
+                <label class="form-label">Image Preview</label>
+                <img [src]="imagePreview" alt="Image Preview" class="img-thumbnail">
+            </div> -->
+        </select>
+
         <!-- TEXT -->
         <input *ngSwitchCase="'text'" [formControlName]="input.key" [id]="input.key" [type]="input.type"
             class="form-control form-control-lg">
@@ -23,7 +34,7 @@
         <!-- SELECT MULTIPLE -->
         <select [id]="input.key" *ngSwitchCase="'multi-select'" [formControlName]="input.key"
             class="form-control form-select form-select-lg" multiple [ngModel]="input.idArray">
-            <option *ngFor="let opt of input.options" [value]="opt.key" >{{opt.value}}</option>
+            <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
         </select>
 
         <!-- DATE -->

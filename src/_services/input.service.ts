@@ -9,6 +9,7 @@ import { InputTextarea } from 'src/_inputs/input-textarea';
 import { BackendService } from './backend.service';
 import { InputMultiSelect } from 'src/_inputs/input-multi-select';
 import { InputHidden } from 'src/_inputs/input-hidden';
+import { InputImage } from 'src/_inputs/input-image';
 
 @Injectable({ providedIn: 'root' })
 export class InputService {
@@ -64,6 +65,20 @@ export class InputService {
         required: true,
         options: this.buildEmployeeOptions(),
         order: 6
+      }),
+      new InputImage({
+        key: 'img_banner',
+        label: 'Choose Banner Image',
+        value: data?.img_banner || '',
+        options: this.buildImageOptions(),
+        order: 7
+      }),
+      new InputImage({
+        key: 'img_card',
+        label: 'Choose Card Image',
+        value: data?.img_card || '',
+        options: this.buildImageOptions(),
+        order: 7
       })
     ]
 
@@ -119,6 +134,20 @@ export class InputService {
         options: this.buildEmployeeOptions(),
         order: 6
       }),
+      new InputImage({
+        key: 'img_banner',
+        label: 'Choose Banner Image',
+        value: data?.img_banner || '',
+        options: this.buildImageOptions(),
+        order: 7
+      }),
+      new InputImage({
+        key: 'img_card',
+        label: 'Choose Card Image',
+        value: data?.img_card || '',
+        options: this.buildImageOptions(),
+        order: 7
+      }),
       new InputHidden({
         key: 'department',
         value: '1', // default
@@ -159,6 +188,20 @@ export class InputService {
         options: this.buildEmployeeOptions(),
         order: 3
       }),
+      new InputImage({
+        key: 'img_banner',
+        label: 'Choose Banner Image',
+        value: data?.img_banner || '',
+        options: this.buildImageOptions(),
+        order: 7
+      }),
+      new InputImage({
+        key: 'img_card',
+        label: 'Choose Card Image',
+        value: data?.img_card || '',
+        options: this.buildImageOptions(),
+        order: 7
+      }),
       new InputHidden({
         key: 'department',
         value: '1', // default
@@ -178,6 +221,19 @@ export class InputService {
       console.log("buildEmployeeOptions:", employees);
       for (let emp of employees) {
         options.push({ key: emp.id, value: emp.first_name + ' ' + emp.last_name })
+      }
+    })
+
+    return options;
+  }
+
+  private buildImageOptions() {
+    let options: { key: string, value: string }[] = [];
+
+    this.backendService.get('/api/v1/image/').subscribe((images: any) => {
+      console.log("buildEmployeeOptions:", images);
+      for (let img of images) {
+        options.push({ key: img.id, value: img.name })
       }
     })
 
