@@ -59,10 +59,8 @@ export class InputService {
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
-        // value: data?.staff || '',
-        // idArray: this.getIdArray(data?.staff) || '',
-        idArray: [1,2],
-        required: true,
+        idArray: this.getIdArray(data?.staff) || [],
+        valueArray: this.getValueArray(data?.staff) || [],        required: true,
         options: this.buildEmployeeOptions(),
         order: 6
       })
@@ -114,8 +112,8 @@ export class InputService {
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
-        // value: data?.staff || '',
-        // idArray: this.getIdArray(data?.staff) || '',
+        idArray: this.getIdArray(data?.staff) || [],
+        valueArray: this.getValueArray(data?.staff) || [],
         required: true,
         options: this.buildEmployeeOptions(),
         order: 6
@@ -133,6 +131,10 @@ export class InputService {
 
   getProjectInputs(data?: any) {
     console.log('Getting Project Inputs...');
+    const eos = this.buildEmployeeOptions();
+    console.log('EMPLOYEE OPTIONS', eos);
+    const pls = this.getIdArray(data?.project_leader);
+    console.log('PROJECT LEADS:', pls);
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
@@ -150,8 +152,8 @@ export class InputService {
       new InputMultiSelect({
         key: 'project_leader',
         label: 'Project Leaders',
-        // value: data?.project_leader || '',
-        // value: this.getIdArray(data?.project_leader) || '',
+        idArray: this.getIdArray(data?.project_leader) || [],
+        valueArray: this.getValueArray(data?.project_leader) || [],
         required: true,
         options: this.buildEmployeeOptions(),
         order: 3
@@ -172,7 +174,7 @@ export class InputService {
     let options: { key: string, value: string }[] = [];
 
     this.backendService.get('/api/v1/users/').subscribe((employees: any) => {
-      // console.log("buildEmployeeOptions:", employees);
+      console.log("buildEmployeeOptions:", employees);
       for (let emp of employees) {
         options.push({ key: emp.id, value: emp.first_name + ' ' + emp.last_name })
       }
@@ -189,12 +191,20 @@ export class InputService {
       ids.push(x.id);
     }
 
-    console.log('ARRAY IDS', ids);
-
+    console.log('getIdArray:', ids);
     return ids;
-    // console.log('ids', ids);
-    // console.log(ids.join(','));
-    // return ids.join(',');
+  }
+
+  getValueArray(data: any) {
+    if(!data) { return undefined; } // if no data, don't run the function.
+
+    let ids:string[] = [];
+    for (let x of data) {
+      ids.push(String(x.id));
+    }
+
+    console.log('getValueArray:', ids);
+    return ids;
   }
 
 }

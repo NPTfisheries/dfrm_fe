@@ -61,14 +61,12 @@ export class ListPageComponent implements OnInit {
   // add & edit for department, division, and project
   add(routeType: string | undefined) {
     console.log('add:', routeType);
-    const modalOptions: NgbModalOptions = {
-      size: 'xl',
-    };
+    const modalOptions: NgbModalOptions = { size: 'xl', };
 
     const modalRef = this.modalService.open(FormContainerComponent, modalOptions);
 
     modalRef.componentInstance.routeType = routeType;
-
+    modalRef.componentInstance.url = this.url;
   }
 
   edit(routeType: string | undefined, id: any) {
@@ -76,9 +74,7 @@ export class ListPageComponent implements OnInit {
 
     const data = this.getRecordById(id);
 
-    const modalOptions: NgbModalOptions = {
-      size: 'xl',
-    };
+    const modalOptions: NgbModalOptions = { size: 'xl', };
 
     const modalRef = this.modalService.open(FormContainerComponent, modalOptions);
 
@@ -88,9 +84,7 @@ export class ListPageComponent implements OnInit {
   }
 
   uploadImage() {
-    const modalOptions: NgbModalOptions = {
-      size: 'xl',
-    };
+    const modalOptions: NgbModalOptions = { size: 'xl', };
 
     const modalRef = this.modalService.open(ImageUploadComponent, modalOptions);
 
@@ -102,9 +96,7 @@ export class ListPageComponent implements OnInit {
   }
 
   registerUser() {
-    const modalOptions: NgbModalOptions = {
-      size: 'xl',
-    };
+    const modalOptions: NgbModalOptions = { size: 'xl', };
 
     const modalRef = this.modalService.open(RegisterComponent, modalOptions);
 

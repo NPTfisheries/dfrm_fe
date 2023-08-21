@@ -1,5 +1,6 @@
 export class InputBase<T> {
   value: T | undefined;
+  valueArray: string[] | undefined;
   idArray: number[] | undefined;
   key: string;
   label: string;
@@ -11,6 +12,7 @@ export class InputBase<T> {
 
   constructor(options: {
     value?: T;
+    valueArray?: string[];
     idArray?: number[];
     key?: string;
     label?: string;
@@ -21,6 +23,7 @@ export class InputBase<T> {
     options?: { key: string, value: string }[];
   } = {}) {
     this.value = options.value;
+    this.valueArray = options.valueArray;
     this.idArray = options.idArray;
     this.key = options.key || '';
     this.label = options.label || '';
