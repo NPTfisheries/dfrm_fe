@@ -81,7 +81,7 @@ export class InputService {
         order: 1
       }),
       new InputTextarea({
-        key: 'textarea',
+        key: 'description',
         label: 'Description',
         value: data?.description || '',
         order: 2

@@ -13,7 +13,7 @@ export class FormContainerComponent implements OnInit {
 
   @Input() routeType: string | undefined;  // always provided...?
   @Input() data?: any | undefined;
-  @Input() url?: string | undefined;
+  @Input() url!: string;
 
   inputs$!: Observable<InputBase<string>[]> | undefined;
   addOrEdit: string = 'Add';
@@ -40,11 +40,6 @@ export class FormContainerComponent implements OnInit {
       default:
         return
     }
-  }
-
-  button() {
-    console.log(this.data);
-    console.log(this.url);
   }
 
 }
