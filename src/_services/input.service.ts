@@ -15,25 +15,38 @@ export class InputService {
 
   constructor(private backendService: BackendService) { }
 
+  // getInputs(routeType: string, data?: any) {
+  //   switch(routeType):
+  //   case 'department':
+  //     return this.getDepartmentInputs(data);
+  //   case 'division':
+  //     return this.getDivisionInputs(data);
+  //   case 'project':
+  //     return this.getProjectInputs(data);
+  //   default:
+  //     return of([]);
+  // }
+
   // TODO: get from a remote source of question metadata
-  getDepartmentInputs() {
+  getDepartmentInputs(data?: any) {
+    console.log('Getting Department Inputs...');
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
         label: 'Name',
-        value: 'Name Value',
+        value: data?.name || '',
         required: true,
         order: 1
       }),
       new InputTextarea({
-        key: 'textarea',
-        label: 'Description',
+        key: 'description',
+        label: data?.description || 'Description',
         order: 2
       }),
       new InputSelect({
         key: 'manager',
         label: 'Manager',
-        value: 'Name Value',
+        value: '',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 3
@@ -41,7 +54,7 @@ export class InputService {
       new InputSelect({
         key: 'deputy',
         label: 'Deputy',
-        value: 'Name Value',
+        value: '',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 4
@@ -49,7 +62,7 @@ export class InputService {
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
-        value: 'Name Value',
+        value: '',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 5
@@ -57,7 +70,7 @@ export class InputService {
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
-        value: "PL Val",
+        value: "",
         required: true,
         options: this.buildEmployeeOptions(),
         order: 6
@@ -67,13 +80,13 @@ export class InputService {
     return of(inputs.sort((a, b) => a.order - b.order));
   }
 
-  getDivisionInputs() {
-    
+  getDivisionInputs(data?: any) {
+    console.log('Getting Division Inputs...');
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
         label: 'Name',
-        value: 'Name Value',
+        value: '',
         required: true,
         order: 1
       }),
@@ -85,15 +98,15 @@ export class InputService {
       new InputSelect({
         key: 'manager',
         label: 'Manager',
-        value: 'Name Value',
+        value: '',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 3
       }),
       new InputSelect({
-        key: 'assistant',
-        label: 'Manager',
-        value: 'Name Value',
+        key: 'deputy',
+        label: 'Deputy',
+        value: '',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 4
@@ -101,7 +114,7 @@ export class InputService {
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
-        value: 'Name Value',
+        value: '',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 5
@@ -109,47 +122,49 @@ export class InputService {
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
-        value: "PL Val",
+        value: '',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 6
       }),
       new InputHidden({
         key: 'department',
-        value: '1',
+        value: '1', // default
         required: true,
         order: 99
       })
     ]
 
     return of(inputs.sort((a, b) => a.order - b.order));
-   }
+  }
 
-  getProjectInputs() {
+  getProjectInputs(data?: any) {
+    console.log('Getting Project Inputs...');
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
         label: 'Name',
-        value: 'Name Value',
+        value: data?.name || '',
         required: true,
         order: 1
       }),
       new InputTextarea({
         key: 'textarea',
-        label: 'Description',
+        label: data?.description || 'Description',
+        value: '',
         order: 2
       }),
       new InputMultiSelect({
         key: 'project_leader',
         label: 'Project Leaders',
-        value: "PL Val",
+        value: "",
         required: true,
         options: this.buildEmployeeOptions(),
         order: 3
       }),
       new InputHidden({
         key: 'department',
-        value: '1',
+        value: '1', // default
         required: true,
         order: 99
       })
@@ -158,66 +173,12 @@ export class InputService {
     return of(inputs.sort((a, b) => a.order - b.order));
   }
 
-  getInputs() {
-    const inputs: InputBase<string>[] = [
-
-      new InputSelect({
-        key: 'employee',
-        label: 'Employee Select',
-        value: 'Name Value',
-        required: true,
-        options: this.buildEmployeeOptions(),
-        order: 1
-      }),
-
-      new InputText({
-        key: 'name',
-        label: 'Name Input (TEXT)',
-        value: 'Name Value',
-        required: true,
-        order: 1
-      }),
-
-      new InputText({
-        key: 'email',
-        label: 'Email Input',
-        type: 'email',
-        order: 2
-      }),
-
-      new InputDate({
-        key: 'date',
-        label: 'Date Input',
-        type: 'date',
-        order: 3
-      }),
-
-      new InputTextarea({
-        key: 'textarea',
-        label: 'Text Area Input',
-        order: 4
-      }),
-
-      new InputSelect({
-        key: 'select1',
-        label: 'Select Input',
-        // Key has to be string --> b/c typed.
-        options: [
-          { key: '1', value: 'Option 1' },
-          { key: '2', value: 'Option 2' },
-          { key: '3', value: 'Option 3' }
-        ]
-      })
-    ];
-
-    return of(inputs.sort((a, b) => a.order - b.order));
-  }
 
   private buildEmployeeOptions() {
     let options: { key: string, value: string }[] = [];
 
     this.backendService.get('/api/v1/users/').subscribe((employees: any) => {
-      console.log("BEO", employees);
+      // console.log("buildEmployeeOptions:", employees);
       for (let emp of employees) {
         options.push({ key: emp.id, value: emp.first_name + ' ' + emp.last_name })
       }

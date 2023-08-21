@@ -27,6 +27,9 @@ export class ListPageComponent implements OnInit {
   @ViewChild(DivisionFormComponent) divisionFormComponent!: DivisionFormComponent;
   @ViewChild(ProjectFormComponent) projectFormComponent!: ProjectFormComponent;
 
+  @ViewChild(FormContainerComponent) formContainerComponent!: FormContainerComponent;
+
+
 
   @ViewChild(AddEditPageComponent) addEditComponent!: AddEditPageComponent;
   @ViewChild(RegisterComponent) registerComponent!: AddEditPageComponent;
@@ -104,6 +107,36 @@ export class ListPageComponent implements OnInit {
     }).catch((reason: any) => { }); // prevents error on exiting modal by clicking outside.
   }
 
+  // add & edit for department, division, and project
+  add(routeType: string | undefined) {
+    console.log('add:', routeType);
+    const modalOptions: NgbModalOptions = {
+      size: 'xl',
+    };
+
+    const modalRef = this.modalService.open(FormContainerComponent, modalOptions);
+
+    modalRef.componentInstance.routeType = routeType;
+    
+  }
+
+  edit(routeType: string | undefined, slug: string | undefined) {
+    console.log('edit:', routeType, slug);
+    const data = this.backendService.get('/api/v1/' + routeType + '/' + slug + '/').subscribe(data => {
+      console.log('edit form data:', data);
+      return data;
+    });
+
+    const modalOptions: NgbModalOptions = {
+      size: 'xl',
+    };
+
+    const modalRef = this.modalService.open(FormContainerComponent, modalOptions);
+
+    modalRef.componentInstance.routeType = this.routeType;
+    modalRef.componentInstance.data = data;
+  }
+
   uploadImage() {
     const modalOptions: NgbModalOptions = {
       size: 'xl',
@@ -142,7 +175,7 @@ export class ListPageComponent implements OnInit {
         this.columns = ['name', 'description', 'manager', 'deputy', 'assistant', 'staff'];
         break;
       case 'project':
-        this.columns = ['name', 'description', 'Project Leader(s)'];
+        this.columns = ['name', 'description', 'Project Leaders'];
         break;
       case 'users':
         this.columns = ['name', 'email', 'work_phone', 'mobile_phone', 'title'];

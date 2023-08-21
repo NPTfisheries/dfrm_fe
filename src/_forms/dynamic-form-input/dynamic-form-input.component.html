@@ -11,7 +11,7 @@
             class="form-control form-control-lg">
 
         <!-- TEXTAREA -->
-        <textarea *ngSwitchCase="'textarea'" rows="3" [formControlName]="'description'"
+        <textarea *ngSwitchCase="'textarea'" rows="3" [formControlName]="input.key" [id]="input.key"
             class="form-control form-control-lg"></textarea>
 
         <!-- SELECT -->
