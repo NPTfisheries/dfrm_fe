@@ -18,10 +18,6 @@
     flex:1;
 }
 
-.dfrm-card:hover {
-    cursor: pointer;
-}
-
 .card-hr {
     border-color: #f9f906;;
 }
@@ -33,7 +29,6 @@
 .card-title {
     font-size: x-large;
     color: #f9f906;
-    text-align: center;
 }
 
 .card-text {

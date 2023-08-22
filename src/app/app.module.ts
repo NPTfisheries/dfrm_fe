@@ -27,6 +27,7 @@ import { CardComponent } from './card/card.component';
 import { DynamicFormComponent } from '../_forms/dynamic-form/dynamic-form.component';
 import { DynamicFormInputComponent } from '../_forms/dynamic-form-input/dynamic-form-input.component';
 import { FormContainerComponent } from '../_forms/form-container/form-container.component';
+import { EmployeeCardComponent } from './employee-card/employee-card.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { FormContainerComponent } from '../_forms/form-container/form-container.
     DynamicFormComponent,
     DynamicFormInputComponent,
     FormContainerComponent,
+    EmployeeCardComponent,
   ],
   imports: [
     BrowserModule,
