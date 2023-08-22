@@ -10,6 +10,7 @@ import { BackendService } from './backend.service';
 import { InputMultiSelect } from 'src/_inputs/input-multi-select';
 import { InputHidden } from 'src/_inputs/input-hidden';
 import { InputImage } from 'src/_inputs/input-image';
+import { InputPhone } from 'src/_inputs/input-phone';
 
 @Injectable({ providedIn: 'root' })
 export class InputService {
@@ -161,10 +162,6 @@ export class InputService {
 
   getProjectInputs(data?: any) {
     console.log('Getting Project Inputs...');
-    // const eos = this.buildEmployeeOptions();
-    // console.log('EMPLOYEE OPTIONS', eos);
-    // const pls = this.getIdArray(data?.project_leader);
-    // console.log('PROJECT LEADS:', pls);
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
@@ -214,11 +211,7 @@ export class InputService {
   }
 
   getSubprojectInputs(data?: any) {
-    console.log('Getting Project Inputs...');
-    // const eos = this.buildEmployeeOptions();
-    // console.log('EMPLOYEE OPTIONS', eos);
-    // const pls = this.getIdArray(data?.project_leader);
-    // console.log('PROJECT LEADS:', pls);
+    console.log('Getting Subproject Inputs...');
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
@@ -269,11 +262,7 @@ export class InputService {
   }
 
   getTaskInputs(data?: any) {
-    console.log('Getting Project Inputs...');
-    // const eos = this.buildEmployeeOptions();
-    // console.log('EMPLOYEE OPTIONS', eos);
-    // const pls = this.getIdArray(data?.project_leader);
-    // console.log('PROJECT LEADS:', pls);
+    console.log('Getting Task Inputs...');
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
@@ -317,6 +306,83 @@ export class InputService {
         value: data?.img_card.id || '',
         options: this.buildOptions('/api/v1/image/'),
         order: 7
+      })
+    ]
+
+    return of(inputs.sort((a, b) => a.order - b.order));
+  }
+
+  getProfileInputs(data?: any) {
+    console.log('Getting Profile Inputs...');
+    const inputs: InputBase<string>[] = [
+      new InputText({
+        key: 'first_name',
+        label: 'First Name',
+        value: data?.first_name || '',
+        required: true,
+        order: 1
+      }),
+      new InputText({
+        key: 'last_name',
+        label: 'Last Name',
+        value: data?.last_name || '',
+        required: true,
+        order: 2
+      }),
+      new InputText({
+        key: 'email',
+        label: 'Email',
+        value: data?.email || '',
+        required: true,
+        order: 3
+      }),
+      new InputText({
+        key: 'title',
+        label: 'Title',
+        value: data?.profile?.title || '',
+        required: true,
+        order: 4
+      }),
+      new InputTextarea({
+        key: 'bio',
+        label: 'bio',
+        value: data?.profile?.bio || '',
+        order: 5
+      }),
+      new InputText({
+        key: 'city',
+        label: 'City',
+        value: data?.profile?.city || '',
+        required: true,
+        order: 6
+      }),
+      new InputText({
+        key: 'state',
+        label: 'State',
+        value: data?.profile?.state || '',
+        required: true,
+        order: 7
+      }),
+      new InputPhone({
+        key: 'work_phone',
+        label: 'Work Phone',
+        value: data?.profile?.work_phone || '',
+        required: true,
+        order: 8
+      }),
+      new InputPhone({
+        key: 'mobile_phone',
+        label: 'Mobile Phone',
+        value: data?.profile?.mobile_phone || '',
+        required: true,
+        order: 8
+      }),
+      new InputImage({
+        key: 'photo',
+        label: 'Choose Profile Image',
+        value: data?.profile?.photo || '',
+        options: this.buildOptions('/api/v1/image/'),
+        order: 9
       })
     ]
 
