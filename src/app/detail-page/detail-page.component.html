@@ -1,8 +1,13 @@
 <div class="banner-container">
-    <img class="banner-image" [src]="imageUrl" alt="Banner Image" />
+    <img class="banner-image" [src]="imageUrl" [alt]="data?.description" />
 </div>
 
 <div class="container">
-    <h1>{{ data?.name }}</h1>
-    <!-- <h1 class="dfrm-page-title">{{ data.name }}s</h1> -->
+    <h1 class="detail-title">{{ data?.name }}</h1>
+    <p>{{ data?.description }}</p>
+    <div class="card-container">
+        <ng-container *ngFor="let pl of data.project_leader; let i = index">
+            <!-- <app-employee-card></app-employee-card> -->
+        </ng-container>
+    </div>
 </div>

@@ -70,14 +70,14 @@ export class InputService {
         key: 'img_banner',
         label: 'Choose Banner Image',
         value: data?.img_banner || '',
-        options: this.buildImageOptions(),
+        options: this.buildOptions('/api/v1/image/'),
         order: 7
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.img_card || '',
-        options: this.buildImageOptions(),
+        options: this.buildOptions('/api/v1/image/'),
         order: 7
       })
     ]
@@ -138,14 +138,14 @@ export class InputService {
         key: 'img_banner',
         label: 'Choose Banner Image',
         value: data?.img_banner || '',
-        options: this.buildImageOptions(),
+        options: this.buildOptions('/api/v1/image/'),
         order: 7
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.img_card || '',
-        options: this.buildImageOptions(),
+        options: this.buildOptions('/api/v1/image/'),
         order: 7
       }),
       new InputHidden({
@@ -161,10 +161,10 @@ export class InputService {
 
   getProjectInputs(data?: any) {
     console.log('Getting Project Inputs...');
-    const eos = this.buildEmployeeOptions();
-    console.log('EMPLOYEE OPTIONS', eos);
-    const pls = this.getIdArray(data?.project_leader);
-    console.log('PROJECT LEADS:', pls);
+    // const eos = this.buildEmployeeOptions();
+    // console.log('EMPLOYEE OPTIONS', eos);
+    // const pls = this.getIdArray(data?.project_leader);
+    // console.log('PROJECT LEADS:', pls);
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
@@ -192,14 +192,14 @@ export class InputService {
         key: 'img_banner',
         label: 'Choose Banner Image',
         value: data?.img_banner || '',
-        options: this.buildImageOptions(),
+        options: this.buildOptions('/api/v1/image/'),
         order: 7
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.img_card || '',
-        options: this.buildImageOptions(),
+        options: this.buildOptions('/api/v1/image/'),
         order: 7
       }),
       new InputHidden({
@@ -213,7 +213,62 @@ export class InputService {
     return of(inputs.sort((a, b) => a.order - b.order));
   }
 
+  getSubprojectInputs(data?: any) {
+    console.log('Getting Project Inputs...');
+    // const eos = this.buildEmployeeOptions();
+    // console.log('EMPLOYEE OPTIONS', eos);
+    // const pls = this.getIdArray(data?.project_leader);
+    // console.log('PROJECT LEADS:', pls);
+    const inputs: InputBase<string>[] = [
+      new InputText({
+        key: 'name',
+        label: 'Name',
+        value: data?.name || '',
+        required: true,
+        order: 1
+      }),
+      new InputTextarea({
+        key: 'description',
+        label: 'Description',
+        value: data?.description || '',
+        order: 2
+      }),
+      new InputSelect({
+        key: 'project',
+        label: 'Project',
+        value: data?.project || [],
+        required: true,
+        options: this.buildOptions('/api/v1/project/'),
+        order: 3
+      }),
+      new InputSelect({
+        key: 'lead',
+        label: 'Subproject Lead',
+        value: data?.lead || [],
+        required: true,
+        options: this.buildEmployeeOptions(),
+        order: 4
+      }),
+      new InputImage({
+        key: 'img_banner',
+        label: 'Choose Banner Image',
+        value: data?.img_banner || '',
+        options: this.buildOptions('/api/v1/image/'),
+        order: 7
+      }),
+      new InputImage({
+        key: 'img_card',
+        label: 'Choose Card Image',
+        value: data?.img_card || '',
+        options: this.buildOptions('/api/v1/image/'),
+        order: 7
+      })
+    ]
 
+    return of(inputs.sort((a, b) => a.order - b.order));
+  }
+
+  // for employees
   private buildEmployeeOptions() {
     let options: { key: string, value: string }[] = [];
 
@@ -227,19 +282,20 @@ export class InputService {
     return options;
   }
 
-  private buildImageOptions() {
+  // for everything else (id/name)
+  private buildOptions(url: string) {
     let options: { key: string, value: string }[] = [];
 
-    this.backendService.get('/api/v1/image/').subscribe((images: any) => {
-      console.log("buildEmployeeOptions:", images);
-      for (let img of images) {
-        options.push({ key: img.id, value: img.name })
+    this.backendService.get(url).subscribe((list: any) => {
+      console.log("buildOptions:", list);
+      for (let item of list) {
+        options.push({ key: item.id, value: item.name })
       }
     })
 
     return options;
   }
-
+  
   getIdArray(data: any) {
     if(!data) { return undefined; } // if no data, don't run the function.
 
