@@ -1,9 +1,12 @@
 <div class="container">
     <h1>{{ routeType | titlecase }} List</h1>
 
-    <button *ngIf="routeType == 'department'" (click)="add('department')" class="dfrm-button grow">Add New Department</button>
+    <!-- <button *ngIf="routeType == 'department'" (click)="add('department')" class="dfrm-button grow">Add New Department</button>
     <button *ngIf="routeType == 'division'" (click)="add('division')" class="dfrm-button grow">Add New Division</button>
-    <button *ngIf="routeType == 'project'" (click)="add('project')" class="dfrm-button grow">Add New Project</button>
+    <button *ngIf="routeType == 'project'" (click)="add('project')" class="dfrm-button grow">Add New Project</button> -->
+    <button *ngIf="routeType != 'users' && routeType != 'image'" 
+        (click)="add(routeType)" class="dfrm-button grow">Add New {{ routeType | titlecase}}</button>
+    
 
     <button *ngIf="routeType == 'users'" (click)="registerUser()">Register User</button>
     <button *ngIf="routeType == 'image'" (click)="uploadImage()">Upload Image</button>
@@ -71,6 +74,32 @@
                             </li>
                         </ul>
                     </td>
+                    <td><button class="btn btn-success" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
+                    </td>
+                    <td><button class="btn btn-warning" (click)="edit('project', x.id)"><i
+                                class="fa-regular fa-pen-to-square"></i></button></td>
+                </tr>
+            </tbody>
+
+            <tbody class="table-group-divider" *ngIf="routeType === 'subproject'">
+                <tr *ngFor="let x of list">
+                    <td>{{ x.name }}</td>
+                    <td>{{ x.description }}</td>
+                    <td>{{ x.project }}</td>
+                    <td>{{ x.lead }}</td>
+                    <td><button class="btn btn-success" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
+                    </td>
+                    <td><button class="btn btn-warning" (click)="edit('project', x.id)"><i
+                                class="fa-regular fa-pen-to-square"></i></button></td>
+                </tr>
+            </tbody>
+
+            <tbody class="table-group-divider" *ngIf="routeType === 'task'">
+                <tr *ngFor="let x of list">
+                    <td>{{ x.name }}</td>
+                    <td>{{ x.description }}</td>
+                    <td>{{ x.subproject }}</td>
+                    <td>{{ x.supervisor }}</td>
                     <td><button class="btn btn-success" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
                     </td>
                     <td><button class="btn btn-warning" (click)="edit('project', x.id)"><i

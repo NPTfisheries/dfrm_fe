@@ -36,6 +36,10 @@ export class FormContainerComponent implements OnInit {
         return this.inputService.getDivisionInputs(data);
       case 'project':
         return this.inputService.getProjectInputs(data);
+      case 'subproject':
+        return this.inputService.getSubprojectInputs(data);
+      case 'task':
+        return this.inputService.getTaskInputs(data);
       default:
         return
     }

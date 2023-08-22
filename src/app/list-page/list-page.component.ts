@@ -15,7 +15,7 @@ import { FormContainerComponent } from 'src/_forms/form-container/form-container
   styleUrls: ['./list-page.component.css']
 })
 export class ListPageComponent implements OnInit {
-  
+
   @ViewChild(FormContainerComponent) formContainerComponent!: FormContainerComponent;
   @ViewChild(RegisterComponent) registerComponent!: RegisterComponent;
 
@@ -114,7 +114,13 @@ export class ListPageComponent implements OnInit {
         this.columns = ['name', 'description', 'manager', 'deputy', 'assistant', 'staff'];
         break;
       case 'project':
-        this.columns = ['name', 'description', 'Project Leaders'];
+        this.columns = ['name', 'description', 'project leaders'];
+        break;
+      case 'subproject':
+        this.columns = ['name', 'description', 'project', 'lead'];
+        break;
+      case 'task':
+        this.columns = ['name', 'description', 'subproject', 'supervisor'];
         break;
       case 'users':
         this.columns = ['name', 'email', 'work_phone', 'mobile_phone', 'title'];
