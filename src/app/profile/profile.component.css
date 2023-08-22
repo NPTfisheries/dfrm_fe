@@ -1,0 +1,19 @@
+.profile-image-container {
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-image {
+    min-height: 300px;
+    max-width: 60%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    border-radius: 100%
+}

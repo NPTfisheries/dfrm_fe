@@ -1,10 +1,16 @@
 <nav class="nav navbar navbar-dark bg-dark mx-auto">
   <div class="container">
     <img class="nav-link" src='./assets/images/DFRM.png' height="90px" style="padding:0;" />
-    <div *ngFor="let tab of tabs">
-      <a class="nav-link grow" routerLink="{{tab | lowercase}}" routerLinkActive="active"
-        ariaCurrentWhenActive="page">{{tab}}</a>
-    </div>
+    <a class="nav-link grow" routerLink="home" routerLinkActive="active"
+    ariaCurrentWhenActive="page">Home</a>
+    <li ngbDropdown class="nav-item" role="presentation">
+      <button type="button" class="nav-link" ngbDropdownToggle>Administration</button>
+      <div ngbDropdownMenu>
+        <button *ngFor="let tab of tabs" class="nav-link" ngbDropdownItem routerLink="{{tab | lowercase}}" 
+        routerLinkActive="active" ariaCurrentWhenActive="page">{{tab}}</button>
+      </div>
+    </li>
+
 
     <button *ngIf="!isLoggedIn; else profileNav" class="nav-link ms-auto grow" (click)="openLoginModal()">Login</button>
   </div>
@@ -14,17 +20,17 @@
   <li ngbDropdown class="nav-item ms-auto" role="presentation">
     <button type="button" class="nav-link" ngbDropdownToggle>{{ username }}</button>
     <div ngbDropdownMenu>
-      <button  ngbDropdownItem routerLink="profile">Profile</button>
+      <button ngbDropdownItem routerLink="profile" routerLinkActive="active">Profile</button>
       <button ngbDropdownItem (click)="updatePassword()">Update Password</button>
 
       <div class="dropdown-divider"></div>
-      <button ngbDropdownItem routerLink="department">Department List</button>
-      <button ngbDropdownItem routerLink="division">Division List</button>
-      <button ngbDropdownItem routerLink="project">Project List</button>
-      <button ngbDropdownItem routerLink="subproject">Subroject List</button>
-      <button ngbDropdownItem routerLink="task">Task List</button>
-      <button ngbDropdownItem routerLink="users">User List</button>
-      <button ngbDropdownItem routerLink="image">Images</button>
+      <button ngbDropdownItem routerLink="department" routerLinkActive="active">Department List</button>
+      <button ngbDropdownItem routerLink="division" routerLinkActive="active">Division List</button>
+      <button ngbDropdownItem routerLink="project" routerLinkActive="active">Project List</button>
+      <button ngbDropdownItem routerLink="subproject" routerLinkActive="active">Subroject List</button>
+      <button ngbDropdownItem routerLink="task" routerLinkActive="active">Task List</button>
+      <button ngbDropdownItem routerLink="users" routerLinkActive="active">User List</button>
+      <button ngbDropdownItem routerLink="image" routerLinkActive="active">Images</button>
 
       <div class="dropdown-divider"></div>
       <button ngbDropdownItem (click)="authService.logout()">Logout</button>

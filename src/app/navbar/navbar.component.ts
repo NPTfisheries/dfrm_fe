@@ -13,7 +13,7 @@ import { PasswordUpdateComponent } from '../forms/password-update/password-updat
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  tabs = ['Home',  'Departments', 'Divisions', 'Projects']
+  tabs = ['Departments', 'Divisions', 'Projects']
 
   username?: string | null = null; 
   isLoggedIn: boolean | null = false;

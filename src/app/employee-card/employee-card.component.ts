@@ -19,6 +19,6 @@ export class EmployeeCardComponent {
   }
 
   getImage() {
-    this.imageUrl = 'http://localhost:8000' + this.data.profile.photo;
+    this.imageUrl = 'http://localhost:8000' + this.data.profile.photo; 
   }
 }

@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   ) {  }
 
   ngOnInit(): void {
-    this.backendService.get('/api/v1/department/1/').subscribe(department => {
+    this.backendService.get('/api/v1/department/fisheries/').subscribe(department => {
       this.info = department;
     });
   }

@@ -1,15 +1,27 @@
-<p>profile works!</p>
+<div class="container">
+    <div class="profile-image-container">
+        <img [src]="imageUrl" class="profile-image" alt="...">
+    </div>
+    <h1>{{ user?.first_name }} {{ user?.last_name }}</h1>
+    <h2>{{ user?.profile?.bio}}</h2>
+    <h2>
+        <ul>
+            <li>
+                <h2>Office Location: {{ user?.profile?.city }}, {{ user?.profile?.state }}</h2>
+            </li>
+            <li>
+                <h2>Email: {{ user?.email }}</h2>
+            </li>
+            <li>
+                <h2>Work Phone: {{ user?.profile?.work_phone }}</h2>
+            </li>
+            <li>
+                <h2>Mobile Phone: {{ user?.profile?.mobile_phone }}</h2>
+            </li>
+        </ul>
+    </h2>
 
-<h1>{{ user?.id }}</h1>
-<h2>{{ user?.email }}</h2>
-<h2>{{ user?.first_name }}</h2>
-<h2>{{ user?.last_name }}</h2>
-<h2>{{ user?.profile?.bio}}</h2>
-<h2>{{ user?.profile?.city }}</h2>
-<h2>{{ user?.profile?.state }}</h2>
-<h2>{{ user?.profile?.mobile_phone }}</h2>
-<h2>{{ user?.profile?.work_phone }}</h2>
 
-
-<h1></h1>
-<button (click)="updateProfile()">Update Profile</button>
+    <h1></h1>
+    <button (click)="updateProfile()" class="dfrm-button grow">Update Profile</button>
+</div>

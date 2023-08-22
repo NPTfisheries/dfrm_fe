@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 
 import { BackendService } from 'src/_services/backend.service';
 import { User } from 'src/_models/user';
-import { Profile } from 'src/_models/profile';
 
 import { ProfileUpdateComponent } from '../forms/profile-update/profile-update.component';
 
@@ -15,19 +14,20 @@ import { ProfileUpdateComponent } from '../forms/profile-update/profile-update.c
 })
 export class ProfileComponent implements OnInit {
 
-  user: any | undefined;
+  user: User | undefined;
+  imageUrl!: string | null;
 
   constructor(
     private backendService: BackendService,
     public modalService: NgbModal,
-    private router: Router,
   ) {  }
 
   ngOnInit() {
-    this.backendService.get('./api/v1/user').subscribe(user => {
+    this.backendService.get('/api/v1/user').subscribe((user: any) => {
       this.user = user;
+      this.getImage(user.profile.photo);
     });
-    
+  
   }
 
   updateProfile() {
@@ -37,6 +37,10 @@ export class ProfileComponent implements OnInit {
     modalRef.componentInstance.userUpdated.subscribe((updatedUser: any) => {
       this.user = updatedUser;
     });
+  }
+
+  getImage(path: string) {
+    this.imageUrl = path.replace('http://localhost:4200', 'http://localhost:8000' );  
   }
 
 }

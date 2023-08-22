@@ -11,16 +11,24 @@
     color:#f9f906
 }
 
-/* .dropdown-item {
-    font-size:large;
-    font-weight:200;
-    color:#5492b4;
-} */
+.nav-grow {
+    transition: all .2s ease-in-out; 
+}
+
+.nav-grow:hover {
+    transform: scale(1.1);
+}
 
 .dropdown-item:hover {
-    background-color:#cfd7db;
-    color:#0d1b1f;
+    background-color: #0d1b1f;
+    color:#cfd7db;
 }
+
+.dropdown-item.router-link-active, .dropdown-item.active {
+    background-color: #0d1b1f;
+    color:#f9f906
+}
+
 
 
 .dropdown-menu {

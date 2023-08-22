@@ -16,6 +16,12 @@
     font-size: larger;
 }
 
+/* text */
+h1 {
+    font-size:xx-large;
+}
+
+
 /* IMAGES */
 .banner-container {
     height: 500px;
