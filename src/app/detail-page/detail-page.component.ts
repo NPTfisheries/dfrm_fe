@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { BackendService } from 'src/_services/backend.service';
+import { getRouteType, getRouteSlug } from 'src/_utilities/route-utils';
 
 
 @Component({
@@ -24,15 +25,13 @@ export class DetailPageComponent implements OnInit {
   }
 
   getDetail() {
-    this.route.url.subscribe(params => {
-      // console.log('params', params);
-      const url = `/api/v1/${params[0].path}/${params[1].path}/`;
-      // console.log('url', url);
-      this.backendService.get(url).subscribe((response: any) => {
-        console.log(response);
-        this.data = response;
-        this.imageUrl = 'http://localhost:8000' + response.img_banner.image;
-      });
+    const routeType = getRouteType(this.route);
+    // console.log('routeType:', routeType);
+    const slug = getRouteSlug(this.route);
+    // console.log('slug:', slug);
+    
+    this.backendService.getDetail(routeType, slug).subscribe(detail => {
+      this.data = detail;
     });
   }
 

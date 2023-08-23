@@ -5,5 +5,5 @@ export function getRouteType(route:ActivatedRoute) {
     }
 
 export function getRouteSlug(route:ActivatedRoute) {
-        return route.snapshot.url[1].path.slice(0,-1);
+        return route.snapshot.url[1].path;
     }

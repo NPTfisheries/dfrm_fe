@@ -16,7 +16,6 @@ export class DynamicFormComponent implements OnInit {
   @Input() routeType!: string;
   @Input() inputs: InputBase<string>[] | null = [];
   @Input() slug!: string;
-  @Input() addOrEdit!: string;
   form!: FormGroup;
   payload = '';
 

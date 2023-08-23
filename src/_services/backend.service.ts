@@ -9,13 +9,6 @@ import { Observable, of } from "rxjs";
 export class BackendService {
 
     base_url = '/api/v1/';
-    // url_department = this.base_url + 'department/';
-    // url_division = this.base_url + 'division/';
-    // url_project = this.base_url + 'project/';
-    // url_subproject = this.base_url + 'subproject/';
-    // url_task = this.base_url + 'task/';
-    // url_users = this.base_url + 'users/';
-
 
     constructor(
         private http: HttpClient,
@@ -26,8 +19,13 @@ export class BackendService {
         return this.get(URL);
     }
 
-    getDetail(routeType: string, id: number): Observable<any>  {
-        const URL = `${this.base_url}${routeType}/${id}/`;
+    // getDetailById(routeType: string, id: number): Observable<any>  {
+    //     const URL = `${this.base_url}${routeType}/${id}/`;
+    //     return this.get(URL);
+    // }
+
+    getDetail(routeType: string, slug: string): Observable<any>  {
+        const URL = `${this.base_url}${routeType}/${slug}/`;
         return this.get(URL);
     }
 
@@ -36,7 +34,7 @@ export class BackendService {
         return this.post(URL, object);
     }
     
-    // updateItem(routeType: string, id: number, object:object): Observable<any>  {
+    // updateItemById(routeType: string, id: number, object:object): Observable<any>  {
     //     const URL = `${this.base_url}${routeType}/${id}/`;
     //     return this.put(URL, object);
     // }
@@ -49,32 +47,8 @@ export class BackendService {
     getCurrentUser(): Observable<User> {
         return this.get(this.base_url + 'user/')
     }
-
-    // getDepartment() { }
-    // updateDepartment() { }
-
-    // getDivision() { }
-    // updateDivision() { }
-
-    // getProject() { }
-    // updateProject() { }
-
-    // getSubproject() { }
-    // updateSubproject() { }
-
-    // getTask() { }
-    // updateTask() { }
-
-
-
-    // getUser(id: number): Observable<any> {
-    //     return this.get(`${this.url_users}${id}/`)
-    // }
-    // updateUser(user: User): Observable<any> {
-    //     this.put(`${this.url_users}${id}/`, user)
-    // }
-
-    // HELPERS
+    
+    // HELPERS -- change to private eventually?
     get(url: string): Observable<any> {
         return this.http.get(url) //, { observe: 'response' })
             .pipe(
