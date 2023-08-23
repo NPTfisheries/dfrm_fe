@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { Observable, concatMap, first } from 'rxjs';
 
 import { AuthService } from 'src/_services/auth.service';
 import { AlertService } from 'src/_services/alert.service';
@@ -58,12 +57,24 @@ export class RegisterComponent implements OnInit {
 
     const regUser$ = this.authService.register(this.form.value)
 
-    regUser$.subscribe(() => {
-      this.backendService.get('/api/v1/users/').subscribe(updatedList => {
-        this.newList.emit(updatedList);
-      });
-      this.activeModal.close();
+    regUser$.subscribe({ //() => {
+      next: () => {
+        this.backendService.get('/api/v1/users/').subscribe(updatedList => {
+          this.newList.emit(updatedList);
+        });
+        this.activeModal.close();
+      },
+      error: response => {
+        console.log(response);
+        this.alertService.error('Register New User Failed! Check your fields and try again.');
+        this.loading = false;
+      }
+
     })
+  }
+
+  emitUpdatedList(updatedList: any) {
+    this.newList.emit(updatedList);
   }
 
   // Custom validator to check if passwords match
