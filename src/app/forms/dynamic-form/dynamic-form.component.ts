@@ -14,6 +14,7 @@ import { BackendService } from 'src/_services/backend.service';
 export class DynamicFormComponent implements OnInit {
 
   @Output() formSubmitted: EventEmitter<void> = new EventEmitter<void>;
+  @Output() formValidityChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Input() routeType!: string;
   @Input() inputs: InputBase<string>[] | null = [];
@@ -29,6 +30,9 @@ export class DynamicFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.ics.toFormGroup(this.inputs as InputBase<string>[]);
+    this.form.statusChanges.subscribe((status) => {
+      this.formValidityChanged.emit(status === 'VALID');
+    });
   }
 
   onSubmit() {
@@ -46,5 +50,5 @@ export class DynamicFormComponent implements OnInit {
       });
     }
   }
-  
+
 }

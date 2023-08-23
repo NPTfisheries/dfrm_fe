@@ -4,7 +4,13 @@
     </div>
     <alert id="alert-modal"></alert>
     <div class="modal-body">
-        <app-dynamic-form [inputs]="inputs$ | async" [slug]="slug" [routeType]="routeType" (formSubmitted)="handleFormSubmitted()"></app-dynamic-form>
-        <button class="dfrm-button grow" (click)="submitDynamicForm()">Submit Form</button>
+        <app-dynamic-form 
+        [inputs]="inputs$ | async" 
+        [slug]="slug" 
+        [routeType]="routeType" 
+        (formSubmitted)="handleFormSubmitted()"
+        (formValidityChanged)="handleFormValidityChanged($event)">
+            </app-dynamic-form>
+        <button class="dfrm-button" (click)="submitDynamicForm()" [disabled]="!formValid">Submit Form</button>
     </div>
 </div>

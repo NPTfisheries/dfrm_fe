@@ -17,6 +17,18 @@
     font-size: larger;
 }
 
+.dfrm-button:hover, .dfrm-button-invert:hover {
+    transition: all .2s ease-in-out; 
+    transform: scale(1.1);
+}
+
+.dfrm-button:disabled, .dfrm-button-invert:disabled {
+    background-color: #5492b4; 
+    color: #0d1b1f; 
+    cursor: not-allowed;
+    transform: none;
+}
+
 /* .dfrm-button-invert {
     background-color: #f9f906;
     color:#0d1b1f;;
@@ -34,7 +46,6 @@
     border-color: #f9f906;
     font-size: larger;
 }
-
 
 /* text */
 h1 {
@@ -65,6 +76,10 @@ h1 {
 
 .grow:hover {
     transform: scale(1.1);
+}
+
+.grow:disabled {
+    transition: none;
 }
 
 /* FORMS */

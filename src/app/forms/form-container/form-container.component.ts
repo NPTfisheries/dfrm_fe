@@ -21,6 +21,7 @@ export class FormContainerComponent implements OnInit {
   @Input() slug!: string;
 
   inputs$!: Observable<InputBase<string>[]> | undefined;
+  formValid: boolean = false;
 
   @ViewChild(DynamicFormComponent) dynamicFormComponent!: DynamicFormComponent;
 
@@ -44,6 +45,11 @@ export class FormContainerComponent implements OnInit {
       this.newList.emit(updatedList);
     });
     this.activeModal.close();
+  }
+
+  handleFormValidityChanged(valid: boolean) {
+    // console.log('handleFormValidity:', valid);
+    this.formValid = valid;
   }
 
   getInputs(routeType: any, data?: any) {
