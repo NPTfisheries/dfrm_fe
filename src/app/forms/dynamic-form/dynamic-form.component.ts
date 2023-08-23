@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -12,6 +12,8 @@ import { BackendService } from 'src/_services/backend.service';
   styleUrls: ['./dynamic-form.component.css']
 })
 export class DynamicFormComponent implements OnInit {
+
+  @Output() formSubmitted: EventEmitter<void> = new EventEmitter<void>;
 
   @Input() routeType!: string;
   @Input() inputs: InputBase<string>[] | null = [];
@@ -31,17 +33,18 @@ export class DynamicFormComponent implements OnInit {
 
   onSubmit() {
     console.log(this.form.value);
+    
+    let formRequest$;
 
     if(this.slug === undefined) {
-      this.backendService.newItem(this.routeType, this.form.value).subscribe(response => {
-        console.log(response);
-        this.activeModal.close();
+      this.backendService.newItem(this.routeType, this.form.value).subscribe({
+        next: () => {this.formSubmitted.emit();}
       });
     } else {
-      this.backendService.updateItem(this.routeType, this.slug, this.form.value).subscribe(response => {
-        console.log(response);
-        this.activeModal.close();
+      this.backendService.updateItem(this.routeType, this.slug, this.form.value).subscribe({
+        next: () => {this.formSubmitted.emit();}
       });
     }
   }
+  
 }

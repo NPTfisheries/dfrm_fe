@@ -5,12 +5,9 @@
             <app-dynamic-form-input [input]="input" [form]="form"></app-dynamic-form-input>
         </div>
 
-        <div class="form-row">
+        <!-- <div class="form-row">
             <button class="dfrm-button grow" type="submit" [disabled]="!form.valid">Save</button>
-        </div>
+        </div> -->
     </form>
 
-    <div *ngIf="payload" class="form-row">
-        <strong>Saved the following values</strong><br>{{payload}}
-    </div>
 </div>

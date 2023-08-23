@@ -56,6 +56,13 @@ export class ListPageComponent implements OnInit {
     const modalRef = this.modalService.open(FormContainerComponent, this.getModalOptions());
 
     modalRef.componentInstance.routeType = routeType;
+
+    modalRef.result.then((result) => {
+      modalRef.componentInstance.newList.subscribe((newList: any) => {
+        this.list = newList;
+        this.alertService.success(`New ${this.routeType} created!`, { autoClose: true });
+      });
+    }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
 
   edit(routeType: string | undefined, slug:string) {
@@ -68,6 +75,13 @@ export class ListPageComponent implements OnInit {
     modalRef.componentInstance.routeType = routeType;
     modalRef.componentInstance.slug = slug;
     modalRef.componentInstance.data = data;
+
+    modalRef.result.then((result) => {
+      modalRef.componentInstance.newList.subscribe((newList: any) => {
+        this.list = newList;
+        this.alertService.success(`Edit ${this.routeType} successful!`, { autoClose: true });
+      });
+    }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
 
   uploadImage() {
