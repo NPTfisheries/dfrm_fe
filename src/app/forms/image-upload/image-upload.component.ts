@@ -61,7 +61,6 @@ export class ImageUploadComponent implements OnInit {
 
     this.backendService.post('/api/v1/image/', formData).subscribe({
       next: () => {
-        this.alertService.success('Image successfully uploaded!.', { autoClose: true });
         this.imageForm.reset();
         this.selectedImage = undefined;
         this.imagePreview = undefined;

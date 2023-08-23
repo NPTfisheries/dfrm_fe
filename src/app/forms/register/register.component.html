@@ -37,14 +37,14 @@
 
             <div class="mb-3">
                 <label class="form-label">Role</label>
-                <select formControlName="role" class="form-select form-control-lg"
+                <select formControlName="role" class="form-control form-select form-select-lg"
                     [ngClass]="{ 'is-invalid': submitted && f['role'].errors }">
                     <option value="" disabled selected>Select a role</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                    <option value="1">Admin</option>
+                    <option value="2">Manager</option>
+                    <option value="3">Professional</option>
+                    <option value="4">Technician</option>
+                    <option value="5">Guest</option>
                 </select>
                 <div *ngIf="submitted && f['role'].errors" class="invalid-feedback">
                     <div *ngIf="f['role'].errors['required']">Role is required</div>

@@ -13,7 +13,7 @@ import { BackendService } from 'src/_services/backend.service';
 })
 export class RegisterComponent implements OnInit {
 
-  @Output() newList: EventEmitter<any> = new EventEmitter<any>();
+  @Output() updateList: EventEmitter<any> = new EventEmitter<any>();
 
   form!: FormGroup;
   loading = false;
@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
     regUser$.subscribe({
       next: () => {
         this.backendService.getList('users').subscribe(updatedList => {
-          this.newList.emit(updatedList);
+          this.updateList.emit(updatedList);
         });
         this.activeModal.close();
       },

@@ -40,7 +40,7 @@ export class ListPageComponent implements OnInit {
   ngOnInit(): void {
     this.routeType = getRouteType(this.route);
     this.getList(this.routeType);
-    console.log('route', this.route);
+    this.populateFieldsArray(this.routeType);
   }
 
   getList(routeType: string) {
@@ -77,7 +77,7 @@ export class ListPageComponent implements OnInit {
     modalRef.componentInstance.data = data;
 
     modalRef.result.then((result) => {
-      modalRef.componentInstance.newList.subscribe((newList: any) => {
+      modalRef.componentInstance.updateList.subscribe((newList: any) => {
         this.list = newList;
         this.alertService.success(`Edit ${this.routeType} successful!`, { autoClose: true });
       });
@@ -88,8 +88,10 @@ export class ListPageComponent implements OnInit {
     const modalRef = this.modalService.open(ImageUploadComponent, this.getModalOptions());
 
     modalRef.result.then((result) => {
-      console.log(result);
-      this.alertService.success(`Image uploaded!`, { autoClose: true });
+      modalRef.componentInstance.updateList.subscribe((newList: any) => {
+        this.list = newList;
+        this.alertService.success(`Image uploaded!`, { autoClose: true });
+      });
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
 
@@ -121,10 +123,10 @@ export class ListPageComponent implements OnInit {
         this.columns = ['name', 'description', 'subproject', 'supervisor'];
         break;
       case 'users':
-        this.columns = ['name', 'email', 'work_phone', 'mobile_phone', 'title'];
+        this.columns = ['name', 'email', 'work phone', 'mobile phone', 'title'];
         break;
       case 'image':
-        this.columns = ['name', 'description', 'photographer', 'photo_date', 'source'];
+        this.columns = ['name', 'description', 'photographer', 'photo date', 'source'];
         break;
       default:
         this.columns = [];
