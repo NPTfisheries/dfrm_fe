@@ -36,11 +36,15 @@ export class BackendService {
         return this.post(URL, object);
     }
     
-    updateItem(routeType: string, id: number, object:object): Observable<any>  {
-        const URL = `${this.base_url}${routeType}/${id}/`;
+    // updateItem(routeType: string, id: number, object:object): Observable<any>  {
+    //     const URL = `${this.base_url}${routeType}/${id}/`;
+    //     return this.put(URL, object);
+    // }
+
+    updateItem(routeType: string, slug:string, object:object): Observable<any>  {
+        const URL = `${this.base_url}${routeType}/${slug}/`;
         return this.put(URL, object);
     }
-
 
     getCurrentUser(): Observable<User> {
         return this.get(this.base_url + 'user/')

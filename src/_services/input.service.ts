@@ -394,7 +394,7 @@ export class InputService {
     let options: { key: string, value: string }[] = [];
 
     this.backendService.get('/api/v1/users/').subscribe((employees: any) => {
-      console.log("buildEmployeeOptions:", employees);
+      // console.log("buildEmployeeOptions:", employees);
       for (let emp of employees) {
         options.push({ key: emp.id, value: emp.first_name + ' ' + emp.last_name })
       }
@@ -408,7 +408,7 @@ export class InputService {
     let options: { key: string, value: string }[] = [];
 
     this.backendService.get(url).subscribe((list: any) => {
-      console.log("buildOptions:", list);
+      // console.log("buildOptions:", list);
       for (let item of list) {
         options.push({ key: item.id, value: item.name })
       }

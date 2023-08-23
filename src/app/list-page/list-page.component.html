@@ -33,7 +33,7 @@
                     </td>
                     <td><button class="dfrm-button btn-center" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="dfrm-button-invert btn-center grow" (click)="edit('department', x.id)"><i
+                    <td><button class="dfrm-button-invert btn-center grow" (click)="edit('department', x.slug)"><i
                                 class="fa-regular fa-pen-to-square"></i></button></td>
                 </tr>
             </tbody>
@@ -54,7 +54,7 @@
                     </td>
                     <td><button class="dfrm-button btn-center" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="dfrm-button-invert btn-center grow" (click)="edit('division', x.id)"><i
+                    <td><button class="dfrm-button-invert btn-center grow" (click)="edit('division', x.slug)"><i
                                 class="fa-regular fa-pen-to-square"></i></button></td>
                 </tr>
             </tbody>
@@ -72,7 +72,7 @@
                     </td>
                     <td><button class="dfrm-button btn-center" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="dfrm-button-invert btn-center grow" (click)="edit('project', x.id)"><i
+                    <td><button class="dfrm-button-invert btn-center grow" (click)="edit('project', x.slug)"><i
                                 class="fa-regular fa-pen-to-square"></i></button></td>
                 </tr>
             </tbody>
@@ -85,7 +85,7 @@
                     <td>{{ x.lead }}</td>
                     <td><button class="dfrm-button btn-center grow" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="dfrm-button-invert btn-center grow" (click)="edit('subproject', x.id)"><i
+                    <td><button class="dfrm-button-invert btn-center grow" (click)="edit('subproject', x.slug)"><i
                                 class="fa-regular fa-pen-to-square"></i></button></td>
                 </tr>
             </tbody>
@@ -98,7 +98,7 @@
                     <td>{{ x.supervisor }}</td>
                     <td><button class="dfrm-button btn-center grow" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="dfrm-button-invert btn-center grow" (click)="edit('task', x.id)"><i
+                    <td><button class="dfrm-button-invert btn-center grow" (click)="edit('task', x.slug)"><i
                                 class="fa-regular fa-pen-to-square"></i></button></td>
                 </tr>
             </tbody>

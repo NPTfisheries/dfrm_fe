@@ -1,11 +1,11 @@
 <div>
     <div class="modal-header">
-        <h1 class="modal-title">{{ addOrEdit | titlecase }} {{ routeType | titlecase }}</h1>
+        <h1 class="modal-title">{{ slug === undefined ? 'Add' : 'Edit' }} {{ routeType | titlecase }}</h1>
         <!-- <h4 class="modal-title">Add {{ routeType | titlecase }}</h4> -->
         <h2>(FORM CONTAINER COMPONENT)</h2>
     </div>
     <alert id="alert-modal"></alert>
     <div class="modal-body">
-        <app-dynamic-form [inputs]="inputs$ | async" [url]="url" [addOrEdit]="addOrEdit"></app-dynamic-form>
+        <app-dynamic-form [inputs]="inputs$ | async" [slug]="slug" [routeType]="routeType"></app-dynamic-form>
     </div>
 </div>

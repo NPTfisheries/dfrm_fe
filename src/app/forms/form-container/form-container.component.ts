@@ -11,10 +11,9 @@ import { InputService } from 'src/_services/input.service';
 })
 export class FormContainerComponent implements OnInit {
 
-  @Input() routeType: string | undefined;  // always provided...?
+  @Input() routeType!: string;  // always provided.
   @Input() data?: any | undefined;
-  @Input() url!: string;
-  @Input() addOrEdit!: string;
+  @Input() slug!: string;
 
   inputs$!: Observable<InputBase<string>[]> | undefined;
 
@@ -27,7 +26,7 @@ export class FormContainerComponent implements OnInit {
   }
 
   getInputs(routeType: any, data?: any) {
-    console.log('getInputs', routeType, data)
+    console.log('getInputs', routeType, data);
 
     switch (routeType) {
       case 'department':

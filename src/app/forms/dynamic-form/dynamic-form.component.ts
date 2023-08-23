@@ -13,8 +13,9 @@ import { BackendService } from 'src/_services/backend.service';
 })
 export class DynamicFormComponent implements OnInit {
 
+  @Input() routeType!: string;
   @Input() inputs: InputBase<string>[] | null = [];
-  @Input() url!: string;
+  @Input() slug!: string;
   @Input() addOrEdit!: string;
   form!: FormGroup;
   payload = '';
@@ -30,20 +31,15 @@ export class DynamicFormComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.payload= JSON.stringify(this.form.getRawValue());
-    // console.log(this.payload);
     console.log(this.form.value);
-    console.log(this.url);
 
-    if(this.addOrEdit === 'add') {
-      this.backendService.post(this.url, this.form.value).subscribe(response => {
+    if(this.slug === undefined) {
+      this.backendService.newItem(this.routeType, this.form.value).subscribe(response => {
         console.log(response);
         this.activeModal.close();
       });
-    }
-
-    if(this.addOrEdit === 'edit') {
-      this.backendService.put(this.url, this.form.value).subscribe(response => {
+    } else {
+      this.backendService.updateItem(this.routeType, this.slug, this.form.value).subscribe(response => {
         console.log(response);
         this.activeModal.close();
       });

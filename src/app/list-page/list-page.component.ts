@@ -65,10 +65,10 @@ export class ListPageComponent implements OnInit {
     modalRef.componentInstance.addOrEdit = 'add';
   }
 
-  edit(routeType: string | undefined, id: any) {
-    console.log('edit:', routeType, id);
+  edit(routeType: string | undefined, slug:string) {
+    console.log('edit:', routeType, slug);
 
-    const data = this.getRecordById(id);
+    const data = this.getRecordBySlug(slug);
 
     const modalOptions: NgbModalOptions = { size: 'xl', };
 
@@ -76,8 +76,7 @@ export class ListPageComponent implements OnInit {
 
     modalRef.componentInstance.routeType = routeType;
     modalRef.componentInstance.data = data;
-    modalRef.componentInstance.url = this.url + data.slug + '/';
-    modalRef.componentInstance.addOrEdit = 'edit';
+    modalRef.componentInstance.slug = slug;
   }
 
   uploadImage() {
@@ -133,10 +132,9 @@ export class ListPageComponent implements OnInit {
     }
   }
 
-  getRecordById(id: number) {
+  getRecordBySlug(slug: string) {
     for (let item of this.list) {
-      if (item.id === id) {
-        console.log('returning', item);
+      if (item.slug === slug) {
         return item;
       }
     }
