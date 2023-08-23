@@ -8,23 +8,52 @@ import { Observable, of } from "rxjs";
 @Injectable({ providedIn: 'root' })
 export class BackendService {
 
-    url_users = '/api/v1/users/';
+    base_url = '/api/v1/';
+    url_department = this.base_url + 'department/';
+    url_division = this.base_url + 'division/';
+    url_project = this.base_url + 'project/';
+    url_subproject = this.base_url + 'subproject/';
+    url_task = this.base_url + 'task/';
+    url_users = this.base_url + 'users/';
 
-    constructor(
-        private http: HttpClient,
-    ) { }
 
-    options(url: string) {
-        return this.http.options(url)
-            .pipe(
-                map((response) => {
-                    console.log(`${url} response:`, response);
-                    return response;
-                })
-            );
+    constructor(private http: HttpClient,) { }
+
+    getDepartmentList() { }
+    getDepartment() { }
+    updateDepartment() { }
+
+    getDivisionList() { }
+    getDivision() { }
+    updateDivision() { }
+
+    getProjectList() { }
+    getProject() { }
+    updateProject() { }
+
+    getSubprojectList() { }
+    getSubproject() { }
+    updateSubproject() { }
+
+    getTaskList() { }
+    getTask() { }
+    updateTask() { }
+
+    getUserList(): Observable<User[]> {
+        return this.get(this.url_users)
     }
+    getCurrentUser(): Observable<User> {
+        return this.get(this.base_url + 'user/')
+    }
+    getUser(id: number): Observable<any> {
+        return this.get(`${this.url_users}${id}/`)
+    }
+    // updateUser(user: User): Observable<any> {
+    //     this.put(`${this.url_users}${id}/`, user)
+    // }
 
-    get(url: string) {
+    // HELPERS
+    get(url: string): Observable<any> {
         return this.http.get(url) //, { observe: 'response' })
             .pipe(
                 map((response) => {
@@ -34,17 +63,7 @@ export class BackendService {
             );
     }
 
-    patch(url: string, object: object) {
-        return this.http.patch(url, object)
-            .pipe(
-                map((response) => {
-                    console.log(`${url} response:`, response);
-                    return response;
-                })
-            );
-    }
-
-    post(url: string, object: object) {
+    post(url: string, object: object): Observable<any> {
         return this.http.post(url, object)
             .pipe(
                 map((response) => {
@@ -54,7 +73,7 @@ export class BackendService {
             );
     }
 
-    put(url: string, object: object) {
+    put(url: string, object: object): Observable<any> {
         return this.http.put(url, object)
             .pipe(
                 map((response) => {
@@ -66,42 +85,6 @@ export class BackendService {
 
     // need to build an error handler
     // https://angular.io/tutorial/tour-of-heroes/toh-pt6
-
-    // GET
-    getUser(id: number): Observable<User> {
-        const url = `${this.url_users}/${id}`
-        return this.http.get<User>('/api/v1/users/')
-            .pipe(
-                // tap(_ => this.log('fetched user id=${id}')),
-                catchError(this.handleError<User>(`getUser id=${id}`))
-            );
-    }
-
-    // getUserName(id:number): Observable<any> {
-    //     const url = `${this.url_users}/${id}`
-    //     return this.http.get<User>(url)
-    //         .pipe(
-    //             map(user => `${user.first_name || ''} ${user.last_name || ''}`),
-    //             catchError(this.handleError<User>(`getUser id=${id}`))
-    //         );
-    // }
-
-    getUsers(): Observable<User[]> {
-        return this.http.get<User[]>(this.url_users)
-            .pipe(
-                // tap(_ => this.log('fetched user list')),
-                catchError(this.handleError<User[]>('getUsers', []))
-            );
-    }
-
-    updateUser(user: User): Observable<any> {
-        return this.http.put(this.url_users, user)
-        .pipe(
-            // tap(_ => this.log(`updated user id =${user.id}`)),
-            catchError(this.handleError<any>('updateUser'))
-        );
-    }
-
     /**
  * Handle Http operation that failed.
  * Let the app continue.

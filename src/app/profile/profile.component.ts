@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
 
 import { BackendService } from 'src/_services/backend.service';
 import { User } from 'src/_models/user';
@@ -18,16 +17,15 @@ export class ProfileComponent implements OnInit {
   imageUrl!: string | null;
 
   constructor(
-    private backendService: BackendService,
+    private bs: BackendService,
     public modalService: NgbModal,
   ) {  }
 
   ngOnInit() {
-    this.backendService.get('/api/v1/user').subscribe((user: any) => {
+    this.bs.getCurrentUser().subscribe((user: any) => {
       this.user = user;
       this.getImage(user.profile.photo);
     });
-  
   }
 
   updateProfile() {

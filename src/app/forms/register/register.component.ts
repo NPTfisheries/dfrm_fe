@@ -13,7 +13,6 @@ import { BackendService } from 'src/_services/backend.service';
 })
 export class RegisterComponent implements OnInit {
 
-  // @Output() userRegistered = new EventEmitter<any>();
   @Output() newList: EventEmitter<any> = new EventEmitter<any>();
 
   form!: FormGroup;
@@ -57,7 +56,7 @@ export class RegisterComponent implements OnInit {
 
     const regUser$ = this.authService.register(this.form.value)
 
-    regUser$.subscribe({ //() => {
+    regUser$.subscribe({
       next: () => {
         this.backendService.get('/api/v1/users/').subscribe(updatedList => {
           this.newList.emit(updatedList);
@@ -71,10 +70,6 @@ export class RegisterComponent implements OnInit {
       }
 
     })
-  }
-
-  emitUpdatedList(updatedList: any) {
-    this.newList.emit(updatedList);
   }
 
   // Custom validator to check if passwords match

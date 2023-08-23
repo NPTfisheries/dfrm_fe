@@ -36,20 +36,44 @@ export class ListPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getRoute();
     this.getList();
   }
 
-  getList() {
+  getRoute() {
     this.route.url.subscribe(params => {
       this.routeType = params[0].path;
-      this.url = `/api/v1/${this.routeType}/`;
       this.populateFieldsArray(this.routeType);
-
-      this.backendService.get(this.url).subscribe(response => {
-        console.log(response);
-        this.list = response;
-      });
     });
+  }
+
+  getList() {
+    switch (this.routeType) {
+      case 'users':
+        this.backendService.getUserList().subscribe(response => {
+          this.list = response;
+        });
+        break;
+      default:
+          this.url = `/api/v1/${this.routeType}/`;
+          // this.populateFieldsArray(this.routeType);
+    
+          this.backendService.get(this.url).subscribe(response => {
+            console.log(response);
+            this.list = response;
+          });
+          break;
+    }
+    // this.route.url.subscribe(params => {
+    //   this.routeType = params[0].path;
+    //   this.url = `/api/v1/${this.routeType}/`;
+    //   this.populateFieldsArray(this.routeType);
+
+    //   this.backendService.get(this.url).subscribe(response => {
+    //     console.log(response);
+    //     this.list = response;
+    //   });
+    // });
   }
 
   updateList() {
