@@ -59,13 +59,12 @@ export class ImageUploadComponent implements OnInit {
     formData.append('photo_date', this.f['photo_date'].value);
     formData.append('image', this.selectedImage);
 
-    this.backendService.post('/api/v1/image/', formData).subscribe({
+    this.backendService.newItem('image', formData).subscribe({
       next: () => {
-        this.imageForm.reset();
-        this.selectedImage = undefined;
-        this.imagePreview = undefined;
+        this.backendService.getList('image').subscribe((newList: any) => {
+          this.updateList.emit(newList);
+        });
         this.activeModal.close('success');
-        this.updateList.emit();
       },
       error: (err) => {
         this.alertService.error('Failed to upload image.', { autoClose: true })

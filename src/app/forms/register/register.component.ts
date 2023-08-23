@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
   form!: FormGroup;
   loading = false;
   submitted = false;
+  permissionGroup: string = 'Guest';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,6 +29,8 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.authService.getPermissionGroup()
+
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(/^[\w-]+(\.[\w-]+)*@nezperce\.org$/)]],
       first_name: ['', Validators.required],
