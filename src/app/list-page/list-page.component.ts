@@ -6,6 +6,7 @@ import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
 import { RegisterComponent } from '../forms/register/register.component';
 import { ImageUploadComponent } from '../forms/image-upload/image-upload.component';
+import { Observable } from 'rxjs';
 
 import { FormContainerComponent } from '../forms/form-container/form-container.component';
 
@@ -22,7 +23,7 @@ export class ListPageComponent implements OnInit {
   @ViewChild(RegisterComponent) registerComponent!: RegisterComponent;
 
   routeType: string | undefined;
-  list: any | undefined;
+  list: any[] | undefined;
   columns: string[] = [];
   url: string = '';
 
@@ -100,7 +101,7 @@ export class ListPageComponent implements OnInit {
     const modalRef = this.modalService.open(RegisterComponent, this.getModalOptions());
 
     modalRef.result.then((result) => {
-      modalRef.componentInstance.newList.subscribe((newList: any) => {
+      modalRef.componentInstance.updateList.subscribe((newList: any) => {
         this.list = newList;
         this.alertService.success(`New user registered!`, { autoClose: true });
       });
@@ -135,6 +136,8 @@ export class ListPageComponent implements OnInit {
   }
 
   getRecordBySlug(slug: string) {
+    if(!this.list) { return; }
+
     for (let item of this.list) {
       if (item.slug === slug) {
         return item;

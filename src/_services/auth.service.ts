@@ -16,17 +16,18 @@ export class AuthService {
     public token$ = new BehaviorSubject<string | null>(null); // for http interceptor
     public isLoggedIn$ = new BehaviorSubject<boolean>(false);
 
+    public permissionGroup$ = new BehaviorSubject<string | null>(null);
+
+
     constructor(
         private router: Router,
         private http: HttpClient
     ) { 
     }
 
-    // getIsLoggedIn(): boolean | null {
-    //     return this.isLoggedIn$.getValue();
-    // }
-
     getToken(): string | null { return this.token$.getValue(); } // for http interceptor
+    getPermissionGroup(): string | null { return this.permissionGroup$.getValue(); }
+
 
     // Login will set user$ and token$ values to be shared
     login(email: string, password: string) {
@@ -37,7 +38,7 @@ export class AuthService {
         return this.http.post<any>('/api/v1/login/', credentials)
             .pipe(
                 map((response) => {
-                    console.log('login return:', response);
+                    // console.log('login return:', response);
                     // console.log('access: ', response.access);
                     const decoded: any = jwtDecode(response.access);
                     // console.log('access decoded:', decoded);
@@ -46,6 +47,7 @@ export class AuthService {
                     this.username$.next(`${response.first_name} ${response.last_name}`);
                     this.token$.next(response.access);
                     this.isLoggedIn$.next(true);
+                    this.permissionGroup$.next(response.groups[0]);
                 })//,
                 // catchError(this.handleError)
             );
