@@ -23,7 +23,7 @@ export class ListPageComponent implements OnInit {
   @ViewChild(RegisterComponent) registerComponent!: RegisterComponent;
 
   routeType: string | undefined;
-  list: any[] | undefined;
+  list: any | undefined;
   columns: string[] = [];
   url: string = '';
 
@@ -59,7 +59,7 @@ export class ListPageComponent implements OnInit {
     modalRef.componentInstance.routeType = routeType;
 
     modalRef.result.then((result) => {
-      modalRef.componentInstance.newList.subscribe((newList: any) => {
+      modalRef.componentInstance.updateList.subscribe((newList: any) => {
         this.list = newList;
         this.alertService.success(`New ${this.routeType} created!`, { autoClose: true });
       });

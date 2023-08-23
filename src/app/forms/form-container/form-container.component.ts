@@ -14,7 +14,7 @@ import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 })
 export class FormContainerComponent implements OnInit {
 
-  @Output() newList: EventEmitter<any> = new EventEmitter<any>();
+  @Output() updateList: EventEmitter<any> = new EventEmitter<any>();
 
   @Input() routeType!: string;  // always provided.
   @Input() data?: any | undefined;
@@ -42,7 +42,7 @@ export class FormContainerComponent implements OnInit {
   handleFormSubmitted() {
     this.backendService.getList(this.routeType).subscribe(updatedList => {
       console.log('handleFormSubmitted fired.');
-      this.newList.emit(updatedList);
+      this.updateList.emit(updatedList);
     });
     this.activeModal.close();
   }
