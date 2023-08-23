@@ -11,6 +11,8 @@
     <button *ngIf="routeType == 'users'" (click)="registerUser()" class="dfrm-button grow">Register User</button>
     <button *ngIf="routeType == 'image'" (click)="uploadImage()" class="dfrm-button grow">Upload Image</button>
 
+    <button (click)="showlist()" class="dfrm-button grow"> SHOW LIST</button>
+
     <div class="table-container">
         <table *ngIf="list" class="table table-dark table-bordered table-hover mb-0">
             <thead>
@@ -35,9 +37,9 @@
                             </li>
                         </ul>
                     </td>
-                    <td><button class="btn btn-success" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
+                    <td><button class="dfrm-button btn-center" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="btn btn-warning" (click)="edit('department', x.id)"><i
+                    <td><button class="dfrm-button-invert btn-center grow" (click)="edit('department', x.id)"><i
                                 class="fa-regular fa-pen-to-square"></i></button></td>
                 </tr>
             </tbody>
@@ -56,9 +58,9 @@
                             </li>
                         </ul>
                     </td>
-                    <td><button class="btn btn-success" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
+                    <td><button class="dfrm-button btn-center" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="btn btn-warning" (click)="edit('division', x.id)"><i
+                    <td><button class="dfrm-button-invert btn-center grow" (click)="edit('division', x.id)"><i
                                 class="fa-regular fa-pen-to-square"></i></button></td>
                 </tr>
             </tbody>
@@ -74,9 +76,9 @@
                             </li>
                         </ul>
                     </td>
-                    <td><button class="btn btn-success" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
+                    <td><button class="dfrm-button btn-center" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="btn btn-warning" (click)="edit('project', x.id)"><i
+                    <td><button class="dfrm-button-invert btn-center grow" (click)="edit('project', x.id)"><i
                                 class="fa-regular fa-pen-to-square"></i></button></td>
                 </tr>
             </tbody>
@@ -87,9 +89,9 @@
                     <td>{{ x.description }}</td>
                     <td>{{ x.project }}</td>
                     <td>{{ x.lead }}</td>
-                    <td><button class="btn btn-success" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
+                    <td><button class="dfrm-button btn-center grow" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="btn btn-warning" (click)="edit('project', x.id)"><i
+                    <td><button class="dfrm-button-invert btn-center grow" (click)="edit('project', x.id)"><i
                                 class="fa-regular fa-pen-to-square"></i></button></td>
                 </tr>
             </tbody>
@@ -100,9 +102,9 @@
                     <td>{{ x.description }}</td>
                     <td>{{ x.subproject }}</td>
                     <td>{{ x.supervisor }}</td>
-                    <td><button class="btn btn-success" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
+                    <td><button class="dfrm-button btn-center grow" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="btn btn-warning" (click)="edit('project', x.id)"><i
+                    <td><button class="dfrm-button-invert btn-center grow" (click)="edit('project', x.id)"><i
                                 class="fa-regular fa-pen-to-square"></i></button></td>
                 </tr>
             </tbody>
@@ -114,7 +116,7 @@
                     <td>{{ x.profile.work_phone }}</td>
                     <td>{{ x.profile.mobile_phone }}</td>
                     <td>{{ x.profile.title }}</td>
-                    <td><button class="btn btn-success" [routerLink]="x.id"><i class="fa-regular fa-eye"></i></button>
+                    <td><button class="dfrm-button btn-center grow" [routerLink]="x.id"><i class="fa-regular fa-eye"></i></button>
                     </td>
                 </tr>
             </tbody>
@@ -126,7 +128,7 @@
                     <td>{{ x.photographer }}</td>
                     <td>{{ x.photo_date }}</td>
                     <td>{{ x.source }}</td>
-                    <td><button class="btn btn-success" [routerLink]="x.id"><i class="fa-regular fa-eye"></i></button>
+                    <td><button class="dfrm-button btn-center grow" [routerLink]="x.id"><i class="fa-regular fa-eye"></i></button>
                     </td>
                 </tr>
             </tbody>

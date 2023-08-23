@@ -7,6 +7,7 @@
 .dfrm-page-title {
     font-size:58px;  
 }
+
 .dfrm-button {
     background-color: #0d1b1f;
     color:#f9f906;
@@ -15,6 +16,25 @@
     border-color: #5492b4;
     font-size: larger;
 }
+
+/* .dfrm-button-invert {
+    background-color: #f9f906;
+    color:#0d1b1f;;
+    padding: 6px;
+    border-radius: 10px;
+    border-color: #5492b4;
+    font-size: larger;
+} */
+
+.dfrm-button-invert {
+    background-color: #5492b4;
+    color:#0d1b1f;;
+    padding: 6px;
+    border-radius: 10px;
+    border-color: #f9f906;
+    font-size: larger;
+}
+
 
 /* text */
 h1 {

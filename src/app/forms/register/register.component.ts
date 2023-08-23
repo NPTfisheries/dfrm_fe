@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { first } from 'rxjs';
+import { Observable, concatMap, first } from 'rxjs';
 
 import { AuthService } from 'src/_services/auth.service';
 import { AlertService } from 'src/_services/alert.service';
+import { BackendService } from 'src/_services/backend.service';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +13,10 @@ import { AlertService } from 'src/_services/alert.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
+  // @Output() userRegistered = new EventEmitter<any>();
+  @Output() newList: EventEmitter<any> = new EventEmitter<any>();
+
   form!: FormGroup;
   loading = false;
   submitted = false;
@@ -21,6 +26,7 @@ export class RegisterComponent implements OnInit {
     private authService: AuthService,
     private alertService: AlertService,
     private activeModal: NgbActiveModal,
+    private backendService: BackendService,
   ) { }
 
   ngOnInit() {
@@ -50,23 +56,14 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this.authService.register(this.form.value)
-      .pipe(first())
-      .subscribe({
-        next: () => {
-          this.alertService.success('Registration successful!', { id: 'register-modal', autoClose: true });
-          // reset the form to allow for another round.
-          this.form.reset();
-          this.loading = false;
-          this.submitted = false;
-          this.activeModal.close();
-        },
-        error: response => {
-          // console.log(response);
-          this.alertService.error('Register New User Failed! Check your fields and try again.');
-          this.loading = false;
-        }
-      })
+    const regUser$ = this.authService.register(this.form.value)
+
+    regUser$.subscribe(() => {
+      this.backendService.get('/api/v1/users/').subscribe(updatedList => {
+        this.newList.emit(updatedList);
+      });
+      this.activeModal.close();
+    })
   }
 
   // Custom validator to check if passwords match

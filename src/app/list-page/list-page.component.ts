@@ -31,6 +31,9 @@ export class ListPageComponent implements OnInit {
     private modalService: NgbModal,
   ) { }
 
+  showlist() {
+    console.log(this.list);
+  }
 
   ngOnInit(): void {
     this.getList();
@@ -92,20 +95,19 @@ export class ListPageComponent implements OnInit {
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
 
+
   registerUser() {
     const modalOptions: NgbModalOptions = { size: 'xl', };
 
     const modalRef = this.modalService.open(RegisterComponent, modalOptions);
 
     modalRef.result.then((result) => {
-      console.log(result);
-      if (result === 'success') {
-        this.updateList();
-        this.alertService.success(`New user registered!`, { autoClose: true });
-      }
+      modalRef.componentInstance.newList.subscribe((newList: any) => {
+          this.list = newList;
+          this.alertService.success(`New user registered!`, { autoClose: true });
+      });
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
-
 
   populateFieldsArray(routeType: string) {
     switch (routeType) {

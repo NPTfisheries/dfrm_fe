@@ -3,7 +3,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { BackendService } from 'src/_services/backend.service';
-import { Profile } from 'src/_models/profile';
 
 import { AlertService } from 'src/_services/alert.service';
 import { phoneFormatValidator } from 'src/_validators/phone-format-validator';
