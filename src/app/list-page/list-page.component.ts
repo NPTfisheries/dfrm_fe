@@ -49,20 +49,13 @@ export class ListPageComponent implements OnInit {
     });
   }
 
-  // updateList() {
-  //   this.getList(this.routeType);
-  // }
-
   // add & edit for department, division, and project
   add(routeType: string | undefined) {
     console.log('add:', routeType);
-    const modalOptions: NgbModalOptions = { size: 'xl', };
 
-    const modalRef = this.modalService.open(FormContainerComponent, modalOptions);
+    const modalRef = this.modalService.open(FormContainerComponent, this.getModalOptions());
 
     modalRef.componentInstance.routeType = routeType;
-    modalRef.componentInstance.url = this.url;
-    modalRef.componentInstance.addOrEdit = 'add';
   }
 
   edit(routeType: string | undefined, slug:string) {
@@ -70,32 +63,25 @@ export class ListPageComponent implements OnInit {
 
     const data = this.getRecordBySlug(slug);
 
-    const modalOptions: NgbModalOptions = { size: 'xl', };
-
-    const modalRef = this.modalService.open(FormContainerComponent, modalOptions);
+    const modalRef = this.modalService.open(FormContainerComponent, this.getModalOptions());
 
     modalRef.componentInstance.routeType = routeType;
-    modalRef.componentInstance.data = data;
     modalRef.componentInstance.slug = slug;
+    modalRef.componentInstance.data = data;
   }
 
   uploadImage() {
-    const modalOptions: NgbModalOptions = { size: 'xl', };
-
-    const modalRef = this.modalService.open(ImageUploadComponent, modalOptions);
+    const modalRef = this.modalService.open(ImageUploadComponent, this.getModalOptions());
 
     modalRef.result.then((result) => {
       console.log(result);
-      // this.updateList();
       this.alertService.success(`Image uploaded!`, { autoClose: true });
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
 
 
   registerUser() {
-    const modalOptions: NgbModalOptions = { size: 'xl', };
-
-    const modalRef = this.modalService.open(RegisterComponent, modalOptions);
+    const modalRef = this.modalService.open(RegisterComponent, this.getModalOptions());
 
     modalRef.result.then((result) => {
       modalRef.componentInstance.newList.subscribe((newList: any) => {
@@ -138,6 +124,12 @@ export class ListPageComponent implements OnInit {
         return item;
       }
     }
+  }
+
+  getModalOptions(): NgbModalOptions {
+    return {
+      size: 'xl',
+    };
   }
 
 }
