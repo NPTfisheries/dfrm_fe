@@ -6,7 +6,7 @@ import { RegisterComponent } from './forms/register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 
-import { AuthGuard } from 'src/_helpers/auth-guard';
+import { AuthGuard } from 'src/_utilities/auth-guard';
 import { ListPageComponent } from './list-page/list-page.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
 import { CardPageComponent } from './card-page/card-page.component';

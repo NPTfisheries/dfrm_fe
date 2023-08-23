@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { InputBase } from '../../_inputs/input-base';
+import { InputBase } from 'src/_inputs/input-base';
 
 @Component({
   selector: 'app-dynamic-form-input',

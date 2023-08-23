@@ -15,7 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from './forms/register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 
-import { CustomHttpInterceptor } from 'src/_helpers/http-interceptor';
+import { CustomHttpInterceptor } from 'src/_utilities/http-interceptor';
 import { ProfileUpdateComponent } from './forms/profile-update/profile-update.component';
 import { ListPageComponent } from './list-page/list-page.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
@@ -24,9 +24,9 @@ import { ImageUploadComponent } from './forms/image-upload/image-upload.componen
 import { FooterComponent } from './footer/footer.component';
 import { CardPageComponent } from './card-page/card-page.component';
 import { CardComponent } from './card/card.component';
-import { DynamicFormComponent } from '../_forms/dynamic-form/dynamic-form.component';
-import { DynamicFormInputComponent } from '../_forms/dynamic-form-input/dynamic-form-input.component';
-import { FormContainerComponent } from '../_forms/form-container/form-container.component';
+import { DynamicFormComponent } from './forms/dynamic-form/dynamic-form.component';
+import { DynamicFormInputComponent } from './forms/dynamic-form-input/dynamic-form-input.component';
+import { FormContainerComponent } from './forms/form-container/form-container.component';
 import { EmployeeCardComponent } from './employee-card/employee-card.component';
 
 @NgModule({

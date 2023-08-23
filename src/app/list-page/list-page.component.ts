@@ -7,7 +7,9 @@ import { BackendService } from 'src/_services/backend.service';
 import { RegisterComponent } from '../forms/register/register.component';
 import { ImageUploadComponent } from '../forms/image-upload/image-upload.component';
 
-import { FormContainerComponent } from 'src/_forms/form-container/form-container.component';
+import { FormContainerComponent } from '../forms/form-container/form-container.component';
+
+import { getRouteType } from 'src/_utilities/route-utils';
 
 @Component({
   selector: 'app-list-page',
@@ -36,49 +38,20 @@ export class ListPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getRoute();
-    this.getList();
+    this.routeType = getRouteType(this.route);
+    this.getList(this.routeType);
+    console.log('route', this.route);
   }
 
-  getRoute() {
-    this.route.url.subscribe(params => {
-      this.routeType = params[0].path;
-      this.populateFieldsArray(this.routeType);
+  getList(routeType: string) {
+    this.backendService.getList(routeType).subscribe(list => {
+      this.list = list;
     });
   }
 
-  getList() {
-    switch (this.routeType) {
-      case 'users':
-        this.backendService.getUserList().subscribe(response => {
-          this.list = response;
-        });
-        break;
-      default:
-          this.url = `/api/v1/${this.routeType}/`;
-          // this.populateFieldsArray(this.routeType);
-    
-          this.backendService.get(this.url).subscribe(response => {
-            console.log(response);
-            this.list = response;
-          });
-          break;
-    }
-    // this.route.url.subscribe(params => {
-    //   this.routeType = params[0].path;
-    //   this.url = `/api/v1/${this.routeType}/`;
-    //   this.populateFieldsArray(this.routeType);
-
-    //   this.backendService.get(this.url).subscribe(response => {
-    //     console.log(response);
-    //     this.list = response;
-    //   });
-    // });
-  }
-
-  updateList() {
-    this.getList();
-  }
+  // updateList() {
+  //   this.getList(this.routeType);
+  // }
 
   // add & edit for department, division, and project
   add(routeType: string | undefined) {
@@ -114,7 +87,7 @@ export class ListPageComponent implements OnInit {
 
     modalRef.result.then((result) => {
       console.log(result);
-      this.updateList();
+      // this.updateList();
       this.alertService.success(`Image uploaded!`, { autoClose: true });
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
@@ -127,8 +100,8 @@ export class ListPageComponent implements OnInit {
 
     modalRef.result.then((result) => {
       modalRef.componentInstance.newList.subscribe((newList: any) => {
-          this.list = newList;
-          this.alertService.success(`New user registered!`, { autoClose: true });
+        this.list = newList;
+        this.alertService.success(`New user registered!`, { autoClose: true });
       });
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }

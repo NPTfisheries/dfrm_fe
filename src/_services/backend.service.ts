@@ -9,45 +9,63 @@ import { Observable, of } from "rxjs";
 export class BackendService {
 
     base_url = '/api/v1/';
-    url_department = this.base_url + 'department/';
-    url_division = this.base_url + 'division/';
-    url_project = this.base_url + 'project/';
-    url_subproject = this.base_url + 'subproject/';
-    url_task = this.base_url + 'task/';
-    url_users = this.base_url + 'users/';
+    // url_department = this.base_url + 'department/';
+    // url_division = this.base_url + 'division/';
+    // url_project = this.base_url + 'project/';
+    // url_subproject = this.base_url + 'subproject/';
+    // url_task = this.base_url + 'task/';
+    // url_users = this.base_url + 'users/';
 
 
-    constructor(private http: HttpClient,) { }
+    constructor(
+        private http: HttpClient,
+        ) { }
 
-    getDepartmentList() { }
-    getDepartment() { }
-    updateDepartment() { }
-
-    getDivisionList() { }
-    getDivision() { }
-    updateDivision() { }
-
-    getProjectList() { }
-    getProject() { }
-    updateProject() { }
-
-    getSubprojectList() { }
-    getSubproject() { }
-    updateSubproject() { }
-
-    getTaskList() { }
-    getTask() { }
-    updateTask() { }
-
-    getUserList(): Observable<User[]> {
-        return this.get(this.url_users)
+    getList(routeType: string): Observable<any[]> {
+        const URL = `${this.base_url}${routeType}`;
+        return this.get(URL);
     }
+
+    getDetail(routeType: string, id: number): Observable<any>  {
+        const URL = `${this.base_url}${routeType}/${id}/`;
+        return this.get(URL);
+    }
+
+    newItem(routeType: string, object:object): Observable<any>  {
+        const URL = `${this.base_url}${routeType}/`;
+        return this.post(URL, object);
+    }
+    
+    updateItem(routeType: string, id: number, object:object): Observable<any>  {
+        const URL = `${this.base_url}${routeType}/${id}/`;
+        return this.put(URL, object);
+    }
+
+
     getCurrentUser(): Observable<User> {
         return this.get(this.base_url + 'user/')
     }
-    getUser(id: number): Observable<any> {
-        return this.get(`${this.url_users}${id}/`)
-    }
+
+    // getDepartment() { }
+    // updateDepartment() { }
+
+    // getDivision() { }
+    // updateDivision() { }
+
+    // getProject() { }
+    // updateProject() { }
+
+    // getSubproject() { }
+    // updateSubproject() { }
+
+    // getTask() { }
+    // updateTask() { }
+
+
+
+    // getUser(id: number): Observable<any> {
+    //     return this.get(`${this.url_users}${id}/`)
+    // }
     // updateUser(user: User): Observable<any> {
     //     this.put(`${this.url_users}${id}/`, user)
     // }

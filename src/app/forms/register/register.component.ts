@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit {
 
     regUser$.subscribe({
       next: () => {
-        this.backendService.get('/api/v1/users/').subscribe(updatedList => {
+        this.backendService.getList('users').subscribe(updatedList => {
           this.newList.emit(updatedList);
         });
         this.activeModal.close();
