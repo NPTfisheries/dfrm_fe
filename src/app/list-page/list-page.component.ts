@@ -2,15 +2,16 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 
+import { AuthService } from 'src/_services/auth.service';
 import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
 import { RegisterComponent } from '../forms/register/register.component';
 import { ImageUploadComponent } from '../forms/image-upload/image-upload.component';
-import { Observable } from 'rxjs';
 
 import { FormContainerComponent } from '../forms/form-container/form-container.component';
 
 import { getRouteType } from 'src/_utilities/route-utils';
+import { managerAccess, professionalAccess } from 'src/_utilities/permission-util';
 
 @Component({
   selector: 'app-list-page',
@@ -22,13 +23,17 @@ export class ListPageComponent implements OnInit {
   @ViewChild(FormContainerComponent) formContainerComponent!: FormContainerComponent;
   @ViewChild(RegisterComponent) registerComponent!: RegisterComponent;
 
+  managerAccess = managerAccess;
+  professionalAccess = professionalAccess;
   routeType: string | undefined;
   list: any | undefined;
   columns: string[] = [];
-  url: string = '';
+  // url: string = '';
+  permissionGroup!: string;
 
   constructor(
     private route: ActivatedRoute,
+    private authService: AuthService,
     private backendService: BackendService,
     private alertService: AlertService,
     private modalService: NgbModal,
@@ -42,6 +47,7 @@ export class ListPageComponent implements OnInit {
     this.routeType = getRouteType(this.route);
     this.getList(this.routeType);
     this.populateFieldsArray(this.routeType);
+    this.permissionGroup = this.authService.getPermissionGroup();
   }
 
   getList(routeType: string) {

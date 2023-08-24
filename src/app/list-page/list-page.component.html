@@ -1,9 +1,20 @@
 <div class="container">
     <h1>{{ routeType | titlecase }} List</h1>
-    <button *ngIf="routeType != 'users' && routeType != 'image'" 
-        (click)="add(routeType)" class="dfrm-button grow">Add New {{ routeType | titlecase}}</button>
-    <button *ngIf="routeType == 'users'" (click)="registerUser()" class="dfrm-button grow">Register User</button>
-    <button *ngIf="routeType == 'image'" (click)="uploadImage()" class="dfrm-button grow">Upload Image</button>
+
+    <button *ngIf="routeType == 'department' && managerAccess(permissionGroup)" (click)="add(routeType)"
+        class="dfrm-button">Add New {{ routeType | titlecase}}</button>
+    <button *ngIf="routeType == 'division' && managerAccess(permissionGroup)" (click)="add(routeType)"
+        class="dfrm-button">Add New {{ routeType | titlecase}}</button>
+    <button *ngIf="routeType == 'project' && professionalAccess(permissionGroup)" (click)="add(routeType)"
+        class="dfrm-button">Add New {{ routeType | titlecase}}</button>
+    <button *ngIf="routeType == 'subproject' && professionalAccess(permissionGroup)" (click)="add(routeType)"
+        class="dfrm-button">Add New {{ routeType | titlecase}}</button>
+    <button *ngIf="routeType == 'task' && professionalAccess(permissionGroup)" (click)="add(routeType)"
+        class="dfrm-button">Add New {{ routeType | titlecase}}</button>
+    <button *ngIf="routeType == 'users' && managerAccess(permissionGroup)" (click)="registerUser()"
+        class="dfrm-button">Register User</button>
+    <button *ngIf="routeType == 'image' && managerAccess(permissionGroup)" (click)="uploadImage()"
+        class="dfrm-button">Upload Image</button>
 
     <div class="table-container">
         <table *ngIf="list" class="table table-dark table-bordered table-hover mb-0">
@@ -11,7 +22,12 @@
                 <tr>
                     <th *ngFor="let col of columns">{{ col | titlecase}}</th>
                     <th style="text-align: center;">View</th>
-                    <th *ngIf="routeType !== 'users' && routeType !== 'image'" style="text-align: center;">Edit</th>
+
+                    <th *ngIf="routeType == 'department' && managerAccess(permissionGroup)" style="text-align: center;">Edit</th>
+                    <th *ngIf="routeType == 'division' && managerAccess(permissionGroup)" style="text-align: center;">Edit</th>
+                    <th *ngIf="routeType == 'project' && professionalAccess(permissionGroup)" style="text-align: center;">Edit</th>
+                    <th *ngIf="routeType == 'subproject' && professionalAccess(permissionGroup)" style="text-align: center;">Edit</th>
+                    <th *ngIf="routeType == 'task' && professionalAccess(permissionGroup)" style="text-align: center;">Edit</th>
                 </tr>
             </thead>
 
@@ -29,10 +45,15 @@
                             </li>
                         </ul>
                     </td>
-                    <td><button class="dfrm-button btn-center" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
+                    <td>
+                        <button class="dfrm-button btn-center" [routerLink]="x.slug"><i
+                                class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="dfrm-button-invert btn-center" (click)="edit('department', x.slug)"><i
-                                class="fa-regular fa-pen-to-square"></i></button></td>
+                    <td *ngIf="managerAccess(permissionGroup)">
+                        <button class="dfrm-button-invert btn-center" (click)="edit('department', x.slug)">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
 
@@ -50,10 +71,14 @@
                             </li>
                         </ul>
                     </td>
-                    <td><button class="dfrm-button btn-center" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
+                    <td><button class="dfrm-button btn-center" [routerLink]="x.slug"><i
+                                class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="dfrm-button-invert btn-center" (click)="edit('division', x.slug)"><i
-                                class="fa-regular fa-pen-to-square"></i></button></td>
+                    <td *ngIf="managerAccess(permissionGroup)">
+                        <button class="dfrm-button-invert btn-center" (click)="edit('division', x.slug)">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
 
@@ -68,10 +93,14 @@
                             </li>
                         </ul>
                     </td>
-                    <td><button class="dfrm-button btn-center" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
+                    <td><button class="dfrm-button btn-center" [routerLink]="x.slug"><i
+                                class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="dfrm-button-invert btn-center" (click)="edit('project', x.slug)"><i
-                                class="fa-regular fa-pen-to-square"></i></button></td>
+                    <td *ngIf="professionalAccess(permissionGroup)">
+                        <button class="dfrm-button-invert btn-center" (click)="edit('project', x.slug)"><i
+                                class="fa-regular fa-pen-to-square"></i>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
 
@@ -81,10 +110,14 @@
                     <td>{{ x.description }}</td>
                     <td>{{ x.project }}</td>
                     <td>{{ x.lead }}</td>
-                    <td><button class="dfrm-button btn-center" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
+                    <td><button class="dfrm-button btn-center" [routerLink]="x.slug"><i
+                                class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="dfrm-button-invert btn-center" (click)="edit('subproject', x.slug)"><i
-                                class="fa-regular fa-pen-to-square"></i></button></td>
+                    <td *ngIf="professionalAccess(permissionGroup)">
+                        <button class="dfrm-button-invert btn-center" (click)="edit('subproject', x.slug)">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
 
@@ -94,10 +127,14 @@
                     <td>{{ x.description }}</td>
                     <td>{{ x.subproject }}</td>
                     <td>{{ x.supervisor }}</td>
-                    <td><button class="dfrm-button btn-center" [routerLink]="x.slug"><i class="fa-regular fa-eye"></i></button>
+                    <td><button class="dfrm-button btn-center" [routerLink]="x.slug"><i
+                                class="fa-regular fa-eye"></i></button>
                     </td>
-                    <td><button class="dfrm-button-invert btn-center" (click)="edit('task', x.slug)"><i
-                                class="fa-regular fa-pen-to-square"></i></button></td>
+                    <td *ngIf="professionalAccess(permissionGroup)">
+                        <button class="dfrm-button-invert btn-center" (click)="edit('task', x.slug)">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
 
@@ -108,7 +145,10 @@
                     <td>{{ x.profile.work_phone }}</td>
                     <td>{{ x.profile.mobile_phone }}</td>
                     <td>{{ x.profile.title }}</td>
-                    <td><button class="dfrm-button btn-center" [routerLink]="x.id"><i class="fa-regular fa-eye"></i></button>
+                    <td>
+                        <button class="dfrm-button btn-center" [routerLink]="x.id">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>
@@ -120,7 +160,10 @@
                     <td>{{ x.photographer }}</td>
                     <td>{{ x.photo_date }}</td>
                     <td>{{ x.source }}</td>
-                    <td><button class="dfrm-button btn-center" [routerLink]="x.id"><i class="fa-regular fa-eye"></i></button>
+                    <td>
+                        <button class="dfrm-button btn-center" [routerLink]="x.id">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>
