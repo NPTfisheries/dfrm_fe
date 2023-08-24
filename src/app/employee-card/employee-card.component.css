@@ -9,6 +9,10 @@
     flex-direction: column;
 }
 
+.dfrm-card:hover {
+    cursor: pointer;
+}
+
 .card-img-top {
     /* needs to jive with dfrm-card border-radius */
     border-radius: 15px 15px 0 0;

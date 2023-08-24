@@ -38,7 +38,7 @@ const routes: Routes = [
     { path: 'department/:slug', component: DetailPageComponent},
     { path: 'division/:slug', component: DetailPageComponent},
     { path: 'project/:slug', component: DetailPageComponent},
-    { path: 'users/:id', component: DetailPageComponent},
+    { path: 'users/:id', component: ProfileComponent},
 
 ];
 
