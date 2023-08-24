@@ -72,10 +72,10 @@ export class ListPageComponent implements OnInit {
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
 
-  edit(routeType: string | undefined, slug:string) {
+  edit(routeType: string, slug: string | number) {
     console.log('edit:', routeType, slug);
 
-    const data = this.getRecordBySlug(slug);
+    const data = this.getRecordBySlug(routeType, slug);
 
     const modalRef = this.modalService.open(FormContainerComponent, this.getModalOptions());
 
@@ -141,11 +141,30 @@ export class ListPageComponent implements OnInit {
     }
   }
 
-  getRecordBySlug(slug: string) {
-    if(!this.list) { return; }
+  getRecordBySlug(routeType:string, slug: string | number) {
+    if (!this.list) { return; }
+
+    if (routeType === 'users') {
+      // users is queried via ID, where everything else is slug. (routing and api calls). This works
+      for (let item of this.list) {
+        if (item.id === slug) {
+          return item;
+        }
+      }
+    } else {
+      for (let item of this.list) {
+        if (item.slug === slug) {
+          return item;
+        }
+      }
+    }
+  }
+
+  getRecordById(id: number) {
+    if (!this.list) { return; }
 
     for (let item of this.list) {
-      if (item.slug === slug) {
+      if (item.id === id) {
         return item;
       }
     }

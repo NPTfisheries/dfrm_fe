@@ -32,7 +32,12 @@ export class DetailPageComponent implements OnInit {
     
     this.backendService.getDetail(routeType, slug).subscribe(detail => {
       this.data = detail;
+      this.getImage(detail.img_banner.image);
     });
+  }
+
+  getImage(url:string) {
+    return this.imageUrl = 'http://localhost:8000'+url;
   }
 
 }

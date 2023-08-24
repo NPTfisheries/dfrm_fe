@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BackendService } from 'src/_services/backend.service';
 
-import { CardComponent } from '../card/card.component';
+import { getRouteType } from 'src/_utilities/route-utils';
+
+// import { CardComponent } from '../card/card.component';
 
 @Component({
   selector: 'app-card-page',
@@ -26,26 +28,17 @@ export class CardPageComponent implements OnInit {
   }
 
   getList() {
-    this.route.url.subscribe(params => {
-      this.routeType = params[0].path.slice(0, -1);
-      this.backendService.get(`/api/v1/${this.routeType}/`).subscribe(response => {
-        this.list = response;
-      });
+    // card pages have an extra s (i.e., department[s]) that must be removed to get proper url
+    this.routeType = getRouteType(this.route).slice(0,-1);
+
+    this.backendService.getList(this.routeType).subscribe(response => {
+      this.list = response;
     });
   }
 
-  //   interface ImageResponse {
-  //     id: number;
-  //     slug: string;
-  //     name: string;
-  //     description: string;
-  //     photographer: string;
-  //     source: string;
-  //     image: string; // Add the 'image' property here
-  // }
-
   getImage() {
-    this.backendService.get('/api/v1/image/saturn/').subscribe((response: any) => {
+    this.backendService.getImageBySlug('saturn').subscribe((response: any) => {
+      // response.image is a url: "http://localhost:4200/media/images/uploaded/saturn_79MFAAl.jpg"
       const alteredUrl = response.image.replace('localhost:4200', 'localhost:8000');
       this.bannerImage = alteredUrl; 
     });

@@ -389,6 +389,48 @@ export class InputService {
     return of(inputs.sort((a, b) => a.order - b.order));
   }
 
+  getImageInputs(data?: any) {
+    console.log('Getting Image Inputs...');
+    const inputs: InputBase<string>[] = [
+      new InputText({
+        key: 'name',
+        label: 'Name',
+        value: data?.name || '',
+        required: true,
+        order: 1
+      }),
+      new InputText({
+        key: 'description',
+        label: 'Description',
+        value: data?.description || '',
+        required: true,
+        order: 2
+      }),
+      new InputText({
+        key: 'photographer',
+        label: 'Photographer',
+        value: data?.photographer || '',
+        required: true,
+        order: 3
+      }),
+      new InputDate({
+        key: 'photo_date',
+        label: 'Photo Date',
+        value: data?.photo_date || '',
+        required: true,
+        order: 4
+      }),
+      new InputText({
+        key: 'source',
+        label: 'source',
+        value: data?.source || '',
+        order: 5
+      })
+    ]
+
+    return of(inputs.sort((a, b) => a.order - b.order));
+  }
+
   // for employees
   private buildEmployeeOptions() {
     let options: { key: string, value: string }[] = [];

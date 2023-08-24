@@ -28,6 +28,9 @@
                     <th *ngIf="routeType == 'project' && professionalAccess(permissionGroup)" style="text-align: center;">Edit</th>
                     <th *ngIf="routeType == 'subproject' && professionalAccess(permissionGroup)" style="text-align: center;">Edit</th>
                     <th *ngIf="routeType == 'task' && professionalAccess(permissionGroup)" style="text-align: center;">Edit</th>
+                    <th *ngIf="routeType == 'users' && managerAccess(permissionGroup)" style="text-align: center;">Edit</th>
+                    <th *ngIf="routeType == 'image' && managerAccess(permissionGroup)" style="text-align: center;">Edit</th>
+
                 </tr>
             </thead>
 
@@ -150,6 +153,11 @@
                             <i class="fa-regular fa-eye"></i>
                         </button>
                     </td>
+                    <td *ngIf="managerAccess(permissionGroup)">
+                        <button class="dfrm-button-invert btn-center" (click)="edit('users', x.id)">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
 
@@ -163,6 +171,11 @@
                     <td>
                         <button class="dfrm-button btn-center" [routerLink]="x.id">
                             <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </td>
+                    <td *ngIf="managerAccess(permissionGroup)">
+                        <button class="dfrm-button-invert btn-center" (click)="edit('image', x.slug)">
+                            <i class="fa-regular fa-pen-to-square"></i>
                         </button>
                     </td>
                 </tr>

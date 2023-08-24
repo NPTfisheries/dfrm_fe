@@ -45,8 +45,13 @@ export class BackendService {
     }
 
     getCurrentUser(): Observable<User> {
-        return this.get(this.base_url + 'user/')
+        return this.get(this.base_url + 'user/');
     }
+
+    getImageBySlug(slug:string) {
+        return this.get(`/api/v1/image/${slug}/`);
+    }
+
     
     // HELPERS -- change to private eventually?
     get(url: string): Observable<any> {

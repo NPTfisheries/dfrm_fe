@@ -6,8 +6,8 @@
     <h1 class="detail-title">{{ data?.name }}</h1>
     <p>{{ data?.description }}</p>
     <div class="card-container">
-        <app-employee-card [data]="data.manager"></app-employee-card>
-        <app-employee-card [data]="data.deputy"></app-employee-card>
-        <app-employee-card [data]="data.assistant"></app-employee-card>
+        <app-employee-card [data]="data?.manager"></app-employee-card>
+        <app-employee-card [data]="data?.deputy"></app-employee-card>
+        <app-employee-card [data]="data?.assistant"></app-employee-card>
     </div>
 </div>
