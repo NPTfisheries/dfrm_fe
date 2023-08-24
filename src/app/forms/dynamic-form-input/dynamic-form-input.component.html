@@ -17,6 +17,13 @@
             </div> -->
         </select>
 
+        <!-- PHONE -->
+        <div *ngSwitchCase="'phone'" >
+            <input [formControlName]="input.key" [id]="input.key" [type]="input.type"
+            class="form-control form-control-lg">
+            <small class="form-text text-muted">Expected format: +1 XXX XXX XXXX</small>
+        </div>
+ 
         <!-- TEXT -->
         <input *ngSwitchCase="'text'" [formControlName]="input.key" [id]="input.key" [type]="input.type"
             class="form-control form-control-lg">

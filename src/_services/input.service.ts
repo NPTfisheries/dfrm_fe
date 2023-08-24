@@ -345,7 +345,7 @@ export class InputService {
       }),
       new InputTextarea({
         key: 'bio',
-        label: 'bio',
+        label: 'Bio',
         value: data?.profile?.bio || '',
         order: 5
       }),

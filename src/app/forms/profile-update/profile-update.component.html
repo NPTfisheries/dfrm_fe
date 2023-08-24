@@ -60,16 +60,16 @@
                     <input type="text" formControlName="mobile_phone" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && fp['mobile_phone'].errors }" />
                     <div *ngIf="submitted && fp['mobile_phone'].errors" class="invalid-feedback">
-                        <div *ngIf="fp['mobile_phone'].errors['phoneFormat']">Invalid phone number format. Use "+1 123 456 7890".</div>
+                        <div *ngIf="fp['mobile_phone'].errors['phoneFormat']">Invalid phone number format. Use "+1 XXX XXX XXXX".</div>
                     </div>
-                    <small class="form-text text-muted">Expected format: +1 123 456 7890</small>
-                </div>
+                    <small class="form-text text-muted">Expected format: +1 XXX XXX XXXX</small>
+                </div>S
                 <div class="mb-3">
                     <label class="form-label">Work Phone</label>
                     <input type="text" formControlName="work_phone" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && fp['work_phone'].errors }" />
                     <div *ngIf="submitted && fp['work_phone'].errors" class="invalid-feedback">
-                        <div *ngIf="fp['work_phone'].errors['phoneFormat']">Invalid phone number format. Use "+1 123 456 7890".</div>
+                        <div *ngIf="fp['work_phone'].errors['phoneFormat']">Invalid phone number format. Use "+1 XXX XXX XXXX".</div>
                     </div>
                 </div>
                 <!-- <div class="mb-3">
