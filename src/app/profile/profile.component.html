@@ -23,5 +23,5 @@
 
 
     <h1></h1>
-    <button (click)="updateProfile()" class="dfrm-button grow">Update Profile</button>
+    <button *ngIf="this.routeType === 'profile'" (click)="updateProfile()" class="dfrm-button grow">Update Profile</button>
 </div>
