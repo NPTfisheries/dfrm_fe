@@ -54,6 +54,10 @@ export class ListPageComponent implements OnInit {
     this.populateFieldsArray(this.routeType);
   }
 
+  ngOnDestroy(): void {
+    this.permissionGroupSubscription.unsubscribe();
+  }
+
   getList(routeType: string) {
     this.backendService.getList(routeType).subscribe(list => {
       this.list = list;

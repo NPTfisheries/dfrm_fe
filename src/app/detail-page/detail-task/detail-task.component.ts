@@ -46,6 +46,11 @@ export class DetailTaskComponent implements OnInit, OnChanges {
     }
   }
 
+  ngOnDestroy(): void {
+    this.permissionGroupSubscription.unsubscribe();
+  }
+
+
   getList() {
     this.backendService.getList(`task/?subproject_id=${this.subprojectId}`).subscribe(list => {
       this.list = list;
