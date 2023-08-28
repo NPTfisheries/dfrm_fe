@@ -17,6 +17,9 @@ export class FormContainerComponent implements OnInit {
   @Output() updateList: EventEmitter<any> = new EventEmitter<any>();
 
   @Input() routeType!: string;  // always provided.
+  @Input() projectId: string | null = null;  // provided only for refreshing subprojects.
+  @Input() subprojectId: string | null = null;  // povided only for refreshing tasks.
+
   @Input() data?: any | undefined;
   @Input() slug!: string;
 
@@ -40,7 +43,13 @@ export class FormContainerComponent implements OnInit {
   }
 
   handleFormSubmitted() {
-    this.backendService.getList(this.routeType).subscribe(updatedList => {
+
+    let route = this.routeType;
+    if(this.projectId) { route = `${this.routeType}/?project_id=${this.projectId}`}; // subproject list, filtered
+    if(this.subprojectId) { route = `${this.routeType}/?subproject_id=${this.subprojectId}`}; // task list, filtered
+
+
+    this.backendService.getList(route).subscribe(updatedList => {
       console.log('handleFormSubmitted fired.');
       this.updateList.emit(updatedList);
     });

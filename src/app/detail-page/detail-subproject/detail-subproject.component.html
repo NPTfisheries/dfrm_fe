@@ -1,23 +1,27 @@
 <button *ngIf="professionalAccess(permissionGroup)" (click)="add()" class="dfrm-button">Add Subproject</button>
-
+<h1>Project Id {{projectId}}</h1>
 <div *ngFor="let item of list; let i = index">
+    <!-- subproject info -->
     <div class="container rounded-border my-5">
         <div class="row">
-          <div *ngIf="i % 2 === 1" class="col-md-4">
-            <img [src]="'http://localhost:8000' + item.img_card.image" alt="Image" class="rounded-left block-image">
-          </div>
-          <div class="col-md-8 p-4">
-            <div>
-              <h2>{{ item.name }}</h2>
-              <p>{{ item.description }}</p>
-              <p>Subproject Lead: <a [routerLink]="'/users/' + item.lead.id">{{ item.lead.first_name }} {{item.lead.last_name}} </a></p>
+            <div *ngIf="i % 2 === 1" class="col-md-4">
+                <img [src]="'http://localhost:8000' + item.img_card.image" alt="Image" class="rounded-left block-image">
             </div>
-          </div>
-          <div *ngIf="i % 2 === 0" class="col-md-4">
-            <img [src]="'http://localhost:8000' + item.img_card.image" alt="Image" class="rounded-right block-image">
-          </div>
+            <div class="col-md-8 p-4">
+                <div>
+                    <h2>{{ item.name }}</h2>
+                    <p>{{ item.description }}</p>
+                    <p>Subproject Lead: <a [routerLink]="'/users/' + item.lead.id">{{ item.lead.first_name }}
+                            {{item.lead.last_name}} </a></p>
+                </div>
+            </div>
+            <div *ngIf="i % 2 === 0" class="col-md-4">
+                <img [src]="'http://localhost:8000' + item.img_card.image" alt="Image"
+                    class="rounded-right block-image">
+            </div>
         </div>
-      </div>
-</div>
+        <!-- tasks -->
+        <app-detail-task [subprojectId]="item.id"></app-detail-task>
+    </div>
 
-<app-detail-task></app-detail-task>
+</div>

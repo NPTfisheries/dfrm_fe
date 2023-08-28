@@ -122,7 +122,7 @@ export class InputService {
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
-        value: data?.assistant.id ||'',
+        value: data?.assistant.id || '',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 5
@@ -227,12 +227,19 @@ export class InputService {
         value: data?.description || '',
         order: 2
       }),
-      new InputSelect({
+      // new InputSelect({
+      //   key: 'project',
+      //   label: 'Project',
+      //   value: data?.project || [],
+      //   required: true,
+      //   options: this.buildOptions('/api/v1/project/'),
+      //   order: 3
+      // }),
+      new InputHidden({
         key: 'project',
         label: 'Project',
         value: data?.project || [],
         required: true,
-        options: this.buildOptions('/api/v1/project/'),
         order: 3
       }),
       new InputSelect({
@@ -278,14 +285,21 @@ export class InputService {
         value: data?.description || '',
         order: 2
       }),
-      new InputSelect({
+      new InputHidden({
         key: 'subproject',
         label: 'Subproject',
         value: data?.subproject || [],
         required: true,
-        options: this.buildOptions('/api/v1/subproject/'),
         order: 3
       }),
+      // new InputSelect({
+      //   key: 'subproject',
+      //   label: 'Subproject',
+      //   value: data?.subproject || [],
+      //   required: true,
+      //   options: this.buildOptions('/api/v1/subproject/'),
+      //   order: 3
+      // }),
       new InputSelect({
         key: 'supervisor',
         label: 'Task Supervisor',
@@ -468,9 +482,9 @@ export class InputService {
   }
 
   getIdArray(data: any) {
-    if(!data) { return undefined; } // if no data, don't run the function.
+    if (!data) { return undefined; } // if no data, don't run the function.
 
-    let ids:number[] = [];
+    let ids: number[] = [];
     for (let x of data) {
       ids.push(x.id);
     }

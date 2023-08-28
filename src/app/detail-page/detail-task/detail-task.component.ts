@@ -1,37 +1,76 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChild, Input, SimpleChanges } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormContainerComponent } from 'src/app/forms/form-container/form-container.component';
 
 import { AuthService } from 'src/_services/auth.service';
 import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
 
-
-import { managerAccess, professionalAccess } from 'src/_utilities/permission-util';
+import { professionalAccess } from 'src/_utilities/permission-util';
 
 @Component({
   selector: 'app-detail-task',
   templateUrl: './detail-task.component.html',
   styleUrls: ['./detail-task.component.css']
 })
-export class DetailTaskComponent implements OnInit {
+export class DetailTaskComponent implements OnInit, OnChanges {
 
-  managerAccess = managerAccess;
+  @Input() subprojectId: number | undefined;
+  @ViewChild(FormContainerComponent) formContainerComponent!: FormContainerComponent;
+
   professionalAccess = professionalAccess;
 
   permissionGroup!: string;
+  list: any | undefined;
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private alertService: AlertService,
     private backendService: BackendService,
-  ) {}
+    private modalService: NgbModal,
+  ) { }
 
   ngOnInit(): void {
     this.permissionGroup = this.authService.getPermissionGroup();
-
+    this.getList();
   }
-  
-  add() { 
-    console.log('adding task');
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['subprojectId'] && !changes['subprojectId'].isFirstChange()) {
+      this.getList();
+    }
+  }
+
+  getList() {
+    this.backendService.getList(`task/?subproject_id=${this.subprojectId}`).subscribe(list => {
+      this.list = list;
+    });
+  }
+
+  add() {
+    console.log('adding subproject');
+
+    const newData = {
+      name: '',
+      description: '',
+      subproject: this.subprojectId,
+      supervisor: '',
+      img_banner: '',
+      img_card: '',
+    }
+
+    const modalRef = this.modalService.open(FormContainerComponent, { size: 'xl', });
+
+    modalRef.componentInstance.routeType = 'task';
+    modalRef.componentInstance.subprojectId = this.subprojectId; // needed for filtered list response from FCC
+    modalRef.componentInstance.data = newData;
+
+    modalRef.result.then((result) => {
+      modalRef.componentInstance.updateList.subscribe((newList: any) => {
+        this.list = newList;
+        this.alertService.success(`New task created!`, { autoClose: true });
+      });
+    }).catch((reason) => { }); // prevents error on exiting modal by clicking outside
   }
 
 }

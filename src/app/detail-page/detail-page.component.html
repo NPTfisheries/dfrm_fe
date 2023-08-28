@@ -14,7 +14,6 @@
         </div>
     </div>
     <div *ngIf="routeType === 'project'">
-        <h1>You are on a Project Page!</h1>
-        <app-detail-subproject></app-detail-subproject>    
+        <app-detail-subproject [projectId]="data?.id"></app-detail-subproject>    
     </div>
 </div>
