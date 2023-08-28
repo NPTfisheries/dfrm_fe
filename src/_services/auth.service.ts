@@ -16,7 +16,8 @@ export class AuthService {
     public token$ = new BehaviorSubject<string | null>(null); // for http interceptor
     public isLoggedIn$ = new BehaviorSubject<boolean>(false);
 
-    public permissionGroup = 'Guest';
+    private permissionGroupSubject = new BehaviorSubject<string>('Guest');
+    public permissionGroup$ = this.permissionGroupSubject.asObservable();
 
 
     constructor(
@@ -26,8 +27,6 @@ export class AuthService {
     }
 
     getToken(): string | null { return this.token$.getValue(); } // for http interceptor
-    getPermissionGroup(): string { return this.permissionGroup; }
-
 
     // Login will set user$ and token$ values to be shared
     login(email: string, password: string) {
@@ -47,7 +46,7 @@ export class AuthService {
                     this.username$.next(`${response.first_name} ${response.last_name}`);
                     this.token$.next(response.access);
                     this.isLoggedIn$.next(true);
-                    this.permissionGroup = response.groups[0];
+                    this.updatePermissionGroup(response.groups[0]);
                 })//,
                 // catchError(this.handleError)
             );
@@ -70,6 +69,10 @@ export class AuthService {
                     console.log(response);
                 })
             );
+    }
+
+    updatePermissionGroup(newGroup: string) {
+        this.permissionGroupSubject.next(newGroup);
     }
 
     // https://angular.io/guide/http-handle-request-errors

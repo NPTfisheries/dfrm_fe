@@ -1,6 +1,7 @@
-import { Component, OnInit, OnChanges, ViewChild, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChild, Input, SimpleChanges, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormContainerComponent } from 'src/app/forms/form-container/form-container.component';
+import { Subscription } from 'rxjs';
 
 import { AuthService } from 'src/_services/auth.service';
 import { AlertService } from 'src/_services/alert.service';
@@ -22,22 +23,30 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
 
   permissionGroup!: string;
   list: any | undefined;
+  private permissionGroupSubscription: Subscription;
 
   constructor(
     private authService: AuthService,
     private alertService: AlertService,
     private backendService: BackendService,
     private modalService: NgbModal,
-  ) { }
+  ) { 
+    this.permissionGroupSubscription = this.authService.permissionGroup$.subscribe(group => {
+      this.permissionGroup = group;
+    });
+  }
 
   ngOnInit(): void {
-    this.permissionGroup = this.authService.getPermissionGroup();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['projectId'] && !changes['projectId'].isFirstChange()) {
       this.getList();
     }
+  }
+  
+  ngOnDestroy(): void {
+    this.permissionGroupSubscription.unsubscribe();
   }
 
   getList() {

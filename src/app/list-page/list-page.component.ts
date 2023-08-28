@@ -7,6 +7,7 @@ import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
 import { RegisterComponent } from '../forms/register/register.component';
 import { ImageUploadComponent } from '../forms/image-upload/image-upload.component';
+import { Subscription } from 'rxjs';
 
 import { FormContainerComponent } from '../forms/form-container/form-container.component';
 
@@ -28,8 +29,8 @@ export class ListPageComponent implements OnInit {
   routeType: string | undefined;
   list: any | undefined;
   columns: string[] = [];
-  // url: string = '';
   permissionGroup!: string;
+  private permissionGroupSubscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,7 +38,11 @@ export class ListPageComponent implements OnInit {
     private backendService: BackendService,
     private alertService: AlertService,
     private modalService: NgbModal,
-  ) { }
+  ) {
+    this.permissionGroupSubscription = this.authService.permissionGroup$.subscribe(group => {
+      this.permissionGroup = group;
+    });
+  }
 
   showlist() {
     console.log(this.list);
@@ -47,7 +52,6 @@ export class ListPageComponent implements OnInit {
     this.routeType = getRouteType(this.route);
     this.getList(this.routeType);
     this.populateFieldsArray(this.routeType);
-    this.permissionGroup = this.authService.getPermissionGroup();
   }
 
   getList(routeType: string) {
@@ -72,7 +76,7 @@ export class ListPageComponent implements OnInit {
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
 
-  edit(routeType: string, slug: string ) {
+  edit(routeType: string, slug: string) {
     console.log('edit:', routeType, slug);
 
     const data = this.getRecordBySlug(routeType, slug);
@@ -141,7 +145,7 @@ export class ListPageComponent implements OnInit {
     }
   }
 
-  getRecordBySlug(routeType:string, slug: string) {
+  getRecordBySlug(routeType: string, slug: string) {
     if (!this.list) { return; }
 
     // if (routeType === 'users') {
@@ -152,11 +156,11 @@ export class ListPageComponent implements OnInit {
     //     }
     //   }
     // } else {
-      for (let item of this.list) {
-        if (item.slug === slug) {
-          return item;
-        }
+    for (let item of this.list) {
+      if (item.slug === slug) {
+        return item;
       }
+    }
     // }
   }
 
