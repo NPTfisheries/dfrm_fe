@@ -6,8 +6,11 @@
     <h1 class="detail-title">{{ data?.name }}</h1>
     <p>{{ data?.description }}</p>
     <div class="card-container">
-        <app-employee-card [data]="data?.manager"></app-employee-card>
-        <app-employee-card [data]="data?.deputy"></app-employee-card>
-        <app-employee-card [data]="data?.assistant"></app-employee-card>
+        <app-employee-card *ngIf="data.manager" [data]="data?.manager"></app-employee-card>
+        <app-employee-card *ngIf="data.deputy" [data]="data?.deputy"></app-employee-card>
+        <app-employee-card *ngIf="data.assistant" [data]="data?.assistant"></app-employee-card>
+        <div *ngFor="let pl of data.project_leader">
+            <app-employee-card *ngIf="pl" [data]="pl"></app-employee-card>
+        </div>
     </div>
 </div>

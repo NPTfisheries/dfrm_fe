@@ -49,7 +49,7 @@
 .card-image-container {
     height: 300px;
     width: 100%;
-    overflow: hidden;
+    overflow: hidden !important;
 }
 
 .card-image {
