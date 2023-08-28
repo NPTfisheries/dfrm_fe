@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackendService } from 'src/_services/backend.service';
 
+import { formatPhone } from 'src/_utilities/formatPhone';
+
 @Component({
   selector: 'app-employee-card',
   templateUrl: './employee-card.component.html',
@@ -9,6 +11,7 @@ import { BackendService } from 'src/_services/backend.service';
 })
 export class EmployeeCardComponent {
 
+  formatPhone = formatPhone;
   @Input() data: any | undefined;
   imageUrl!: any | null;
 

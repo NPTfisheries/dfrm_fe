@@ -57,7 +57,7 @@ export class AuthService {
         this.username$.next(null);
         this.token$.next(null);
         this.isLoggedIn$.next(false);
-        
+        this.updatePermissionGroup('Guest');
         this.router.navigate(['home']);
     }
 
