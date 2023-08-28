@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BackendService } from 'src/_services/backend.service';
 import { getRouteType, getRouteSlug } from 'src/_utilities/route-utils';
 
+import { managerAccess, professionalAccess } from 'src/_utilities/permission-util';
 
 @Component({
   selector: 'app-detail-page',
@@ -14,6 +15,7 @@ export class DetailPageComponent implements OnInit {
 
   data: any | null = null;
   imageUrl!: string | null;
+  routeType: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,9 +27,9 @@ export class DetailPageComponent implements OnInit {
   }
 
   getDetail() {
-    const routeType = getRouteType(this.route);
+    this.routeType = getRouteType(this.route);
     const slug = getRouteSlug(this.route);
-    this.backendService.getDetail(routeType, slug).subscribe(detail => {
+    this.backendService.getDetail(this.routeType, slug).subscribe(detail => {
       this.data = detail;
       this.getImage(detail.img_banner.image);
     });

@@ -28,6 +28,8 @@ import { DynamicFormComponent } from './forms/dynamic-form/dynamic-form.componen
 import { DynamicFormInputComponent } from './forms/dynamic-form-input/dynamic-form-input.component';
 import { FormContainerComponent } from './forms/form-container/form-container.component';
 import { EmployeeCardComponent } from './employee-card/employee-card.component';
+import { DetailTaskComponent } from './detail-page/detail-task/detail-task.component';
+import { DetailSubprojectComponent } from './detail-page/detail-subproject/detail-subproject.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { EmployeeCardComponent } from './employee-card/employee-card.component';
     DynamicFormInputComponent,
     FormContainerComponent,
     EmployeeCardComponent,
+    DetailTaskComponent,
+    DetailSubprojectComponent,
   ],
   imports: [
     BrowserModule,

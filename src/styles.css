@@ -86,3 +86,64 @@ h1 {
 .form-label {
     font-size: larger;
 }
+
+/* CARDS */
+.dfrm-card {
+    min-height: 500px;
+    max-height: 500px;
+    border-radius: 15px;
+    border-color: #5492b4;
+    border-width: 2px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.dfrm-card:hover {
+    cursor: pointer;
+}
+
+.card-img-top {
+    /* needs to jive with dfrm-card border-radius */
+    border-radius: 15px 15px 0 0;
+}
+
+.card-body {
+    flex:1;
+}
+
+.card-hr {  
+    border-color: #f9f906;
+}
+
+.bg-dark {
+    background-color: #0d1b1f;
+}
+
+.card-title {
+    font-size: x-large;
+    color: #f9f906;
+}
+
+.card-text {
+    font-size: larger;
+    color: #cfd7db;
+
+}
+
+.card-footer {
+    margin-top: auto;
+}
+
+.card-image-container {
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.card-image {
+    height:auto;
+    min-width: 100%;
+    display:block;
+    margin: 0 auto;
+}
