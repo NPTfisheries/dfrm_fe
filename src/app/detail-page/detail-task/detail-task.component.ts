@@ -73,4 +73,33 @@ export class DetailTaskComponent implements OnInit, OnChanges {
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside
   }
 
+  edit(slug: string) {
+    console.log('edit: task', slug);
+
+    const data = this.getRecordBySlug(slug);
+
+    const modalRef = this.modalService.open(FormContainerComponent, { size: 'xl', });
+
+    modalRef.componentInstance.routeType = 'task';
+    modalRef.componentInstance.slug = slug;
+    modalRef.componentInstance.subprojectId = this.subprojectId; // needed for filtered list response from FCC
+    modalRef.componentInstance.data = data;
+
+    modalRef.result.then((result) => {
+      modalRef.componentInstance.updateList.subscribe((newList: any) => {
+        this.list = newList;
+        this.alertService.success(`Edit task successful!`, { autoClose: true });
+      });
+    }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
+  }
+
+  getRecordBySlug(slug: string) {
+    if (!this.list) { return; }
+    for (let item of this.list) {
+      if (item.slug === slug) {
+        return item;
+      }
+    }
+  }
+
 }

@@ -21,6 +21,7 @@
                     <img [src]="'http://localhost:8000' + item.img_card.image" alt="Image"
                         class="rounded-right block-image">
                 </div>
+                <button *ngIf="professionalAccess(permissionGroup)" (click)="edit(item.slug)" class="dfrm-button">Edit Task</button>
             </div>
         </div>
     </div>

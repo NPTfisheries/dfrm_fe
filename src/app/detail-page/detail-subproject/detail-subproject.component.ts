@@ -24,18 +24,18 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
   list: any | undefined;
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private alertService: AlertService,
     private backendService: BackendService,
     private modalService: NgbModal,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.permissionGroup = this.authService.getPermissionGroup();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes['projectId'] && !changes['projectId'].isFirstChange()) {
+    if (changes['projectId'] && !changes['projectId'].isFirstChange()) {
       this.getList();
     }
   }
@@ -44,32 +44,60 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
     this.backendService.getList(`subproject/?project_id=${this.projectId}`).subscribe(list => {
       this.list = list;
     });
-  }  
-
-  add() { 
-    console.log('adding subproject'); 
-
-      const newData = {
-        name: '',
-        description: '',
-        project: this.projectId,
-        lead: '',
-        img_banner: '',
-        img_card: '',
-      }
-  
-      const modalRef = this.modalService.open(FormContainerComponent, { size: 'xl', });
-  
-      modalRef.componentInstance.routeType = 'subproject';
-      modalRef.componentInstance.projectId = this.projectId; // needed for filtered list response from FCC
-      modalRef.componentInstance.data = newData;
-
-      modalRef.result.then((result) => {
-        modalRef.componentInstance.updateList.subscribe((newList: any) => {
-          this.list = newList;
-          this.alertService.success(`New subproject created!`, { autoClose: true });
-        });
-      }).catch((reason) => { }); // prevents error on exiting modal by clicking outside
   }
 
+  add() {
+    console.log('adding subproject');
+
+    const newData = {
+      name: '',
+      description: '',
+      project: this.projectId,
+      lead: '',
+      img_banner: '',
+      img_card: '',
+    }
+
+    const modalRef = this.modalService.open(FormContainerComponent, { size: 'xl', });
+
+    modalRef.componentInstance.routeType = 'subproject';
+    modalRef.componentInstance.projectId = this.projectId; // needed for filtered list response from FCC
+    modalRef.componentInstance.data = newData;
+
+    modalRef.result.then((result) => {
+      modalRef.componentInstance.updateList.subscribe((newList: any) => {
+        this.list = newList;
+        this.alertService.success(`New subproject created!`, { autoClose: true });
+      });
+    }).catch((reason) => { }); // prevents error on exiting modal by clicking outside
+  }
+
+  edit(slug: string) {
+    console.log('edit: subproject', slug);
+
+    const data = this.getRecordBySlug(slug);
+
+    const modalRef = this.modalService.open(FormContainerComponent, { size: 'xl', });
+
+    modalRef.componentInstance.routeType = 'subproject';
+    modalRef.componentInstance.slug = slug;
+    modalRef.componentInstance.projectId = this.projectId; // needed for filtered list response from FCC
+    modalRef.componentInstance.data = data;
+
+    modalRef.result.then((result) => {
+      modalRef.componentInstance.updateList.subscribe((newList: any) => {
+        this.list = newList;
+        this.alertService.success(`Edit subproject successful!`, { autoClose: true });
+      });
+    }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
+  }
+
+  getRecordBySlug(slug: string) {
+    if (!this.list) { return; }
+    for (let item of this.list) {
+      if (item.slug === slug) {
+        return item;
+      }
+    }
+  }
 }

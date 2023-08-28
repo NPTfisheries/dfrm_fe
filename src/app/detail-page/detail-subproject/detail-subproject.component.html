@@ -15,6 +15,7 @@
                             {{item.lead.last_name}} </a></p>
                 </div>
             </div>
+            <button *ngIf="professionalAccess(permissionGroup)" (click)="edit(item.slug)" class="dfrm-button">Edit</button>
             <div *ngIf="i % 2 === 0" class="col-md-4">
                 <img [src]="'http://localhost:8000' + item.img_card.image" alt="Image"
                     class="rounded-right block-image">
@@ -23,5 +24,4 @@
         <!-- tasks -->
         <app-detail-task [subprojectId]="item.id"></app-detail-task>
     </div>
-
 </div>

@@ -237,10 +237,9 @@ export class InputService {
       // }),
       new InputHidden({
         key: 'project',
-        label: 'Project',
         value: data?.project || [],
         required: true,
-        order: 3
+        order: 99
       }),
       new InputSelect({
         key: 'lead',
@@ -287,10 +286,9 @@ export class InputService {
       }),
       new InputHidden({
         key: 'subproject',
-        label: 'Subproject',
         value: data?.subproject || [],
         required: true,
-        order: 3
+        order: 99
       }),
       // new InputSelect({
       //   key: 'subproject',
