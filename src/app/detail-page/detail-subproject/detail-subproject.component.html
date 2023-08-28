@@ -1,12 +1,14 @@
 <button *ngIf="professionalAccess(permissionGroup)" (click)="add()" class="dfrm-button">Add Subproject</button>
-<h1>Project Id {{projectId}}</h1>
 <div *ngFor="let item of list; let i = index">
     <!-- subproject info -->
     <div class="container rounded-border my-5">
+        <div class="col-md-4 banner-container-sub">
+            <img [src]="'http://localhost:8000' + item.img_banner.image" alt="Image" class="banner-image-sub rounded-top">
+        </div>
         <div class="row">
-            <div *ngIf="i % 2 === 1" class="col-md-4">
+            <!-- <div *ngIf="i % 2 === 1" class="col-md-4">
                 <img [src]="'http://localhost:8000' + item.img_card.image" alt="Image" class="rounded-left block-image">
-            </div>
+            </div> -->
             <div class="col-md-8 p-4">
                 <div>
                     <h2>{{ item.name }}</h2>
@@ -16,10 +18,10 @@
                 </div>
             </div>
             <button *ngIf="professionalAccess(permissionGroup)" (click)="edit(item.slug)" class="dfrm-button">Edit</button>
-            <div *ngIf="i % 2 === 0" class="col-md-4">
+            <!-- <div *ngIf="i % 2 === 0" class="col-md-4">
                 <img [src]="'http://localhost:8000' + item.img_card.image" alt="Image"
                     class="rounded-right block-image">
-            </div>
+            </div> -->
         </div>
         <!-- tasks -->
         <app-detail-task [subprojectId]="item.id"></app-detail-task>
