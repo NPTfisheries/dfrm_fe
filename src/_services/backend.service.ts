@@ -52,6 +52,9 @@ export class BackendService {
         return this.get(`/api/v1/image/${slug}/`);
     }
 
+    updateProfile(profile: any) {
+        return this.put('/api/v1/profile/', profile);
+    }
     
     // HELPERS -- change to private eventually?
     get(url: string): Observable<any> {

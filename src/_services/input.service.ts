@@ -11,6 +11,7 @@ import { InputMultiSelect } from 'src/_inputs/input-multi-select';
 import { InputHidden } from 'src/_inputs/input-hidden';
 import { InputImage } from 'src/_inputs/input-image';
 import { InputPhone } from 'src/_inputs/input-phone';
+import { InputFile } from 'src/_inputs/input-file';
 
 @Injectable({ providedIn: 'root' })
 export class InputService {
@@ -237,7 +238,7 @@ export class InputService {
       new InputSelect({
         key: 'lead',
         label: 'Subproject Lead',
-        value: data?.lead || [],
+        value: data?.lead.id || [],
         required: true,
         options: this.buildEmployeeOptions(),
         order: 4
@@ -288,7 +289,7 @@ export class InputService {
       new InputSelect({
         key: 'supervisor',
         label: 'Task Supervisor',
-        value: data?.lead || [],
+        value: data?.supervisor.id || [],
         required: true,
         options: this.buildEmployeeOptions(),
         order: 4
@@ -353,37 +354,44 @@ export class InputService {
         key: 'city',
         label: 'City',
         value: data?.profile?.city || '',
-        required: true,
+        // required: true,
         order: 6
       }),
       new InputText({
         key: 'state',
         label: 'State',
         value: data?.profile?.state || '',
-        required: true,
+        // required: true,
         order: 7
       }),
       new InputPhone({
         key: 'work_phone',
         label: 'Work Phone',
         value: data?.profile?.work_phone || '',
-        required: true,
+        // required: true,
         order: 8
       }),
       new InputPhone({
         key: 'mobile_phone',
         label: 'Mobile Phone',
         value: data?.profile?.mobile_phone || '',
-        required: true,
-        order: 8
-      }),
-      new InputImage({
-        key: 'photo',
-        label: 'Choose Profile Image',
-        value: data?.profile?.photo || '',
-        options: this.buildOptions('/api/v1/image/'),
+        // required: true,
         order: 9
+      }),
+      new InputFile({
+        key: 'photo',
+        label: 'Choose Profile Photo',
+        value: data?.profile?.photo || '',
+        required: false,
+        order: 10
       })
+      // new InputImage({
+      //   key: 'photo',
+      //   label: 'Choose Profile Image',
+      //   value: data?.profile?.photo || '',
+      //   options: this.buildOptions('/api/v1/image/'),
+      //   order: 9
+      // })
     ]
 
     return of(inputs.sort((a, b) => a.order - b.order));

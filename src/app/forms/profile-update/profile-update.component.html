@@ -6,86 +6,54 @@
 
     <div class="modal-body">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
             <div class="mb-3">
-                <label class="form-label">First Name</label>
-                <input type="text" formControlName="first_name" class="form-control form-control-lg"
-                    [ngClass]="{ 'is-invalid': submitted && f['first_name'].errors }" />
-                <div *ngIf="submitted && f['first_name'].errors" class="invalid-feedback">
-                    <div *ngIf="f['first_name'].errors['required']">First name is required</div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Last Name</label>
-                <input type="text" formControlName="last_name" class="form-control form-control-lg"
-                    [ngClass]="{ 'is-invalid': submitted && f['last_name'].errors }" />
-                <div *ngIf="submitted && f['last_name'].errors" class="invalid-feedback">
-                    <div *ngIf="f['last_name'].errors['required']">Last name is required</div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="text" formControlName="email" class="form-control form-control-lg"
-                        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
-                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                        <div *ngIf="f['email'].errors['required']">Email is required</div>
-                    </div>
-                </div>
-            </div>
-            <div formGroupName="profile">
-                <div class="mb-3">
-                    <label class="form-label">Title</label>
-                    <input type="text" formControlName="title" class="form-control form-control-lg"
-                        [ngClass]="{ 'is-invalid': submitted && fp['title'].errors }" />
-                    <!-- <div *ngIf="submitted && fp['title'].errors" class="invalid-feedback">
-                        <div *ngIf="fp['title'].errors['required']">Title is required</div>
+                <label for='title' class="form-label">Title</label>
+                <input type="text" formControlName="title" class="form-control form-control-lg"
+                    [ngClass]="{ 'is-invalid': submitted && f['title'].errors }" />
+                <!-- <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+                        <div *ngIf="f['title'].errors['required']">Title is required</div>
                     </div> -->
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Bio</label>
+                <textarea rows="3" formControlName="bio" class="form-control form-control-lg"
+                    [ngClass]="{ 'is-invalid': submitted && f['bio'].errors }"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" formControlName="city" class="form-control form-control-lg"
+                    [ngClass]="{ 'is-invalid': submitted && f['city'].errors }" />
+            </div>
+            <div class="mb-3">
+                <label for="state" class="form-label">State</label>
+                <input type="text" formControlName="state" class="form-control form-control-lg"
+                    [ngClass]="{ 'is-invalid': submitted && f['state'].errors }" />
+            </div>
+            <div class="mb-3">
+                <label for="mobile_phone" class="form-label">Mobile Phone</label>
+                <input type="text" formControlName="mobile_phone" class="form-control form-control-lg"
+                    [ngClass]="{ 'is-invalid': submitted && f['mobile_phone'].errors }" />
+                <div *ngIf="submitted && f['mobile_phone'].errors" class="invalid-feedback">
+                    <div *ngIf="f['mobile_phone'].errors['phoneFormat']">Invalid phone number format. Use "+1 XXX
+                        XXX XXXX".</div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Bio</label>
-                    <!-- <input type="text" formControlName="bio" class="form-control form-control-lg"
-                        [ngClass]="{ 'is-invalid': submitted && fp['bio'].errors }" /> -->
-                    <textarea rows="3" [formControlName]="'bio'" 
-                        class="form-control form-control-lg" [ngClass]="{ 'is-invalid': submitted && fp['bio'].errors }" ></textarea>
-
+                <small class="form-text text-muted">Expected format: +1 XXX XXX XXXX</small>
+            </div>
+            <div class="mb-3">
+                <label for="work_phone" class="form-label">Work Phone</label>
+                <input type="text" formControlName="work_phone" class="form-control form-control-lg"
+                    [ngClass]="{ 'is-invalid': submitted && f['work_phone'].errors }" />
+                <div *ngIf="submitted && f['work_phone'].errors" class="invalid-feedback">
+                    <div *ngIf="f['work_phone'].errors['phoneFormat']">Invalid phone number format. Use "+1 XXX XXX
+                        XXXX".</div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">City</label>
-                    <input type="text" formControlName="city" class="form-control form-control-lg"
-                        [ngClass]="{ 'is-invalid': submitted && fp['city'].errors }" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">State</label>
-                    <input type="text" formControlName="state" class="form-control form-control-lg"
-                        [ngClass]="{ 'is-invalid': submitted && fp['state'].errors }" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Mobile Phone</label>
-                    <input type="text" formControlName="mobile_phone" class="form-control form-control-lg"
-                        [ngClass]="{ 'is-invalid': submitted && fp['mobile_phone'].errors }" />
-                    <div *ngIf="submitted && fp['mobile_phone'].errors" class="invalid-feedback">
-                        <div *ngIf="fp['mobile_phone'].errors['phoneFormat']">Invalid phone number format. Use "+1 XXX
-                            XXX XXXX".</div>
-                    </div>
-                    <small class="form-text text-muted">Expected format: +1 XXX XXX XXXX</small>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Work Phone</label>
-                    <input type="text" formControlName="work_phone" class="form-control form-control-lg"
-                        [ngClass]="{ 'is-invalid': submitted && fp['work_phone'].errors }" />
-                    <div *ngIf="submitted && fp['work_phone'].errors" class="invalid-feedback">
-                        <div *ngIf="fp['work_phone'].errors['phoneFormat']">Invalid phone number format. Use "+1 XXX XXX
-                            XXXX".</div>
-                    </div>
-                </div>
-                <!-- <div class="mb-3">
-                    <label class="form-label">Photo</label>
-                    <input type="file" formControlName="photo" class="form-control form-control-lg"
-                        [ngClass]="{ 'is-invalid': submitted && fp['photo'].errors }" />
-                </div> -->
+            </div>
+            <div class="mb-3">
+                <input type="file" (change)="onFileChange($event)" class="form-control form-control-lg" />
             </div>
 
             <div>
-                <button [disabled]="loading" class="dfrm-button grow">
+                <button type="submit" [disabled]="loading" class="dfrm-button grow">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
                     Update Profile
                 </button>

@@ -72,7 +72,7 @@ export class ListPageComponent implements OnInit {
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
 
-  edit(routeType: string, slug: string | number) {
+  edit(routeType: string, slug: string ) {
     console.log('edit:', routeType, slug);
 
     const data = this.getRecordBySlug(routeType, slug);
@@ -123,12 +123,12 @@ export class ListPageComponent implements OnInit {
       case 'project':
         this.columns = ['name', 'description', 'project leaders'];
         break;
-      case 'subproject':
-        this.columns = ['name', 'description', 'project', 'lead'];
-        break;
-      case 'task':
-        this.columns = ['name', 'description', 'subproject', 'supervisor'];
-        break;
+      // case 'subproject':
+      //   this.columns = ['name', 'description', 'project', 'lead'];
+      //   break;
+      // case 'task':
+      //   this.columns = ['name', 'description', 'subproject', 'supervisor'];
+      //   break;
       case 'users':
         this.columns = ['name', 'email', 'work phone', 'mobile phone', 'title'];
         break;
@@ -141,23 +141,23 @@ export class ListPageComponent implements OnInit {
     }
   }
 
-  getRecordBySlug(routeType:string, slug: string | number) {
+  getRecordBySlug(routeType:string, slug: string) {
     if (!this.list) { return; }
 
-    if (routeType === 'users') {
-      // users is queried via ID, where everything else is slug. (routing and api calls). This works
-      for (let item of this.list) {
-        if (item.id === slug) {
-          return item;
-        }
-      }
-    } else {
+    // if (routeType === 'users') {
+    //   // users is queried via ID, where everything else is slug. (routing and api calls). This works
+    //   for (let item of this.list) {
+    //     if (item.id === slug) {
+    //       return item;
+    //     }
+    //   }
+    // } else {
       for (let item of this.list) {
         if (item.slug === slug) {
           return item;
         }
       }
-    }
+    // }
   }
 
   getRecordById(id: number) {

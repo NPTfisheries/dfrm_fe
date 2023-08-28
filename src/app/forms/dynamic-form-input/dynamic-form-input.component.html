@@ -3,8 +3,11 @@
 
     <div [ngSwitch]="input.controlType">
 
+        <!-- FILE -->
+        <input  *ngSwitchCase="'file'" type="file" [formControlName]="input.key" [value]="input.key" [id]="input.key" class="form-control form-control-lg">
+
         <!-- HIDDEN -->
-        <input type="hidden" [formControlName]="input.key" [value]="input.key" [id]="input.key" />
+        <input *ngSwitchCase="'hidden'" type="hidden" [formControlName]="input.key" [value]="input.key" [id]="input.key" />
 
         <!-- IMAGE -->
         <select [id]="input.key" *ngSwitchCase="'image'" [formControlName]="input.key"

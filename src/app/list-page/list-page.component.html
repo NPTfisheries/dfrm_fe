@@ -7,10 +7,10 @@
         class="dfrm-button">Add New {{ routeType | titlecase}}</button>
     <button *ngIf="routeType == 'project' && professionalAccess(permissionGroup)" (click)="add(routeType)"
         class="dfrm-button">Add New {{ routeType | titlecase}}</button>
-    <button *ngIf="routeType == 'subproject' && professionalAccess(permissionGroup)" (click)="add(routeType)"
+    <!-- <button *ngIf="routeType == 'subproject' && professionalAccess(permissionGroup)" (click)="add(routeType)"
         class="dfrm-button">Add New {{ routeType | titlecase}}</button>
     <button *ngIf="routeType == 'task' && professionalAccess(permissionGroup)" (click)="add(routeType)"
-        class="dfrm-button">Add New {{ routeType | titlecase}}</button>
+        class="dfrm-button">Add New {{ routeType | titlecase}}</button> -->
     <button *ngIf="routeType == 'users' && managerAccess(permissionGroup)" (click)="registerUser()"
         class="dfrm-button">Register User</button>
     <button *ngIf="routeType == 'image' && managerAccess(permissionGroup)" (click)="uploadImage()"
@@ -26,9 +26,9 @@
                     <th *ngIf="routeType == 'department' && managerAccess(permissionGroup)" style="text-align: center;">Edit</th>
                     <th *ngIf="routeType == 'division' && managerAccess(permissionGroup)" style="text-align: center;">Edit</th>
                     <th *ngIf="routeType == 'project' && professionalAccess(permissionGroup)" style="text-align: center;">Edit</th>
-                    <th *ngIf="routeType == 'subproject' && professionalAccess(permissionGroup)" style="text-align: center;">Edit</th>
+                    <!-- <th *ngIf="routeType == 'subproject' && professionalAccess(permissionGroup)" style="text-align: center;">Edit</th>
                     <th *ngIf="routeType == 'task' && professionalAccess(permissionGroup)" style="text-align: center;">Edit</th>
-                    <th *ngIf="routeType == 'users' && managerAccess(permissionGroup)" style="text-align: center;">Edit</th>
+                    <th *ngIf="routeType == 'users' && managerAccess(permissionGroup)" style="text-align: center;">Edit</th> -->
                     <th *ngIf="routeType == 'image' && managerAccess(permissionGroup)" style="text-align: center;">Edit</th>
 
                 </tr>
@@ -107,12 +107,12 @@
                 </tr>
             </tbody>
 
-            <tbody class="table-group-divider" *ngIf="routeType === 'subproject'">
+            <!-- <tbody class="table-group-divider" *ngIf="routeType === 'subproject'">
                 <tr *ngFor="let x of list">
                     <td>{{ x.name }}</td>
                     <td>{{ x.description }}</td>
                     <td>{{ x.project }}</td>
-                    <td>{{ x.lead }}</td>
+                    <td>{{ x.lead.first_name }} {{ x.lead.last_name }}</td>
                     <td><button class="dfrm-button btn-center" [routerLink]="x.slug"><i
                                 class="fa-regular fa-eye"></i></button>
                     </td>
@@ -129,7 +129,7 @@
                     <td>{{ x.name }}</td>
                     <td>{{ x.description }}</td>
                     <td>{{ x.subproject }}</td>
-                    <td>{{ x.supervisor }}</td>
+                    <td>{{ x.supervisor.first_name }} {{ x.supervisor.last_name }}</td>
                     <td><button class="dfrm-button btn-center" [routerLink]="x.slug"><i
                                 class="fa-regular fa-eye"></i></button>
                     </td>
@@ -139,7 +139,7 @@
                         </button>
                     </td>
                 </tr>
-            </tbody>
+            </tbody> -->
 
             <tbody *ngIf="routeType === 'users'">
                 <tr *ngFor="let x of list">
@@ -151,11 +151,6 @@
                     <td>
                         <button class="dfrm-button btn-center" [routerLink]="x.id">
                             <i class="fa-regular fa-eye"></i>
-                        </button>
-                    </td>
-                    <td *ngIf="managerAccess(permissionGroup)">
-                        <button class="dfrm-button-invert btn-center" (click)="edit('users', x.id)">
-                            <i class="fa-regular fa-pen-to-square"></i>
                         </button>
                     </td>
                 </tr>

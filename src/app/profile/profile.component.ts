@@ -17,7 +17,7 @@ import { getRouteType, getRouteSlug } from 'src/_utilities/route-utils';
 export class ProfileComponent implements OnInit {
 
   user: User | undefined;
-  imageUrl!: string | null;
+  imageUrl!: string | undefined;
   routeType!: string;
 
   constructor(
@@ -38,10 +38,12 @@ export class ProfileComponent implements OnInit {
       const slug = getRouteSlug(this.route);  // actually 'id'
       this.bs.getDetail(this.routeType, slug).subscribe(user => {
         this.user = user;
+        this.getImage(user?.profile?.photo);
       });
     } else {
       this.bs.getCurrentUser().subscribe(currentUser => {
         this.user = currentUser;
+        this.getImage(currentUser?.profile?.photo);
       });
     }
   }
@@ -52,11 +54,12 @@ export class ProfileComponent implements OnInit {
 
     modalRef.componentInstance.userUpdated.subscribe((updatedUser: any) => {
       this.user = updatedUser;
+      this.getImage(updatedUser.profile.photo);
     });
   }
 
-  getImage(path: string) {
-    this.imageUrl = path.replace('http://localhost:4200', 'http://localhost:8000');
+  getImage(path: string | undefined) {
+    this.imageUrl = path?.replace('http://localhost:4200', 'http://localhost:8000');
   }
 
 }
