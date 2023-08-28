@@ -4,8 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { BackendService } from 'src/_services/backend.service';
 import { getRouteType, getRouteSlug } from 'src/_utilities/route-utils';
 
-import { managerAccess, professionalAccess } from 'src/_utilities/permission-util';
-
 @Component({
   selector: 'app-detail-page',
   templateUrl: './detail-page.component.html',

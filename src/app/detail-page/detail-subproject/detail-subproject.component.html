@@ -1,2 +1,11 @@
 <p>detail-subproject works!</p>
-<button *ngIf="professionalAccess(permissionGroup)" (click)="add()">Add Subproject</button>
+<button *ngIf="professionalAccess(permissionGroup)" (click)="add()" class="dfrm-button">Add Subproject</button>
+
+<div *ngFor="let item of list">
+    <hr />
+    <h1>{{ item.name }}</h1>
+    <p>{{ item.description }}</p>
+    <p>Subproject Lead: <a [routerLink]="'/users/' + item.lead.id">{{ item.lead.first_name }} {{item.lead.last_name}} </a></p>
+</div>
+
+<app-detail-task></app-detail-task>
