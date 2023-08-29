@@ -1,20 +1,22 @@
 <button *ngIf="professionalAccess(permissionGroup)" (click)="add()" class="dfrm-button">Add Subproject</button>
 <div *ngFor="let item of list; let i = index">
     <!-- subproject info -->
-    <div class="container rounded-border my-5 ">
+    <div class="container rounded-border bg-dark">
         <div class="col-md-4 banner-container-sub">
             <img [src]="'http://localhost:8000' + item.img_banner.image" alt="Image"
                 class="banner-image-sub rounded-top">
         </div>
         <div class="container">
-            <div class="col-md-12 p-5">
+            <div class="col-md-12 px-2">
                 <div class="d-flex flex-column align-items-center">
-                    <h2 class="subproject-title">{{ item.name }}</h2>
+                    <h2 class="text-yellow">{{ item.name }}</h2>
                 </div>
-                <p class="subproject-text">{{ item.description }}</p>
+                <br>
+                <p class="text-lightgray">{{ item.description }}</p>
                 <br>
                 <div class="d-flex justify-content-between">
-                    <p class="subproject-text">Subproject Lead: <a [routerLink]="'/users/' + item.lead.id">{{
+                    <p class="text-lightgray">Subproject Lead: <a class="text-yellow"
+                            [routerLink]="'/users/' + item.lead.id">{{
                             item.lead.first_name }}
                             {{item.lead.last_name}} </a></p>
                     <button *ngIf="professionalAccess(permissionGroup)" (click)="edit(item.slug)"
@@ -23,6 +25,9 @@
             </div>
         </div>
         <!-- tasks -->
-        <app-detail-task [subprojectId]="item.id"></app-detail-task>
+        <div class="container px-5">
+            <app-detail-task [subprojectId]="item.id"></app-detail-task>
+        </div>
     </div>
+    <h2 class="divider gradient-hr" style="margin-top: 150px; margin-bottom: 150px;" *ngIf="i !== list.length-1"></h2>
 </div>

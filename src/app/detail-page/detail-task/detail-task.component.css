@@ -4,6 +4,13 @@
     background-color: #0d1b1f;
 }
 
+.task-container-light {
+    border: 3px solid #f9f906;
+    border-radius: 10px;
+    background-color: #cfd7db;
+}
+
+
 .rounded-left {
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
