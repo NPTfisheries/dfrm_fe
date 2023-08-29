@@ -3,26 +3,20 @@
     <!-- subproject info -->
     <div class="container rounded-border my-5">
         <div class="col-md-4 banner-container-sub">
-            <img [src]="'http://localhost:8000' + item.img_banner.image" alt="Image" class="banner-image-sub rounded-top">
+            <img [src]="'http://localhost:8000' + item.img_banner.image" alt="Image"
+                class="banner-image-sub rounded-top">
         </div>
         <div class="row">
-            <!-- <div *ngIf="i % 2 === 1" class="col-md-4">
-                <img [src]="'http://localhost:8000' + item.img_card.image" alt="Image" class="rounded-left block-image">
-            </div> -->
-            <div class="col-md-8 p-4">
-                <div>
-                    <h2>{{ item.name }}</h2>
-                    <p>{{ item.description }}</p>
-                    <p>Subproject Lead: <a [routerLink]="'/users/' + item.lead.id">{{ item.lead.first_name }}
+            <div class="col-md-12 p-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="subproject-title">{{ item.name }}</h2>
+                        <button *ngIf="professionalAccess(permissionGroup)" (click)="edit(item.slug)" class="dfrm-button">Edit</button>
+                    </div>
+                    <p class="subproject-text">{{ item.description }}</p>
+                    <p class="subproject-text">Subproject Lead: <a [routerLink]="'/users/' + item.lead.id">{{ item.lead.first_name }}
                             {{item.lead.last_name}} </a></p>
                 </div>
             </div>
-            <button *ngIf="professionalAccess(permissionGroup)" (click)="edit(item.slug)" class="dfrm-button">Edit</button>
-            <!-- <div *ngIf="i % 2 === 0" class="col-md-4">
-                <img [src]="'http://localhost:8000' + item.img_card.image" alt="Image"
-                    class="rounded-right block-image">
-            </div> -->
-        </div>
         <!-- tasks -->
         <app-detail-task [subprojectId]="item.id"></app-detail-task>
     </div>

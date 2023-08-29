@@ -13,7 +13,7 @@
                     <div>
                         <h2 class="task-title">{{ item.name }}</h2>
                         <p class="task-text">{{ item.description }}</p>
-                        <p class="task-text task-footer">Subproject Lead: <a class="grow" [routerLink]="'/users/' + item.supervisor.id">{{ item.supervisor.first_name }}
+                        <p class="task-text task-footer">Supervisor: <a class="grow" [routerLink]="'/users/' + item.supervisor.id">{{ item.supervisor.first_name }}
                                 {{item.supervisor.last_name}} </a></p>
                     </div>
                 </div>
