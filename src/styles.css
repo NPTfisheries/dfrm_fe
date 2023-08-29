@@ -5,31 +5,6 @@
 }
 
 /* text */
-h1 {
-    /* font-size: xx-large; */
-    font-size: 3.5em;
-}
-
-h2 {
-    /* font-size: x-large; */
-    font-size: 3em;
-    
-}
-
-h3 {
-    /* font-size: xx-large; */
-    font-size: 2.5em
-}
-
-h4 {
-    font-size: 2em;
-}
-
-p {
-    /* font-size: xx-large; */
-    font-size: 1.5em;
-}
-
 .text-yellow {
     color: #f9f906;
 }
@@ -37,7 +12,6 @@ p {
 .text-lightgray {
     color: #cfd7db;
 }
-
 
 .dfrm-page-title {
     font-size: 58px;
@@ -157,15 +131,6 @@ p {
 
 .bg-dark {
     background-color: #0d1b1f;
-}
-
-.card-title {
-    color: #f9f906;
-}
-
-.card-text {
-    color: #cfd7db;
-
 }
 
 .card-footer {

@@ -1,4 +1,4 @@
-<div class="card text-white bg-dark mb-3 dfrm-card grow" (click)="navigateToUserProfile()" style="width: 25rem;">
+<!-- <div class="card text-white bg-dark mb-3 dfrm-card grow" (click)="navigateToUserProfile()" style="width: 25rem;">
     <div class="card-image-container">
         <img [src]="imageUrl" class="card-img-top card-image" alt="...">
     </div>
@@ -10,5 +10,15 @@
             <p class="card-text">Email: {{ data?.email }}</p>
             <p class="card-text">Work Phone: {{ formatPhone(data?.profile?.work_phone) }}</p>
         </div>
+    </div>
+</div> -->
+
+<div class="employee-card grow" (click)="navigateToUserProfile()" style="width: 25rem;">
+    <div class="employee-photo-container mb-3">
+        <img class='employee-photo' [src]="imageUrl" class="" alt="employee profile photo">
+    </div>
+    <div class="card-body text-center">
+        <h3 class="text-yellow">{{ data?.first_name }} {{ data?.last_name }}</h3>
+        <p class="text-lightgray">{{ data?.profile?.title }}</p>
     </div>
 </div>

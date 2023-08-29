@@ -1,0 +1,25 @@
+.employee-card {
+    background-color: none;
+    width: 25rem;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.employee-photo-container {
+    overflow: hidden;
+    border: 2px solid;
+    border-radius: 50%;
+    border-color: #cfd7db;
+    height: 300px;
+    width: 300px;
+}
+
+/* .employee-photo { */
+    /* width: auto;
+    height: auto; */
+    /* object-fit: cover; */
+    /* object-position: center bottom; */
+/* } */

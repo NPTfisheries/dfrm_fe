@@ -1,11 +1,14 @@
 <div class="banner-container">
     <img class="banner-image" [src]="imageUrl" [alt]="data?.description" />
 </div>
-
+<br>
 <div class="container">
-    <h1 class="detail-title">{{ data?.name }}</h1>
+    <h1 class="text-center">{{ data?.name }}</h1>
+    <br>
     <p>{{ data?.description }}</p>
-    <div class="card-container">
+</div>
+<div class="row employee-bar">
+    <div class="d-flex justify-space-between">
         <app-employee-card *ngIf="data?.manager" [data]="data?.manager"></app-employee-card>
         <app-employee-card *ngIf="data?.deputy" [data]="data?.deputy"></app-employee-card>
         <app-employee-card *ngIf="data?.assistant" [data]="data?.assistant"></app-employee-card>
@@ -13,7 +16,8 @@
             <app-employee-card *ngIf="pl" [data]="pl"></app-employee-card>
         </div>
     </div>
-    <div *ngIf="routeType === 'project'">
-        <app-detail-subproject [projectId]="data?.id"></app-detail-subproject>    
-    </div>
+</div>
+
+<div *ngIf="routeType === 'project'">
+    <app-detail-subproject [projectId]="data?.id"></app-detail-subproject>
 </div>

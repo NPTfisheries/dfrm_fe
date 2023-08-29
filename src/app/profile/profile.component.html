@@ -3,26 +3,22 @@
         <img [src]="imageUrl" class="profile-image" alt="...">
     </div>
     <h1>{{ user?.first_name }} {{ user?.last_name }}</h1>
-    <h1>{{ user?.profile?.title }}</h1>
-    <h2>{{ user?.profile?.bio }}</h2>
-    <h2>
-        <ul>
-            <li>
-                <h2>Office Location: {{ user?.profile?.city }}, {{ user?.profile?.state }}</h2>
-            </li>
-            <li>
-                <h2>Email: {{ user?.email }}</h2>
-            </li>
-            <li>
-                <h2>Work Phone: {{ user?.profile?.work_phone }}</h2>
-            </li>
-            <li>
-                <h2>Mobile Phone: {{ user?.profile?.mobile_phone }}</h2>
-            </li>
-        </ul>
-    </h2>
-
-
-    <h1></h1>
-    <button *ngIf="this.routeType === 'profile'" (click)="updateProfile()" class="dfrm-button grow">Update Profile</button>
+    <h2>{{ user?.profile?.title }}</h2>
+    <h3>{{ user?.profile?.bio }}</h3>
+    <ul>
+        <li>
+            <h3>Office Location: {{ user?.profile?.city }}, {{ user?.profile?.state }}</h3>
+        </li><br>
+        <li>
+            <h3>Email: {{ user?.email }}</h3>
+        </li><br>
+        <li>
+            <h3>Work Phone: {{ user?.profile?.work_phone }}</h3>
+        </li><br>
+        <li>
+            <h3>Mobile Phone: {{ user?.profile?.mobile_phone }}</h3>
+        </li><br>
+    </ul>
+    <button *ngIf="this.routeType === 'profile'" (click)="updateProfile()" class="dfrm-button grow">Update
+        Profile</button>
 </div>

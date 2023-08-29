@@ -3,16 +3,16 @@
         <img [src]="imageUrl" class="card-img-top card-image" alt="...">
     </div>
     <div class="card-body ">
-        <h5 class="card-title">{{ data.name }}</h5>
+        <h5 class="text-yellow">{{ data.name }}</h5>
         <hr class="card-hr" />
 
         <div class="card-footer" *ngIf="routeType !== 'project'">
-            <p class="card-text">Manager: {{ data.manager.first_name }} {{ data.manager.last_name }}</p>
+            <p class="text-lightgray">Manager: {{ data.manager.first_name }} {{ data.manager.last_name }}</p>
             <!-- <p class="card-text">Deputy: {{ data.deputy.first_name }} {{ data.deputy.last_name }}</p>
             <p class="card-text">Assistant: {{ data.assistant.first_name }} {{ data.assistant.last_name }}</p> -->
         </div>
         <div class="card-footer" *ngIf="routeType === 'project'">
-            <p class="card-text" *ngFor="let pl of data.project_leader">Project Leader: {{pl.first_name}}
+            <p class="text-lightgray" *ngFor="let pl of data.project_leader">Project Leader: {{pl.first_name}}
                 {{pl.last_name}}</p>
         </div>
     </div>

@@ -8,10 +8,11 @@
         </div>
         <div class="container">
             <div class="col-md-12 p-5">
-                <div class="col-md-12 p-4 d-flex flex-column align-items-center">
+                <div class="d-flex flex-column align-items-center">
                     <h2 class="subproject-title">{{ item.name }}</h2>
                 </div>
                 <p class="subproject-text">{{ item.description }}</p>
+                <br>
                 <div class="d-flex justify-content-between">
                     <p class="subproject-text">Subproject Lead: <a [routerLink]="'/users/' + item.lead.id">{{
                             item.lead.first_name }}
