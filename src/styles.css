@@ -4,7 +4,31 @@
     font-family: 'Times New Roman', Times, serif;
 }
 
+.mtb150 {
+    margin-top: 150px;
+    margin-bottom: 150px;
+}
+
+.employee-bar {
+    background-color: #0d1b1f;
+    overflow-x:hidden;
+    padding: 75px;
+    margin-top: 150px;
+    margin-bottom: 150px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
 /* text */
+h1 {
+    margin-bottom: 75px;
+}
+
+p {
+    line-height: 40px;
+}
+
 .text-yellow {
     color: #f9f906;
 }
@@ -52,7 +76,6 @@
 .dfrm-button-invert {
     background-color: #5492b4;
     color: #0d1b1f;
-    ;
     padding: 6px;
     border-radius: 10px;
     border-color: #f9f906;
@@ -68,7 +91,7 @@
     height: 500px;
     width: 100%;
     overflow: hidden;
-    margin-bottom: 1em;
+    margin-bottom: 75px;
 }
 
 .banner-image {
@@ -157,6 +180,8 @@
     line-height: 2em;
     color: white;
     background: black;
+    margin-top: 150px;
+    margin-bottom: 150px;
 
     &:before {
         background: linear-gradient(to right, white, black);
@@ -164,7 +189,7 @@
 
     &:after {
         background: linear-gradient(to left, white, black);
-    }    
+    }
 }
 
 .divider {

@@ -1,11 +1,11 @@
 <div class="banner-container">
-    <img class="banner-image" src="../../assets/images/saturn.jpg" alt="Banner Image" />
+    <img class="banner-image" [src]="bannerImage" alt="Banner Image" />
 </div>
 <div class="container">
     <h1 class="dfrm-title">Department of Fisheries Resources Management</h1>
 
     <div class="col-md">
-        <p class="home-p">
+        <p>
             The land and its waters define the Nez Perce way. Over the course
             of thousands of years, nature has taught us how to live with her.
             This intimate and sacred relationship unifies us, stabilizes us, humbles
@@ -17,11 +17,16 @@
     </div>
 </div>
 
-<h2 class="divider gradient-hr"></h2>
+<div class="employee-bar">
+    <app-employee-card *ngIf="data?.manager" [data]="data?.manager"></app-employee-card>
+    <app-employee-card *ngIf="data?.deputy" [data]="data?.deputy"></app-employee-card>
+    <app-employee-card *ngIf="data?.assistant" [data]="data?.assistant"></app-employee-card>
+</div>
 
-<div class="container">
+
+<div class="container mtb150">
     <div class="col-md">
-        <p class="home-p">
+        <p>
             The Nimiipúu fished, hunted, gathered, pastured
             livestock and traded over an enormously broad area
             that includes what is today, Idaho, Washington,
@@ -48,4 +53,10 @@
             prayers, dances, rituals, and ceremonies.
         </p>
     </div>
+</div>
+
+<h2 class="divider gradient-hr"></h2>
+
+<div class="container mtb150" >
+    <p>{{ data?.description }}</p>
 </div>

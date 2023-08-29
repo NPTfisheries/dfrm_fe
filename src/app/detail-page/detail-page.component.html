@@ -4,8 +4,6 @@
 <br>
 <div class="container">
     <h1 class="text-center">{{ data?.name }}</h1>
-    <br>
-    <p>{{ data?.description }}</p>
 </div>
 <div class="employee-bar">
     <app-employee-card *ngIf="data?.manager" [data]="data?.manager"></app-employee-card>
@@ -15,6 +13,12 @@
         <app-employee-card *ngIf="pl" [data]="pl"></app-employee-card>
     </div>
 </div>
+
+<div class="container mtb150" >
+    <p>{{ data?.description }}</p>
+</div>
+
+<h2  *ngIf="routeType === 'project'"  class="divider gradient-hr"></h2>
 
 <div *ngIf="routeType === 'project'">
     <app-detail-subproject [projectId]="data?.id"></app-detail-subproject>

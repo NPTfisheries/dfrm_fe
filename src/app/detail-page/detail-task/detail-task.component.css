@@ -7,7 +7,8 @@
 .task-container-light {
     border: 3px solid #f9f906;
     border-radius: 10px;
-    background-color: #cfd7db;
+    /* background-color: #cfd7db; */
+    background-color: rgb(207,215,219, 1.5);
 }
 
 

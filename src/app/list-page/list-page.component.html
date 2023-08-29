@@ -1,8 +1,8 @@
-<div class="container">
-    <h1>{{ routeType | titlecase }} List</h1>
+<div class="container" style="padding-top: 75px; padding-bottom: 75px;">
+    <h1 class="text-center">{{ routeType | titlecase }} List</h1>
 
-    <button *ngIf="routeType == 'department' && managerAccess(permissionGroup)" (click)="add(routeType)"
-        class="dfrm-button">Add New {{ routeType | titlecase}}</button>
+    <!-- <button *ngIf="routeType == 'department' && managerAccess(permissionGroup)" (click)="add(routeType)"
+        class="dfrm-button">Add New {{ routeType | titlecase}}</button> -->
     <button *ngIf="routeType == 'division' && managerAccess(permissionGroup)" (click)="add(routeType)"
         class="dfrm-button">Add New {{ routeType | titlecase}}</button>
     <button *ngIf="routeType == 'project' && professionalAccess(permissionGroup)" (click)="add(routeType)"
@@ -17,7 +17,7 @@
             <thead>
                 <tr>
                     <th *ngFor="let col of columns">{{ col | titlecase}}</th>
-                    <th style="text-align: center;">View</th>
+                    <th *ngIf="routeType !== 'department'" style="text-align: center;">View</th>
 
                     <th *ngIf="routeType == 'department' && managerAccess(permissionGroup)" style="text-align: center;">Edit</th>
                     <th *ngIf="routeType == 'division' && managerAccess(permissionGroup)" style="text-align: center;">Edit</th>
@@ -44,10 +44,10 @@
                             </li>
                         </ul>
                     </td>
-                    <td>
+                    <!-- <td>
                         <button class="dfrm-button btn-center" [routerLink]="x.slug"><i
                                 class="fa-regular fa-eye"></i></button>
-                    </td>
+                    </td> -->
                     <td *ngIf="managerAccess(permissionGroup)">
                         <button class="dfrm-button-invert btn-center" (click)="edit('department', x.slug)">
                             <i class="fa-regular fa-pen-to-square"></i>
