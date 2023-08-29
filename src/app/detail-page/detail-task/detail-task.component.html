@@ -1,7 +1,7 @@
 <div class="container">
     <button *ngIf="professionalAccess(permissionGroup)" (click)="add()" class="dfrm-button">Add Task</button>
     <div *ngFor="let item of list; let i = index">
-        <hr />
+        <br>
         <!-- task info -->
         <div class="container task-container">
             <div class="row">
@@ -11,19 +11,26 @@
                 </div>
                 <div class="col-md-8 p-4">
                     <div>
-                        <h2 class="task-title">{{ item.name }}</h2>
-                        <p class="task-text">{{ item.description }}</p>
-                        <p class="task-text task-footer">Supervisor: <a class="grow" [routerLink]="'/users/' + item.supervisor.id">{{ item.supervisor.first_name }}
-                                {{item.supervisor.last_name}} </a></p>
+                        <h3 class="text-yellow">{{ item.name }}</h3>
+                        <p class="text-lightgray">{{ item.description }}</p>
+                        <br>
+                        <hr class="card-hr">
+                        <div class="d-flex justify-content-between">
+                            <p class="text-lightgray">Supervisor: <a class="block-link"
+                                    [routerLink]="'/users/' + item.supervisor.id">{{ item.supervisor.first_name }}
+                                    {{item.supervisor.last_name}} </a></p>
+                            <button *ngIf="professionalAccess(permissionGroup)" (click)="edit(item.slug)"
+                                class="dfrm-button">Edit Task</button>
+                        </div>
                     </div>
                 </div>
                 <div *ngIf="i % 2 === 0" class="col-md-4 overflow-hidden">
                     <img [src]="'http://localhost:8000' + item.img_card.image" alt="Image"
                         class="rounded-right image-task">
                 </div>
-                <button *ngIf="professionalAccess(permissionGroup)" (click)="edit(item.slug)" class="dfrm-button">Edit Task</button>
             </div>
         </div>
+        <br>
     </div>
     <br>
 </div>
