@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { AgGridModule } from 'ag-grid-angular';
+
 import { AppRoutingModule } from './app.routing.module';
 
 import { AppComponent } from './app.component';
@@ -63,6 +65,7 @@ import { DetailSubprojectComponent } from './detail-page/detail-subproject/detai
     NgbModule,
     HttpClientModule,
     ReactiveFormsModule,
+    AgGridModule,
   ],
   providers: [
     // services with @Injectable({ providedIn: 'root' }) don't need to be listed here. They are singleton, available throughout app.

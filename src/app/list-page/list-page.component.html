@@ -12,20 +12,35 @@
     <button *ngIf="routeType == 'image' && managerAccess(permissionGroup)" (click)="uploadImage()"
         class="dfrm-button">Upload Image</button>
 
+        <br>
+    <div class="container" style="height: 500px;">
+        <ag-grid-angular style="width: 100%; height: 100%" class="ag-theme-alpine" [columnDefs]="columnDefs"
+            [defaultColDef]="defaultColDef" [rowData]="rowData" [rowSelection]="'multiple'"
+            [animateRows]="true"></ag-grid-angular>
+    </div>
+
+    <br>
     <div class="table-container">
+
+
+
         <table *ngIf="list" class="table table-dark table-bordered table-hover mb-0">
             <thead>
                 <tr>
                     <th *ngFor="let col of columns">{{ col | titlecase}}</th>
                     <th *ngIf="routeType !== 'department'" style="text-align: center;">View</th>
 
-                    <th *ngIf="routeType == 'department' && managerAccess(permissionGroup)" style="text-align: center;">Edit</th>
-                    <th *ngIf="routeType == 'division' && managerAccess(permissionGroup)" style="text-align: center;">Edit</th>
-                    <th *ngIf="routeType == 'project' && professionalAccess(permissionGroup)" style="text-align: center;">Edit</th>
+                    <th *ngIf="routeType == 'department' && managerAccess(permissionGroup)" style="text-align: center;">
+                        Edit</th>
+                    <th *ngIf="routeType == 'division' && managerAccess(permissionGroup)" style="text-align: center;">
+                        Edit</th>
+                    <th *ngIf="routeType == 'project' && professionalAccess(permissionGroup)"
+                        style="text-align: center;">Edit</th>
                     <!-- <th *ngIf="routeType == 'subproject' && professionalAccess(permissionGroup)" style="text-align: center;">Edit</th>
                     <th *ngIf="routeType == 'task' && professionalAccess(permissionGroup)" style="text-align: center;">Edit</th>
                     <th *ngIf="routeType == 'users' && managerAccess(permissionGroup)" style="text-align: center;">Edit</th> -->
-                    <th *ngIf="routeType == 'image' && managerAccess(permissionGroup)" style="text-align: center;">Edit</th>
+                    <th *ngIf="routeType == 'image' && managerAccess(permissionGroup)" style="text-align: center;">Edit
+                    </th>
 
                 </tr>
             </thead>

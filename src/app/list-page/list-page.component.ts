@@ -2,6 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 
+import { AgGridAngular } from 'ag-grid-angular';
+import { GridReadyEvent } from 'ag-grid-community';
+import { ColDef } from 'ag-grid-community';
+import { Observable } from 'rxjs';
+
 import { AuthService } from 'src/_services/auth.service';
 import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
@@ -24,9 +29,31 @@ export class ListPageComponent implements OnInit {
   @ViewChild(FormContainerComponent) formContainerComponent!: FormContainerComponent;
   @ViewChild(RegisterComponent) registerComponent!: RegisterComponent;
 
+  @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
+
+
+  columnDefs: ColDef[] | undefined;
+
+  // rowData = [
+  //   { name: 'Toyota', email: 'Celica', work_phone: 35000, mobile_phone: 10392, title:'pig' }
+  // ];
+
+  defaultColDef: ColDef = {
+    sortable: true,
+    filter: true,
+  };
+
+  rowData!: any[];
+
+  onGridReady(params: GridReadyEvent) {
+    this.getList(this.routeType);
+  }
+
   managerAccess = managerAccess;
   professionalAccess = professionalAccess;
-  routeType: string | undefined;
+  // routeType: string | undefined;
+  routeType!: string;
+
   list: any | undefined;
   columns: string[] = [];
   permissionGroup!: string;
@@ -52,6 +79,8 @@ export class ListPageComponent implements OnInit {
     this.routeType = getRouteType(this.route);
     this.getList(this.routeType);
     this.populateFieldsArray(this.routeType);
+
+    this.columnDefs = this.getColumnDefs(this.routeType);
   }
 
   ngOnDestroy(): void {
@@ -59,8 +88,9 @@ export class ListPageComponent implements OnInit {
   }
 
   getList(routeType: string) {
-    this.backendService.getList(routeType).subscribe(list => {
+    this.backendService.getList(routeType).subscribe((list: any) => {
       this.list = list;
+      this.rowData = list;
     });
   }
 
@@ -126,26 +156,41 @@ export class ListPageComponent implements OnInit {
     switch (routeType) {
       case 'department':
       case 'division':
-        this.columns = ['name', 'description', 'manager', 'deputy', 'assistant', 'staff'];
+        this.columns =  ['name', 'description', 'manager', 'deputy', 'assistant', 'staff'];
         break;
       case 'project':
-        this.columns = ['name', 'description', 'project leaders'];
+        this.columns =  ['name', 'description', 'project leaders'];
         break;
-      // case 'subproject':
-      //   this.columns = ['name', 'description', 'project', 'lead'];
-      //   break;
-      // case 'task':
-      //   this.columns = ['name', 'description', 'subproject', 'supervisor'];
-      //   break;
       case 'users':
-        this.columns = ['name', 'email', 'work phone', 'mobile phone', 'title'];
+        this.columns =  ['name', 'email', 'work phone', 'mobile phone', 'title'];
         break;
       case 'image':
-        this.columns = ['name', 'description', 'photographer', 'photo date', 'source'];
+        this.columns =  ['name', 'description', 'photographer', 'photo date', 'source'];
         break;
       default:
         this.columns = [];
-        break;
+        return;
+    }
+  }
+
+  private transformArray(inputArray: string[]): ColDef[] {
+    return inputArray.map(item => ({ field: item }));
+  }
+
+  getColumnDefs(routeType: string) {
+    switch (routeType) {
+      case 'department':
+      case 'division':
+        return this.transformArray(['name', 'description', 'manager', 'deputy', 'assistant', 'staff']);
+      case 'project':
+        return this.transformArray(['name', 'description', 'project leaders']);
+      case 'users':
+        return this.transformArray(['first_name', 'last_name', 'email', 'work phone', 'mobile phone', 'title']);
+        // return this.transformArray(['name', 'email', 'work phone', 'mobile phone', 'title']);
+      case 'image':
+        return this.transformArray(['name', 'description', 'photographer', 'photo date', 'source']);
+      default:
+        return;
     }
   }
 
