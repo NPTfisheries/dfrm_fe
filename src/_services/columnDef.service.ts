@@ -20,6 +20,10 @@ const divisionColDefs = [
     {
         field: 'name',
         headerName: 'Name'
+        // type:
+        // width:
+        // editable:
+        // filter:
     },
     {
         field: 'description',
@@ -38,8 +42,9 @@ const divisionColDefs = [
         headerName: 'Assistant'
     },
     {
-        field: 'staff',
-        headerName: 'Staff'
+        field: 'staff_names',
+        headerName: 'Staff',
+        valueGetter: getStaffNames
     }
 ];
 
@@ -53,8 +58,9 @@ const projectColDefs = [
         headerName: 'Description'
     },
     {
-        field: 'project_leader',
-        headerName: 'Project Leaders'
+        field: 'project_leader_names',
+        headerName: 'Project Leaders',
+        valueGetter: getProjectLeaderNames
     }
 ];
 
@@ -98,7 +104,8 @@ const imageColDefs = [
     },
     {
         field: 'photo_date',
-        headerName: 'Photo Date'
+        headerName: 'Photo Date',
+        type: 'dateColumn'
     },
     {
         field: 'source',
@@ -109,3 +116,20 @@ const imageColDefs = [
 // function transformArray(inputArray: string[]): ColDef[] {
 //     return inputArray.map(item => ({ field: item }));
 // }
+
+// Function to extract and concatenate project leader names
+function getProjectLeaderNames(params: any) {
+    if (params.data.project_leader && Array.isArray(params.data.project_leader)) {
+        const leaderNames = params.data.project_leader.map((leader: any) => leader.full_name);
+        return leaderNames.join(', ');
+    }
+    return '';
+}
+
+function getStaffNames(params: any) {
+    if (params.data.staff && Array.isArray(params.data.staff)) {
+        const staffNames = params.data.staff.map((staff: any) => staff.full_name);
+        return staffNames.join(', ');
+    }
+    return '';
+}
