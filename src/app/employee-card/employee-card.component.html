@@ -1,21 +1,6 @@
-<!-- <div class="card text-white bg-dark mb-3 dfrm-card grow" (click)="navigateToUserProfile()" style="width: 25rem;">
-    <div class="card-image-container">
-        <img [src]="imageUrl" class="card-img-top card-image" alt="...">
-    </div>
-    <div class="card-body ">
-        <h4 class="card-title">{{ data?.first_name }} {{ data?.last_name }}</h4>
-        <hr class="card-hr" />
-        <div class="card-footer">
-            <p class="card-text">{{ data?.profile?.title }}</p>
-            <p class="card-text">Email: {{ data?.email }}</p>
-            <p class="card-text">Work Phone: {{ formatPhone(data?.profile?.work_phone) }}</p>
-        </div>
-    </div>
-</div> -->
-
-<div class="employee-card grow" (click)="navigateToUserProfile()" style="width: 25rem;">
+<div class="employee-card grow" (click)="navigateToUserProfile()">
     <div class="employee-photo-container mb-3">
-        <img class='employee-photo' [src]="imageUrl" class="" alt="employee profile photo">
+        <img id='employee-photo' [src]="imageUrl" class="" alt="employee profile photo">
     </div>
     <div class="card-body text-center">
         <h3 class="text-yellow">{{ data?.first_name }} {{ data?.last_name }}</h3>

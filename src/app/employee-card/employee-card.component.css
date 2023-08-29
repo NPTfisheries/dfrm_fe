@@ -7,7 +7,6 @@
     justify-content: center;
 }
 
-
 .employee-photo-container {
     overflow: hidden;
     border: 2px solid;
@@ -17,9 +16,8 @@
     width: 300px;
 }
 
-/* .employee-photo { */
-    /* width: auto;
-    height: auto; */
-    /* object-fit: cover; */
-    /* object-position: center bottom; */
-/* } */
+#employee-photo {
+    min-height: 100%;
+    min-width: 100%; 
+    object-fit: cover;
+}

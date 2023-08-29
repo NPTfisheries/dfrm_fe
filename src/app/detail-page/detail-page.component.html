@@ -7,14 +7,12 @@
     <br>
     <p>{{ data?.description }}</p>
 </div>
-<div class="row employee-bar">
-    <div class="d-flex justify-space-between">
-        <app-employee-card *ngIf="data?.manager" [data]="data?.manager"></app-employee-card>
-        <app-employee-card *ngIf="data?.deputy" [data]="data?.deputy"></app-employee-card>
-        <app-employee-card *ngIf="data?.assistant" [data]="data?.assistant"></app-employee-card>
-        <div *ngFor="let pl of data?.project_leader">
-            <app-employee-card *ngIf="pl" [data]="pl"></app-employee-card>
-        </div>
+<div class="employee-bar">
+    <app-employee-card *ngIf="data?.manager" [data]="data?.manager"></app-employee-card>
+    <app-employee-card *ngIf="data?.deputy" [data]="data?.deputy"></app-employee-card>
+    <app-employee-card *ngIf="data?.assistant" [data]="data?.assistant"></app-employee-card>
+    <div *ngFor="let pl of data?.project_leader">
+        <app-employee-card *ngIf="pl" [data]="pl"></app-employee-card>
     </div>
 </div>
 
