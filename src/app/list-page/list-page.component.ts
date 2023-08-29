@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AgGridAngular } from 'ag-grid-angular';
 import { GridReadyEvent } from 'ag-grid-community';
 import { ColDef } from 'ag-grid-community';
-import { Observable } from 'rxjs';
+import { getColumnDefs } from 'src/_services/columnDef.service';
 
 import { AuthService } from 'src/_services/auth.service';
 import { AlertService } from 'src/_services/alert.service';
@@ -33,10 +33,6 @@ export class ListPageComponent implements OnInit {
 
 
   columnDefs: ColDef[] | undefined;
-
-  // rowData = [
-  //   { name: 'Toyota', email: 'Celica', work_phone: 35000, mobile_phone: 10392, title:'pig' }
-  // ];
 
   defaultColDef: ColDef = {
     sortable: true,
@@ -80,7 +76,7 @@ export class ListPageComponent implements OnInit {
     this.getList(this.routeType);
     this.populateFieldsArray(this.routeType);
 
-    this.columnDefs = this.getColumnDefs(this.routeType);
+    this.columnDefs = getColumnDefs(this.routeType);
   }
 
   ngOnDestroy(): void {
@@ -156,16 +152,16 @@ export class ListPageComponent implements OnInit {
     switch (routeType) {
       case 'department':
       case 'division':
-        this.columns =  ['name', 'description', 'manager', 'deputy', 'assistant', 'staff'];
+        this.columns = ['name', 'description', 'manager', 'deputy', 'assistant', 'staff'];
         break;
       case 'project':
-        this.columns =  ['name', 'description', 'project leaders'];
+        this.columns = ['name', 'description', 'project leaders'];
         break;
       case 'users':
-        this.columns =  ['name', 'email', 'work phone', 'mobile phone', 'title'];
+        this.columns = ['name', 'email', 'work phone', 'mobile phone', 'title'];
         break;
       case 'image':
-        this.columns =  ['name', 'description', 'photographer', 'photo date', 'source'];
+        this.columns = ['name', 'description', 'photographer', 'photo date', 'source'];
         break;
       default:
         this.columns = [];
@@ -173,44 +169,13 @@ export class ListPageComponent implements OnInit {
     }
   }
 
-  private transformArray(inputArray: string[]): ColDef[] {
-    return inputArray.map(item => ({ field: item }));
-  }
-
-  getColumnDefs(routeType: string) {
-    switch (routeType) {
-      case 'department':
-      case 'division':
-        return this.transformArray(['name', 'description', 'manager', 'deputy', 'assistant', 'staff']);
-      case 'project':
-        return this.transformArray(['name', 'description', 'project leaders']);
-      case 'users':
-        return this.transformArray(['first_name', 'last_name', 'email', 'work phone', 'mobile phone', 'title']);
-        // return this.transformArray(['name', 'email', 'work phone', 'mobile phone', 'title']);
-      case 'image':
-        return this.transformArray(['name', 'description', 'photographer', 'photo date', 'source']);
-      default:
-        return;
-    }
-  }
-
   getRecordBySlug(routeType: string, slug: string) {
     if (!this.list) { return; }
-
-    // if (routeType === 'users') {
-    //   // users is queried via ID, where everything else is slug. (routing and api calls). This works
-    //   for (let item of this.list) {
-    //     if (item.id === slug) {
-    //       return item;
-    //     }
-    //   }
-    // } else {
     for (let item of this.list) {
       if (item.slug === slug) {
         return item;
       }
     }
-    // }
   }
 
   getRecordById(id: number) {
