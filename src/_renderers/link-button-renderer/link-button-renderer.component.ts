@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
+import { ICellRendererParams } from 'ag-grid-community';
 
 @Component({
   selector: 'app-link-button-renderer',
-  template: `<button class="dfrm-button" [routerLink]="this.slug"><i class="fa-regular fa-eye"></i></button>`,
+  template: `<button class='ag-button' [routerLink]="this.slug"><i class="fa-regular fa-eye"></i></button>`,
+  // template: `<i class="fa-regular fa-eye" [routerLink]="this.slug"></i>`,
+  styleUrls: ['./link-button-renderer.component.css']
 })
 export class LinkButtonRendererComponent implements ICellRendererAngularComp{
   slug = '';
@@ -12,7 +15,7 @@ export class LinkButtonRendererComponent implements ICellRendererAngularComp{
     this.slug = params.value || '';
   }
 
-  refresh(params:any): boolean {
+  refresh(params: ICellRendererParams): boolean {
     this.slug = params.value || '';
     return true;
   }

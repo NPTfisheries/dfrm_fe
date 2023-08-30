@@ -45,6 +45,13 @@ const divisionColDefs = [
         field: 'staff_names',
         headerName: 'Staff',
         valueGetter: getStaffNames
+    },
+    {
+        headerName: 'View',
+        field: 'slug',
+        cellRenderer: LinkButtonRendererComponent,
+        cellRendererParams:  { },
+        maxWidth: 100
     }
 ];
 
@@ -63,10 +70,11 @@ const projectColDefs = [
         valueGetter: getProjectLeaderNames
     },
     {
-        headerName: 'ViewBySlug',
+        headerName: 'View',
         field: 'slug',
         cellRenderer: LinkButtonRendererComponent,
-        cellRendererParams:  { }
+        cellRendererParams:  { },
+        maxWidth: 100
     }
 ];
 
@@ -88,9 +96,15 @@ const usersColDefs = [
         field: 'profile.work_phone',
         headerName: 'Work Phone'
     },
+    // {
+    //     field: 'profile.mobile_phone',
+    //     headerName: 'Mobile Phone'
+    // },
     {
-        field: 'profile.mobile_phone',
-        headerName: 'Mobile Phone'
+        headerName: 'View',
+        field: 'id',
+        cellRenderer: LinkButtonRendererComponent,
+        cellRendererParams:  { }
     }
 ];
 
@@ -116,6 +130,13 @@ const imageColDefs = [
     {
         field: 'source',
         headerName: 'Source'
+    },
+    {
+        headerName: 'View',
+        field: 'slug',
+        cellRenderer: LinkButtonRendererComponent,
+        cellRendererParams:  { },
+        maxWidth: 100
     }
 ];
 

@@ -3,8 +3,7 @@ import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 
 import { AgGridAngular } from 'ag-grid-angular';
-import { AgGridModule } from 'ag-grid-angular';
-import { GridReadyEvent } from 'ag-grid-community';
+import { GridApi, ColumnApi } from 'ag-grid-community';
 import { ColDef } from 'ag-grid-community';
 import { getColumnDefs } from 'src/_services/columnDef.service';
 import { LinkButtonRendererComponent } from 'src/_renderers/link-button-renderer/link-button-renderer.component';
@@ -30,27 +29,31 @@ export class ListPageComponent implements OnInit {
 
   @ViewChild(FormContainerComponent) formContainerComponent!: FormContainerComponent;
   @ViewChild(RegisterComponent) registerComponent!: RegisterComponent;
-
   @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
 
 
+  private gridApi = GridApi;
+  private gridColumnApi = ColumnApi;
   columnDefs: ColDef[] | undefined;
   frameworkComponents: any = {
     linkButtonRenderer: LinkButtonRendererComponent,
   };
 
+  // default settings for all columns.
   defaultColDef: ColDef = {
     sortable: true,
     filter: true,
+    resizable: true,
   };
 
   rowData!: any[];
 
-  onGridReady(params: GridReadyEvent) {
+  onGridReady(params: any) {
     this.getList(this.routeType);
+    this.gridApi = params.api;
+    params.api.sizeColumnsToFit();
+    // params.api.autoSizeAllColumns();
   }
-
-
 
   managerAccess = managerAccess;
   professionalAccess = professionalAccess;
