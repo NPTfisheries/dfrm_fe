@@ -4,7 +4,6 @@ import { FormContainerComponent } from 'src/app/forms/form-container/form-contai
 import { Subscription } from 'rxjs';
 
 import { AuthService } from 'src/_services/auth.service';
-import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
 
 import { getRecordBySlug } from 'src/_utilities/getRecordBySlug';
@@ -23,12 +22,10 @@ export class DetailTaskComponent implements OnInit, OnChanges {
 
   data: any | undefined;
   permissionGroup!: string;
-  routeType = 'task';
   private permissionGroupSubscription: Subscription;
 
   constructor(
     private authService: AuthService,
-    private alertService: AlertService,
     private backendService: BackendService,
     private modalService: NgbModal,
   ) {
@@ -71,10 +68,12 @@ export class DetailTaskComponent implements OnInit, OnChanges {
 
     const modalRef = this.modalService.open(FormContainerComponent, { size: 'xl', });
 
-    modalRef.componentInstance.routeType = 'task';
-    modalRef.componentInstance.subprojectId = this.subprojectId; // needed for filtered list response from FCC
-    modalRef.componentInstance.data = newData;
     modalRef.componentInstance.context = this;
+    modalRef.componentInstance.routeType = 'task';
+    modalRef.componentInstance.data = newData;
+    modalRef.componentInstance.subprojectId = this.subprojectId; // needed for filtered list response from FCC
+    
+ 
   }
 
   edit(slug: string) {
@@ -84,11 +83,11 @@ export class DetailTaskComponent implements OnInit, OnChanges {
 
     const modalRef = this.modalService.open(FormContainerComponent, { size: 'xl', });
 
-    modalRef.componentInstance.routeType = 'task';
-    modalRef.componentInstance.slug = slug;
-    modalRef.componentInstance.subprojectId = this.subprojectId; // needed for filtered list response from FCC
     modalRef.componentInstance.context = this;
+    modalRef.componentInstance.routeType = 'task';
     modalRef.componentInstance.data = data;
+    modalRef.componentInstance.subprojectId = this.subprojectId; // needed for filtered list response from FCC
+    modalRef.componentInstance.data = slug;
   }
 
 }

@@ -186,16 +186,6 @@ function usersColDefs(routeType: string, context: any) {
             field: 'id',
             cellRenderer: LinkButtonRendererComponent,
             cellRendererParams: {}
-        },
-        {
-            headerName: 'Edit',
-            field: 'slug',
-            cellRenderer: EditButtonRendererComponent,
-            cellRendererParams: {
-                routeType: routeType,
-                context: context
-            },
-            maxWidth: 100
         }
     ];
 }

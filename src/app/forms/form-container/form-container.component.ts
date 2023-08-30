@@ -20,11 +20,11 @@ export class FormContainerComponent implements OnInit {
   @Input() context!: ListPageComponent | DetailSubprojectComponent | DetailTaskComponent | undefined;
 
   @Input() routeType!: string;  // always provided.
+  @Input() data?: any | undefined;
   @Input() projectId: string | null = null;  // provided only for refreshing subprojects.
   @Input() subprojectId: string | null = null;  // povided only for refreshing tasks.
+  @Input() slug!: string;  // for update api --> passed to dynamic form.
 
-  @Input() data?: any | undefined;
-  @Input() slug!: string;
 
   inputs$!: Observable<InputBase<string>[]> | undefined;
   formValid: boolean = false;
@@ -39,7 +39,7 @@ export class FormContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.inputs$ = this.getInputs(this.routeType, this.data);
-    console.log('Context:', this.context);
+    // console.log('Context:', this.context);
   }
 
   submitDynamicForm() {

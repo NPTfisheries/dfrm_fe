@@ -10,7 +10,6 @@ import { LinkButtonRendererComponent } from 'src/_renderers/link-button-renderer
 import { EditButtonRendererComponent } from 'src/_renderers/edit-button-renderer/edit-button-renderer.component';
 
 import { AuthService } from 'src/_services/auth.service';
-import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
 import { RegisterComponent } from '../forms/register/register.component';
 import { ImageUploadComponent } from '../forms/image-upload/image-upload.component';
@@ -62,7 +61,6 @@ export class ListPageComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private backendService: BackendService,
-    private alertService: AlertService,
     private modalService: NgbModal,
 
   ) {
@@ -99,38 +97,18 @@ export class ListPageComponent implements OnInit {
     console.log('add:', routeType);
 
     const modalRef = this.modalService.open(FormContainerComponent, this.getModalOptions());
-
-    modalRef.componentInstance.routeType = routeType;
     modalRef.componentInstance.context = this;
-
-    // modalRef.result.then((result) => {
-    //   modalRef.componentInstance.updateList.subscribe((newList: any) => {
-    //     this.list = newList;
-    //     this.alertService.success(`New ${this.routeType} created!`, { autoClose: true });
-    //   });
-    // }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
+    modalRef.componentInstance.routeType = routeType;
   }
 
   uploadImage() {
     const modalRef = this.modalService.open(ImageUploadComponent, this.getModalOptions());
-
-    modalRef.result.then((result) => {
-      modalRef.componentInstance.updateList.subscribe((newList: any) => {
-        this.list = newList;
-        this.alertService.success(`Image uploaded!`, { autoClose: true });
-      });
-    }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
+    modalRef.componentInstance.context = this;
   }
 
   registerUser() {
     const modalRef = this.modalService.open(RegisterComponent, this.getModalOptions());
-
-    modalRef.result.then((result) => {
-      modalRef.componentInstance.updateList.subscribe((newList: any) => {
-        this.list = newList;
-        this.alertService.success(`New user registered!`, { autoClose: true });
-      });
-    }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
+    modalRef.componentInstance.context = this;
   }
 
   getModalOptions(): NgbModalOptions {
