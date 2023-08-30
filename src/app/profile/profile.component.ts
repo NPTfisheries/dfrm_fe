@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getUserData();
+    window.scrollTo(0, 0);
   }
 
   getUserData() {

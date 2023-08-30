@@ -52,6 +52,16 @@ p {
     font-size: larger;
 }
 
+.dfrm-button-small {
+    height: 35px;
+    background-color: #0d1b1f;
+    color: #f9f906;
+    padding: 2px 8px 2px 8px;
+    border-radius: 15px;
+    border-color: #5492b4;
+    font-size:medium;
+}
+
 .dfrm-button:hover,
 .dfrm-button-invert:hover {
     transition: all .2s ease-in-out;

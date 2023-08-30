@@ -3,6 +3,7 @@ th {
     color: #cfd7db;
     white-space: nowrap;
 }
+
 td {
     font-size: large;
     color: #cfd7db;
@@ -18,10 +19,15 @@ td {
 }
 
 .btn-center {
-    margin:auto;
+    margin: auto;
     display: block;
 }
 
 ::ng-deep .ag-cell-focus {
     outline: none !important;
-  }
+}
+
+.btn-right {
+    float: right;
+    margin-right: 30px;
+}

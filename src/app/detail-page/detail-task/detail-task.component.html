@@ -1,10 +1,10 @@
 <div class="container">
     <div class="d-flex">
-        <button *ngIf="professionalAccess(permissionGroup)" (click)="add()" class="dfrm-button"
+        <button *ngIf="professionalAccess(permissionGroup)" (click)="add()" class="dfrm-button-small"
             style="margin-left: auto;">Add Task</button>
     </div>
     <div *ngFor="let item of data; let i = index">
-        <br>
+        <!-- <br> -->
         task info
         <div class="container task-container-light">
             <div class="row">
@@ -23,7 +23,7 @@
                                     [routerLink]="'/users/' + item.supervisor.id">{{ item.supervisor.first_name }}
                                     {{item.supervisor.last_name}} </a></p>
                             <button *ngIf="professionalAccess(permissionGroup)" (click)="edit(item.slug)"
-                                class="dfrm-button">Edit Task</button>
+                                class="dfrm-button-small">Edit Task</button>
                         </div>
                     </div>
                 </div>
