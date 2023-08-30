@@ -1,6 +1,7 @@
 import { LinkButtonRendererComponent } from "src/_renderers/link-button-renderer/link-button-renderer.component";
 import { EditButtonRendererComponent } from "src/_renderers/edit-button-renderer/edit-button-renderer.component";
 
+import { professionalAccess, managerAccess } from "src/_utilities/permission-util";
 import { formatPhone } from "src/_utilities/formatPhone";
 
 export function getColumnDefs(routeType: string, context: any) {
@@ -22,7 +23,7 @@ export function getColumnDefs(routeType: string, context: any) {
 }
 
 function departmentColDefs(routeType: string, context: any) {
-    return [
+    const columns: any[] = [
         {
             field: 'name',
             headerName: 'Name'
@@ -51,8 +52,11 @@ function departmentColDefs(routeType: string, context: any) {
             field: 'staff_names',
             headerName: 'Staff',
             valueGetter: getStaffNames
-        },
-        {
+        }
+    ];
+
+    if (managerAccess(context.permissionGroup)) {
+        columns.push({
             headerName: 'Edit',
             field: 'slug',
             cellRenderer: EditButtonRendererComponent,
@@ -61,12 +65,15 @@ function departmentColDefs(routeType: string, context: any) {
                 context: context
             },
             maxWidth: 100
-        }
-    ];
+        });
+    }
+
+    return columns;
+
 }
 
 function divisionColDefs(routeType: string, context: any) {
-    return [
+    const columns: any[] = [
         {
             field: 'name',
             headerName: 'Name'
@@ -102,8 +109,11 @@ function divisionColDefs(routeType: string, context: any) {
             cellRenderer: LinkButtonRendererComponent,
             cellRendererParams: {},
             maxWidth: 100
-        },
-        {
+        }
+    ];
+
+    if (managerAccess(context.permissionGroup)) {
+        columns.push({
             headerName: 'Edit',
             field: 'slug',
             cellRenderer: EditButtonRendererComponent,
@@ -112,12 +122,15 @@ function divisionColDefs(routeType: string, context: any) {
                 context: context
             },
             maxWidth: 100
-        }
-    ];
+        });
+    }
+
+    return columns;
+
 }
 
 function projectColDefs(routeType: string, context: any) {
-    return [
+    const columns: any[] = [
         {
             field: 'name',
             headerName: 'Name'
@@ -137,8 +150,11 @@ function projectColDefs(routeType: string, context: any) {
             cellRenderer: LinkButtonRendererComponent,
             cellRendererParams: {},
             maxWidth: 100
-        },
-        {
+        }
+    ];
+
+    if (professionalAccess(context.permissionGroup)) {
+        columns.push({
             headerName: 'Edit',
             field: 'slug',
             cellRenderer: EditButtonRendererComponent,
@@ -147,12 +163,15 @@ function projectColDefs(routeType: string, context: any) {
                 context: context
             },
             maxWidth: 100
-        }
-    ];
+        });
+    }
+
+    return columns;
+
 }
 
 function usersColDefs(routeType: string, context: any) {
-    return [
+    const columns: any[] = [
         {
             field: 'full_name',
             headerName: 'Name'
@@ -188,11 +207,14 @@ function usersColDefs(routeType: string, context: any) {
             cellRendererParams: {}
         }
     ];
+
+    return columns;
+
 }
 
 
 function imageColDefs(routeType: string, context: any) {
-    return [
+    const columns: any[] = [
         {
             field: 'name',
             headerName: 'Name'
@@ -220,8 +242,11 @@ function imageColDefs(routeType: string, context: any) {
             cellRenderer: LinkButtonRendererComponent,
             cellRendererParams: {},
             maxWidth: 100
-        },
-        {
+        }
+    ];
+
+    if (managerAccess(context.permissionGroup)) {
+        columns.push({
             headerName: 'Edit',
             field: 'slug',
             cellRenderer: EditButtonRendererComponent,
@@ -230,8 +255,11 @@ function imageColDefs(routeType: string, context: any) {
                 context: context
             },
             maxWidth: 100
-        }
-    ];
+        });
+    }
+
+    return columns;
+
 }
 
 // Function to extract and concatenate project leader names
