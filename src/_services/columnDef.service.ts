@@ -1,13 +1,16 @@
 import { LinkButtonRendererComponent } from "src/_renderers/link-button-renderer/link-button-renderer.component";
 import { EditButtonRendererComponent } from "src/_renderers/edit-button-renderer/edit-button-renderer.component";
 
-export function getColumnDefs(routeType: string) {
+import { formatPhone } from "src/_utilities/formatPhone";
+
+export function getColumnDefs(routeType: string, context: any) {
+    console.log('GetColumnDefs routeType:', routeType);
     switch (routeType) {
         case 'department':
         case 'division':
             return divisionColDefs;
         case 'project':
-            return projectColDefs;
+            return projectColDefs(routeType, context);
         case 'users':
             return usersColDefs;
         case 'image':
@@ -46,45 +49,82 @@ const divisionColDefs = [
         field: 'staff_names',
         headerName: 'Staff',
         valueGetter: getStaffNames
-    },
-    {
-        headerName: 'View',
-        field: 'slug',
-        cellRenderer: LinkButtonRendererComponent,
-        cellRendererParams:  { },
-        maxWidth: 100
-    }
+    }//,
+    // {
+    //     headerName: 'View',
+    //     field: 'slug',
+    //     cellRenderer: LinkButtonRendererComponent,
+    //     cellRendererParams:  { },
+    //     maxWidth: 100
+    // }
 ];
 
-const projectColDefs = [
-    {
-        field: 'name',
-        headerName: 'Name'
-    },
-    {
-        field: 'description',
-        headerName: 'Description'
-    },
-    {
-        field: 'project_leader_names',
-        headerName: 'Project Leaders',
-        valueGetter: getProjectLeaderNames
-    },
-    {
-        headerName: 'View',
-        field: 'slug',
-        cellRenderer: LinkButtonRendererComponent,
-        cellRendererParams:  { },
-        maxWidth: 100
-    },
-    {
-        headerName: 'Edit',
-        field: 'slug',
-        cellRenderer: EditButtonRendererComponent,
-        cellRendererParams:  { },
-        maxWidth: 100
-    }
-];
+function projectColDefs(routeType: string, context: any) {
+    return [
+        {
+            field: 'name',
+            headerName: 'Name'
+        },
+        {
+            field: 'description',
+            headerName: 'Description'
+        },
+        {
+            field: 'project_leader_names',
+            headerName: 'Project Leaders',
+            valueGetter: getProjectLeaderNames
+        },
+        {
+            headerName: 'View',
+            field: 'slug',
+            cellRenderer: LinkButtonRendererComponent,
+            cellRendererParams:  { },
+            maxWidth: 100
+        },
+        {
+            headerName: 'Edit',
+            field: 'slug',
+            cellRenderer: EditButtonRendererComponent,
+            cellRendererParams: {
+                routeType: routeType,
+                context: context
+            },
+            maxWidth: 100
+        }
+    ];
+}
+
+// const projectColDefs = [
+//     {
+//         field: 'name',
+//         headerName: 'Name'
+//     },
+//     {
+//         field: 'description',
+//         headerName: 'Description'
+//     },
+//     {
+//         field: 'project_leader_names',
+//         headerName: 'Project Leaders',
+//         valueGetter: getProjectLeaderNames
+//     },
+//     {
+//         headerName: 'View',
+//         field: 'slug',
+//         cellRenderer: LinkButtonRendererComponent,
+//         cellRendererParams:  { },
+//         maxWidth: 100
+//     },
+//     {
+//         headerName: 'Edit',
+//         field: 'slug',
+//         cellRenderer: EditButtonRendererComponent,
+//         cellRendererParams:  {
+//             context: this,
+//          },
+//         maxWidth: 100
+//     }
+// ];
 
 
 const usersColDefs = [
@@ -105,17 +145,16 @@ const usersColDefs = [
         headerName: 'Work Phone',
         valueFormatter: function (params:any) {
             const phoneNumber = params.value;
-            if (/^\+\d{11}$/.test(phoneNumber)) {
-                const formattedPhoneNumber = `(${phoneNumber.substr(2, 3)}) ${phoneNumber.substr(5, 3)}-${phoneNumber.substr(8)}`;
-                return formattedPhoneNumber;
-            } else {
-                return ''; // Return empty string for unexpected formats
-            }
+            return formatPhone(phoneNumber);
         }
     },
     // {
     //     field: 'profile.mobile_phone',
-    //     headerName: 'Mobile Phone'
+    //     headerName: 'Mobile Phone',
+    //     valueFormatter: function (params:any) {
+    //         const phoneNumber = params.value;
+    //     return formatPhone(phoneNumber);
+    // }
     // },
     {
         headerName: 'View',
@@ -157,10 +196,6 @@ const imageColDefs = [
     }
 ];
 
-// function transformArray(inputArray: string[]): ColDef[] {
-//     return inputArray.map(item => ({ field: item }));
-// }
-
 // Function to extract and concatenate project leader names
 function getProjectLeaderNames(params: any) {
     if (params.data.project_leader && Array.isArray(params.data.project_leader)) {
@@ -170,6 +205,7 @@ function getProjectLeaderNames(params: any) {
     return '';
 }
 
+// .. or staff names
 function getStaffNames(params: any) {
     if (params.data.staff && Array.isArray(params.data.staff)) {
         const staffNames = params.data.staff.map((staff: any) => staff.full_name);

@@ -22,6 +22,7 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
   professionalAccess = professionalAccess;
 
   permissionGroup!: string;
+  routeType = 'subproject';
   list: any | undefined;
   private permissionGroupSubscription: Subscription;
 
@@ -72,6 +73,7 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
     modalRef.componentInstance.routeType = 'subproject';
     modalRef.componentInstance.projectId = this.projectId; // needed for filtered list response from FCC
     modalRef.componentInstance.data = newData;
+    modalRef.componentInstance.listContext = this;
 
     modalRef.result.then((result) => {
       modalRef.componentInstance.updateList.subscribe((newList: any) => {

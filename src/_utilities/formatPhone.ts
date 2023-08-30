@@ -1,13 +1,10 @@
-export function formatPhone(phone: string) {
-    if(!phone) { return; }
-
-    const formatted =
-        '('
-        + phone.substring(2, 5)
-        + ') '
-        + phone.substring(5, 8)
-        + '-'
-        + phone.substring(8, 12);
-
-    return formatted;
+export function formatPhone(phoneNumber: string | undefined) {
+    if(!phoneNumber) {
+        return '';
+    } else if (/^\+\d{11}$/.test(phoneNumber)) {
+        const formattedPhoneNumber = `(${phoneNumber.substr(2, 3)}) ${phoneNumber.substr(5, 3)}-${phoneNumber.substr(8)}`;
+        return formattedPhoneNumber;
+    } else {
+        return ''; // Return empty string for unexpected formats
+    }
 }

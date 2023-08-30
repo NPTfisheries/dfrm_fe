@@ -6,6 +6,9 @@ import { InputBase } from 'src/_inputs/input-base';
 import { InputService } from 'src/_services/input.service';
 import { BackendService } from 'src/_services/backend.service';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
+import { ListPageComponent } from 'src/app/list-page/list-page.component';
+import { DetailSubprojectComponent } from 'src/app/detail-page/detail-subproject/detail-subproject.component';
+import { DetailTaskComponent } from 'src/app/detail-page/detail-task/detail-task.component';
 
 @Component({
   selector: 'app-form-container',
@@ -13,6 +16,9 @@ import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
   styleUrls: ['./form-container.component.css']
 })
 export class FormContainerComponent implements OnInit {
+
+  @Input() listContext: ListPageComponent | DetailSubprojectComponent | DetailTaskComponent | undefined;
+  @Input() rdContext: ListPageComponent | undefined;
 
   @Output() updateList: EventEmitter<any> = new EventEmitter<any>();
 
@@ -36,6 +42,8 @@ export class FormContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.inputs$ = this.getInputs(this.routeType, this.data);
+    console.log('List Context:', this.listContext);
+    console.log('rowData Context:', this.rdContext);
   }
 
   submitDynamicForm() {
@@ -43,15 +51,20 @@ export class FormContainerComponent implements OnInit {
   }
 
   handleFormSubmitted() {
-
     let route = this.routeType;
-    if(this.projectId) { route = `${this.routeType}/?project_id=${this.projectId}`}; // subproject list, filtered
-    if(this.subprojectId) { route = `${this.routeType}/?subproject_id=${this.subprojectId}`}; // task list, filtered
+    if (this.projectId) { route = `${this.routeType}/?project_id=${this.projectId}` }; // subproject list, filtered
+    if (this.subprojectId) { route = `${this.routeType}/?subproject_id=${this.subprojectId}` }; // task list, filtered
 
 
     this.backendService.getList(route).subscribe(updatedList => {
-      console.log('handleFormSubmitted fired.');
-      this.updateList.emit(updatedList);
+      // console.log('handleFormSubmitted fired.');
+      // this.updateList.emit(updatedList);
+      if (this.listContext) {
+        this.listContext.list = updatedList;
+      }
+      if (this.rdContext) {
+        this.rdContext.rowData = updatedList;
+      }
     });
     this.activeModal.close();
   }

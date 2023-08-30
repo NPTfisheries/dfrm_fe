@@ -23,6 +23,7 @@ export class DetailTaskComponent implements OnInit, OnChanges {
 
   list: any | undefined;
   permissionGroup!: string;
+  routeType = 'task';
   private permissionGroupSubscription: Subscription;
 
   constructor(
@@ -74,6 +75,8 @@ export class DetailTaskComponent implements OnInit, OnChanges {
     modalRef.componentInstance.routeType = 'task';
     modalRef.componentInstance.subprojectId = this.subprojectId; // needed for filtered list response from FCC
     modalRef.componentInstance.data = newData;
+
+    modalRef.componentInstance.listContext = this;
 
     modalRef.result.then((result) => {
       modalRef.componentInstance.updateList.subscribe((newList: any) => {

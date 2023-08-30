@@ -38,8 +38,7 @@ export class CardPageComponent implements OnInit {
   }
 
   getImage(routeType: string | undefined) {
-
-    console.log('GETIMAGE', routeType);
+    // console.log('GETIMAGE', routeType);
     let slug = '';
     switch (routeType) {
       case 'division':

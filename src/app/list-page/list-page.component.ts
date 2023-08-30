@@ -50,20 +50,11 @@ export class ListPageComponent implements OnInit {
 
   rowData!: any[];
 
-  onGridReady(params: any) {
-    this.getList(this.routeType);
-    this.gridApi = params.api;
-    params.api.sizeColumnsToFit();
-    // params.api.autoSizeAllColumns();
-  }
-
   managerAccess = managerAccess;
   professionalAccess = professionalAccess;
-  // routeType: string | undefined;
   routeType!: string;
 
   list: any | undefined;
-  columns: string[] = [];
   permissionGroup!: string;
   private permissionGroupSubscription: Subscription;
 
@@ -79,19 +70,18 @@ export class ListPageComponent implements OnInit {
       this.permissionGroup = group;
     });
 
-
   }
 
-  showlist() {
-    console.log(this.list);
+  onGridReady(params: any) {
+    this.getList(this.routeType);
+    this.gridApi = params.api;
+    params.api.sizeColumnsToFit();
+    // params.api.autoSizeAllColumns();
   }
 
   ngOnInit(): void {
     this.routeType = getRouteType(this.route);
-    this.getList(this.routeType);
-    this.populateFieldsArray(this.routeType);
-
-    this.columnDefs = getColumnDefs(this.routeType);
+    this.columnDefs = getColumnDefs(this.routeType, this);
   }
 
   ngOnDestroy(): void {
@@ -100,7 +90,6 @@ export class ListPageComponent implements OnInit {
 
   getList(routeType: string) {
     this.backendService.getList(routeType).subscribe((list: any) => {
-      this.list = list;
       this.rowData = list;
     });
   }
@@ -112,32 +101,14 @@ export class ListPageComponent implements OnInit {
     const modalRef = this.modalService.open(FormContainerComponent, this.getModalOptions());
 
     modalRef.componentInstance.routeType = routeType;
+    modalRef.componentInstance.rdContext = this;
 
-    modalRef.result.then((result) => {
-      modalRef.componentInstance.updateList.subscribe((newList: any) => {
-        this.list = newList;
-        this.alertService.success(`New ${this.routeType} created!`, { autoClose: true });
-      });
-    }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
-  }
-
-  edit(routeType: string, slug: string) {
-    console.log('edit:', routeType, slug);
-
-    const data = this.getRecordBySlug(routeType, slug);
-
-    const modalRef = this.modalService.open(FormContainerComponent, this.getModalOptions());
-
-    modalRef.componentInstance.routeType = routeType;
-    modalRef.componentInstance.slug = slug;
-    modalRef.componentInstance.data = data;
-
-    modalRef.result.then((result) => {
-      modalRef.componentInstance.updateList.subscribe((newList: any) => {
-        this.list = newList;
-        this.alertService.success(`Edit ${this.routeType} successful!`, { autoClose: true });
-      });
-    }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
+    // modalRef.result.then((result) => {
+    //   modalRef.componentInstance.updateList.subscribe((newList: any) => {
+    //     this.list = newList;
+    //     this.alertService.success(`New ${this.routeType} created!`, { autoClose: true });
+    //   });
+    // }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
 
   uploadImage() {
@@ -151,7 +122,6 @@ export class ListPageComponent implements OnInit {
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
 
-
   registerUser() {
     const modalRef = this.modalService.open(RegisterComponent, this.getModalOptions());
 
@@ -161,46 +131,6 @@ export class ListPageComponent implements OnInit {
         this.alertService.success(`New user registered!`, { autoClose: true });
       });
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
-  }
-
-  populateFieldsArray(routeType: string) {
-    switch (routeType) {
-      case 'department':
-      case 'division':
-        this.columns = ['name', 'description', 'manager', 'deputy', 'assistant', 'staff'];
-        break;
-      case 'project':
-        this.columns = ['name', 'description', 'project leaders'];
-        break;
-      case 'users':
-        this.columns = ['name', 'email', 'work phone', 'mobile phone', 'title'];
-        break;
-      case 'image':
-        this.columns = ['name', 'description', 'photographer', 'photo date', 'source'];
-        break;
-      default:
-        this.columns = [];
-        return;
-    }
-  }
-
-  getRecordBySlug(routeType: string, slug: string) {
-    if (!this.list) { return; }
-    for (let item of this.list) {
-      if (item.slug === slug) {
-        return item;
-      }
-    }
-  }
-
-  getRecordById(id: number) {
-    if (!this.list) { return; }
-
-    for (let item of this.list) {
-      if (item.id === id) {
-        return item;
-      }
-    }
   }
 
   getModalOptions(): NgbModalOptions {

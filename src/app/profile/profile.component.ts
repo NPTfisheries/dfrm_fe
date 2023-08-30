@@ -7,6 +7,7 @@ import { User } from 'src/_models/user';
 
 import { ProfileUpdateComponent } from '../forms/profile-update/profile-update.component';
 import { getRouteType, getRouteSlug } from 'src/_utilities/route-utils';
+import { formatPhone } from 'src/_utilities/formatPhone';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { getRouteType, getRouteSlug } from 'src/_utilities/route-utils';
 })
 export class ProfileComponent implements OnInit {
 
+  formatPhone = formatPhone;
   user: User | undefined;
   imageUrl!: string | undefined;
   routeType!: string;

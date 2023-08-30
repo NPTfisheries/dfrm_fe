@@ -13,10 +13,10 @@
             <h3>Email: {{ user?.email }}</h3>
         </li><br>
         <li>
-            <h3>Work Phone: {{ user?.profile?.work_phone }}</h3>
+            <h3>Work Phone: {{ formatPhone(user?.profile?.work_phone) }}</h3>
         </li><br>
         <li>
-            <h3>Mobile Phone: {{ user?.profile?.mobile_phone }}</h3>
+            <h3>Mobile Phone: {{ formatPhone(user?.profile?.mobile_phone) }}</h3>
         </li><br>
     </ul>
     <button *ngIf="this.routeType === 'profile'" (click)="updateProfile()" class="dfrm-button grow">Update
