@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 
@@ -17,10 +17,7 @@ import { DetailTaskComponent } from 'src/app/detail-page/detail-task/detail-task
 })
 export class FormContainerComponent implements OnInit {
 
-  @Input() listContext: ListPageComponent | DetailSubprojectComponent | DetailTaskComponent | undefined;
-  @Input() rdContext: ListPageComponent | undefined;
-
-  @Output() updateList: EventEmitter<any> = new EventEmitter<any>();
+  @Input() context!: ListPageComponent | DetailSubprojectComponent | DetailTaskComponent | undefined;
 
   @Input() routeType!: string;  // always provided.
   @Input() projectId: string | null = null;  // provided only for refreshing subprojects.
@@ -42,8 +39,7 @@ export class FormContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.inputs$ = this.getInputs(this.routeType, this.data);
-    console.log('List Context:', this.listContext);
-    console.log('rowData Context:', this.rdContext);
+    console.log('Context:', this.context);
   }
 
   submitDynamicForm() {
@@ -52,25 +48,19 @@ export class FormContainerComponent implements OnInit {
 
   handleFormSubmitted() {
     let route = this.routeType;
+
     if (this.projectId) { route = `${this.routeType}/?project_id=${this.projectId}` }; // subproject list, filtered
     if (this.subprojectId) { route = `${this.routeType}/?subproject_id=${this.subprojectId}` }; // task list, filtered
 
-
     this.backendService.getList(route).subscribe(updatedList => {
-      // console.log('handleFormSubmitted fired.');
-      // this.updateList.emit(updatedList);
-      if (this.listContext) {
-        this.listContext.list = updatedList;
-      }
-      if (this.rdContext) {
-        this.rdContext.rowData = updatedList;
+      if (this.context) {
+        this.context.data = updatedList;
+        this.activeModal.close();
       }
     });
-    this.activeModal.close();
   }
 
   handleFormValidityChanged(valid: boolean) {
-    // console.log('handleFormValidity:', valid);
     this.formValid = valid;
   }
 

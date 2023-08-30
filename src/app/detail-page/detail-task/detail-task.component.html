@@ -3,7 +3,7 @@
         <button *ngIf="professionalAccess(permissionGroup)" (click)="add()" class="dfrm-button"
             style="margin-left: auto;">Add Task</button>
     </div>
-    <div *ngFor="let item of list; let i = index">
+    <div *ngFor="let item of data; let i = index">
         <br>
         task info
         <div class="container task-container-light">

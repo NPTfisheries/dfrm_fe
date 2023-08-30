@@ -40,7 +40,7 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
 
     modalRef.result.then((result) => {
       modalRef.componentInstance.updateList.subscribe((newList: any) => {        
-        this.params.context.rowData = newList;
+        this.params.context.data = newList;
         this.params.context.alertService.success(`Edit ${this.params.routeType} successful!`, { autoClose: true });
       });
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.

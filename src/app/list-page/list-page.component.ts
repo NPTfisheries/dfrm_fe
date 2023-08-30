@@ -48,7 +48,7 @@ export class ListPageComponent implements OnInit {
     resizable: true,
   };
 
-  rowData!: any[];
+  data!: any[];
 
   managerAccess = managerAccess;
   professionalAccess = professionalAccess;
@@ -90,7 +90,7 @@ export class ListPageComponent implements OnInit {
 
   getList(routeType: string) {
     this.backendService.getList(routeType).subscribe((list: any) => {
-      this.rowData = list;
+      this.data = list;
     });
   }
 
@@ -101,7 +101,7 @@ export class ListPageComponent implements OnInit {
     const modalRef = this.modalService.open(FormContainerComponent, this.getModalOptions());
 
     modalRef.componentInstance.routeType = routeType;
-    modalRef.componentInstance.rdContext = this;
+    modalRef.componentInstance.context = this;
 
     // modalRef.result.then((result) => {
     //   modalRef.componentInstance.updateList.subscribe((newList: any) => {

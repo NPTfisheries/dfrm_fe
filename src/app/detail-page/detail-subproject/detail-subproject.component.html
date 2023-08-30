@@ -1,5 +1,5 @@
 <button *ngIf="professionalAccess(permissionGroup)" (click)="add()" class="dfrm-button">Add Subproject</button>
-<div *ngFor="let item of list; let i = index">
+<div *ngFor="let item of data; let i = index">
     <!-- subproject info -->
     <div class="container rounded-border bg-dark">
         <div class="col-md-4 banner-container-sub">
@@ -29,5 +29,5 @@
             <app-detail-task [subprojectId]="item.id"></app-detail-task>
         </div>
     </div>
-    <h2 class="divider gradient-hr" *ngIf="i !== list.length-1"></h2>
+    <h2 class="divider gradient-hr" *ngIf="i !== data.length-1"></h2>
 </div>
