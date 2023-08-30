@@ -3,9 +3,11 @@ import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 
 import { AgGridAngular } from 'ag-grid-angular';
+import { AgGridModule } from 'ag-grid-angular';
 import { GridReadyEvent } from 'ag-grid-community';
 import { ColDef } from 'ag-grid-community';
 import { getColumnDefs } from 'src/_services/columnDef.service';
+import { LinkButtonRendererComponent } from 'src/_renderers/link-button-renderer/link-button-renderer.component';
 
 import { AuthService } from 'src/_services/auth.service';
 import { AlertService } from 'src/_services/alert.service';
@@ -33,6 +35,9 @@ export class ListPageComponent implements OnInit {
 
 
   columnDefs: ColDef[] | undefined;
+  frameworkComponents: any = {
+    linkButtonRenderer: LinkButtonRendererComponent,
+  };
 
   defaultColDef: ColDef = {
     sortable: true,
@@ -44,6 +49,8 @@ export class ListPageComponent implements OnInit {
   onGridReady(params: GridReadyEvent) {
     this.getList(this.routeType);
   }
+
+
 
   managerAccess = managerAccess;
   professionalAccess = professionalAccess;
@@ -61,10 +68,13 @@ export class ListPageComponent implements OnInit {
     private backendService: BackendService,
     private alertService: AlertService,
     private modalService: NgbModal,
+
   ) {
     this.permissionGroupSubscription = this.authService.permissionGroup$.subscribe(group => {
       this.permissionGroup = group;
     });
+
+
   }
 
   showlist() {

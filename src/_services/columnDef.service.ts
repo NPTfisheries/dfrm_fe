@@ -1,4 +1,4 @@
-import { ColDef } from 'ag-grid-community';
+import { LinkButtonRendererComponent } from "src/_renderers/link-button-renderer/link-button-renderer.component";
 
 export function getColumnDefs(routeType: string) {
     switch (routeType) {
@@ -61,6 +61,12 @@ const projectColDefs = [
         field: 'project_leader_names',
         headerName: 'Project Leaders',
         valueGetter: getProjectLeaderNames
+    },
+    {
+        headerName: 'ViewBySlug',
+        field: 'slug',
+        cellRenderer: LinkButtonRendererComponent,
+        cellRendererParams:  { }
     }
 ];
 

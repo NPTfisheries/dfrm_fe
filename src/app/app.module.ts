@@ -32,6 +32,7 @@ import { FormContainerComponent } from './forms/form-container/form-container.co
 import { EmployeeCardComponent } from './employee-card/employee-card.component';
 import { DetailTaskComponent } from './detail-page/detail-task/detail-task.component';
 import { DetailSubprojectComponent } from './detail-page/detail-subproject/detail-subproject.component';
+import { LinkButtonRendererComponent } from '../_renderers/link-button-renderer/link-button-renderer.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { DetailSubprojectComponent } from './detail-page/detail-subproject/detai
     EmployeeCardComponent,
     DetailTaskComponent,
     DetailSubprojectComponent,
+    LinkButtonRendererComponent,
   ],
   imports: [
     BrowserModule,
