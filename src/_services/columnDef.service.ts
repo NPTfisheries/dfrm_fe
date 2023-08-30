@@ -1,4 +1,5 @@
 import { LinkButtonRendererComponent } from "src/_renderers/link-button-renderer/link-button-renderer.component";
+import { EditButtonRendererComponent } from "src/_renderers/edit-button-renderer/edit-button-renderer.component";
 
 export function getColumnDefs(routeType: string) {
     switch (routeType) {
@@ -75,6 +76,13 @@ const projectColDefs = [
         cellRenderer: LinkButtonRendererComponent,
         cellRendererParams:  { },
         maxWidth: 100
+    },
+    {
+        headerName: 'Edit',
+        field: 'slug',
+        cellRenderer: EditButtonRendererComponent,
+        cellRendererParams:  { },
+        maxWidth: 100
     }
 ];
 
@@ -94,7 +102,16 @@ const usersColDefs = [
     },
     {
         field: 'profile.work_phone',
-        headerName: 'Work Phone'
+        headerName: 'Work Phone',
+        valueFormatter: function (params:any) {
+            const phoneNumber = params.value;
+            if (/^\+\d{11}$/.test(phoneNumber)) {
+                const formattedPhoneNumber = `(${phoneNumber.substr(2, 3)}) ${phoneNumber.substr(5, 3)}-${phoneNumber.substr(8)}`;
+                return formattedPhoneNumber;
+            } else {
+                return ''; // Return empty string for unexpected formats
+            }
+        }
     },
     // {
     //     field: 'profile.mobile_phone',

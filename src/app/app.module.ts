@@ -33,6 +33,7 @@ import { EmployeeCardComponent } from './employee-card/employee-card.component';
 import { DetailTaskComponent } from './detail-page/detail-task/detail-task.component';
 import { DetailSubprojectComponent } from './detail-page/detail-subproject/detail-subproject.component';
 import { LinkButtonRendererComponent } from '../_renderers/link-button-renderer/link-button-renderer.component';
+import { EditButtonRendererComponent } from '../_renderers/edit-button-renderer/edit-button-renderer.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { LinkButtonRendererComponent } from '../_renderers/link-button-renderer/
     DetailTaskComponent,
     DetailSubprojectComponent,
     LinkButtonRendererComponent,
+    EditButtonRendererComponent,
   ],
   imports: [
     BrowserModule,

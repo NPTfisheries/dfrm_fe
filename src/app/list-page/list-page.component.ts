@@ -7,6 +7,7 @@ import { GridApi, ColumnApi } from 'ag-grid-community';
 import { ColDef } from 'ag-grid-community';
 import { getColumnDefs } from 'src/_services/columnDef.service';
 import { LinkButtonRendererComponent } from 'src/_renderers/link-button-renderer/link-button-renderer.component';
+import { EditButtonRendererComponent } from 'src/_renderers/edit-button-renderer/edit-button-renderer.component';
 
 import { AuthService } from 'src/_services/auth.service';
 import { AlertService } from 'src/_services/alert.service';
@@ -37,6 +38,7 @@ export class ListPageComponent implements OnInit {
   columnDefs: ColDef[] | undefined;
   frameworkComponents: any = {
     linkButtonRenderer: LinkButtonRendererComponent,
+    editButtonRenderer: EditButtonRendererComponent,
   };
 
   // default settings for all columns.
