@@ -4,14 +4,10 @@ import { ICellRendererParams } from 'ag-grid-community';
 
 @Component({
   selector: 'app-link-button-renderer',
-  template: `<button class='ag-button' [routerLink]="this.slug"><i class="fa-regular fa-eye"></i></button>`,
-  styles: [`
-  .ag-button {
-      background-color: transparent;
-      border: none;    
-    }
-  `]
+  template: `<div class="icon-wrapper"><i [routerLink]="this.slug" class="fa-regular fa-eye ag-clickable"></i><div>`,
+  styleUrls: ['../renderers.css']
 })
+
 export class LinkButtonRendererComponent implements ICellRendererAngularComp{
   slug = '';
 

@@ -7,13 +7,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-image-preview-renderer',
-  template: `<button class='ag-button' (click)="previewImage()"><i class="fa-regular fa-eye"></i></button>`,
-  styles: [`
-  .ag-button {
-      background-color: transparent;
-      border: none;    
-    }
-  `]
+  template: `<div class="icon-wrapper"><i (click)="previewImage()" class="fa-regular fa-eye ag-clickable"></i></div>`,
+  styleUrls: ['../renderers.css']
+
 })
 export class ImagePreviewRendererComponent implements ICellRendererAngularComp {
   private params: any;
@@ -31,9 +27,12 @@ export class ImagePreviewRendererComponent implements ICellRendererAngularComp {
   }
 
   previewImage() {
-    console.log('edit:', this.params.routeType, this.params.value);
+    console.log('previewImage:', this.params);
     console.log(this.params);
 
+    const imageUrl = this.params.data.image.replace('localhost:4200', 'localhost:8000');
+
     const modalRef = this.modalService.open(ImagePreviewComponent, { size: 'xl' });
+    modalRef.componentInstance.imageUrl = imageUrl;
   }
 }

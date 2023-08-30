@@ -205,7 +205,8 @@ function usersColDefs(routeType: string, context: any) {
             headerName: 'View',
             field: 'id',
             cellRenderer: LinkButtonRendererComponent,
-            cellRendererParams: {}
+            cellRendererParams: {},
+            maxWidth: 100
         }
     ];
 

@@ -21,3 +21,7 @@ td {
     margin:auto;
     display: block;
 }
+
+::ng-deep .ag-cell-focus {
+    outline: none !important;
+  }
