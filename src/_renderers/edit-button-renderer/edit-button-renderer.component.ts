@@ -9,7 +9,12 @@ import { FormContainerComponent } from 'src/app/forms/form-container/form-contai
 @Component({
   selector: 'app-edit-button-renderer',
   template: `<button class="ag-button" (click)="onEditClick()"><i  class="fa-regular fa-pen-to-square"></i></button>`,
-  styleUrls: ['./edit-button-renderer.component.css']
+  styles: [`
+  .ag-button {
+      background-color: transparent;
+      border: none;    
+    }
+  `]
 })
 export class EditButtonRendererComponent implements ICellRendererAngularComp {
 

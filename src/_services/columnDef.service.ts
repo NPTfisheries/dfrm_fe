@@ -1,5 +1,6 @@
 import { LinkButtonRendererComponent } from "src/_renderers/link-button-renderer/link-button-renderer.component";
 import { EditButtonRendererComponent } from "src/_renderers/edit-button-renderer/edit-button-renderer.component";
+import { ImagePreviewRendererComponent } from "src/_renderers/image-preview-renderer/image-preview-renderer.component";
 
 import { professionalAccess, managerAccess } from "src/_utilities/permission-util";
 import { formatPhone } from "src/_utilities/formatPhone";
@@ -237,9 +238,9 @@ function imageColDefs(routeType: string, context: any) {
             headerName: 'Source'
         },
         {
-            headerName: 'View',
+            headerName: 'Preview',
             field: 'slug',
-            cellRenderer: LinkButtonRendererComponent,
+            cellRenderer: ImagePreviewRendererComponent,
             cellRendererParams: {},
             maxWidth: 100
         }

@@ -34,6 +34,8 @@ import { DetailTaskComponent } from './detail-page/detail-task/detail-task.compo
 import { DetailSubprojectComponent } from './detail-page/detail-subproject/detail-subproject.component';
 import { LinkButtonRendererComponent } from '../_renderers/link-button-renderer/link-button-renderer.component';
 import { EditButtonRendererComponent } from '../_renderers/edit-button-renderer/edit-button-renderer.component';
+import { ImagePreviewComponent } from './image-preview/image-preview.component';
+import { ImagePreviewRendererComponent } from '../_renderers/image-preview-renderer/image-preview-renderer.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { EditButtonRendererComponent } from '../_renderers/edit-button-renderer/
     DetailSubprojectComponent,
     LinkButtonRendererComponent,
     EditButtonRendererComponent,
+    ImagePreviewComponent,
+    ImagePreviewRendererComponent,
   ],
   imports: [
     BrowserModule,
