@@ -17,7 +17,7 @@ import { professionalAccess } from 'src/_utilities/permission-util';
 export class DetailSubprojectComponent implements OnInit, OnChanges {
 
   @Input() projectId: number | undefined;
-  @ViewChild(FormContainerComponent) formContainerComponent!: FormContainerComponent;
+  // @ViewChild(FormContainerComponent) formContainerComponent!: FormContainerComponent;
 
   professionalAccess = professionalAccess;
 
