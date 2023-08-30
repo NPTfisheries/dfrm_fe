@@ -76,13 +76,15 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
     console.log('edit: subproject', slug);
 
     const data = getRecordBySlug(this.data, slug);
+    // console.log('passing this:', data)
+
 
     const modalRef = this.modalService.open(FormContainerComponent, { size: 'xl', });
     modalRef.componentInstance.context = this;
     modalRef.componentInstance.routeType = 'subproject';
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.projectId = this.projectId; // needed for filtered list response from FCC
-    modalRef.componentInstance.data = slug;
+    modalRef.componentInstance.slug = slug;
   }
 
 }

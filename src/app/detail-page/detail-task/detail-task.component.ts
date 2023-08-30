@@ -87,7 +87,7 @@ export class DetailTaskComponent implements OnInit, OnChanges {
     modalRef.componentInstance.routeType = 'task';
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.subprojectId = this.subprojectId; // needed for filtered list response from FCC
-    modalRef.componentInstance.data = slug;
+    modalRef.componentInstance.slug = slug;
   }
 
 }
