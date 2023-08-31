@@ -47,7 +47,6 @@ export class InputService {
         key: 'deputy',
         label: 'Deputy',
         value: data?.deputy.id || '',
-        required: true,
         options: this.buildEmployeeOptions(),
         order: 4
       }),
@@ -55,7 +54,6 @@ export class InputService {
         key: 'assistant',
         label: 'Assistant',
         value: data?.assistant.id || '',
-        required: true,
         options: this.buildEmployeeOptions(),
         order: 5
       }),
@@ -64,7 +62,6 @@ export class InputService {
         label: 'Staff',
         idArray: this.getIdArray(data?.staff) || [],
         // valueArray: this.getValueArray(data?.staff) || [],        
-        required: true,
         options: this.buildEmployeeOptions(),
         order: 6
       }),
@@ -115,7 +112,6 @@ export class InputService {
         key: 'deputy',
         label: 'Deputy',
         value: data?.deputy.id || '',
-        required: true,
         options: this.buildEmployeeOptions(),
         order: 4
       }),
@@ -123,7 +119,6 @@ export class InputService {
         key: 'assistant',
         label: 'Assistant',
         value: data?.assistant.id || '',
-        required: true,
         options: this.buildEmployeeOptions(),
         order: 5
       }),
@@ -132,7 +127,6 @@ export class InputService {
         label: 'Staff',
         idArray: this.getIdArray(data?.staff) || [],
         // valueArray: this.getValueArray(data?.staff) || [],
-        required: true,
         options: this.buildEmployeeOptions(),
         order: 6
       }),

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { InputBase } from 'src/_inputs/input-base';
 import { InputControlService } from 'src/_services/input-control.service';
@@ -20,13 +19,11 @@ export class DynamicFormComponent implements OnInit {
   @Input() inputs: InputBase<string>[] | null = [];
   @Input() slug!: string;
   form!: FormGroup;
-  payload = '';
 
   constructor(
     private ics: InputControlService,
     private backendService: BackendService,
-    private activeModal: NgbActiveModal,
-  ) { }
+      ) { }
 
   ngOnInit(): void {
     this.form = this.ics.toFormGroup(this.inputs as InputBase<string>[]);
@@ -38,8 +35,6 @@ export class DynamicFormComponent implements OnInit {
   onSubmit() {
     console.log(this.form.value);
     
-    let formRequest$;
-
     if(this.slug === undefined) {
       this.backendService.newItem(this.routeType, this.form.value).subscribe({
         next: () => {this.formSubmitted.emit();}

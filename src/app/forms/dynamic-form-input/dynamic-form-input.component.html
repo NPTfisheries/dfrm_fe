@@ -4,29 +4,36 @@
     <div [ngSwitch]="input.controlType">
 
         <!-- FILE -->
-        <input  *ngSwitchCase="'file'" type="file" [formControlName]="input.key" [value]="input.key" [id]="input.key" class="form-control form-control-lg">
+        <input *ngSwitchCase="'file'" type="file" [formControlName]="input.key" [value]="input.key" [id]="input.key"
+            class="form-control form-control-lg">
 
         <!-- HIDDEN -->
-        <input *ngSwitchCase="'hidden'" type="hidden" style="display:none;" [formControlName]="input.key" [value]="input.key" [id]="input.key" />
+        <input *ngSwitchCase="'hidden'" type="hidden" style="display:none;" [formControlName]="input.key"
+            [value]="input.key" [id]="input.key" />
 
         <!-- IMAGE -->
-        <select [id]="input.key" *ngSwitchCase="'image'" [formControlName]="input.key"
-            class="form-control form-select form-select-lg">
-            <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
-            <!-- image preview -->
-            <!-- <div *ngIf="selectedImage" class="mb-3">
-                <label class="form-label">Image Preview</label>
-                <img [src]="imagePreview" alt="Image Preview" class="img-thumbnail">
-            </div> -->
-        </select>
+        <div class="row justify-space-between position-relative" style="max-height:180px" *ngSwitchCase="'image'">
+            <div class="col-sm-8">
+                <select [id]="input.key" *ngSwitchCase="'image'" [formControlName]="input.key" size="6"
+                    (change)="onSelectChange($event)" class="form-control form-select form-select-lg">
+                    <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <div class="mb-3">
+                    <img *ngIf="imagePreview" [src]="imagePreview" alt="Image Preview" class="img-thumbnail"
+                     style="max-height: 160px">
+                </div>
+            </div>
+        </div>
 
         <!-- PHONE -->
-        <div *ngSwitchCase="'phone'" >
+        <div *ngSwitchCase="'phone'">
             <input [formControlName]="input.key" [id]="input.key" [type]="input.type"
-            class="form-control form-control-lg">
+                class="form-control form-control-lg">
             <small class="form-text text-muted">Expected format: +1 XXX XXX XXXX</small>
         </div>
- 
+
         <!-- TEXT -->
         <input *ngSwitchCase="'text'" [formControlName]="input.key" [id]="input.key" [type]="input.type"
             class="form-control form-control-lg">
@@ -38,12 +45,14 @@
         <!-- SELECT -->
         <select [id]="input.key" *ngSwitchCase="'select'" [formControlName]="input.key"
             class="form-control form-select form-select-lg">
+            <option [value]=""></option>
             <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
         </select>
 
         <!-- SELECT MULTIPLE -->
         <select [id]="input.key" *ngSwitchCase="'multi-select'" [formControlName]="input.key"
             class="form-control form-select form-select-lg" multiple [ngModel]="input.idArray">
+            <option [value]=""></option>
             <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
         </select>
 
