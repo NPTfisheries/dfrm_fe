@@ -1,24 +1,39 @@
-<div class="container">
-    <div class="profile-image-container">
-        <img [src]="imageUrl" class="profile-image" alt="...">
+<div class="container py-4">
+    <button *ngIf="this.routeType === 'profile'" style='float:right; position: absolute;' (click)="updateProfile()"
+        class="dfrm-button-small grow">Update
+        Image</button>
+    <div class="d-flex justify-content-around align-items center my-4">
+        <div class="profile-img-container">
+            <img [src]="imageUrl" class="profile-img" alt="...">
+        </div>
     </div>
-    <h1>{{ user?.first_name }} {{ user?.last_name }}</h1>
-    <h2>{{ user?.profile?.title }}</h2>
-    <h3>{{ user?.profile?.bio }}</h3>
-    <ul>
-        <li>
-            <h3>Office Location: {{ user?.profile?.city }}, {{ user?.profile?.state }}</h3>
-        </li><br>
-        <li>
-            <h3>Email: {{ user?.email }}</h3>
-        </li><br>
-        <li>
-            <h3>Work Phone: {{ formatPhone(user?.profile?.work_phone) }}</h3>
-        </li><br>
-        <li>
-            <h3>Mobile Phone: {{ formatPhone(user?.profile?.mobile_phone) }}</h3>
-        </li><br>
-    </ul>
-    <button *ngIf="this.routeType === 'profile'" (click)="updateProfile()" class="dfrm-button grow">Update
-        Profile</button>
+
+    <div class="bg-dark rounded p-4 my-5">
+        <button *ngIf="this.routeType === 'profile'" style='float:right; position: absolute;' (click)="updateProfile()"
+            class="dfrm-button-small grow">Update
+            Profile</button>
+        <h1 class="text-center font-weight-bold text-yellow my-2">{{ user?.full_name }}</h1>
+        <h2 class="text-center text-lightgray">{{ user?.profile?.title }}</h2>
+        <hr class="card-hr" />
+        <br>
+        <h4 class="text-lightgray">{{ user?.profile?.bio }}</h4>
+        <br>
+        <hr class="card-hr" />
+        <br>
+        <ul class="text-lightgray">
+            <li>
+                <h4 class="text-lightgray">Office Location: {{ user?.profile?.city }}, {{ user?.profile?.state }}</h4>
+            </li><br>
+            <li>
+                <h4 class="text-lightgray">Email: {{ user?.email }}</h4>
+            </li><br>
+            <li>
+                <h4 class="text-lightgray">Work Phone: {{ formatPhone(user?.profile?.work_phone) }}</h4>
+            </li><br>
+            <li>
+                <h4 class="text-lightgray">Mobile Phone: {{ formatPhone(user?.profile?.mobile_phone) }}</h4>
+            </li><br>
+        </ul>
+
+    </div>
 </div>

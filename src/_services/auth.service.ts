@@ -19,7 +19,6 @@ export class AuthService {
     private permissionGroupSubject = new BehaviorSubject<string>('Guest');
     public permissionGroup$ = this.permissionGroupSubject.asObservable();
 
-
     constructor(
         private router: Router,
         private http: HttpClient
@@ -37,12 +36,11 @@ export class AuthService {
         return this.http.post<any>('/api/v1/login/', credentials)
             .pipe(
                 map((response) => {
-                    // console.log('login return:', response);
+                    console.log('login return:', response);
                     // console.log('access: ', response.access);
                     const decoded: any = jwtDecode(response.access);
                     // console.log('access decoded:', decoded);
                     
-
                     this.username$.next(`${response.first_name} ${response.last_name}`);
                     this.token$.next(response.access);
                     this.isLoggedIn$.next(true);

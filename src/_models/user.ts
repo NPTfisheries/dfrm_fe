@@ -1,9 +1,10 @@
 import { Profile } from "./profile";
 
 export interface User {
+    id?: string;
     email?: string;
     first_name?: string;
-    id?: string;
     last_name?: string;
+    full_name?: string;
     profile: Profile;
 }

@@ -22,6 +22,7 @@ export class DetailPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDetail();
+    window.scrollTo(0, 0);
   }
 
   getDetail() {
