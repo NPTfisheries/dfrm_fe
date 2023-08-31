@@ -19,8 +19,8 @@
                         <br>
                         <hr>
                         <div class="d-flex justify-content-between py-0 my-0">
-                            <p class=>Supervisor: <a
-                                    [routerLink]="'/users/' + item.supervisor.id">{{ item.supervisor.first_name }}
+                            <p>Supervisor: <a [routerLink]="'/users/' + item.supervisor.id">{{
+                                    item.supervisor.first_name }}
                                     {{item.supervisor.last_name}} </a></p>
                             <button *ngIf="professionalAccess(permissionGroup)" (click)="edit(item.slug)"
                                 class="dfrm-button-small">Edit Task</button>
@@ -33,34 +33,6 @@
                 </div>
             </div>
         </div>
-        
-        <!-- <div class="container task-container">
-            <div class="row">
-                <div *ngIf="i % 2 === 1" class="col-md-4 overflow-hidden">
-                    <img [src]="'http://localhost:8000' + item.img_card.image" alt="Image"
-                        class="rounded-left image-task">
-                </div>
-                <div class="col-md-8 p-4">
-                    <div>
-                        <h3 class="text-yellow">{{ item.name }}</h3>
-                        <p class="text-lightgray">{{ item.description }}</p>
-                        <br>
-                        <hr class="card-hr">
-                        <div class="d-flex justify-content-between">
-                            <p class="text-lightgray">Supervisor: <a class="block-link"
-                                    [routerLink]="'/users/' + item.supervisor.id">{{ item.supervisor.first_name }}
-                                    {{item.supervisor.last_name}} </a></p>
-                            <button *ngIf="professionalAccess(permissionGroup)" (click)="edit(item.slug)"
-                                class="dfrm-button">Edit Task</button>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="i % 2 === 0" class="col-md-4 overflow-hidden">
-                    <img [src]="'http://localhost:8000' + item.img_card.image" alt="Image"
-                        class="rounded-right image-task">
-                </div>
-            </div>
-        </div> -->
         <br>
     </div>
     <br>
