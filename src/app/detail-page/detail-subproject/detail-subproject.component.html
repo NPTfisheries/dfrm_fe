@@ -2,6 +2,7 @@
     <button *ngIf="professionalAccess(permissionGroup)" (click)="add()" class="dfrm-button"
         style="margin-left:auto;">Add Subproject</button>
 </div>
+<br>
 <div *ngFor="let item of data; let i = index">
     <!-- subproject info -->
     <div class="container rounded-border bg-dark">

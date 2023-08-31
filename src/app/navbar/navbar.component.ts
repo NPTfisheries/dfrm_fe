@@ -14,9 +14,7 @@ import { PasswordUpdateComponent } from '../forms/password-update/password-updat
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  tabs = ['Divisions', 'Projects']
-
-  currentUser?: User | null = null;
+  
   username?: string | null = null; 
   isLoggedIn: boolean | null = false;
 

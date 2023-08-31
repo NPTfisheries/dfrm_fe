@@ -1,13 +1,14 @@
 <nav class="nav navbar navbar-dark bg-dark sticky-top mx-auto">
   <div class="container" style="margin-top: 0px; margin-bottom: 0px;">
     <img class="nav-link" src='./assets/images/DFRM.png' height="90px" style="padding:0;" />
-    <a class="nav-link grow" routerLink="home" routerLinkActive="active"
-    ariaCurrentWhenActive="page">Home</a>
+    <a class="nav-link grow" routerLink="home" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a>
     <li ngbDropdown class="nav-item" role="presentation">
-      <button type="button" class="nav-link" ngbDropdownToggle>Department Structure</button>
-      <div ngbDropdownMenu  class="col-md-12">
-        <button *ngFor="let tab of tabs" class="nav-link" ngbDropdownItem routerLink="{{tab | lowercase}}" 
-        routerLinkActive="active" ariaCurrentWhenActive="page">{{tab}}</button>
+      <button type="button" class="nav-link" ngbDropdownToggle>Administration</button>
+      <div ngbDropdownMenu>
+        <button class="nav-link" ngbDropdownItem routerLink="divisions"
+          routerLinkActive="active" ariaCurrentWhenActive="page">Department Structure</button>
+        <button class="nav-link" ngbDropdownItem routerLink="projects"
+          routerLinkActive="active" ariaCurrentWhenActive="page">Projects</button>
       </div>
     </li>
 
