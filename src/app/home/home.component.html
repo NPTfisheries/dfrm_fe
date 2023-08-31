@@ -17,14 +17,10 @@
     </div>
 </div>
 
-<div class="employee-bar">
-    <app-employee-card *ngIf="data?.manager" [data]="data?.manager"></app-employee-card>
-    <app-employee-card *ngIf="data?.deputy" [data]="data?.deputy"></app-employee-card>
-    <app-employee-card *ngIf="data?.assistant" [data]="data?.assistant"></app-employee-card>
-</div>
 
 
-<div class="container mtb150">
+
+<div class="container my-5">
     <div class="col-md">
         <p>
             The Nimiipúu fished, hunted, gathered, pastured
@@ -57,6 +53,6 @@
 
 <h2 class="divider gradient-hr"></h2>
 
-<div class="container mtb150" >
+<div class="container my-5" >
     <p>{{ data?.description }}</p>
 </div>

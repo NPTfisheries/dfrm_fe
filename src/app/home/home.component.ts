@@ -19,12 +19,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     // we only have 1 department for the time being.
-    this.backendService.get('/api/v1/department/')
-    .subscribe(department => {   
-      this.data = department[0];
+    // this.backendService.get('/api/v1/department/')
+    // .subscribe(department => {   
+    //   this.data = department[0];
 
-      this.getImage(department[0].img_banner.slug);
-    });
+    //   this.getImage(department[0].img_banner.slug);
+    // });
+    this.getImage('weir');
   }
   
   getImage(slug: string) {

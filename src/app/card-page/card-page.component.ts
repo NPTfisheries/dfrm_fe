@@ -4,8 +4,6 @@ import { BackendService } from 'src/_services/backend.service';
 
 import { getRouteType } from 'src/_utilities/route-utils';
 
-// import { CardComponent } from '../card/card.component';
-
 @Component({
   selector: 'app-card-page',
   templateUrl: './card-page.component.html',
@@ -13,6 +11,7 @@ import { getRouteType } from 'src/_utilities/route-utils';
 })
 export class CardPageComponent implements OnInit {
 
+  department: any | undefined;
   list: any | undefined;
   routeType!: string | undefined;
   bannerImage: any | undefined = '';
@@ -29,6 +28,15 @@ export class CardPageComponent implements OnInit {
   getList() {
     // card pages have an extra s (i.e., department[s]) that must be removed to get proper url
     this.routeType = getRouteType(this.route).slice(0, -1);
+
+    if (this.routeType == 'division') {
+      this.backendService.get('/api/v1/department/')
+        .subscribe(department => {
+          this.department = department[0];
+
+          this.getImage(department[0].img_banner.slug);
+        });
+    }
 
     this.backendService.getList(this.routeType).subscribe(response => {
       this.list = response;

@@ -25,17 +25,18 @@ import { PasswordUpdateComponent } from './forms/password-update/password-update
 import { ImageUploadComponent } from './forms/image-upload/image-upload.component';
 import { FooterComponent } from './footer/footer.component';
 import { CardPageComponent } from './card-page/card-page.component';
-import { CardComponent } from './card/card.component';
+import { CardComponent } from './cards/card/card.component';
 import { DynamicFormComponent } from './forms/dynamic-form/dynamic-form.component';
 import { DynamicFormInputComponent } from './forms/dynamic-form-input/dynamic-form-input.component';
 import { FormContainerComponent } from './forms/form-container/form-container.component';
-import { EmployeeCardComponent } from './employee-card/employee-card.component';
+import { EmployeeCardComponent } from './cards/employee-card/employee-card.component';
 import { DetailTaskComponent } from './detail-page/detail-task/detail-task.component';
 import { DetailSubprojectComponent } from './detail-page/detail-subproject/detail-subproject.component';
 import { LinkButtonRendererComponent } from '../_renderers/link-button-renderer/link-button-renderer.component';
 import { EditButtonRendererComponent } from '../_renderers/edit-button-renderer/edit-button-renderer.component';
 import { ImagePreviewComponent } from './image-preview/image-preview.component';
 import { ImagePreviewRendererComponent } from '../_renderers/image-preview-renderer/image-preview-renderer.component';
+import { StaffCardComponent } from './cards/staff-card/staff-card.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ImagePreviewRendererComponent } from '../_renderers/image-preview-rende
     EditButtonRendererComponent,
     ImagePreviewComponent,
     ImagePreviewRendererComponent,
+    StaffCardComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,11 +1,11 @@
-<div class="banner-container">
+<div class="banner-container mb-5">
     <img class="banner-image" [src]="imageUrl" [alt]="data?.description" />
 </div>
 <br>
-<div class="container">
+<div class="container my-5">
     <h1 class="text-center">{{ data?.name }}</h1>
 </div>
-<div class="employee-bar">
+<div class="employee-bar my-5">
     <app-employee-card *ngIf="data?.manager" [data]="data?.manager"></app-employee-card>
     <app-employee-card *ngIf="data?.deputy" [data]="data?.deputy"></app-employee-card>
     <app-employee-card *ngIf="data?.assistant" [data]="data?.assistant"></app-employee-card>
@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<div class="container mtb150" >
+<div class="container my-5" >
     <p>{{ data?.description }}</p>
 </div>
 

@@ -1,0 +1,9 @@
+<div class="staff-card grow" (click)="navigateToUserProfile()">
+    <div class="staff-photo-container mb-3">
+        <img id='staff-photo' [src]="imageUrl" class="" alt="employee profile photo">
+    </div>
+    <div class="card-body text-center">
+        <h4 class="text-yellow">{{ data?.first_name }} {{ data?.last_name }}</h4>
+        <p class="text-lightgray">{{ data?.profile?.title }}</p>
+    </div>
+</div>

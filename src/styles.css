@@ -6,26 +6,28 @@
     font-family: 'Times New Roman', Times, serif;
 }
 
-.mtb150 {
-    margin-top: 150px;
-    margin-bottom: 150px;
-}
-
 .rounded-border {
     border: 3px solid #ccc;
     border-radius: 10px;
     /* padding: -13px; */
     padding-right: 0;
     padding-left: 0;
-    margin-bottom: 150px;
 }
 
 .employee-bar {
     background-color: #0d1b1f;
     overflow-x:hidden;
     padding: 75px;
-    margin-top: 150px;
-    margin-bottom: 150px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.staff-bar {
+    background-color: #0d1b1f;
+    overflow-x:hidden;
+    padding-top: 50px;
+    padding-bottom: 30px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -85,15 +87,6 @@ p {
     transform: none;
 }
 
-/* .dfrm-button-invert {
-    background-color: #f9f906;
-    color:#0d1b1f;;
-    padding: 6px;
-    border-radius: 10px;
-    border-color: #5492b4;
-    font-size: larger;
-} */
-
 .dfrm-button-invert {
     background-color: #5492b4;
     color: #0d1b1f;
@@ -152,7 +145,6 @@ p {
     border-radius: 15px;
     border-color: #5492b4;
     border-width: 2px;
-
     display: flex;
     flex-direction: column;
 }
@@ -204,8 +196,6 @@ p {
     line-height: 2em;
     color: white;
     background: black;
-    margin-top: 150px;
-    margin-bottom: 150px;
 
     &:before {
         background: linear-gradient(to right, white, black);

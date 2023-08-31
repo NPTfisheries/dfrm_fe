@@ -1,0 +1,23 @@
+.staff-card {
+    background-color: none;
+    width: 15rem;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.staff-photo-container {
+    overflow: hidden;
+    border: 2px solid;
+    border-radius: 50%;
+    border-color: #cfd7db;
+    height: 150px;
+    width: 150px;
+}
+
+#staff-photo {
+    min-height: 100%;
+    min-width: 100%; 
+    object-fit: cover;
+}
