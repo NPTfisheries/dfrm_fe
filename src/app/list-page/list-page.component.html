@@ -3,26 +3,19 @@
 
     <button *ngIf="routeType == 'division' && managerAccess(permissionGroup)" (click)="add(routeType)"
         class="dfrm-button btn-right">Add New {{ routeType | titlecase}}</button>
-    <button *ngIf="routeType == 'project' && professionalAccess(permissionGroup)" (click)="add(routeType)"
-        class="dfrm-button btn-right">Add New {{ routeType | titlecase}}</button>
     <button *ngIf="routeType == 'users' && managerAccess(permissionGroup)" (click)="registerUser()"
         class="dfrm-button btn-right">Register User</button>
     <button *ngIf="routeType == 'image' && managerAccess(permissionGroup)" (click)="uploadImage()"
         class="dfrm-button btn-right">Upload Image</button>
- 
+    <button *ngIf="routeType == 'project' && professionalAccess(permissionGroup)" (click)="add(routeType)"
+        class="dfrm-button btn-right">Add New {{ routeType | titlecase}}</button>
 
-        <br><br><br>
+
+    <br><br><br>
     <div class="container" style="height: 600px;">
-        <ag-grid-angular 
-            style="width: 100%; height: 100%" 
-            class="ag-theme-alpine" 
-            [columnDefs]="columnDefs"    
-            [defaultColDef]="defaultColDef" 
-            [rowData]="data" 
-            [rowSelection]="'multiple'"
-            [suppressCellFocus]="true"
-            (gridReady)="onGridReady($event)"
-            [animateRows]="true">
+        <ag-grid-angular style="width: 100%; height: 100%; font-size:20px" class="ag-theme-alpine"
+            [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [rowData]="data" [rowSelection]="'multiple'"
+            [suppressCellFocus]="true" (gridReady)="onGridReady($event)" [animateRows]="true">
         </ag-grid-angular>
     </div>
 

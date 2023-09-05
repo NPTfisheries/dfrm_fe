@@ -45,6 +45,7 @@ export class ListPageComponent implements OnInit {
     sortable: true,
     filter: true,
     resizable: true,
+    cellStyle: {fontSize: '20px'},
   };
 
   data!: any[];
