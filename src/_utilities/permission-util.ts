@@ -5,9 +5,16 @@ export function managerAccess(permissionGroup:string) {
     return permittedGroups.includes(permissionGroup);
 }
 
+export function projectleaderAccess(permissionGroup:string) {
+    
+    const permittedGroups = ['Admin', 'Manager', 'Project_leader'];
+    
+    return permittedGroups.includes(permissionGroup);
+}
+
 export function professionalAccess(permissionGroup:string) {
     
-    const permittedGroups = ['Admin', 'Manager', 'Professional'];
+    const permittedGroups = ['Admin', 'Manager', 'Project_leader', 'Professional'];
     
     return permittedGroups.includes(permissionGroup);
 }

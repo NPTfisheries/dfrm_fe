@@ -42,9 +42,10 @@
                     <option value="" disabled selected>Select a role</option>
                     <!-- <option value="1">Admin</option> -->
                     <option value="2">Manager</option>
-                    <option value="3">Professional</option>
-                    <option value="4">Technician</option>
-                    <option value="5">Guest</option>
+                    <option value="3">Project Leader</option>
+                    <option value="4">Professional</option>
+                    <option value="5">Technician</option>
+                    <option value="6">Guest</option>
                 </select>
                 <div *ngIf="submitted && f['role'].errors" class="invalid-feedback">
                     <div *ngIf="f['role'].errors['required']">Role is required</div>
