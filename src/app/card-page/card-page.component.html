@@ -22,7 +22,7 @@
     </div>
 </div>
 
-<div *ngIf="department">
+<div *ngIf="department && department.staff.length > 0 ">
     <h2 class="divider gradient-hr my-5"></h2>
     <h2 class="text-center  pb-4">Auxilliary Staff</h2>
     <div class="staff-bar mb-5">
