@@ -112,9 +112,7 @@ export class ListPageComponent implements OnInit {
   }
 
   getModalOptions(): NgbModalOptions {
-    return {
-      size: 'xl',
-    };
+    return { size: 'xl', };
   }
 
 }

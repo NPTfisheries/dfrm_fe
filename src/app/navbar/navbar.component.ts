@@ -34,15 +34,11 @@ export class NavbarComponent implements OnInit {
   }
 
   openLoginModal() {
-    this.modalService.open(LoginComponent);
+    this.modalService.open(LoginComponent, this.getModalOptions());
   }
 
-  updatePassword() {
-    const modalOptions: NgbModalOptions = {
-      size: 'sm',
-        };
-      
-    const modalRef = this.modalService.open(PasswordUpdateComponent, modalOptions);
+  updatePassword() {     
+    const modalRef = this.modalService.open(PasswordUpdateComponent, this.getModalOptions());
 
     modalRef.result.then((result) => {
       console.log(result);
@@ -51,4 +47,10 @@ export class NavbarComponent implements OnInit {
       }
     }).catch((reason) => { }); // prevents error on exiting modal by clicking outside.
   }
+
+  getModalOptions(): NgbModalOptions {
+    return { //size: 'sm', //sm, lg, xl  
+    centered: true, };
+  }
+
 }

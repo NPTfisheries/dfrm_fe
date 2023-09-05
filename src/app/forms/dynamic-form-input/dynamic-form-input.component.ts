@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { BackendService } from 'src/_services/backend.service';
@@ -10,7 +10,7 @@ import { InputBase } from 'src/_inputs/input-base';
   templateUrl: './dynamic-form-input.component.html',
   styleUrls: ['./dynamic-form-input.component.css']
 })
-export class DynamicFormInputComponent {
+export class DynamicFormInputComponent implements OnInit {
   @Input() input!: InputBase<string>;
   @Input() form!: FormGroup;
 
@@ -21,6 +21,10 @@ export class DynamicFormInputComponent {
   ) {}
 
   get isValid() { return this.form.controls[this.input.key].valid; }
+
+  ngOnInit(): void {
+
+  }
 
   // for image preview
   onSelectChange(event: any): void {
@@ -35,6 +39,5 @@ export class DynamicFormInputComponent {
       this.imagePreview = img.image.replace('localhost:4200', 'localhost:8000');
     })
   }
-  
 
 }
