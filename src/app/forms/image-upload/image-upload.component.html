@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container px-4 py-4">
     <br />
     <h2 style="text-align: center;">Upload an Image</h2>
     <form [formGroup]="imageForm" (ngSubmit)="onSubmit()">
@@ -38,7 +38,7 @@
     </h4>
     <!-- image preview -->
     <div *ngIf="selectedImage" class="mb-3">
-        <label class="form-label">Image Preview</label>
+        <label class="form-label text-center">Image Preview</label>
         <img [src]="imagePreview" alt="Image Preview" class="img-thumbnail">
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -7,6 +7,9 @@ import { AuthService } from 'src/_services/auth.service';
 import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
 
+import { ListPageComponent } from 'src/app/list-page/list-page.component';
+
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -14,7 +17,7 @@ import { BackendService } from 'src/_services/backend.service';
 })
 export class RegisterComponent implements OnInit {
 
-  @Output() updateList: EventEmitter<any> = new EventEmitter<any>();
+  @Input() context!: ListPageComponent
 
   form!: FormGroup;
   loading = false;
@@ -62,12 +65,10 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    const regUser$ = this.authService.register(this.form.value)
-
-    regUser$.subscribe({
+    this.authService.register(this.form.value).subscribe({
       next: () => {
         this.backendService.getList('users').subscribe(updatedList => {
-          this.updateList.emit(updatedList);
+          this.context.data = updatedList;
         });
         this.activeModal.close();
       },
@@ -76,7 +77,6 @@ export class RegisterComponent implements OnInit {
         this.alertService.error('Register New User Failed! Check your fields and try again.');
         this.loading = false;
       }
-
     })
   }
 

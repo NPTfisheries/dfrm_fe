@@ -1,8 +1,10 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
+
+import { ListPageComponent } from 'src/app/list-page/list-page.component';
 
 @Component({
   selector: 'app-image-upload',
@@ -11,7 +13,7 @@ import { BackendService } from 'src/_services/backend.service';
 })
 export class ImageUploadComponent implements OnInit {
 
-  @Output() updateList: EventEmitter<void> = new EventEmitter<void>();
+  @Input() context!: ListPageComponent 
 
   imageForm!: FormGroup;
   selectedImage: File | undefined;
@@ -61,10 +63,10 @@ export class ImageUploadComponent implements OnInit {
 
     this.backendService.newItem('image', formData).subscribe({
       next: () => {
-        this.backendService.getList('image').subscribe((newList: any) => {
-          this.updateList.emit(newList);
+        this.backendService.getList('image').subscribe((updatedList: any) => {
+          this.context.data = updatedList;
+          this.activeModal.close('success');
         });
-        this.activeModal.close('success');
       },
       error: (err) => {
         this.alertService.error('Failed to upload image.', { autoClose: true })
