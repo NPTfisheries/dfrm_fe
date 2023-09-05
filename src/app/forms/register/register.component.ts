@@ -1,7 +1,6 @@
-import { Component, EventEmitter, OnInit, Input } from '@angular/core';
+import { Component,  OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 import { AuthService } from 'src/_services/auth.service';
 import { AlertService } from 'src/_services/alert.service';
@@ -22,8 +21,6 @@ export class RegisterComponent implements OnInit {
   form!: FormGroup;
   loading = false;
   submitted = false;
-  permissionGroup!: string;
-  private permissionGroupSubscription: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,11 +28,7 @@ export class RegisterComponent implements OnInit {
     private alertService: AlertService,
     private activeModal: NgbActiveModal,
     private backendService: BackendService,
-  ) {
-    this.permissionGroupSubscription = this.authService.permissionGroup$.subscribe(group => {
-      this.permissionGroup = group;
-    });
-  }
+  ) { }
 
   ngOnInit() {
 

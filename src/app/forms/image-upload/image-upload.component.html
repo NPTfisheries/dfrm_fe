@@ -28,14 +28,35 @@
         </div>
         <button type="submit" class="dfrm-button" [disabled]="imageForm.invalid || !selectedImage">Upload
             Image</button>
-            
+
     </form>
     <br />
-    <h4><em>Uploaded images must be original and not violate copyrights. By uploading here you are providing metadata
-            about
-            the image and
-            verify the image is original and useable by the Nez Perce Tribe. Violations are punishable by DEATH.</em>
-    </h4>
+    <div class="container rounded" style="background-color: yellow;">
+        <p><em><strong>By uploading images here, you are confirming the following:</strong></em></p>
+        <ol>
+            <li>
+                <p><strong>No Copyright Infringement:</strong> You shall not upload any images that infringe on the
+                    copyrights, trademarks, or
+                    intellectual property rights of any third party.</p>
+            </li>
+            <li>
+                <p><strong>Ownership and Responsibility:</strong> You confirm that you are the owner of the uploaded
+                    images
+                    or have obtained all
+                    necessary permissions and rights to use, upload, and share these images on this website. You are
+                    solely
+                    responsible for any copyright infringement or legal issues that may arise from the use of these
+                    images.
+                </p>
+            </li>
+            <li>
+                <p>Any user found to be uploading copyrighted images without proper authorization may be subject to
+                    legal action and account suspension.
+                </p>
+            </li>
+        </ol>
+    </div>
+
     <!-- image preview -->
     <div *ngIf="selectedImage" class="mb-3">
         <label class="form-label text-center">Image Preview</label>

@@ -45,14 +45,14 @@
         <!-- SELECT -->
         <select [id]="input.key" *ngSwitchCase="'select'" [formControlName]="input.key"
             class="form-control form-select form-select-lg">
-            <option [value]=""></option>
+            <option [value]=''></option>
             <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
         </select>
 
         <!-- SELECT MULTIPLE -->
         <select [id]="input.key" *ngSwitchCase="'multi-select'" [formControlName]="input.key"
             class="form-control form-select form-select-lg" multiple [ngModel]="input.idArray">
-            <option [value]=""></option>
+            <option></option>
             <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
         </select>
 

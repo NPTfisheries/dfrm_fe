@@ -33,8 +33,19 @@ export class DynamicFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    // dealing with empty arrays - cannot present data as [""] which is the default value for no selection in html.
+    if (Array.isArray(this.form.value.staff) && this.form.value.staff.length === 1 && this.form.value.staff[0] === "") {
+      this.form.value.staff=[];
+      // console.log('Staff was a string, reassigned as empty array:', this.form.value.staff);
+    }
+
+    if (Array.isArray(this.form.value.project_leader) && this.form.value.project_leader.length === 1 && this.form.value.project_leader[0] === "") {
+      this.form.value.project_leader=[];
+      // console.log('Project leader was a string, reassigned as empty array:', this.form.value.project_leader);
+    }
     
+    console.log(this.form.value);
+
     if(this.slug === undefined) {
       this.backendService.newItem(this.routeType, this.form.value).subscribe({
         next: () => {this.formSubmitted.emit();}
