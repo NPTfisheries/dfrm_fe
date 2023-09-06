@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 
 import * as L from 'leaflet';
 
@@ -7,20 +7,22 @@ import * as L from 'leaflet';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements AfterViewInit {
   @ViewChild('map') private mapContainer!: ElementRef;
   private map!: L.Map;
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.initMap();
   }
+  
 
   private initMap(): void {
     // Set up the map
     this.map = L.map('map').setView([44.862533, -116.087802], 13);
 
     // Add a tile layer (you can use any tile provider)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
       maxZoom: 18,
       minZoom: 10
     }).addTo(this.map);
