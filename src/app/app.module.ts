@@ -37,6 +37,8 @@ import { EditButtonRendererComponent } from '../_renderers/edit-button-renderer/
 import { ImagePreviewComponent } from './image-preview/image-preview.component';
 import { ImagePreviewRendererComponent } from '../_renderers/image-preview-renderer/image-preview-renderer.component';
 import { StaffCardComponent } from './cards/staff-card/staff-card.component';
+import { FacilitiesComponent } from './facilities/facilities.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,8 @@ import { StaffCardComponent } from './cards/staff-card/staff-card.component';
     ImagePreviewComponent,
     ImagePreviewRendererComponent,
     StaffCardComponent,
+    FacilitiesComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,

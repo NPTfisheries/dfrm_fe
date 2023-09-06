@@ -10,6 +10,7 @@ import { AuthGuard } from 'src/_utilities/auth-guard';
 import { ListPageComponent } from './list-page/list-page.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
 import { CardPageComponent } from './card-page/card-page.component';
+import { FacilitiesComponent } from './facilities/facilities.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch:'full' },
@@ -24,6 +25,7 @@ const routes: Routes = [
     { path: 'departments', component: CardPageComponent },
     { path: 'divisions', component: CardPageComponent },
     { path: 'projects', component: CardPageComponent },
+    { path: 'facilities', component: FacilitiesComponent },
     
     // singular is for the list page, similar to django return for API
     { path: 'department', component: ListPageComponent, canActivate: [AuthGuard]},
