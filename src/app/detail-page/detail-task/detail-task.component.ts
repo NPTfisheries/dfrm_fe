@@ -1,13 +1,12 @@
 import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormContainerComponent } from 'src/app/forms/form-container/form-container.component';
-import { Subscription } from 'rxjs';
 
 import { AuthService } from 'src/_services/auth.service';
 import { BackendService } from 'src/_services/backend.service';
 
 import { getRecordBySlug } from 'src/_utilities/getRecordBySlug';
-import { professionalAccess } from 'src/_utilities/permission-util';
+import { managerAccess, professionalAccess } from 'src/_utilities/permission-util';
 
 @Component({
   selector: 'app-detail-task',
@@ -18,34 +17,40 @@ export class DetailTaskComponent implements OnInit, OnChanges {
 
   @Input() subprojectId: number | undefined;
 
-  professionalAccess = professionalAccess;
+  addTask: boolean = false;
+  managerPerms: boolean = false;
+  taskPerms: any;
 
   data: any | undefined;
-  permissionGroup!: string;
-  private permissionGroupSubscription: Subscription;
 
   constructor(
     private authService: AuthService,
     private backendService: BackendService,
     private modalService: NgbModal,
-  ) {
-    this.permissionGroupSubscription = this.authService.permissionGroup$.subscribe(group => {
-      this.permissionGroup = group;
-    });
-  }
+  ) { }
 
   ngOnInit(): void {
     this.getList();
+    this.checkPermissions();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['subprojectId'] && !changes['subprojectId'].isFirstChange()) {
       this.getList();
+      this.checkPermissions();
     }
   }
 
-  ngOnDestroy(): void {
-    this.permissionGroupSubscription.unsubscribe();
+  checkPermissions() {
+    this.authService.permissionGroup$.subscribe((permGroup: string) => {
+      this.managerPerms = managerAccess(permGroup);
+    });
+    this.authService.subprojectPerms$.subscribe((subprojectPerms: any) => {
+      this.addTask = subprojectPerms.includes(String(this.subprojectId));
+    });
+    this.authService.taskPerms$.subscribe((taskPerms:any) => {
+      this.taskPerms = taskPerms;
+    });
   }
 
   getList() {
@@ -72,8 +77,10 @@ export class DetailTaskComponent implements OnInit, OnChanges {
     modalRef.componentInstance.routeType = 'task';
     modalRef.componentInstance.data = newData;
     modalRef.componentInstance.subprojectId = this.subprojectId; // needed for filtered list response from FCC
-    
- 
+
+    modalRef.result.then(() => {
+      this.checkPermissions();
+    });
   }
 
   edit(slug: string) {
@@ -90,4 +97,7 @@ export class DetailTaskComponent implements OnInit, OnChanges {
     modalRef.componentInstance.slug = slug;
   }
 
+  canEditTask(id: any) {
+    return this.taskPerms.includes(String(id));
+  }
 }

@@ -19,6 +19,15 @@ export class AuthService {
     private permissionGroupSubject = new BehaviorSubject<string>('Guest');
     public permissionGroup$ = this.permissionGroupSubject.asObservable();
 
+    private projectPermsSubject = new BehaviorSubject<object>([]);
+    public projectPerms$ = this.projectPermsSubject.asObservable();
+
+    private subprojectPermsSubject = new BehaviorSubject<object>([]);
+    public subprojectPerms$ = this.subprojectPermsSubject.asObservable();
+    
+    private taskPermsSubject = new BehaviorSubject<object>([]);
+    public taskPerms$ = this.taskPermsSubject.asObservable();
+
     constructor(
         private router: Router,
         private http: HttpClient
@@ -44,7 +53,11 @@ export class AuthService {
                     this.username$.next(`${response.first_name} ${response.last_name}`);
                     this.token$.next(response.access);
                     this.isLoggedIn$.next(true);
-                    this.updatePermissionGroup(response.groups[0]);
+
+                    this.permissionGroupSubject.next(response.groups[0])
+                    this.projectPermsSubject.next(response.project_objects);
+                    this.subprojectPermsSubject.next(response.subproject_objects);
+                    this.taskPermsSubject.next(response.task_objects);
                 })//,
                 // catchError(this.handleError)
             );
@@ -55,8 +68,12 @@ export class AuthService {
         this.username$.next(null);
         this.token$.next(null);
         this.isLoggedIn$.next(false);
-        this.updatePermissionGroup('Guest');
-        this.router.navigate(['home']);
+
+        this.permissionGroupSubject.next('Guest')
+        this.projectPermsSubject.next([]);
+        this.subprojectPermsSubject.next([]);
+        this.taskPermsSubject.next([]);
+        // this.router.navigate(['home']);
     }
 
     register(newUser: User) {
@@ -69,9 +86,19 @@ export class AuthService {
             );
     }
 
-    updatePermissionGroup(newGroup: string) {
-        this.permissionGroupSubject.next(newGroup);
-    }
+    // updatePermissionGroup(newGroup: string) {
+    //     this.permissionGroupSubject.next(newGroup);
+    // }
+
+    // updateObjectPermissionsGroup(response: any) {
+    //     const opg = {
+    //         'projects': response.project_objects,
+    //         'subprojects': response.subproject_objects,
+    //         'tasks': response.task_objects
+    //     };
+
+    //     this.objectPermissionsSubject.next(opg);
+    // }
 
     // https://angular.io/guide/http-handle-request-errors
     private handleError(error: HttpErrorResponse) {

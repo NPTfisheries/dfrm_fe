@@ -1,6 +1,6 @@
 <div class="container">
-    <button *ngIf="professionalAccess(permissionGroup)" (click)="add()" class="dfrm-button"
-        style="margin-left:auto;">Add Subproject</button>
+    <button *ngIf="addSubproject || managerPerms" (click)="add()" class="dfrm-button" style="margin-left:auto;">Add
+        Subproject</button>
 </div>
 <br>
 <div *ngFor="let item of data; let i = index">
@@ -23,7 +23,7 @@
                             [routerLink]="'/users/' + item.lead.id">{{
                             item.lead.first_name }}
                             {{item.lead.last_name}} </a></p>
-                    <button *ngIf="professionalAccess(permissionGroup)" (click)="edit(item.slug)"
+                    <button *ngIf="managerPerms || canEditSubproject(item.id)" (click)="edit(item.slug)"
                         class="dfrm-button-small">Edit Subproject</button>
                 </div>
             </div>
