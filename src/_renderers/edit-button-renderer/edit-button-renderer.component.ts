@@ -5,23 +5,33 @@ import { ICellRendererParams } from 'ag-grid-community';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormContainerComponent } from 'src/app/forms/form-container/form-container.component';
 
+import { AuthService } from 'src/_services/auth.service';
 
 @Component({
   selector: 'app-edit-button-renderer',
-  template: `<div class="icon-wrapper"><i (click)="onEditClick()" class="fa-regular fa-pen-to-square ag-clickable"></i></div>`,
+  // template: `<div class="icon-wrapper"><i (click)="onEditClick()" class="fa-regular fa-pen-to-square ag-clickable"></i></div>`,
+  template: `<div class="icon-wrapper">
+                <i (click)="onEditClick()" *ngIf="renderButton()" class="fa-regular fa-pen-to-square ag-clickable"></i></div>`,
   styleUrls: ['../renderers.css']
 })
 export class EditButtonRendererComponent implements ICellRendererAngularComp {
 
 
   private params: any;
+  projectPerms: any;
 
   constructor(
     private modalService: NgbModal,
+    private authService: AuthService,
   ) { }
 
   agInit(params: any): void {
     this.params = params;
+    if(this.params.routeType === 'project') {
+      this.authService.projectPerms$.subscribe(projectPerms => {
+        this.projectPerms = projectPerms;
+      });
+    }
   }
 
   refresh(params: ICellRendererParams): boolean {
@@ -37,6 +47,11 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
     modalRef.componentInstance.routeType = this.params.routeType;
     modalRef.componentInstance.data = this.params.data;
     modalRef.componentInstance.slug = this.params.value;
+  }
+
+  renderButton() {
+    if(this.params.routeType !== 'project') { return true }
+    return this.projectPerms.includes(String(this.params.data.id));
   }
 
 }
