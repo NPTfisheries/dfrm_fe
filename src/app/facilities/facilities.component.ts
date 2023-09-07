@@ -11,7 +11,7 @@ export class FacilitiesComponent implements OnInit {
 
 
   list: any | undefined;
-  routeType!: string | undefined;
+  // routeType!: string | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,13 +19,18 @@ export class FacilitiesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getList();
   }
   
   getList() {
-    this.routeType = 'facility';
-    this.backendService.getList(this.routeType).subscribe(facilities => {
-      console.log('Facilities:', facilities);
+    // this.routeType = 'facility';
+    this.backendService.getList('facility').subscribe((response: any) => {
+      console.log('Facilities:', response);
+      this.list = response.features;
     })
   }
 
+  logFeatures() {
+    console.log(this.list);
+  }
 }
