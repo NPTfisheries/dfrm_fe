@@ -1,4 +1,5 @@
-import { Component, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges, Input } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import * as L from 'leaflet';
 
@@ -7,12 +8,31 @@ import * as L from 'leaflet';
   templateUrl: './geometry-input.component.html',
   styleUrls: ['./geometry-input.component.css']
 })
-export class GeometryInputComponent {
-  
+export class GeometryInputComponent implements OnInit {
+
+  @Input() form!: FormGroup;
+
+  geometryControl!: FormControl;
+
+  // exampleGeometry = { 
+  //   "type": "Point",
+  //   "coordinates": [ -116, 44.0 ]
+  // }
+
+  marker!: any;
+  geometry!: any;
   private map!: L.Map;
+
+  ngOnInit(): void {
+    this.geometryControl = new FormControl(this.geometry);
+    this.form.addControl('geometry', this.geometryControl);
+  }
 
   ngAfterViewInit(): void {
     this.initMap();
+    if (this.geometry) {
+      this.setMarker(this.geometry.coordinates[1], this.geometry.coordinates[0]);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -30,9 +50,30 @@ export class GeometryInputComponent {
     }).addTo(this.map);
 
     this.map.on('click', (e: L.LeafletMouseEvent) => {
-      const lat = e.latlng.lat;
-      const long = e.latlng.lng;
+      console.log('Latitude:', e.latlng.lat);
+      console.log('Longitude:', e.latlng.lng);
+      this.buildGeometry(e.latlng.lat, e.latlng.lng);
+
+      if(this.marker) {
+        this.map.removeLayer(this.marker);
+      }
+      this.marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map);
     })
 
+  }
+
+  buildGeometry(latitude: number, longitude: number) {
+    this.geometry = {
+      "type": "Point",
+      "coordinates": [longitude, latitude]
+    };
+  }
+
+  showGeometry() {
+    console.log(this.geometry);
+  }
+
+  setMarker(latitude: number, longitude: number) {
+    const marker = L.marker([longitude, latitude]).addTo(this.map)
   }
 }

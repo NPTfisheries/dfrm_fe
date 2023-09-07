@@ -1,3 +1,7 @@
+<div [formGroup]="form">
+    <input type="hidden" style="display:none;" [formControl]="geometryControl" [value]="'GLORP'" [id]="'geometry'" />
+</div>
 <div class="map-container">
     <div id="map"></div>
 </div>
+<button type="button" (click)="showGeometry()">showGeometry</button>
