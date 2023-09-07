@@ -31,8 +31,7 @@ const routes: Routes = [
     { path: 'department', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'division', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'project', component: ListPageComponent, canActivate: [AuthGuard]},
-    { path: 'subproject', component: ListPageComponent, canActivate: [AuthGuard]},
-    { path: 'task', component: ListPageComponent, canActivate: [AuthGuard]},
+    { path: 'facility', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'users', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'image', component: ListPageComponent, canActivate: [AuthGuard]},
 
