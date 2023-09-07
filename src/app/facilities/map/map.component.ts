@@ -25,6 +25,9 @@ export class MapComponent implements AfterViewInit {
       minZoom: 3
     }).addTo(this.map);
 
+
+    L.control.scale().addTo(this.map);
+
     // Add a marker (optional)
     //   L.marker([51.5, -0.09]).addTo(this.map)
     //     .bindPopup('Hello, Leaflet!')
