@@ -21,8 +21,8 @@ export class MapComponent implements AfterViewInit {
     this.map = L.map('map').setView([44.862533, -116.087802], 13);
 
     // Add a tile layer (you can use any tile provider)
-    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      // L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
       maxZoom: 18,
       minZoom: 10
     }).addTo(this.map);
