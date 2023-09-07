@@ -18,6 +18,8 @@ export function getColumnDefs(routeType: string, context: any) {
             return usersColDefs(routeType, context);
         case 'image':
             return imageColDefs(routeType, context);
+        case 'facility':
+            return facilityColDefs(routeType, context);
         default:
             return;
     }
@@ -193,14 +195,6 @@ function usersColDefs(routeType: string, context: any) {
                 return formatPhone(phoneNumber);
             }
         },
-        // {
-        //     field: 'profile.mobile_phone',
-        //     headerName: 'Mobile Phone',
-        //     valueFormatter: function (params:any) {
-        //         const phoneNumber = params.value;
-        //     return formatPhone(phoneNumber);
-        // }
-        // },
         {
             headerName: 'View',
             field: 'id',
@@ -267,27 +261,27 @@ function imageColDefs(routeType: string, context: any) {
 function facilityColDefs(routeType: string, context: any) {
     const columns: any[] = [
         {
-            field: 'name',
+            field: 'properties.name',
             headerName: 'Name'
         },
         {
-            field: 'description',
+            field: 'properties.description',
             headerName: 'Description'
         },
         {
-            field: 'street_adress',
+            field: 'properties.street_adress',
             headerName: 'Street Addresss'
         },
         {
-            field: 'mailing_address',
+            field: 'properties.mailing_address',
             headerName: 'Mailing Address'
         },
         {
-            field: 'city',
+            field: 'properties.city',
             headerName: 'City'
         },
         {
-            field: 'state',
+            field: 'properties.state',
             headerName: 'State'
         }
     ];

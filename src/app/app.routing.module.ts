@@ -18,8 +18,6 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent},
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-    // { path: 'image', component: ImageUploadComponent, canActivate: [AuthGuard]},
-
 
     // plural is for the public-facing card pages
     { path: 'departments', component: CardPageComponent },

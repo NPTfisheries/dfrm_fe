@@ -45,7 +45,7 @@ export class ListPageComponent implements OnInit {
     sortable: true,
     filter: true,
     resizable: true,
-    cellStyle: {fontSize: '20px'},
+    cellStyle: { fontSize: '20px' },
   };
 
   data!: any[];
@@ -89,7 +89,13 @@ export class ListPageComponent implements OnInit {
 
   getList(routeType: string) {
     this.backendService.getList(routeType).subscribe((list: any) => {
-      this.data = list;
+      if (routeType === 'facility') { 
+        this.data = list.features;
+        console.log(list.features);
+      }
+      else {
+        this.data = list;
+      }
     });
   }
 
@@ -100,7 +106,7 @@ export class ListPageComponent implements OnInit {
     const modalRef = this.modalService.open(FormContainerComponent, this.getModalOptions());
     modalRef.componentInstance.context = this;
     modalRef.componentInstance.routeType = routeType;
-    
+
     modalRef.result.then(() => {
       this.authService.refreshPermissions().subscribe();
     });
