@@ -77,7 +77,7 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
     modalRef.componentInstance.data = newData;
 
     modalRef.result.then(() => {
-      this.checkPermissions();
+      this.authService.refreshPermissions().subscribe();
     });
   }
 

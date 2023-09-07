@@ -86,19 +86,17 @@ export class AuthService {
             );
     }
 
-    // updatePermissionGroup(newGroup: string) {
-    //     this.permissionGroupSubject.next(newGroup);
-    // }
-
-    // updateObjectPermissionsGroup(response: any) {
-    //     const opg = {
-    //         'projects': response.project_objects,
-    //         'subprojects': response.subproject_objects,
-    //         'tasks': response.task_objects
-    //     };
-
-    //     this.objectPermissionsSubject.next(opg);
-    // }
+    refreshPermissions() {
+        return this.http.get('/api/v1/permissions')
+        .pipe(
+            map((response: any) => {
+                console.log("REFRESH PERMS:", response);
+                this.projectPermsSubject.next(response.project_objects);
+                this.subprojectPermsSubject.next(response.subproject_objects);
+                this.taskPermsSubject.next(response.task_objects);
+            })
+        )
+    }
 
     // https://angular.io/guide/http-handle-request-errors
     private handleError(error: HttpErrorResponse) {

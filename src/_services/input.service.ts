@@ -219,6 +219,7 @@ export class InputService {
         key: 'description',
         label: 'Description',
         value: data?.description || '',
+        required: true,
         order: 2
       }),
       // new InputSelect({

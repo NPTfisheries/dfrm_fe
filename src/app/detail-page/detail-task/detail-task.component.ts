@@ -79,7 +79,7 @@ export class DetailTaskComponent implements OnInit, OnChanges {
     modalRef.componentInstance.subprojectId = this.subprojectId; // needed for filtered list response from FCC
 
     modalRef.result.then(() => {
-      this.checkPermissions();
+      this.authService.refreshPermissions().subscribe();
     });
   }
 
