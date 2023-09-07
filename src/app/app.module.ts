@@ -39,6 +39,7 @@ import { ImagePreviewRendererComponent } from '../_renderers/image-preview-rende
 import { StaffCardComponent } from './cards/staff-card/staff-card.component';
 import { FacilitiesComponent } from './facilities/facilities.component';
 import { MapComponent } from './facilities/map/map.component';
+import { GeometryInputComponent } from './forms/geometry-input/geometry-input.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { MapComponent } from './facilities/map/map.component';
     StaffCardComponent,
     FacilitiesComponent,
     MapComponent,
+    GeometryInputComponent,
   ],
   imports: [
     BrowserModule,

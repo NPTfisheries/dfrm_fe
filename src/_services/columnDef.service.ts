@@ -289,7 +289,7 @@ function facilityColDefs(routeType: string, context: any) {
     if (managerAccess(context.permissionGroup)) {
         columns.push({
             headerName: 'Edit',
-            field: 'slug',
+            field: 'properties.slug',
             cellRenderer: EditButtonRendererComponent,
             cellRendererParams: {
                 routeType: routeType,

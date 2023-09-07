@@ -3,9 +3,12 @@
 
     <div [ngSwitch]="input.controlType">
 
+        <!-- GEOMETRY -->
+        <app-geometry-input *ngSwitchCase="'geometry'"></app-geometry-input>
+
         <!-- FILE -->
         <input *ngSwitchCase="'file'" type="file" [formControlName]="input.key" [value]="input.key" [id]="input.key"
-            class="form-control form-control-lg">
+            class="form-control form-control-lg">        
 
         <!-- HIDDEN -->
         <input *ngSwitchCase="'hidden'" type="hidden" style="display:none;" [formControlName]="input.key"
@@ -22,10 +25,14 @@
             <div class="col-sm-4">
                 <div class="mb-3">
                     <img *ngIf="imagePreview" [src]="imagePreview" alt="Image Preview" class="img-thumbnail"
-                     style="max-height: 160px">
+                        style="max-height: 160px">
                 </div>
             </div>
         </div>
+
+        <!-- NUMBER -->
+        <input *ngSwitchCase="'number'" [formControlName]="input.key" [id]="input.key" [type]="input.type"
+            class="form-control form-control-lg">
 
         <!-- PHONE -->
         <div *ngSwitchCase="'phone'">

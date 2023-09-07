@@ -12,7 +12,7 @@ import { InputHidden } from 'src/_inputs/input-hidden';
 import { InputImage } from 'src/_inputs/input-image';
 import { InputPhone } from 'src/_inputs/input-phone';
 import { InputFile } from 'src/_inputs/input-file';
-import { InputCoordinates } from 'src/_inputs/input-coordinates';
+import { InputGeometry } from 'src/_inputs/input-geometry';
 import { InputNumber } from 'src/_inputs/input-number';
 
 @Injectable({ providedIn: 'root' })
@@ -502,7 +502,6 @@ export class InputService {
         key: 'mailing_address',
         label: 'Mailing Address',
         value: data?.properties?.mailing_address || '',
-        required: true,
         order: 11
       }),
       new InputText({
@@ -526,11 +525,11 @@ export class InputService {
         // required: true,
         order: 14
       }),
-      new InputCoordinates({
-        key: 'coordinates',
-        label: 'Coordinates',
-        value: data?.geometry?.coordinates || '',
-        // required: true,
+      new InputGeometry({
+        key: 'geometry',
+        label: 'Geometry',
+        value: data?.geometry || '',
+        required: true,
         order: 15
       })
     ]
