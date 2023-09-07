@@ -38,7 +38,7 @@ import { ImagePreviewComponent } from './image-preview/image-preview.component';
 import { ImagePreviewRendererComponent } from '../_renderers/image-preview-renderer/image-preview-renderer.component';
 import { StaffCardComponent } from './cards/staff-card/staff-card.component';
 import { FacilitiesComponent } from './facilities/facilities.component';
-import { MapComponent } from './map/map.component';
+import { MapComponent } from './facilities/map/map.component';
 
 @NgModule({
   declarations: [

@@ -14,22 +14,20 @@ export class MapComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.initMap();
   }
-  
+
 
   private initMap(): void {
-    // Set up the map
-    this.map = L.map('map').setView([44.862533, -116.087802], 13);
+    this.map = L.map('map').setView([44.862533, -116.087802], 10);
 
-    // Add a tile layer (you can use any tile provider)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      // L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-      maxZoom: 18,
-      minZoom: 10
+    L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>',
+      maxZoom: 20,
+      minZoom: 3
     }).addTo(this.map);
 
     // Add a marker (optional)
-  //   L.marker([51.5, -0.09]).addTo(this.map)
-  //     .bindPopup('Hello, Leaflet!')
-  //     .openPopup();
+    //   L.marker([51.5, -0.09]).addTo(this.map)
+    //     .bindPopup('Hello, Leaflet!')
+    //     .openPopup();
   }
 }
