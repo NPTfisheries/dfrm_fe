@@ -30,7 +30,4 @@ export class FacilitiesComponent implements OnInit {
     })
   }
 
-  logFeatures() {
-    console.log(this.list);
-  }
 }

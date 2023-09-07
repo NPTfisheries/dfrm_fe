@@ -12,6 +12,8 @@ import { InputHidden } from 'src/_inputs/input-hidden';
 import { InputImage } from 'src/_inputs/input-image';
 import { InputPhone } from 'src/_inputs/input-phone';
 import { InputFile } from 'src/_inputs/input-file';
+import { InputCoordinates } from 'src/_inputs/input-coordinates';
+import { InputNumber } from 'src/_inputs/input-number';
 
 @Injectable({ providedIn: 'root' })
 export class InputService {
@@ -222,14 +224,6 @@ export class InputService {
         required: true,
         order: 2
       }),
-      // new InputSelect({
-      //   key: 'project',
-      //   label: 'Project',
-      //   value: data?.project || [],
-      //   required: true,
-      //   options: this.buildOptions('/api/v1/project/'),
-      //   order: 3
-      // }),
       new InputHidden({
         key: 'project',
         value: data?.project || [],
@@ -285,14 +279,6 @@ export class InputService {
         required: true,
         order: 99
       }),
-      // new InputSelect({
-      //   key: 'subproject',
-      //   label: 'Subproject',
-      //   value: data?.subproject || [],
-      //   required: true,
-      //   options: this.buildOptions('/api/v1/subproject/'),
-      //   order: 3
-      // }),
       new InputSelect({
         key: 'supervisor',
         label: 'Task Supervisor',
@@ -392,13 +378,6 @@ export class InputService {
         required: false,
         order: 10
       })
-      // new InputImage({
-      //   key: 'photo',
-      //   label: 'Choose Profile Image',
-      //   value: data?.profile?.photo || '',
-      //   options: this.buildOptions('/api/v1/image/'),
-      //   order: 9
-      // })
     ]
 
     return of(inputs.sort((a, b) => a.order - b.order));
@@ -440,6 +419,120 @@ export class InputService {
         label: 'source',
         value: data?.source || '',
         order: 5
+      })
+    ]
+
+    return of(inputs.sort((a, b) => a.order - b.order));
+  }
+
+  getFacilityInputs(data?: any) {
+    console.log('Getting Facility Inputs...');
+    const inputs: InputBase<string>[] = [
+      new InputText({
+        key: 'name',
+        label: 'Name',
+        value: data?.name || '',
+        required: true,
+        order: 1
+      }),
+      new InputTextarea({
+        key: 'description',
+        label: 'Description',
+        value: data?.description || '',
+        order: 2
+      }),
+      new InputSelect({
+        key: 'manager',
+        label: 'Manager',
+        value: data?.manager.id || '',
+        required: true,
+        options: this.buildEmployeeOptions(),
+        order: 3
+      }),
+      new InputSelect({
+        key: 'deputy',
+        label: 'Deputy',
+        value: data?.deputy.id || '',
+        options: this.buildEmployeeOptions(),
+        order: 4
+      }),
+      new InputSelect({
+        key: 'assistant',
+        label: 'Assistant',
+        value: data?.assistant.id || '',
+        options: this.buildEmployeeOptions(),
+        order: 5
+      }),
+      new InputMultiSelect({
+        key: 'staff',
+        label: 'Staff',
+        idArray: this.getIdArray(data?.staff) || [],
+        // valueArray: this.getValueArray(data?.staff) || [],        
+        options: this.buildEmployeeOptions(),
+        order: 6
+      }),
+      new InputImage({
+        key: 'img_banner',
+        label: 'Choose Banner Image',
+        value: data?.img_banner.id || '',
+        options: this.buildOptions('/api/v1/image/'),
+        order: 7
+      }),
+      new InputImage({
+        key: 'img_card',
+        label: 'Choose Card Image',
+        value: data?.img_card.id || '',
+        options: this.buildOptions('/api/v1/image/'),
+        order: 7
+      }),
+      new InputPhone({
+        key: 'phone_number',
+        label: 'Phone Number',
+        value: data?.profile?.phone_number || '',
+        // required: true,
+        order: 9
+      }),
+      new InputText({
+        key: 'street_address',
+        label: 'street_address',
+        value: data?.street_address || '',
+        required: true,
+        order: 10
+      }),
+      new InputText({
+        key: 'mailing_address',
+        label: 'Mailing Address',
+        value: data?.mailing_address || '',
+        required: true,
+        order: 11
+      }),
+      new InputText({
+        key: 'city',
+        label: 'City',
+        value: data?.city || '',
+        // required: true,
+        order: 12
+      }),
+      new InputText({
+        key: 'state',
+        label: 'State',
+        value: data?.state || '',
+        // required: true,
+        order: 13
+      }),
+      new InputNumber({
+        key: 'zipcode',
+        label: 'Zipcode',
+        value: data?.zipcode || '',
+        // required: true,
+        order: 14
+      }),
+      new InputCoordinates({
+        key: 'coordinates',
+        label: 'Coordinates',
+        value: data?.coordinates || '',
+        // required: true,
+        order: 15
       })
     ]
 
