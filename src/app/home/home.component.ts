@@ -29,13 +29,14 @@ export class HomeComponent implements OnInit {
   }
   
   getImage(slug: string) {
-    this.backendService.getImageBySlug(slug).subscribe((response: any) => {
-      console.log(response);
-      // response.image is similar to: "http://localhost:4200/media/images/uploaded/saturn_79MFAAl.jpg"
-      const alteredUrl = response.image.replace('localhost:4200', 'localhost:8000');
+    this.bannerImage = "http://localhost:4200/assets/images/Clearwater_River_Home_Page.jpg";
+    // this.backendService.getImageBySlug(slug).subscribe((response: any) => {
+    //   console.log(response);
+    //   // response.image is similar to: "http://localhost:4200/media/images/uploaded/saturn_79MFAAl.jpg"
+    //   const alteredUrl = response.image.replace('localhost:4200', 'localhost:8000');
 
-      this.bannerImage = alteredUrl;
-    });
+    //   this.bannerImage = alteredUrl;
+    // });
   }
 
 }

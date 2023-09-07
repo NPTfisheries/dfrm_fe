@@ -12,7 +12,7 @@ import { getRouteType, getRouteSlug } from 'src/_utilities/route-utils';
 export class DetailPageComponent implements OnInit {
 
   data: any | null = null;
-  imageUrl!: string | null;
+  bannerImage!: string | null;
   routeType: string | null = null;
 
   constructor(
@@ -35,7 +35,7 @@ export class DetailPageComponent implements OnInit {
   }
 
   getImage(url:string) {
-    return this.imageUrl = 'http://localhost:8000'+url;
+    return this.bannerImage = 'http://localhost:8000'+url;
   }
 
 }
