@@ -100,6 +100,10 @@ export class ListPageComponent implements OnInit {
     const modalRef = this.modalService.open(FormContainerComponent, this.getModalOptions());
     modalRef.componentInstance.context = this;
     modalRef.componentInstance.routeType = routeType;
+    
+    modalRef.result.then(() => {
+      this.authService.refreshPermissions().subscribe();
+    });
   }
 
   uploadImage() {

@@ -73,7 +73,7 @@ export class AuthService {
         this.projectPermsSubject.next([]);
         this.subprojectPermsSubject.next([]);
         this.taskPermsSubject.next([]);
-        // this.router.navigate(['home']);
+        this.router.navigate(['home']);
     }
 
     register(newUser: User) {
