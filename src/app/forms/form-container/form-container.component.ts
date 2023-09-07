@@ -82,6 +82,8 @@ export class FormContainerComponent implements OnInit {
         return this.inputService.getProfileInputs(data);
       case 'image':
         return this.inputService.getImageInputs(data);
+      case 'facility':
+        return this.inputService.getFacilityInputs(data);
       default:
         return
     }

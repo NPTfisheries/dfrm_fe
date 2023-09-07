@@ -431,20 +431,20 @@ export class InputService {
       new InputText({
         key: 'name',
         label: 'Name',
-        value: data?.name || '',
+        value: data?.properties?.name || '',
         required: true,
         order: 1
       }),
       new InputTextarea({
         key: 'description',
         label: 'Description',
-        value: data?.description || '',
+        value: data?.properties?.description || '',
         order: 2
       }),
       new InputSelect({
         key: 'manager',
         label: 'Manager',
-        value: data?.manager.id || '',
+        value: data?.properties?.manager.id || '',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 3
@@ -452,85 +452,84 @@ export class InputService {
       new InputSelect({
         key: 'deputy',
         label: 'Deputy',
-        value: data?.deputy.id || '',
+        value: data?.properties?.deputy.id || '',
         options: this.buildEmployeeOptions(),
         order: 4
       }),
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
-        value: data?.assistant.id || '',
+        value: data?.properties?.assistant.id || '',
         options: this.buildEmployeeOptions(),
         order: 5
       }),
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
-        idArray: this.getIdArray(data?.staff) || [],
-        // valueArray: this.getValueArray(data?.staff) || [],        
+        idArray: this.getIdArray(data?.properties?.staff) || [],
         options: this.buildEmployeeOptions(),
         order: 6
       }),
       new InputImage({
         key: 'img_banner',
         label: 'Choose Banner Image',
-        value: data?.img_banner.id || '',
+        value: data?.properties?.img_banner.id || '',
         options: this.buildOptions('/api/v1/image/'),
         order: 7
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
-        value: data?.img_card.id || '',
+        value: data?.properties?.img_card.id || '',
         options: this.buildOptions('/api/v1/image/'),
         order: 7
       }),
       new InputPhone({
         key: 'phone_number',
         label: 'Phone Number',
-        value: data?.profile?.phone_number || '',
+        value: data?.properties?.phone_number || '',
         // required: true,
         order: 9
       }),
       new InputText({
         key: 'street_address',
         label: 'street_address',
-        value: data?.street_address || '',
+        value: data?.properties?.street_address || '',
         required: true,
         order: 10
       }),
       new InputText({
         key: 'mailing_address',
         label: 'Mailing Address',
-        value: data?.mailing_address || '',
+        value: data?.properties?.mailing_address || '',
         required: true,
         order: 11
       }),
       new InputText({
         key: 'city',
         label: 'City',
-        value: data?.city || '',
+        value: data?.properties?.city || '',
         // required: true,
         order: 12
       }),
       new InputText({
         key: 'state',
         label: 'State',
-        value: data?.state || '',
+        value: data?.properties?.state || '',
         // required: true,
         order: 13
       }),
       new InputNumber({
         key: 'zipcode',
         label: 'Zipcode',
-        value: data?.zipcode || '',
+        value: data?.properties?.zipcode || '',
         // required: true,
         order: 14
       }),
       new InputCoordinates({
         key: 'coordinates',
         label: 'Coordinates',
-        value: data?.coordinates || '',
+        value: data?.geometry?.coordinates || '',
         // required: true,
         order: 15
       })

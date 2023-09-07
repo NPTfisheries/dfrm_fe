@@ -9,7 +9,6 @@ import { AuthService } from 'src/_services/auth.service';
 
 @Component({
   selector: 'app-edit-button-renderer',
-  // template: `<div class="icon-wrapper"><i (click)="onEditClick()" class="fa-regular fa-pen-to-square ag-clickable"></i></div>`,
   template: `<div class="icon-wrapper">
                 <i (click)="onEditClick()" *ngIf="renderButton()" class="fa-regular fa-pen-to-square ag-clickable"></i></div>`,
   styleUrls: ['../renderers.css']
@@ -51,6 +50,7 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
 
   renderButton() {
     if(this.params.routeType !== 'project') { return true }
+    //object level permissions for project edit buttons.
     return this.projectPerms.includes(String(this.params.data.id));
   }
 
