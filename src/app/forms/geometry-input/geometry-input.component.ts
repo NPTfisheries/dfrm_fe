@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import { InputBase } from 'src/_inputs/input-base';
@@ -10,7 +10,7 @@ import * as L from 'leaflet';
   templateUrl: './geometry-input.component.html',
   styleUrls: ['./geometry-input.component.css']
 })
-export class GeometryInputComponent implements OnInit {
+export class GeometryInputComponent {
 
   @Input() input!: InputBase<string>;
   @Input() form!: FormGroup;
@@ -21,26 +21,18 @@ export class GeometryInputComponent implements OnInit {
   geometry!: any;
   private map!: L.Map;
 
-  ngOnInit(): void {
-    this.geometryControl = new FormControl(this.geometry || null);
-    this.form.addControl('geometry', this.geometryControl);
-  }
-
   ngAfterViewInit(): void {
     this.initMap();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-
-  }
-
-
   private initMap(): void {
+    // start centered on pin if it's provided....
     if(this.input.value !== '') {
       this.geometry = this.input.value;
       this.map = L.map('map').setView([this.geometry.coordinates[1], this.geometry.coordinates[0]], 8);
       this.marker = L.marker([this.geometry.coordinates[1], this.geometry.coordinates[0]]).addTo(this.map);
     } else {
+      // otherwise we center someplace else.
       this.map = L.map('map').setView([45.25, -116.087802], 8);
     }
     
@@ -50,12 +42,10 @@ export class GeometryInputComponent implements OnInit {
       minZoom: 7
     }).addTo(this.map);
 
-
-
     this.map.on('click', (e: L.LeafletMouseEvent) => {
       console.log('Latitude:', e.latlng.lat);
       console.log('Longitude:', e.latlng.lng);
-      this.buildGeometry(e.latlng.lat, e.latlng.lng);
+      this.updateGeometry(e.latlng.lat, e.latlng.lng);
 
       if (this.marker) { this.map.removeLayer(this.marker); }
       this.marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map);
@@ -63,23 +53,13 @@ export class GeometryInputComponent implements OnInit {
 
   }
 
-  buildGeometry(latitude: number, longitude: number) {
-    // exampleGeometry = { 
-    //   "type": "Point",
-    //   "coordinates": [ -116, 44.0 ]
-    // }
-
+  updateGeometry(latitude: number, longitude: number) {
     this.geometry = {
       "type": "Point",
       "coordinates": [longitude, latitude]
     };
-    this.geometryControl.setValue(this.geometry); // correctly applying value.
-  }
 
-  showGeometry() {
-    console.log(this.input);
-    console.log(this.geometry);
-    console.log(this.geometryControl.value)
+    this.input.value = this.geometry;
   }
 
 }
