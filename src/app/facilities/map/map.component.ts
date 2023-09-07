@@ -35,7 +35,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
       attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>',
       maxZoom: 20,
-      minZoom: 3
+      minZoom: 7
     }).addTo(this.map);
 
     L.control.scale().addTo(this.map);
@@ -56,7 +56,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
                     <h5>${f.properties.city}, ${f.properties.state} ${f.properties.zipcode}</h5>
                     <h5>${formatPhone(f.properties.phone_number)}</h5>
                     `)
-        .openPopup()
     }
   }
 }
