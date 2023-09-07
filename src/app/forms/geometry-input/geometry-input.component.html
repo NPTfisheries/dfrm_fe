@@ -1,5 +1,5 @@
 <div [formGroup]="form">
-    <input type="hidden" style="display:none;" [formControl]="geometryControl" [value]="'GLORP'" [id]="'geometry'" />
+    <input type="hidden" style="display:none;" [formControlName]="input.key" [value]="input.value" [id]="input.key" />
 </div>
 <div class="map-container">
     <div id="map"></div>

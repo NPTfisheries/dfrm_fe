@@ -4,7 +4,7 @@
     <div [ngSwitch]="input.controlType">
 
         <!-- GEOMETRY -->
-        <app-geometry-input *ngSwitchCase="'geometry'" [formGroup]="form"></app-geometry-input>
+        <app-geometry-input *ngSwitchCase="'geometry'" [input]="input" [form]="form"></app-geometry-input>
 
         <!-- FILE -->
         <input *ngSwitchCase="'file'" type="file" [formControlName]="input.key" [value]="input.key" [id]="input.key"
