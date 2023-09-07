@@ -264,6 +264,51 @@ function imageColDefs(routeType: string, context: any) {
 
 }
 
+function facilityColDefs(routeType: string, context: any) {
+    const columns: any[] = [
+        {
+            field: 'name',
+            headerName: 'Name'
+        },
+        {
+            field: 'description',
+            headerName: 'Description'
+        },
+        {
+            field: 'street_adress',
+            headerName: 'Street Addresss'
+        },
+        {
+            field: 'mailing_address',
+            headerName: 'Mailing Address'
+        },
+        {
+            field: 'city',
+            headerName: 'City'
+        },
+        {
+            field: 'state',
+            headerName: 'State'
+        }
+    ];
+
+    if (managerAccess(context.permissionGroup)) {
+        columns.push({
+            headerName: 'Edit',
+            field: 'slug',
+            cellRenderer: EditButtonRendererComponent,
+            cellRendererParams: {
+                routeType: routeType,
+                context: context
+            },
+            maxWidth: 100
+        });
+    }
+
+    return columns;
+
+}
+
 // Function to extract and concatenate project leader names
 function getProjectLeaderNames(params: any) {
     if (params.data.project_leader && Array.isArray(params.data.project_leader)) {
