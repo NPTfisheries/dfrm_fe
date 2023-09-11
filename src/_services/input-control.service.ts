@@ -9,9 +9,19 @@ export class InputControlService {
         const group: any = {};
 
         inputs.forEach(input => {
-            group[input.key] = input.required ? new FormControl(input.value || '', Validators.required)
+            if (input.key === 'coordinates') {
+              // Handle the 'coordinates' field specially -> GeoJSON
+              console.log('Building coordinates input!', input);
+              group['coordinates'] = new FormGroup({
+                type: new FormControl('Point'),
+                coordinates: new FormControl(input.value || [])
+              });
+            } else {
+              group[input.key] = input.required ? new FormControl(input.value || '', Validators.required)
                 : new FormControl(input.value || '');
-        });
+            }
+          });
+        
         return new FormGroup(group);
     }
 }

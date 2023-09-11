@@ -1,5 +1,5 @@
 import { InputBase } from "./input-base";
 
-export class InputGeometry extends InputBase<string> {
-  override controlType = 'geometry';
+export class InputCoordinates extends InputBase<string> {
+  override controlType = 'coordinates';
 }

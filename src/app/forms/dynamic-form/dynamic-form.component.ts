@@ -44,7 +44,7 @@ export class DynamicFormComponent implements OnInit {
       // console.log('Project leader was a string, reassigned as empty array:', this.form.value.project_leader);
     }
     
-    console.log(this.form.value);
+    console.log('Submitted form:', this.form.value);
 
     if(this.slug === undefined) {
       this.backendService.newItem(this.routeType, this.form.value).subscribe({
