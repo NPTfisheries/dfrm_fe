@@ -84,6 +84,7 @@ export class ProfileComponent implements OnInit {
       this.bs.updateProfilePhoto(formData).subscribe(response => {
         console.log(response);
         this.getImage(response.photo);
+        // this.getUserData();
       });
     }
   }
