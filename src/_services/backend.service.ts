@@ -38,9 +38,9 @@ export class BackendService {
         return this.get(this.base_url + 'user/');
     }
 
-    getImageBySlug(slug:string) {
-        return this.get(`/api/v1/image/${slug}/`);
-    }
+    // getImageBySlug(slug:string) {
+    //     return this.get(`/api/v1/image/${slug}/`);
+    // }
 
     getImageById(id:number) {
         return this.get(`/api/v1/image/${id}/`);

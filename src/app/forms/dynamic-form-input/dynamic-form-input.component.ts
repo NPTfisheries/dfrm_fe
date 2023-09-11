@@ -23,11 +23,10 @@ export class DynamicFormInputComponent implements OnInit {
   ngOnInit(): void {
     if (this.input.controlType === 'image') {
       // load initial preview.
-      this.backendService.getImageById(Number(this.input.value)).subscribe(img => {
-        this.imagePreview = img.image.replace('localhost:4200', 'localhost:8000');
-      });
+      this.updatePreview(Number(this.input.value));
     }
   }
+
   get isValid() { return this.form.controls[this.input.key].valid; }
 
   // ONLY for Image Preview
@@ -37,8 +36,12 @@ export class DynamicFormInputComponent implements OnInit {
     // console.log(event.target.options[event.target.selectedIndex].text);
     // console.log(event.target.options[event.target.selectedIndex].value);
     const imageId = event.target.options[event.target.selectedIndex].value;
+    this.updatePreview(imageId);
 
-    this.backendService.getImageById(imageId).subscribe(img => {
+  }
+
+  private updatePreview(id: number) {
+    this.backendService.getImageById(id).subscribe(img => {
       this.imagePreview = img.image.replace('localhost:4200', 'localhost:8000');
     });
   }
