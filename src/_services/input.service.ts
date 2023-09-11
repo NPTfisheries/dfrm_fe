@@ -432,7 +432,6 @@ export class InputService {
         key: 'name',
         label: 'Name',
         value: data?.properties?.name || '',
-        // value: 'Test Name',
         required: true,
         order: 1
       }),
@@ -440,14 +439,12 @@ export class InputService {
         key: 'description',
         label: 'Description',
         value: data?.properties?.description || '',
-        // value: 'testing desc',
         order: 2
       }),
       new InputSelect({
         key: 'manager',
         label: 'Manager',
         value: data?.properties?.manager.id || '',
-        // value: '2',
         required: true,
         options: this.buildEmployeeOptions(),
         order: 3
@@ -456,7 +453,6 @@ export class InputService {
         key: 'deputy',
         label: 'Deputy',
         value: data?.properties?.deputy.id || '',
-        // value: '2',
         options: this.buildEmployeeOptions(),
         order: 4
       }),
@@ -464,7 +460,6 @@ export class InputService {
         key: 'assistant',
         label: 'Assistant',
         value: data?.properties?.assistant.id || '',
-        // value: '2',
         options: this.buildEmployeeOptions(),
         order: 5
       }),
@@ -472,7 +467,6 @@ export class InputService {
         key: 'staff',
         label: 'Staff',
         idArray: this.getIdArray(data?.properties?.staff) || [],
-        // value: "['1','2']",
         options: this.buildEmployeeOptions(),
         order: 6
       }),
@@ -480,7 +474,6 @@ export class InputService {
         key: 'img_banner',
         label: 'Choose Banner Image',
         value: data?.properties?.img_banner.id || '',
-        // value: '1',
         options: this.buildOptions('/api/v1/image/'),
         order: 7
       }),
@@ -488,7 +481,6 @@ export class InputService {
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.properties?.img_card.id || '',
-        // value: '1',
         options: this.buildOptions('/api/v1/image/'),
         order: 7
       }),
@@ -496,7 +488,6 @@ export class InputService {
         key: 'phone_number',
         label: 'Phone Number',
         value: data?.properties?.phone_number || '',
-        // value: '+12086344782',
         // required: true,
         order: 9
       }),
@@ -504,7 +495,6 @@ export class InputService {
         key: 'street_address',
         label: 'street_address',
         value: data?.properties?.street_address || '',
-        // value: '101 Fake Street',
         required: true,
         order: 10
       }),
@@ -512,14 +502,12 @@ export class InputService {
         key: 'mailing_address',
         label: 'Mailing Address',
         value: data?.properties?.mailing_address || '',
-        // value: '207 Misleading Way',
         order: 11
       }),
       new InputText({
         key: 'city',
         label: 'City',
         value: data?.properties?.city || '',
-        // value: 'CITY',
         // required: true,
         order: 12
       }),
@@ -527,7 +515,6 @@ export class InputService {
         key: 'state',
         label: 'State',
         value: data?.properties?.state || '',
-        // value: 'STATE',
         // required: true,
         order: 13
       }),
@@ -535,7 +522,6 @@ export class InputService {
         key: 'zipcode',
         label: 'Zipcode',
         value: data?.properties?.zipcode || '',
-        // value: '12345',
         // required: true,
         order: 14
       }),

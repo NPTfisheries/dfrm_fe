@@ -11,11 +11,17 @@ import { formatPhone } from 'src/_utilities/formatPhone';
 })
 export class MapComponent implements AfterViewInit, OnChanges {
   
-  // @ViewChild('map') private mapContainer!: ElementRef;
-
   @Input() facilities!: any;
 
   private map!: L.Map;
+
+  customIcon = L.divIcon({
+    className: 'custom-icon', // Define a CSS class for styling the icon
+    html: '<i class="fa fa-location-dot fa-2xl" style="color:#a712de" ></i>', // Use the Font Awesome icon class
+    iconSize: [10, 10], // Set the size of your custom icon (e.g., width: 32px, height: 32px)
+    iconAnchor: [10, 20], // Set the icon anchor point [:top left] (usually half of iconSize for centering)
+    popupAnchor: [0, 0] // Set the popup anchor point relative to the icon (adjust as needed)
+  });
 
   ngAfterViewInit(): void {
     this.initMap();
@@ -44,12 +50,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
   }
 
   addMarkers() {
-        // // Add a marker (optional)
-    //   L.marker([51.5, -116.09]).addTo(this.map)
-    //     .bindPopup('Hello, Leaflet!')
-    //     .openPopup();
     for(let f of this.facilities) {
-      L.marker([f.geometry.coordinates[1], f.geometry.coordinates[0]]).addTo(this.map)
+      L.marker([f.geometry.coordinates[1], f.geometry.coordinates[0]],
+        { icon: this.customIcon}).addTo(this.map)
         .bindPopup(`<h3>${f.properties.name}</h3>
                     <hr>
                     <h5>${f.properties.street_address}</h5>
@@ -58,4 +61,5 @@ export class MapComponent implements AfterViewInit, OnChanges {
                     `)
     }
   }
+
 }
