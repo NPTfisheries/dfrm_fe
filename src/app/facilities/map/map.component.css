@@ -1,9 +1,9 @@
 .map-container {
-    height: 700px;
+    height: 900px;
     width: 100%;
     overflow:hidden;
     position: relative;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
 }
 
 #map {

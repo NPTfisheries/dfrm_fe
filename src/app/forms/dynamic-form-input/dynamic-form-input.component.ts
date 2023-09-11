@@ -32,12 +32,9 @@ export class DynamicFormInputComponent implements OnInit {
   // ONLY for Image Preview
   onSelectChange(event: any): void {
     if (this.input.controlType !== 'image') { return; }
-
     // console.log(event.target.options[event.target.selectedIndex].text);
     // console.log(event.target.options[event.target.selectedIndex].value);
-    const imageId = event.target.options[event.target.selectedIndex].value;
-    this.updatePreview(imageId);
-
+    this.updatePreview(event.target.options[event.target.selectedIndex].value);
   }
 
   private updatePreview(id: number) {

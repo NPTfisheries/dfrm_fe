@@ -9,7 +9,7 @@
         class="dfrm-button btn-right">Upload Image</button>
     <button *ngIf="routeType == 'facility' && managerAccess(permissionGroup)" (click)="add(routeType)"
         class="dfrm-button btn-right">Add Facility</button>
-    <button *ngIf="routeType == 'project' && professionalAccess(permissionGroup)" (click)="add(routeType)"
+    <button *ngIf="routeType == 'project' && projectleaderAccess(permissionGroup)" (click)="add(routeType)"
         class="dfrm-button btn-right">Add New {{ routeType | titlecase}}</button>
 
 

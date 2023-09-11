@@ -486,7 +486,7 @@ export class InputService {
       }),
       new InputText({
         key: 'street_address',
-        label: 'street_address',
+        label: 'Street Address',
         value: data?.properties?.street_address || '',
         required: true,
         order: 10

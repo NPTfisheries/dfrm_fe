@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs';
 import { FormContainerComponent } from '../forms/form-container/form-container.component';
 
 import { getRouteType } from 'src/_utilities/route-utils';
-import { managerAccess, professionalAccess } from 'src/_utilities/permission-util';
+import { managerAccess, projectleaderAccess } from 'src/_utilities/permission-util';
 
 @Component({
   selector: 'app-list-page',
@@ -51,7 +51,7 @@ export class ListPageComponent implements OnInit {
   data!: any[];
 
   managerAccess = managerAccess;
-  professionalAccess = professionalAccess;
+  projectleaderAccess = projectleaderAccess;
   routeType!: string;
 
   list: any | undefined;
