@@ -42,6 +42,11 @@ export class BackendService {
         return this.get(`/api/v1/image/${slug}/`);
     }
 
+    getImageById(id:number) {
+        return this.get(`/api/v1/image/${id}/`);
+    }
+
+
     updateProfile(profile: any) {
         return this.put('/api/v1/profile/', profile);
     }
