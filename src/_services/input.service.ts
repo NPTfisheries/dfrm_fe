@@ -309,74 +309,67 @@ export class InputService {
   getProfileInputs(data?: any) {
     console.log('Getting Profile Inputs...');
     const inputs: InputBase<string>[] = [
-      new InputText({
-        key: 'first_name',
-        label: 'First Name',
-        value: data?.first_name || '',
-        required: true,
-        order: 1
-      }),
-      new InputText({
-        key: 'last_name',
-        label: 'Last Name',
-        value: data?.last_name || '',
-        required: true,
-        order: 2
-      }),
-      new InputText({
-        key: 'email',
-        label: 'Email',
-        value: data?.email || '',
-        required: true,
-        order: 3
-      }),
+      // new InputText({
+      //   key: 'first_name',
+      //   label: 'First Name',
+      //   value: data?.first_name || '',
+      //   required: true,
+      //   order: 1
+      // }),
+      // new InputText({
+      //   key: 'last_name',
+      //   label: 'Last Name',
+      //   value: data?.last_name || '',
+      //   required: true,
+      //   order: 2
+      // }),
+      // new InputText({
+      //   key: 'email',
+      //   label: 'Email',
+      //   value: data?.email || '',
+      //   required: true,
+      //   order: 3
+      // }),
       new InputText({
         key: 'title',
         label: 'Title',
-        value: data?.profile?.title || '',
+        value: data?.title || '',
         required: true,
         order: 4
       }),
       new InputTextarea({
         key: 'bio',
         label: 'Bio',
-        value: data?.profile?.bio || '',
+        value: data?.bio || '',
         order: 5
       }),
       new InputText({
         key: 'city',
         label: 'City',
-        value: data?.profile?.city || '',
+        value: data?.city || '',
         // required: true,
         order: 6
       }),
       new InputText({
         key: 'state',
         label: 'State',
-        value: data?.profile?.state || '',
+        value: data?.state || '',
         // required: true,
         order: 7
       }),
       new InputPhone({
         key: 'work_phone',
         label: 'Work Phone',
-        value: data?.profile?.work_phone || '',
+        value: data?.work_phone || '',
         // required: true,
         order: 8
       }),
       new InputPhone({
         key: 'mobile_phone',
         label: 'Mobile Phone',
-        value: data?.profile?.mobile_phone || '',
+        value: data?.mobile_phone || '',
         // required: true,
         order: 9
-      }),
-      new InputFile({
-        key: 'photo',
-        label: 'Choose Profile Photo',
-        value: data?.profile?.photo || '',
-        required: false,
-        order: 10
       })
     ]
 

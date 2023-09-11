@@ -52,6 +52,14 @@ export class FormContainerComponent implements OnInit {
     if (this.projectId) { route = `${this.routeType}/?project_id=${this.projectId}` }; // subproject list, filtered
     if (this.subprojectId) { route = `${this.routeType}/?subproject_id=${this.subprojectId}` }; // task list, filtered
 
+    if (route === 'profile') {
+      this.backendService.getCurrentUser().subscribe(currentUser => {
+        if (this.context) {
+          this.context.data = currentUser;
+          this.activeModal.close();
+        }
+      })
+    }
     this.backendService.getList(route).subscribe(updatedList => {
       if (this.context) {
         this.context.data = updatedList;
@@ -78,7 +86,9 @@ export class FormContainerComponent implements OnInit {
         return this.inputService.getSubprojectInputs(data);
       case 'task':
         return this.inputService.getTaskInputs(data);
-      case 'users':
+      // case 'users':
+      //   return this.inputService.getProfileInputs(data);
+      case 'profile':
         return this.inputService.getProfileInputs(data);
       case 'image':
         return this.inputService.getImageInputs(data);
@@ -87,6 +97,13 @@ export class FormContainerComponent implements OnInit {
       default:
         return
     }
+  }
+
+  addOrEdit() {
+    if(this.routeType === 'profile' || this.slug !== undefined) {
+      return false; // 'Add'
+    }
+    return true; // 'Edit'
   }
 
 }

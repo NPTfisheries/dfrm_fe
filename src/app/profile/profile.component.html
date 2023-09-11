@@ -1,5 +1,6 @@
 <div class="container py-4">
-    <button *ngIf="this.routeType === 'profile'" style='float:right; position: absolute;' (click)="updateProfile()"
+    <input type="file" #fileInput style="display: none" (change)="handleFileInputChange($event)">
+    <button *ngIf="this.routeType === 'profile'" style='float:right; position: absolute;' (click)="triggerFileInputClick()"
         class="dfrm-button-small grow">Update
         Image</button>
     <div class="d-flex justify-content-around align-items center my-4">
@@ -12,26 +13,26 @@
         <button *ngIf="this.routeType === 'profile'" style='float:right; position: absolute;' (click)="updateProfile()"
             class="dfrm-button-small grow">Update
             Profile</button>
-        <h1 class="text-center font-weight-bold text-yellow my-2">{{ user?.full_name }}</h1>
-        <h2 class="text-center text-lightgray">{{ user?.profile?.title }}</h2>
+        <h1 class="text-center font-weight-bold text-yellow my-2">{{ data?.full_name }}</h1>
+        <h2 class="text-center text-lightgray">{{ data?.profile?.title }}</h2>
         <hr class="card-hr" />
         <br>
-        <h4 class="text-lightgray">{{ user?.profile?.bio }}</h4>
+        <h4 class="text-lightgray">{{ data?.profile?.bio }}</h4>
         <br>
         <hr class="card-hr" />
         <br>
         <ul class="text-lightgray">
             <li>
-                <h4 class="text-lightgray">Office Location: {{ user?.profile?.city }}, {{ user?.profile?.state }}</h4>
+                <h4 class="text-lightgray">Office Location: {{ data?.profile?.city }}, {{ data?.profile?.state }}</h4>
             </li><br>
             <li>
-                <h4 class="text-lightgray">Email: {{ user?.email }}</h4>
+                <h4 class="text-lightgray">Email: {{ data?.email }}</h4>
             </li><br>
             <li>
-                <h4 class="text-lightgray">Work Phone: {{ formatPhone(user?.profile?.work_phone) }}</h4>
+                <h4 class="text-lightgray">Work Phone: {{ formatPhone(data?.profile?.work_phone) }}</h4>
             </li><br>
             <li>
-                <h4 class="text-lightgray">Mobile Phone: {{ formatPhone(user?.profile?.mobile_phone) }}</h4>
+                <h4 class="text-lightgray">Mobile Phone: {{ formatPhone(data?.profile?.mobile_phone) }}</h4>
             </li><br>
         </ul>
 

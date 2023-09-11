@@ -18,7 +18,6 @@ import { RegisterComponent } from './forms/register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 
 import { CustomHttpInterceptor } from 'src/_utilities/http-interceptor';
-import { ProfileUpdateComponent } from './forms/profile-update/profile-update.component';
 import { ListPageComponent } from './list-page/list-page.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
 import { PasswordUpdateComponent } from './forms/password-update/password-update.component';
@@ -50,7 +49,6 @@ import { GeometryInputComponent } from './forms/geometry-input/geometry-input.co
     HomeComponent,
     RegisterComponent,
     ProfileComponent,
-    ProfileUpdateComponent,
     ListPageComponent,
     DetailPageComponent,
     PasswordUpdateComponent,

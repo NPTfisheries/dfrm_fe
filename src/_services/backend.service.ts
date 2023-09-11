@@ -19,11 +19,6 @@ export class BackendService {
         return this.get(URL);
     }
 
-    // getDetailById(routeType: string, id: number): Observable<any>  {
-    //     const URL = `${this.base_url}${routeType}/${id}/`;
-    //     return this.get(URL);
-    // }
-
     getDetail(routeType: string, slug: string): Observable<any>  {
         const URL = `${this.base_url}${routeType}/${slug}/`;
         return this.get(URL);
@@ -33,11 +28,6 @@ export class BackendService {
         const URL = `${this.base_url}${routeType}/`;
         return this.post(URL, object);
     }
-    
-    // updateItemById(routeType: string, id: number, object:object): Observable<any>  {
-    //     const URL = `${this.base_url}${routeType}/${id}/`;
-    //     return this.put(URL, object);
-    // }
 
     updateItem(routeType: string, slug:string, object:object): Observable<any>  {
         const URL = `${this.base_url}${routeType}/${slug}/`;
@@ -54,6 +44,10 @@ export class BackendService {
 
     updateProfile(profile: any) {
         return this.put('/api/v1/profile/', profile);
+    }
+
+    updateProfilePhoto(photo: any) {
+        return this.put('/api/v1/profile-photo/', photo);
     }
     
     // HELPERS -- change to private eventually?

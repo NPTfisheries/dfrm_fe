@@ -40,10 +40,10 @@ export class ImageUploadComponent implements OnInit {
 
   onFileChange(event: any): void {
     if (event.target.files && event.target.files.length > 0) {
-      const newSelectedImage = event.target.files[0];
-      if (newSelectedImage) {
-        this.selectedImage = newSelectedImage;
-        this.imagePreview = URL.createObjectURL(newSelectedImage);
+      const newProfilePhoto = event.target.files[0];
+      if (newProfilePhoto) {
+        this.selectedImage = newProfilePhoto;
+        this.imagePreview = URL.createObjectURL(newProfilePhoto);
       }
     }
   }

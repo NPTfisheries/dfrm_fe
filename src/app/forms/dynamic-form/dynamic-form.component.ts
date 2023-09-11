@@ -46,8 +46,14 @@ export class DynamicFormComponent implements OnInit {
     
     console.log('Submitted form:', this.form.value);
 
-    if(this.slug === undefined) {
+    
+    if(this.slug === undefined && this.routeType !== 'profile') {
       this.backendService.newItem(this.routeType, this.form.value).subscribe({
+        next: () => {this.formSubmitted.emit();}
+      });
+    } else if(this.routeType === 'profile') {
+      console.log('SDJFSFJDSFJLDSFJDSJFDS');
+      this.backendService.updateProfile(this.form.value).subscribe({
         next: () => {this.formSubmitted.emit();}
       });
     } else {
