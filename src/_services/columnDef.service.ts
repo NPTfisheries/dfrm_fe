@@ -2,7 +2,7 @@ import { LinkButtonRendererComponent } from "src/_renderers/link-button-renderer
 import { EditButtonRendererComponent } from "src/_renderers/edit-button-renderer/edit-button-renderer.component";
 import { ImagePreviewRendererComponent } from "src/_renderers/image-preview-renderer/image-preview-renderer.component";
 
-import { professionalAccess, managerAccess } from "src/_utilities/permission-util";
+import { professionalAccess, managerAccess, projectleaderAccess } from "src/_utilities/permission-util";
 import { formatPhone } from "src/_utilities/formatPhone";
 
 export function getColumnDefs(routeType: string, context: any) {
@@ -156,7 +156,7 @@ function projectColDefs(routeType: string, context: any) {
         }
     ];
 
-    if (professionalAccess(context.permissionGroup)) {
+    if (projectleaderAccess(context.permissionGroup)) {
         columns.push({
             headerName: 'Edit',
             field: 'slug',

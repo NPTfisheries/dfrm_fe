@@ -35,14 +35,15 @@ export class InputService {
         key: 'description',
         label: 'Description',
         value: data?.description || '',
+        required: true,
         order: 2
       }),
       new InputSelect({
         key: 'manager',
         label: 'Manager',
         value: data?.manager.id || '',
-        required: true,
         options: this.buildEmployeeOptions(),
+        required: true,
         order: 3
       }),
       new InputSelect({
@@ -63,7 +64,6 @@ export class InputService {
         key: 'staff',
         label: 'Staff',
         idArray: this.getIdArray(data?.staff) || [],
-        // valueArray: this.getValueArray(data?.staff) || [],        
         options: this.buildEmployeeOptions(),
         order: 6
       }),
@@ -100,6 +100,7 @@ export class InputService {
         key: 'description',
         label: 'Description',
         value: data?.description || '',
+        required: true,
         order: 2
       }),
       new InputSelect({
@@ -128,7 +129,6 @@ export class InputService {
         key: 'staff',
         label: 'Staff',
         idArray: this.getIdArray(data?.staff) || [],
-        // valueArray: this.getValueArray(data?.staff) || [],
         options: this.buildEmployeeOptions(),
         order: 6
       }),
@@ -171,15 +171,15 @@ export class InputService {
         key: 'description',
         label: 'Description',
         value: data?.description || '',
+        required: true,
         order: 2
       }),
       new InputMultiSelect({
         key: 'project_leader',
         label: 'Project Leaders',
         idArray: this.getIdArray(data?.project_leader) || [],
-        // valueArray: this.getValueArray(data?.project_leader) || [],
-        required: true,
         options: this.buildEmployeeOptions(),
+        required: true,
         order: 3
       }),
       new InputImage({
@@ -234,8 +234,8 @@ export class InputService {
         key: 'lead',
         label: 'Subproject Lead',
         value: data?.lead.id || [],
-        required: true,
         options: this.buildEmployeeOptions(),
+        required: true,
         order: 4
       }),
       new InputImage({
@@ -271,6 +271,7 @@ export class InputService {
         key: 'description',
         label: 'Description',
         value: data?.description || '',
+        required: true,
         order: 2
       }),
       new InputHidden({
@@ -283,8 +284,8 @@ export class InputService {
         key: 'supervisor',
         label: 'Task Supervisor',
         value: data?.supervisor.id || [],
-        required: true,
         options: this.buildEmployeeOptions(),
+        required: true,
         order: 4
       }),
       new InputImage({
@@ -309,32 +310,10 @@ export class InputService {
   getProfileInputs(data?: any) {
     console.log('Getting Profile Inputs...');
     const inputs: InputBase<string>[] = [
-      // new InputText({
-      //   key: 'first_name',
-      //   label: 'First Name',
-      //   value: data?.first_name || '',
-      //   required: true,
-      //   order: 1
-      // }),
-      // new InputText({
-      //   key: 'last_name',
-      //   label: 'Last Name',
-      //   value: data?.last_name || '',
-      //   required: true,
-      //   order: 2
-      // }),
-      // new InputText({
-      //   key: 'email',
-      //   label: 'Email',
-      //   value: data?.email || '',
-      //   required: true,
-      //   order: 3
-      // }),
       new InputText({
         key: 'title',
         label: 'Title',
         value: data?.title || '',
-        required: true,
         order: 4
       }),
       new InputTextarea({
@@ -347,28 +326,24 @@ export class InputService {
         key: 'city',
         label: 'City',
         value: data?.city || '',
-        // required: true,
         order: 6
       }),
       new InputText({
         key: 'state',
         label: 'State',
         value: data?.state || '',
-        // required: true,
         order: 7
       }),
       new InputPhone({
         key: 'work_phone',
         label: 'Work Phone',
         value: data?.work_phone || '',
-        // required: true,
         order: 8
       }),
       new InputPhone({
         key: 'mobile_phone',
         label: 'Mobile Phone',
         value: data?.mobile_phone || '',
-        // required: true,
         order: 9
       })
     ]
@@ -411,6 +386,7 @@ export class InputService {
         key: 'source',
         label: 'source',
         value: data?.source || '',
+        required: true,
         order: 5
       })
     ]
@@ -432,14 +408,15 @@ export class InputService {
         key: 'description',
         label: 'Description',
         value: data?.properties?.description || '',
+        required: true,
         order: 2
       }),
       new InputSelect({
         key: 'manager',
         label: 'Manager',
         value: data?.properties?.manager.id || '',
-        required: true,
         options: this.buildEmployeeOptions(),
+        required: true,
         order: 3
       }),
       new InputSelect({
@@ -481,7 +458,6 @@ export class InputService {
         key: 'phone_number',
         label: 'Phone Number',
         value: data?.properties?.phone_number || '',
-        // required: true,
         order: 9
       }),
       new InputText({
@@ -501,28 +477,28 @@ export class InputService {
         key: 'city',
         label: 'City',
         value: data?.properties?.city || '',
-        // required: true,
+        required: true,
         order: 12
       }),
       new InputText({
         key: 'state',
         label: 'State',
         value: data?.properties?.state || '',
-        // required: true,
+        required: true,
         order: 13
       }),
       new InputNumber({
         key: 'zipcode',
         label: 'Zipcode',
         value: data?.properties?.zipcode || '',
-        // required: true,
+        required: true,
         order: 14
       }),
       new InputCoordinates({
         key: 'coordinates',
         label: 'Coordinates',
         value: data?.geometry.coordinates || '',
-        // required: true,
+        required: true,
         order: 15
       })
     ]
@@ -569,17 +545,5 @@ export class InputService {
     console.log('getIdArray:', ids);
     return ids;
   }
-
-  // getValueArray(data: any) {
-  //   if(!data) { return undefined; } // if no data, don't run the function.
-
-  //   let ids:string[] = [];
-  //   for (let x of data) {
-  //     ids.push(String(x.id));
-  //   }
-
-  //   console.log('getValueArray:', ids);
-  //   return ids;
-  // }
 
 }

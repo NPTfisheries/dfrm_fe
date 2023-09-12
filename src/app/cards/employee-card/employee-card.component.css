@@ -10,6 +10,7 @@
 
 .employee-photo-container {
     overflow: hidden;
+    /* position: relative; */
     border: 2px solid;
     border-radius: 50%;
     border-color: #cfd7db;
