@@ -66,12 +66,10 @@ export class MapComponent implements AfterViewInit, OnChanges {
       },
       onEachFeature: (feature: any, layer) => {
         const customPopupContent = this.facilityPopup(feature);
-        layer.bindPopup(customPopupContent, {
-          className: 'custom-popup'
-        });
+        layer.bindPopup(customPopupContent);
 
-        layer.on('click', () => {
-          console.log('clicked a thingy');
+        layer.on('popupopen', () => {
+          // get img_card
           this.backendService.getImageById(feature.properties.img_card).subscribe(response => {
             this.imageUrl = response.image.replace('localhost:4200', 'localhost:8000');
 
@@ -79,18 +77,17 @@ export class MapComponent implements AfterViewInit, OnChanges {
             const popup = layer.getPopup();
             if (popup) {
               popup.setContent(this.facilityPopup(feature));
+
+              const button = document.getElementById('myb');
+              if (button) {
+                // set click listener
+                button.addEventListener('click', () => {
+                  console.log('button clicked', feature.id);
+                  this.facilitySlug.emit(feature.properties.slug);
+                });
+              }
             }
           });
-        });
-
-        layer.on('popupopen', () => {
-          const button = document.getElementById('myb');
-          if (button) {
-            button.addEventListener('click', () => {
-              console.log('button clicked', feature.id);
-              this.facilitySlug.emit(feature.properties.slug);
-            });
-          }
         });
       }
     }).addTo(this.map);
