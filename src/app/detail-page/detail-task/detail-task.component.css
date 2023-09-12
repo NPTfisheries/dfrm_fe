@@ -1,5 +1,5 @@
-.task-container {
-    border: 3px solid #ccc;
+.task-container-dark {
+    border: 3px solid #f9f906;
     border-radius: 10px;
     background-color: #0d1b1f;
 }
@@ -7,8 +7,8 @@
 .task-container-light {
     border: 3px solid #f9f906;
     border-radius: 10px;
-    /* background-color: #cfd7db; */
-    background-color: rgb(207, 215, 219, 1.5);
+    background-color: #cfd7db;
+    /* background-color: rgb(207, 215, 219, 1.5); */
 }
 
 
@@ -32,9 +32,4 @@
     overflow: hidden;
     padding-left: 0px;
     padding-right: 0px;
-}
-
-.task-link a {
-    color:#f9f906 !important;
-    text-decoration: wavy;
 }

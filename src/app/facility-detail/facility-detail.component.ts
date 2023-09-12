@@ -29,7 +29,6 @@ export class FacilityDetailComponent implements OnInit {
     this.routeType = getRouteType(this.route);
     const slug = getRouteSlug(this.route);
     this.backendService.getDetail(this.routeType, slug).subscribe(detail => {
-      console.log('FACILITY DETAIL:', detail);
       this.data = detail;
       this.getImage(detail.properties.img_banner);
     });
