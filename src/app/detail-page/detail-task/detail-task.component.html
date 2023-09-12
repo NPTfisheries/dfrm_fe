@@ -1,10 +1,9 @@
 <div class="container">
     <div class="d-flex">
-        <button *ngIf="managerPerms || addTask" (click)="add()" class="dfrm-button-small"
-            style="margin-left: auto;">Add Task</button>
+        <button *ngIf="managerPerms || addTask" (click)="add()" class="dfrm-button-small" style="margin-left: auto;">Add
+            Task</button>
     </div>
     <div *ngFor="let item of data; let i = index">
-        <!-- <br> -->
         task info
         <div class="container task-container-light">
             <div class="row">
@@ -15,16 +14,14 @@
                 <div class="col-md-8 py-4">
                     <div>
                         <h3>{{ item.name }}</h3>
-                        <p>{{ item.description }}</p>
-                        <br>
-                        <hr>
                         <div class="d-flex justify-content-between py-0 my-0">
-                            <p>Supervisor: <a [routerLink]="'/users/' + item.supervisor.id">{{
-                                    item.supervisor.first_name }}
-                                    {{item.supervisor.last_name}} </a></p>
+                            <p>Supervisor: <a class="task-link" [routerLink]="'/users/' + item.supervisor.id">{{
+                                    item.supervisor.full_name }} </a></p>
                             <button *ngIf="managerPerms || canEditTask(item.id)" (click)="edit(item.slug)"
                                 class="dfrm-button-small">Edit Task</button>
                         </div>
+                        <hr>
+                        <p>{{ item.description }}</p>
                     </div>
                 </div>
                 <div *ngIf="i % 2 === 0" class="col-md-4 overflow-hidden">

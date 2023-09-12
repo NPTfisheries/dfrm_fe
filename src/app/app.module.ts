@@ -39,6 +39,7 @@ import { StaffCardComponent } from './cards/staff-card/staff-card.component';
 import { FacilitiesComponent } from './facilities/facilities.component';
 import { MapComponent } from './facilities/map/map.component';
 import { GeometryInputComponent } from './forms/geometry-input/geometry-input.component';
+import { FacilityDetailComponent } from './facility-detail/facility-detail.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { GeometryInputComponent } from './forms/geometry-input/geometry-input.co
     FacilitiesComponent,
     MapComponent,
     GeometryInputComponent,
+    FacilityDetailComponent,
   ],
   imports: [
     BrowserModule,

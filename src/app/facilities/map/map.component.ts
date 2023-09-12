@@ -1,8 +1,6 @@
 import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
-import { BackendService } from 'src/_services/backend.service';
 import * as L from 'leaflet';
-
 import { formatPhone } from 'src/_utilities/formatPhone';
 
 
@@ -26,9 +24,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     popupAnchor: [0, 0] // Set the popup anchor point relative to the icon (adjust as needed)
   });
 
-  constructor(
-    private backendService: BackendService,
-  ) { }
+  constructor( ) { }
 
   ngAfterViewInit(): void {
     this.initMap();
@@ -109,7 +105,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     <h5>${facility.properties.street_address}</h5>
     <h5>${facility.properties.city}, ${facility.properties.state} ${facility.properties.zipcode}</h5>
     <h5>${formatPhone(facility.properties.phone_number)}</h5>
-    <button id="myb"> Click </button>
+    <button id="myb" class="dfrm-button-small" > Facility Details </button>
     `
   }
 }

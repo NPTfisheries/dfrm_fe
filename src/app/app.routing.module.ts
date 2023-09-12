@@ -11,6 +11,7 @@ import { ListPageComponent } from './list-page/list-page.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
 import { CardPageComponent } from './card-page/card-page.component';
 import { FacilitiesComponent } from './facilities/facilities.component';
+import { FacilityDetailComponent } from './facility-detail/facility-detail.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch:'full' },
@@ -37,7 +38,7 @@ const routes: Routes = [
     { path: 'department/:slug', component: DetailPageComponent},
     { path: 'division/:slug', component: DetailPageComponent},
     { path: 'project/:slug', component: DetailPageComponent},
-    { path: 'facility/:slug', component: DetailPageComponent},
+    { path: 'facility/:slug', component: FacilityDetailComponent},
     { path: 'users/:id', component: ProfileComponent},
 
 ];
