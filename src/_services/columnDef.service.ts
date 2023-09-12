@@ -283,6 +283,13 @@ function facilityColDefs(routeType: string, context: any) {
         {
             field: 'properties.state',
             headerName: 'State'
+        },
+        {
+            headerName: 'View',
+            field: 'properties.slug',
+            cellRenderer: LinkButtonRendererComponent,
+            cellRendererParams: {},
+            maxWidth: 100
         }
     ];
 
