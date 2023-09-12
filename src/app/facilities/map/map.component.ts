@@ -1,8 +1,10 @@
-import { Component, AfterViewInit, Input, ElementRef, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
+import { BackendService } from 'src/_services/backend.service';
 import * as L from 'leaflet';
 
 import { formatPhone } from 'src/_utilities/formatPhone';
+
 
 @Component({
   selector: 'app-map',
@@ -10,7 +12,8 @@ import { formatPhone } from 'src/_utilities/formatPhone';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements AfterViewInit, OnChanges {
-  
+
+  @Output() facilitySlug = new EventEmitter<string>();
   @Input() facilities!: any;
 
   private map!: L.Map;
@@ -23,20 +26,24 @@ export class MapComponent implements AfterViewInit, OnChanges {
     popupAnchor: [0, 0] // Set the popup anchor point relative to the icon (adjust as needed)
   });
 
+  constructor(
+    private backendService: BackendService,
+  ) { }
+
   ngAfterViewInit(): void {
     this.initMap();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes['facilities'] && !changes['facilities'].firstChange) {
-      if(this.facilities) {
+    if (changes['facilities'] && !changes['facilities'].firstChange) {
+      if (this.facilities) {
         this.addMarkers();
       }
     }
   }
 
   private initMap(): void {
-    this.map = L.map('map').setView([45.25, -116.087802], 8);
+    this.map = L.map('map').setView([45.25, -116.087802], 7);
 
     L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
       attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>',
@@ -50,16 +57,59 @@ export class MapComponent implements AfterViewInit, OnChanges {
   }
 
   addMarkers() {
-    for(let f of this.facilities) {
-      L.marker([f.geometry.coordinates[1], f.geometry.coordinates[0]],
-        { icon: this.customIcon}).addTo(this.map)
-        .bindPopup(`<h3>${f.properties.name}</h3>
-                    <hr>
-                    <h5>${f.properties.street_address}</h5>
-                    <h5>${f.properties.city}, ${f.properties.state} ${f.properties.zipcode}</h5>
-                    <h5>${formatPhone(f.properties.phone_number)}</h5>
-                    `)
-    }
+    L.geoJSON(this.facilities, {
+      // style: (feature) => {
+      //   if (feature?.properties.id >= 5) { 
+      //     return { color: "blue" }; 
+      //   } else {
+      //     return { color: "green" }
+      //   }
+      // },
+      pointToLayer: (feature, latlng) => {
+        // Create a marker with the custom icon
+        return L.marker(latlng, {
+          icon: this.customIcon,
+        });
+      },
+      onEachFeature: (feature: any, layer) => {
+        const customPopupContent = this.facilityPopup(feature);
+        layer.bindPopup(customPopupContent);
+
+        layer.on('popupopen', () => {
+          const button = document.getElementById('myb');
+          if (button) {
+            button.addEventListener('click', () => {
+              console.log('button clicked', feature.id);
+              this.facilitySlug.emit(feature.properties.slug);
+            });
+          }
+        });
+      }
+    }).addTo(this.map);
+
+    // var geojsonMarkerOptions = {
+    //   radius: 8,
+    //   fillColor: "#ff7800",
+    //   color: "#000",
+    //   weight: 1,
+    //   opacity: 1,
+    //   fillOpacity: 0.8
+    // };
+
+    // L.geoJSON(this.facilities, {
+    //   pointToLayer: function(feature, latlng) {
+    //     return L.circleMarker(latlng, geojsonMarkerOptions)
+    //   }
+    // }).addTo(this.map);
   }
 
+  facilityPopup(facility: any) {
+    return `<h3>${facility.properties.name}</h3>
+    <hr>
+    <h5>${facility.properties.street_address}</h5>
+    <h5>${facility.properties.city}, ${facility.properties.state} ${facility.properties.zipcode}</h5>
+    <h5>${formatPhone(facility.properties.phone_number)}</h5>
+    <button id="myb"> Click </button>
+    `
+  }
 }

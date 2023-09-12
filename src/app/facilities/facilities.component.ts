@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from 'src/_services/backend.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class FacilitiesComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private backendService: BackendService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -28,6 +29,11 @@ export class FacilitiesComponent implements OnInit {
       console.log('Facilities:', response);
       this.list = response.features;
     })
+  }
+
+  navToFacility(slug: string) {
+    console.log('goToFacility!', slug);
+    this.router.navigate([`facility/${slug}`]);
   }
 
 }
