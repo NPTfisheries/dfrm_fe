@@ -22,7 +22,7 @@ export class InputService {
 
   // TODO: get from a remote source of question metadata
   getDepartmentInputs(data?: any) {
-    console.log('Getting Department Inputs...');
+    // console.log('Getting Department Inputs...');
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
@@ -87,7 +87,7 @@ export class InputService {
   }
 
   getDivisionInputs(data?: any) {
-    console.log('Getting Division Inputs...');
+    // console.log('Getting Division Inputs...');
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
@@ -158,7 +158,7 @@ export class InputService {
   }
 
   getProjectInputs(data?: any) {
-    console.log('Getting Project Inputs...');
+    // console.log('Getting Project Inputs...');
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
@@ -208,7 +208,7 @@ export class InputService {
   }
 
   getSubprojectInputs(data?: any) {
-    console.log('Getting Subproject Inputs...');
+    // console.log('Getting Subproject Inputs...');
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
@@ -258,7 +258,7 @@ export class InputService {
   }
 
   getTaskInputs(data?: any) {
-    console.log('Getting Task Inputs...');
+    // console.log('Getting Task Inputs...');
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
@@ -308,7 +308,7 @@ export class InputService {
   }
 
   getProfileInputs(data?: any) {
-    console.log('Getting Profile Inputs...');
+    // console.log('Getting Profile Inputs...');
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'title',
@@ -352,7 +352,7 @@ export class InputService {
   }
 
   getImageInputs(data?: any) {
-    console.log('Getting Image Inputs...');
+    // console.log('Getting Image Inputs...');
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
@@ -395,7 +395,7 @@ export class InputService {
   }
 
   getFacilityInputs(data?: any) {
-    console.log('Getting Facility Inputs...');
+    // console.log('Getting Facility Inputs...');
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
@@ -542,7 +542,7 @@ export class InputService {
       ids.push(x.id);
     }
 
-    console.log('getIdArray:', ids);
+    // console.log('getIdArray:', ids);
     return ids;
   }
 

@@ -27,7 +27,7 @@ export class ImagePreviewRendererComponent implements ICellRendererAngularComp {
   }
 
   previewImage() {
-    console.log('previewImage:', this.params);
+    // console.log('previewImage:', this.params);
 
     const imageUrl = this.params.data.image.replace('localhost:4200', 'localhost:8000');
 

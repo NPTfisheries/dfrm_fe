@@ -44,15 +44,13 @@ export class DynamicFormComponent implements OnInit {
       // console.log('Project leader was a string, reassigned as empty array:', this.form.value.project_leader);
     }
     
-    console.log('Submitted form:', this.form.value);
-
+    // console.log('Submitted form:', this.form.value);
     
     if(this.slug === undefined && this.routeType !== 'profile') {
       this.backendService.newItem(this.routeType, this.form.value).subscribe({
         next: () => {this.formSubmitted.emit();}
       });
     } else if(this.routeType === 'profile') {
-      console.log('SDJFSFJDSFJLDSFJDSJFDS');
       this.backendService.updateProfile(this.form.value).subscribe({
         next: () => {this.formSubmitted.emit();}
       });

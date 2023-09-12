@@ -45,7 +45,7 @@ export class AuthService {
         return this.http.post<any>('/api/v1/login/', credentials)
             .pipe(
                 map((response) => {
-                    console.log('login return:', response);
+                    // console.log('login return:', response);
                     // console.log('access: ', response.access);
                     const decoded: any = jwtDecode(response.access);
                     // console.log('access decoded:', decoded);
@@ -90,7 +90,7 @@ export class AuthService {
         return this.http.get('/api/v1/permissions')
         .pipe(
             map((response: any) => {
-                console.log("REFRESH PERMS:", response);
+                // console.log("REFRESH PERMS:", response);
                 this.projectPermsSubject.next(response.project_objects);
                 this.subprojectPermsSubject.next(response.subproject_objects);
                 this.taskPermsSubject.next(response.task_objects);

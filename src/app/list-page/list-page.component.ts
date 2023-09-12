@@ -91,7 +91,7 @@ export class ListPageComponent implements OnInit {
     this.backendService.getList(routeType).subscribe((list: any) => {
       if (routeType === 'facility') { 
         this.data = list.features;
-        console.log(list.features);
+        // console.log(list.features);
       }
       else {
         this.data = list;
@@ -101,7 +101,7 @@ export class ListPageComponent implements OnInit {
 
   // add & edit for department, division, and project
   add(routeType: string | undefined) {
-    console.log('add:', routeType);
+    // console.log('add:', routeType);
 
     const modalRef = this.modalService.open(FormContainerComponent, this.getModalOptions());
     modalRef.componentInstance.context = this;

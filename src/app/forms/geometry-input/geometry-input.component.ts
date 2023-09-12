@@ -35,7 +35,7 @@ export class GeometryInputComponent {
     // start centered on pin if it's provided....
     if(this.input.value !== '') {
       this.coordinates = this.input.value;
-      console.log('geometry set to', this.input.value);
+      // console.log('geometry set to', this.input.value);
       this.map = L.map('map').setView([this.coordinates[1], this.coordinates[0]], 8);
       this.marker = L.marker([this.coordinates[1], this.coordinates[0]], {icon:this.customIcon}).addTo(this.map);
     } else {
@@ -50,8 +50,8 @@ export class GeometryInputComponent {
     }).addTo(this.map);
 
     this.map.on('click', (e: L.LeafletMouseEvent) => {
-      console.log('Latitude:', e.latlng.lat);
-      console.log('Longitude:', e.latlng.lng);
+      // console.log('Latitude:', e.latlng.lat);
+      // console.log('Longitude:', e.latlng.lng);
       this.updateCoordinates(e.latlng.lat, e.latlng.lng);
 
       if (this.marker) { this.map.removeLayer(this.marker); }

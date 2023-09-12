@@ -6,7 +6,7 @@ import { professionalAccess, managerAccess, projectleaderAccess } from "src/_uti
 import { formatPhone } from "src/_utilities/formatPhone";
 
 export function getColumnDefs(routeType: string, context: any) {
-    console.log('GetColumnDefs routeType:', routeType);
+    // console.log('GetColumnDefs routeType:', routeType);
     switch (routeType) {
         case 'department':
             return departmentColDefs(routeType, context);

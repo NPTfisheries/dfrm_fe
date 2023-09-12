@@ -73,7 +73,7 @@ export class FormContainerComponent implements OnInit {
   }
 
   getInputs(routeType: any, data?: any) {
-    console.log('getInputs', routeType, data);
+    // console.log('getInputs', routeType, data);
 
     switch (routeType) {
       case 'department':

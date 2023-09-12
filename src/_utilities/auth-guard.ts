@@ -14,11 +14,11 @@ export class AuthGuard implements CanActivate {
         return this.authService.isLoggedIn$.pipe(
             map(isLoggedIn => {
                 if (isLoggedIn) {
-                    console.log('AuthGuard: Access Granted!');
+                    // console.log('AuthGuard: Access Granted!');
                     return true; // User is authenticated, allow access
                 } else {
                     // User is not authenticated, redirect to the home page
-                    console.log('AuthGuard: Access DENIED!');
+                    // console.log('AuthGuard: Access DENIED!');
                     this.router.navigate(['home']);
                     return false;
                 }

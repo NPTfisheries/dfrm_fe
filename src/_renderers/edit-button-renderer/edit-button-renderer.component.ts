@@ -38,8 +38,8 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
   }
 
   onEditClick() {
-    console.log('edit:', this.params.routeType, this.params.value);
-    console.log(this.params);
+    // console.log('edit:', this.params.routeType, this.params.value);
+    // console.log(this.params);
 
     const modalRef = this.modalService.open(FormContainerComponent, { size: 'xl' });
     modalRef.componentInstance.context = this.params.context
