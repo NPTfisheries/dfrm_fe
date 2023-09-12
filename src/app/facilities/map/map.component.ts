@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
+import { BackendService } from 'src/_services/backend.service';
 import * as L from 'leaflet';
 import { formatPhone } from 'src/_utilities/formatPhone';
 
@@ -15,6 +16,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   @Input() facilities!: any;
 
   private map!: L.Map;
+  imageUrl!: string;
 
   customIcon = L.divIcon({
     className: 'custom-icon', // Define a CSS class for styling the icon
@@ -24,7 +26,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
     popupAnchor: [0, 0] // Set the popup anchor point relative to the icon (adjust as needed)
   });
 
-  constructor( ) { }
+  constructor(
+    private backendService: BackendService,
+  ) { }
 
   ngAfterViewInit(): void {
     this.initMap();
@@ -54,13 +58,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
   addMarkers() {
     L.geoJSON(this.facilities, {
-      // style: (feature) => {
-      //   if (feature?.properties.id >= 5) { 
-      //     return { color: "blue" }; 
-      //   } else {
-      //     return { color: "green" }
-      //   }
-      // },
       pointToLayer: (feature, latlng) => {
         // Create a marker with the custom icon
         return L.marker(latlng, {
@@ -69,7 +66,22 @@ export class MapComponent implements AfterViewInit, OnChanges {
       },
       onEachFeature: (feature: any, layer) => {
         const customPopupContent = this.facilityPopup(feature);
-        layer.bindPopup(customPopupContent);
+        layer.bindPopup(customPopupContent, {
+          className: 'custom-popup'
+        });
+
+        layer.on('click', () => {
+          console.log('clicked a thingy');
+          this.backendService.getImageById(feature.properties.img_card).subscribe(response => {
+            this.imageUrl = response.image.replace('localhost:4200', 'localhost:8000');
+
+            // Get the popup and update its content only if it exists
+            const popup = layer.getPopup();
+            if (popup) {
+              popup.setContent(this.facilityPopup(feature));
+            }
+          });
+        });
 
         layer.on('popupopen', () => {
           const button = document.getElementById('myb');
@@ -82,30 +94,22 @@ export class MapComponent implements AfterViewInit, OnChanges {
         });
       }
     }).addTo(this.map);
-
-    // var geojsonMarkerOptions = {
-    //   radius: 8,
-    //   fillColor: "#ff7800",
-    //   color: "#000",
-    //   weight: 1,
-    //   opacity: 1,
-    //   fillOpacity: 0.8
-    // };
-
-    // L.geoJSON(this.facilities, {
-    //   pointToLayer: function(feature, latlng) {
-    //     return L.circleMarker(latlng, geojsonMarkerOptions)
-    //   }
-    // }).addTo(this.map);
   }
 
+
   facilityPopup(facility: any) {
-    return `<h3>${facility.properties.name}</h3>
+    return `<div style="height: 200px; width:200px; overflow:hidden;">
+    <img style="width: 100%; height: 100%; object-fit: cover;" src="${this.imageUrl}" >
+    </div> <br>
+    <div style="text-align:center;">
+    <h3>${facility.properties.name}</h3>
     <hr>
     <h5>${facility.properties.street_address}</h5>
     <h5>${facility.properties.city}, ${facility.properties.state} ${facility.properties.zipcode}</h5>
     <h5>${formatPhone(facility.properties.phone_number)}</h5>
+    <br>
     <button id="myb" class="dfrm-button-small" > Facility Details </button>
+    </div>
     `
   }
 }
