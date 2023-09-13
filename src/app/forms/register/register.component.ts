@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit {
       },
       error: response => {
         console.log(response);
-        this.alertService.error('Register New User Failed! Check your fields and try again.');
+        this.alertService.error('Register New User Failed! Check your fields and try again.', { autoClose: true });
         this.loading = false;
       }
     })
