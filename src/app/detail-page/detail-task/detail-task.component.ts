@@ -6,7 +6,7 @@ import { AuthService } from 'src/_services/auth.service';
 import { BackendService } from 'src/_services/backend.service';
 
 import { getRecordBySlug } from 'src/_utilities/getRecordBySlug';
-import { managerAccess, professionalAccess } from 'src/_utilities/permission-util';
+import { managerAccess, projectleaderAccess } from 'src/_utilities/permission-util';
 
 @Component({
   selector: 'app-detail-task',
@@ -19,6 +19,7 @@ export class DetailTaskComponent implements OnInit, OnChanges {
 
   addTask: boolean = false;
   managerPerms: boolean = false;
+  projectleaderPerms: boolean = false;
   taskPerms: any;
 
   data: any | undefined;
@@ -44,6 +45,7 @@ export class DetailTaskComponent implements OnInit, OnChanges {
   checkPermissions() {
     this.authService.permissionGroup$.subscribe((permGroup: string) => {
       this.managerPerms = managerAccess(permGroup);
+      this.projectleaderPerms = projectleaderAccess(permGroup);
     });
     this.authService.subprojectPerms$.subscribe((subprojectPerms: any) => {
       this.addTask = subprojectPerms.includes(String(this.subprojectId));

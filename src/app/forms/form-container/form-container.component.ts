@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { InputBase } from 'src/_inputs/input-base';
 import { InputService } from 'src/_services/input.service';
 import { BackendService } from 'src/_services/backend.service';
+import { AlertService } from 'src/_services/alert.service';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 import { ListPageComponent } from 'src/app/list-page/list-page.component';
 import { DetailSubprojectComponent } from 'src/app/detail-page/detail-subproject/detail-subproject.component';
@@ -35,6 +36,7 @@ export class FormContainerComponent implements OnInit {
     private inputService: InputService,
     private backendService: BackendService,
     private activeModal: NgbActiveModal,
+    private alertService: AlertService,
   ) { }
 
   ngOnInit(): void {
@@ -64,6 +66,7 @@ export class FormContainerComponent implements OnInit {
       if (this.context) {
         this.context.data = updatedList;
         this.activeModal.close();
+        this.alertService.success(`New ${route} succesfully created.`, { autoClose: true});
       }
     });
   }

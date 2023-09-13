@@ -1,6 +1,6 @@
 <div class="container">
     <div class="d-flex">
-        <button *ngIf="managerPerms || addTask" (click)="add()" class="dfrm-button-small" style="margin-left: auto;">Add
+        <button *ngIf="managerPerms || (projectleaderPerms && addTask)" (click)="add()" class="dfrm-button-small" style="margin-left: auto;">Add
             Task</button>
     </div>
     <div *ngFor="let item of data; let i = index">
