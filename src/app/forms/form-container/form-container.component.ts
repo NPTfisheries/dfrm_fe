@@ -66,7 +66,7 @@ export class FormContainerComponent implements OnInit {
       if (this.context) {
         this.context.data = updatedList;
         this.activeModal.close();
-        this.alertService.success(`New ${route} succesfully created.`, { autoClose: true});
+        // this.alertService.success(`New ${this.routeType} succesfully created.`, { autoClose: true});
       }
     });
   }
