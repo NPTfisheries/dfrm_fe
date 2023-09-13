@@ -15,10 +15,15 @@
     border-color: #cfd7db;
     height: 300px;
     width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #employee-photo {
     min-height: 100%;
     min-width: 100%; 
+    height: auto;
+    width: auto;
     object-fit: cover;
 }
