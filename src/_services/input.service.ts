@@ -12,7 +12,7 @@ import { InputHidden } from 'src/_inputs/input-hidden';
 import { InputImage } from 'src/_inputs/input-image';
 import { InputPhone } from 'src/_inputs/input-phone';
 import { InputFile } from 'src/_inputs/input-file';
-import { InputCoordinates } from 'src/_inputs/input-geometry'; 
+import { InputCoordinates } from 'src/_inputs/input-geometry';
 import { InputNumber } from 'src/_inputs/input-number';
 
 @Injectable({ providedIn: 'root' })
@@ -408,6 +408,19 @@ export class InputService {
         key: 'description',
         label: 'Description',
         value: data?.properties?.description || '',
+        required: true,
+        order: 2
+      }),
+      new InputSelect({
+        key: 'facility_type',
+        label: 'Facility Type',
+        value: data?.properties?.facility_type || '',
+        // options: this.buildFacilityOptions(),
+        options: [
+          { key: "Office", value: "Office" },
+          { key: 'Hatchery', value: 'Hatchery' },
+          { key: 'Other', value: 'Other' }
+        ],
         required: true,
         order: 2
       }),

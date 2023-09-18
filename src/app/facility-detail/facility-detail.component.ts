@@ -30,14 +30,15 @@ export class FacilityDetailComponent implements OnInit {
     const slug = getRouteSlug(this.route);
     this.backendService.getDetail(this.routeType, slug).subscribe(detail => {
       this.data = detail;
-      this.getImage(detail.properties.img_banner);
+      // this.getImage(detail.properties.img_banner);
+      this.bannerImage = `http://localhost:8000${detail.properties.img_banner[0].image}`
     });
   }
 
-  getImage(id:number) {
-    this.backendService.getImageById(id).subscribe(response => {
-      this.bannerImage = response.image.replace('http://localhost:4200', 'http://localhost:8000');
-    });
-  }
+  // getImage(id:number) {
+  //   this.backendService.getImageById(id).subscribe(response => {
+  //     this.bannerImage = response.image.replace('http://localhost:4200', 'http://localhost:8000');
+  //   });
+  // }
 
 }

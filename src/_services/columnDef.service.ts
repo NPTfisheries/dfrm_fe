@@ -269,6 +269,10 @@ function facilityColDefs(routeType: string, context: any) {
             headerName: 'Description'
         },
         {
+            field: 'properties.facility_type',
+            headerName: 'Facility Type'
+        },
+        {
             field: 'properties.street_adress',
             headerName: 'Street Addresss'
         },
