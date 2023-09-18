@@ -62,10 +62,16 @@ export class FormContainerComponent implements OnInit {
         }
       })
     }
-    this.backendService.getList(route).subscribe(updatedList => {
+    this.backendService.getList(route).subscribe((updatedList: any) => {
       if (this.context) {
-        this.context.data = updatedList;
-        this.activeModal.close();
+        if(route === 'facility') {
+          this.context.data = updatedList.features;
+          this.activeModal.close();
+        } else {
+          this.context.data = updatedList;
+          this.activeModal.close();
+        }
+
         // this.alertService.success(`New ${this.routeType} succesfully created.`, { autoClose: true});
       }
     });
