@@ -456,14 +456,14 @@ export class InputService {
       new InputImage({
         key: 'img_banner',
         label: 'Choose Banner Image',
-        value: data?.properties?.img_banner || '',
+        value: data?.properties?.img_banner.id || '',
         options: this.buildOptions('/api/v1/image/'),
         order: 7
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
-        value: data?.properties?.img_card || '',
+        value: data?.properties?.img_card.id || '',
         options: this.buildOptions('/api/v1/image/'),
         order: 7
       }),
