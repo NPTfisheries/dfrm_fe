@@ -69,9 +69,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
         layer.bindPopup(customPopupContent);
 
         layer.on('popupopen', () => {
-          // get img_card
-          this.backendService.getImageById(feature.properties.img_card).subscribe(response => {
-            this.imageUrl = response.image.replace('localhost:4200', 'localhost:8000');
+            // set popup-card-img
+            this.imageUrl = `http://localhost:8000${feature.properties.img_card.image}`;
 
             // Get the popup and update its content only if it exists
             const popup = layer.getPopup();
@@ -87,7 +86,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
                 });
               }
             }
-          });
         });
       }
     }).addTo(this.map);

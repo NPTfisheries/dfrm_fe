@@ -46,6 +46,7 @@ export class ListPageComponent implements OnInit {
     filter: true,
     resizable: true,
     cellStyle: { fontSize: '20px' },
+    // cellDataType: false,
   };
 
   data!: any[];
@@ -74,7 +75,7 @@ export class ListPageComponent implements OnInit {
   onGridReady(params: any) {
     this.getList(this.routeType);
     this.gridApi = params.api;
-    params.api.sizeColumnsToFit();
+    params.api.sizeColumnsToFit(params);
     // params.api.autoSizeAllColumns();
   }
 
