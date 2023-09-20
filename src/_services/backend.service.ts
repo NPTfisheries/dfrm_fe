@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
-import { map, tap, catchError } from 'rxjs/operators';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 import { User } from "src/_models/user";
 import { Observable, of } from "rxjs";
@@ -39,20 +39,26 @@ export class BackendService {
     }
 
     // getImageBySlug(slug:string) {
-    //     return this.get(`/api/v1/image/${slug}/`);
+    //     return this.get(`${this.base_url}image/${slug}/`);
     // }
 
     getImageById(id:number) {
-        return this.get(`/api/v1/image/${id}/`);
+        return this.get(`${this.base_url}image/${id}/`);
     }
 
 
     updateProfile(profile: any) {
-        return this.put('/api/v1/profile/', profile);
+        return this.put('${this.base_url}profile/', profile);
     }
 
     updateProfilePhoto(photo: any) {
-        return this.put('/api/v1/profile-photo/', photo);
+        return this.put('${this.base_url}profile-photo/', photo);
+    }
+
+    objectLookup(object_type: string) {
+        const params = new HttpParams().set('object_type', object_type);
+
+        return this.http.get(`${this.base_url}lookup`, { params })
     }
     
     // HELPERS -- change to private eventually?

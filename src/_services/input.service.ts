@@ -238,6 +238,13 @@ export class InputService {
         required: true,
         order: 4
       }),
+      new InputSelect({
+        key: 'division',
+        label: 'Division',
+        value: data?.division || '',
+        options: this.buildOptions('/api/v1/division/'),
+        order: 5
+      }),
       new InputImage({
         key: 'img_banner',
         label: 'Choose Banner Image',
@@ -260,10 +267,11 @@ export class InputService {
   getTaskInputs(data?: any) {
     // console.log('Getting Task Inputs...');
     const inputs: InputBase<string>[] = [
-      new InputText({
-        key: 'name',
-        label: 'Name',
-        value: data?.name || '',
+      new InputSelect({
+        key: 'task_type',
+        label: 'Task Type',
+        value: data?.task_type || '',
+        options: this.getObjects('Task'),
         required: true,
         order: 1
       }),
@@ -314,37 +322,37 @@ export class InputService {
         key: 'title',
         label: 'Title',
         value: data?.title || '',
-        order: 4
+        order: 1
       }),
       new InputTextarea({
         key: 'bio',
         label: 'Bio',
         value: data?.bio || '',
-        order: 5
+        order: 2
       }),
       new InputText({
         key: 'city',
         label: 'City',
         value: data?.city || '',
-        order: 6
+        order: 3
       }),
       new InputText({
         key: 'state',
         label: 'State',
         value: data?.state || '',
-        order: 7
+        order: 4
       }),
       new InputPhone({
         key: 'work_phone',
         label: 'Work Phone',
         value: data?.work_phone || '',
-        order: 8
+        order: 5
       }),
       new InputPhone({
         key: 'mobile_phone',
         label: 'Mobile Phone',
         value: data?.mobile_phone || '',
-        order: 9
+        order: 6
       })
     ]
 
@@ -415,14 +423,9 @@ export class InputService {
         key: 'facility_type',
         label: 'Facility Type',
         value: data?.properties?.facility_type || '',
-        // options: this.buildFacilityOptions(),
-        options: [
-          { key: "Office", value: "Office" },
-          { key: 'Hatchery', value: 'Hatchery' },
-          { key: 'Other', value: 'Other' }
-        ],
+        options: this.getObjects('Facility'),
         required: true,
-        order: 2
+        order: 3
       }),
       new InputSelect({
         key: 'manager',
@@ -430,89 +433,89 @@ export class InputService {
         value: data?.properties?.manager.id || '',
         options: this.buildEmployeeOptions(),
         required: true,
-        order: 3
+        order: 4
       }),
       new InputSelect({
         key: 'deputy',
         label: 'Deputy',
         value: data?.properties?.deputy.id || '',
         options: this.buildEmployeeOptions(),
-        order: 4
+        order: 5
       }),
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
         value: data?.properties?.assistant.id || '',
         options: this.buildEmployeeOptions(),
-        order: 5
+        order: 6
       }),
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
         idArray: this.getIdArray(data?.properties?.staff) || [],
         options: this.buildEmployeeOptions(),
-        order: 6
+        order: 7
       }),
       new InputImage({
         key: 'img_banner',
         label: 'Choose Banner Image',
         value: data?.properties?.img_banner.id || '',
         options: this.buildOptions('/api/v1/image/'),
-        order: 7
+        order: 8
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.properties?.img_card.id || '',
         options: this.buildOptions('/api/v1/image/'),
-        order: 7
+        order: 9
       }),
       new InputPhone({
         key: 'phone_number',
         label: 'Phone Number',
         value: data?.properties?.phone_number || '',
-        order: 9
+        order: 10
       }),
       new InputText({
         key: 'street_address',
         label: 'Street Address',
         value: data?.properties?.street_address || '',
         required: true,
-        order: 10
+        order: 11
       }),
       new InputText({
         key: 'mailing_address',
         label: 'Mailing Address',
         value: data?.properties?.mailing_address || '',
-        order: 11
+        order: 12
       }),
       new InputText({
         key: 'city',
         label: 'City',
         value: data?.properties?.city || '',
         required: true,
-        order: 12
+        order: 13
       }),
       new InputText({
         key: 'state',
         label: 'State',
         value: data?.properties?.state || '',
         required: true,
-        order: 13
+        order: 14
       }),
       new InputNumber({
         key: 'zipcode',
         label: 'Zipcode',
         value: data?.properties?.zipcode || '',
         required: true,
-        order: 14
+        order: 15
       }),
       new InputCoordinates({
         key: 'coordinates',
         label: 'Coordinates',
         value: data?.geometry.coordinates || '',
         required: true,
-        order: 15
+        order: 16
       })
     ]
 
@@ -542,7 +545,19 @@ export class InputService {
       for (let item of list) {
         options.push({ key: item.id, value: item.name })
       }
-    })
+    });
+
+    return options;
+  }
+
+  getObjects(object_type:string) {
+    let options: { key: string, value: string }[] = [];
+
+    this.backendService.objectLookup(object_type).subscribe((list: any) => {
+      for(let item of list) {
+        options.push({ key: item.id, value: item.name})
+      }
+    });
 
     return options;
   }

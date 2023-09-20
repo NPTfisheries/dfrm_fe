@@ -4,7 +4,7 @@
             Task</button>
     </div>
     <div *ngFor="let item of data; let i = index">
-        task info
+        <br>
         <div class="container task-container-light">
             <div class="row">
 
@@ -15,7 +15,7 @@
 
                 <div class="col-md-8 py-4">
                     <div>
-                        <h3>{{ item.name }}</h3>
+                        <h3>{{ item.task_type.name }}</h3>
                         <hr>
                         <div class="d-flex justify-content-between py-0 my-0">
                             <p>Supervisor: <a style="color:black" [routerLink]="'/users/' + item.supervisor.id">{{

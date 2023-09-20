@@ -3,6 +3,14 @@
 @import 'ag-grid-community/styles/ag-theme-alpine.css';
 @import url('https://unpkg.com/leaflet@1.0.1/dist/leaflet.css');
 
+
+/* 
+blackish #0d1b1f
+yellow #f9f906
+light grey #cfd7db
+dark grey #5492b4 
+*/
+
 * {
     font-family: 'Times New Roman', Times, serif;
 }
