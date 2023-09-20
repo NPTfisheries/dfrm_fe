@@ -62,7 +62,7 @@ export class DetailTaskComponent implements OnInit, OnChanges {
   }
 
   add() {
-    console.log('adding subproject');
+    // console.log('adding task');
 
     const newData = {
       name: '',
@@ -82,6 +82,7 @@ export class DetailTaskComponent implements OnInit, OnChanges {
     modalRef.componentInstance.addOrEdit = 'add';
 
     modalRef.result.then(() => {
+      console.log('MODAL CLOSED');
       this.authService.refreshPermissions().subscribe();
     });
   }

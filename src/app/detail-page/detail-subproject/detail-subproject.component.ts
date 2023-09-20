@@ -59,7 +59,7 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
   }
 
   add() {
-    console.log('adding subproject');
+    // console.log('adding subproject');
 
     const newData = {
       name: '',
@@ -87,15 +87,12 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
 
     const data = getRecordById(this.data, id);
 
-    // console.log('passing this:', data)
-
-
     const modalRef = this.modalService.open(FormContainerComponent, { size: 'xl', });
     modalRef.componentInstance.context = this;
     modalRef.componentInstance.routeType = 'subproject';
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.projectId = this.projectId; // needed for filtered list response from FCC
-    modalRef.componentInstance.slug = id;
+    modalRef.componentInstance.slug = id; // subproject uses id instead of slug.
     modalRef.componentInstance.addOrEdit = 'edit';
   }
 
