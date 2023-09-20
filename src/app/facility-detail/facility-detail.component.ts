@@ -31,7 +31,7 @@ export class FacilityDetailComponent implements OnInit {
     this.backendService.getDetail(this.routeType, slug).subscribe(detail => {
       this.data = detail;
       // this.getImage(detail.properties.img_banner);
-      this.bannerImage = `http://localhost:8000${detail.properties.img_banner[0].image}`
+      this.bannerImage = `http://localhost:8000${detail.properties.img_banner.image}`
     });
   }
 

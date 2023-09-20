@@ -69,7 +69,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     L.geoJSON(this.facilities, {
       style:function(feature) {
         // https://leafletjs.com/examples/geojson/
-        switch(feature?.properties.facility_type) {
+        switch(feature?.properties.facility_type.name) {
           case "Office": return { fillColor: 'blue'};
           case "Hatchery": return { fillColor: 'red'};
           default: return { fillColor: 'green'};  // Other

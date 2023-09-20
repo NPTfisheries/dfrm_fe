@@ -38,6 +38,8 @@ export class DynamicFormInputComponent implements OnInit {
   }
 
   private updatePreview(id: number) {
+    if(id === 0) return; // prevents errors for 'Add' from where no image selected yet.
+
     this.backendService.getImageById(id).subscribe(img => {
       this.imagePreview = img.image.replace('localhost:4200', 'localhost:8000');
     });
