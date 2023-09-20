@@ -109,10 +109,11 @@ export class FormContainerComponent implements OnInit {
   }
 
   addOrEdit() {
-    if(this.routeType === 'profile' || this.slug !== undefined) {
-      return false; // 'Add'
+    // profile                         dep/div/proj/subproj       task
+    if(this.routeType === 'profile' || this.slug !== undefined || this.data.task_type ) {
+      return false; // 'Edit'
     }
-    return true; // 'Edit'
+    return true; // 'Add'
   }
 
 }

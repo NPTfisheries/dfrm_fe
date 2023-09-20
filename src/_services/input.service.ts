@@ -270,7 +270,7 @@ export class InputService {
       new InputSelect({
         key: 'task_type',
         label: 'Task Type',
-        value: data?.task_type || '',
+        value: data?.task_type?.id || '',
         options: this.getObjects('Task'),
         required: true,
         order: 1
