@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs';
 import { FormContainerComponent } from '../forms/form-container/form-container.component';
 
 import { getRouteType } from 'src/_utilities/route-utils';
-import { managerAccess, projectleaderAccess } from 'src/_utilities/permission-util';
+import { adminAccess, managerAccess, projectleaderAccess } from 'src/_utilities/permission-util';
 
 @Component({
   selector: 'app-list-page',
@@ -51,6 +51,7 @@ export class ListPageComponent implements OnInit {
 
   data!: any[];
 
+  adminAccess = adminAccess;
   managerAccess = managerAccess;
   projectleaderAccess = projectleaderAccess;
   routeType!: string;
@@ -107,6 +108,7 @@ export class ListPageComponent implements OnInit {
     const modalRef = this.modalService.open(FormContainerComponent, this.getModalOptions());
     modalRef.componentInstance.context = this;
     modalRef.componentInstance.routeType = routeType;
+    modalRef.componentInstance.addOrEdit = 'add'
 
     modalRef.result.then(() => {
       this.authService.refreshPermissions().subscribe();

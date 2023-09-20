@@ -1,3 +1,9 @@
+export function adminAccess(permissionGroup: string) {
+
+    const permittedGroups = ['Admin'];
+
+    return permittedGroups.includes(permissionGroup);
+}
 export function managerAccess(permissionGroup: string) {
 
     const permittedGroups = ['Admin', 'Manager'];

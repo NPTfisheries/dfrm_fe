@@ -1,7 +1,6 @@
 <div>
     <div class="modal-header">
-        <h1 class="modal-title">{{ addOrEdit() ? 'Add' : 'Edit '}} {{ routeType | titlecase }}</h1>
-        <!-- <h1 class="modal-title">{{ slug === undefined ? 'Add' : 'Edit' }} {{ routeType | titlecase }}</h1> -->
+        <h1 class="modal-title">{{ addOrEdit | titlecase }} {{ routeType | titlecase }}</h1>
     </div>
     <alert id="alert-modal"></alert>
     <div class="modal-body">
@@ -9,6 +8,7 @@
         [inputs]="inputs$ | async" 
         [slug]="slug" 
         [routeType]="routeType" 
+        [addOrEdit]="addOrEdit"
         (formSubmitted)="handleFormSubmitted()"
         (formValidityChanged)="handleFormValidityChanged($event)">
             </app-dynamic-form>

@@ -25,6 +25,7 @@ export class FormContainerComponent implements OnInit {
   @Input() projectId: string | null = null;  // provided only for refreshing subprojects.
   @Input() subprojectId: string | null = null;  // povided only for refreshing tasks.
   @Input() slug!: string;  // for update api --> passed to dynamic form.
+  @Input() addOrEdit!: string 
 
 
   inputs$!: Observable<InputBase<string>[]> | undefined;
@@ -95,8 +96,6 @@ export class FormContainerComponent implements OnInit {
         return this.inputService.getSubprojectInputs(data);
       case 'task':
         return this.inputService.getTaskInputs(data);
-      // case 'users':
-      //   return this.inputService.getProfileInputs(data);
       case 'profile':
         return this.inputService.getProfileInputs(data);
       case 'image':
@@ -106,14 +105,6 @@ export class FormContainerComponent implements OnInit {
       default:
         return
     }
-  }
-
-  addOrEdit() {
-    // profile                         dep/div/proj/subproj       task
-    if(this.routeType === 'profile' || this.slug !== undefined || this.data?.task_type ) {
-      return false; // 'Edit'
-    }
-    return true; // 'Add'
   }
 
 }

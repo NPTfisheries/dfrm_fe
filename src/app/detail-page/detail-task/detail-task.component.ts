@@ -5,7 +5,7 @@ import { FormContainerComponent } from 'src/app/forms/form-container/form-contai
 import { AuthService } from 'src/_services/auth.service';
 import { BackendService } from 'src/_services/backend.service';
 
-import { getRecordBySlug } from 'src/_utilities/getRecordBySlug';
+import { getRecordById } from 'src/_utilities/getRecordById';
 import { managerAccess, projectleaderAccess } from 'src/_utilities/permission-util';
 
 @Component({
@@ -79,16 +79,18 @@ export class DetailTaskComponent implements OnInit, OnChanges {
     modalRef.componentInstance.routeType = 'task';
     modalRef.componentInstance.data = newData;
     modalRef.componentInstance.subprojectId = this.subprojectId; // needed for filtered list response from FCC
+    modalRef.componentInstance.addOrEdit = 'add';
 
     modalRef.result.then(() => {
       this.authService.refreshPermissions().subscribe();
     });
   }
 
-  edit(slug: string) {
-    console.log('edit: task', slug);
+  edit(id: string) {
+    // task uses id, not slug.
+    console.log('edit: task', id);
 
-    const data = getRecordBySlug(this.data, slug);
+    const data = getRecordById(this.data, id);
 
     const modalRef = this.modalService.open(FormContainerComponent, { size: 'xl', });
 
@@ -96,7 +98,8 @@ export class DetailTaskComponent implements OnInit, OnChanges {
     modalRef.componentInstance.routeType = 'task';
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.subprojectId = this.subprojectId; // needed for filtered list response from FCC
-    modalRef.componentInstance.slug = slug;
+    modalRef.componentInstance.slug = id;
+    modalRef.componentInstance.addOrEdit = 'edit';
   }
 
   canEditTask(id: any) {

@@ -5,7 +5,7 @@ import { FormContainerComponent } from 'src/app/forms/form-container/form-contai
 import { AuthService } from 'src/_services/auth.service';
 import { BackendService } from 'src/_services/backend.service';
 
-import { getRecordBySlug } from 'src/_utilities/getRecordBySlug';
+import { getRecordById } from 'src/_utilities/getRecordById'; 
 import { managerAccess } from 'src/_utilities/permission-util';
 
 @Component({
@@ -75,16 +75,18 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
     modalRef.componentInstance.routeType = 'subproject';
     modalRef.componentInstance.projectId = this.projectId; // needed for filtered list response from FCC
     modalRef.componentInstance.data = newData;
+    modalRef.componentInstance.addOrEdit = 'add';
 
     modalRef.result.then(() => {
       this.authService.refreshPermissions().subscribe();
     });
   }
 
-  edit(slug: string) {
-    console.log('edit: subproject', slug);
+  edit(id: string) {
+    console.log('edit: subproject', id);
 
-    const data = getRecordBySlug(this.data, slug);
+    const data = getRecordById(this.data, id);
+
     // console.log('passing this:', data)
 
 
@@ -93,7 +95,8 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
     modalRef.componentInstance.routeType = 'subproject';
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.projectId = this.projectId; // needed for filtered list response from FCC
-    modalRef.componentInstance.slug = slug;
+    modalRef.componentInstance.slug = id;
+    modalRef.componentInstance.addOrEdit = 'edit';
   }
 
   canEditSubproject(id:any) {

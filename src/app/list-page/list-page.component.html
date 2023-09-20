@@ -1,14 +1,14 @@
 <div class="container" style="padding-top: 75px; padding-bottom: 50px;">
     <h2 class="text-center">{{ routeType | titlecase }} List</h2>
 
+    <button *ngIf="routeType == 'users' && adminAccess(permissionGroup)" (click)="registerUser()"
+        class="dfrm-button btn-right">Register User</button>
     <button *ngIf="routeType == 'division' && managerAccess(permissionGroup)" (click)="add(routeType)"
         class="dfrm-button btn-right">Add New {{ routeType | titlecase}}</button>
-    <button *ngIf="routeType == 'users' && managerAccess(permissionGroup)" (click)="registerUser()"
-        class="dfrm-button btn-right">Register User</button>
-    <button *ngIf="routeType == 'image' && projectleaderAccess(permissionGroup)" (click)="uploadImage()"
-        class="dfrm-button btn-right">Upload Image</button>
     <button *ngIf="routeType == 'facility' && managerAccess(permissionGroup)" (click)="add(routeType)"
         class="dfrm-button btn-right">Add Facility</button>
+    <button *ngIf="routeType == 'image' && projectleaderAccess(permissionGroup)" (click)="uploadImage()"
+        class="dfrm-button btn-right">Upload Image</button>
     <button *ngIf="routeType == 'project' && projectleaderAccess(permissionGroup)" (click)="add(routeType)"
         class="dfrm-button btn-right">Add New {{ routeType | titlecase}}</button>
 

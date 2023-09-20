@@ -24,7 +24,7 @@
                             [routerLink]="'/users/' + item.lead.id">{{
                             item.lead.full_name }} </a></p>
                     <button *ngIf="managerPerms || canEditSubproject(item.id)"
-                        (click)="edit(item.slug)" class="dfrm-button-small">Edit Subproject</button>
+                        (click)="edit(item.id)" class="dfrm-button-small">Edit Subproject</button>
                 </div>
             </div>
         </div>

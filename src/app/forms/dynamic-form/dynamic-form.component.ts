@@ -18,6 +18,7 @@ export class DynamicFormComponent implements OnInit {
   @Input() routeType!: string;
   @Input() inputs: InputBase<string>[] | null = [];
   @Input() slug!: string;
+  @Input() addOrEdit!: string 
   form!: FormGroup;
 
   constructor(
@@ -43,22 +44,25 @@ export class DynamicFormComponent implements OnInit {
       this.form.value.project_leader=[];
       // console.log('Project leader was a string, reassigned as empty array:', this.form.value.project_leader);
     }
-    
-    // console.log('Submitted form:', this.form.value);
-    
-    if(this.slug === undefined && this.routeType !== 'profile') {
+
+    if(this.addOrEdit === 'add') {
       this.backendService.newItem(this.routeType, this.form.value).subscribe({
         next: () => {this.formSubmitted.emit();}
       });
-    } else if(this.routeType === 'profile') {
-      this.backendService.updateProfile(this.form.value).subscribe({
-        next: () => {this.formSubmitted.emit();}
-      });
-    } else {
-      this.backendService.updateItem(this.routeType, this.slug, this.form.value).subscribe({
-        next: () => {this.formSubmitted.emit();}
-      });
     }
+
+    if(this.addOrEdit === 'edit') {
+      if(this.routeType === 'profile') {
+        this.backendService.updateProfile(this.form.value).subscribe({
+          next: () => {this.formSubmitted.emit();}
+        });
+      } else {
+        this.backendService.updateItem(this.routeType, this.slug, this.form.value).subscribe({
+          next: () => {this.formSubmitted.emit();}
+        });
+      }
+    }
+
   }
 
 }
