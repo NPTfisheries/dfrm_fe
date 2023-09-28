@@ -4,33 +4,35 @@ import { map } from 'rxjs/operators';
 
 import { User } from "src/_models/user";
 import { Observable, of } from "rxjs";
+import { environment } from "src/environments/environment";
 
 @Injectable({ providedIn: 'root' })
 export class BackendService {
 
     base_url = '/api/v1/';
+    apiUrl = environment.apiUrl;  // http://localhost:8000/api/v1/
 
     constructor(
         private http: HttpClient,
         ) { }
 
     getList(routeType: string): Observable<any[]> {
-        const URL = `${this.base_url}${routeType}`;
+        const URL = `${this.apiUrl}${routeType}`;
         return this.get(URL);
     }
 
     getDetail(routeType: string, slug: string): Observable<any>  {
-        const URL = `${this.base_url}${routeType}/${slug}/`;
+        const URL = `${this.apiUrl}${routeType}/${slug}/`;
         return this.get(URL);
     }
 
     newItem(routeType: string, object:object): Observable<any>  {
-        const URL = `${this.base_url}${routeType}/`;
+        const URL = `${this.apiUrl}${routeType}/`;
         return this.post(URL, object);
     }
 
     updateItem(routeType: string, slug:string, object:object): Observable<any>  {
-        const URL = `${this.base_url}${routeType}/${slug}/`;
+        const URL = `${this.apiUrl}${routeType}/${slug}/`;
         return this.put(URL, object);
     }
 
@@ -39,26 +41,26 @@ export class BackendService {
     }
 
     // getImageBySlug(slug:string) {
-    //     return this.get(`${this.base_url}image/${slug}/`);
+    //     return this.get(`${this.apiUrl}image/${slug}/`);
     // }
 
     getImageById(id:number) {
-        return this.get(`${this.base_url}image/${id}/`);
+        return this.get(`${this.apiUrl}image/${id}/`);
     }
 
 
     updateProfile(profile: any) {
-        return this.put('${this.base_url}profile/', profile);
+        return this.put('${this.apiUrl}profile/', profile);
     }
 
     updateProfilePhoto(photo: any) {
-        return this.put('${this.base_url}profile-photo/', photo);
+        return this.put('${this.apiUrl}profile-photo/', photo);
     }
 
     objectLookup(object_type: string) {
         const params = new HttpParams().set('object_type', object_type);
 
-        return this.http.get(`${this.base_url}lookup`, { params })
+        return this.http.get(`${this.apiUrl}lookup`, { params })
     }
     
     // HELPERS -- change to private eventually?
