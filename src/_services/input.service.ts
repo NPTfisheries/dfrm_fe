@@ -242,7 +242,7 @@ export class InputService {
         key: 'division',
         label: 'Division',
         value: data?.division || '',
-        options: this.buildOptions('/api/v1/division/'),
+        options: this.buildOptions('division'),
         order: 5
       }),
       new InputImage({
