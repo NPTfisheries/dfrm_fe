@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 
 @Component({
   selector: 'app-staff-card',
@@ -16,20 +17,14 @@ export class StaffCardComponent {
   ) { }
 
   navigateToUserProfile() {
-    console.log('Staff Card Clicked!');
+    // console.log('Staff Card Clicked!');
     this.router.navigateByUrl('users/' + this.data.id);
   };
 
   ngOnChanges() {
     if (this.data) {
-      // this.getProfilePhoto(this.data);
-      this.imageUrl=`http://localhost:8000${this.data.profile.photo}`;
+      this.imageUrl = buildImageUrl(this.data.profile.photo);
     }
   }
   
-  // getProfilePhoto(user: any) {
-  //   // for data passed from a nested employee, you only get the end path: "/media/images/profile_default.JPG"
-  //   // this.imageUrl = 'http://localhost:8000' + this.data.profile.photo; 
-  //   this.imageUrl = 'http://localhost:8000' + user.profile.photo; 
-  // }
 }

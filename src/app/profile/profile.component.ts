@@ -6,6 +6,7 @@ import { BackendService } from 'src/_services/backend.service';
 import { User } from 'src/_models/user';
 
 import { getRouteType, getRouteSlug } from 'src/_utilities/route-utils';
+import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 import { formatPhone } from 'src/_utilities/formatPhone';
 import { FormContainerComponent } from '../forms/form-container/form-container.component';
 
@@ -59,12 +60,8 @@ export class ProfileComponent implements OnInit {
     modalRef.componentInstance.data = this.data?.profile; // pass profile info to modal
   }
 
-  updateProfilePhoto() {
-
-  }
-
-  getImage(path: string | undefined) {
-    this.imageUrl = path?.replace('http://localhost:4200', 'http://localhost:8000');
+  getImage(path: any) {
+    this.imageUrl = buildImageUrl(path);
   }
 
   triggerFileInputClick() {

@@ -11,11 +11,11 @@ export class HomeComponent implements OnInit {
 
   token: any | null = null;
   data: Department | undefined;
-  bannerImage!: string;
+  bannerImage: string = "./assets/images/Clearwater_River_Home_Page.jpg";
 
   constructor(
     private backendService: BackendService,
-  ) {  }
+  ) { }
 
   ngOnInit(): void {
     // we only have 1 department for the time being.
@@ -23,20 +23,6 @@ export class HomeComponent implements OnInit {
     // .subscribe(department => {   
     //   this.data = department[0];
 
-    //   this.getImage(department[0].img_banner.slug);
-    // });
-    this.getImage('weir');
-  }
-  
-  getImage(slug: string) {
-    this.bannerImage = "http://localhost:4200/assets/images/Clearwater_River_Home_Page.jpg";
-    // this.backendService.getImageBySlug(slug).subscribe((response: any) => {
-    //   console.log(response);
-    //   // response.image is similar to: "http://localhost:4200/media/images/uploaded/saturn_79MFAAl.jpg"
-    //   const alteredUrl = response.image.replace('localhost:4200', 'localhost:8000');
-
-    //   this.bannerImage = alteredUrl;
-    // });
   }
 
 }

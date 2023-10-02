@@ -8,9 +8,13 @@ import { map, catchError } from 'rxjs/operators';
 import jwtDecode from 'jwt-decode';
 
 import { User } from "src/_models/user";
+import { environment } from "src/environments/environment";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+
+    apiUrl = environment.apiUrl;
+    apiVersion = '/api/v1/';
 
     public username$ = new BehaviorSubject<string | null>(null);
     public token$ = new BehaviorSubject<string | null>(null); // for http interceptor
@@ -42,10 +46,10 @@ export class AuthService {
 
 
         // https://angular.io/guide/http-server-communication
-        return this.http.post<any>('/api/v1/login/', credentials)
+        return this.http.post<any>(`${this.apiUrl}${this.apiVersion}login/`, credentials)
             .pipe(
                 map((response) => {
-                    // console.log('login return:', response);
+                    console.log('login return:', response);
                     // console.log('access: ', response.access);
                     const decoded: any = jwtDecode(response.access);
                     // console.log('access decoded:', decoded);
@@ -78,7 +82,7 @@ export class AuthService {
 
     register(newUser: User) {
         // password check happens in register component and server.
-        return this.http.post('/api/v1/register/', newUser)
+        return this.http.post(`${this.apiUrl}${this.apiVersion}register/`, newUser)
             .pipe(
                 map((response) => {
                     console.log(response);
@@ -87,7 +91,7 @@ export class AuthService {
     }
 
     refreshPermissions() {
-        return this.http.get('/api/v1/permissions')
+        return this.http.get(`${this.apiUrl}${this.apiVersion}permissions`)
         .pipe(
             map((response: any) => {
                 // console.log("REFRESH PERMS:", response);
