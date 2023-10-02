@@ -3,7 +3,7 @@ import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, Output, Even
 import { BackendService } from 'src/_services/backend.service';
 import * as L from 'leaflet';
 import { formatPhone } from 'src/_utilities/formatPhone';
-
+import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 
 @Component({
   selector: 'app-map',
@@ -90,7 +90,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
         layer.on('popupopen', () => {
             // set popup-card-img
-            this.imageUrl = `http://localhost:8000${feature.properties.img_card.image}`;
+            this.imageUrl = buildImageUrl(feature.properties.img_card.image);
 
             // Get the popup and update its content only if it exists
             const popup = layer.getPopup();
