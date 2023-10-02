@@ -58,6 +58,8 @@ export class ProfileComponent implements OnInit {
     modalRef.componentInstance.context = this;
     modalRef.componentInstance.routeType = 'profile';
     modalRef.componentInstance.data = this.data?.profile; // pass profile info to modal
+    modalRef.componentInstance.addOrEdit ='edit';
+    
   }
 
   getImage(path: any) {
