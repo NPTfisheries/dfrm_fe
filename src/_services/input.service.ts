@@ -71,14 +71,14 @@ export class InputService {
         key: 'img_banner',
         label: 'Choose Banner Image',
         value: data?.img_banner.id || '',
-        options: this.buildOptions('/api/v1/image/'),
+        options: this.buildOptions('image'),
         order: 7
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.img_card.id || '',
-        options: this.buildOptions('/api/v1/image/'),
+        options: this.buildOptions('image'),
         order: 7
       })
     ]
@@ -136,14 +136,14 @@ export class InputService {
         key: 'img_banner',
         label: 'Choose Banner Image',
         value: data?.img_banner.id || '',
-        options: this.buildOptions('/api/v1/image/'),
+        options: this.buildOptions('image'),
         order: 7
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.img_card.id || '',
-        options: this.buildOptions('/api/v1/image/'),
+        options: this.buildOptions('image'),
         order: 7
       }),
       new InputHidden({
@@ -186,14 +186,14 @@ export class InputService {
         key: 'img_banner',
         label: 'Choose Banner Image',
         value: data?.img_banner.id || '',
-        options: this.buildOptions('/api/v1/image/'),
+        options: this.buildOptions('image'),
         order: 7
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.img_card.id || '',
-        options: this.buildOptions('/api/v1/image/'),
+        options: this.buildOptions('image'),
         order: 7
       }),
       new InputHidden({
@@ -249,14 +249,14 @@ export class InputService {
         key: 'img_banner',
         label: 'Choose Banner Image',
         value: data?.img_banner.id || '',
-        options: this.buildOptions('/api/v1/image/'),
+        options: this.buildOptions('image'),
         order: 7
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.img_card.id || '',
-        options: this.buildOptions('/api/v1/image/'),
+        options: this.buildOptions('image'),
         order: 7
       })
     ]
@@ -300,14 +300,14 @@ export class InputService {
         key: 'img_banner',
         label: 'Choose Banner Image',
         value: data?.img_banner.id || '',
-        options: this.buildOptions('/api/v1/image/'),
+        options: this.buildOptions('image'),
         order: 7
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.img_card.id || '',
-        options: this.buildOptions('/api/v1/image/'),
+        options: this.buildOptions('image'),
         order: 7
       })
     ]
@@ -460,14 +460,14 @@ export class InputService {
         key: 'img_banner',
         label: 'Choose Banner Image',
         value: data?.properties?.img_banner.id || '',
-        options: this.buildOptions('/api/v1/image/'),
+        options: this.buildOptions('image'),
         order: 8
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.properties?.img_card.id || '',
-        options: this.buildOptions('/api/v1/image/'),
+        options: this.buildOptions('image'),
         order: 9
       }),
       new InputPhone({
@@ -526,7 +526,7 @@ export class InputService {
   private buildEmployeeOptions() {
     let options: { key: string, value: string }[] = [];
 
-    this.backendService.get('/api/v1/users/').subscribe((employees: any) => {
+    this.backendService.getList('users').subscribe((employees: any) => {
       // console.log("buildEmployeeOptions:", employees);
       for (let emp of employees) {
         options.push({ key: emp.id, value: emp.first_name + ' ' + emp.last_name })
@@ -537,10 +537,10 @@ export class InputService {
   }
 
   // for everything else (id/name)
-  private buildOptions(url: string) {
+  private buildOptions(routeType: string) {
     let options: { key: string, value: string }[] = [];
 
-    this.backendService.get(url).subscribe((list: any) => {
+    this.backendService.getList(routeType).subscribe((list: any) => {
       // console.log("buildOptions:", list);
       for (let item of list) {
         options.push({ key: item.id, value: item.name })
