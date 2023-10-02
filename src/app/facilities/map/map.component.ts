@@ -113,7 +113,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
 
   facilityPopup(facility: any) {
-    return `<div style="height: 200px; width:200px; overflow:hidden;">
+    return `<div style="height:200px; width:250px; overflow:hidden; margin: 0 auto">
     <img style="width: 100%; height: 100%; object-fit: cover;" src="${this.imageUrl}" >
     </div> <br>
     <div style="text-align:center;">
