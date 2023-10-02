@@ -67,6 +67,7 @@ p {
     border-radius: 10px;
     border-color: #5492b4;
     font-size: larger;
+    transition: all .2s ease-in-out;
 }
 
 .dfrm-button-small {
@@ -77,12 +78,14 @@ p {
     border-radius: 15px;
     border-color: #5492b4;
     font-size:medium;
+    transition: all .2s ease-in-out;
 }
 
 .dfrm-button:hover,
-.dfrm-button-invert:hover {
-    transition: all .2s ease-in-out;
+.dfrm-button-invert:hover,
+.dfrm-button-small:hover {
     transform: scale(1.1);
+    transition: all .2s ease-in-out;
 }
 
 .dfrm-button:disabled,
