@@ -7,7 +7,7 @@
     <!-- subproject info -->
     <div class="container rounded-border bg-dark my-5">
         <div class="col-md-4 banner-container-sub">
-            <img [src]="'http://localhost:8000' + item.img_banner.image" alt="Image"
+            <img [src]="getImageUrl(item.img_banner.image)" alt="Image"
                 class="banner-image-sub rounded-top">
         </div>
         <div class="container">

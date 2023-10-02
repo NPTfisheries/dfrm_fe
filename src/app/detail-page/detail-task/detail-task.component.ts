@@ -7,6 +7,7 @@ import { BackendService } from 'src/_services/backend.service';
 
 import { getRecordById } from 'src/_utilities/getRecordById';
 import { managerAccess, projectleaderAccess } from 'src/_utilities/permission-util';
+import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 
 @Component({
   selector: 'app-detail-task',
@@ -53,6 +54,10 @@ export class DetailTaskComponent implements OnInit, OnChanges {
     this.authService.taskPerms$.subscribe((taskPerms:any) => {
       this.taskPerms = taskPerms;
     });
+  }
+
+  getImageUrl(imagePath: string) {
+    return buildImageUrl(imagePath);
   }
 
   getList() {

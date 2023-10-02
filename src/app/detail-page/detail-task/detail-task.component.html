@@ -9,7 +9,7 @@
             <div class="row">
 
                 <div *ngIf="i % 2 === 1" class="col-md-4 overflow-hidden">
-                    <img [src]="'http://localhost:8000' + item.img_card.image" alt="Image"
+                    <img [src]="getImageUrl(item.img_card.image)" alt="Image"
                         class="rounded-left image-task">
                 </div>
 
@@ -30,7 +30,7 @@
                 </div>
 
                 <div *ngIf="i % 2 === 0" class="col-md-4 overflow-hidden">
-                    <img [src]="'http://localhost:8000' + item.img_card.image" alt="Image"
+                    <img [src]="getImageUrl(item.img_card.image)" alt="Image"
                         class="rounded-right image-task">
                 </div>
 

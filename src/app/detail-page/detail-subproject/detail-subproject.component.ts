@@ -6,6 +6,7 @@ import { AuthService } from 'src/_services/auth.service';
 import { BackendService } from 'src/_services/backend.service';
 
 import { getRecordById } from 'src/_utilities/getRecordById'; 
+import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 import { managerAccess } from 'src/_utilities/permission-util';
 
 @Component({
@@ -52,6 +53,10 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
     });
   }
 
+  getImageUrl(imagePath: string) {
+    return buildImageUrl(imagePath);
+  }
+  
   getList() {
     this.backendService.getList(`subproject/?project_id=${this.projectId}`).subscribe(list => {
       this.data = list;
