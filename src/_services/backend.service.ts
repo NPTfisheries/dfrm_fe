@@ -9,58 +9,54 @@ import { environment } from "src/environments/environment";
 @Injectable({ providedIn: 'root' })
 export class BackendService {
 
-    base_url = '/api/v1/';
-    apiUrl = environment.apiUrl;  // http://localhost:8000/api/v1/
+    apiUrl = environment.apiUrl;  // http://localhost:8000
+    apiVersion = '/api/v1/';
 
     constructor(
         private http: HttpClient,
         ) { }
 
     getList(routeType: string): Observable<any[]> {
-        const URL = `${this.apiUrl}${routeType}`;
+        const URL = `${this.apiUrl}${this.apiVersion}${routeType}`;
         return this.get(URL);
     }
 
     getDetail(routeType: string, slug: string): Observable<any>  {
-        const URL = `${this.apiUrl}${routeType}/${slug}/`;
+        const URL = `${this.apiUrl}${this.apiVersion}${routeType}/${slug}/`;
         return this.get(URL);
     }
 
     newItem(routeType: string, object:object): Observable<any>  {
-        const URL = `${this.apiUrl}${routeType}/`;
+        const URL = `${this.apiUrl}${this.apiVersion}${routeType}/`;
         return this.post(URL, object);
     }
 
     updateItem(routeType: string, slug:string, object:object): Observable<any>  {
-        const URL = `${this.apiUrl}${routeType}/${slug}/`;
+        const URL = `${this.apiUrl}${this.apiVersion}${routeType}/${slug}/`;
         return this.put(URL, object);
     }
 
     getCurrentUser(): Observable<User> {
-        return this.get(this.base_url + 'user/');
+        return this.get(this.apiUrl + this.apiVersion + 'user/');
     }
 
-    // getImageBySlug(slug:string) {
-    //     return this.get(`${this.apiUrl}image/${slug}/`);
-    // }
-
     getImageById(id:number) {
-        return this.get(`${this.apiUrl}image/${id}/`);
+        return this.get(`${this.apiUrl}${this.apiVersion}image/${id}/`);
     }
 
 
     updateProfile(profile: any) {
-        return this.put('${this.apiUrl}profile/', profile);
+        return this.put(`${this.apiUrl}${this.apiVersion}profile/`, profile);
     }
 
     updateProfilePhoto(photo: any) {
-        return this.put('${this.apiUrl}profile-photo/', photo);
+        return this.put(`${this.apiUrl}${this.apiVersion}profile-photo/`, photo);
     }
 
     objectLookup(object_type: string) {
         const params = new HttpParams().set('object_type', object_type);
 
-        return this.http.get(`${this.apiUrl}lookup`, { params })
+        return this.http.get(`${this.apiUrl}${this.apiVersion}lookup`, { params })
     }
     
     // HELPERS -- change to private eventually?
@@ -68,7 +64,7 @@ export class BackendService {
         return this.http.get(url) //, { observe: 'response' })
             .pipe(
                 map((response) => {
-                    // console.log(`${url} response:`, response);
+                    console.log(`${url} response:`, response);
                     return response;
                 })
             );
@@ -78,7 +74,7 @@ export class BackendService {
         return this.http.post(url, object)
             .pipe(
                 map((response) => {
-                    // console.log(`${url} response:`, response);
+                    console.log(`${url} response:`, response);
                     return response;
                 })
             );
@@ -88,7 +84,7 @@ export class BackendService {
         return this.http.put(url, object)
             .pipe(
                 map((response) => {
-                    // console.log(`${url} response:`, response);
+                    console.log(`${url} response:`, response);
                     return response;
                 })
             );

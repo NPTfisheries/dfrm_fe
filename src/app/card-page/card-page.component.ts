@@ -14,7 +14,7 @@ export class CardPageComponent implements OnInit {
   department: any | undefined;
   list: any | undefined;
   routeType!: string | undefined;
-  bannerImage: any | undefined = '';
+  bannerImage: any | undefined = "./assets/images/Clearwater_River_Home_Page.jpg";
 
   constructor(
     private route: ActivatedRoute,
@@ -33,8 +33,6 @@ export class CardPageComponent implements OnInit {
       this.backendService.get('/api/v1/department/')
         .subscribe(department => {
           this.department = department[0];
-
-          this.getImage(department[0].img_banner.slug);
         });
     }
 
@@ -42,30 +40,6 @@ export class CardPageComponent implements OnInit {
       this.list = response;
     });
 
-    this.getImage(this.routeType);
-  }
-
-  getImage(routeType: string | undefined) {
-    // console.log('GETIMAGE', routeType);
-    let slug = '';
-    switch (routeType) {
-      case 'division':
-        slug = 'clearwater-river'
-        break;
-      case 'project':
-        slug = 'wallowa-lake'
-        break;
-      default:
-        slug = 'saturn';
-    }
-
-    this.bannerImage = "http://localhost:4200/assets/images/Clearwater_River_Home_Page.jpg";
-
-    // this.backendService.getImageBySlug(slug).subscribe((response: any) => {
-    //   // response.image is a url: "http://localhost:4200/media/images/uploaded/saturn_79MFAAl.jpg"
-    //   const alteredUrl = response.image.replace('localhost:4200', 'localhost:8000');
-    //   this.bannerImage = alteredUrl;
-    // });
   }
 
 }

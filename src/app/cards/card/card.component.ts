@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 
 @Component({
   selector: 'app-card',
@@ -25,7 +26,8 @@ export class CardComponent implements OnInit {
   };
 
   getImage() {
-    this.imageUrl = 'http://localhost:8000' + this.data.img_card.image;
+    // this.imageUrl = 'http://localhost:8000' + this.data.img_card.image;
+    this.imageUrl = buildImageUrl(this.data.img_card.image);
   }
 
 }

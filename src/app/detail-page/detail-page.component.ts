@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { BackendService } from 'src/_services/backend.service';
 import { getRouteType, getRouteSlug } from 'src/_utilities/route-utils';
+import { buildImageUrl } from 'src/_utilities/buildImageUrl';
+
 
 @Component({
   selector: 'app-detail-page',
@@ -35,7 +37,7 @@ export class DetailPageComponent implements OnInit {
   }
 
   getImage(url:string) {
-    return this.bannerImage = 'http://localhost:8000'+url;
+    this.bannerImage = buildImageUrl(url);
   }
 
 }
