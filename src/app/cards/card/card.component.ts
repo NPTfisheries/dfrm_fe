@@ -18,16 +18,11 @@ export class CardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getImage();
+    this.imageUrl = buildImageUrl(this.data.img_card.image);
   }
 
   navigateToDetail(slug: string) {
     this.router.navigateByUrl(this.routeType + '/' + slug);
   };
-
-  getImage() {
-    // this.imageUrl = 'http://localhost:8000' + this.data.img_card.image;
-    this.imageUrl = buildImageUrl(this.data.img_card.image);
-  }
 
 }

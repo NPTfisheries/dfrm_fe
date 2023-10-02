@@ -61,7 +61,6 @@ export class ProfileComponent implements OnInit {
   }
 
   getImage(path: any) {
-    // this.imageUrl = path?.replace('http://localhost:4200', 'http://localhost:8000');
     this.imageUrl = buildImageUrl(path);
   }
 

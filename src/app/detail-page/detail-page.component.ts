@@ -32,12 +32,8 @@ export class DetailPageComponent implements OnInit {
     const slug = getRouteSlug(this.route);
     this.backendService.getDetail(this.routeType, slug).subscribe(detail => {
       this.data = detail;
-      this.getImage(detail.img_banner.image);
+      this.bannerImage = buildImageUrl(detail.img_banner.image);
     });
-  }
-
-  getImage(url:string) {
-    this.bannerImage = buildImageUrl(url);
   }
 
 }

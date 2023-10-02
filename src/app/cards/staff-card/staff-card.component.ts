@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 
-
 @Component({
   selector: 'app-staff-card',
   templateUrl: './staff-card.component.html',
@@ -18,14 +17,12 @@ export class StaffCardComponent {
   ) { }
 
   navigateToUserProfile() {
-    console.log('Staff Card Clicked!');
+    // console.log('Staff Card Clicked!');
     this.router.navigateByUrl('users/' + this.data.id);
   };
 
   ngOnChanges() {
     if (this.data) {
-      // this.getProfilePhoto(this.data);
-      // this.imageUrl=`http://localhost:8000${this.data.profile.photo}`;
       this.imageUrl = buildImageUrl(this.data.profile.photo);
     }
   }
