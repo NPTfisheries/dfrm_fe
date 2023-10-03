@@ -30,9 +30,9 @@ export class CardPageComponent implements OnInit {
     this.routeType = getRouteType(this.route).slice(0, -1);
 
     if (this.routeType == 'division') {
-      this.backendService.get('/api/v1/department/')
-        .subscribe(department => {
-          this.department = department[0];
+      this.backendService.getList('department')
+        .subscribe(departments => {
+          this.department = departments[0];
         });
     }
 
