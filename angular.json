@@ -29,7 +29,10 @@
               "node_modules/leaflet/dist/leaflet.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            ]
           },
           "configurations": {
             "production": {
