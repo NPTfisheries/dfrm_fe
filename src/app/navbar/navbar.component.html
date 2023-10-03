@@ -1,27 +1,39 @@
-<nav class="nav navbar navbar-expand-lg navbar-dark bg-dark sticky-top mx-auto">
-  <div class="container" style="margin-top: 0px; margin-bottom: 0px;">
-    <!-- <img class="nav-link" src='./assets/images/DFRM.png' height="90px" style="padding:0;" /> -->
-    <img class="img-fluid" src='./assets/images/DFRM.png' height="90px" style="padding:0; max-height:85px;" />
-    <a class="nav-link grow" routerLink="home" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a>
-    <li ngbDropdown class="nav-item" role="presentation">
-      <button type="button" class="nav-link" ngbDropdownToggle>Administration</button>
-      <div ngbDropdownMenu>
-        <button class="nav-link" ngbDropdownItem routerLink="divisions" routerLinkActive="active"
-          ariaCurrentWhenActive="page">Department Structure</button>
-        <button class="nav-link" ngbDropdownItem routerLink="projects" routerLinkActive="active"
-          ariaCurrentWhenActive="page">Projects</button>
-        <button class="nav-link" ngbDropdownItem routerLink="facilities" routerLinkActive="active"
-          ariaCurrentWhenActive="page">Facilities</button>
-      </div>
-    </li>
+<nav class="nav navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+  <div class="container">
+    <img class="navbar-brand" src='./assets/images/DFRM.png' height="80px" />
 
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <button *ngIf="!isLoggedIn; else profileNav" class="nav-link ms-auto grow" (click)="openLoginModal()">Login</button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+        <button class="nav-link me-auto" aria-current="page" routerLink="home" routerLinkActive="active">Home</button>
+        <li class="nav-item dropdown" ngbDropdown>
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle id="navbarAdmin" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Administration
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarAdmin">
+            <button class="dropdown-item" ngbDropdownItem aria-current="page" routerLink="divisions"
+              routerLinkActive="active">Department Structure</button>
+            <button class="dropdown-item" ngbDropdownItem aria-current="page" routerLink="projects"
+              routerLinkActive="active">Projects</button>
+            <button class="dropdown-item" ngbDropdownItem aria-current="page" routerLink="facilities"
+              routerLinkActive="active">Facilities</button>
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <button *ngIf="!isLoggedIn; else profileNav" class="nav-link me-auto" (click)="openLoginModal()">Login</button>
+      </ul>
+    </div>
   </div>
 </nav>
 
 <ng-template #profileNav>
-  <li ngbDropdown class="nav-item ms-auto" role="presentation">
+  <li ngbDropdown class="nav-item" role="presentation">
     <button type="button" class="nav-link" ngbDropdownToggle>{{ username }}</button>
     <div ngbDropdownMenu>
       <button ngbDropdownItem routerLink="profile" routerLinkActive="active">Profile</button>

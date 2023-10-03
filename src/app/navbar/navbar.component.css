@@ -29,8 +29,6 @@
     color:#f9f906
 }
 
-
-
 .dropdown-menu {
     background-color: #0d1b1f;
     border-color: #cfd7db;;
@@ -39,3 +37,16 @@
 .dropdown-divider {
     border-color:#cfd7db; 
 }
+
+@media (min-width: 768px) {
+    .navbar-expand-md .justify-content-between {
+      justify-content: between;
+    }
+  }
+  /* This CSS code will make sure that the justify-content-between class is only applied to the navbar when the screen width is at least 768 pixels (medium and larger screens) where the navbar-expand-md class takes effect. It will keep the normal alignment on smaller screens when the navbar is collapsed. */
+  
+  
+  
+  
+  
+  
