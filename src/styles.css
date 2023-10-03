@@ -27,6 +27,7 @@ dark grey #5492b4
     overflow-x:hidden;
     padding: 75px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
 }
@@ -37,6 +38,7 @@ dark grey #5492b4
     padding-top: 50px;
     padding-bottom: 30px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
 }
