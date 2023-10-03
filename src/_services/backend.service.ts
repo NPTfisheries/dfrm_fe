@@ -53,6 +53,10 @@ export class BackendService {
         return this.put(`${this.apiUrl}${this.apiVersion}profile-photo/`, photo);
     }
 
+    updatePassword(passwordUpdateForm: any) {
+        return this.put(`${this.apiUrl}${this.apiVersion}change_password/`, passwordUpdateForm);
+    }
+
     objectLookup(object_type: string) {
         const params = new HttpParams().set('object_type', object_type);
 
