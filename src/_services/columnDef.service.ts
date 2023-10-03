@@ -237,7 +237,7 @@ function imageColDefs(routeType: string, context: any) {
             field: 'slug',
             cellRenderer: ImagePreviewRendererComponent,
             cellRendererParams: {},
-            maxWidth: 100
+            maxWidth: 130
         }
     ];
 
