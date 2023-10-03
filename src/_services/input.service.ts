@@ -422,7 +422,7 @@ export class InputService {
       new InputSelect({
         key: 'facility_type',
         label: 'Facility Type',
-        value: data?.properties?.facility_type || '',
+        value: data?.properties?.facility_type?.id || '',
         options: this.getObjects('Facility'),
         required: true,
         order: 3

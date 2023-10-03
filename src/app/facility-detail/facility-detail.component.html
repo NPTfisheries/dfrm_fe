@@ -10,9 +10,9 @@
     <p>{{ data?.properties.city }}, {{ data?.properties.state }} {{ data?.properties.zipcode }}</p>
 </div>
 <div class="employee-bar my-5">
-    <app-employee-card *ngIf="data?.properties.manager" [data]="data?.properties.manager"></app-employee-card>
-    <app-employee-card *ngIf="data?.properties.deputy" [data]="data?.properties.deputy"></app-employee-card>
-    <app-employee-card *ngIf="data?.properties.assistant" [data]="data?.properties.assistant"></app-employee-card>
+    <app-employee-card *ngIf="data?.properties.manager.email !== ''" [data]="data?.properties.manager"></app-employee-card>
+    <app-employee-card *ngIf="data?.properties.deputy.email !== ''" [data]="data?.properties.deputy"></app-employee-card>
+    <app-employee-card *ngIf="data?.properties.assistant.email !== ''" [data]="data?.properties.assistant"></app-employee-card>
 </div>
 
 <div class="container my-5" >
