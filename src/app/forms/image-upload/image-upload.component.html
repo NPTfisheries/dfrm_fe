@@ -4,7 +4,7 @@
     <form [formGroup]="imageForm" (ngSubmit)="onSubmit()">
 
         <div class="mb-3">
-            <input type="file" (change)="onFileChange($event)" class="form-control form-control-lg" >
+            <input type="file" (change)="onFileChange($event)" class="form-control form-control-lg" [ngClass]="{ 'validationError' : !selectedImage }">
             <div class="errorMessage validationErrorMessage" *ngIf="!selectedImage">A file must be selected.</div>
         </div>
         <div class="mb-3">
