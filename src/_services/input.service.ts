@@ -18,6 +18,9 @@ import { InputNumber } from 'src/_inputs/input-number';
 @Injectable({ providedIn: 'root' })
 export class InputService {
 
+  defaultBannerId = 3;
+  defaultCardId = 4;
+
   constructor(private backendService: BackendService) { }
 
   // TODO: get from a remote source of question metadata
@@ -70,14 +73,14 @@ export class InputService {
       new InputImage({
         key: 'img_banner',
         label: 'Choose Banner Image',
-        value: data?.img_banner.id || '',
+        value: data?.img_banner.id || this.defaultBannerId,
         options: this.buildOptions('image'),
         order: 7
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
-        value: data?.img_card.id || '',
+        value: data?.img_card.id || this.defaultCardId,
         options: this.buildOptions('image'),
         order: 7
       })
@@ -135,14 +138,14 @@ export class InputService {
       new InputImage({
         key: 'img_banner',
         label: 'Choose Banner Image',
-        value: data?.img_banner.id || '',
+        value: data?.img_banner.id || this.defaultBannerId,
         options: this.buildOptions('image'),
         order: 7
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
-        value: data?.img_card.id || '',
+        value: data?.img_card.id || this.defaultCardId,
         options: this.buildOptions('image'),
         order: 7
       }),
@@ -185,14 +188,14 @@ export class InputService {
       new InputImage({
         key: 'img_banner',
         label: 'Choose Banner Image',
-        value: data?.img_banner.id || '',
+        value: data?.img_banner.id || this.defaultBannerId,
         options: this.buildOptions('image'),
         order: 7
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
-        value: data?.img_card.id || '',
+        value: data?.img_card.id || this.defaultCardId,
         options: this.buildOptions('image'),
         order: 7
       }),
@@ -248,14 +251,14 @@ export class InputService {
       new InputImage({
         key: 'img_banner',
         label: 'Choose Banner Image',
-        value: data?.img_banner.id || '',
+        value: data?.img_banner.id || this.defaultBannerId,
         options: this.buildOptions('image'),
         order: 7
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
-        value: data?.img_card.id || '',
+        value: data?.img_card.id || this.defaultCardId,
         options: this.buildOptions('image'),
         order: 7
       })
@@ -299,14 +302,14 @@ export class InputService {
       new InputImage({
         key: 'img_banner',
         label: 'Choose Banner Image',
-        value: data?.img_banner.id || '',
+        value: data?.img_banner.id || this.defaultBannerId,
         options: this.buildOptions('image'),
         order: 7
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
-        value: data?.img_card.id || '',
+        value: data?.img_card.id || this.defaultCardId,
         options: this.buildOptions('image'),
         order: 7
       })
@@ -463,14 +466,15 @@ export class InputService {
       new InputImage({
         key: 'img_banner',
         label: 'Choose Banner Image',
-        value: data?.properties?.img_banner.id || '',
+        value: data?.properties?.img_banner.id || this.defaultBannerId,
         options: this.buildOptions('image'),
+        required: true,
         order: 8
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
-        value: data?.properties?.img_card.id || '',
+        value: data?.properties?.img_card.id || this.defaultCardId,
         options: this.buildOptions('image'),
         order: 9
       }),

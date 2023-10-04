@@ -1,7 +1,8 @@
-.requiredInput {
-    background-color: lightgreen;
+.validationError {
+    background-color: rgba(255, 0, 0, 0.25);
 }
 
-.validationError {
-    border: 4px dashed red;
+.validationErrorMessage {
+    font-style: italic;
+    color: red;
 }

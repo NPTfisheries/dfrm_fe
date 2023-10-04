@@ -51,7 +51,7 @@
             [pattern]="input.pattern">
 
         <!-- TEXTAREA -->
-        <textarea *ngSwitchCase="'textarea'" rows="3" [formControlName]="input.key" [id]="input.key"
+        <textarea *ngSwitchCase="'textarea'" rows="5" [formControlName]="input.key" [id]="input.key"
             class="form-control form-control-lg" [ngClass]="getInputClasses(input)" [required]="input.required"
             [minlength]="input.minlength" [maxlength]="input.maxlength"></textarea>
 
@@ -64,7 +64,7 @@
         </select>
 
         <!-- SELECT MULTIPLE -->
-        <select [id]="input.key" *ngSwitchCase="'multi-select'" [formControlName]="input.key"
+        <select [id]="input.key" *ngSwitchCase="'multi-select'" [formControlName]="input.key" rows="10"
             class="form-control form-select form-select-lg" [ngClass]="getInputClasses(input)" multiple
             [ngModel]="input.idArray" [required]="input.required" [minlength]="input.minlength"
             [maxlength]="input.maxlength">
@@ -80,13 +80,13 @@
 
     </div>
 
-    <div class="errorMessage" *ngIf="form.get(input.key)?.hasError('required')">{{input.label}} is required</div>
-    <div class="errorMessage" *ngIf="form.get(input.key)?.hasError('min')">{{input.label}} must be {{input.min}} or
+    <div class="errorMessage validationErrorMessage" *ngIf="form.get(input.key)?.hasError('required')">{{input.label}} is required</div>
+    <div class="errorMessage validationErrorMessage" *ngIf="form.get(input.key)?.hasError('min')">{{input.label}} must be {{input.min}} or
         greater.</div>
-    <div class="errorMessage" *ngIf="form.get(input.key)?.hasError('max')">{{input.label}} must be {{input.max}} or
+    <div class="errorMessage validationErrorMessage" *ngIf="form.get(input.key)?.hasError('max')">{{input.label}} must be {{input.max}} or
         less.</div>
-    <div class="errorMessage" *ngIf="form.get(input.key)?.hasError('minlength')">{{input.label}} must be at least
+    <div class="errorMessage validationErrorMessage" *ngIf="form.get(input.key)?.hasError('minlength')">{{input.label}} must be at least
         {{input.minlength}} characters long.</div>
-    <div class="errorMessage" *ngIf="form.get(input.key)?.hasError('pattern')">{{input.patternMessage}}</div>
+    <div class="errorMessage validationErrorMessage" *ngIf="form.get(input.key)?.hasError('pattern')">{{input.patternMessage}}</div>
 
 </div>

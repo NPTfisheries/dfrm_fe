@@ -27,19 +27,6 @@ export class InputControlService {
       } else {
         group[input.key] = new FormControl(input.value || '', validators);
       }
-
-
-      // if (input.key === 'coordinates') {
-      //   // Handle the 'coordinates' field specially -> GeoJSON
-      //   group['coordinates'] = new FormGroup({
-      //     type: new FormControl('Point'),
-      //     coordinates: new FormControl(input.value || [])
-      //   });
-      // } else {
-      //   group[input.key] = input.required ? new FormControl(input.value || '', Validators.required)
-      //     : new FormControl(input.value || '');
-      // }
-
     });
 
     return new FormGroup(group);

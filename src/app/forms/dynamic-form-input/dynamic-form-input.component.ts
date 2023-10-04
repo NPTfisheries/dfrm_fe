@@ -31,7 +31,6 @@ export class DynamicFormInputComponent implements OnInit {
 
   getInputClasses(input: any): { [key: string]: boolean } {
     return {
-      'requiredInput': input.required,
       'validationError': this.form.get(input.key)?.errors !== null,
     };
   }
