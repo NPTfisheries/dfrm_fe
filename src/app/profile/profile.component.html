@@ -22,16 +22,16 @@
         <hr class="card-hr" />
         <br>
         <ul class="text-lightgray">
-            <li>
+            <li *ngIf="data?.profile?.city">
                 <h4 class="text-lightgray">Office Location: {{ data?.profile?.city }}, {{ data?.profile?.state }}</h4>
             </li><br>
             <li>
                 <h4 class="text-lightgray">Email: <a class="text-yellow" href="mailto:{{data?.email}}">{{ data?.email }}</a></h4>
             </li><br>
-            <li>
+            <li *ngIf="data?.profile?.mobile_phone">
                 <h4 class="text-lightgray">Work Phone: {{ formatPhone(data?.profile?.work_phone) }}</h4>
             </li><br>
-            <li>
+            <li *ngIf="data?.profile?.mobile_phone">
                 <h4 class="text-lightgray">Mobile Phone: {{ formatPhone(data?.profile?.mobile_phone) }}</h4>
             </li><br>
         </ul>
