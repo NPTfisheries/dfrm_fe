@@ -55,6 +55,16 @@ function departmentColDefs(routeType: string, context: any) {
             field: 'staff_names',
             headerName: 'Staff',
             valueGetter: getStaffNames
+        },
+        {
+            headerName: 'View',
+            cellRenderer: LinkButtonRendererComponent,
+            cellRendererParams: {},
+            valueGetter: function(params: any) {
+                // this will return all departments to the divisions list, but while it's only Fisheries that is fine.
+                return '/divisions'; 
+            },
+            maxWidth: 100
         }
     ];
 
