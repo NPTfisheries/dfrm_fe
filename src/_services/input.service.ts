@@ -29,7 +29,7 @@ export class InputService {
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
-        label: 'Name',
+        label: 'Department Name',
         value: data?.name || '',
         required: true,
         order: 1
@@ -94,7 +94,7 @@ export class InputService {
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
-        label: 'Name',
+        label: 'Division Name',
         value: data?.name || '',
         required: true,
         order: 1
@@ -165,7 +165,7 @@ export class InputService {
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
-        label: 'Name',
+        label: 'Project Name',
         value: data?.name || '',
         required: true,
         order: 1
@@ -215,7 +215,7 @@ export class InputService {
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
-        label: 'Name',
+        label: 'Subproject Name',
         value: data?.name || '',
         required: true,
         order: 1
@@ -371,14 +371,14 @@ export class InputService {
     const inputs: InputBase<string>[] = [
       new InputText({
         key: 'name',
-        label: 'Name',
+        label: 'Image Name',
         value: data?.name || '',
         required: true,
         order: 1
       }),
       new InputText({
         key: 'description',
-        label: 'Description',
+        label: 'Image Description',
         value: data?.description || '',
         required: true,
         order: 2

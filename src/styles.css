@@ -209,16 +209,18 @@ p {
     height: 0.25em;
     line-height: 2em;
     color: white;
-    background: black;
+    /* background: black; */
+    background: #5492b4;
 
     &:before {
-        background: linear-gradient(to right, white, black);
+        background: linear-gradient(to right, white, #5492b4);
     }
 
     &:after {
-        background: linear-gradient(to left, white, black);
+        background: linear-gradient(to left, white, #5492b4);
     }
 }
+
 
 .divider {
     display: flex;

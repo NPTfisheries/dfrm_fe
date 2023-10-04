@@ -64,7 +64,7 @@
         </select>
 
         <!-- SELECT MULTIPLE -->
-        <select [id]="input.key" *ngSwitchCase="'multi-select'" [formControlName]="input.key" rows="10"
+        <select [id]="input.key" *ngSwitchCase="'multi-select'" [formControlName]="input.key" size="10"
             class="form-control form-select form-select-lg" [ngClass]="getInputClasses(input)" multiple
             [ngModel]="input.idArray" [required]="input.required" [minlength]="input.minlength"
             [maxlength]="input.maxlength">

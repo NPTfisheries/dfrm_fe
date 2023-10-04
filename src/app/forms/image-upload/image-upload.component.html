@@ -20,6 +20,7 @@
         <div class="mb-3">
             <label for="photographer" class="form-label">Photographer</label>
             <input type="text" formControlName="photographer" class="form-control form-control-lg" required [ngClass]="{ 'validationError' : imageForm.get('photographer')?.errors }">
+            <div><small><em>Who took the photo?</em></small></div>
             <div class="errorMessage validationErrorMessage" *ngIf="imageForm.get('photographer')?.hasError('required')">Photographer is required.</div>
         </div>
         <div class="mb-3">
@@ -30,6 +31,7 @@
         <div class="mb-3">
             <label for="photo_date" class="form-label">Photo Date</label>
             <input type="date" formControlName="photo_date" class="form-control form-control-date form-control-lg" required [ngClass]="{ 'validationError' : imageForm.get('photo_date')?.errors }" />
+            <div><small><em>When was the photo taken?</em></small></div>
             <div class="errorMessage validationErrorMessage" *ngIf="imageForm.get('photo_date')?.hasError('required')">Photo date is required.</div>
         </div>
         <button type="submit" class="dfrm-button" [disabled]="imageForm.invalid || !selectedImage">Upload
