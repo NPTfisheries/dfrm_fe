@@ -3,23 +3,27 @@
 </div>
 <br>
 <div class="container my-5 text-center">
-    <h1 >{{ data?.properties.name }}</h1>
+    <h1>{{ data?.properties.name }}</h1>
+    <div class="container my-5">
+        <p>{{ data?.properties.description }}</p>
+    </div>
     <h2 class="divider gradient-hr my-5"></h2>
     <p>Street Address: {{ data?.properties.street_address }}</p>
     <p>Mailing Addresss: {{ data?.properties.mailing_address }}</p>
     <p>{{ data?.properties.city }}, {{ data?.properties.state }} {{ data?.properties.zipcode }}</p>
 </div>
 <div class="employee-bar my-5">
-    <app-employee-card *ngIf="data?.properties.manager && data?.properties.manager.email !== ''" [data]="data?.properties.manager"></app-employee-card>
-    <app-employee-card *ngIf="data?.properties.assistant && data?.properties.deputy.email !== ''" [data]="data?.properties.deputy"></app-employee-card>
-    <app-employee-card *ngIf="data?.properties.assistant && data?.properties.assistant.email !== ''" [data]="data?.properties.assistant"></app-employee-card>
+    <app-employee-card *ngIf="data?.properties.manager && data?.properties.manager.email !== ''"
+        [data]="data?.properties.manager"></app-employee-card>
+    <app-employee-card *ngIf="data?.properties.assistant && data?.properties.deputy.email !== ''"
+        [data]="data?.properties.deputy"></app-employee-card>
+    <app-employee-card *ngIf="data?.properties.assistant && data?.properties.assistant.email !== ''"
+        [data]="data?.properties.assistant"></app-employee-card>
 </div>
 
-<div class="container my-5" >
-    <p>{{ data?.properties.description }}</p>
-</div>
 
-<div *ngIf="data?.properties.staff.length > 0 ">
+
+<!-- <div *ngIf="data?.properties.staff.length > 0 ">
     <h2 class="divider gradient-hr my-5"></h2>
     <h2 class="text-center  pb-4">Facility Staff</h2>
     <div class="staff-bar mb-5">
@@ -27,4 +31,4 @@
             <app-staff-card [data]="staff"></app-staff-card>
         </div>
     </div>
-</div>
+</div> -->
