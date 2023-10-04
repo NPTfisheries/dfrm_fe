@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { BackendService } from 'src/_services/backend.service';
 import { getRouteType, getRouteSlug } from 'src/_utilities/route-utils';
+import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 
 @Component({
   selector: 'app-facility-detail',
@@ -30,7 +31,7 @@ export class FacilityDetailComponent implements OnInit {
     const slug = getRouteSlug(this.route);
     this.backendService.getDetail(this.routeType, slug).subscribe(detail => {
       this.data = detail;
-      this.bannerImage = `http://localhost:8000${detail.properties.img_banner.image}`
+      this.bannerImage = buildImageUrl(detail.properties.img_banner.image);
     });
   }
 
