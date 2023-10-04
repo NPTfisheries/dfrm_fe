@@ -2,7 +2,11 @@
     <img class="banner-image" [src]="bannerImage" alt="Banner Image" />
 </div>
 
+
 <ng-container *ngIf="department">
+    <div class="container my-5" >
+        <p>{{ department?.description }}</p>
+    </div>
     <h1 class="dfrm-page-title text-center">Administrative Staff</h1>
     <div class="employee-bar my-5">
         <app-employee-card *ngIf="department?.manager?.id" [data]="department?.manager"></app-employee-card>
