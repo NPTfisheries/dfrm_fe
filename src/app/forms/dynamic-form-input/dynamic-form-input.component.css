@@ -1,0 +1,7 @@
+.requiredInput {
+    background-color: lightgreen;
+}
+
+.validationError {
+    border: 4px dashed red;
+}
