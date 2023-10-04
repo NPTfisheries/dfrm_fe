@@ -8,7 +8,7 @@
 
         <!-- FILE -->
         <input *ngSwitchCase="'file'" type="file" [formControlName]="input.key" [value]="input.key" [id]="input.key"
-            class="form-control form-control-lg" [required]="input.required" >
+            class="form-control form-control-lg" [required]="input.required">
 
         <!-- HIDDEN -->
         <input *ngSwitchCase="'hidden'" type="hidden" style="display:none;" [formControlName]="input.key"
@@ -19,7 +19,7 @@
             <div class="col-sm-8">
                 <select [id]="input.key" *ngSwitchCase="'image'" [formControlName]="input.key" size="6"
                     (change)="onSelectChange($event)" class="form-control form-select form-select-lg"
-                    [required]="input.required" [minlength]="input.minlength" [maxlength]="input.maxlength" >
+                    [required]="input.required" [minlength]="input.minlength" [maxlength]="input.maxlength">
                     <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
                 </select>
             </div>
@@ -34,30 +34,27 @@
         <!-- NUMBER -->
         <input *ngSwitchCase="'number'" [formControlName]="input.key" [id]="input.key" [type]="input.type"
             class="form-control form-control-lg" [required]="input.required" [min]="input.min" [max]="input.max"
-            [minlength]="input.minlength" [maxlength]="input.maxlength" [pattern]="input.pattern" >
+            [minlength]="input.minlength" [maxlength]="input.maxlength" [pattern]="input.pattern">
 
         <!-- PHONE -->
-        <div *ngSwitchCase="'phone'">
-            <input [formControlName]="input.key" [id]="input.key" [type]="input.type"
-                class="form-control form-control-lg" [required]="input.required" [min]="input.min" [max]="input.max"
-                [minlength]="input.minlength" [maxlength]="input.maxlength" [pattern]="input.pattern" >
-            <small class="form-text text-muted">Expected format: +1 XXX XXX XXXX</small>
-        </div>
+        <input *ngSwitchCase="'phone'" [formControlName]="input.key" [id]="input.key" [type]="input.type"
+            class="form-control form-control-lg" [required]="input.required" [min]="input.min" [max]="input.max"
+            [minlength]="input.minlength" [maxlength]="input.maxlength" [pattern]="input.pattern">
 
         <!-- TEXT -->
         <input *ngSwitchCase="'text'" [formControlName]="input.key" [id]="input.key" [type]="input.type"
             class="form-control form-control-lg" [required]="input.required" [min]="input.min" [max]="input.max"
-            [minlength]="input.minlength" [maxlength]="input.maxlength" [pattern]="input.pattern" >
+            [minlength]="input.minlength" [maxlength]="input.maxlength" [pattern]="input.pattern">
 
         <!-- TEXTAREA -->
         <textarea *ngSwitchCase="'textarea'" rows="3" [formControlName]="input.key" [id]="input.key"
             class="form-control form-control-lg" [required]="input.required" [minlength]="input.minlength"
-            [maxlength]="input.maxlength" ></textarea>
+            [maxlength]="input.maxlength"></textarea>
 
         <!-- SELECT -->
         <select [id]="input.key" *ngSwitchCase="'select'" [formControlName]="input.key"
             class="form-control form-select form-select-lg" [required]="input.required" [minlength]="input.minlength"
-            [maxlength]="input.maxlength" >
+            [maxlength]="input.maxlength">
             <option [value]=''></option>
             <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
         </select>
@@ -65,7 +62,7 @@
         <!-- SELECT MULTIPLE -->
         <select [id]="input.key" *ngSwitchCase="'multi-select'" [formControlName]="input.key"
             class="form-control form-select form-select-lg" multiple [ngModel]="input.idArray"
-            [required]="input.required" [minlength]="input.minlength" [maxlength]="input.maxlength" >
+            [required]="input.required" [minlength]="input.minlength" [maxlength]="input.maxlength">
             <option></option>
             <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
         </select>

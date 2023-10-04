@@ -346,9 +346,6 @@ export class InputService {
         key: 'work_phone',
         label: 'Work Phone',
         value: data?.work_phone || '',
-        minlength: '5',
-        maxlength: '15',
-        // pattern: "+1234567890",
         pattern: "\\+1\\s?\\d{3}\\s?\\d{3}\\s?\\d{4}",
         patternMessage: 'Phone numbers must be provided as "+1 123 456 7890", spaces optional.',
         order: 5
@@ -357,6 +354,8 @@ export class InputService {
         key: 'mobile_phone',
         label: 'Mobile Phone',
         value: data?.mobile_phone || '',
+        pattern: "\\+1\\s?\\d{3}\\s?\\d{3}\\s?\\d{4}",
+        patternMessage: 'Phone numbers must be provided as "+1 123 456 7890", spaces optional.',
         order: 6
       })
     ]
@@ -479,6 +478,8 @@ export class InputService {
         key: 'phone_number',
         label: 'Phone Number',
         value: data?.properties?.phone_number || '',
+        pattern: "\\+1\\s?\\d{3}\\s?\\d{3}\\s?\\d{4}",
+        patternMessage: 'Phone numbers must be provided as "+1 123 456 7890", spaces optional.',
         order: 10
       }),
       new InputText({
