@@ -15,6 +15,8 @@ export class DynamicFormInputComponent implements OnInit {
   @Input() form!: FormGroup;
 
   imagePreview: string | undefined;
+  // phoneRegex = "\\+1\\s?\\d{3}\\s?\\d{3}\\s?\\d{4}";
+  // phoneRegex = "ABC";
 
   constructor(
     private backendService: BackendService,

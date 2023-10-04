@@ -8,7 +8,7 @@
 
         <!-- FILE -->
         <input *ngSwitchCase="'file'" type="file" [formControlName]="input.key" [value]="input.key" [id]="input.key"
-            class="form-control form-control-lg">        
+            class="form-control form-control-lg" [required]="input.required" >
 
         <!-- HIDDEN -->
         <input *ngSwitchCase="'hidden'" type="hidden" style="display:none;" [formControlName]="input.key"
@@ -18,7 +18,8 @@
         <div class="row justify-space-between position-relative" style="max-height:180px" *ngSwitchCase="'image'">
             <div class="col-sm-8">
                 <select [id]="input.key" *ngSwitchCase="'image'" [formControlName]="input.key" size="6"
-                    (change)="onSelectChange($event)" class="form-control form-select form-select-lg">
+                    (change)="onSelectChange($event)" class="form-control form-select form-select-lg"
+                    [required]="input.required" [minlength]="input.minlength" [maxlength]="input.maxlength" >
                     <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
                 </select>
             </div>
@@ -32,42 +33,57 @@
 
         <!-- NUMBER -->
         <input *ngSwitchCase="'number'" [formControlName]="input.key" [id]="input.key" [type]="input.type"
-            class="form-control form-control-lg">
+            class="form-control form-control-lg" [required]="input.required" [min]="input.min" [max]="input.max"
+            [minlength]="input.minlength" [maxlength]="input.maxlength" [pattern]="input.pattern" >
 
         <!-- PHONE -->
         <div *ngSwitchCase="'phone'">
             <input [formControlName]="input.key" [id]="input.key" [type]="input.type"
-                class="form-control form-control-lg">
+                class="form-control form-control-lg" [required]="input.required" [min]="input.min" [max]="input.max"
+                [minlength]="input.minlength" [maxlength]="input.maxlength" [pattern]="input.pattern" >
             <small class="form-text text-muted">Expected format: +1 XXX XXX XXXX</small>
         </div>
 
         <!-- TEXT -->
         <input *ngSwitchCase="'text'" [formControlName]="input.key" [id]="input.key" [type]="input.type"
-            class="form-control form-control-lg">
+            class="form-control form-control-lg" [required]="input.required" [min]="input.min" [max]="input.max"
+            [minlength]="input.minlength" [maxlength]="input.maxlength" [pattern]="input.pattern" >
 
         <!-- TEXTAREA -->
         <textarea *ngSwitchCase="'textarea'" rows="3" [formControlName]="input.key" [id]="input.key"
-            class="form-control form-control-lg"></textarea>
+            class="form-control form-control-lg" [required]="input.required" [minlength]="input.minlength"
+            [maxlength]="input.maxlength" ></textarea>
 
         <!-- SELECT -->
         <select [id]="input.key" *ngSwitchCase="'select'" [formControlName]="input.key"
-            class="form-control form-select form-select-lg">
+            class="form-control form-select form-select-lg" [required]="input.required" [minlength]="input.minlength"
+            [maxlength]="input.maxlength" >
             <option [value]=''></option>
             <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
         </select>
 
         <!-- SELECT MULTIPLE -->
         <select [id]="input.key" *ngSwitchCase="'multi-select'" [formControlName]="input.key"
-            class="form-control form-select form-select-lg" multiple [ngModel]="input.idArray">
+            class="form-control form-select form-select-lg" multiple [ngModel]="input.idArray"
+            [required]="input.required" [minlength]="input.minlength" [maxlength]="input.maxlength" >
             <option></option>
             <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
         </select>
 
         <!-- DATE -->
         <input *ngSwitchCase="'date'" [type]="input.type" [formControlName]="input.key"
-            class="form-control form-control-date form-control-lg" />
+            class="form-control form-control-date form-control-lg" [required]="input.required" [min]="input.min"
+            [max]="input.max" [minlength]="input.minlength" [maxlength]="input.maxlength" />
 
     </div>
 
-    <div class="errorMessage" *ngIf="!isValid">{{input.label}} is required</div>
+    <div class="errorMessage" *ngIf="form.get(input.key)?.hasError('required')">{{input.label}} is required</div>
+    <div class="errorMessage" *ngIf="form.get(input.key)?.hasError('min')">{{input.label}} must be {{input.min}} or
+        greater.</div>
+    <div class="errorMessage" *ngIf="form.get(input.key)?.hasError('max')">{{input.label}} must be {{input.max}} or
+        less.</div>
+    <div class="errorMessage" *ngIf="form.get(input.key)?.hasError('minlength')">{{input.label}} must be at least
+        {{input.minlength}} characters long.</div>
+    <div class="errorMessage" *ngIf="form.get(input.key)?.hasError('pattern')">{{input.patternMessage}}</div>
+
 </div>
