@@ -55,7 +55,7 @@ export class SelectInputComponent implements OnInit {
   }
 
   updateValue() {
-    console.log(this.selectedOption);
+    // console.log(this.selectedOption);
     this.form.get(`${this.input.key}`)?.patchValue(this.selectedOption);
   }
 
