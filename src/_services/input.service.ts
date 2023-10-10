@@ -376,7 +376,7 @@ export class InputService {
         required: true,
         order: 1
       }),
-      new InputText({
+      new InputTextarea({
         key: 'description',
         label: 'Image Description',
         value: data?.description || '',

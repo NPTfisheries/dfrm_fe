@@ -14,7 +14,7 @@
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <input type="text" formControlName="description" class="form-control form-control-lg" required [ngClass]="{ 'validationError' : imageForm.get('description')?.errors }">
+            <textarea formControlName="description" rows="5" class="form-control form-control-lg" required [ngClass]="{ 'validationError' : imageForm.get('description')?.errors }"></textarea>
             <div class="errorMessage validationErrorMessage" *ngIf="imageForm.get('description')?.hasError('required')">Description name is required.</div>
         </div>
         <div class="mb-3">
@@ -40,7 +40,7 @@
     </form>
     <br />
     <div class="container rounded" style="background-color: yellow;">
-        <p><em><strong>By uploading images here, you are confirming the following:</strong></em></p>
+        <p class="text-center"><em><strong>By uploading images here, you are confirming the following:</strong></em></p>
         <ol>
             <li>
                 <p><strong>No Copyright Infringement:</strong> You shall not upload any images that infringe on the
