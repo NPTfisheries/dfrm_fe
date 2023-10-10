@@ -40,6 +40,7 @@ import { FacilitiesComponent } from './facilities/facilities.component';
 import { MapComponent } from './facilities/map/map.component';
 import { GeometryInputComponent } from './forms/geometry-input/geometry-input.component';
 import { FacilityDetailComponent } from './facility-detail/facility-detail.component';
+import { SelectInputComponent } from './forms/select-input/select-input.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { FacilityDetailComponent } from './facility-detail/facility-detail.compo
     MapComponent,
     GeometryInputComponent,
     FacilityDetailComponent,
+    SelectInputComponent,
   ],
   imports: [
     BrowserModule,
