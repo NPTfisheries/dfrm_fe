@@ -24,8 +24,9 @@
             <div class="errorMessage validationErrorMessage" *ngIf="imageForm.get('photographer')?.hasError('required')">Photographer is required.</div>
         </div>
         <div class="mb-3">
-            <label for="source" class="form-label">Source</label>
+            <label for="source" class="form-label">Image Source</label>
             <input type="text" formControlName="source" class="form-control form-control-lg" required [ngClass]="{ 'validationError' : imageForm.get('source')?.errors }" >
+            <div><small><em>Where does the image come from? This helps ensure all images are copyright free. This can be the exact URL of the page where you got the photo, if applicable.</em></small></div>
             <div class="errorMessage validationErrorMessage" *ngIf="imageForm.get('source')?.hasError('required')">Source is required.</div>
         </div>
         <div class="mb-3">
