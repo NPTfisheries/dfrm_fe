@@ -1,7 +1,8 @@
-<!-- <ng-select [items]="users"
-           bindLabel="name"
-           autofocus
-           bindValue="id"
-           [(ngModel)]="selectedUser">
-</ng-select> -->
-<h1>SELECT HERE</h1>
+<ng-select 
+    [(ngModel)]="selectedOption"
+    [items]="options$"
+    [bindLabel]="labels"
+    bindValue="id" 
+    [multiple]="multiple"
+    (change)="updateValue()">
+</ng-select>

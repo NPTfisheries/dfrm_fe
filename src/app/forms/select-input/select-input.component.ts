@@ -1,19 +1,65 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { BackendService } from 'src/_services/backend.service';
+import { FormGroup } from '@angular/forms';
+
+import { InputBase } from 'src/_inputs/input-base';
 
 @Component({
   selector: 'app-select-input',
   templateUrl: './select-input.component.html',
   styleUrls: ['./select-input.component.css']
 })
-export class SelectInputComponent {
+export class SelectInputComponent implements OnInit {
+
+  @Input() input!: InputBase<string>;
+  @Input() form!: FormGroup;
 
 
-  selectedUser = 1;
-  data = [
-      { id: 1, name: 'Volvo' },
-      { id: 2, name: 'Saab' },
-      { id: 3, name: 'Opel' },
-      { id: 4, name: 'Audi' },
-  ];
+  options$: any | undefined;
+  selectedOption!: any;
+  labels!: string;
+  multiple: boolean = false;
 
+  constructor(
+    private backendService: BackendService,
+  ) { }
+
+  ngOnInit(): void {
+    this.selectedOption = this.input.value;
+    if(['staff', 'project_leader'].includes(this.input.key)) { 
+      this.multiple = true;
+      this.selectedOption = this.input.idArray}
+
+    if(this.input.key === 'project_leader') { console.log('XXX', this.input)};
+
+    switch(this.input.key) {
+      case 'facility_type':
+        this.options$ = this.backendService.objectLookup('Facility').subscribe(ftypes => {
+          this.labels = 'name';
+          this.options$ = ftypes;
+        });
+        break;
+      case 'task_type':
+        this.options$ = this.backendService.objectLookup('Task').subscribe(ttypes => {
+          this.labels = 'name';
+          this.options$ = ttypes;
+        });
+        break;
+      default:
+        this.options$ = this.backendService.getList('users').subscribe(users => {
+          this.labels = 'full_name';
+          this.options$ = users;
+        });
+    }
+
+  }
+
+  updateValue() {
+    console.log(this.selectedOption);
+    this.form.get(`${this.input.key}`)?.patchValue(this.selectedOption);
+  }
+
+  onclick() {
+    console.log(this.input);
+  }
 }

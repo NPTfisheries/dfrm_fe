@@ -58,7 +58,7 @@ export class BackendService {
     }
 
     objectLookup(object_type: string) {
-        const params = new HttpParams().set('object_type', object_type);
+        const params = new HttpParams().set('object_type', object_type); // Facility, Task
 
         return this.http.get(`${this.apiUrl}${this.apiVersion}lookup`, { params })
     }

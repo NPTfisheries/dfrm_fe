@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Department } from 'src/_models/department';
 import { BackendService } from 'src/_services/backend.service';
 
-import { SelectInputComponent } from '../forms/select-input/select-input.component';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

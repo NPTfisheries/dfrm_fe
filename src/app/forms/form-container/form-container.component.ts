@@ -79,7 +79,6 @@ export class FormContainerComponent implements OnInit {
   }
 
   handleFormValidityChanged(valid: boolean) {
-    console.log("balkjf");
     this.formValid = valid;
   }
 

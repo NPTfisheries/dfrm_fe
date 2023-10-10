@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AgGridModule } from 'ag-grid-angular';
@@ -79,6 +80,7 @@ import { SelectInputComponent } from './forms/select-input/select-input.componen
     BrowserModule,
     RouterModule,
     AppRoutingModule,
+    NgSelectModule,
     FormsModule,
     NgbModule,
     HttpClientModule,
