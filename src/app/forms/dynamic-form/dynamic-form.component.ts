@@ -17,7 +17,7 @@ export class DynamicFormComponent implements OnInit {
 
   @Input() routeType!: string;
   @Input() inputs: InputBase<string>[] | null = [];
-  @Input() slug!: string;
+  @Input() identifier!: string; // id || slug
   @Input() addOrEdit!: string 
   form!: FormGroup;
 
@@ -57,7 +57,8 @@ export class DynamicFormComponent implements OnInit {
           next: () => {this.formSubmitted.emit();}
         });
       } else {
-        this.backendService.updateItem(this.routeType, this.slug, this.form.value).subscribe({
+        // console.log('Dyanamic Form Submit: ', this.routeType, this.form.value);
+        this.backendService.updateItem(this.routeType, this.identifier, this.form.value).subscribe({
           next: () => {this.formSubmitted.emit();}
         });
       }

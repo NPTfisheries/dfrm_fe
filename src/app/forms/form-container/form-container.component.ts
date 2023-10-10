@@ -24,7 +24,7 @@ export class FormContainerComponent implements OnInit {
   @Input() data?: any | undefined;
   @Input() projectId: string | null = null;  // provided only for refreshing subprojects.
   @Input() subprojectId: string | null = null;  // povided only for refreshing tasks.
-  @Input() slug!: string;  // for update api --> passed to dynamic form.
+  @Input() identifier!: string;  // slug || id for update api --> passed to dynamic form.  
   @Input() addOrEdit!: string 
 
 

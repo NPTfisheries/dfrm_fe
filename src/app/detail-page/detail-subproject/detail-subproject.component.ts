@@ -88,6 +88,7 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
   }
 
   edit(id: string) {
+    // subproject uses id
     console.log('edit: subproject', id);
 
     const data = getRecordById(this.data, id);
@@ -97,7 +98,7 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
     modalRef.componentInstance.routeType = 'subproject';
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.projectId = this.projectId; // needed for filtered list response from FCC
-    modalRef.componentInstance.slug = id; // subproject uses id instead of slug.
+    modalRef.componentInstance.identifier = id; 
     modalRef.componentInstance.addOrEdit = 'edit';
   }
 

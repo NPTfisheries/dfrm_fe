@@ -93,7 +93,7 @@ export class DetailTaskComponent implements OnInit, OnChanges {
   }
 
   edit(id: string) {
-    // task uses id, not slug.
+    // task uses id
     console.log('edit: task', id);
 
     const data = getRecordById(this.data, id);
@@ -104,7 +104,7 @@ export class DetailTaskComponent implements OnInit, OnChanges {
     modalRef.componentInstance.routeType = 'task';
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.subprojectId = this.subprojectId; // needed for filtered list response from FCC
-    modalRef.componentInstance.slug = id;
+    modalRef.componentInstance.identifier = id;
     modalRef.componentInstance.addOrEdit = 'edit';
   }
 

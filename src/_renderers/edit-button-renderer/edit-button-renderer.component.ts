@@ -45,7 +45,7 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
     modalRef.componentInstance.context = this.params.context
     modalRef.componentInstance.routeType = this.params.routeType;
     modalRef.componentInstance.data = this.params.data;
-    modalRef.componentInstance.slug = this.params.value;
+    modalRef.componentInstance.identifier = this.params.value;
     modalRef.componentInstance.addOrEdit = 'edit';
   }
 

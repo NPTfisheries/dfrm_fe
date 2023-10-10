@@ -254,7 +254,7 @@ function imageColDefs(routeType: string, context: any) {
     if (managerAccess(context.permissionGroup)) {
         columns.push({
             headerName: 'Edit',
-            field: 'slug',
+            field: 'id',
             cellRenderer: EditButtonRendererComponent,
             cellRendererParams: {
                 routeType: routeType,
