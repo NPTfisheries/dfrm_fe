@@ -9,7 +9,8 @@
 <div class="container my-5" >
     <p>{{ data?.description }}</p>
 </div>
-<div class="employee-bar my-5">
+<h2 *ngIf="routeType === 'project'" class="bar-title">Project Leaders</h2>
+<div class="employee-bar">
     <app-employee-card *ngIf="data?.manager && data?.manager.email !== ''" [data]="data?.manager"></app-employee-card>
     <app-employee-card *ngIf="data?.deputy && data?.deputy.email !== ''" [data]="data?.deputy"></app-employee-card>
     <app-employee-card *ngIf="data?.deputy && data?.assistant.email !== ''" [data]="data?.assistant"></app-employee-card>
