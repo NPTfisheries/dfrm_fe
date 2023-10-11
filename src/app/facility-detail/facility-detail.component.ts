@@ -7,8 +7,7 @@ import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 
 @Component({
   selector: 'app-facility-detail',
-  templateUrl: './facility-detail.component.html',
-  styleUrls: ['./facility-detail.component.css']
+  templateUrl: './facility-detail.component.html'
 })
 export class FacilityDetailComponent implements OnInit {
   

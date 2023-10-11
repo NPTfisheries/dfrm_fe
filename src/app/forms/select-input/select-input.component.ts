@@ -6,8 +6,7 @@ import { InputBase } from 'src/_inputs/input-base';
 
 @Component({
   selector: 'app-select-input',
-  templateUrl: './select-input.component.html',
-  styleUrls: ['./select-input.component.css']
+  templateUrl: './select-input.component.html'
 })
 export class SelectInputComponent implements OnInit {
 
@@ -26,13 +25,14 @@ export class SelectInputComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedOption = this.input.value;
-    if(['staff', 'project_leader'].includes(this.input.key)) { 
+    if (['staff', 'project_leader'].includes(this.input.key)) {
       this.multiple = true;
-      this.selectedOption = this.input.idArray}
+      this.selectedOption = this.input.idArray
+    }
 
-    if(this.input.key === 'project_leader') { console.log('XXX', this.input)};
+    if (this.input.key === 'project_leader') { console.log('XXX', this.input) };
 
-    switch(this.input.key) {
+    switch (this.input.key) {
       case 'facility_type':
         this.options$ = this.backendService.objectLookup('Facility').subscribe(ftypes => {
           this.labels = 'name';
@@ -43,6 +43,12 @@ export class SelectInputComponent implements OnInit {
         this.options$ = this.backendService.objectLookup('Task').subscribe(ttypes => {
           this.labels = 'name';
           this.options$ = ttypes;
+        });
+        break;
+      case 'division':
+        this.options$ = this.backendService.getList('division').subscribe(divisions => {
+          this.labels = 'name';
+          this.options$ = divisions;          
         });
         break;
       default:
@@ -59,7 +65,10 @@ export class SelectInputComponent implements OnInit {
     this.form.get(`${this.input.key}`)?.patchValue(this.selectedOption);
   }
 
-  onclick() {
-    console.log(this.input);
+  getInputClasses(input: any): { [key: string]: boolean } {
+    return {
+      'validationError': this.form.get(input.key)?.errors !== null,
+      'valerrrrrr': this.form.get(input.key)?.errors !== null
+    };
   }
 }

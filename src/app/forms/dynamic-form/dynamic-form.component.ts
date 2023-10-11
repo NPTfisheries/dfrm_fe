@@ -7,8 +7,7 @@ import { BackendService } from 'src/_services/backend.service';
 
 @Component({
   selector: 'app-dynamic-form',
-  templateUrl: './dynamic-form.component.html',
-  styleUrls: ['./dynamic-form.component.css']
+  templateUrl: './dynamic-form.component.html'
 })
 export class DynamicFormComponent implements OnInit {
 

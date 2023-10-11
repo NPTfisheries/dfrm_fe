@@ -1,8 +1,10 @@
-<ng-select 
+<ng-select
     [(ngModel)]="selectedOption"
     [items]="options$"
     [bindLabel]="labels"
     bindValue="id" 
     [multiple]="multiple"
-    (change)="updateValue()">
+    (change)="updateValue()"
+    [required]="input.required"
+    [ngClass]="getInputClasses(input)">
 </ng-select>

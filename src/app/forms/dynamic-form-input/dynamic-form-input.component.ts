@@ -7,8 +7,7 @@ import { InputBase } from 'src/_inputs/input-base';
 
 @Component({
   selector: 'app-dynamic-form-input',
-  templateUrl: './dynamic-form-input.component.html',
-  styleUrls: ['./dynamic-form-input.component.css']
+  templateUrl: './dynamic-form-input.component.html'
 })
 export class DynamicFormInputComponent implements OnInit {
   @Input() input!: InputBase<string>;

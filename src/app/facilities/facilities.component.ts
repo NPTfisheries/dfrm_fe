@@ -4,8 +4,7 @@ import { BackendService } from 'src/_services/backend.service';
 
 @Component({
   selector: 'app-facilities',
-  templateUrl: './facilities.component.html',
-  styleUrls: ['./facilities.component.css']
+  templateUrl: './facilities.component.html'
 })
 export class FacilitiesComponent implements OnInit {
 

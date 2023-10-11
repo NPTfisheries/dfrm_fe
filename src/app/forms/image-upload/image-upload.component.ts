@@ -8,8 +8,7 @@ import { ListPageComponent } from 'src/app/list-page/list-page.component';
 
 @Component({
   selector: 'app-image-upload',
-  templateUrl: './image-upload.component.html',
-  styleUrls: ['./image-upload.component.css']
+  templateUrl: './image-upload.component.html'
 })
 export class ImageUploadComponent implements OnInit {
 

@@ -13,8 +13,7 @@ import { DetailTaskComponent } from 'src/app/detail-page/detail-task/detail-task
 
 @Component({
   selector: 'app-form-container',
-  templateUrl: './form-container.component.html',
-  styleUrls: ['./form-container.component.css']
+  templateUrl: './form-container.component.html'
 })
 export class FormContainerComponent implements OnInit {
 

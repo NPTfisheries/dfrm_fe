@@ -8,8 +8,7 @@ import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 
 @Component({
   selector: 'app-detail-page',
-  templateUrl: './detail-page.component.html',
-  styleUrls: ['./detail-page.component.css']
+  templateUrl: './detail-page.component.html'
 })
 export class DetailPageComponent implements OnInit {
 
