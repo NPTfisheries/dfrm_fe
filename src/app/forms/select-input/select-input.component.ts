@@ -6,7 +6,7 @@ import { InputBase } from 'src/_inputs/input-base';
 
 @Component({
   selector: 'app-select-input',
-  templateUrl: './select-input.component.html'
+  templateUrl: './select-input.component.html',
 })
 export class SelectInputComponent implements OnInit {
 
@@ -28,6 +28,7 @@ export class SelectInputComponent implements OnInit {
     if (['staff', 'project_leader'].includes(this.input.key)) {
       this.multiple = true;
       this.selectedOption = this.input.idArray
+      this.form.get(`${this.input.key}`)?.patchValue(this.input.idArray); //make sure the form value is updated for validation.
     }
 
     if (this.input.key === 'project_leader') { console.log('XXX', this.input) };
@@ -67,7 +68,7 @@ export class SelectInputComponent implements OnInit {
 
   getInputClasses(input: any): { [key: string]: boolean } {
     return {
-      'validationError': this.form.get(input.key)?.errors !== null,
+      'validationError': this.form.get(input.key)?.errors !== null
     };
   }
 }
