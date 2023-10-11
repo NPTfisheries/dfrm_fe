@@ -31,7 +31,7 @@ export class DivisionDetailComponent implements OnInit{
     const slug = getRouteSlug(this.route);
     this.backendService.getDetail(this.routeType, slug).subscribe(detail => {
       this.division = detail;
-      this.bannerImage = buildImageUrl(detail.properties.img_banner.image);
+      this.bannerImage = buildImageUrl(detail.img_banner.image);
     });
   }
 
