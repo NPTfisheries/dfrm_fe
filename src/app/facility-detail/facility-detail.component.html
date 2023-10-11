@@ -25,9 +25,9 @@
 
 <!-- <div *ngIf="data?.properties.staff.length > 0 ">
     <h2 class="divider gradient-hr my-5"></h2>
-    <h2 class="text-center  pb-4">Facility Staff</h2>
-    <div class="staff-bar mb-5">
-        <div *ngFor="let staff of data?.properties.staff">
+    <h2 class="bar-title">Facility Staff</h2>
+    <div>
+        <div *ngFor="let staff of data?.properties.staff" class="staff-bar mb-5">
             <app-staff-card [data]="staff"></app-staff-card>
         </div>
     </div>
