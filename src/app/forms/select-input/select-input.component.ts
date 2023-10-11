@@ -68,7 +68,6 @@ export class SelectInputComponent implements OnInit {
   getInputClasses(input: any): { [key: string]: boolean } {
     return {
       'validationError': this.form.get(input.key)?.errors !== null,
-      'valerrrrrr': this.form.get(input.key)?.errors !== null
     };
   }
 }

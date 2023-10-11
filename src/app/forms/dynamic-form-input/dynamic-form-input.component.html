@@ -18,7 +18,7 @@
         <div class="row justify-space-between position-relative" style="max-height:180px" *ngSwitchCase="'image'">
             <div class="col-sm-8">
                 <select [id]="input.key" *ngSwitchCase="'image'" [formControlName]="input.key" size="6"
-                    (change)="onSelectChange($event)" class="form-control form-select form-select-lg"
+                    (change)="onSelectChange($event)" class="form-control form-select"
                     [ngClass]="getInputClasses(input)" [required]="input.required" [minlength]="input.minlength"
                     [maxlength]="input.maxlength">
                     <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
