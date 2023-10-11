@@ -12,7 +12,8 @@
 <div class="container">
     <p>{{ division.description }}</p>
 </div>
-<div class="employee-bar my-5">
+<h2 class="bar-title">Management Staff</h2>
+<div class="employee-bar">
     <app-employee-card *ngIf="division?.manager?.id" [data]="division?.manager"></app-employee-card>
     <app-employee-card *ngIf="division?.deputy?.id" [data]="division?.deputy"></app-employee-card>
     <app-employee-card *ngIf="division?.assistant?.id" [data]="division?.assistant"></app-employee-card>
