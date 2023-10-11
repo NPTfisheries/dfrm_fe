@@ -56,22 +56,9 @@
             [minlength]="input.minlength" [maxlength]="input.maxlength"></textarea>
 
         <!-- SELECT -->
-        <!-- <select [id]="input.key" *ngSwitchCase="'select'" [formControlName]="input.key"
-            class="form-control form-select form-select-lg" [ngClass]="getInputClasses(input)"
-            [required]="input.required" [minlength]="input.minlength" [maxlength]="input.maxlength">
-            <option [value]=''></option>
-            <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
-        </select> -->
         <app-select-input *ngSwitchCase="'select'" [input]="input" [form]="form"></app-select-input>
 
         <!-- SELECT MULTIPLE -->
-        <!-- <select [id]="input.key" *ngSwitchCase="'multi-select'" [formControlName]="input.key" size="10"
-            class="form-control form-select form-select-lg" [ngClass]="getInputClasses(input)" multiple
-            [ngModel]="input.idArray" [required]="input.required" [minlength]="input.minlength"
-            [maxlength]="input.maxlength">
-            <option></option>
-            <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
-        </select> -->
         <app-select-input *ngSwitchCase="'multi-select'" [input]="input" [form]="form"></app-select-input>
 
         <!-- DATE -->
