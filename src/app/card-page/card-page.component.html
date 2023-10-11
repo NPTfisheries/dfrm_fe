@@ -4,14 +4,17 @@
 
 
 <ng-container *ngIf="department">
-    <div class="container my-5" >
+    <div class="container my-5">
         <p>{{ department?.description }}</p>
     </div>
-    <h1 class="dfrm-page-title text-center">Administrative Staff</h1>
-    <div class="employee-bar my-5">
-        <app-employee-card *ngIf="department?.manager?.id" [data]="department?.manager"></app-employee-card>
-        <app-employee-card *ngIf="department?.deputy?.id" [data]="department?.deputy"></app-employee-card>
-        <app-employee-card *ngIf="department?.assistant?.id" [data]="department?.assistant"></app-employee-card>
+
+    <div>
+        <h2 class="bar-title">Administrative Staff</h2>
+        <div class="employee-bar">
+            <app-employee-card *ngIf="department?.manager?.id" [data]="department?.manager"></app-employee-card>
+            <app-employee-card *ngIf="department?.deputy?.id" [data]="department?.deputy"></app-employee-card>
+            <app-employee-card *ngIf="department?.assistant?.id" [data]="department?.assistant"></app-employee-card>
+        </div>
     </div>
 </ng-container>
 
@@ -28,9 +31,9 @@
 
 <div *ngIf="department && department.staff.length > 0 ">
     <h2 class="divider gradient-hr my-5"></h2>
-    <h2 class="text-center  pb-4">Auxilliary Staff</h2>
-    <div class="staff-bar mb-5">
-        <div *ngFor="let staff of department?.staff">
+    <div>
+        <h2 class="bar-title">Management Staff</h2>
+        <div *ngFor="let staff of department?.staff" class="staff-bar mb-5">
             <app-staff-card [data]="staff"></app-staff-card>
         </div>
     </div>

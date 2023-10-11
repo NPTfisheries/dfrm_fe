@@ -44,6 +44,15 @@ dark grey #5492b4
     align-items: center;
 }
 
+.bar-title {
+    background-color: #0d1b1f;
+    overflow-x:hidden;
+    padding-top: 50px;
+    color:white;
+    text-align: center;
+    margin-bottom: 0;
+}
+
 /* text */
 p {
     /* fs-5 = 1.25rem */

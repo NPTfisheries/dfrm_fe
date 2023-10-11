@@ -7,8 +7,7 @@ import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 
 @Component({
   selector: 'app-division-detail',
-  templateUrl: './division-detail.component.html',
-  styleUrls: ['./division-detail.component.css']
+  templateUrl: './division-detail.component.html'
 })
 export class DivisionDetailComponent implements OnInit{
 
