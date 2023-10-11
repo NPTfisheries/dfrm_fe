@@ -8,8 +8,7 @@ import { AlertService } from 'src/_services/alert.service';
 
 @Component({
   selector: 'app-password-update',
-  templateUrl: './password-update.component.html',
-  styleUrls: ['./password-update.component.css']
+  templateUrl: './password-update.component.html'
 })
 export class PasswordUpdateComponent {
   form!: FormGroup;
