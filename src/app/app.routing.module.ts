@@ -12,6 +12,7 @@ import { DetailPageComponent } from './detail-page/detail-page.component';
 import { CardPageComponent } from './card-page/card-page.component';
 import { FacilitiesComponent } from './facilities/facilities.component';
 import { FacilityDetailComponent } from './facility-detail/facility-detail.component';
+import { DivisionDetailComponent } from './division-detail/division-detail.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch:'full' },
@@ -36,7 +37,7 @@ const routes: Routes = [
 
     // wildcard for detail pages
     { path: 'department/:slug', component: DetailPageComponent},
-    { path: 'division/:slug', component: DetailPageComponent},
+    { path: 'division/:slug', component: DivisionDetailComponent},
     { path: 'project/:slug', component: DetailPageComponent},
     { path: 'facility/:slug', component: FacilityDetailComponent},
     { path: 'users/:id', component: ProfileComponent},

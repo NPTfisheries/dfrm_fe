@@ -6,8 +6,7 @@ import { getRouteType } from 'src/_utilities/route-utils';
 
 @Component({
   selector: 'app-card-page',
-  templateUrl: './card-page.component.html',
-  styleUrls: ['./card-page.component.css']
+  templateUrl: './card-page.component.html'
 })
 export class CardPageComponent implements OnInit {
 

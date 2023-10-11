@@ -145,7 +145,7 @@ p {
 }
 
 .validationError {
-    background-color: rgba(255, 0, 0, 0.25);
+    /* background-color: rgba(255, 0, 0, 0.25); */
     border: 2px red dashed;
     border-radius: 6px;
 }
@@ -156,6 +156,13 @@ p {
 }
 
 /* CARDS */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; 
+    margin-top: 20px; 
+}
+
 .dfrm-card {
     min-height: 500px;
     max-height: 500px;
