@@ -246,6 +246,7 @@ export class InputService {
         label: 'Division',
         value: data?.division || '',
         options: this.buildOptions('division'),
+        required: true,
         order: 5
       }),
       new InputImage({
