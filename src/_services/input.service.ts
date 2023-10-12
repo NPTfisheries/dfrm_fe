@@ -45,7 +45,7 @@ export class InputService {
         key: 'manager',
         label: 'Manager',
         value: data?.manager.id || '',
-        options: this.buildEmployeeOptions(),
+        // options: this.buildEmployeeOptions(),
         required: true,
         order: 3
       }),
@@ -53,21 +53,21 @@ export class InputService {
         key: 'deputy',
         label: 'Deputy',
         value: data?.deputy.id || '',
-        options: this.buildEmployeeOptions(),
+        // options: this.buildEmployeeOptions(),
         order: 4
       }),
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
         value: data?.assistant.id || '',
-        options: this.buildEmployeeOptions(),
+        // options: this.buildEmployeeOptions(),
         order: 5
       }),
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
         idArray: this.getIdArray(data?.staff) || [],
-        options: this.buildEmployeeOptions(),
+        // options: this.buildEmployeeOptions(),
         order: 6
       }),
       new InputImage({
@@ -111,28 +111,28 @@ export class InputService {
         label: 'Manager',
         value: data?.manager.id || '',
         required: true,
-        options: this.buildEmployeeOptions(),
+        // options: this.buildEmployeeOptions(),
         order: 3
       }),
       new InputSelect({
         key: 'deputy',
         label: 'Deputy',
         value: data?.deputy.id || '',
-        options: this.buildEmployeeOptions(),
+        // options: this.buildEmployeeOptions(),
         order: 4
       }),
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
         value: data?.assistant.id || '',
-        options: this.buildEmployeeOptions(),
+        // options: this.buildEmployeeOptions(),
         order: 5
       }),
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
         idArray: this.getIdArray(data?.staff) || [],
-        options: this.buildEmployeeOptions(),
+        // options: this.buildEmployeeOptions(),
         order: 6
       }),
       new InputImage({
@@ -181,7 +181,7 @@ export class InputService {
         key: 'project_leader',
         label: 'Project Leaders',
         idArray: this.getIdArray(data?.project_leader) || [],
-        options: this.buildEmployeeOptions(),
+        // options: this.buildEmployeeOptions(),
         required: true,
         order: 3
       }),
@@ -237,15 +237,15 @@ export class InputService {
         key: 'lead',
         label: 'Subproject Lead',
         value: data?.lead.id || [],
-        options: this.buildEmployeeOptions(),
+        // options: this.buildEmployeeOptions(),
         required: true,
         order: 4
       }),
       new InputSelect({
         key: 'division',
         label: 'Division',
-        value: data?.division || '',
-        options: this.buildOptions('division'),
+        value: data?.division.id || '',
+        // options: this.buildOptions('division'),
         required: true,
         order: 5
       }),
@@ -275,7 +275,7 @@ export class InputService {
         key: 'task_type',
         label: 'Task Type',
         value: data?.task_type?.id || '',
-        options: this.getObjects('Task'),
+        // options: this.getObjects('Task'),
         required: true,
         order: 1
       }),
@@ -296,7 +296,7 @@ export class InputService {
         key: 'supervisor',
         label: 'Task Supervisor',
         value: data?.supervisor.id || [],
-        options: this.buildEmployeeOptions(),
+        // options: this.buildEmployeeOptions(),
         required: true,
         order: 4
       }),
@@ -439,7 +439,7 @@ export class InputService {
         key: 'manager',
         label: 'Manager',
         value: data?.properties?.manager.id || '',
-        options: this.buildEmployeeOptions(),
+        // options: this.buildEmployeeOptions(),
         required: true,
         order: 4
       }),
@@ -447,21 +447,21 @@ export class InputService {
         key: 'deputy',
         label: 'Deputy',
         value: data?.properties?.deputy.id || '',
-        options: this.buildEmployeeOptions(),
+        // options: this.buildEmployeeOptions(),
         order: 5
       }),
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
         value: data?.properties?.assistant.id || '',
-        options: this.buildEmployeeOptions(),
+        // options: this.buildEmployeeOptions(),
         order: 6
       }),
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
         idArray: this.getIdArray(data?.properties?.staff) || [],
-        options: this.buildEmployeeOptions(),
+        // options: this.buildEmployeeOptions(),
         order: 7
       }),
       new InputImage({

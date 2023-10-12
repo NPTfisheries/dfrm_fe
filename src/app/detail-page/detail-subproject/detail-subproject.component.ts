@@ -64,8 +64,6 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
   }
 
   add() {
-    // console.log('adding subproject');
-
     const newData = {
       name: '',
       description: '',
@@ -73,6 +71,7 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
       lead: '',
       img_banner: '',
       img_card: '',
+      division: {id: ''}
     }
 
     const modalRef = this.modalService.open(FormContainerComponent, { size: 'xl', });
