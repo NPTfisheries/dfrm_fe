@@ -16,6 +16,10 @@ dark grey #5492b4
     font-family: 'Times New Roman', Times, serif;
 }
 
+pre {
+    white-space: pre-wrap;
+}
+
 .rounded-border {
     border: 3px solid #ccc;
     border-radius: 10px;
