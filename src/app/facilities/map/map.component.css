@@ -7,17 +7,6 @@
     /* margin-bottom: 50px; */
 }
 
-#map {
-    height: 100%;
-}
-
-/* .custom-popup .img-container {
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 10px;
-    max-width: 300px;
-} */
-
 .custom-popup .img-container {
     height: 200px;
     width: 200px;

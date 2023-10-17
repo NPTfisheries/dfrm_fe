@@ -223,7 +223,10 @@ p {
     margin-top: auto;
 }
 
-
+/* MAPS  */
+#map {
+    height: 100%;
+}
 
 /*  special divider */
 .gradient-hr {

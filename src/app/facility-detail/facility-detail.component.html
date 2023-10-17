@@ -22,8 +22,9 @@
         [data]="data?.properties.assistant"></app-employee-card>
 </div>
 
-<h2 class="divider gradient-hr my-5"></h2>
+<!-- <h2 class="divider gradient-hr my-5"></h2> -->
 
+<app-detail-map *ngIf="data" [facility]="data" ></app-detail-map>
 
 <!-- <div *ngIf="data?.properties.staff.length > 0 ">
     <h2 class="divider gradient-hr my-5"></h2>
