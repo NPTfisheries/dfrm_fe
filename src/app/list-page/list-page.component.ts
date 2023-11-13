@@ -3,8 +3,7 @@ import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 
 import { AgGridAngular } from 'ag-grid-angular';
-import { GridApi, ColumnApi } from 'ag-grid-community';
-import { ColDef } from 'ag-grid-community';
+import { GridApi, ColumnApi, ColDef } from 'ag-grid-community';
 import { getColumnDefs } from 'src/_services/columnDef.service';
 import { LinkButtonRendererComponent } from 'src/_renderers/link-button-renderer/link-button-renderer.component';
 import { EditButtonRendererComponent } from 'src/_renderers/edit-button-renderer/edit-button-renderer.component';
@@ -56,7 +55,6 @@ export class ListPageComponent implements OnInit {
   projectleaderAccess = projectleaderAccess;
   routeType!: string;
 
-  list: any | undefined;
   permissionGroup!: string;
   private permissionGroupSubscription: Subscription;
 
@@ -70,7 +68,6 @@ export class ListPageComponent implements OnInit {
     this.permissionGroupSubscription = this.authService.permissionGroup$.subscribe(group => {
       this.permissionGroup = group;
     });
-
   }
 
   onGridReady(params: any) {

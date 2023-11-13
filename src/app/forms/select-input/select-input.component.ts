@@ -52,6 +52,10 @@ export class SelectInputComponent implements OnInit {
           this.options$ = divisions;          
         });
         break;
+      case 'document_type':
+        this.labels = 'document_type';
+        this.options$ = ["Annual Report", "Journal Article", "Technical Memo","Presentation Slides","Other"];
+        break;
       default:
         this.options$ = this.backendService.getList('users').subscribe(users => {
           this.labels = 'full_name';

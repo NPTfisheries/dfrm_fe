@@ -410,6 +410,69 @@ export class InputService {
     return of(inputs.sort((a, b) => a.order - b.order));
   }
 
+  getFileInputs(data?: any) {
+    // console.log('Getting Image Inputs...');
+    const inputs: InputBase<string>[] = [
+      new InputText({
+        key: 'title',
+        label: 'Title',
+        value: data?.title || '',
+        required: true,
+        order: 1
+      }),
+      new InputTextarea({
+        key: 'description',
+        label: 'File Description',
+        value: data?.description || '',
+        required: true,
+        order: 2
+      }),
+      new InputText({
+        key: 'primary_author',
+        label: 'Primary Author',
+        value: data?.primary_author || '',
+        required: true,
+        order: 3
+      }),
+      new InputText({
+        key: 'employee_authors',
+        label: 'Employee Authors',
+        value: data?.employee_authors.id || [],
+        required: true,
+        order: 4
+      }),
+      new InputDate({
+        key: 'publish_date',
+        label: 'Publish Date',
+        value: data?.publish_date || '',
+        required: true,
+        order: 4
+      }),
+      new InputText({
+        key: 'file_type',
+        label: 'File Type',
+        value: data?.file_type || '',
+        required: true,
+        order: 5
+      }),
+      new InputText({
+        key: 'citation',
+        label: 'Citation',
+        value: data?.citation || '',
+        order: 6
+      }),
+      new InputText({
+        key: 'keywords',
+        label: 'Keywords',
+        value: data?.keywords || '',
+        required: true,
+        order: 3
+      })
+    ]
+
+    return of(inputs.sort((a, b) => a.order - b.order));
+  }
+
   getFacilityInputs(data?: any) {
     // console.log('Getting Facility Inputs...');
     const inputs: InputBase<string>[] = [

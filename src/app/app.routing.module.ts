@@ -13,11 +13,13 @@ import { CardPageComponent } from './card-page/card-page.component';
 import { FacilitiesComponent } from './facilities/facilities.component';
 import { FacilityDetailComponent } from './facility-detail/facility-detail.component';
 import { DivisionDetailComponent } from './division-detail/division-detail.component';
+import { DocumentsComponent } from './documents/documents.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch:'full' },
     { path: 'login', component: LoginComponent},
     { path: 'home', component: HomeComponent},
+    { path: 'documents', component: DocumentsComponent},
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
 

@@ -18,6 +18,8 @@ export function getColumnDefs(routeType: string, context: any) {
             return usersColDefs(routeType, context);
         case 'image':
             return imageColDefs(routeType, context);
+        case 'document':
+            return documentColDefs(routeType, context);
         case 'facility':
             return facilityColDefs(routeType, context);
         default:
@@ -268,6 +270,61 @@ function imageColDefs(routeType: string, context: any) {
 
 }
 
+function documentColDefs(routeType: string, context: any) {
+    const columns: any[] = [
+        {
+            field: 'title',
+            headerName: 'Title'
+        },
+        {
+            field: 'description',
+            headerName: 'Description'
+        },
+        {
+            field: 'primary_author',
+            headerName: 'Primary Author'
+        },
+        {
+            field: 'employee_author_names',
+            headerName: 'Employee Authors',
+            valueGetter: getAuthorNames
+        },
+        {
+            field: 'publish_date',
+            headerName: 'Publish Date',
+            type: 'dateColumn'
+        },
+        {
+            field: 'document_type',
+            headerName: 'Document Type'
+        },
+        {
+            field: 'citation',
+            headerName: 'Citation'
+        },
+        {
+            field: 'keywords',
+            headerName: 'Keywords'
+        }
+    ];
+
+    if (managerAccess(context.permissionGroup)) {
+        columns.push({
+            headerName: 'Edit',
+            field: 'id',
+            cellRenderer: EditButtonRendererComponent,
+            cellRendererParams: {
+                routeType: routeType,
+                context: context
+            },
+            maxWidth: 100
+        });
+    }
+
+    return columns;
+
+}
+
 function facilityColDefs(routeType: string, context: any) {
     const columns: any[] = [
         {
@@ -338,6 +395,15 @@ function getStaffNames(params: any) {
     if (params.data.staff && Array.isArray(params.data.staff)) {
         const staffNames = params.data.staff.map((staff: any) => staff.full_name);
         return staffNames.join(', ');
+    }
+    return '';
+}
+
+// ..  or authors
+function getAuthorNames(params: any) {
+    if (params.data.employee_authors && Array.isArray(params.data.employee_authors)) {
+        const authorNames = params.data.employee_authors.map((staff: any) => staff.full_name);
+        return authorNames.join(', ');
     }
     return '';
 }

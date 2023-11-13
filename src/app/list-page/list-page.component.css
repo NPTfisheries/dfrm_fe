@@ -26,8 +26,3 @@ td {
 ::ng-deep .ag-cell-focus {
     outline: none !important;
 }
-
-.btn-right {
-    float: right;
-    margin-right: 30px;
-}

@@ -44,6 +44,8 @@ import { FacilityDetailComponent } from './facility-detail/facility-detail.compo
 import { SelectInputComponent } from './forms/select-input/select-input.component';
 import { DivisionDetailComponent } from './division-detail/division-detail.component';
 import { DetailMapComponent } from './facility-detail/detail-map/detail-map.component';
+import { DocumentsComponent } from './documents/documents.component';
+import { DocumentUploadComponent } from './document-upload/document-upload.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +81,8 @@ import { DetailMapComponent } from './facility-detail/detail-map/detail-map.comp
     SelectInputComponent,
     DivisionDetailComponent,
     DetailMapComponent,
+    DocumentsComponent,
+    DocumentUploadComponent,
   ],
   imports: [
     BrowserModule,
