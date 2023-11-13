@@ -31,8 +31,10 @@
         </div>
         <div class="mb-3">
             <label for="employee_authors" class="form-label">Employee Authors</label>
-            <input type="text" formControlName="employee_authors" class="form-control"
-                [ngClass]="{ 'validationError' : documentForm.get('employee_authors')?.errors }">
+            <select id="employee_authors" formControlName="employee_authors" size="6" multiple
+                class="form-control form-select">
+                <option *ngFor="let type of [1,2,3]" [value]="type">{{type}}</option>
+            </select>
         </div>
         <div class="mb-3">
             <label for="publish_date" class="form-label">Publish Date</label>
@@ -43,14 +45,16 @@
         </div>
         <div class="mb-3">
             <label for="document_type" class="form-label">Document Type</label>
-            <input type="text" formControlName="document_type" class="form-control" required
-                [ngClass]="{ 'validationError' : documentForm.get('document_type')?.errors }">
+                <select id="document_type" formControlName="document_type" size="5"
+                    class="form-control form-select" [ngClass]="{ 'validationError' : documentForm.get('document_type')?.errors }">
+                    <option *ngFor="let type of document_types" [value]="type">{{type}}</option>
+                </select>
             <div class="errorMessage validationErrorMessage"
                 *ngIf="documentForm.get('document_type')?.hasError('required')">Document type is required.</div>
         </div>
         <div class="mb-3">
             <label for="citation" class="form-label">Citation</label>
-            <input type="text" formControlName="citation" class="form-control" 
+            <input type="text" formControlName="citation" class="form-control"
                 [ngClass]="{ 'validationError' : documentForm.get('citation')?.errors }">
         </div>
         <div class="mb-3">

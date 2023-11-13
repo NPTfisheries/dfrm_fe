@@ -46,6 +46,7 @@ import { DivisionDetailComponent } from './division-detail/division-detail.compo
 import { DetailMapComponent } from './facility-detail/detail-map/detail-map.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { DocumentUploadComponent } from './document-upload/document-upload.component';
+import { DocumentPreviewRendererComponent } from '../_renderers/document-preview-renderer/document-preview-renderer.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { DocumentUploadComponent } from './document-upload/document-upload.compo
     DetailMapComponent,
     DocumentsComponent,
     DocumentUploadComponent,
+    DocumentPreviewRendererComponent,
   ],
   imports: [
     BrowserModule,

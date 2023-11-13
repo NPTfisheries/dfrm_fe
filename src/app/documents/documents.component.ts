@@ -81,6 +81,9 @@ export class DocumentsComponent implements OnInit {
   }
 
   viewclick() {
-    //window.open(url, '_blank');
+    console.log(this.data[0].document);
+    const documentUrl = this.data[0].document.replace('localhost:4200', 'localhost:8000');
+
+    window.open(documentUrl, '_blank');
   }
 }

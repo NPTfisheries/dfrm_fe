@@ -1,6 +1,7 @@
 import { LinkButtonRendererComponent } from "src/_renderers/link-button-renderer/link-button-renderer.component";
 import { EditButtonRendererComponent } from "src/_renderers/edit-button-renderer/edit-button-renderer.component";
 import { ImagePreviewRendererComponent } from "src/_renderers/image-preview-renderer/image-preview-renderer.component";
+import { DocumentPreviewRendererComponent } from "src/_renderers/document-preview-renderer/document-preview-renderer.component";
 
 import { professionalAccess, managerAccess, projectleaderAccess } from "src/_utilities/permission-util";
 import { formatPhone } from "src/_utilities/formatPhone";
@@ -305,6 +306,13 @@ function documentColDefs(routeType: string, context: any) {
         {
             field: 'keywords',
             headerName: 'Keywords'
+        },
+        {
+            headerName: 'View',
+            field: 'document',
+            cellRenderer: DocumentPreviewRendererComponent,
+            cellRendererParams: {},
+            maxWidth: 100
         }
     ];
 

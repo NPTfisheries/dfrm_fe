@@ -17,6 +17,8 @@ export class DocumentUploadComponent implements OnInit {
   documentForm!: FormGroup;
   selectedDocument: File | undefined;
 
+  document_types = ["Annual Report", "Journal Article", "Technical Memo", "Presentation Slides", 'Other'];
+
   constructor(
     private formBuilder: FormBuilder,
     private backendService: BackendService,
