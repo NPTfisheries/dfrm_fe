@@ -9,12 +9,11 @@ import { ColDef, ColGroupDef, GridApi } from 'ag-grid-community';
 import { FormContainerComponent } from '../forms/form-container/form-container.component';
 import { DocumentUploadComponent } from '../document-upload/document-upload.component';
 import { getColumnDefs } from 'src/_services/columnDef.service';
-import { projectleaderAccess } from 'src/_utilities/permission-util';
+import { professionalAccess } from 'src/_utilities/permission-util';
 
 @Component({
   selector: 'app-documents',
-  templateUrl: './documents.component.html',
-  styleUrls: ['./documents.component.css']
+  templateUrl: './documents.component.html'
 })
 export class DocumentsComponent implements OnInit {
   @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
@@ -22,7 +21,7 @@ export class DocumentsComponent implements OnInit {
   @ViewChild(DocumentUploadComponent) documentUploadComponent!: DocumentUploadComponent;
 
   private gridApi: GridApi | undefined;
-  projectleaderAccess=projectleaderAccess;
+  professionalAccess=professionalAccess;
   routeType: string = 'document';
 
   defaultColDef: ColDef = {
