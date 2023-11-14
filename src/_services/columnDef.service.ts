@@ -172,7 +172,7 @@ function projectColDefs(routeType: string, context: any) {
         }
     ];
 
-    if (professionalAccess(context.permissionGroup)) {
+    if (projectleaderAccess(context.permissionGroup)) {
         columns.push({
             headerName: 'Edit',
             field: 'slug',
