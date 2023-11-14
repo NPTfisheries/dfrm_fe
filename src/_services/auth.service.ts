@@ -55,7 +55,7 @@ export class AuthService {
         return this.http.post<any>(`${this.apiUrl}${this.apiVersion}login/`, credentials)
             .pipe(
                 map((response) => {
-                    console.log('login return:', response);
+                    // console.log('login return:', response);
                     // console.log('access: ', response.access);
                     const decoded: any = jwtDecode(response.access);
                     // console.log('access decoded:', decoded);

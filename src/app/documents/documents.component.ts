@@ -54,8 +54,7 @@ export class DocumentsComponent implements OnInit {
   onGridReady(params: any) {
     this.getList(this.routeType);
     this.gridApi = params.api;
-    // params.api.sizeColumnsToFit(params);
-    params.api.autoSizeAllColumns();
+    params.api.sizeColumnsToFit(params);
   }
   
   ngOnInit(): void {

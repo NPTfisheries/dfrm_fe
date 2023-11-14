@@ -101,7 +101,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
               if (button) {
                 // set click listener
                 button.addEventListener('click', () => {
-                  console.log('button clicked', feature.id);
+                  // console.log('button clicked', feature.id);
                   this.facilitySlug.emit(feature.properties.slug);
                 });
               }
