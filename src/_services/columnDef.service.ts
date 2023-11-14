@@ -318,7 +318,7 @@ function documentColDefs(routeType: string, context: any) {
         }
     ];
 
-    if (projectleaderAccess(context.permissionGroup)) {
+    if (professionalAccess(context.permissionGroup)) {
         columns.push({
             headerName: 'Edit',
             field: 'id',
