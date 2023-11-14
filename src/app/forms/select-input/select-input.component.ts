@@ -25,7 +25,7 @@ export class SelectInputComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedOption = this.input.value;
-    if (['staff', 'project_leader'].includes(this.input.key)) {
+    if (['staff', 'project_leader', 'employee_authors'].includes(this.input.key)) {
       this.multiple = true;
       this.selectedOption = this.input.idArray
       this.form.get(`${this.input.key}`)?.patchValue(this.input.idArray); //make sure the form value is updated for validation.

@@ -33,7 +33,6 @@ export class DocumentsComponent implements OnInit {
   };
 
   data!: any[];
-  // columnDefs: ColDef[] | undefined;
   columnDefs: (ColDef | ColGroupDef)[] = [];
   list: any | undefined;
   permissionGroup!: string;

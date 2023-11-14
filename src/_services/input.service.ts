@@ -410,7 +410,7 @@ export class InputService {
     return of(inputs.sort((a, b) => a.order - b.order));
   }
 
-  getFileInputs(data?: any) {
+  getDocumentInputs(data?: any) {
     // console.log('Getting Image Inputs...');
     const inputs: InputBase<string>[] = [
       new InputText({
@@ -422,7 +422,7 @@ export class InputService {
       }),
       new InputTextarea({
         key: 'description',
-        label: 'File Description',
+        label: 'Description',
         value: data?.description || '',
         required: true,
         order: 2
@@ -434,11 +434,10 @@ export class InputService {
         required: true,
         order: 3
       }),
-      new InputText({
+      new InputMultiSelect({
         key: 'employee_authors',
         label: 'Employee Authors',
-        value: data?.employee_authors.id || [],
-        required: true,
+        idArray: this.getIdArray(data?.employee_authors) || [],
         order: 4
       }),
       new InputDate({
@@ -446,27 +445,26 @@ export class InputService {
         label: 'Publish Date',
         value: data?.publish_date || '',
         required: true,
-        order: 4
+        order: 5
       }),
       new InputText({
-        key: 'file_type',
-        label: 'File Type',
-        value: data?.file_type || '',
+        key: 'document_type',
+        label: 'Document Type',
+        value: data?.document_type || '',
         required: true,
-        order: 5
+        order: 6
       }),
       new InputText({
         key: 'citation',
         label: 'Citation',
         value: data?.citation || '',
-        order: 6
+        order: 7
       }),
       new InputText({
         key: 'keywords',
         label: 'Keywords',
         value: data?.keywords || '',
-        required: true,
-        order: 3
+        order: 8
       })
     ]
 
