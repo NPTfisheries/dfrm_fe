@@ -29,13 +29,19 @@
             <div class="errorMessage validationErrorMessage"
                 *ngIf="documentForm.get('primary_author')?.hasError('required')">Primary Author is required.</div>
         </div>
-        <div class="mb-3">
-            <label for="employee_authors" class="form-label">Employee Authors</label>
-            <select id="employee_authors" formControlName="employee_authors" size="6" multiple
+        <!-- <div class="mb-3"> -->
+        <label for="employee_authors" class="form-label">Employee Authors</label>
+        <!-- <select id="employee_authors" formControlName="employee_authors" size="6" multiple
                 class="form-control form-select">
-                <option *ngFor="let type of [1,2,3]" [value]="type">{{type}}</option>
+                <option *ngFor="let author of author_choices" [value]="author.key">{{author.value}}</option>
             </select>
-        </div>
+        </div> -->
+
+        <ng-select formControlName="employee_authors" 
+                   [multiple]="true" >
+            <ng-option *ngFor="let author of author_choices" [value]="author.key">{{author.value}}</ng-option>
+        </ng-select>
+
         <div class="mb-3">
             <label for="publish_date" class="form-label">Publish Date</label>
             <input type="date" formControlName="publish_date" class="form-control form-control-date" required
@@ -45,10 +51,10 @@
         </div>
         <div class="mb-3">
             <label for="document_type" class="form-label">Document Type</label>
-                <select id="document_type" formControlName="document_type" size="5"
-                    class="form-control form-select" [ngClass]="{ 'validationError' : documentForm.get('document_type')?.errors }">
-                    <option *ngFor="let type of document_types" [value]="type">{{type}}</option>
-                </select>
+            <select id="document_type" formControlName="document_type" size="5" class="form-control form-select"
+                [ngClass]="{ 'validationError' : documentForm.get('document_type')?.errors }">
+                <option *ngFor="let type of document_types" [value]="type">{{type}}</option>
+            </select>
             <div class="errorMessage validationErrorMessage"
                 *ngIf="documentForm.get('document_type')?.hasError('required')">Document type is required.</div>
         </div>

@@ -15,9 +15,12 @@ export class DocumentUploadComponent implements OnInit {
   @Input() context!: DocumentsComponent 
 
   documentForm!: FormGroup;
+  selectedAuthors: any[] = [];
   selectedDocument: File | undefined;
 
+  // options for select menus
   document_types = ["Annual Report", "Journal Article", "Technical Memo", "Presentation Slides", 'Other'];
+  author_choices!: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,6 +30,9 @@ export class DocumentUploadComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.author_choices = this.buildEmployeeOptions();
+
     this.documentForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -55,11 +61,19 @@ export class DocumentUploadComponent implements OnInit {
       return;
     }
 
+    console.log(this.f['employee_authors'].value);
+
     const formData = new FormData();
     formData.append('title', this.f['title'].value);
     formData.append('description', this.f['description'].value);
     formData.append('primary_author', this.f['primary_author'].value);
-    formData.append('employee_authors', this.f['employee_authors'].value);
+
+    // formData.append('employee_authors', this.f['employee_authors'].value);
+    const chosenAuthors = this.f['employee_authors'].value;
+    for( let i = 0; i < chosenAuthors.length; i++) {
+      formData.append(`employee_authors`, chosenAuthors[i]);
+    }
+    
     formData.append('publish_date', this.f['publish_date'].value);
     formData.append('document_type', this.f['document_type'].value);
     formData.append('citation', this.f['citation'].value);
@@ -78,6 +92,26 @@ export class DocumentUploadComponent implements OnInit {
         console.log(err);
       }
     });
+  }
+
+   // for employees
+   private buildEmployeeOptions() {
+    let options: { key: string, value: string }[] = [];
+
+    this.backendService.getList('users').subscribe((employees: any) => {
+      // console.log("buildEmployeeOptions:", employees);
+      for (let emp of employees) {
+        options.push({ key: emp.id, value: emp.full_name })
+      }
+    })
+
+    console.log('employee options: ', options);
+    return options;
+  }
+
+  updateAuthors() {
+    console.log('updating selectedAuthors to:', this.documentForm.get(`employee_authors`));
+    this.documentForm.get(`employee_authors`)?.patchValue(this.selectedAuthors);
   }
 
 }
