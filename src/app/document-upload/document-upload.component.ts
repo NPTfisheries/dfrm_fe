@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
+import { AuthService } from 'src/_services/auth.service';
 
 import { DocumentsComponent } from '../documents/documents.component';
 
@@ -26,6 +27,7 @@ export class DocumentUploadComponent implements OnInit {
     private formBuilder: FormBuilder,
     private backendService: BackendService,
     private alertService: AlertService,
+    private authService: AuthService,
     private activeModal: NgbActiveModal,
   ) { }
 
@@ -84,6 +86,7 @@ export class DocumentUploadComponent implements OnInit {
       next: () => {
         this.backendService.getList('document').subscribe((updatedList: any) => {
           this.context.data = updatedList;
+          this.authService.refreshPermissions().subscribe();
           this.activeModal.close('success');
         });
       },

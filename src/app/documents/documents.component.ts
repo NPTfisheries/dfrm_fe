@@ -28,6 +28,7 @@ export class DocumentsComponent implements OnInit {
   defaultColDef: ColDef = {
     sortable: true,
     filter: true,
+    // flex: 1,
     resizable: true,
     cellStyle: { fontSize: '15px' },
   };
@@ -53,8 +54,8 @@ export class DocumentsComponent implements OnInit {
   onGridReady(params: any) {
     this.getList(this.routeType);
     this.gridApi = params.api;
-    params.api.sizeColumnsToFit(params);
-    // params.api.autoSizeAllColumns();
+    // params.api.sizeColumnsToFit(params);
+    params.api.autoSizeAllColumns();
   }
   
   ngOnInit(): void {

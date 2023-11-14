@@ -68,6 +68,7 @@ export class AuthService {
                     this.projectPermsSubject.next(response.project_objects);
                     this.subprojectPermsSubject.next(response.subproject_objects);
                     this.taskPermsSubject.next(response.task_objects);
+                    this.imagePermsSubject.next(response.image_objects);
                     this.documentPermsSubject.next(response.document_objects);
                 })//,
                 // catchError(this.handleError)
@@ -84,6 +85,8 @@ export class AuthService {
         this.projectPermsSubject.next([]);
         this.subprojectPermsSubject.next([]);
         this.taskPermsSubject.next([]);
+        this.imagePermsSubject.next([]);
+        this.documentPermsSubject.next([]);
         this.router.navigate(['home']);
     }
 
@@ -105,6 +108,8 @@ export class AuthService {
                 this.projectPermsSubject.next(response.project_objects);
                 this.subprojectPermsSubject.next(response.subproject_objects);
                 this.taskPermsSubject.next(response.task_objects);
+                this.imagePermsSubject.next(response.image_objects);
+                this.documentPermsSubject.next(response.document_objects);
             })
         )
     }

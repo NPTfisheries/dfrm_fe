@@ -43,6 +43,11 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
         this.objectPerms = documentPerms;
       });
     }
+    if(this.params.routeType === 'image') {
+      this.authService.imagePerms$.subscribe(imagePerms => {
+        this.objectPerms = imagePerms;
+      });
+    }
   }
 
   refresh(params: ICellRendererParams): boolean {
@@ -63,8 +68,7 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
 
   // true/false logic
   renderButton() {
-    // if(!projectleaderAccess(this.permissionGroup)) { return false}
-    if(!['project', 'document'].includes(this.params.routeType)) { return true }
+    if(!['project', 'document', 'image'].includes(this.params.routeType)) { return true }
     //object level permissions for project edit buttons.
     return this.objectPerms.includes(String(this.params.data.id));
   }
