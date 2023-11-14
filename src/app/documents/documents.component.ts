@@ -4,12 +4,12 @@ import { AuthService } from 'src/_services/auth.service';
 import { BackendService } from 'src/_services/backend.service';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { AgGridAngular } from 'ag-grid-angular';
-import { ColDef, GridApi } from 'ag-grid-community';
+import { ColDef, ColGroupDef, GridApi } from 'ag-grid-community';
 
 import { FormContainerComponent } from '../forms/form-container/form-container.component';
 import { DocumentUploadComponent } from '../document-upload/document-upload.component';
 import { getColumnDefs } from 'src/_services/columnDef.service';
-import { adminAccess } from 'src/_utilities/permission-util';
+import { projectleaderAccess } from 'src/_utilities/permission-util';
 
 @Component({
   selector: 'app-documents',
@@ -21,19 +21,20 @@ export class DocumentsComponent implements OnInit {
   @ViewChild(FormContainerComponent) formContainerComponent!: FormContainerComponent;
   @ViewChild(DocumentUploadComponent) documentUploadComponent!: DocumentUploadComponent;
 
-  private gridApi = GridApi;
-  adminAccess = adminAccess;
+  private gridApi: GridApi | undefined;
+  projectleaderAccess=projectleaderAccess;
   routeType: string = 'document';
 
   defaultColDef: ColDef = {
     sortable: true,
     filter: true,
     resizable: true,
-    cellStyle: { fontSize: '20px' },
+    cellStyle: { fontSize: '15px' },
   };
 
   data!: any[];
-  columnDefs: ColDef[] | undefined;
+  // columnDefs: ColDef[] | undefined;
+  columnDefs: (ColDef | ColGroupDef)[] = [];
   list: any | undefined;
   permissionGroup!: string;
   private permissionGroupSubscription: Subscription;
@@ -45,8 +46,8 @@ export class DocumentsComponent implements OnInit {
   ) {
     this.permissionGroupSubscription = this.authService.permissionGroup$.subscribe(group => {
       this.permissionGroup = group;
+      this.columnDefs = getColumnDefs(this.routeType, this);
     });
-
   }
 
   onGridReady(params: any) {
@@ -55,7 +56,7 @@ export class DocumentsComponent implements OnInit {
     params.api.sizeColumnsToFit(params);
     // params.api.autoSizeAllColumns();
   }
-
+  
   ngOnInit(): void {
     this.columnDefs = getColumnDefs(this.routeType, this);
   }
@@ -68,22 +69,12 @@ export class DocumentsComponent implements OnInit {
     this.backendService.getList(routeType).subscribe((list: any) => {
         this.data = list;
     });
-  }
+  }  
 
   uploadDocument() {
     console.log('button clicked');
-    const modalRef = this.modalService.open(DocumentUploadComponent, this.getModalOptions());
+    const modalRef = this.modalService.open(DocumentUploadComponent, { size: 'xl', });
     modalRef.componentInstance.context = this;
   }
 
-  getModalOptions(): NgbModalOptions {
-    return { size: 'xl', };
-  }
-
-  viewclick() {
-    console.log(this.data[0].document);
-    const documentUrl = this.data[0].document.replace('localhost:4200', 'localhost:8000');
-
-    window.open(documentUrl, '_blank');
-  }
 }

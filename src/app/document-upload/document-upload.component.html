@@ -29,14 +29,8 @@
             <div class="errorMessage validationErrorMessage"
                 *ngIf="documentForm.get('primary_author')?.hasError('required')">Primary Author is required.</div>
         </div>
-        <!-- <div class="mb-3"> -->
+        
         <label for="employee_authors" class="form-label">Employee Authors</label>
-        <!-- <select id="employee_authors" formControlName="employee_authors" size="6" multiple
-                class="form-control form-select">
-                <option *ngFor="let author of author_choices" [value]="author.key">{{author.value}}</option>
-            </select>
-        </div> -->
-
         <ng-select formControlName="employee_authors" 
                    [multiple]="true" >
             <ng-option *ngFor="let author of author_choices" [value]="author.key">{{author.value}}</ng-option>

@@ -3,6 +3,8 @@ import { EditButtonRendererComponent } from "src/_renderers/edit-button-renderer
 import { ImagePreviewRendererComponent } from "src/_renderers/image-preview-renderer/image-preview-renderer.component";
 import { DocumentPreviewRendererComponent } from "src/_renderers/document-preview-renderer/document-preview-renderer.component";
 
+
+import { ColDef, ColGroupDef } from "ag-grid-community";
 import { professionalAccess, managerAccess, projectleaderAccess } from "src/_utilities/permission-util";
 import { formatPhone } from "src/_utilities/formatPhone";
 
@@ -24,12 +26,13 @@ export function getColumnDefs(routeType: string, context: any) {
         case 'facility':
             return facilityColDefs(routeType, context);
         default:
-            return;
+            let emptylist: ColDef[] = []
+            return emptylist;
     }
 }
 
 function departmentColDefs(routeType: string, context: any) {
-    const columns: any[] = [
+    const columns: (ColDef | ColGroupDef)[] = [
         {
             field: 'name',
             headerName: 'Name'
@@ -89,7 +92,7 @@ function departmentColDefs(routeType: string, context: any) {
 }
 
 function divisionColDefs(routeType: string, context: any) {
-    const columns: any[] = [
+    const columns: (ColDef | ColGroupDef)[] = [
         {
             field: 'name',
             headerName: 'Name'
@@ -146,7 +149,7 @@ function divisionColDefs(routeType: string, context: any) {
 }
 
 function projectColDefs(routeType: string, context: any) {
-    const columns: any[] = [
+    const columns: (ColDef | ColGroupDef)[] = [
         {
             field: 'name',
             headerName: 'Name'
@@ -169,7 +172,7 @@ function projectColDefs(routeType: string, context: any) {
         }
     ];
 
-    if (projectleaderAccess(context.permissionGroup)) {
+    if (professionalAccess(context.permissionGroup)) {
         columns.push({
             headerName: 'Edit',
             field: 'slug',
@@ -187,7 +190,7 @@ function projectColDefs(routeType: string, context: any) {
 }
 
 function usersColDefs(routeType: string, context: any) {
-    const columns: any[] = [
+    const columns: (ColDef | ColGroupDef)[] = [
         {
             field: 'full_name',
             headerName: 'Name'
@@ -221,9 +224,8 @@ function usersColDefs(routeType: string, context: any) {
 
 }
 
-
 function imageColDefs(routeType: string, context: any) {
-    const columns: any[] = [
+    const columns: (ColDef | ColGroupDef)[] = [
         {
             field: 'name',
             headerName: 'Name'
@@ -254,7 +256,7 @@ function imageColDefs(routeType: string, context: any) {
         }
     ];
 
-    if (managerAccess(context.permissionGroup)) {
+    if (projectleaderAccess(context.permissionGroup)) {
         columns.push({
             headerName: 'Edit',
             field: 'id',
@@ -272,7 +274,7 @@ function imageColDefs(routeType: string, context: any) {
 }
 
 function documentColDefs(routeType: string, context: any) {
-    const columns: any[] = [
+    const columns: (ColDef | ColGroupDef)[] = [
         {
             field: 'title',
             headerName: 'Title'
@@ -316,7 +318,7 @@ function documentColDefs(routeType: string, context: any) {
         }
     ];
 
-    if (managerAccess(context.permissionGroup)) {
+    if (projectleaderAccess(context.permissionGroup)) {
         columns.push({
             headerName: 'Edit',
             field: 'id',
@@ -334,7 +336,7 @@ function documentColDefs(routeType: string, context: any) {
 }
 
 function facilityColDefs(routeType: string, context: any) {
-    const columns: any[] = [
+    const columns: (ColDef | ColGroupDef)[] = [
         {
             field: 'properties.name',
             headerName: 'Name'

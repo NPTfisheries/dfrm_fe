@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
-
+import { Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormContainerComponent } from 'src/app/forms/form-container/form-container.component';
 
+import { projectleaderAccess } from 'src/_utilities/permission-util';
 import { AuthService } from 'src/_services/auth.service';
 
 @Component({
@@ -15,20 +16,31 @@ import { AuthService } from 'src/_services/auth.service';
 })
 export class EditButtonRendererComponent implements ICellRendererAngularComp {
 
-
+  projectleaderAccess=projectleaderAccess;
   private params: any;
-  projectPerms: any;
+  objectPerms: any;
+  permissionGroup!: string;
+  private permissionGroupSubscription: Subscription;
 
   constructor(
     private modalService: NgbModal,
     private authService: AuthService,
-  ) { }
+  ) {
+    this.permissionGroupSubscription = this.authService.permissionGroup$.subscribe(group => {
+      this.permissionGroup = group;
+    });
+   }
 
   agInit(params: any): void {
     this.params = params;
     if(this.params.routeType === 'project') {
       this.authService.projectPerms$.subscribe(projectPerms => {
-        this.projectPerms = projectPerms;
+        this.objectPerms = projectPerms;
+      });
+    }
+    if(this.params.routeType === 'document') {
+      this.authService.documentPerms$.subscribe(documentPerms => {
+        this.objectPerms = documentPerms;
       });
     }
   }
@@ -49,10 +61,12 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
     modalRef.componentInstance.addOrEdit = 'edit';
   }
 
+  // true/false logic
   renderButton() {
-    if(this.params.routeType !== 'project') { return true }
+    // if(!projectleaderAccess(this.permissionGroup)) { return false}
+    if(!['project', 'document'].includes(this.params.routeType)) { return true }
     //object level permissions for project edit buttons.
-    return this.projectPerms.includes(String(this.params.data.id));
+    return this.objectPerms.includes(String(this.params.data.id));
   }
 
 }
