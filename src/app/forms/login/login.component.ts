@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: () => {
           this.activeModal.close();
-          // this.router.navigate(['home']);
+          // this.router.navigate([this.router.url]);
         },
         error: response => {
           console.log('Error response: ', response);

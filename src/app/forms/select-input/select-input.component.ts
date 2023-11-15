@@ -25,7 +25,7 @@ export class SelectInputComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedOption = this.input.value;
-    if (['staff', 'project_leader'].includes(this.input.key)) {
+    if (['staff', 'project_leader', 'employee_authors'].includes(this.input.key)) {
       this.multiple = true;
       this.selectedOption = this.input.idArray
       this.form.get(`${this.input.key}`)?.patchValue(this.input.idArray); //make sure the form value is updated for validation.
@@ -51,6 +51,10 @@ export class SelectInputComponent implements OnInit {
           this.labels = 'name';
           this.options$ = divisions;          
         });
+        break;
+      case 'document_type':
+        this.labels = 'document_type';
+        this.options$ = ["Annual Report", "Journal Article", "Technical Memo","Presentation Slides","Other"];
         break;
       default:
         this.options$ = this.backendService.getList('users').subscribe(users => {

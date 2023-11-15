@@ -1,0 +1,15 @@
+<div class="container" style="padding-top: 75px; padding-bottom: 50px;">
+    <h2 class="text-center">{{ routeType | titlecase }} List</h2>
+
+    <button *ngIf="professionalAccess(permissionGroup)" (click)="uploadDocument()"
+        class="dfrm-button btn-right">Upload Document</button>
+
+    <br><br><br>
+    <div class="container" style="height: 600px;">
+        <ag-grid-angular style="width: 100%; height: 100%; font-size:15px" class="ag-theme-alpine"
+            [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [rowData]="data" [rowSelection]="'multiple'"
+            [suppressCellFocus]="true" (gridReady)="onGridReady($event)" [animateRows]="true">
+        </ag-grid-angular>
+    </div>
+
+</div>

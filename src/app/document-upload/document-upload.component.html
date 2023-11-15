@@ -1,0 +1,69 @@
+<div class="container px-4 py-4">
+    <br />
+    <h2 style="text-align: center;">Document Upload</h2>
+    <form [formGroup]="documentForm" (ngSubmit)="onSubmit()">
+
+        <div class="mb-3">
+            <input type="file" (change)="onFileChange($event)" class="form-control"
+                [ngClass]="{ 'validationError' : !selectedDocument }">
+            <div class="errorMessage validationErrorMessage" *ngIf="!selectedDocument">A file must be selected.</div>
+        </div>
+        <div class="mb-3">
+            <label for="title" class="form-label">Document Title</label>
+            <input type="text" formControlName="title" class="form-control" required
+                [ngClass]="{ 'validationError' : documentForm.get('title')?.errors }">
+            <div class="errorMessage validationErrorMessage" *ngIf="documentForm.get('title')?.hasError('required')">
+                Title is required.</div>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea formControlName="description" rows="5" class="form-control" required
+                [ngClass]="{ 'validationError' : documentForm.get('description')?.errors }"></textarea>
+            <div class="errorMessage validationErrorMessage"
+                *ngIf="documentForm.get('description')?.hasError('required')">Description is required.</div>
+        </div>
+        <div class="mb-3">
+            <label for="primary_author" class="form-label">Primary Author</label>
+            <input type="text" formControlName="primary_author" class="form-control" required
+                [ngClass]="{ 'validationError' : documentForm.get('primary_author')?.errors }">
+            <div class="errorMessage validationErrorMessage"
+                *ngIf="documentForm.get('primary_author')?.hasError('required')">Primary Author is required.</div>
+        </div>
+        
+        <label for="employee_authors" class="form-label">Employee Authors</label>
+        <ng-select formControlName="employee_authors" 
+                   [multiple]="true" >
+            <ng-option *ngFor="let author of author_choices" [value]="author.key">{{author.value}}</ng-option>
+        </ng-select>
+
+        <div class="mb-3">
+            <label for="publish_date" class="form-label">Publish Date</label>
+            <input type="date" formControlName="publish_date" class="form-control form-control-date" required
+                [ngClass]="{ 'validationError' : documentForm.get('publish_date')?.errors }" />
+            <div class="errorMessage validationErrorMessage"
+                *ngIf="documentForm.get('publish_date')?.hasError('required')">Publish date is required.</div>
+        </div>
+        <div class="mb-3">
+            <label for="document_type" class="form-label">Document Type</label>
+            <select id="document_type" formControlName="document_type" size="5" class="form-control form-select"
+                [ngClass]="{ 'validationError' : documentForm.get('document_type')?.errors }">
+                <option *ngFor="let type of document_types" [value]="type">{{type}}</option>
+            </select>
+            <div class="errorMessage validationErrorMessage"
+                *ngIf="documentForm.get('document_type')?.hasError('required')">Document type is required.</div>
+        </div>
+        <div class="mb-3">
+            <label for="citation" class="form-label">Citation</label>
+            <input type="text" formControlName="citation" class="form-control"
+                [ngClass]="{ 'validationError' : documentForm.get('citation')?.errors }">
+        </div>
+        <div class="mb-3">
+            <label for="keywords" class="form-label">Keywords</label>
+            <input type="text" formControlName="keywords" class="form-control"
+                [ngClass]="{ 'validationError' : documentForm.get('keywords')?.errors }">
+        </div>
+        <button type="submit" class="dfrm-button" [disabled]="documentForm.invalid || !selectedDocument">Upload
+            Document</button>
+
+    </form>
+</div>

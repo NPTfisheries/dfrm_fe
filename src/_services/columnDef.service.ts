@@ -1,7 +1,10 @@
 import { LinkButtonRendererComponent } from "src/_renderers/link-button-renderer/link-button-renderer.component";
 import { EditButtonRendererComponent } from "src/_renderers/edit-button-renderer/edit-button-renderer.component";
 import { ImagePreviewRendererComponent } from "src/_renderers/image-preview-renderer/image-preview-renderer.component";
+import { DocumentPreviewRendererComponent } from "src/_renderers/document-preview-renderer/document-preview-renderer.component";
 
+
+import { ColDef, ColGroupDef } from "ag-grid-community";
 import { professionalAccess, managerAccess, projectleaderAccess } from "src/_utilities/permission-util";
 import { formatPhone } from "src/_utilities/formatPhone";
 
@@ -18,15 +21,18 @@ export function getColumnDefs(routeType: string, context: any) {
             return usersColDefs(routeType, context);
         case 'image':
             return imageColDefs(routeType, context);
+        case 'document':
+            return documentColDefs(routeType, context);
         case 'facility':
             return facilityColDefs(routeType, context);
         default:
-            return;
+            let emptylist: ColDef[] = []
+            return emptylist;
     }
 }
 
 function departmentColDefs(routeType: string, context: any) {
-    const columns: any[] = [
+    const columns: (ColDef | ColGroupDef)[] = [
         {
             field: 'name',
             headerName: 'Name'
@@ -86,7 +92,7 @@ function departmentColDefs(routeType: string, context: any) {
 }
 
 function divisionColDefs(routeType: string, context: any) {
-    const columns: any[] = [
+    const columns: (ColDef | ColGroupDef)[] = [
         {
             field: 'name',
             headerName: 'Name'
@@ -143,7 +149,7 @@ function divisionColDefs(routeType: string, context: any) {
 }
 
 function projectColDefs(routeType: string, context: any) {
-    const columns: any[] = [
+    const columns: (ColDef | ColGroupDef)[] = [
         {
             field: 'name',
             headerName: 'Name'
@@ -184,7 +190,7 @@ function projectColDefs(routeType: string, context: any) {
 }
 
 function usersColDefs(routeType: string, context: any) {
-    const columns: any[] = [
+    const columns: (ColDef | ColGroupDef)[] = [
         {
             field: 'full_name',
             headerName: 'Name'
@@ -218,9 +224,8 @@ function usersColDefs(routeType: string, context: any) {
 
 }
 
-
 function imageColDefs(routeType: string, context: any) {
-    const columns: any[] = [
+    const columns: (ColDef | ColGroupDef)[] = [
         {
             field: 'name',
             headerName: 'Name'
@@ -251,7 +256,69 @@ function imageColDefs(routeType: string, context: any) {
         }
     ];
 
-    if (managerAccess(context.permissionGroup)) {
+    if (projectleaderAccess(context.permissionGroup)) {
+        columns.push({
+            headerName: 'Edit',
+            field: 'id',
+            cellRenderer: EditButtonRendererComponent,
+            cellRendererParams: {
+                routeType: routeType,
+                context: context
+            },
+            maxWidth: 100
+        });
+    }
+
+    return columns;
+
+}
+
+function documentColDefs(routeType: string, context: any) {
+    const columns: (ColDef | ColGroupDef)[] = [
+        {
+            field: 'title',
+            headerName: 'Title'
+        },
+        {
+            field: 'description',
+            headerName: 'Description'
+        },
+        {
+            field: 'primary_author',
+            headerName: 'Primary Author'
+        },
+        {
+            field: 'employee_author_names',
+            headerName: 'Employee Authors',
+            valueGetter: getAuthorNames
+        },
+        {
+            field: 'publish_date',
+            headerName: 'Publish Date',
+            type: 'dateColumn'
+        },
+        {
+            field: 'document_type',
+            headerName: 'Document Type'
+        },
+        {
+            field: 'citation',
+            headerName: 'Citation'
+        },
+        {
+            field: 'keywords',
+            headerName: 'Keywords'
+        },
+        {
+            headerName: 'View',
+            field: 'document',
+            cellRenderer: DocumentPreviewRendererComponent,
+            cellRendererParams: {},
+            maxWidth: 100
+        }
+    ];
+
+    if (professionalAccess(context.permissionGroup)) {
         columns.push({
             headerName: 'Edit',
             field: 'id',
@@ -269,7 +336,7 @@ function imageColDefs(routeType: string, context: any) {
 }
 
 function facilityColDefs(routeType: string, context: any) {
-    const columns: any[] = [
+    const columns: (ColDef | ColGroupDef)[] = [
         {
             field: 'properties.name',
             headerName: 'Name'
@@ -338,6 +405,15 @@ function getStaffNames(params: any) {
     if (params.data.staff && Array.isArray(params.data.staff)) {
         const staffNames = params.data.staff.map((staff: any) => staff.full_name);
         return staffNames.join(', ');
+    }
+    return '';
+}
+
+// ..  or authors
+function getAuthorNames(params: any) {
+    if (params.data.employee_authors && Array.isArray(params.data.employee_authors)) {
+        const authorNames = params.data.employee_authors.map((staff: any) => staff.full_name);
+        return authorNames.join(', ');
     }
     return '';
 }

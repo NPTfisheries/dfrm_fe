@@ -32,6 +32,12 @@ export class AuthService {
     private taskPermsSubject = new BehaviorSubject<object>([]);
     public taskPerms$ = this.taskPermsSubject.asObservable();
 
+    private imagePermsSubject = new BehaviorSubject<object>([]);
+    public imagePerms$ = this.imagePermsSubject.asObservable();
+
+    private documentPermsSubject = new BehaviorSubject<object>([]);
+    public documentPerms$ = this.documentPermsSubject.asObservable();
+
     constructor(
         private router: Router,
         private http: HttpClient
@@ -62,6 +68,8 @@ export class AuthService {
                     this.projectPermsSubject.next(response.project_objects);
                     this.subprojectPermsSubject.next(response.subproject_objects);
                     this.taskPermsSubject.next(response.task_objects);
+                    this.imagePermsSubject.next(response.image_objects);
+                    this.documentPermsSubject.next(response.document_objects);
                 })//,
                 // catchError(this.handleError)
             );
@@ -77,6 +85,8 @@ export class AuthService {
         this.projectPermsSubject.next([]);
         this.subprojectPermsSubject.next([]);
         this.taskPermsSubject.next([]);
+        this.imagePermsSubject.next([]);
+        this.documentPermsSubject.next([]);
         this.router.navigate(['home']);
     }
 
@@ -98,6 +108,8 @@ export class AuthService {
                 this.projectPermsSubject.next(response.project_objects);
                 this.subprojectPermsSubject.next(response.subproject_objects);
                 this.taskPermsSubject.next(response.task_objects);
+                this.imagePermsSubject.next(response.image_objects);
+                this.documentPermsSubject.next(response.document_objects);
             })
         )
     }
