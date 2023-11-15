@@ -447,7 +447,7 @@ export class InputService {
         required: true,
         order: 5
       }),
-      new InputText({
+      new InputSelect({
         key: 'document_type',
         label: 'Document Type',
         value: data?.document_type || '',
