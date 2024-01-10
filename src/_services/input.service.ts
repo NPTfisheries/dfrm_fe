@@ -262,6 +262,12 @@ export class InputService {
         value: data?.img_card.id || this.defaultCardId,
         options: this.buildOptions('image'),
         order: 7
+      }),
+      new InputNumber({
+        key: 'sort_order',
+        label: 'Sort Order',
+        value: data?.sort_order || 1,
+        order: 8
       })
     ]
 
@@ -313,6 +319,12 @@ export class InputService {
         value: data?.img_card.id || this.defaultCardId,
         options: this.buildOptions('image'),
         order: 7
+      }),
+      new InputNumber({
+        key: 'sort_order',
+        label: 'Sort Order',
+        value: data?.sort_order || 1,
+        order: 8
       })
     ]
 
@@ -622,12 +634,12 @@ export class InputService {
     return options;
   }
 
-  getObjects(object_type:string) {
+  getObjects(object_type: string) {
     let options: { key: string, value: string }[] = [];
 
     this.backendService.objectLookup(object_type).subscribe((list: any) => {
-      for(let item of list) {
-        options.push({ key: item.id, value: item.name})
+      for (let item of list) {
+        options.push({ key: item.id, value: item.name })
       }
     });
 

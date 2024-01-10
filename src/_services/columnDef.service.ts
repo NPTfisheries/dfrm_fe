@@ -8,6 +8,8 @@ import { ColDef, ColGroupDef } from "ag-grid-community";
 import { professionalAccess, managerAccess, projectleaderAccess } from "src/_utilities/permission-util";
 import { formatPhone } from "src/_utilities/formatPhone";
 
+// COLUMN DEFINITIONS ARE FOR AG GRID
+
 export function getColumnDefs(routeType: string, context: any) {
     // console.log('GetColumnDefs routeType:', routeType);
     switch (routeType) {
