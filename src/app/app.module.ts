@@ -34,6 +34,7 @@ import { DetailTaskComponent } from './detail-page/detail-task/detail-task.compo
 import { DetailSubprojectComponent } from './detail-page/detail-subproject/detail-subproject.component';
 import { LinkButtonRendererComponent } from '../_renderers/link-button-renderer/link-button-renderer.component';
 import { EditButtonRendererComponent } from '../_renderers/edit-button-renderer/edit-button-renderer.component';
+import { DeleteButtonRendererComponent } from 'src/_renderers/delete-button-renderer/delete-button-renderer.component';
 import { ImagePreviewComponent } from './image-preview/image-preview.component';
 import { ImagePreviewRendererComponent } from '../_renderers/image-preview-renderer/image-preview-renderer.component';
 import { StaffCardComponent } from './cards/staff-card/staff-card.component';
@@ -72,6 +73,7 @@ import { DocumentPreviewRendererComponent } from '../_renderers/document-preview
     DetailSubprojectComponent,
     LinkButtonRendererComponent,
     EditButtonRendererComponent,
+    DeleteButtonRendererComponent,
     ImagePreviewComponent,
     ImagePreviewRendererComponent,
     StaffCardComponent,

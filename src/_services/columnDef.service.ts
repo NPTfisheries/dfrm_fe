@@ -1,5 +1,6 @@
 import { LinkButtonRendererComponent } from "src/_renderers/link-button-renderer/link-button-renderer.component";
 import { EditButtonRendererComponent } from "src/_renderers/edit-button-renderer/edit-button-renderer.component";
+import { DeleteButtonRendererComponent } from "src/_renderers/delete-button-renderer/delete-button-renderer.component";
 import { ImagePreviewRendererComponent } from "src/_renderers/image-preview-renderer/image-preview-renderer.component";
 import { DocumentPreviewRendererComponent } from "src/_renderers/document-preview-renderer/document-preview-renderer.component";
 
@@ -33,7 +34,7 @@ export function getColumnDefs(routeType: string, context: any) {
     }
 }
 
-const viewEditProps = {
+const buttonProps = {
     maxWidth: 80,
     minWidth: 80,
     filter: false,
@@ -79,7 +80,7 @@ function departmentColDefs(routeType: string, context: any) {
                 // this will return all departments to the divisions list, but while it's only Fisheries that is fine.
                 return '/divisions'; 
             },
-            ...viewEditProps
+            ...buttonProps
         }
     ];
 
@@ -92,7 +93,7 @@ function departmentColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            ...viewEditProps
+            ...buttonProps
         });
     }
 
@@ -136,7 +137,7 @@ function divisionColDefs(routeType: string, context: any) {
             field: 'slug',
             cellRenderer: LinkButtonRendererComponent,
             cellRendererParams: {},
-            ...viewEditProps
+            ...buttonProps
         }
     ];
 
@@ -149,7 +150,7 @@ function divisionColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            ...viewEditProps
+            ...buttonProps
         });
     }
 
@@ -177,7 +178,7 @@ function projectColDefs(routeType: string, context: any) {
             field: 'slug',
             cellRenderer: LinkButtonRendererComponent,
             cellRendererParams: {},
-            ...viewEditProps
+            ...buttonProps
         }
     ];
 
@@ -190,7 +191,7 @@ function projectColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            ...viewEditProps
+            ...buttonProps
         });
     }
 
@@ -225,7 +226,7 @@ function usersColDefs(routeType: string, context: any) {
             field: 'id',
             cellRenderer: LinkButtonRendererComponent,
             cellRendererParams: {},
-            ...viewEditProps
+            ...buttonProps
         }
     ];
 
@@ -274,7 +275,17 @@ function imageColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            ...viewEditProps
+            ...buttonProps
+        },
+        {
+            headerName: 'Delete',
+            field: 'id',
+            cellRenderer: DeleteButtonRendererComponent,
+            cellRendererParams: {
+                routeType: routeType,
+                context: context
+            },
+            ...buttonProps
         });
     }
 
@@ -323,7 +334,7 @@ function documentColDefs(routeType: string, context: any) {
             field: 'document',
             cellRenderer: DocumentPreviewRendererComponent,
             cellRendererParams: {},
-            ...viewEditProps
+            ...buttonProps
         }
     ];
 
@@ -336,7 +347,17 @@ function documentColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            ...viewEditProps
+            ...buttonProps
+        },
+        {
+            headerName: 'Delete',
+            field: 'id',
+            cellRenderer: DeleteButtonRendererComponent,
+            cellRendererParams: {
+                routeType: routeType,
+                context: context
+            },
+            ...buttonProps
         });
     }
 
@@ -379,7 +400,7 @@ function facilityColDefs(routeType: string, context: any) {
             field: 'properties.slug',
             cellRenderer: LinkButtonRendererComponent,
             cellRendererParams: {},
-            ...viewEditProps
+            ...buttonProps
         }
     ];
 
@@ -392,7 +413,7 @@ function facilityColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            ...viewEditProps
+            ...buttonProps
         });
     }
 
