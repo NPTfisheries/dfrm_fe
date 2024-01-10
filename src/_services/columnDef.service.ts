@@ -33,6 +33,13 @@ export function getColumnDefs(routeType: string, context: any) {
     }
 }
 
+const viewEditProps = {
+    maxWidth: 80,
+    minWidth: 80,
+    filter: false,
+    sortable: false    
+}
+
 function departmentColDefs(routeType: string, context: any) {
     const columns: (ColDef | ColGroupDef)[] = [
         {
@@ -72,7 +79,7 @@ function departmentColDefs(routeType: string, context: any) {
                 // this will return all departments to the divisions list, but while it's only Fisheries that is fine.
                 return '/divisions'; 
             },
-            maxWidth: 100
+            ...viewEditProps
         }
     ];
 
@@ -85,7 +92,7 @@ function departmentColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            maxWidth: 100
+            ...viewEditProps
         });
     }
 
@@ -129,7 +136,7 @@ function divisionColDefs(routeType: string, context: any) {
             field: 'slug',
             cellRenderer: LinkButtonRendererComponent,
             cellRendererParams: {},
-            maxWidth: 100
+            ...viewEditProps
         }
     ];
 
@@ -142,7 +149,7 @@ function divisionColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            maxWidth: 100
+            ...viewEditProps
         });
     }
 
@@ -170,7 +177,7 @@ function projectColDefs(routeType: string, context: any) {
             field: 'slug',
             cellRenderer: LinkButtonRendererComponent,
             cellRendererParams: {},
-            maxWidth: 100
+            ...viewEditProps
         }
     ];
 
@@ -183,7 +190,7 @@ function projectColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            maxWidth: 100
+            ...viewEditProps
         });
     }
 
@@ -218,7 +225,7 @@ function usersColDefs(routeType: string, context: any) {
             field: 'id',
             cellRenderer: LinkButtonRendererComponent,
             cellRendererParams: {},
-            maxWidth: 100
+            ...viewEditProps
         }
     ];
 
@@ -267,7 +274,7 @@ function imageColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            maxWidth: 100
+            ...viewEditProps
         });
     }
 
@@ -316,7 +323,7 @@ function documentColDefs(routeType: string, context: any) {
             field: 'document',
             cellRenderer: DocumentPreviewRendererComponent,
             cellRendererParams: {},
-            maxWidth: 100
+            ...viewEditProps
         }
     ];
 
@@ -329,7 +336,7 @@ function documentColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            maxWidth: 100
+            ...viewEditProps
         });
     }
 
@@ -372,7 +379,7 @@ function facilityColDefs(routeType: string, context: any) {
             field: 'properties.slug',
             cellRenderer: LinkButtonRendererComponent,
             cellRendererParams: {},
-            maxWidth: 100
+            ...viewEditProps
         }
     ];
 
@@ -385,7 +392,7 @@ function facilityColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            maxWidth: 100
+            ...viewEditProps
         });
     }
 
