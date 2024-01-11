@@ -12,7 +12,7 @@
     <p>Mailing Addresss: {{ data?.properties.mailing_address }}</p>
     <p>{{ data?.properties.city }}, {{ data?.properties.state }} {{ data?.properties.zipcode }}</p>
 </div>
-<h2 class="bar-title">Facility Staff</h2>
+<h2 class="bar-title">Facility Management Staff</h2>
 <div class="employee-bar">
     <app-employee-card *ngIf="data?.properties.manager && data?.properties.manager.email !== ''"
         [data]="data?.properties.manager"></app-employee-card>
