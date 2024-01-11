@@ -4,6 +4,6 @@
     </div>
     <div class="modal-body d-flex justify-content-around">
             <button class="flex dfrm-button" (click)="delete()">Delete</button>
-            <button class="flex dfrm-button-invert" (click)="cancel()">Cancel</button>
+            <button class="flex dfrm-button-invert" (click)="cancel()" [disabled]="isSubmitting">Cancel</button>
     </div>
 </div>

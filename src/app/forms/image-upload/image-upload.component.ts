@@ -17,6 +17,7 @@ export class ImageUploadComponent implements OnInit {
   imageForm!: FormGroup;
   selectedImage: File | undefined;
   imagePreview: string | undefined;
+  isSubmitting: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,6 +53,8 @@ export class ImageUploadComponent implements OnInit {
       return;
     }
 
+    this.isSubmitting = true;
+
     const formData = new FormData();
     formData.append('name', this.f['name'].value);
     formData.append('description', this.f['description'].value);
@@ -70,6 +73,7 @@ export class ImageUploadComponent implements OnInit {
       error: (err) => {
         this.alertService.error('Failed to upload image.', { autoClose: true })
         console.log(err);
+        this.isSubmitting = false;
       }
     });
   }
