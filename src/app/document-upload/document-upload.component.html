@@ -62,7 +62,7 @@
             <input type="text" formControlName="keywords" class="form-control"
                 [ngClass]="{ 'validationError' : documentForm.get('keywords')?.errors }">
         </div>
-        <button type="submit" class="dfrm-button" [disabled]="documentForm.invalid || !selectedDocument">Upload
+        <button type="submit" class="dfrm-button" [disabled]="documentForm.invalid || !selectedDocument || isSubmitting">Upload
             Document</button>
 
     </form>

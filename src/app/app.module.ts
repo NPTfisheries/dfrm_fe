@@ -34,6 +34,7 @@ import { DetailTaskComponent } from './detail-page/detail-task/detail-task.compo
 import { DetailSubprojectComponent } from './detail-page/detail-subproject/detail-subproject.component';
 import { LinkButtonRendererComponent } from '../_renderers/link-button-renderer/link-button-renderer.component';
 import { EditButtonRendererComponent } from '../_renderers/edit-button-renderer/edit-button-renderer.component';
+import { DeleteButtonRendererComponent } from 'src/_renderers/delete-button-renderer/delete-button-renderer.component';
 import { ImagePreviewComponent } from './image-preview/image-preview.component';
 import { ImagePreviewRendererComponent } from '../_renderers/image-preview-renderer/image-preview-renderer.component';
 import { StaffCardComponent } from './cards/staff-card/staff-card.component';
@@ -47,6 +48,7 @@ import { DetailMapComponent } from './facility-detail/detail-map/detail-map.comp
 import { DocumentsComponent } from './documents/documents.component';
 import { DocumentUploadComponent } from './document-upload/document-upload.component';
 import { DocumentPreviewRendererComponent } from '../_renderers/document-preview-renderer/document-preview-renderer.component';
+import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,7 @@ import { DocumentPreviewRendererComponent } from '../_renderers/document-preview
     DetailSubprojectComponent,
     LinkButtonRendererComponent,
     EditButtonRendererComponent,
+    DeleteButtonRendererComponent,
     ImagePreviewComponent,
     ImagePreviewRendererComponent,
     StaffCardComponent,
@@ -85,6 +88,7 @@ import { DocumentPreviewRendererComponent } from '../_renderers/document-preview
     DocumentsComponent,
     DocumentUploadComponent,
     DocumentPreviewRendererComponent,
+    ModalConfirmComponent,
   ],
   imports: [
     BrowserModule,

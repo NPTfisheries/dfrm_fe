@@ -16,6 +16,7 @@ export class DocumentUploadComponent implements OnInit {
   @Input() context!: DocumentsComponent 
 
   documentForm!: FormGroup;
+  isSubmitting: boolean = false;
   selectedAuthors: any[] = [];
   selectedDocument: File | undefined;
 
@@ -63,7 +64,7 @@ export class DocumentUploadComponent implements OnInit {
       return;
     }
 
-    console.log(this.f['employee_authors'].value);
+    this.isSubmitting = true;
 
     const formData = new FormData();
     formData.append('title', this.f['title'].value);
@@ -93,6 +94,7 @@ export class DocumentUploadComponent implements OnInit {
       error: (err) => {
         this.alertService.error('Failed to upload document.', { autoClose: true })
         console.log(err);
+        this.isSubmitting = false;
       }
     });
   }

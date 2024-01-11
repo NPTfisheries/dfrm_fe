@@ -1,0 +1,9 @@
+<div>
+    <div class="modal-header">
+        <h2 class="modal-title text-center" >Confirm Delete?</h2>
+    </div>
+    <div class="modal-body d-flex justify-content-around">
+            <button class="flex dfrm-button" (click)="delete()">Delete</button>
+            <button class="flex dfrm-button-invert" (click)="cancel()" [disabled]="isSubmitting">Cancel</button>
+    </div>
+</div>
