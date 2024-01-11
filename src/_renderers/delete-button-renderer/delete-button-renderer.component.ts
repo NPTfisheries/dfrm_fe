@@ -3,7 +3,7 @@ import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 import { Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormContainerComponent } from 'src/app/forms/form-container/form-container.component';
+import { ModalConfirmComponent } from 'src/app/modal-confirm/modal-confirm.component';
 
 import { projectleaderAccess } from 'src/_utilities/permission-util';
 import { AuthService } from 'src/_services/auth.service';
@@ -54,12 +54,10 @@ export class DeleteButtonRendererComponent implements ICellRendererAngularComp {
     console.log(this.objectPerms);
     // console.log(this.params);
 
-    // const modalRef = this.modalService.open(FormContainerComponent, { size: 'xl' });
-    // modalRef.componentInstance.context = this.params.context
-    // modalRef.componentInstance.routeType = this.params.routeType;
-    // modalRef.componentInstance.data = this.params.data;
-    // modalRef.componentInstance.identifier = this.params.value;
-    // modalRef.componentInstance.addOrEdit = 'edit';
+    const modalRef = this.modalService.open(ModalConfirmComponent, { size: 'sm' });
+    modalRef.componentInstance.context = this.params.context
+    modalRef.componentInstance.routeType = this.params.routeType;
+    modalRef.componentInstance.identifier = this.params.value;
   }
 
   // true/false logic

@@ -62,6 +62,11 @@ export class BackendService {
 
         return this.http.get(`${this.apiUrl}${this.apiVersion}lookup`, { params })
     }
+
+    deleteFile(routeType: string, pk: string) {
+        const url = `${this.apiUrl}${this.apiVersion}${routeType}/${pk}/`;
+        return this.http.delete(url);
+    }
     
     // HELPERS -- change to private eventually?
     get(url: string): Observable<any> {

@@ -48,6 +48,7 @@ import { DetailMapComponent } from './facility-detail/detail-map/detail-map.comp
 import { DocumentsComponent } from './documents/documents.component';
 import { DocumentUploadComponent } from './document-upload/document-upload.component';
 import { DocumentPreviewRendererComponent } from '../_renderers/document-preview-renderer/document-preview-renderer.component';
+import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { DocumentPreviewRendererComponent } from '../_renderers/document-preview
     DocumentsComponent,
     DocumentUploadComponent,
     DocumentPreviewRendererComponent,
+    ModalConfirmComponent,
   ],
   imports: [
     BrowserModule,
