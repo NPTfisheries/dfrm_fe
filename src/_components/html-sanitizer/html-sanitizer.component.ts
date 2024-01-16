@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-html-sanitizer',
-  template: '<div class="container"><div [innerHTML]="transformHTML(this.html)" [class]="class"></div></div>'
+  template: '<div class="container"><div [innerHTML]="transformHTML(this.html)" [class]="class"></div></div>',
 })
 export class HtmlSanitizerComponent {
   String = String;
