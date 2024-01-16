@@ -51,10 +51,10 @@ function departmentColDefs(routeType: string, context: any) {
             // editable:
             // filter:
         },
-        {
-            field: 'description',
-            headerName: 'Description'
-        },
+        // {
+        //     field: 'description',
+        //     headerName: 'Description'
+        // },
         {
             field: 'manager.full_name',
             headerName: 'Manager'
@@ -111,10 +111,10 @@ function divisionColDefs(routeType: string, context: any) {
             // editable:
             // filter:
         },
-        {
-            field: 'description',
-            headerName: 'Description'
-        },
+        // {
+        //     field: 'description',
+        //     headerName: 'Description'
+        // },
         {
             field: 'manager.full_name',
             headerName: 'Manager'
@@ -164,10 +164,10 @@ function projectColDefs(routeType: string, context: any) {
             field: 'name',
             headerName: 'Name'
         },
-        {
-            field: 'description',
-            headerName: 'Description'
-        },
+        // {
+        //     field: 'description',
+        //     headerName: 'Description'
+        // },
         {
             field: 'project_leader_names',
             headerName: 'Project Leaders',
@@ -240,10 +240,10 @@ function imageColDefs(routeType: string, context: any) {
             field: 'name',
             headerName: 'Name'
         },
-        {
-            field: 'description',
-            headerName: 'Description'
-        },
+        // {
+        //     field: 'description',
+        //     headerName: 'Description'
+        // },
         {
             field: 'photographer',
             headerName: 'Photographer'
@@ -299,10 +299,10 @@ function documentColDefs(routeType: string, context: any) {
             field: 'title',
             headerName: 'Title'
         },
-        {
-            field: 'description',
-            headerName: 'Description'
-        },
+        // {
+        //     field: 'description',
+        //     headerName: 'Description'
+        // },
         {
             field: 'primary_author',
             headerName: 'Primary Author'
@@ -371,10 +371,10 @@ function facilityColDefs(routeType: string, context: any) {
             field: 'properties.name',
             headerName: 'Name'
         },
-        {
-            field: 'properties.description',
-            headerName: 'Description'
-        },
+        // {
+        //     field: 'properties.description',
+        //     headerName: 'Description'
+        // },
         {
             field: 'properties.facility_type.name',
             headerName: 'Facility Type'
