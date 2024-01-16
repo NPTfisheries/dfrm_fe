@@ -49,6 +49,8 @@ import { DocumentsComponent } from './documents/documents.component';
 import { DocumentUploadComponent } from './document-upload/document-upload.component';
 import { DocumentPreviewRendererComponent } from '../_renderers/document-preview-renderer/document-preview-renderer.component';
 import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
+import { RichTextInputComponent } from './forms/rich-text-input/rich-text-input.component';
+import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
   declarations: [
@@ -89,6 +91,7 @@ import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
     DocumentUploadComponent,
     DocumentPreviewRendererComponent,
     ModalConfirmComponent,
+    RichTextInputComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,6 +103,7 @@ import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
     HttpClientModule,
     ReactiveFormsModule,
     AgGridModule,
+    NgxEditorModule,
   ],
   providers: [
     // services with @Injectable({ providedIn: 'root' }) don't need to be listed here. They are singleton, available throughout app.

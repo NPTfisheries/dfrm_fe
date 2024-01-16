@@ -24,7 +24,7 @@ export class FormContainerComponent implements OnInit {
   @Input() projectId: string | null = null;  // provided only for refreshing subprojects.
   @Input() subprojectId: string | null = null;  // povided only for refreshing tasks.
   @Input() identifier!: string;  // slug || id for update api --> passed to dynamic form.  
-  @Input() addOrEdit!: string 
+  @Input() addOrEdit!: string
 
 
   inputs$!: Observable<InputBase<string>[]> | undefined;
@@ -55,6 +55,7 @@ export class FormContainerComponent implements OnInit {
     if (this.subprojectId) { route = `${this.routeType}/?subproject_id=${this.subprojectId}` }; // task list, filtered
 
     if (route === 'profile') {
+      console.log('getting profile...');
       this.backendService.getCurrentUser().subscribe(currentUser => {
         if (this.context) {
           this.context.data = currentUser;
@@ -62,19 +63,23 @@ export class FormContainerComponent implements OnInit {
         }
       })
     }
-    this.backendService.getList(route).subscribe((updatedList: any) => {
-      if (this.context) {
-        if(route === 'facility') {
-          this.context.data = updatedList.features;
-          this.activeModal.close();
-        } else {
-          this.context.data = updatedList;
-          this.activeModal.close();
-        }
+    
+    if (route !== 'profile') {
+      this.backendService.getList(route).subscribe((updatedList: any) => {
+        if (this.context) {
+          if (route === 'facility') {
+            this.context.data = updatedList.features;
+            this.activeModal.close();
+          } else {
+            this.context.data = updatedList;
+            this.activeModal.close();
+          }
 
-        // this.alertService.success(`New ${this.routeType} succesfully created.`, { autoClose: true});
-      }
-    });
+          // this.alertService.success(`New ${this.routeType} succesfully created.`, { autoClose: true});
+        }
+      });
+    }
+
   }
 
   handleFormValidityChanged(valid: boolean) {
@@ -99,8 +104,8 @@ export class FormContainerComponent implements OnInit {
         return this.inputService.getProfileInputs(data);
       case 'image':
         return this.inputService.getImageInputs(data);
-        case 'document':
-          return this.inputService.getDocumentInputs(data);
+      case 'document':
+        return this.inputService.getDocumentInputs(data);
       case 'facility':
         return this.inputService.getFacilityInputs(data);
       default:

@@ -1,0 +1,31 @@
+.editor {
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+
+    .NgxEditor__MenuBar {
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        border-bottom: 1px solid #ced4da; 
+    }
+
+    .NgxEditor {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border: none;
+        min-height: 100px;
+    }
+
+    .CodeMirror {
+        border: 1px solid #eee;
+        height: auto;
+        margin-bottom: 0.7rem;
+    
+        pre {
+          white-space: pre !important;
+        }
+      }
+      
+    br {
+        display: none;
+    }
+}

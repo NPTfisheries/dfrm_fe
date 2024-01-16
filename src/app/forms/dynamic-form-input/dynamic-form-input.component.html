@@ -51,9 +51,12 @@
             [pattern]="input.pattern">
 
         <!-- TEXTAREA -->
-        <textarea *ngSwitchCase="'textarea'" rows="5" [formControlName]="input.key" [id]="input.key"
+        <!-- <textarea *ngSwitchCase="'textarea'" rows="5" [formControlName]="input.key" [id]="input.key"
             class="form-control" [ngClass]="getInputClasses(input)" [required]="input.required"
-            [minlength]="input.minlength" [maxlength]="input.maxlength"></textarea>
+            [minlength]="input.minlength" [maxlength]="input.maxlength"></textarea> -->
+
+        <app-rich-text-input *ngSwitchCase="'textarea'" [input]="input" [form]="form"></app-rich-text-input>
+
 
         <!-- SELECT -->
         <app-select-input *ngSwitchCase="'select'" [input]="input" [form]="form"></app-select-input>
