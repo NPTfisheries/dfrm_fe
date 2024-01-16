@@ -37,6 +37,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy {
     console.log(this.input);
     this.editor = new Editor({
       content: this.input.value,
+      keyboardShortcuts: true,
     });
 
     // console.log(this.editor);

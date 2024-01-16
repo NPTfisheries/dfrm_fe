@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { BackendService } from 'src/_services/backend.service';
 import { User } from 'src/_models/user';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { getRouteType, getRouteSlug } from 'src/_utilities/route-utils';
 import { buildImageUrl } from 'src/_utilities/buildImageUrl';
@@ -24,7 +24,6 @@ export class ProfileComponent implements OnInit {
 
   formatPhone = formatPhone;
   data: User | undefined; // user
-  bioHTML: string | SafeHtml = '';
   imageUrl!: string | undefined;
   routeType!: string;
 

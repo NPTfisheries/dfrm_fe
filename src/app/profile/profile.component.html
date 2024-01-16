@@ -20,7 +20,7 @@
         <!-- <pre>
             <h4 class="text-lightgray">{{ data?.profile?.bio }}</h4>
         </pre> -->
-        <div [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(String(data?.profile?.bio))" class="text-lightgray"></div>
+        <app-html-sanitizer [html]="data?.profile?.bio" class="text-lightgray"></app-html-sanitizer>
         <br>
         <hr class="card-hr" />
         <br>

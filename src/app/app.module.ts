@@ -10,7 +10,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { AppRoutingModule } from './app.routing.module';
 
 import { AppComponent } from './app.component';
-import { AlertComponent } from 'src/_components/alert.component';
+import { AlertComponent } from 'src/_components/alert/alert.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './forms/login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -51,6 +51,7 @@ import { DocumentPreviewRendererComponent } from '../_renderers/document-preview
 import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
 import { RichTextInputComponent } from './forms/rich-text-input/rich-text-input.component';
 import { NgxEditorModule } from 'ngx-editor';
+import { HtmlSanitizerComponent } from '../_components/html-sanitizer/html-sanitizer.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { NgxEditorModule } from 'ngx-editor';
     DocumentPreviewRendererComponent,
     ModalConfirmComponent,
     RichTextInputComponent,
+    HtmlSanitizerComponent,
   ],
   imports: [
     BrowserModule,

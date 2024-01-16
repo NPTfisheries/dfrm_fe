@@ -7,7 +7,8 @@
     <h1 class="dfrm-title text-center">Department of Fisheries Resources Management</h1>
     <h2 class="divider gradient-hr my-5"></h2>
     <div class="container my-5">
-        <pre><p>{{ department?.description }}</p></pre>
+        <!-- <pre><p>{{ department?.description }}</p></pre> -->
+        <app-html-sanitizer [html]="department?.description"></app-html-sanitizer>
     </div>
 
     <div>
