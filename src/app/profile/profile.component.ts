@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { BackendService } from 'src/_services/backend.service';
 import { User } from 'src/_models/user';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { getRouteType, getRouteSlug } from 'src/_utilities/route-utils';
 import { buildImageUrl } from 'src/_utilities/buildImageUrl';
@@ -17,6 +18,8 @@ import { FormContainerComponent } from '../forms/form-container/form-container.c
 })
 export class ProfileComponent implements OnInit {
 
+  String = String;
+
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   formatPhone = formatPhone;
@@ -28,6 +31,7 @@ export class ProfileComponent implements OnInit {
     private bs: BackendService,
     private route: ActivatedRoute,
     public modalService: NgbModal,
+    public sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit() {

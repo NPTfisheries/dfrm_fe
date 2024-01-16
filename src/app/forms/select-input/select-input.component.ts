@@ -31,7 +31,7 @@ export class SelectInputComponent implements OnInit {
       this.form.get(`${this.input.key}`)?.patchValue(this.input.idArray); //make sure the form value is updated for validation.
     }
 
-    if (this.input.key === 'project_leader') { console.log('XXX', this.input) };
+    // if (this.input.key === 'project_leader') { console.log('XXX', this.input) };
 
     switch (this.input.key) {
       case 'facility_type':

@@ -25,7 +25,8 @@
                         </div>
                         <br>
 
-                        <pre><p>{{ item.description }}</p></pre>
+                        <!-- <pre><p>{{ item.description }}</p></pre> -->
+                        <app-html-sanitizer [html]="item.description"></app-html-sanitizer>
                     </div>
                 </div>
 

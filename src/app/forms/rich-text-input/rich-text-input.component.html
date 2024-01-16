@@ -1,0 +1,10 @@
+<div class="editor">
+    <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+    </ngx-editor-menu>
+    <ngx-editor [editor]="editor" 
+                [formControlName]="input.key"
+                [spellcheck]="true"
+                placeholder='' 
+                (keyup)="onChange($event)">
+    </ngx-editor>
+</div>

@@ -51,9 +51,14 @@
             [pattern]="input.pattern">
 
         <!-- TEXTAREA -->
-        <textarea *ngSwitchCase="'textarea'" rows="5" [formControlName]="input.key" [id]="input.key"
+        <!-- <textarea *ngSwitchCase="'textarea'" rows="5" [formControlName]="input.key" [id]="input.key"
             class="form-control" [ngClass]="getInputClasses(input)" [required]="input.required"
-            [minlength]="input.minlength" [maxlength]="input.maxlength"></textarea>
+            [minlength]="input.minlength" [maxlength]="input.maxlength"></textarea> -->
+        <div *ngSwitchCase="'textarea'" > 
+            <app-rich-text-input [input]="input" [form]="form"></app-rich-text-input>
+            <div><small><em>*For Hyperlinks, use the entire URL (e.g., https://nezperce.org). Also, make sure to 
+                add a space after adding a link to ensure the link is solidified.</em></small></div>
+        </div>
 
         <!-- SELECT -->
         <app-select-input *ngSwitchCase="'select'" [input]="input" [form]="form"></app-select-input>

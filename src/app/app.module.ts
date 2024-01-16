@@ -10,7 +10,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { AppRoutingModule } from './app.routing.module';
 
 import { AppComponent } from './app.component';
-import { AlertComponent } from 'src/_components/alert.component';
+import { AlertComponent } from 'src/_components/alert/alert.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './forms/login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -49,6 +49,9 @@ import { DocumentsComponent } from './documents/documents.component';
 import { DocumentUploadComponent } from './document-upload/document-upload.component';
 import { DocumentPreviewRendererComponent } from '../_renderers/document-preview-renderer/document-preview-renderer.component';
 import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
+import { RichTextInputComponent } from './forms/rich-text-input/rich-text-input.component';
+import { NgxEditorModule } from 'ngx-editor';
+import { HtmlSanitizerComponent } from '../_components/html-sanitizer/html-sanitizer.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +92,8 @@ import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
     DocumentUploadComponent,
     DocumentPreviewRendererComponent,
     ModalConfirmComponent,
+    RichTextInputComponent,
+    HtmlSanitizerComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,6 +105,7 @@ import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
     HttpClientModule,
     ReactiveFormsModule,
     AgGridModule,
+    NgxEditorModule,
   ],
   providers: [
     // services with @Injectable({ providedIn: 'root' }) don't need to be listed here. They are singleton, available throughout app.
