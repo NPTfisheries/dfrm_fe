@@ -257,13 +257,18 @@ export class InputService {
         options: this.buildOptions('image'),
         order: 7
       }),
-      new InputImage({
+      new InputHidden({
         key: 'img_card',
-        label: 'Choose Card Image',
         value: data?.img_card.id || this.defaultCardId,
-        options: this.buildOptions('image'),
-        order: 7
+        order: 99
       }),
+      // new InputImage({
+      //   key: 'img_card',
+      //   label: 'Choose Card Image',
+      //   value: data?.img_card.id || this.defaultCardId,
+      //   options: this.buildOptions('image'),
+      //   order: 7
+      // }),
       new InputNumber({
         key: 'sort_order',
         label: 'Sort Order',
@@ -307,13 +312,18 @@ export class InputService {
         required: true,
         order: 4
       }),
-      new InputImage({
+      new InputHidden({
         key: 'img_banner',
-        label: 'Choose Banner Image',
-        value: data?.img_banner.id || this.defaultBannerId,
-        options: this.buildOptions('image'),
-        order: 7
+        value: data?.img_card.id || this.defaultCardId,
+        order: 99
       }),
+      // new InputImage({
+      //   key: 'img_banner',
+      //   label: 'Choose Banner Image',
+      //   value: data?.img_banner.id || this.defaultBannerId,
+      //   options: this.buildOptions('image'),
+      //   order: 7
+      // }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',

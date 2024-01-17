@@ -30,7 +30,7 @@ pre {
 .employee-bar {
     background-color: #0d1b1f;
     overflow-x:hidden;
-    padding: 75px;
+    padding: 25px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;

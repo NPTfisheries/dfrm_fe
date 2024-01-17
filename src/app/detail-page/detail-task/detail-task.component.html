@@ -19,7 +19,7 @@
                         <hr>
                         <div class="d-flex justify-content-between py-0 my-0">
                             <p>Supervisor: <a style="color:black" [routerLink]="'/users/' + item.supervisor.id">{{
-                                    item.supervisor.full_name }} </a></p>
+                                    item.supervisor.first_name }} {{ item.supervisor.last_name }}</a></p>
                             <button *ngIf="managerPerms || canEditTask(item.id)" (click)="edit(item.id)"
                                 class="dfrm-button-small">Edit Task</button>
                         </div>

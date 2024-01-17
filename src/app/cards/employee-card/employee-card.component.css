@@ -1,6 +1,6 @@
 .employee-card {
     background-color: none;
-    width: 25rem;
+    width: 20rem;
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -13,8 +13,8 @@
     border: 2px solid;
     border-radius: 50%;
     border-color: #cfd7db;
-    height: 300px;
-    width: 300px;
+    height: 150px;
+    width: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
