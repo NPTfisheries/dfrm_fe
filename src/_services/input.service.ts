@@ -614,7 +614,7 @@ export class InputService {
     this.backendService.getList('users').subscribe((employees: any) => {
       // console.log("buildEmployeeOptions:", employees);
       for (let emp of employees) {
-        options.push({ key: emp.id, value: emp.first_name + ' ' + emp.last_name })
+        options.push({ key: emp.id, value: emp.last_name + ', ' + emp.first_name })
       }
     })
 
