@@ -10,7 +10,7 @@ import { AuthService } from 'src/_services/auth.service';
 
 @Component({
   selector: 'app-edit-button-renderer',
-  template: `<div class="icon-wrapper">
+  template: `<div class="icon-wrapper d-flex align-items-center" >
                 <i (click)="onEditClick()" *ngIf="renderButton()" class="fa-regular fa-pen-to-square ag-clickable"></i></div>`,
   styleUrls: ['../renderers.css']
 })

@@ -3,10 +3,8 @@ import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 
 import { AgGridAngular } from 'ag-grid-angular';
-import { GridApi, ColumnApi, ColDef } from 'ag-grid-community';
+import { GridApi, ColDef } from 'ag-grid-community';
 import { getColumnDefs } from 'src/_services/columnDef.service';
-import { LinkButtonRendererComponent } from 'src/_renderers/link-button-renderer/link-button-renderer.component';
-import { EditButtonRendererComponent } from 'src/_renderers/edit-button-renderer/edit-button-renderer.component';
 
 import { AuthService } from 'src/_services/auth.service';
 import { BackendService } from 'src/_services/backend.service';
@@ -32,12 +30,7 @@ export class ListPageComponent implements OnInit {
 
 
   private gridApi = GridApi;
-  private gridColumnApi = ColumnApi;
   columnDefs: ColDef[] | undefined;
-  frameworkComponents: any = {
-    linkButtonRenderer: LinkButtonRendererComponent,
-    editButtonRenderer: EditButtonRendererComponent,
-  };
 
   // default settings for all columns.
   defaultColDef: ColDef = {

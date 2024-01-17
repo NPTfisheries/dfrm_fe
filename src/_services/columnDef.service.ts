@@ -350,9 +350,7 @@ function documentColDefs(routeType: string, context: any) {
             field: 'document',
             cellRenderer: DocumentPreviewRendererComponent,
             cellRendererParams: {},
-            ...buttonProps,
-            maxWidth: 70,
-            minWidth: 70
+            ...buttonProps
         }
     ];
 
@@ -365,9 +363,7 @@ function documentColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            ...buttonProps,
-            maxWidth: 65,
-            minWidth: 65
+            ...buttonProps
 
         },
         {
@@ -380,8 +376,8 @@ function documentColDefs(routeType: string, context: any) {
             },
             filter: false,
             sortable: false,
-            maxWidth: 80,
-            minWidth: 80
+            maxWidth: 90,
+            minWidth: 90
         });
     }
 
@@ -424,9 +420,7 @@ function facilityColDefs(routeType: string, context: any) {
             field: 'properties.slug',
             cellRenderer: LinkButtonRendererComponent,
             cellRendererParams: {},
-            ...buttonProps,
-            maxWidth: 80,
-            minWidth: 80,
+            ...buttonProps
         }
     ];
 
@@ -439,9 +433,7 @@ function facilityColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            ...buttonProps,
-            maxWidth: 80,
-            minWidth: 80
+            ...buttonProps
         });
     }
 

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/_services/auth.service';
 import { BackendService } from 'src/_services/backend.service';
-import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, ColGroupDef, GridApi } from 'ag-grid-community';
 
@@ -29,7 +29,7 @@ export class DocumentsComponent implements OnInit {
     filter: true,
     // flex: 1,
     resizable: true,
-    cellStyle: { fontSize: '15px' },
+    cellStyle: { fontSize: '20px' },
   };
 
   data!: any[];
