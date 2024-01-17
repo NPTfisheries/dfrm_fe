@@ -35,10 +35,10 @@ export function getColumnDefs(routeType: string, context: any) {
 }
 
 const buttonProps = {
-    maxWidth: 80,
-    minWidth: 80,
     filter: false,
-    sortable: false    
+    sortable: false,
+    maxWidth: 80,
+    minWidth: 80    
 }
 
 function departmentColDefs(routeType: string, context: any) {
@@ -219,7 +219,10 @@ function usersColDefs(routeType: string, context: any) {
             valueFormatter: function (params: any) {
                 const phoneNumber = params.value;
                 return formatPhone(phoneNumber);
-            }
+            },
+            sortable: false,
+            maxWidth: 170,
+            minWidth: 170
         },
         {
             headerName: 'View',
@@ -251,7 +254,9 @@ function imageColDefs(routeType: string, context: any) {
         {
             field: 'photo_date',
             headerName: 'Photo Date',
-            type: 'dateColumn'
+            type: 'dateColumn',
+            maxWidth: 150,
+            minWidth: 150
         },
         {
             field: 'source',
@@ -262,7 +267,10 @@ function imageColDefs(routeType: string, context: any) {
             field: 'slug',
             cellRenderer: ImagePreviewRendererComponent,
             cellRendererParams: {},
-            maxWidth: 130
+            filter: false,
+            sortable: false,
+            maxWidth: 105,
+            minWidth: 105
         }
     ];
 
@@ -285,7 +293,11 @@ function imageColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            ...buttonProps
+            filter: false,
+            sortable: false,
+            maxWidth: 90,
+            minWidth: 90,
+
         });
     }
 
@@ -334,7 +346,9 @@ function documentColDefs(routeType: string, context: any) {
             field: 'document',
             cellRenderer: DocumentPreviewRendererComponent,
             cellRendererParams: {},
-            ...buttonProps
+            ...buttonProps,
+            maxWidth: 70,
+            minWidth: 70
         }
     ];
 
@@ -347,7 +361,10 @@ function documentColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            ...buttonProps
+            ...buttonProps,
+            maxWidth: 65,
+            minWidth: 65
+
         },
         {
             headerName: 'Delete',
@@ -357,7 +374,10 @@ function documentColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            ...buttonProps
+            filter: false,
+            sortable: false,
+            maxWidth: 80,
+            minWidth: 80
         });
     }
 
@@ -400,7 +420,9 @@ function facilityColDefs(routeType: string, context: any) {
             field: 'properties.slug',
             cellRenderer: LinkButtonRendererComponent,
             cellRendererParams: {},
-            ...buttonProps
+            ...buttonProps,
+            maxWidth: 80,
+            minWidth: 80,
         }
     ];
 
@@ -413,7 +435,9 @@ function facilityColDefs(routeType: string, context: any) {
                 routeType: routeType,
                 context: context
             },
-            ...buttonProps
+            ...buttonProps,
+            maxWidth: 80,
+            minWidth: 80
         });
     }
 
