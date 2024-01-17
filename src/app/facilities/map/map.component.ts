@@ -33,7 +33,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     weight: 1,
     opacity: 1,
     fillOpacity: 0.8
-};
+  };
 
   constructor(
     private backendService: BackendService,
@@ -60,19 +60,20 @@ export class MapComponent implements AfterViewInit, OnChanges {
       minZoom: 7
     }).addTo(this.map);
 
-    L.control.scale({position: 'topright'}).addTo(this.map);
+    L.control.scale({ position: 'topright' }).addTo(this.map);
 
     this.addMarkers();
+    this.addLegend();
   }
 
   addMarkers() {
     L.geoJSON(this.facilities, {
-      style:function(feature) {
+      style: function (feature) {
         // https://leafletjs.com/examples/geojson/
-        switch(feature?.properties.facility_type.name) {
-          case "Office": return { fillColor: 'blue'};
-          case "Hatchery": return { fillColor: 'red'};
-          default: return { fillColor: 'green'};  // Other
+        switch (feature?.properties.facility_type.name) {
+          case "Office": return { fillColor: 'blue' };
+          case "Hatchery": return { fillColor: 'red' };
+          default: return { fillColor: 'green' };  // Other
         }
       },
       pointToLayer: (feature, latlng) => {
@@ -89,28 +90,51 @@ export class MapComponent implements AfterViewInit, OnChanges {
         layer.bindPopup(customPopupContent);
 
         layer.on('popupopen', () => {
-            // set popup-card-img
-            this.imageUrl = buildImageUrl(feature.properties.img_card.image);
+          // set popup-card-img
+          this.imageUrl = buildImageUrl(feature.properties.img_card.image);
 
-            // Get the popup and update its content only if it exists
-            const popup = layer.getPopup();
-            if (popup) {
-              popup.setContent(this.facilityPopup(feature));
+          // Get the popup and update its content only if it exists
+          const popup = layer.getPopup();
+          if (popup) {
+            popup.setContent(this.facilityPopup(feature));
 
-              const button = document.getElementById('myb');
-              if (button) {
-                // set click listener
-                button.addEventListener('click', () => {
-                  // console.log('button clicked', feature.id);
-                  this.facilitySlug.emit(feature.properties.slug);
-                });
-              }
+            const button = document.getElementById('myb');
+            if (button) {
+              // set click listener
+              button.addEventListener('click', () => {
+                // console.log('button clicked', feature.id);
+                this.facilitySlug.emit(feature.properties.slug);
+              });
             }
+          }
         });
       }
     }).addTo(this.map);
   }
 
+  addLegend() {
+    console.log('Add Legend Activated!');
+    const legend = new (L.Control.extend({
+      options: { position: 'bottomleft' },
+
+      onAdd: function (map: L.Map) {
+        console.log('Legend On Add!');
+        const div = L.DomUtil.create('div', 'legend');
+        const labels = ['Hatchery', 'Office', 'Other'];
+        const colors = ['red', 'blue', 'green'];
+        let legendContent = '<div style="background-color: white; padding: 10px; border-radius: 6px;">';
+        for (let i = 0; i < labels.length; i++) {
+          legendContent += '<div style="margin-bottom: 5px;"><span style="background:' + colors[i] + '; border-radius: 50%; width: 12px; height: 12px; display: inline-block;"></span>&nbsp;&nbsp;' + '<span style="font-size: 18px;">' + labels[i] + '</span></div>';
+        }
+        legendContent += '</div>';
+        div.innerHTML = legendContent;
+        console.log(div);
+        return div;
+      }
+    }));
+    legend.addTo(this.map);
+
+  }
 
   facilityPopup(facility: any) {
     return `<div style="height:200px; width:250px; overflow:hidden; margin: 0 auto">
@@ -126,6 +150,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
     <button id="myb" class="dfrm-button-small" > Facility Details </button>
     </div>
     `
-  }  
+  }
 
 }
