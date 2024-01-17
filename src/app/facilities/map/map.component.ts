@@ -113,7 +113,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
   }
 
   addLegend() {
-    console.log('Add Legend Activated!');
     const legend = new (L.Control.extend({
       options: { position: 'bottomleft' },
 
@@ -128,7 +127,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
         }
         legendContent += '</div>';
         div.innerHTML = legendContent;
-        console.log(div);
+        // console.log(div);
         return div;
       }
     }));
