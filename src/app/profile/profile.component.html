@@ -13,7 +13,7 @@
         <button *ngIf="this.routeType === 'profile'" style='float:right; position: absolute;' (click)="updateProfile()"
             class="dfrm-button-small grow">Update
             Profile</button>
-        <h1 class="text-center font-weight-bold text-yellow my-2">{{ data?.full_name }}</h1>
+        <h1 class="text-center font-weight-bold text-yellow my-2">{{ data?.first_name }} {{ data?.last_name }}</h1>
         <h2 class="text-center text-lightgray">{{ data?.profile?.title }}</h2>
         <div class="text-center">
             <!-- <br> -->
