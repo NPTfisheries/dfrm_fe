@@ -15,6 +15,17 @@
             Profile</button>
         <h1 class="text-center font-weight-bold text-yellow my-2">{{ data?.full_name }}</h1>
         <h2 class="text-center text-lightgray">{{ data?.profile?.title }}</h2>
+        <div class="text-center">
+            <!-- <br> -->
+                <h4 *ngIf="data?.profile?.city" class="text-lightgray">{{ data?.profile?.city }}, {{ data?.profile?.state }}</h4>
+            <!-- <br> -->
+                <h4 class="text-lightgray">Email: <a class="text-yellow" href="mailto:{{data?.email}}">{{ data?.email }}</a></h4>
+            <!-- <br> -->
+                <h4 *ngIf="data?.profile?.work_phone" class="text-lightgray">Work Phone: {{ formatPhone(data?.profile?.work_phone) }}</h4>
+            <!-- <br> -->
+                <h4 *ngIf="data?.profile?.mobile_phone" class="text-lightgray">Mobile Phone: {{ formatPhone(data?.profile?.mobile_phone) }}</h4>
+            <!-- <br> -->
+        </div>
         <hr class="card-hr" />
         <br>
         <!-- <pre>
@@ -23,21 +34,5 @@
         <app-html-sanitizer [html]="data?.profile?.bio" class="text-lightgray"></app-html-sanitizer>
         <br>
         <hr class="card-hr" />
-        <br>
-        <ul class="text-lightgray">
-            <li *ngIf="data?.profile?.city">
-                <h4 class="text-lightgray">Office Location: {{ data?.profile?.city }}, {{ data?.profile?.state }}</h4>
-            </li><br>
-            <li>
-                <h4 class="text-lightgray">Email: <a class="text-yellow" href="mailto:{{data?.email}}">{{ data?.email }}</a></h4>
-            </li><br>
-            <li *ngIf="data?.profile?.mobile_phone">
-                <h4 class="text-lightgray">Work Phone: {{ formatPhone(data?.profile?.work_phone) }}</h4>
-            </li><br>
-            <li *ngIf="data?.profile?.mobile_phone">
-                <h4 class="text-lightgray">Mobile Phone: {{ formatPhone(data?.profile?.mobile_phone) }}</h4>
-            </li><br>
-        </ul>
-
     </div>
 </div>
