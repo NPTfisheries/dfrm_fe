@@ -123,7 +123,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
         const colors = ['red', 'blue', 'green'];
         let legendContent = '<div style="background-color: white; padding: 10px; border-radius: 6px;">';
         for (let i = 0; i < labels.length; i++) {
-          legendContent += '<div style="margin-bottom: 5px;"><span style="background:' + colors[i] + '; border-radius: 50%; width: 12px; height: 12px; display: inline-block;"></span>&nbsp;&nbsp;' + '<span style="font-size: 18px;">' + labels[i] + '</span></div>';
+          legendContent += '<div style="margin-bottom: 5px;"><span style="background:' + colors[i] + '; border: 1px solid black; border-radius: 50%; width: 16px; height: 16px; display: inline-block;"></span>&nbsp;&nbsp;' + '<span style="font-size: 18px;">' + labels[i] + '</span></div>';
         }
         legendContent += '</div>';
         div.innerHTML = legendContent;
