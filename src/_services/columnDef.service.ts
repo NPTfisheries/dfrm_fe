@@ -241,7 +241,8 @@ function imageColDefs(routeType: string, context: any) {
     const columns: (ColDef | ColGroupDef)[] = [
         {
             field: 'name',
-            headerName: 'Name'
+            headerName: 'Name *',
+            tooltipField: 'description'
         },
         // {
         //     field: 'description',
@@ -309,7 +310,8 @@ function documentColDefs(routeType: string, context: any) {
     const columns: (ColDef | ColGroupDef)[] = [
         {
             field: 'title',
-            headerName: 'Title'
+            headerName: 'Title *',
+            tooltipField: 'description'
         },
         // {
         //     field: 'description',
@@ -335,11 +337,13 @@ function documentColDefs(routeType: string, context: any) {
         },
         {
             field: 'citation',
-            headerName: 'Citation'
+            headerName: 'Citation',
+            tooltipField: 'citation'
         },
         {
             field: 'keywords',
-            headerName: 'Keywords'
+            headerName: 'Keywords',
+            tooltipField: 'keywords'
         },
         {
             headerName: 'View',

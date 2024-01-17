@@ -14,6 +14,7 @@ import { InputPhone } from 'src/_inputs/input-phone';
 import { InputFile } from 'src/_inputs/input-file';
 import { InputCoordinates } from 'src/_inputs/input-geometry';
 import { InputNumber } from 'src/_inputs/input-number';
+import { InputRichText } from 'src/_inputs/input-richtext';
 
 @Injectable({ providedIn: 'root' })
 export class InputService {
@@ -34,7 +35,7 @@ export class InputService {
         required: true,
         order: 1
       }),
-      new InputTextarea({
+      new InputRichText({
         key: 'description',
         label: 'Description',
         value: data?.description || '',
@@ -99,7 +100,7 @@ export class InputService {
         required: true,
         order: 1
       }),
-      new InputTextarea({
+      new InputRichText({
         key: 'description',
         label: 'Description',
         value: data?.description || '',
@@ -170,7 +171,7 @@ export class InputService {
         required: true,
         order: 1
       }),
-      new InputTextarea({
+      new InputRichText({
         key: 'description',
         label: 'Description',
         value: data?.description || '',
@@ -220,7 +221,7 @@ export class InputService {
         required: true,
         order: 1
       }),
-      new InputTextarea({
+      new InputRichText({
         key: 'description',
         label: 'Description',
         value: data?.description || '',
@@ -285,7 +286,7 @@ export class InputService {
         required: true,
         order: 1
       }),
-      new InputTextarea({
+      new InputRichText({
         key: 'description',
         label: 'Description',
         value: data?.description || '',
@@ -340,7 +341,7 @@ export class InputService {
         value: data?.title || '',
         order: 1
       }),
-      new InputTextarea({
+      new InputRichText({
         key: 'bio',
         label: 'Bio',
         value: data?.bio || '',
@@ -493,7 +494,7 @@ export class InputService {
         required: true,
         order: 1
       }),
-      new InputTextarea({
+      new InputRichText({
         key: 'description',
         label: 'Description',
         value: data?.properties?.description || '',
@@ -627,7 +628,7 @@ export class InputService {
     this.backendService.getList(routeType).subscribe((list: any) => {
       // console.log("buildOptions:", list);
       for (let item of list) {
-        options.push({ key: item.id, value: item.name })
+        options.push({ key: item.id, value: `${item.name} (Source: ${item.source})` })
       }
     });
 

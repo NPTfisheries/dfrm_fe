@@ -19,6 +19,7 @@
             [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [rowData]="data" [rowSelection]="'multiple'"
             [suppressCellFocus]="true" (gridReady)="onGridReady($event)" [animateRows]="true">
         </ag-grid-angular>
+        <p *ngIf="routeType == 'image'" ><em>* Hover over image name to see description.</em></p>
     </div>
 
 </div>
