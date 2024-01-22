@@ -444,7 +444,9 @@ function facilityColDefs(routeType: string, context: any) {
 // Function to extract and concatenate project leader names
 function getProjectLeaderNames(params: any) {
     if (params.data.project_leader && Array.isArray(params.data.project_leader)) {
-        const leaderNames = params.data.project_leader.map((leader: any) => leader.full_name);
+        // const leaderNames = params.data.project_leader.map((leader: any) => leader.full_name);
+        // return leaderNames.join('; ');
+        const leaderNames = params.data.project_leader.map((leader: any) => leader.first_name + ' ' + leader.last_name);
         return leaderNames.join(', ');
     }
     return '';
@@ -453,7 +455,9 @@ function getProjectLeaderNames(params: any) {
 // .. or staff names
 function getStaffNames(params: any) {
     if (params.data.staff && Array.isArray(params.data.staff)) {
-        const staffNames = params.data.staff.map((staff: any) => staff.full_name);
+        // const staffNames = params.data.staff.map((staff: any) => staff.full_name);
+        // return staffNames.join('; ');
+        const staffNames = params.data.staff.map((staff: any) => staff.first_name + ' ' + staff.last_name);
         return staffNames.join(', ');
     }
     return '';
