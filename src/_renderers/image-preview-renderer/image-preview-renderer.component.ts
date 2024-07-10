@@ -29,7 +29,7 @@ export class ImagePreviewRendererComponent implements ICellRendererAngularComp {
   previewImage() {
     // console.log('previewImage:', this.params);
 
-    const imageUrl = this.params.data.image.replace('localhost:4200', 'localhost:8000');
+    const imageUrl = this.params.data.image.replace('backend:8000', 'localhost:8000');
 
     const modalRef = this.modalService.open(ImagePreviewComponent, { size: 'xl', centered: true, fullscreen: true });
     modalRef.componentInstance.imageUrl = imageUrl;
