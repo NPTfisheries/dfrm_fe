@@ -5,8 +5,7 @@ export function buildImageUrl(imageUrl: string) {
     
     if(environment.apiUrl === '') {
         // console.log('using localhost');
-        // return `http://localhost:8000${imageUrl}`
-        return `${imageUrl}`
+        return `http://localhost:8000${imageUrl}`
     }
 
     return `${imageUrl}`;
