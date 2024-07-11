@@ -47,12 +47,12 @@ export class ProfileComponent implements OnInit {
       const slug = getRouteSlug(this.route);  // actually 'id'
       this.bs.getDetail(this.routeType, slug).subscribe(user => {
         this.data = user;
-        this.getImage(user?.profile?.photo);
+        this.imageUrl = buildImageUrl(user?.profile?.photo)
       });
     } else {
       this.bs.getCurrentUser().subscribe(currentUser => {
         this.data = currentUser;
-        this.getImage(currentUser?.profile?.photo);
+        this.imageUrl = buildImageUrl(currentUser?.profile?.photo)
       });
     }
   }
@@ -64,10 +64,6 @@ export class ProfileComponent implements OnInit {
     modalRef.componentInstance.data = this.data?.profile; // pass profile info to modal
     modalRef.componentInstance.addOrEdit ='edit';
     
-  }
-
-  getImage(path: any) {
-    this.imageUrl = buildImageUrl(path);
   }
 
   triggerFileInputClick() {
@@ -86,7 +82,7 @@ export class ProfileComponent implements OnInit {
 
       this.bs.updateProfilePhoto(formData).subscribe(response => {
         console.log(response);
-        this.getImage(response.photo);
+        this.imageUrl = buildImageUrl(response.photo)
       });
     }
   }

@@ -4,6 +4,7 @@ import { ICellRendererParams } from 'ag-grid-community';
 
 import { ImagePreviewComponent } from 'src/app/image-preview/image-preview.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 
 @Component({
   selector: 'app-image-preview-renderer',
@@ -29,7 +30,7 @@ export class ImagePreviewRendererComponent implements ICellRendererAngularComp {
   previewImage() {
     // console.log('previewImage:', this.params);
 
-    const imageUrl = this.params.data.image.replace('backend:8000', 'localhost:8000');
+    const imageUrl = buildImageUrl(this.params.data.image);
 
     const modalRef = this.modalService.open(ImagePreviewComponent, { size: 'xl', centered: true, fullscreen: true });
     modalRef.componentInstance.imageUrl = imageUrl;
