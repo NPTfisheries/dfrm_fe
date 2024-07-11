@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    apiUrl: ''  // the proxy should work here.
+    apiUrl: ''  // leave empty and depend on proxy.conf.json
 };
