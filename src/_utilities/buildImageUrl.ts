@@ -10,5 +10,5 @@ export function buildImageUrl(imageUrl: string | undefined) {
         return `http://localhost:8000${imageUrl}`
     }
 
-    return `environment.apiUrl${imageUrl}`;
+    return `${environment.apiUrl}${imageUrl}`;
 }
