@@ -8,7 +8,8 @@ export function buildImageUrl(imageUrl: string | undefined) {
     if(environment.apiUrl === '') {
         // console.log('using localhost');
         return `http://localhost:8000${imageUrl}`
+    } else {
+        return `https://dfrm-website.s3.us-west-2.amazonaws.com${imageUrl}`
     }
 
-    return `${environment.apiUrl}${imageUrl}`;
 }
