@@ -50,12 +50,8 @@ export class BackendService {
         return this.patch(`${this.apiUrl}${this.apiVersion}profile/`, profile);
     }
 
-    // updateProfilePhoto(photo: any) {
-    //     return this.put(`${this.apiUrl}${this.apiVersion}profile-photo/`, photo);
-    // }
-
-    updateProfilePhoto(profile: any) {
-        return this.patch(`${this.apiUrl}${this.apiVersion}profile/`, profile);
+    updateProfilePhoto(photo: any) {
+        return this.put(`${this.apiUrl}${this.apiVersion}profile-photo/`, photo);
     }
 
     updatePassword(passwordUpdateForm: any) {
