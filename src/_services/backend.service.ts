@@ -9,7 +9,7 @@ import { environment } from "src/environments/environment";
 @Injectable({ providedIn: 'root' })
 export class BackendService {
 
-    apiUrl = environment.apiUrl;  // http://localhost:8000
+    apiUrl = environment.apiUrl;
     apiVersion = '/api/v1/';
 
     constructor(
@@ -46,10 +46,6 @@ export class BackendService {
 
     updateProfile(profile: any) {
         return this.put(`${this.apiUrl}${this.apiVersion}profile/`, profile);
-    }
-
-    updateProfilePhoto(photo: any) {
-        return this.put(`${this.apiUrl}${this.apiVersion}profile-photo/`, photo);
     }
 
     updatePassword(passwordUpdateForm: any) {
@@ -97,17 +93,6 @@ export class BackendService {
                 })
             );
     }
-
-    
-    // patch(url: string, object: object): Observable<any> {
-    //     return this.http.patch(url, object)
-    //         .pipe(
-    //             map((response) => {
-    //                 console.log(`${url} response:`, response);
-    //                 return response;
-    //             })
-    //         );
-    // }
 
     // need to build an error handler
     // https://angular.io/tutorial/tour-of-heroes/toh-pt6
