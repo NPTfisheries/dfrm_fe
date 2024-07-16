@@ -34,7 +34,6 @@ export class BackendService {
     updateItem(routeType: string, slug:string, object:object): Observable<any>  {
         const URL = `${this.apiUrl}${this.apiVersion}${routeType}/${slug}/`;
         return this.put(URL, object);
-        // return this.patch(URL, object);
     }
 
     getCurrentUser(): Observable<User> {
@@ -47,7 +46,6 @@ export class BackendService {
 
     updateProfile(profile: any) {
         return this.put(`${this.apiUrl}${this.apiVersion}profile/`, profile);
-        // return this.patch(`${this.apiUrl}${this.apiVersion}profile/`, profile);
     }
 
     updateProfilePhoto(photo: any) {
@@ -101,15 +99,15 @@ export class BackendService {
     }
 
     
-    patch(url: string, object: object): Observable<any> {
-        return this.http.patch(url, object)
-            .pipe(
-                map((response) => {
-                    console.log(`${url} response:`, response);
-                    return response;
-                })
-            );
-    }
+    // patch(url: string, object: object): Observable<any> {
+    //     return this.http.patch(url, object)
+    //         .pipe(
+    //             map((response) => {
+    //                 console.log(`${url} response:`, response);
+    //                 return response;
+    //             })
+    //         );
+    // }
 
     // need to build an error handler
     // https://angular.io/tutorial/tour-of-heroes/toh-pt6

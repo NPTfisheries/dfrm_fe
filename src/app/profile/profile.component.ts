@@ -80,11 +80,7 @@ export class ProfileComponent implements OnInit {
       const formData = new FormData();
       formData.append('photo', photo)
 
-      // this.bs.updateProfilePhoto(formData).subscribe(response => {
-      //   console.log(response);
-      //   this.imageUrl = buildImageUrl(response.photo)
-      // });
-      this.bs.updateProfile(formData).subscribe(response => {
+      this.bs.updateProfilePhoto(formData).subscribe(response => {
         console.log(response);
         this.imageUrl = buildImageUrl(response.photo)
       });
