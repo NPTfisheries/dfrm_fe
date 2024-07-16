@@ -33,7 +33,8 @@ export class BackendService {
 
     updateItem(routeType: string, slug:string, object:object): Observable<any>  {
         const URL = `${this.apiUrl}${this.apiVersion}${routeType}/${slug}/`;
-        return this.put(URL, object);
+        // return this.put(URL, object);
+        return this.patch(URL, object);
     }
 
     getCurrentUser(): Observable<User> {
@@ -44,13 +45,17 @@ export class BackendService {
         return this.get(`${this.apiUrl}${this.apiVersion}image/${id}/`);
     }
 
-
     updateProfile(profile: any) {
-        return this.put(`${this.apiUrl}${this.apiVersion}profile/`, profile);
+        // return this.put(`${this.apiUrl}${this.apiVersion}profile/`, profile);
+        return this.patch(`${this.apiUrl}${this.apiVersion}profile/`, profile);
     }
 
-    updateProfilePhoto(photo: any) {
-        return this.put(`${this.apiUrl}${this.apiVersion}profile-photo/`, photo);
+    // updateProfilePhoto(photo: any) {
+    //     return this.put(`${this.apiUrl}${this.apiVersion}profile-photo/`, photo);
+    // }
+
+    updateProfilePhoto(profile: any) {
+        return this.patch(`${this.apiUrl}${this.apiVersion}profile/`, profile);
     }
 
     updatePassword(passwordUpdateForm: any) {
@@ -91,6 +96,17 @@ export class BackendService {
 
     put(url: string, object: object): Observable<any> {
         return this.http.put(url, object)
+            .pipe(
+                map((response) => {
+                    console.log(`${url} response:`, response);
+                    return response;
+                })
+            );
+    }
+
+    
+    patch(url: string, object: object): Observable<any> {
+        return this.http.patch(url, object)
             .pipe(
                 map((response) => {
                     console.log(`${url} response:`, response);
