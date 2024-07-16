@@ -52,6 +52,7 @@ import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
 import { RichTextInputComponent } from './forms/rich-text-input/rich-text-input.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { HtmlSanitizerComponent } from '../_components/html-sanitizer/html-sanitizer.component';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { HtmlSanitizerComponent } from '../_components/html-sanitizer/html-sanit
     ModalConfirmComponent,
     RichTextInputComponent,
     HtmlSanitizerComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,

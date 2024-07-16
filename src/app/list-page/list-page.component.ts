@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 
@@ -22,7 +22,7 @@ import { adminAccess, managerAccess, projectleaderAccess } from 'src/_utilities/
   templateUrl: './list-page.component.html',
   styleUrls: ['./list-page.component.css']
 })
-export class ListPageComponent implements OnInit {
+export class ListPageComponent implements OnInit, OnDestroy {
 
   @ViewChild(FormContainerComponent) formContainerComponent!: FormContainerComponent;
   @ViewChild(RegisterComponent) registerComponent!: RegisterComponent;
@@ -47,9 +47,9 @@ export class ListPageComponent implements OnInit {
   managerAccess = managerAccess;
   projectleaderAccess = projectleaderAccess;
   routeType!: string;
-
   permissionGroup!: string;
   private permissionGroupSubscription: Subscription;
+  btnStyle={'float': 'right', 'margin-right': '30px'}
 
   constructor(
     private route: ActivatedRoute,
@@ -63,13 +63,6 @@ export class ListPageComponent implements OnInit {
     });
   }
 
-  onGridReady(params: any) {
-    this.getList(this.routeType);
-    this.gridApi = params.api;
-    params.api.sizeColumnsToFit(params);
-    // params.api.autoSizeAllColumns();
-  }
-
   ngOnInit(): void {
     this.routeType = getRouteType(this.route);
     this.columnDefs = getColumnDefs(this.routeType, this);
@@ -79,15 +72,23 @@ export class ListPageComponent implements OnInit {
     this.permissionGroupSubscription.unsubscribe();
   }
 
+  onGridReady(params: any) {
+    this.getList(this.routeType);
+    this.gridApi = params.api;
+    params.api.sizeColumnsToFit(params);
+    // params.api.autoSizeAllColumns();
+  }
+
   getList(routeType: string) {
     this.backendService.getList(routeType).subscribe((list: any) => {
-      if (routeType === 'facility') { 
-        this.data = list.features;
-        // console.log(list.features);
-      }
-      else {
-        this.data = list;
-      }
+      this.data = routeType === 'facility' ? list.features : list;
+      // if (routeType === 'facility') { 
+      //   this.data = list.features;
+      //   // console.log(list.features);
+      // }
+      // else {
+      //   this.data = list;
+      // }
     });
   }
 
