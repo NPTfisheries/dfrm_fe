@@ -20,7 +20,7 @@
         height: auto;
         margin-bottom: 0.7rem;
     
-        pre {
+        :is(pre) {
           white-space: pre !important;
         }
       }
