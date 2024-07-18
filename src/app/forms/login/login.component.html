@@ -3,25 +3,10 @@
     <alert id="login-alert"></alert>
     <div class="card-body">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="text" formControlName="username" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
-                <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
-                    <div *ngIf="f['username'].errors['required']">Email is required</div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input type="password" formControlName="password" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
-                <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-                    <div *ngIf="f['password'].errors['required']">Password is required</div>
-                    <div *ngIf="f['password'].errors['minlength']">Password must be at least 8 characters</div>
-                    <div *ngIf="f['password'].errors['maxlength']">Password cannot be more than 255 characters</div>
 
-                </div>
-            </div>
+            <app-form-input [form]="form" label="Email" controlName="username" [customErrors]="{ required: 'Email is required'}"></app-form-input>
+            <app-form-input [form]="form" label="Password" controlName="password" type="password" [customErrors]="{ required: 'Password is required', minlength: 'Password must be at least 8 characters', maxlength: 'Password cannot be more than 255 characters' }"></app-form-input>
+
             <app-button [label]="'Login'" [loading]="loading" [style]="{'float':'right'}"></app-button>
         </form>
     </div>
