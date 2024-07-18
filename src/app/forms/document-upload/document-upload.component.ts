@@ -56,14 +56,9 @@ export class DocumentUploadComponent implements OnInit {
 
   get f() { return this.form.controls; }
 
-  onFileChange(event: any): void {
-    if (event.target.files && event.target.files.length > 0) {
-      const newDocument = event.target.files[0];
-      if (newDocument) {
-        this.selectedDocument = newDocument;
-      }
-    }
-  }
+  onFileChange(selectedFile: File | undefined): void {
+    this.selectedDocument = selectedFile;
+  } 
 
   onSubmit(): void {
     if (this.form.invalid || !this.selectedDocument) {

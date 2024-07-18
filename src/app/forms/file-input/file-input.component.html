@@ -1,0 +1,5 @@
+<div class="mb-3">
+    <input type="file" (change)="onFileChange($event)" class="form-control" [ngClass]="{ 'validationError' : !selectedFile }">
+    <div class="errorMessage validationErrorMessage" *ngIf="!selectedFile">{{ validationErrorMessage }}</div>
+  </div>
+  

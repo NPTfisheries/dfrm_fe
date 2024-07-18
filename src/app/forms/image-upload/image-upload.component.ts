@@ -12,7 +12,7 @@ import { ListPageComponent } from 'src/app/list-page/list-page.component';
 })
 export class ImageUploadComponent implements OnInit {
 
-  @Input() context!: ListPageComponent 
+  @Input() context!: ListPageComponent
 
   form!: FormGroup;
   selectedImage: File | undefined;
@@ -38,15 +38,15 @@ export class ImageUploadComponent implements OnInit {
 
   get f() { return this.form.controls; }
 
-  onFileChange(event: any): void {
-    if (event.target.files && event.target.files.length > 0) {
-      const newProfilePhoto = event.target.files[0];
-      if (newProfilePhoto) {
-        this.selectedImage = newProfilePhoto;
-        this.imagePreview = URL.createObjectURL(newProfilePhoto);
-      }
+  onFileChange(selectedFile: File | undefined): void {
+    this.selectedImage = selectedFile;
+    if (this.selectedImage) {
+      this.imagePreview = URL.createObjectURL(this.selectedImage);
+    } else {
+      this.imagePreview = undefined;
     }
   }
+
 
   onSubmit(): void {
     if (this.form.invalid || !this.selectedImage) {

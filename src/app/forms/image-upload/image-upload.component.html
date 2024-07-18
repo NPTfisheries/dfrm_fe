@@ -3,10 +3,7 @@
     <h2 style="text-align: center;">Upload an Image</h2>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-        <div class="mb-3">
-            <input type="file" (change)="onFileChange($event)" class="form-control" [ngClass]="{ 'validationError' : !selectedImage }">
-            <div class="errorMessage validationErrorMessage" *ngIf="!selectedImage">A file must be selected.</div>
-        </div>
+        <app-file-input (fileSelected)="onFileChange($event)" [validationErrorMessage]="'A file must be selected.'"></app-file-input>
 
         <app-form-input [form]="form" label="Image Name" controlName="name" [customErrors]="{ required: 'Image name is required.' }"></app-form-input>
         <app-form-input [form]="form" label="Description" controlName="description" type="textarea" [customErrors]="{ required: 'Description is required.' }"></app-form-input>

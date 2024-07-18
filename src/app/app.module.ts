@@ -54,6 +54,7 @@ import { NgxEditorModule } from 'ngx-editor';
 import { HtmlSanitizerComponent } from '../_components/html-sanitizer/html-sanitizer.component';
 import { ButtonComponent } from '../_components/button/button.component';
 import { FormInputComponent } from './forms/form-input/form-input.component';
+import { FileInputComponent } from './forms/file-input/file-input.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { FormInputComponent } from './forms/form-input/form-input.component';
     HtmlSanitizerComponent,
     ButtonComponent,
     FormInputComponent,
+    FileInputComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,11 +3,7 @@
     <h2 style="text-align: center;">Document Upload</h2>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-        <div class="mb-3">
-            <input type="file" (change)="onFileChange($event)" class="form-control"
-                [ngClass]="{ 'validationError' : !selectedDocument }">
-            <div class="errorMessage validationErrorMessage" *ngIf="!selectedDocument">A file must be selected.</div>
-        </div>
+        <app-file-input (fileSelected)="onFileChange($event)" [validationErrorMessage]="'A file must be selected.'"></app-file-input>
 
         <app-form-input [form]="form" label="Document Title" controlName="title"
             [customErrors]="{ required: 'Document title is required.' }"></app-form-input>
@@ -22,7 +18,7 @@
         </ng-select> 
         
         <app-form-input [form]="form" label="Publish Date" controlName="publish_date" type="date"
-            [minDate]="'1900-01-01'" [customErrors]="{ required: 'Publish date is required.' }"></app-form-input>
+            [minDate]="'01/01/1900'" [customErrors]="{ required: 'Publish date is required.' }"></app-form-input>
         <app-form-input [form]="form" label="Document Type" controlName="document_type" type="select"
             [options]="document_types" [customErrors]="{ required: 'Document type is required.' }"
             selectPrompt="Select document type"></app-form-input>
