@@ -1,41 +1,20 @@
 <div class="container px-4 py-4">
     <br />
     <h2 style="text-align: center;">Upload an Image</h2>
-    <form [formGroup]="imageForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
         <div class="mb-3">
             <input type="file" (change)="onFileChange($event)" class="form-control" [ngClass]="{ 'validationError' : !selectedImage }">
             <div class="errorMessage validationErrorMessage" *ngIf="!selectedImage">A file must be selected.</div>
         </div>
-        <div class="mb-3">
-            <label for="name" class="form-label">Image Name</label>
-            <input type="text" formControlName="name" class="form-control" required [ngClass]="{ 'validationError' : imageForm.get('name')?.errors }">
-            <div class="errorMessage validationErrorMessage" *ngIf="imageForm.get('name')?.hasError('required')">Image name is required.</div>
-        </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea formControlName="description" rows="5" class="form-control" required [ngClass]="{ 'validationError' : imageForm.get('description')?.errors }"></textarea>
-            <div class="errorMessage validationErrorMessage" *ngIf="imageForm.get('description')?.hasError('required')">Description name is required.</div>
-        </div>
-        <div class="mb-3">
-            <label for="photographer" class="form-label">Photographer</label>
-            <input type="text" formControlName="photographer" class="form-control" required [ngClass]="{ 'validationError' : imageForm.get('photographer')?.errors }">
-            <div><small><em>Who took the photo?</em></small></div>
-            <div class="errorMessage validationErrorMessage" *ngIf="imageForm.get('photographer')?.hasError('required')">Photographer is required.</div>
-        </div>
-        <div class="mb-3">
-            <label for="source" class="form-label">Image Source</label>
-            <input type="text" formControlName="source" class="form-control" required [ngClass]="{ 'validationError' : imageForm.get('source')?.errors }" >
-            <div><small><em>Where does the image come from? This helps ensure all images are copyright free. This can be the exact URL of the page where you got the photo, if applicable.</em></small></div>
-            <div class="errorMessage validationErrorMessage" *ngIf="imageForm.get('source')?.hasError('required')">Source is required.</div>
-        </div>
-        <div class="mb-3">
-            <label for="photo_date" class="form-label">Photo Date</label>
-            <input type="date" formControlName="photo_date" class="form-control form-control-date" required [ngClass]="{ 'validationError' : imageForm.get('photo_date')?.errors }" />
-            <div><small><em>When was the photo taken?</em></small></div>
-            <div class="errorMessage validationErrorMessage" *ngIf="imageForm.get('photo_date')?.hasError('required')">Photo date is required.</div>
-        </div>
-        <app-button [label]="'Upload Image'" [loading]="isSubmitting" [disabled]="imageForm.invalid || !selectedImage || isSubmitting"></app-button>
+
+        <app-form-input [form]="form" label="Image Name" controlName="name" [customErrors]="{ required: 'Image name is required.' }"></app-form-input>
+        <app-form-input [form]="form" label="Description" controlName="description" type="textarea" [customErrors]="{ required: 'Description is required.' }"></app-form-input>
+        <app-form-input [form]="form" label="Photographer" controlName="photographer" [customErrors]="{ required: 'Photographer is required.' }"></app-form-input>
+        <app-form-input [form]="form" label="Source" controlName="source" [customErrors]="{ required: 'Source is required.' }"></app-form-input>
+        <app-form-input [form]="form" label="Photo Date" controlName="photo_date" type="date" [customErrors]="{ required: 'Photo date is required.' }"></app-form-input>
+
+        <app-button [label]="'Upload Image'" [loading]="isSubmitting" [disabled]="form.invalid || !selectedImage || isSubmitting"></app-button>
 
     </form>
     <br />

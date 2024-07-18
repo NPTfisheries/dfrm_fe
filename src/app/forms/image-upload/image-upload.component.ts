@@ -14,7 +14,7 @@ export class ImageUploadComponent implements OnInit {
 
   @Input() context!: ListPageComponent 
 
-  imageForm!: FormGroup;
+  form!: FormGroup;
   selectedImage: File | undefined;
   imagePreview: string | undefined;
   isSubmitting: boolean = false;
@@ -27,7 +27,7 @@ export class ImageUploadComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.imageForm = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       photographer: ['', Validators.required],
@@ -36,7 +36,7 @@ export class ImageUploadComponent implements OnInit {
     })
   }
 
-  get f() { return this.imageForm.controls; }
+  get f() { return this.form.controls; }
 
   onFileChange(event: any): void {
     if (event.target.files && event.target.files.length > 0) {
@@ -49,7 +49,7 @@ export class ImageUploadComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.imageForm.invalid || !this.selectedImage) {
+    if (this.form.invalid || !this.selectedImage) {
       return;
     }
 

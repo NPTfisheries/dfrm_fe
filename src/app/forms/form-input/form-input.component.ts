@@ -10,7 +10,7 @@ export class FormInputComponent implements OnInit {
   @Input() form!: FormGroup;
   @Input() label!: string;
   @Input() controlName!: string;
-  @Input() type: 'text' | 'password' | 'select' = 'text';
+  @Input() type: 'text' | 'password' | 'select' | 'textarea' | 'date' = 'text';
   @Input() options: { value: string; label: string; }[] = [];
   @Input() customErrors: { [key: string]: string } = {};
 
