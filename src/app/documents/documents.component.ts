@@ -7,7 +7,7 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, ColGroupDef, GridApi } from 'ag-grid-community';
 
 import { FormContainerComponent } from '../forms/form-container/form-container.component';
-import { DocumentUploadComponent } from '../document-upload/document-upload.component';
+import { DocumentUploadComponent } from '../forms/document-upload/document-upload.component';
 import { getColumnDefs } from 'src/_services/columnDef.service';
 import { professionalAccess } from 'src/_utilities/permission-util';
 

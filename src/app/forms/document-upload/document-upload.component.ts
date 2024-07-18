@@ -5,7 +5,7 @@ import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
 import { AuthService } from 'src/_services/auth.service';
 
-import { DocumentsComponent } from '../documents/documents.component';
+import { DocumentsComponent } from '../../documents/documents.component';
 
 @Component({
   selector: 'app-document-upload',
@@ -13,15 +13,21 @@ import { DocumentsComponent } from '../documents/documents.component';
   styleUrls: ['./document-upload.component.css']
 })
 export class DocumentUploadComponent implements OnInit {
-  @Input() context!: DocumentsComponent 
+  @Input() context!: DocumentsComponent
 
-  documentForm!: FormGroup;
+  form!: FormGroup;
   isSubmitting: boolean = false;
   selectedAuthors: any[] = [];
   selectedDocument: File | undefined;
 
   // options for select menus
-  document_types = ["Annual Report", "Journal Article", "Technical Memo", "Presentation Slides", 'Other'];
+  document_types = [
+    { key: "Annual Report", value: "Annual Report" },
+    { key: "Journal Article", value: "Journal Article" },
+    { key: "Technical Memo", value: "Technical Memo" },
+    { key: "Presentation Slides", value: "Presentation Slides" },
+    { key: 'Other', value: 'Other' }
+  ]
   author_choices!: any;
 
   constructor(
@@ -36,7 +42,7 @@ export class DocumentUploadComponent implements OnInit {
 
     this.author_choices = this.buildEmployeeOptions();
 
-    this.documentForm = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       primary_author: ['', Validators.required],
@@ -48,7 +54,7 @@ export class DocumentUploadComponent implements OnInit {
     })
   }
 
-  get f() { return this.documentForm.controls; }
+  get f() { return this.form.controls; }
 
   onFileChange(event: any): void {
     if (event.target.files && event.target.files.length > 0) {
@@ -60,7 +66,7 @@ export class DocumentUploadComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.documentForm.invalid || !this.selectedDocument) {
+    if (this.form.invalid || !this.selectedDocument) {
       return;
     }
 
@@ -73,10 +79,10 @@ export class DocumentUploadComponent implements OnInit {
 
     // formData.append('employee_authors', this.f['employee_authors'].value);
     const chosenAuthors = this.f['employee_authors'].value;
-    for( let i = 0; i < chosenAuthors.length; i++) {
+    for (let i = 0; i < chosenAuthors.length; i++) {
       formData.append(`employee_authors`, chosenAuthors[i]);
     }
-    
+
     formData.append('publish_date', this.f['publish_date'].value);
     formData.append('document_type', this.f['document_type'].value);
     formData.append('citation', this.f['citation'].value);
@@ -99,8 +105,8 @@ export class DocumentUploadComponent implements OnInit {
     });
   }
 
-   // for employees
-   private buildEmployeeOptions() {
+  // for employees
+  private buildEmployeeOptions() {
     let options: { key: string, value: string }[] = [];
 
     this.backendService.getList('users').subscribe((employees: any) => {
@@ -115,12 +121,12 @@ export class DocumentUploadComponent implements OnInit {
   }
 
   updateAuthors() {
-    console.log('updating selectedAuthors to:', this.documentForm.get(`employee_authors`));
-    this.documentForm.get(`employee_authors`)?.patchValue(this.selectedAuthors);
+    console.log('updating selectedAuthors to:', this.form.get(`employee_authors`));
+    this.form.get(`employee_authors`)?.patchValue(this.selectedAuthors);
   }
 
 }
 
 
 
-  
+

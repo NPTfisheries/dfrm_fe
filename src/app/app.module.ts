@@ -46,7 +46,7 @@ import { SelectInputComponent } from './forms/select-input/select-input.componen
 import { DivisionDetailComponent } from './division-detail/division-detail.component';
 import { DetailMapComponent } from './facility-detail/detail-map/detail-map.component';
 import { DocumentsComponent } from './documents/documents.component';
-import { DocumentUploadComponent } from './document-upload/document-upload.component';
+import { DocumentUploadComponent } from './forms/document-upload/document-upload.component';
 import { DocumentPreviewRendererComponent } from '../_renderers/document-preview-renderer/document-preview-renderer.component';
 import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
 import { RichTextInputComponent } from './forms/rich-text-input/rich-text-input.component';

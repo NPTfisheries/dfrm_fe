@@ -11,8 +11,10 @@ export class FormInputComponent implements OnInit {
   @Input() label!: string;
   @Input() controlName!: string;
   @Input() type: 'text' | 'password' | 'select' | 'textarea' | 'date' = 'text';
-  @Input() options: { value: string; label: string; }[] = [];
+  @Input() options: { key: string; value: string; }[] = [];
   @Input() customErrors: { [key: string]: string } = {};
+  @Input() selectPrompt?: string;
+  @Input() minDate?: string;
 
   get control(): FormControl {
     return this.form.get(this.controlName) as FormControl;

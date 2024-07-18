@@ -8,7 +8,7 @@
             <app-form-input [form]="form" label="Email" controlName="email" [customErrors]="{ required: 'Email is required', pattern: 'Only DFRM employee emails are accepted' }"></app-form-input>
             <app-form-input [form]="form" label="First Name" controlName="first_name" [customErrors]="{ required: 'First name is required' }"></app-form-input>
             <app-form-input [form]="form" label="Last Name" controlName="last_name" [customErrors]="{ required: 'Last name is required' }"></app-form-input>
-            <app-form-input [form]="form" label="Role" controlName="role" type="select" [options]="roles" [customErrors]="{ required: 'Role is required' }"></app-form-input>
+            <app-form-input [form]="form" label="Role" controlName="role" type="select" [options]="roles" selectPrompt="Choose a role" [customErrors]="{ required: 'Role is required' }"></app-form-input>
             <app-form-input [form]="form" label="Password" controlName="password" type="password" [customErrors]="{ required: 'Password is required', minlength: 'Password must be at least 8 characters', maxlength: 'Password cannot be more than 255 characters' }"></app-form-input>
             <app-form-input [form]="form" label="Confirm Password" controlName="password2" type="password" [customErrors]="{ required: 'Confirm Password is required', passwordMismatch: 'Passwords do not match' }"></app-form-input>
 

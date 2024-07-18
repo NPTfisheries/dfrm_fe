@@ -21,11 +21,11 @@ export class RegisterComponent implements OnInit {
   submitted = false;
 
   roles = [
-    { value: '2', label: 'Manager' },
-    { value: '3', label: 'Project Leader' },
-    { value: '4', label: 'Professional' },
-    { value: '5', label: 'Technician' },
-    { value: '6', label: 'Guest' }
+    { key: '2', value: 'Manager' },
+    { key: '3', value: 'Project Leader' },
+    { key: '4', value: 'Professional' },
+    { key: '5', value: 'Technician' },
+    { key: '6', value: 'Guest' }
   ];
 
   constructor(
