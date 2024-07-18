@@ -52,7 +52,7 @@ import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
 import { RichTextInputComponent } from './forms/rich-text-input/rich-text-input.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { HtmlSanitizerComponent } from '../_components/html-sanitizer/html-sanitizer.component';
-import { ButtonComponent } from './button/button.component';
+import { ButtonComponent } from '../_components/button/button.component';
 import { FormInputComponent } from './forms/form-input/form-input.component';
 
 @NgModule({
