@@ -311,7 +311,7 @@ function documentColDefs(routeType: string, context: any) {
         {
             field: 'title',
             headerName: 'Title *',
-            tooltipField: 'description'
+            tooltipField: 'description' // display desc. on hover
         },
         // {
         //     field: 'description',
@@ -467,7 +467,7 @@ function getStaffNames(params: any) {
 function getAuthorNames(params: any) {
     if (params.data.employee_authors && Array.isArray(params.data.employee_authors)) {
         const authorNames = params.data.employee_authors.map((staff: any) => staff.full_name);
-        return authorNames.join(', ');
+        return authorNames.join('; ');
     }
     return '';
 }
