@@ -1,4 +1,9 @@
-<button [disabled]="disabled || loading" class="dfrm-button grow" [ngStyle]="style">
+<button 
+  class="dfrm-button" 
+  [disabled]="disabled || loading" 
+  [ngClass]="buttonClasses"
+  [ngStyle]="style">
+
     {{ label }}
     <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
   </button>

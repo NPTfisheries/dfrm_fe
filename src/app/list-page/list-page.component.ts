@@ -82,20 +82,12 @@ export class ListPageComponent implements OnInit, OnDestroy {
   getList(routeType: string) {
     this.backendService.getList(routeType).subscribe((list: any) => {
       this.data = routeType === 'facility' ? list.features : list;
-      // if (routeType === 'facility') { 
-      //   this.data = list.features;
-      //   // console.log(list.features);
-      // }
-      // else {
-      //   this.data = list;
-      // }
     });
   }
 
   // add & edit for department, division, and project
   add(routeType: string | undefined) {
     // console.log('add:', routeType);
-
     const modalRef = this.modalService.open(FormContainerComponent, this.getModalOptions());
     modalRef.componentInstance.context = this;
     modalRef.componentInstance.routeType = routeType;

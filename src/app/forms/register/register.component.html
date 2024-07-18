@@ -5,14 +5,20 @@
     <alert id="register-modal"></alert>
     <div class="modal-body">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
-            <div class="mb-3">
+            <app-form-input [form]="form" label="Email" controlName="email" [customErrors]="{ required: 'Email is required', pattern: 'Only DFRM employee emails are accepted' }"></app-form-input>
+            <app-form-input [form]="form" label="First Name" controlName="first_name" [customErrors]="{ required: 'First name is required' }"></app-form-input>
+            <app-form-input [form]="form" label="Last Name" controlName="last_name" [customErrors]="{ required: 'Last name is required' }"></app-form-input>
+            <app-form-input [form]="form" label="Role" controlName="role" type="select" [options]="roles" [customErrors]="{ required: 'Role is required' }"></app-form-input>
+            <app-form-input [form]="form" label="Password" controlName="password" type="password" [customErrors]="{ required: 'Password is required', minlength: 'Password must be at least 8 characters', maxlength: 'Password cannot be more than 255 characters' }"></app-form-input>
+            <app-form-input [form]="form" label="Confirm Password" controlName="password2" type="password" [customErrors]="{ required: 'Confirm Password is required', passwordMismatch: 'Passwords do not match' }"></app-form-input>
+          
+            <!-- <div class="mb-3">
                 <label class="form-label">Email</label>
                 <input type="text" formControlName="email" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
-                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                    [ngClass]="{ 'is-invalid':  f['email'].errors }" />
+                <div *ngIf="f['email'].touched && f['email'].dirty && f['email'].errors" class="invalid-feedback">
                     <div *ngIf="f['email'].errors['required']">Email is required</div>
-                    <div *ngIf="f['email'].errors['pattern']">Only DFRM employee emails are accepted (@nezperce.org)
+                    <div *ngIf="f['email'].errors['pattern']">Only DFRM employee emails are accepted
                     </div>
                 </div>
             </div>
@@ -40,7 +46,6 @@
                 <select formControlName="role" class="form-control form-select"
                     [ngClass]="{ 'is-invalid': submitted && f['role'].errors }">
                     <option value="" disabled selected>Select a role</option>
-                    <!-- <option value="1">Admin</option> -->
                     <option value="2">Manager</option>
                     <option value="3">Project Leader</option>
                     <option value="4">Professional</option>
@@ -71,14 +76,9 @@
                     <div *ngIf="f['password2'].errors['required']">Confirm Password is required</div>
                     <div *ngIf="f['password2'].errors['passwordMismatch']">Passwords do not match</div>
                 </div>
-            </div>
+            </div> -->
 
-            <div>
-                <button [disabled]="loading" class="dfrm-button">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
-                    Register User
-                </button>
-            </div>
+            <app-button [label]="'Register User'" [loading]="loading" [disabled]="loading || form.invalid"></app-button>
         </form>
     </div>
 </div>

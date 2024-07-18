@@ -53,6 +53,7 @@ import { RichTextInputComponent } from './forms/rich-text-input/rich-text-input.
 import { NgxEditorModule } from 'ngx-editor';
 import { HtmlSanitizerComponent } from '../_components/html-sanitizer/html-sanitizer.component';
 import { ButtonComponent } from './button/button.component';
+import { FormInputComponent } from './forms/form-input/form-input.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { ButtonComponent } from './button/button.component';
     RichTextInputComponent,
     HtmlSanitizerComponent,
     ButtonComponent,
+    FormInputComponent,
   ],
   imports: [
     BrowserModule,

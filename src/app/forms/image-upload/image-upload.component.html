@@ -35,8 +35,7 @@
             <div><small><em>When was the photo taken?</em></small></div>
             <div class="errorMessage validationErrorMessage" *ngIf="imageForm.get('photo_date')?.hasError('required')">Photo date is required.</div>
         </div>
-        <button type="submit" class="dfrm-button" [disabled]="imageForm.invalid || !selectedImage || isSubmitting">Upload
-            Image</button>
+        <app-button [label]="'Upload Image'" [loading]="isSubmitting" [disabled]="imageForm.invalid || !selectedImage || isSubmitting"></app-button>
 
     </form>
     <br />

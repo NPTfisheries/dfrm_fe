@@ -1,0 +1,16 @@
+<div [formGroup]="form" class="mb-3">
+  <label [for]="id" class="form-label">{{ label }}</label>
+  <ng-container [ngSwitch]="type">
+    <input *ngSwitchCase="'text'" [id]="id" [type]="type" [formControlName]="controlName" class="form-control" [ngClass]="{ 'is-invalid': isInvalid }" />
+    <input *ngSwitchCase="'password'" [id]="id" [type]="type" [formControlName]="controlName" class="form-control" [ngClass]="{ 'is-invalid': isInvalid }" />
+    <select *ngSwitchCase="'select'" [id]="id" class="form-control form-select" [formControlName]="controlName" [ngClass]="{ 'is-invalid': isInvalid }">
+      <option value="" disabled selected>Select a role</option>
+      <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
+    </select>
+  </ng-container>
+  <div *ngIf="isInvalid" class="invalid-feedback">
+    <ng-container *ngFor="let error of errorMessages">
+      <div>{{ error }}</div>
+    </ng-container>
+  </div>
+</div>

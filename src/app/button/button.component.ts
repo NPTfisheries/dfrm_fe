@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -10,4 +10,13 @@ export class ButtonComponent {
   @Input() loading = false;
   @Input() disabled = false;
   @Input() style?: { [klass: string]: any};
+
+  buttonClasses = 'dfrm-button';
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['disabled']) {
+      this.buttonClasses = this.disabled ? 'dfrm-button' : 'dfrm-button grow';
+    }
+  }
+
 }

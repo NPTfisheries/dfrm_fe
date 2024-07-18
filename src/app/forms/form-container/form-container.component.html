@@ -12,6 +12,6 @@
         (formSubmitted)="handleFormSubmitted()"
         (formValidityChanged)="handleFormValidityChanged($event)">
             </app-dynamic-form>
-        <button class="dfrm-button" (click)="submitDynamicForm()" [disabled]="!formValid">Submit Form</button>
+        <app-button [label]="'Submit Form'" (click)="submitDynamicForm()" [disabled]="!formValid"></app-button>
     </div>
 </div>
