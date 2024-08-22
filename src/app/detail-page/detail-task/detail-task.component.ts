@@ -61,8 +61,16 @@ export class DetailTaskComponent implements OnInit, OnChanges {
   }
 
   getList() {
-    this.backendService.getList(`task/?subproject_id=${this.subprojectId}`).subscribe(list => {
-      this.data = list;
+    this.backendService.getList(`task/?subproject_id=${this.subprojectId}`).subscribe(response => {
+      var active_tasks:any = [];
+      
+      response.filter(task => {
+        if(task.is_active) {
+          active_tasks.push(task);
+        }
+      });
+      
+      this.data = active_tasks;
     });
   }
 
@@ -88,6 +96,7 @@ export class DetailTaskComponent implements OnInit, OnChanges {
 
     modalRef.result.then(() => {
       console.log('MODAL CLOSED');
+      this.getList()
       this.authService.refreshPermissions().subscribe();
     });
   }
@@ -106,6 +115,10 @@ export class DetailTaskComponent implements OnInit, OnChanges {
     modalRef.componentInstance.subprojectId = this.subprojectId; // needed for filtered list response from FCC
     modalRef.componentInstance.identifier = id;
     modalRef.componentInstance.addOrEdit = 'edit';
+
+    modalRef.result.then(() => {
+      this.getList();
+    });
   }
 
   canEditTask(id: any) {

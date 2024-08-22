@@ -274,6 +274,11 @@ export class InputService {
         options: this.buildOptions('image'),
         order: 7
       }),
+      new InputCheckbox({
+        key: 'is_active',
+        value: data?.is_active,
+        order: 8
+      }),
       new InputHidden({
         key: 'img_card',
         value: data?.img_card.id || this.defaultCardId,
@@ -328,6 +333,11 @@ export class InputService {
         // options: this.buildEmployeeOptions(),
         required: true,
         order: 4
+      }),
+      new InputCheckbox({
+        key: 'is_active',
+        value: data?.is_active,
+        order: 5
       }),
       new InputHidden({
         key: 'img_banner',

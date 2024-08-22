@@ -8,6 +8,7 @@ export interface Project {
     id?: number;
     img_banner?: number | Image;
     img_card?: number | Image;
+    is_active?: boolean;
     name?: string;
     project_leader?: number[] | User[];
     slug?: string;

@@ -10,6 +10,7 @@ export interface Division {
     id?: string;
     img_banner?: number | Image;
     img_card?: number | Image;
+    is_active?: boolean;
     manager?: number | User;
     name?: string;
     slug?: string;

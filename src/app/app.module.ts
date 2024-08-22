@@ -55,6 +55,7 @@ import { HtmlSanitizerComponent } from '../_components/html-sanitizer/html-sanit
 import { ButtonComponent } from '../_components/button/button.component';
 import { FormInputComponent } from './forms/form-input/form-input.component';
 import { FileInputComponent } from './forms/file-input/file-input.component';
+import { BooleanRendererComponent } from '../_renderers/boolean-renderer/boolean-renderer.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { FileInputComponent } from './forms/file-input/file-input.component';
     ButtonComponent,
     FormInputComponent,
     FileInputComponent,
+    BooleanRendererComponent,
   ],
   imports: [
     BrowserModule,

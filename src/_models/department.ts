@@ -7,7 +7,8 @@ export interface Department {
     description?: string;
     id?: string;
     img_banner?: number | Image;
-    img_card?: number | Image;
+    img_card?: number | Image;    
+    is_active?: boolean;
     manager?: number | User;
     name?: string;
     slug?: string;

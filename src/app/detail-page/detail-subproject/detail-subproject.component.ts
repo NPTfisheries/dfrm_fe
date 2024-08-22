@@ -58,8 +58,16 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
   }
   
   getList() {
-    this.backendService.getList(`subproject/?project_id=${this.projectId}`).subscribe(list => {
-      this.data = list;
+    this.backendService.getList(`subproject/?project_id=${this.projectId}`).subscribe(response => {
+      var active_subprojects:any = [];
+
+      response.filter(subproject => {
+        if(subproject.is_active) {
+          active_subprojects.push(subproject);
+        }
+        this.data = active_subprojects;
+      });
+
     });
   }
 

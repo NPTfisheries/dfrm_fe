@@ -36,7 +36,7 @@ export class CardPageComponent implements OnInit {
     }
 
     this.backendService.getList(this.routeType).subscribe(response => {
-      var active_objects:any = []
+      var active_objects:any = [];
       response.filter(object => {
         if(object.is_active) {
           active_objects.push(object);

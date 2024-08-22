@@ -8,6 +8,7 @@ import { DocumentPreviewRendererComponent } from "src/_renderers/document-previe
 import { ColDef, ColGroupDef } from "ag-grid-community";
 import { professionalAccess, managerAccess, projectleaderAccess } from "src/_utilities/permission-util";
 import { formatPhone } from "src/_utilities/formatPhone";
+import { BooleanRendererComponent } from "src/_renderers/boolean-renderer/boolean-renderer.component";
 
 // COLUMN DEFINITIONS ARE FOR AG GRID
 
@@ -41,6 +42,12 @@ const buttonProps = {
     minWidth: 80    
 }
 
+const isActiveProps = {
+    filter: false,
+    maxWidth: 105,
+    midWidth:105
+}
+
 function departmentColDefs(routeType: string, context: any) {
     const columns: (ColDef | ColGroupDef)[] = [
         {
@@ -71,6 +78,13 @@ function departmentColDefs(routeType: string, context: any) {
             field: 'staff_names',
             headerName: 'Staff',
             valueGetter: getStaffNames
+        },
+        {
+            field: 'is_active',
+            headerName: 'Active?',
+            cellRenderer: BooleanRendererComponent,
+            cellRendererParams: {},
+            ...isActiveProps
         },
         {
             headerName: 'View',
@@ -133,6 +147,13 @@ function divisionColDefs(routeType: string, context: any) {
             valueGetter: getStaffNames
         },
         {
+            field: 'is_active',
+            headerName: 'Active?',
+            cellRenderer: BooleanRendererComponent,
+            cellRendererParams: {},
+            ...isActiveProps
+        },
+        {
             headerName: 'View',
             field: 'slug',
             cellRenderer: LinkButtonRendererComponent,
@@ -164,14 +185,17 @@ function projectColDefs(routeType: string, context: any) {
             field: 'name',
             headerName: 'Name'
         },
-        // {
-        //     field: 'description',
-        //     headerName: 'Description'
-        // },
         {
             field: 'project_leader_names',
             headerName: 'Project Leaders',
             valueGetter: getProjectLeaderNames
+        },
+        {
+            field: 'is_active',
+            headerName: 'Active?',
+            cellRenderer: BooleanRendererComponent,
+            cellRendererParams: {},
+            ...isActiveProps
         },
         {
             headerName: 'View',
@@ -414,6 +438,13 @@ function facilityColDefs(routeType: string, context: any) {
         {
             field: 'properties.state',
             headerName: 'State'
+        },
+        {
+            field: 'properties.is_active',
+            headerName: 'Active?',
+            cellRenderer: BooleanRendererComponent,
+            cellRendererParams: {},
+            ...isActiveProps
         },
         {
             headerName: 'View',
