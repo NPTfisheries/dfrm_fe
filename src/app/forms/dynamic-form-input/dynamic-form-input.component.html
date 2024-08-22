@@ -1,7 +1,14 @@
 <div [formGroup]="form">
-    <label [attr.for]="input.key" class="form-label">{{input.label}}</label>
+    <label [attr.for]="input.key" *ngIf="input?.label" class="form-label">{{input.label}}</label>
 
     <div [ngSwitch]="input.controlType">
+
+        <!-- CHECKBOX (currently only built to use is_active 8/22/24)-->
+        <div *ngSwitchCase="'checkbox'" class="form-check">
+            <input type="checkbox" [id]="input.key" [formControlName]="input.key" [value]="input.value" 
+                class="form-check-input" [ngClass]="getInputClasses(input)" [required]="input.required">
+            <label class="form-check-label" [for]="input.key"> Display on website?</label>
+        </div>
 
         <!-- GEOMETRY -->
         <app-geometry-input *ngSwitchCase="'coordinates'" [input]="input" [form]="form"></app-geometry-input>
@@ -55,6 +62,9 @@
             class="form-control" [ngClass]="getInputClasses(input)" [required]="input.required"
             [minlength]="input.minlength" [maxlength]="input.maxlength"></textarea>
         
+        <!-- RADIO -->
+        <!-- <input *ngSwitchCase="'radio'"> -->
+
         <!-- RICH TEXT -->
         <div *ngSwitchCase="'richtext'" > 
             <app-rich-text-input [input]="input" [form]="form"></app-rich-text-input>

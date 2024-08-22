@@ -34,7 +34,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy {
   ];
 
   ngOnInit(): void {
-    console.log(this.input);
+    // console.log(this.input);
     this.editor = new Editor({
       content: this.input.value,
       keyboardShortcuts: true,

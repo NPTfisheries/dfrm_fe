@@ -15,6 +15,8 @@ import { InputFile } from 'src/_inputs/input-file';
 import { InputCoordinates } from 'src/_inputs/input-geometry';
 import { InputNumber } from 'src/_inputs/input-number';
 import { InputRichText } from 'src/_inputs/input-richtext';
+import { InputCheckbox } from 'src/_inputs/input-checkbox';
+import { InputRadio } from 'src/_inputs/input-radio';
 
 @Injectable({ providedIn: 'root' })
 export class InputService {
@@ -77,6 +79,11 @@ export class InputService {
         value: data?.img_banner.id || this.defaultBannerId,
         options: this.buildOptions('image'),
         order: 7
+      }),
+      new InputCheckbox({
+        key: 'is_active',
+        value: data?.is_active,
+        order: 8
       }),
       new InputImage({
         key: 'img_card',
@@ -150,6 +157,11 @@ export class InputService {
         options: this.buildOptions('image'),
         order: 7
       }),
+      new InputCheckbox({
+        key: 'is_active',
+        value: data?.is_active,
+        order: 8
+      }),
       new InputHidden({
         key: 'department',
         value: '1', // default
@@ -199,6 +211,11 @@ export class InputService {
         value: data?.img_card.id || this.defaultCardId,
         options: this.buildOptions('image'),
         order: 7
+      }),
+      new InputCheckbox({
+        key: 'is_active',
+        value: data?.is_active,
+        order: 8
       }),
       new InputHidden({
         key: 'department',
@@ -611,7 +628,12 @@ export class InputService {
         value: data?.geometry.coordinates || '',
         required: true,
         order: 16
-      })
+      }),
+      new InputCheckbox({
+        key: 'is_active',
+        value: data?.is_active,
+        order: 17
+      }),
     ]
 
     return of(inputs.sort((a, b) => a.order - b.order));

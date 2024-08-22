@@ -26,7 +26,16 @@ export class FacilitiesComponent implements OnInit {
     // this.routeType = 'facility';
     this.backendService.getList('facility').subscribe((response: any) => {
       // console.log('Facilities:', response);
-      this.list = response.features;
+      var active_facilities:any = []
+
+      response.features.filter((facility:any) => {
+        // console.log(facility.properties.is_active);
+        if(facility.properties.is_active) {
+          active_facilities.push(facility);
+        }
+      this.list = active_facilities;
+      });
+
     })
   }
 
