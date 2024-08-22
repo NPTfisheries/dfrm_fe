@@ -641,7 +641,7 @@ export class InputService {
       }),
       new InputCheckbox({
         key: 'is_active',
-        value: data?.is_active,
+        value: data?.properties?.is_active,
         order: 17
       }),
     ]
