@@ -19,7 +19,8 @@ export class DocumentPreviewRendererComponent implements ICellRendererAngularCom
   }
 
   previewDocument() {
-    const documentUrl = this.params.data.document.replace('localhost:4200', 'localhost:8000');
+    // console.log(`Previewing document: ${this.params.data.document}`);
+    const documentUrl = this.params.data.document.replace('backend:8000', 'localhost:8000');
     window.open(documentUrl, '_blank');
   }
 

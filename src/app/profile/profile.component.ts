@@ -10,6 +10,7 @@ import { getRouteType, getRouteSlug } from 'src/_utilities/route-utils';
 import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 import { formatPhone } from 'src/_utilities/formatPhone';
 import { FormContainerComponent } from '../forms/form-container/form-container.component';
+import { UserService } from 'src/_services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -29,6 +30,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private bs: BackendService,
+    private userService: UserService,
     private route: ActivatedRoute,
     public modalService: NgbModal,
     public sanitizer: DomSanitizer,
@@ -44,16 +46,20 @@ export class ProfileComponent implements OnInit {
     this.routeType = getRouteType(this.route);
 
     if (this.routeType === 'users') {
-      const slug = getRouteSlug(this.route);  // actually 'id'
-      this.bs.getDetail(this.routeType, slug).subscribe(user => {
+      const slug = getRouteSlug(this.route);  // user slug is actually 'id'
+      this.userService.getUserById(slug).subscribe(user => {
         this.data = user;
-        this.imageUrl = buildImageUrl(user?.profile?.photo)
+        this.imageUrl = buildImageUrl(user?.profile?.photo);
       });
     } else {
       this.bs.getCurrentUser().subscribe(currentUser => {
         this.data = currentUser;
         this.imageUrl = buildImageUrl(currentUser?.profile?.photo)
       });
+      // this.userService.getCurrentUser().subscribe(currentUser:any => {
+      //     this.data = currentUser;
+      //     this.imageUrl = buildImageUrl(currentUser?.profile?.photo);      
+      // });
     }
   }
 

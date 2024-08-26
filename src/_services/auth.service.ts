@@ -14,7 +14,7 @@ import { environment } from "src/environments/environment";
 export class AuthService {
 
     apiUrl = environment.apiUrl;
-    apiVersion = '/api/v1/';
+    apiVersion = environment.apiVersion;
 
     public username$ = new BehaviorSubject<string | null>(null);
     public token$ = new BehaviorSubject<string | null>(null); // for http interceptor
