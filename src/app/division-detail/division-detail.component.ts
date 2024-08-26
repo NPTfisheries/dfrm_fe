@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { BackendService } from 'src/_services/backend.service';
-import { getRouteSlug, getRouteType } from 'src/_utilities/route-utils';
+import { getRouteSlug } from 'src/_utilities/route-utils';
 import { buildImageUrl } from 'src/_utilities/buildImageUrl';
+import { DivisionService } from 'src/_services/division.service';
 
 @Component({
   selector: 'app-division-detail',
   templateUrl: './division-detail.component.html'
 })
-export class DivisionDetailComponent implements OnInit{
+export class DivisionDetailComponent implements OnInit {
 
   division: any | null = null;
   bannerImage!: string | null;
@@ -17,7 +16,7 @@ export class DivisionDetailComponent implements OnInit{
 
   constructor(
     private route: ActivatedRoute,
-    private backendService: BackendService,
+    private divisionService: DivisionService,
   ) { }
 
   ngOnInit(): void {
@@ -26,12 +25,11 @@ export class DivisionDetailComponent implements OnInit{
   }
 
   getDetail() {
-    this.routeType = getRouteType(this.route);
     const slug = getRouteSlug(this.route);
-    this.backendService.getDetail(this.routeType, slug).subscribe(detail => {
-      this.division = detail;
-      this.bannerImage = buildImageUrl(detail.img_banner.image);
-    });
+    this.divisionService.getDivisionDetail(slug).subscribe((division:any) => {
+      this.division = division;
+      this.bannerImage = buildImageUrl(division?.img_banner?.image);
+    })
   }
 
 }

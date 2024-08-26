@@ -10,7 +10,7 @@ import { environment } from "src/environments/environment";
 export class BackendService {
 
     apiUrl = environment.apiUrl;
-    apiVersion = '/api/v1/';
+    apiVersion = environment.apiVersion;
 
     constructor(
         private http: HttpClient,

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { Observable } from 'rxjs';
 import { Division } from 'src/_models/division';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +10,19 @@ import { Division } from 'src/_models/division';
 export class DivisionService {
   private readonly endpoint = 'division';
 
-  constructor(private dataService: DataService<Division>) { }
+  constructor(
+    private dataService: DataService<Division>,
+    private http: HttpClient,
+  ) { }
 
   getDivisions(): Observable<Division[]> {
-    console.log('getDivisions called');
+    console.log('getDivisions');
     return this.dataService.getData(this.endpoint);
+  }
+
+  getDivisionDetail(slug: string): Observable<Division | null> {
+    console.log(`getDivisionDetail`);
+    return this.dataService.getItem(this.endpoint, slug);
   }
 
   refreshDivisions(): Observable<Division[]> {
@@ -23,4 +32,5 @@ export class DivisionService {
   clearDivisionsCache(): void {
     this.dataService.clearCache(this.endpoint);
   }
+
 }

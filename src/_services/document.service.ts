@@ -12,11 +12,11 @@ export class DocumentService {
     constructor(private dataService: DataService<Document>) { }
 
     getDocuments(): Observable<Document[]> {
-        console.log('getDocuments called');
+        console.log('getDocuments');
         return this.dataService.getData(this.endpoint);
     }
 
-    // getDocumentBySlug(slug: string): Observable<Document | undefined> {
+    // getDocumentById(id: string): Observable<Document | undefined> {
     //     return this.getDocuments().pipe(
     //         map((documents: Document[]) => documents.find(Document => Document.slug == slug))
     //     )

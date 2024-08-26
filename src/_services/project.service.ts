@@ -12,7 +12,7 @@ export class ProjectService {
     constructor(private dataService: DataService<Project>) { }
 
     getProjects(): Observable<Project[]> {
-        console.log('getProjects called');
+        console.log('getProjects');
         return this.dataService.getData(this.endpoint);
     }
 

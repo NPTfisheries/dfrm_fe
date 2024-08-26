@@ -12,7 +12,7 @@ export class ImageService {
     constructor(private dataService: DataService<Image>) { }
 
     getImages(): Observable<Image[]> {
-        console.log('getImages called');
+        console.log('getImages');
         return this.dataService.getData(this.endpoint);
     }
 

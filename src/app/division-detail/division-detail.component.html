@@ -3,7 +3,7 @@
 </div>
 <br>
 <div class="container my-5">
-    <h1 class="dfrm-page-title text-center">{{ division.name }}</h1>
+    <h1 class="dfrm-page-title text-center">{{ division?.name }}</h1>
 
 
 </div>
@@ -11,7 +11,7 @@
 
 <div class="container">
     <!-- <pre><p>{{ division.description }}</p></pre> -->
-    <app-html-sanitizer [html]="division.description"></app-html-sanitizer>
+    <app-html-sanitizer [html]="division?.description"></app-html-sanitizer>
 </div>
 <h2 class="bar-title">Management Staff</h2>
 <div class="employee-bar">
@@ -25,7 +25,7 @@
 <div class="container my-5">
     <h1 class="text-center">Projects</h1>
     <div class="card-container justify-content-md-between justify-content-center">
-        <ng-container *ngFor="let project of division.projects; let i = index">
+        <ng-container *ngFor="let project of division?.projects; let i = index">
             <app-card *ngIf="project" [routeType]="'project'" [data]="project"></app-card>
         </ng-container>
     </div>

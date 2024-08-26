@@ -11,6 +11,9 @@ export class DataService<T> {
     private dataSubjects: { [key: string]: BehaviorSubject<T[] | null> } = {};
     private dataObservables: { [key: string]: Observable<T[]> } = {};
 
+    private itemSubjects: { [key: string]: BehaviorSubject<T | null> } = {};
+    private itemObservables: { [key: string]: Observable<T | null> } = {};
+
     apiUrl = environment.apiUrl;
     apiVersion = environment.apiVersion;
 
@@ -45,7 +48,35 @@ export class DataService<T> {
         }
 
         return this.dataObservables[endpoint];
-    }    
+    }
+
+    // Fetches a single item by key and caches it (e.g., Division Detail).
+    getItem(endpoint: string, key: string): Observable<T | null> {
+        const cacheKey = `${endpoint}/${key}`;
+
+        if (this.itemObservables[cacheKey]) {
+            console.log('Returned existing item!');
+            return this.itemObservables[cacheKey];
+        }
+
+        if (!this.itemSubjects[cacheKey]) {
+            this.itemSubjects[cacheKey] = new BehaviorSubject<T | null>(null);
+        }
+
+        this.itemObservables[cacheKey] = this.itemSubjects[cacheKey].asObservable().pipe(
+            filter((data): data is T => data !== null),
+            shareReplay(1)
+        );
+
+        if (!this.itemSubjects[cacheKey].value) {
+            console.log(`HTTP request for ${this.apiUrl}${this.apiVersion}${cacheKey}`);
+            this.http.get<T>(`${this.apiUrl}${this.apiVersion}${cacheKey}`).pipe(
+                tap(data => this.itemSubjects[cacheKey].next(data))
+            ).subscribe();
+        }
+
+        return this.itemObservables[cacheKey];
+    }
 
     // Refreshes data by making a new HTTP request.
     refreshData(endpoint: string): Observable<T[]> {

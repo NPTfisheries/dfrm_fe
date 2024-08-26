@@ -12,7 +12,7 @@ export class FacilityService {
     constructor(private dataService: DataService<Facility>) { }
 
     getFacilities(): Observable<Facility[]> {
-        console.log('getFacilities called.');
+        console.log('getFacilities');
         return this.dataService.getData(this.endpoint);
     }
 
