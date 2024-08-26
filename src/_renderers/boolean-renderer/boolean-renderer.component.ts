@@ -13,7 +13,7 @@ export class BooleanRendererComponent implements ICellRendererAngularComp {
   icon_style: string | undefined
 
   agInit(params: any): void {
-    console.log('bool renderer params:', params);
+    // console.log('bool renderer params:', params);
     // normal objects        || facilities
     if(params.data?.is_active || params.data?.properties?.is_active) {
       this.icon_class = 'fa-regular fa-square-check fa-xl';

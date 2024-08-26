@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BackendService } from 'src/_services/backend.service';
-
+import { DepartmentService } from 'src/_services/department.service';
+import { DivisionService } from 'src/_services/division.service';
+import { ProjectService } from 'src/_services/project.service';
 import { getRouteType } from 'src/_utilities/route-utils';
 
 @Component({
@@ -17,7 +18,9 @@ export class CardPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private backendService: BackendService,
+    private projectService: ProjectService,
+    private departmentService: DepartmentService,
+    private divisionService: DivisionService,
   ) { }
 
   ngOnInit(): void {
@@ -25,27 +28,31 @@ export class CardPageComponent implements OnInit {
   }
 
   getList() {
-    // card pages have an extra s (i.e., department[s]) that must be removed to get proper url
-    this.routeType = getRouteType(this.route).slice(0, -1);
+    this.routeType = getRouteType(this.route).slice(0, -1);  // remove trailing 's'
 
-    if (this.routeType == 'division') {
-      this.backendService.getList('department')
-        .subscribe(departments => {
+    switch (this.routeType) {
+      case 'division':
+        this.divisionService.getDivisions().subscribe(divisions => {
+          var active_divisions: any = [];
+          divisions.filter(division => {
+            if (division.is_active) { active_divisions.push(division) }
+          });
+          this.list = active_divisions;
+        });
+        this.departmentService.getDepartments().subscribe(departments => {
           this.department = departments[0];
         });
+        break;
+      case 'project':
+        this.projectService.getProjects().subscribe(projects => {
+          var active_projects: any = [];
+          projects.filter(project => {
+            if (project.is_active) { active_projects.push(project) }
+          });
+          this.list = active_projects;
+        });
+        break;
     }
-
-    this.backendService.getList(this.routeType).subscribe(response => {
-      var active_objects:any = [];
-      response.filter(object => {
-        if(object.is_active) {
-          active_objects.push(object);
-        }
-      this.list = active_objects;
-      });
-
-    });
-
   }
 
 }

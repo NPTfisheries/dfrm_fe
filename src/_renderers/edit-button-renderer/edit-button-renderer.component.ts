@@ -7,6 +7,11 @@ import { FormContainerComponent } from 'src/app/forms/form-container/form-contai
 
 import { projectleaderAccess } from 'src/_utilities/permission-util';
 import { AuthService } from 'src/_services/auth.service';
+import { ProjectService } from 'src/_services/project.service';
+import { DepartmentService } from 'src/_services/department.service';
+import { DivisionService } from 'src/_services/division.service';
+import { UserService } from 'src/_services/user.service';
+import { FacilityService } from 'src/_services/facility.service';
 
 @Component({
   selector: 'app-edit-button-renderer',
@@ -16,7 +21,7 @@ import { AuthService } from 'src/_services/auth.service';
 })
 export class EditButtonRendererComponent implements ICellRendererAngularComp {
 
-  projectleaderAccess=projectleaderAccess;
+  projectleaderAccess = projectleaderAccess;
   private params: any;
   objectPerms: any;
   permissionGroup!: string;
@@ -25,28 +30,35 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
   constructor(
     private modalService: NgbModal,
     private authService: AuthService,
+    private projectService: ProjectService,
+    private departmentService: DepartmentService,
+    private divisionService: DivisionService,
+    private userService: UserService,
+    private facilityService: FacilityService
   ) {
     this.permissionGroupSubscription = this.authService.permissionGroup$.subscribe(group => {
       this.permissionGroup = group;
     });
-   }
+  }
 
   agInit(params: any): void {
     this.params = params;
-    if(this.params.routeType === 'project') {
-      this.authService.projectPerms$.subscribe(projectPerms => {
-        this.objectPerms = projectPerms;
-      });
-    }
-    if(this.params.routeType === 'document') {
-      this.authService.documentPerms$.subscribe(documentPerms => {
-        this.objectPerms = documentPerms;
-      });
-    }
-    if(this.params.routeType === 'image') {
-      this.authService.imagePerms$.subscribe(imagePerms => {
-        this.objectPerms = imagePerms;
-      });
+    switch (this.params.routeType) {
+      case 'project':
+        this.authService.projectPerms$.subscribe(projectPerms => {
+          this.objectPerms = projectPerms;
+        });
+        break;
+      case 'document':
+        this.authService.documentPerms$.subscribe(documentPerms => {
+          this.objectPerms = documentPerms;
+        });
+        break;
+      case 'image':
+        this.authService.imagePerms$.subscribe(imagePerms => {
+          this.objectPerms = imagePerms;
+        });
+        break;
     }
   }
 
@@ -64,13 +76,38 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
     modalRef.componentInstance.data = this.params.data;
     modalRef.componentInstance.identifier = this.params.value;
     modalRef.componentInstance.addOrEdit = 'edit';
+
+    modalRef.result.then(() => {
+      this.refreshList();
+    });
+
   }
 
   // true/false logic
   renderButton() {
-    if(!['project', 'document', 'image'].includes(this.params.routeType)) { return true }
+    if (!['project', 'document', 'image'].includes(this.params.routeType)) { return true }
     //object level permissions for project edit buttons.
     return this.objectPerms.includes(String(this.params.data.id));
+  }
+
+  refreshList() {
+    switch (this.params.routeType) {
+      case 'department':
+        this.departmentService.refreshDepartments().subscribe();
+        break;
+      case 'division':
+        this.divisionService.refreshDivisions().subscribe();
+        break;
+      case 'facility':
+        this.facilityService.refreshFacilities().subscribe();
+        break;
+      case 'project':
+        this.projectService.refreshProjects().subscribe();
+        break;
+      case 'users':
+        this.userService.refreshUsers().subscribe();
+        break;
+    }
   }
 
 }

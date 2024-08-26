@@ -45,7 +45,7 @@ const buttonProps = {
 const isActiveProps = {
     filter: false,
     maxWidth: 105,
-    midWidth:105
+    minWidth:105
 }
 
 function departmentColDefs(routeType: string, context: any) {

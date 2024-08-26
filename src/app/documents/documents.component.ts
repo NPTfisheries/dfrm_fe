@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/_services/auth.service';
-import { BackendService } from 'src/_services/backend.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, ColGroupDef, GridApi } from 'ag-grid-community';
@@ -10,6 +9,7 @@ import { FormContainerComponent } from '../forms/form-container/form-container.c
 import { DocumentUploadComponent } from '../forms/document-upload/document-upload.component';
 import { getColumnDefs } from 'src/_services/columnDef.service';
 import { professionalAccess } from 'src/_utilities/permission-util';
+import { DocumentService } from 'src/_services/document.service';
 
 @Component({
   selector: 'app-documents',
@@ -40,7 +40,7 @@ export class DocumentsComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private backendService: BackendService,
+    private documentService: DocumentService,
     private modalService: NgbModal,
   ) {
     this.permissionGroupSubscription = this.authService.permissionGroup$.subscribe(group => {
@@ -64,8 +64,8 @@ export class DocumentsComponent implements OnInit {
   }
 
   getList(routeType: string) {
-    this.backendService.getList(routeType).subscribe((list: any) => {
-        this.data = list;
+    this.documentService.getDocuments().subscribe((documents: any) => {
+        this.data = documents;
     });
   }  
 

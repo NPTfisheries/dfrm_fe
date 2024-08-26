@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BackendService } from 'src/_services/backend.service';
+import { UserService } from 'src/_services/user.service';
 import { FormGroup } from '@angular/forms';
 
 import { InputBase } from 'src/_inputs/input-base';
@@ -21,6 +22,7 @@ export class SelectInputComponent implements OnInit {
 
   constructor(
     private backendService: BackendService,
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
@@ -57,10 +59,14 @@ export class SelectInputComponent implements OnInit {
         this.options$ = ["Annual Report", "Journal Article", "Technical Memo","Presentation Slides","Other"];
         break;
       default:
-        this.options$ = this.backendService.getList('users').subscribe(users => {
-          this.labels = 'full_name';
+        // this.options$ = this.backendService.getList('users').subscribe(users => {
+        //   this.labels = 'full_name';
+        //   this.options$ = users;
+        // });
+        this.userService.getUsers().subscribe(users => {
           this.options$ = users;
-        });
+          this.labels = 'full_name';
+        })
     }
 
   }
