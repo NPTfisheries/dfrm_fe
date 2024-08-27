@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
-
 import { BackendService } from 'src/_services/backend.service';
 import { AlertService } from 'src/_services/alert.service';
 

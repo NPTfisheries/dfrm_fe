@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BackendService } from 'src/_services/backend.service';
 import { UserService } from 'src/_services/user.service';
 import { FormGroup } from '@angular/forms';
 
 import { InputBase } from 'src/_inputs/input-base';
+import { LookupService } from 'src/_services/lookup.service';
+import { DivisionService } from 'src/_services/division.service';
 
 @Component({
   selector: 'app-select-input',
@@ -21,8 +22,9 @@ export class SelectInputComponent implements OnInit {
   multiple: boolean = false;
 
   constructor(
-    private backendService: BackendService,
+    private lookupService: LookupService,
     private userService: UserService,
+    private divisionService: DivisionService,
   ) { }
 
   ngOnInit(): void {
@@ -37,19 +39,19 @@ export class SelectInputComponent implements OnInit {
 
     switch (this.input.key) {
       case 'facility_type':
-        this.options$ = this.backendService.objectLookup('Facility').subscribe(ftypes => {
+        this.options$ = this.lookupService.getLookupsByObjectType('Facility').subscribe(ftypes => {
           this.labels = 'name';
           this.options$ = ftypes;
         });
         break;
       case 'task_type':
-        this.options$ = this.backendService.objectLookup('Task').subscribe(ttypes => {
+        this.options$ = this.lookupService.getLookupsByObjectType('Task').subscribe(ttypes => {
           this.labels = 'name';
           this.options$ = ttypes;
         });
         break;
       case 'division':
-        this.options$ = this.backendService.getList('division').subscribe(divisions => {
+        this.options$ =this.divisionService.getDivisions().subscribe(divisions => {
           this.labels = 'name';
           this.options$ = divisions;          
         });
@@ -59,10 +61,6 @@ export class SelectInputComponent implements OnInit {
         this.options$ = ["Annual Report", "Journal Article", "Technical Memo","Presentation Slides","Other"];
         break;
       default:
-        // this.options$ = this.backendService.getList('users').subscribe(users => {
-        //   this.labels = 'full_name';
-        //   this.options$ = users;
-        // });
         this.userService.getUsers().subscribe(users => {
           this.options$ = users;
           this.labels = 'full_name';

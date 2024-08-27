@@ -4,9 +4,9 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors }
 
 import { AuthService } from 'src/_services/auth.service';
 import { AlertService } from 'src/_services/alert.service';
-import { BackendService } from 'src/_services/backend.service';
 
 import { ListPageComponent } from 'src/app/list-page/list-page.component';
+import { UserService } from 'src/_services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
     private authService: AuthService,
     private alertService: AlertService,
     private activeModal: NgbActiveModal,
-    private backendService: BackendService,
+    private userService: UserService,
   ) { }
 
   ngOnInit() {
@@ -66,8 +66,8 @@ export class RegisterComponent implements OnInit {
 
     this.authService.register(this.form.value).subscribe({
       next: () => {
-        this.backendService.getList('users').subscribe(updatedList => {
-          this.context.data = updatedList;
+        this.userService.refreshUsers().subscribe(users => {
+          this.context.data = users;
         });
         this.activeModal.close();
       },

@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-import { User } from "src/_models/interfaces";
 import { Observable, of } from "rxjs";
 import { environment } from "src/environments/environment";
 
@@ -16,16 +15,6 @@ export class BackendService {
         private http: HttpClient,
         ) { }
 
-    getList(routeType: string): Observable<any[]> {
-        const URL = `${this.apiUrl}${this.apiVersion}${routeType}`;
-        return this.get(URL);
-    }
-
-    getDetail(routeType: string, slug: string): Observable<any>  {
-        const URL = `${this.apiUrl}${this.apiVersion}${routeType}/${slug}/`;
-        return this.get(URL);
-    }
-
     newItem(routeType: string, object:object): Observable<any>  {
         const URL = `${this.apiUrl}${this.apiVersion}${routeType}/`;
         return this.post(URL, object);
@@ -36,26 +25,12 @@ export class BackendService {
         return this.put(URL, object);
     }
 
-    getCurrentUser(): Observable<User> {
-        return this.get(this.apiUrl + this.apiVersion + 'user/');
-    }
-
-    getImageById(id:number) {
-        return this.get(`${this.apiUrl}${this.apiVersion}image/${id}/`);
-    }
-
     updateProfile(profile: any) {
         return this.put(`${this.apiUrl}${this.apiVersion}profile/`, profile);
     }
 
     updatePassword(passwordUpdateForm: any) {
         return this.put(`${this.apiUrl}${this.apiVersion}change_password/`, passwordUpdateForm);
-    }
-
-    objectLookup(object_type: string) {
-        const params = new HttpParams().set('object_type', object_type); // Facility, Task
-
-        return this.http.get(`${this.apiUrl}${this.apiVersion}lookup`, { params })
     }
 
     deleteFile(routeType: string, pk: string) {

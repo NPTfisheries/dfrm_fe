@@ -17,7 +17,11 @@ export class UserService {
   }
 
   getCurrentUser() {
-    return this.dataService.getData('user');
+    return this.dataService.getItem('user', '');
+  }
+
+  refreshCurrentUser() {
+    return this.dataService.refreshItem('user', '');
   }
 
   getUserById(id: number | string) {

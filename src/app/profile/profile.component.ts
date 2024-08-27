@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   formatPhone = formatPhone;
-  data: User | undefined; // user
+  data!: User | null | undefined; 
   imageUrl!: string | undefined;
   routeType!: string;
 
@@ -52,9 +52,9 @@ export class ProfileComponent implements OnInit {
         this.imageUrl = buildImageUrl(user?.profile?.photo);
       });
     } else {
-      this.bs.getCurrentUser().subscribe(currentUser => {
+      this.userService.getCurrentUser().subscribe(currentUser => {
         this.data = currentUser;
-        this.imageUrl = buildImageUrl(currentUser?.profile?.photo)
+        this.imageUrl = buildImageUrl(currentUser?.profile?.photo);
       });
     }
   }
@@ -66,6 +66,9 @@ export class ProfileComponent implements OnInit {
     modalRef.componentInstance.data = this.data?.profile; // pass profile info to modal
     modalRef.componentInstance.addOrEdit ='edit';
     
+    modalRef.result.then(() => {
+      this.refreshProfile();
+    });
   }
 
   triggerFileInputClick() {
@@ -87,6 +90,13 @@ export class ProfileComponent implements OnInit {
         this.imageUrl = buildImageUrl(response.photo)
       });
     }
+  }
+
+  refreshProfile() {
+      this.userService.refreshCurrentUser().subscribe(currentUser => {
+        this.data = currentUser;
+        this.imageUrl = buildImageUrl(currentUser?.profile?.photo);
+      });  
   }
 
 }

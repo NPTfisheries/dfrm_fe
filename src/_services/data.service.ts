@@ -94,6 +94,26 @@ export class DataService<T> {
         );
     }
 
+    // Refreshes a single item by key and updates the cache.
+    refreshItem(endpoint: string, key: string): Observable<T | null> {
+        const cacheKey = `${endpoint}/${key}`;
+
+        console.log(`Refreshing item for ${cacheKey}`);
+
+        if (!this.itemSubjects[cacheKey]) {
+            this.itemSubjects[cacheKey] = new BehaviorSubject<T | null>(null);
+        }
+
+        this.itemObservables[cacheKey] = this.itemSubjects[cacheKey].asObservable().pipe(
+            filter((data): data is T => data !== null),
+            shareReplay(1)
+        );
+
+        return this.http.get<T>(`${this.apiUrl}${this.apiVersion}${cacheKey}`).pipe(
+            tap(data => this.itemSubjects[cacheKey].next(data))
+        );
+    }
+
     // Clears the cached data for a specific endpoint.
     clearCache(endpoint: string): void {
         if (this.dataSubjects[endpoint]) {
@@ -101,6 +121,17 @@ export class DataService<T> {
         }
         if (this.dataObservables[endpoint]) {
             delete this.dataObservables[endpoint];
+        }
+    }
+
+    // Clears the cached item for a specific key.
+    clearItemCache(endpoint: string, key: string): void {
+        const cacheKey = `${endpoint}/${key}`;
+        if (this.itemSubjects[cacheKey]) {
+            this.itemSubjects[cacheKey].next(null);
+        }
+        if (this.itemObservables[cacheKey]) {
+            delete this.itemObservables[cacheKey];
         }
     }
 

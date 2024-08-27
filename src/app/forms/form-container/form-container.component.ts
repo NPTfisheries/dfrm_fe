@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 
 import { InputBase } from 'src/_inputs/input-base';
 import { InputService } from 'src/_services/input.service';
-import { BackendService } from 'src/_services/backend.service';
 import { AlertService } from 'src/_services/alert.service';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 import { ListPageComponent } from 'src/app/list-page/list-page.component';
@@ -34,7 +33,6 @@ export class FormContainerComponent implements OnInit {
 
   constructor(
     private inputService: InputService,
-    private backendService: BackendService,
     private activeModal: NgbActiveModal,
     private alertService: AlertService,
   ) { }
@@ -49,37 +47,7 @@ export class FormContainerComponent implements OnInit {
   }
 
   handleFormSubmitted() {
-    let route = this.routeType;
-
-    if (this.projectId) { route = `${this.routeType}/?project_id=${this.projectId}` }; // subproject list, filtered
-    if (this.subprojectId) { route = `${this.routeType}/?subproject_id=${this.subprojectId}` }; // task list, filtered
-
-    if (route === 'profile') {
-      console.log('getting profile...');
-      this.backendService.getCurrentUser().subscribe(currentUser => {
-        if (this.context) {
-          this.context.data = currentUser;
-          this.activeModal.close();
-        }
-      })
-    }
-    
-    if (route !== 'profile') {
-      this.backendService.getList(route).subscribe((updatedList: any) => {
-        if (this.context) {
-          if (route === 'facility') {
-            this.context.data = updatedList.features;
-            this.activeModal.close();
-          } else {
-            this.context.data = updatedList;
-            this.activeModal.close();
-          }
-
-          // this.alertService.success(`New ${this.routeType} succesfully created.`, { autoClose: true});
-        }
-      });
-    }
-
+    this.activeModal.close();
   }
 
   handleFormValidityChanged(valid: boolean) {
@@ -87,8 +55,6 @@ export class FormContainerComponent implements OnInit {
   }
 
   getInputs(routeType: any, data?: any) {
-    // console.log('getInputs', routeType, data);
-
     switch (routeType) {
       case 'department':
         return this.inputService.getDepartmentInputs(data);

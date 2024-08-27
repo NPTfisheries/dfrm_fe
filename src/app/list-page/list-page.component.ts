@@ -147,12 +147,18 @@ export class ListPageComponent implements OnInit, OnDestroy {
 
     modalRef.result.then(() => {
       this.authService.refreshPermissions().subscribe();
+      this.refreshList();
     });
   }
 
   registerUser() {
     const modalRef = this.modalService.open(RegisterComponent, this.getModalOptions());
     modalRef.componentInstance.context = this;
+
+    modalRef.result.then(() => {
+      this.authService.refreshPermissions().subscribe();
+      this.refreshList();
+    });
   }
 
   getModalOptions(): NgbModalOptions {
