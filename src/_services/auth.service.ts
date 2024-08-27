@@ -7,7 +7,7 @@ import { BehaviorSubject, throwError } from "rxjs";
 import { map, catchError } from 'rxjs/operators';
 import jwtDecode from 'jwt-decode';
 
-import { User } from "src/_models/user";
+import { User } from "src/_models/interfaces";
 import { environment } from "src/environments/environment";
 
 @Injectable({ providedIn: 'root' })

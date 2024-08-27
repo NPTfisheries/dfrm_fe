@@ -3,11 +3,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormContainerComponent } from 'src/app/forms/form-container/form-container.component';
 
 import { AuthService } from 'src/_services/auth.service';
-import { BackendService } from 'src/_services/backend.service';
-
-import { getRecordById } from 'src/_utilities/getRecordById'; 
+import { getRecordById } from 'src/_utilities/getRecordById';
 import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 import { managerAccess } from 'src/_utilities/permission-util';
+import { SubprojectService } from 'src/_services/subproject.service';
 
 @Component({
   selector: 'app-detail-subproject',
@@ -16,7 +15,7 @@ import { managerAccess } from 'src/_utilities/permission-util';
 })
 export class DetailSubprojectComponent implements OnInit, OnChanges {
 
-  @Input() projectId: number | undefined;
+  @Input() projectId!: number;
 
   data: any | undefined;
 
@@ -26,12 +25,14 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
 
   constructor(
     private authService: AuthService,
-    private backendService: BackendService,
+    private subprojectService: SubprojectService,
     private modalService: NgbModal,
-  ) {  }
+  ) { }
 
   ngOnInit(): void {
+    console.log("subprojectdetailinit");
     this.checkPermissions();
+    this.getList();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -42,13 +43,13 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
   }
 
   checkPermissions() {
-    this.authService.permissionGroup$.subscribe((permGroup:string) => {
+    this.authService.permissionGroup$.subscribe((permGroup: string) => {
       this.managerPerms = managerAccess(permGroup);
     });
-    this.authService.projectPerms$.subscribe((projectPerms:any) => {
+    this.authService.projectPerms$.subscribe((projectPerms: any) => {
       this.addSubproject = projectPerms.includes(String(this.projectId));
     });
-    this.authService.subprojectPerms$.subscribe((subprojectPerms:any) => {
+    this.authService.subprojectPerms$.subscribe((subprojectPerms: any) => {
       this.subprojectPerms = subprojectPerms;
     });
   }
@@ -56,18 +57,16 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
   getImageUrl(imagePath: string) {
     return buildImageUrl(imagePath);
   }
-  
+
   getList() {
-    this.backendService.getList(`subproject/?project_id=${this.projectId}`).subscribe(response => {
-      var active_subprojects:any = [];
-
-      response.filter(subproject => {
-        if(subproject.is_active) {
-          active_subprojects.push(subproject);
-        }
-        this.data = active_subprojects;
-      });
-
+    this.subprojectService.getSubprojectsByProjectId(this.projectId).subscribe(subprojects => {
+      this.data = subprojects;
+    });
+  }
+  
+  refreshList() {
+    this.subprojectService.refreshSubprojectsByProjectId(this.projectId).subscribe(subprojects => {
+      this.data = subprojects;
     });
   }
 
@@ -79,7 +78,7 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
       lead: '',
       img_banner: '',
       img_card: '',
-      division: {id: ''}
+      division: { id: '' }
     }
 
     const modalRef = this.modalService.open(FormContainerComponent, { size: 'xl', });
@@ -105,11 +104,16 @@ export class DetailSubprojectComponent implements OnInit, OnChanges {
     modalRef.componentInstance.routeType = 'subproject';
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.projectId = this.projectId; // needed for filtered list response from FCC
-    modalRef.componentInstance.identifier = id; 
+    modalRef.componentInstance.identifier = id;
     modalRef.componentInstance.addOrEdit = 'edit';
+
+    modalRef.result.then(() => {
+      this.authService.refreshPermissions().subscribe();
+      this.refreshList();
+    });
   }
 
-  canEditSubproject(id:any) {
+  canEditSubproject(id: any) {
     return this.subprojectPerms.includes(String(id));
   }
 

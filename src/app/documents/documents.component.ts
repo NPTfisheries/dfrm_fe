@@ -34,7 +34,6 @@ export class DocumentsComponent implements OnInit {
 
   data!: any[];
   columnDefs: (ColDef | ColGroupDef)[] = [];
-  list: any | undefined;
   permissionGroup!: string;
   private permissionGroupSubscription: Subscription;
 
@@ -50,7 +49,7 @@ export class DocumentsComponent implements OnInit {
   }
 
   onGridReady(params: any) {
-    this.getList(this.routeType);
+    this.getList();
     this.gridApi = params.api;
     params.api.sizeColumnsToFit(params);
   }
@@ -63,7 +62,7 @@ export class DocumentsComponent implements OnInit {
     this.permissionGroupSubscription.unsubscribe();
   }
 
-  getList(routeType: string) {
+  getList() {
     this.documentService.getDocuments().subscribe((documents: any) => {
         this.data = documents;
     });

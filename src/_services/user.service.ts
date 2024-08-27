@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { map, Observable } from 'rxjs';
-import { User } from 'src/_models/user';
+import { User } from 'src/_models/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +19,8 @@ export class UserService {
   // getCurrentUser() {
   //   return this.dataService.getData('user');
   // }
-  
-  getUserById(id: string) {
+
+  getUserById(id: number | string) {
     return this.getUsers().pipe(
       map((users: User[]) => users.find(user => user.id == id))
     );

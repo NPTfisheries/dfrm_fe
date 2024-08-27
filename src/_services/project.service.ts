@@ -17,7 +17,7 @@ export class ProjectService {
     }
 
     getProjectBySlug(slug: string): Observable<Project | undefined> {
-        // console.log('Project Slug GET!');
+        // console.log('getProjectBySlug');
         return this.getProjects().pipe(
             map((projects: Project[]) => projects.find(project => project.slug == slug))
         )

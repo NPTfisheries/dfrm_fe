@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthService } from 'src/_services/auth.service';
-
-import { User } from 'src/_models/user';
 import { LoginComponent } from '../forms/login/login.component';
 import { PasswordUpdateComponent } from '../forms/password-update/password-update.component';
 

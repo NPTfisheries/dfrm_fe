@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
-import { Observable } from 'rxjs';
-import { Facility } from 'src/_models/facility';
+import { map, Observable } from 'rxjs';
+import { Facility } from 'src/_models/interfaces';
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +14,13 @@ export class FacilityService {
     getFacilities(): Observable<Facility[]> {
         console.log('getFacilities');
         return this.dataService.getData(this.endpoint);
+    }
+
+    getFacilityBySlug(slug: string): Observable<Facility | undefined> {
+        // console.log('getFacilityBySlug');
+        return this.getFacilities().pipe(
+            map((facilities: Facility[]) => facilities.find(facility => facility?.properties?.slug == slug))
+        )
     }
 
     refreshFacilities(): Observable<Facility[]> {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { map, tap, shareReplay, filter } from 'rxjs/operators';
+import { tap, shareReplay, filter } from 'rxjs/operators';
 import { environment } from "src/environments/environment";
 
 @Injectable({
@@ -42,7 +42,6 @@ export class DataService<T> {
         if (!this.dataSubjects[endpoint].value) {
             console.log(`HTTP request for ${endpoint}`);
             this.http.get<any>(`${this.apiUrl}${this.apiVersion}${endpoint}`).pipe(
-                map(data => endpoint === 'facility' ? data.features : data), // data.features is the array for facilities
                 tap(data => this.dataSubjects[endpoint].next(data))
             ).subscribe();
         }
@@ -104,4 +103,5 @@ export class DataService<T> {
             delete this.dataObservables[endpoint];
         }
     }
+
 }

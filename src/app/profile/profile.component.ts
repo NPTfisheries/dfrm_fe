@@ -3,7 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 
 import { BackendService } from 'src/_services/backend.service';
-import { User } from 'src/_models/user';
+import { User } from 'src/_models/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { getRouteType, getRouteSlug } from 'src/_utilities/route-utils';

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { BackendService } from 'src/_services/backend.service';
-import { getRouteType, getRouteSlug } from 'src/_utilities/route-utils';
+import { getRouteSlug } from 'src/_utilities/route-utils';
 import { buildImageUrl } from 'src/_utilities/buildImageUrl';
+import { FacilityService } from 'src/_services/facility.service';
 
 @Component({
   selector: 'app-facility-detail',
@@ -13,11 +13,10 @@ export class FacilityDetailComponent implements OnInit {
   
   data: any | null = null;
   bannerImage!: string | null;
-  routeType: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
-    private backendService: BackendService,
+    private facilityService: FacilityService,
   ) { }
 
   ngOnInit(): void {
@@ -26,12 +25,14 @@ export class FacilityDetailComponent implements OnInit {
   }
 
   getDetail() {
-    this.routeType = getRouteType(this.route);
     const slug = getRouteSlug(this.route);
-    this.backendService.getDetail(this.routeType, slug).subscribe(detail => {
-      this.data = detail;
-      this.bannerImage = buildImageUrl(detail.properties.img_banner.image);
+
+    this.facilityService.getFacilityBySlug(slug).subscribe(facility => {
+      console.log('facility', facility);
+      this.data = facility;
+      this.bannerImage = buildImageUrl(facility?.properties?.img_banner?.image);
     });
+
   }
 
 }

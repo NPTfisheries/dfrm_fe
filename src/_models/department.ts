@@ -1,5 +1,4 @@
-import { User } from "./user";
-import { Image } from "./image";
+import { User, Image } from "./interfaces";
 
 export interface Department {
     assistant?: number | User;

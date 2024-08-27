@@ -1,6 +1,5 @@
 import { Department } from "./department";
-import { Image } from "./image";
-import { User } from "./user";
+import { Image, User } from "./interfaces";
 
 export interface Project {
     department?: number | Department;

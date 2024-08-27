@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Department } from 'src/_models/department';
-import { BackendService } from 'src/_services/backend.service';
 
 @Component({
   selector: 'app-home',
@@ -13,16 +12,9 @@ export class HomeComponent implements OnInit {
   data: Department | undefined;
   bannerImage: string = "./assets/images/Clearwater_River_Home_Page.jpg";
 
-  constructor(
-    private backendService: BackendService,
-  ) { }
+  constructor() {}
 
   ngOnInit(): void {
-    // we only have 1 department for the time being.
-    // this.backendService.get('/api/v1/department/')
-    // .subscribe(department => {   
-    //   this.data = department[0];
-
   }
 
 }

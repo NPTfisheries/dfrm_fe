@@ -3,11 +3,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormContainerComponent } from 'src/app/forms/form-container/form-container.component';
 
 import { AuthService } from 'src/_services/auth.service';
-import { BackendService } from 'src/_services/backend.service';
-
 import { getRecordById } from 'src/_utilities/getRecordById';
 import { managerAccess, projectleaderAccess } from 'src/_utilities/permission-util';
 import { buildImageUrl } from 'src/_utilities/buildImageUrl';
+import { TaskService } from 'src/_services/task.service';
 
 @Component({
   selector: 'app-detail-task',
@@ -16,7 +15,7 @@ import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 })
 export class DetailTaskComponent implements OnInit, OnChanges {
 
-  @Input() subprojectId: number | undefined;
+  @Input() subprojectId!: number;
 
   addTask: boolean = false;
   managerPerms: boolean = false;
@@ -27,7 +26,7 @@ export class DetailTaskComponent implements OnInit, OnChanges {
 
   constructor(
     private authService: AuthService,
-    private backendService: BackendService,
+    private taskService: TaskService,
     private modalService: NgbModal,
   ) { }
 
@@ -61,16 +60,14 @@ export class DetailTaskComponent implements OnInit, OnChanges {
   }
 
   getList() {
-    this.backendService.getList(`task/?subproject_id=${this.subprojectId}`).subscribe(response => {
-      var active_tasks:any = [];
-      
-      response.filter(task => {
-        if(task.is_active) {
-          active_tasks.push(task);
-        }
-      });
-      
-      this.data = active_tasks;
+    this.taskService.getTasksBySubprojectId(this.subprojectId).subscribe(tasks => {
+      this.data = tasks;
+    });
+  }
+
+  refreshList() {
+    this.taskService.refreshTasksBySubprojectId(this.subprojectId).subscribe(tasks => {
+      this.data = tasks;
     });
   }
 
@@ -96,7 +93,7 @@ export class DetailTaskComponent implements OnInit, OnChanges {
 
     modalRef.result.then(() => {
       console.log('MODAL CLOSED');
-      this.getList()
+      this.refreshList()
       this.authService.refreshPermissions().subscribe();
     });
   }
@@ -117,7 +114,7 @@ export class DetailTaskComponent implements OnInit, OnChanges {
     modalRef.componentInstance.addOrEdit = 'edit';
 
     modalRef.result.then(() => {
-      this.getList();
+      this.refreshList();
     });
   }
 
