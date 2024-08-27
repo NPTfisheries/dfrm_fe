@@ -1,6 +1,5 @@
 import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
-import { BackendService } from 'src/_services/backend.service';
 import * as L from 'leaflet';
 import { formatPhone } from 'src/_utilities/formatPhone';
 import { buildImageUrl } from 'src/_utilities/buildImageUrl';
@@ -36,7 +35,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
   };
 
   constructor(
-    private backendService: BackendService,
   ) { }
 
   ngAfterViewInit(): void {

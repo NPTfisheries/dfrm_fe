@@ -6,7 +6,6 @@ import { InputText } from 'src/_inputs/input-text';
 import { InputDate } from 'src/_inputs/input-date';
 import { InputSelect } from 'src/_inputs/input-select';
 import { InputTextarea } from 'src/_inputs/input-textarea';
-import { BackendService } from './backend.service';
 import { InputMultiSelect } from 'src/_inputs/input-multi-select';
 import { InputHidden } from 'src/_inputs/input-hidden';
 import { InputImage } from 'src/_inputs/input-image';
@@ -17,6 +16,8 @@ import { InputNumber } from 'src/_inputs/input-number';
 import { InputRichText } from 'src/_inputs/input-richtext';
 import { InputCheckbox } from 'src/_inputs/input-checkbox';
 import { InputRadio } from 'src/_inputs/input-radio';
+import { LookupService } from './lookup.service';
+import { ImageService } from './image.service';
 
 @Injectable({ providedIn: 'root' })
 export class InputService {
@@ -24,7 +25,10 @@ export class InputService {
   defaultBannerId = 3;
   defaultCardId = 4;
 
-  constructor(private backendService: BackendService) { }
+  constructor(
+    private lookupService: LookupService,
+    private imageService: ImageService,
+  ) { }
 
   // TODO: get from a remote source of question metadata
   getDepartmentInputs(data?: any) {
@@ -48,7 +52,6 @@ export class InputService {
         key: 'manager',
         label: 'Manager',
         value: data?.manager.id || '',
-        // options: this.buildEmployeeOptions(),
         required: true,
         order: 3
       }),
@@ -56,28 +59,25 @@ export class InputService {
         key: 'deputy',
         label: 'Deputy',
         value: data?.deputy.id || '',
-        // options: this.buildEmployeeOptions(),
         order: 4
       }),
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
         value: data?.assistant.id || '',
-        // options: this.buildEmployeeOptions(),
         order: 5
       }),
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
         idArray: this.getIdArray(data?.staff) || [],
-        // options: this.buildEmployeeOptions(),
         order: 6
       }),
       new InputImage({
         key: 'img_banner',
         label: 'Choose Banner Image',
         value: data?.img_banner.id || this.defaultBannerId,
-        options: this.buildOptions('image'),
+        options: this.buildImageOptions(),
         order: 7
       }),
       new InputCheckbox({
@@ -89,7 +89,7 @@ export class InputService {
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.img_card.id || this.defaultCardId,
-        options: this.buildOptions('image'),
+        options: this.buildImageOptions(),
         order: 7
       })
     ]
@@ -119,42 +119,38 @@ export class InputService {
         label: 'Manager',
         value: data?.manager.id || '',
         required: true,
-        // options: this.buildEmployeeOptions(),
         order: 3
       }),
       new InputSelect({
         key: 'deputy',
         label: 'Deputy',
         value: data?.deputy.id || '',
-        // options: this.buildEmployeeOptions(),
         order: 4
       }),
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
         value: data?.assistant.id || '',
-        // options: this.buildEmployeeOptions(),
         order: 5
       }),
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
         idArray: this.getIdArray(data?.staff) || [],
-        // options: this.buildEmployeeOptions(),
         order: 6
       }),
       new InputImage({
         key: 'img_banner',
         label: 'Choose Banner Image',
         value: data?.img_banner.id || this.defaultBannerId,
-        options: this.buildOptions('image'),
+        options: this.buildImageOptions(),
         order: 7
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.img_card.id || this.defaultCardId,
-        options: this.buildOptions('image'),
+        options: this.buildImageOptions(),
         order: 7
       }),
       new InputCheckbox({
@@ -194,7 +190,6 @@ export class InputService {
         key: 'project_leader',
         label: 'Project Leaders',
         idArray: this.getIdArray(data?.project_leader) || [],
-        // options: this.buildEmployeeOptions(),
         required: true,
         order: 3
       }),
@@ -202,14 +197,14 @@ export class InputService {
         key: 'img_banner',
         label: 'Choose Banner Image',
         value: data?.img_banner.id || this.defaultBannerId,
-        options: this.buildOptions('image'),
+        options: this.buildImageOptions(),
         order: 7
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.img_card.id || this.defaultCardId,
-        options: this.buildOptions('image'),
+        options: this.buildImageOptions(),
         order: 7
       }),
       new InputCheckbox({
@@ -255,7 +250,6 @@ export class InputService {
         key: 'lead',
         label: 'Subproject Lead',
         value: data?.lead.id || [],
-        // options: this.buildEmployeeOptions(),
         required: true,
         order: 4
       }),
@@ -263,7 +257,6 @@ export class InputService {
         key: 'division',
         label: 'Division',
         value: data?.division.id || '',
-        // options: this.buildOptions('division'),
         required: true,
         order: 5
       }),
@@ -271,7 +264,7 @@ export class InputService {
         key: 'img_banner',
         label: 'Choose Banner Image',
         value: data?.img_banner.id || this.defaultBannerId,
-        options: this.buildOptions('image'),
+        options: this.buildImageOptions(),
         order: 7
       }),
       new InputCheckbox({
@@ -288,7 +281,7 @@ export class InputService {
       //   key: 'img_card',
       //   label: 'Choose Card Image',
       //   value: data?.img_card.id || this.defaultCardId,
-      //   options: this.buildOptions('image'),
+      //   options: this.buildImageOptions(),
       //   order: 7
       // }),
       new InputNumber({
@@ -309,7 +302,6 @@ export class InputService {
         key: 'task_type',
         label: 'Task Type',
         value: data?.task_type?.id || '',
-        // options: this.getObjects('Task'),
         required: true,
         order: 1
       }),
@@ -330,7 +322,6 @@ export class InputService {
         key: 'supervisor',
         label: 'Task Supervisor',
         value: data?.supervisor.id || [],
-        // options: this.buildEmployeeOptions(),
         required: true,
         order: 4
       }),
@@ -348,14 +339,14 @@ export class InputService {
       //   key: 'img_banner',
       //   label: 'Choose Banner Image',
       //   value: data?.img_banner.id || this.defaultBannerId,
-      //   options: this.buildOptions('image'),
+      //   options: this.buildImageOptions(),
       //   order: 7
       // }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.img_card.id || this.defaultCardId,
-        options: this.buildOptions('image'),
+        options: this.buildImageOptions(),
         order: 7
       }),
       new InputNumber({
@@ -550,7 +541,6 @@ export class InputService {
         key: 'manager',
         label: 'Manager',
         value: data?.properties?.manager.id || '',
-        // options: this.buildEmployeeOptions(),
         required: true,
         order: 4
       }),
@@ -558,28 +548,25 @@ export class InputService {
         key: 'deputy',
         label: 'Deputy',
         value: data?.properties?.deputy.id || '',
-        // options: this.buildEmployeeOptions(),
         order: 5
       }),
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
         value: data?.properties?.assistant.id || '',
-        // options: this.buildEmployeeOptions(),
         order: 6
       }),
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
         idArray: this.getIdArray(data?.properties?.staff) || [],
-        // options: this.buildEmployeeOptions(),
         order: 7
       }),
       new InputImage({
         key: 'img_banner',
         label: 'Choose Banner Image',
         value: data?.properties?.img_banner.id || this.defaultBannerId,
-        options: this.buildOptions('image'),
+        options: this.buildImageOptions(),
         required: true,
         order: 8
       }),
@@ -587,7 +574,7 @@ export class InputService {
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.properties?.img_card.id || this.defaultCardId,
-        options: this.buildOptions('image'),
+        options: this.buildImageOptions(),
         order: 9
       }),
       new InputPhone({
@@ -649,38 +636,23 @@ export class InputService {
     return of(inputs.sort((a, b) => a.order - b.order));
   }
 
-  // for employees
-  private buildEmployeeOptions() {
+  // helpers
+  private buildImageOptions() {
     let options: { key: string, value: string }[] = [];
 
-    this.backendService.getList('users').subscribe((employees: any) => {
-      // console.log("buildEmployeeOptions:", employees);
-      for (let emp of employees) {
-        options.push({ key: emp.id, value: emp.last_name + ', ' + emp.first_name })
-      }
-    })
+    this.imageService.getImages().subscribe(images => {
+        for (let image of images) {
+          options.push({ key: String(image.id), value: String(image.name) })
+        }
 
-    return options;
-  }
-
-  // for everything else (id/name)
-  private buildOptions(routeType: string) {
-    let options: { key: string, value: string }[] = [];
-
-    this.backendService.getList(routeType).subscribe((list: any) => {
-      // console.log("buildOptions:", list);
-      for (let item of list) {
-        options.push({ key: item.id, value: `${item.name} (Source: ${item.source})` })
-      }
     });
-
     return options;
   }
 
   getObjects(object_type: string) {
     let options: { key: string, value: string }[] = [];
 
-    this.backendService.objectLookup(object_type).subscribe((list: any) => {
+    this.lookupService.getLookupsByObjectType(object_type).subscribe((list: any) => {
       for (let item of list) {
         options.push({ key: item.id, value: item.name })
       }

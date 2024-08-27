@@ -16,10 +16,21 @@ export class ImageService {
         return this.dataService.getData(this.endpoint);
     }
 
-    // getImageById(slug: string): Observable<Image | undefined> {
+    getImageById(id: number | string): Observable<Image | undefined> {
+        return this.getImages().pipe(
+            map((images: Image[]) => images.find(image => image.id == id))
+        )
+    }
+
+    // getImageOptions() {
     //     return this.getImages().pipe(
-    //         map((projects: Image[]) => projects.find(image => image.slug == slug))
-    //     )
+    //         map((images: Image[]) =>
+    //             images.map(image => ({
+    //                 key: image?.id?.toString(),
+    //                 value: `${image.name} (Source: ${image.source})`
+    //             }))
+    //         )
+    //     );
     // }
 
     refreshImages(): Observable<Image[]> {

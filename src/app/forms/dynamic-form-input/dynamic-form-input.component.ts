@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { BackendService } from 'src/_services/backend.service';
 import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 import { InputBase } from 'src/_inputs/input-base';
+import { ImageService } from 'src/_services/image.service';
 
 @Component({
   selector: 'app-dynamic-form-input',
@@ -16,7 +16,7 @@ export class DynamicFormInputComponent implements OnInit {
   imagePreview: string | undefined;
 
   constructor(
-    private backendService: BackendService,
+    private imageService: ImageService,
   ) { }
 
   ngOnInit(): void {
@@ -46,9 +46,10 @@ export class DynamicFormInputComponent implements OnInit {
   private updatePreview(id: number) {
     if (id === 0) return; // prevents errors for 'Add' from where no image selected yet.
 
-    this.backendService.getImageById(id).subscribe(img => {
-      this.imagePreview = buildImageUrl(img.image);
+    this.imageService.getImageById(id).subscribe(img => {
+      this.imagePreview = buildImageUrl(img?.image);
     });
+
   }
 
 }

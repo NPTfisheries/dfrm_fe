@@ -6,6 +6,8 @@ import { BackendService } from 'src/_services/backend.service';
 import { AuthService } from 'src/_services/auth.service';
 
 import { DocumentsComponent } from '../../documents/documents.component';
+import { UserService } from 'src/_services/user.service';
+import { DocumentService } from 'src/_services/document.service';
 
 @Component({
   selector: 'app-document-upload',
@@ -33,6 +35,8 @@ export class DocumentUploadComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private backendService: BackendService,
+    private userService: UserService,
+    private documentService: DocumentService,
     private alertService: AlertService,
     private authService: AuthService,
     private activeModal: NgbActiveModal,
@@ -86,7 +90,7 @@ export class DocumentUploadComponent implements OnInit {
 
     this.backendService.newItem('document', formData).subscribe({
       next: () => {
-        this.backendService.getList('document').subscribe((updatedList: any) => {
+        this.documentService.getDocuments().subscribe((updatedList: any) => {
           this.context.data = updatedList;
           this.authService.refreshPermissions().subscribe();
           this.activeModal.close('success');
@@ -104,14 +108,12 @@ export class DocumentUploadComponent implements OnInit {
   private buildEmployeeOptions() {
     let options: { key: string, value: string }[] = [];
 
-    this.backendService.getList('users').subscribe((employees: any) => {
-      // console.log("buildEmployeeOptions:", employees);
+    this.userService.getUsers().subscribe((employees: any) => {
       for (let emp of employees) {
         options.push({ key: emp.id, value: emp.full_name })
       }
-    })
+    });
 
-    console.log('employee options: ', options);
     return options;
   }
 

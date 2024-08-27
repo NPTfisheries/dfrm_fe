@@ -7,7 +7,7 @@ export class InputBase<T> {
   order: number;
   controlType: string;
   type: string;
-  options: { key: string, value: string }[];
+  options: { key: string, value: string }[] | undefined;
 
   // validators https://angular.io/api/forms/Validators#description
   required: boolean;

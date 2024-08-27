@@ -65,3 +65,9 @@ export interface Facility {
     geometry?: Geometry;
     properties?: FacilityProperties;
 }
+
+export interface Lookup {
+    id?: number;
+    object_type?: string;
+    name?: string;
+}

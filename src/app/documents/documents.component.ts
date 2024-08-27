@@ -68,10 +68,21 @@ export class DocumentsComponent implements OnInit {
     });
   }  
 
+  refreshList() {
+    this.documentService.refreshDocuments().subscribe((documents: any) => {
+        this.data = documents;
+    });
+  }  
+
   uploadDocument() {
     console.log('button clicked');
     const modalRef = this.modalService.open(DocumentUploadComponent, { size: 'xl', });
     modalRef.componentInstance.context = this;
+    
+    modalRef.result.then(() => {
+      this.authService.refreshPermissions().subscribe();
+      this.refreshList();
+    });
   }
 
 }
