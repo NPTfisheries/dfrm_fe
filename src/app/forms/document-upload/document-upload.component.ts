@@ -90,7 +90,7 @@ export class DocumentUploadComponent implements OnInit {
 
     this.backendService.newItem('document', formData).subscribe({
       next: () => {
-        this.documentService.getDocuments().subscribe((updatedList: any) => {
+        this.documentService.refreshDocuments().subscribe((updatedList: any) => {
           this.context.data = updatedList;
           this.authService.refreshPermissions().subscribe();
           this.activeModal.close('success');

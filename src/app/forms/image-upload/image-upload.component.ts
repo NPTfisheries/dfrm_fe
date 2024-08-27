@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
+import { ImageService } from 'src/_services/image.service';
 
 import { ListPageComponent } from 'src/app/list-page/list-page.component';
 
@@ -22,6 +23,7 @@ export class ImageUploadComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private backendService: BackendService,
+    private imageService: ImageService,
     private alertService: AlertService,
     private activeModal: NgbActiveModal,
   ) { }
@@ -65,7 +67,7 @@ export class ImageUploadComponent implements OnInit {
 
     this.backendService.newItem('image', formData).subscribe({
       next: () => {
-        this.backendService.getList('image').subscribe((updatedList: any) => {
+        this.imageService.refreshImages().subscribe((updatedList: any) => {
           this.context.data = updatedList;
           this.activeModal.close('success');
         });

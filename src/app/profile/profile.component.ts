@@ -56,10 +56,6 @@ export class ProfileComponent implements OnInit {
         this.data = currentUser;
         this.imageUrl = buildImageUrl(currentUser?.profile?.photo)
       });
-      // this.userService.getCurrentUser().subscribe(currentUser:any => {
-      //     this.data = currentUser;
-      //     this.imageUrl = buildImageUrl(currentUser?.profile?.photo);      
-      // });
     }
   }
 

@@ -16,9 +16,9 @@ export class UserService {
     return this.dataService.getData(this.endpoint);
   }
 
-  // getCurrentUser() {
-  //   return this.dataService.getData('user');
-  // }
+  getCurrentUser() {
+    return this.dataService.getData('user');
+  }
 
   getUserById(id: number | string) {
     return this.getUsers().pipe(
