@@ -5,7 +5,7 @@
 <div class="container my-5">
     <h1 class="dfrm-page-title text-center">CDMS Data Access</h1>
     <div class="row align-items-center">
-        <div class="col-10">
+        <div class="col-9 offset-1">
             <ng-select [items]="datastores" bindLabel="Name" bindValue="Id" placeholder="Select Datastore"
                 (change)="handleChange(selectedDatastore)" [(ngModel)]="selectedDatastore"></ng-select>
         </div>
@@ -13,17 +13,20 @@
             <app-button [label]="'Retrieve Data'" (click)="retrieveData()"></app-button>
         </div>
     </div>
+    <br>
 
-    <br><br>
     <div class="container" style="height: 600px;">
         <ag-grid-angular style="width: 100%; height: 100%; font-size:20px" class="ag-theme-alpine"
             [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [rowData]="data" [rowSelection]="'multiple'"
-            [suppressCellFocus]="true" (gridReady)="onGridReady($event)" [animateRows]="true" >
+            [suppressCellFocus]="true" (gridReady)="onGridReady($event)" [animateRows]="true">
         </ag-grid-angular>
     </div>
     <br>
     <div class="row align-items-center">
-        <div class="col-2 offset-10">
+        <div class="col-5 offset-3">
+            <p><em>* Filters applied in the grid will be reflected in the exported CSV.</em></p>
+        </div>
+        <div class="col-3 offset-1">
             <app-button [label]="'Export CSV'" (click)="exportData()" [style]="btnStyle"></app-button>
         </div>
     </div>

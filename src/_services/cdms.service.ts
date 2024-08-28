@@ -9,7 +9,9 @@ export class CdmsService {
     apiUrl: string = ''; // necessary for proxy to function (dev)
     apiVersion: string = '/services/api/v1/';
 
-    allowed_datastores = [78, 79, 85, 86, 92, 94, 95, 96, 97, 100, 101, 102, 103, 104, 111, 112, 113] // WT : 122 // Age: 80
+    allowed_datastores = [78, 79, 85, 86, 92, 97, 99, 100, 102, 103, 104, 111, 113] // WT : 122 // Age: 80
+
+    // 99? 107/110/
 
     constructor(
         private http: HttpClient,

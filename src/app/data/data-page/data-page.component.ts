@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { CdmsService } from 'src/_services/cdms.service';
 import { GridApi, ColDef } from 'ag-grid-community';
-// import { ExcelExportModule } from '@ag-grid-enterprise/excel-export';
-import { CsvExportModule } from 'ag-grid-community';
-// import { AllModules } from '@ag-grid-enterprise/all-modules';
 
 import { buildColumnDefs } from 'src/_utilities/buildColumnDefs';
 
@@ -32,8 +29,6 @@ export class DataPageComponent {
     // cellDataType: false,
   };
 
-  // modules = [CsvExportModule, ...AllModules]
-
   constructor(
     private cdmsService: CdmsService,
   ) { }
@@ -53,7 +48,7 @@ export class DataPageComponent {
 
   exportData() {
     this.gridApi.exportDataAsCsv(
-      {'fileName':'testing.csv'}
+      { 'fileName': this.buildFilename() }
     );
   }
 
@@ -91,6 +86,18 @@ export class DataPageComponent {
   handleChange(value: string) {
     console.log(value);
     this.selectedDatastore = value;
+  }
+
+  buildFilename(): string {
+    const datastoreName = this.datastores.find(ds => ds.Id === this.selectedDatastore)?.Name || 'export';
+    const formattedName = datastoreName.replace(/\s+/g, '_');
+    const currentDate = new Date().toLocaleDateString('en-US', {
+      year: '2-digit',
+      month: '2-digit',
+      day: '2-digit'
+    }).replace(/\//g, '');
+
+    return `${formattedName}_${currentDate}.csv`;
   }
 
 }
