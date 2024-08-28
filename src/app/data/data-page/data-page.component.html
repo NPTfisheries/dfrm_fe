@@ -1,6 +1,7 @@
 <div class="banner-container mb-6">
     <img class="banner-image" [src]="bannerImage" alt="Banner Image" />
 </div>
+<app-button [label]="'TEST QUERY'" (click)="testQuery()" [loading]="isLoading"></app-button>
 
 <div class="container my-5">
     <h1 class="dfrm-page-title text-center">CDMS Data Access</h1>
@@ -10,12 +11,13 @@
                 (change)="handleChange(selectedDatastore)" [(ngModel)]="selectedDatastore"></ng-select>
         </div>
         <div class="col-2">
-            <app-button [label]="'Retrieve Data'" (click)="retrieveData()"></app-button>
+            <app-button [label]="'Retrieve Data'" (click)="retrieveData()" [loading]="isLoading"></app-button>
         </div>
     </div>
     <br>
 
-    <div class="container" style="height: 600px;">
+    <div class="container my-5" style="height: 600px;">
+        <h2 *ngIf="loadedDataset">{{loadedDataset}}</h2>
         <ag-grid-angular style="width: 100%; height: 100%; font-size:20px" class="ag-theme-alpine"
             [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [rowData]="data" [rowSelection]="'multiple'"
             [suppressCellFocus]="true" (gridReady)="onGridReady($event)" [animateRows]="true">
@@ -24,10 +26,11 @@
     <br>
     <div class="row align-items-center">
         <div class="col-5 offset-3">
-            <p><em>* Filters applied in the grid will be reflected in the exported CSV.</em></p>
+            <p><em>Filters applied in the grid will be reflected in the exported CSV.</em></p>
         </div>
         <div class="col-3 offset-1">
-            <app-button [label]="'Export CSV'" (click)="exportData()" [style]="btnStyle"></app-button>
+            <app-button [label]="'Export CSV'" (click)="exportData()" [style]="btnStyle"
+                [disabled]="isLoading || !data"></app-button>
         </div>
     </div>
 </div>

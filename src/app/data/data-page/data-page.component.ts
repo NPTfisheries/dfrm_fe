@@ -17,6 +17,8 @@ export class DataPageComponent {
   selectedDatastore!: string;
   value!: string;
   btnStyle = { 'float': 'right', 'margin-right': '30px' }
+  loadedDataset?: string | null;
+  isLoading = false;
 
   private gridApi!: GridApi;
   columnDefs: ColDef[] | undefined;
@@ -52,6 +54,18 @@ export class DataPageComponent {
     );
   }
 
+  testQuery() {
+    console.log('Test Query!');
+    var start = performance.now();
+    this.cdmsService.getCarcassData().subscribe(data => {
+    // this.cdmsService.getDatastoreView('86').subscribe(data => {
+      console.log(data);
+      var finish = performance.now();
+      console.log(`Took ${(finish-start)/1000/60} minutes.`)
+    });
+    
+  }
+
   login() {
     console.log('CDMS Login!');
     // check for isLoggedIn??
@@ -74,11 +88,15 @@ export class DataPageComponent {
       console.log(data);
       this.data = data;
       this.columnDefs = buildColumnDefs(data);
+      this.isLoading = false;
+      this.loadedDataset = this.datastores.find(ds => ds.Id === this.selectedDatastore)?.Name
     });
   }
 
   retrieveData() {
     if (this.selectedDatastore) {
+      this.isLoading = true;
+      this.loadedDataset = null;
       this.getDatastoreView(this.selectedDatastore)
     }
   }

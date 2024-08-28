@@ -63,6 +63,7 @@ export class CdmsService {
         );
     }
 
+    // CDMS
     getDatastoreView(datastoreID: string, projectID?: string): Observable<any> {
         const reqUrl = `${this.apiUrl}${this.apiVersion}npt/getfulldatasetview`;
         let params = new HttpParams().set('id', datastoreID);
@@ -76,6 +77,53 @@ export class CdmsService {
         );
     }
 
+    // PIKUN
+    getCarcassData(surveyYear?: number, project?: string, locationLabel?: string) {
+        return this.get('npt/getsgscarcassdata')
+    }
+
+    getCarcassDataNEOR(surveyYear?: number, grsmeOnly: boolean = true) {
+        return this.get('npt/getsgscarcassdataneor')
+    }
+
+    getFallRR(broodYear?: number, returnYear?: number) {
+        return this.get('npt/getfcrrdata')
+    }
+
+    getJuvAbundance(rst?: string, speciesRun?: string, migratoryYear?: number, broodYear?: number, origin?: string) {
+        return this.get('npt/getjuvabundancedata')
+    }
+
+    getJuvSurvival(rst?: string, speciesRun?: string, migratoryYear?: number, broodYear?: number, origin?: string) {
+        return this.get('npt/getjuvsurvivaldata')
+    }
+
+    getP4data(mrrProject?: string, eventSite?: string, eventType?: string, captureMethod?: string, srrCode?: string,
+        migrationYear?: number, broodYear?: number, calendarYear?: number) {
+        return this.get('npt/getp4data')
+    }
+
+    getReddData(surveyYear?: number, project?: string, locationLabel?: string) {
+        return this.get('npt/getsgsredddata')
+    }
+
+    getReddDataNEOR(surveyYear?: number, grsmeOnly: boolean = true) {
+        return this.get('npt/getsgsredddataneor')
+    }
+
+    getSpawningData(spawnLocation?: string, stock?: string, species?: string, run?: string, sex?: string, origin?: string) {
+        return this.get('npt/getfinsspawningdata')
+    }
+    getWaterTempData(year?: number, location_id?: string) {
+        return this.get('npt/getwatertempdata')
+    }
+
+    getWeirData(facility?: string, species?: string, run?: string, sex?: string, origin?: string) {
+        return this.get('npt/getfinsweirdata')
+    }
+
+
+    // helper
     get(endpoint: string) {
         const reqUrl = `${this.apiUrl}${this.apiVersion}${endpoint}`;
 
