@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 import { CdmsService } from 'src/_services/cdms.service';
+import { GridApi, ColDef } from 'ag-grid-community';
+// import { ExcelExportModule } from '@ag-grid-enterprise/excel-export';
+import { CsvExportModule } from 'ag-grid-community';
+// import { AllModules } from '@ag-grid-enterprise/all-modules';
+
+import { buildColumnDefs } from 'src/_utilities/buildColumnDefs';
 
 @Component({
   selector: 'app-data-page',
@@ -13,7 +19,20 @@ export class DataPageComponent {
   datastores: any[] = [];
   selectedDatastore!: string;
   value!: string;
+  btnStyle = { 'float': 'right', 'margin-right': '30px' }
 
+  private gridApi!: GridApi;
+  columnDefs: ColDef[] | undefined;
+
+  defaultColDef: ColDef = {
+    sortable: true,
+    filter: true,
+    resizable: true,
+    cellStyle: { fontSize: '20px' },
+    // cellDataType: false,
+  };
+
+  // modules = [CsvExportModule, ...AllModules]
 
   constructor(
     private cdmsService: CdmsService,
@@ -25,6 +44,17 @@ export class DataPageComponent {
   }
 
   ngOnDestroy(): void {
+  }
+
+  onGridReady(params: any) {
+    this.gridApi = params.api;
+    params.api.sizeColumnsToFit(params);
+  }
+
+  exportData() {
+    this.gridApi.exportDataAsCsv(
+      {'fileName':'testing.csv'}
+    );
   }
 
   login() {
@@ -47,6 +77,8 @@ export class DataPageComponent {
     console.log(`getDatastoreView: ${datastore_id}`);
     this.cdmsService.getDatastoreView(datastore_id).subscribe(data => {
       console.log(data);
+      this.data = data;
+      this.columnDefs = buildColumnDefs(data);
     });
   }
 
