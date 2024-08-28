@@ -38,7 +38,7 @@ export class BackendService {
         return this.http.delete(url);
     }
     
-    // HELPERS -- change to private eventually?
+    // helpers
     get(url: string): Observable<any> {
         return this.http.get(url) //, { observe: 'response' })
             .pipe(

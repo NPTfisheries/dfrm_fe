@@ -56,6 +56,7 @@ import { ButtonComponent } from '../_components/button/button.component';
 import { FormInputComponent } from './forms/form-input/form-input.component';
 import { FileInputComponent } from './forms/file-input/file-input.component';
 import { BooleanRendererComponent } from '../_renderers/boolean-renderer/boolean-renderer.component';
+import { DataPageComponent } from './data/data-page/data-page.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +103,7 @@ import { BooleanRendererComponent } from '../_renderers/boolean-renderer/boolean
     FormInputComponent,
     FileInputComponent,
     BooleanRendererComponent,
+    DataPageComponent,
   ],
   imports: [
     BrowserModule,

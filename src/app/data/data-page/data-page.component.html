@@ -1,0 +1,10 @@
+<div class="banner-container mb-6">
+    <img class="banner-image" [src]="bannerImage" alt="Banner Image" />
+</div>
+
+<div class="container my-5">
+    <h1 class="dfrm-page-title text-center">CDMS Data Access</h1>
+    <app-button [label]="'Login!'" (click)="login()"></app-button>
+    <app-button [label]="'Datastores!'" (click)="datastores()"></app-button>
+    <app-button [label]="'getDatastore!'" (click)="getDatastore()"></app-button>
+</div>

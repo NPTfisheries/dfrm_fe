@@ -3,5 +3,11 @@
       "target": "http://backend:8000",
       "secure": false,
       "changeOrigin": true
+    },
+    "/services/api": {
+      "target": "https://npt-cdms.nezperce.org",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
     }
   }
