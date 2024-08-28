@@ -38,7 +38,7 @@ export class CdmsService {
     getDatastores() {
         return this.get('datastore/getdatastores').pipe(
             map((datastores: any[]) => {
-                console.log(datastores);
+                // console.log(datastores);
                 return datastores
                     .filter((datastore: any) => this.allowed_datastores.includes(datastore.Id))
                     .map((datastore: any) => ({
@@ -61,13 +61,13 @@ export class CdmsService {
         );
     }
 
-    // CDMS
-    getDatastoreView(datastoreID: string, projectID?: string): Observable<any> {
+    // CDMS queries
+    getDatastoreView(datastoreId: number, projectId?: string): Observable<any> {
         const reqUrl = `${this.apiUrl}${this.apiVersion}npt/getfulldatasetview`;
-        let params = new HttpParams().set('id', datastoreID);
+        let params = new HttpParams().set('id', datastoreId);
 
-        if (projectID) {
-            params = params.set('ProjectId', projectID);
+        if (projectId) {
+            params = params.set('ProjectId', projectId);
         }
 
         return this.http.get(reqUrl, { params }).pipe(
@@ -75,7 +75,7 @@ export class CdmsService {
         );
     }
 
-    // PIKUN
+    // PIKUN queries
     getCarcassData(surveyYear?: number, project?: string, locationLabel?: string) {
         console.log('getCarcassData');
         return this.get('npt/getsgscarcassdata')
@@ -121,7 +121,7 @@ export class CdmsService {
         console.log('getSpawningData');
         return this.get('npt/getfinsspawningdata')
     }
-    getWaterTempData(year?: number, location_id?: string) {
+    getWaterTempData(year: number, location_id?: string) {
         console.log('getWaterTempData');
         return this.get('npt/getwatertempdata')
     }
@@ -137,6 +137,16 @@ export class CdmsService {
         const reqUrl = `${this.apiUrl}${this.apiVersion}${endpoint}`;
 
         return this.http.get(reqUrl).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+    options(endpoint: string) {
+        const reqUrl = `${this.apiUrl}${this.apiVersion}${endpoint}`;
+
+        return this.http.options(reqUrl).pipe(
             map((response: any) => {
                 return response;
             })
