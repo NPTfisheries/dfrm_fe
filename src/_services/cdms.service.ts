@@ -9,9 +9,7 @@ export class CdmsService {
     apiUrl: string = ''; // necessary for proxy to function (dev)
     apiVersion: string = '/services/api/v1/';
 
-    allowed_datastores = [78, 79, 85, 86, 92, 97, 99, 100, 102, 103, 104, 111, 113] // WT : 122 // Age: 80
-
-    // 99? 107/110/
+    allowed_datastores = [78, 79, 85, 86, 92, 97, 99, 100, 102, 103, 104, 107, 110, 111, 113, 122] // Age: 80
 
     constructor(
         private http: HttpClient,
@@ -79,46 +77,57 @@ export class CdmsService {
 
     // PIKUN
     getCarcassData(surveyYear?: number, project?: string, locationLabel?: string) {
+        console.log('getCarcassData');
         return this.get('npt/getsgscarcassdata')
     }
 
     getCarcassDataNEOR(surveyYear?: number, grsmeOnly: boolean = true) {
+        console.log('getCarcassDataNEOR');
         return this.get('npt/getsgscarcassdataneor')
     }
 
     getFallRR(broodYear?: number, returnYear?: number) {
+        console.log('getFallRR');
         return this.get('npt/getfcrrdata')
     }
 
     getJuvAbundance(rst?: string, speciesRun?: string, migratoryYear?: number, broodYear?: number, origin?: string) {
+        console.log('getJuvAbundance');
         return this.get('npt/getjuvabundancedata')
     }
 
     getJuvSurvival(rst?: string, speciesRun?: string, migratoryYear?: number, broodYear?: number, origin?: string) {
+        console.log('getJuvSurvival');
         return this.get('npt/getjuvsurvivaldata')
     }
 
     getP4data(mrrProject?: string, eventSite?: string, eventType?: string, captureMethod?: string, srrCode?: string,
         migrationYear?: number, broodYear?: number, calendarYear?: number) {
+        console.log('getP4data');
         return this.get('npt/getp4data')
     }
 
     getReddData(surveyYear?: number, project?: string, locationLabel?: string) {
+        console.log('getReddData');
         return this.get('npt/getsgsredddata')
     }
 
     getReddDataNEOR(surveyYear?: number, grsmeOnly: boolean = true) {
+        console.log('getReddDataNEOR');
         return this.get('npt/getsgsredddataneor')
     }
 
     getSpawningData(spawnLocation?: string, stock?: string, species?: string, run?: string, sex?: string, origin?: string) {
+        console.log('getSpawningData');
         return this.get('npt/getfinsspawningdata')
     }
     getWaterTempData(year?: number, location_id?: string) {
+        console.log('getWaterTempData');
         return this.get('npt/getwatertempdata')
     }
 
     getWeirData(facility?: string, species?: string, run?: string, sex?: string, origin?: string) {
+        console.log('getWeirData');
         return this.get('npt/getfinsweirdata')
     }
 

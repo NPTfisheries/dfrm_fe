@@ -3,6 +3,7 @@ import { CdmsService } from 'src/_services/cdms.service';
 import { GridApi, ColDef } from 'ag-grid-community';
 
 import { buildColumnDefs } from 'src/_utilities/buildColumnDefs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-data-page',
@@ -58,12 +59,11 @@ export class DataPageComponent {
     console.log('Test Query!');
     var start = performance.now();
     this.cdmsService.getCarcassData().subscribe(data => {
-    // this.cdmsService.getDatastoreView('86').subscribe(data => {
+      // this.cdmsService.getDatastoreView('86').subscribe(data => {
       console.log(data);
       var finish = performance.now();
-      console.log(`Took ${(finish-start)/1000/60} minutes.`)
+      console.log(`Took ${(finish - start) / 1000 / 60} minutes.`)
     });
-    
   }
 
   login() {
@@ -85,11 +85,7 @@ export class DataPageComponent {
   getDatastoreView(datastore_id: string) {
     console.log(`getDatastoreView: ${datastore_id}`);
     this.cdmsService.getDatastoreView(datastore_id).subscribe(data => {
-      console.log(data);
-      this.data = data;
-      this.columnDefs = buildColumnDefs(data);
-      this.isLoading = false;
-      this.loadedDataset = this.datastores.find(ds => ds.Id === this.selectedDatastore)?.Name
+      this.processData(data, datastore_id);
     });
   }
 
@@ -97,7 +93,8 @@ export class DataPageComponent {
     if (this.selectedDatastore) {
       this.isLoading = true;
       this.loadedDataset = null;
-      this.getDatastoreView(this.selectedDatastore)
+      // this.getDatastoreView(this.selectedDatastore)
+      this.querySelector(this.selectedDatastore);
     }
   }
 
@@ -116,6 +113,62 @@ export class DataPageComponent {
     }).replace(/\//g, '');
 
     return `${formattedName}_${currentDate}.csv`;
+  }
+
+  querySelector(datastore_id: string) {
+    let dataObservable: Observable<any>;
+
+    switch (datastore_id) {
+      case '78':
+        dataObservable = this.cdmsService.getCarcassData();
+        break;
+      case '79':
+        dataObservable = this.cdmsService.getReddData();
+        break;
+      case '85':
+        dataObservable = this.cdmsService.getJuvAbundance();
+        break;
+      case '86':
+        dataObservable = this.cdmsService.getJuvSurvival();
+        break;
+      case '99':
+        dataObservable = this.cdmsService.getWeirData();
+        break;
+      case '100':
+        dataObservable = this.cdmsService.getFallRR();
+        break;
+      case '107':
+        dataObservable = this.cdmsService.getP4data();
+        break;
+      case '110':
+        dataObservable = this.cdmsService.getSpawningData();
+        break;
+      case '111':
+        dataObservable = this.cdmsService.getReddDataNEOR();
+        break;
+      case '113':
+        dataObservable = this.cdmsService.getCarcassDataNEOR();
+        break;
+      case '122':
+        dataObservable = this.cdmsService.getWaterTempData();
+        break;
+      default:
+        dataObservable = this.cdmsService.getDatastoreView(datastore_id);
+    }
+
+    if (dataObservable) {
+      dataObservable.subscribe((data: any) => {
+        this.processData(data, datastore_id);
+      });
+    }
+  }
+
+  private processData(data: any, datastore_id: string): void {
+    console.log(data);
+    this.data = data;
+    this.columnDefs = buildColumnDefs(data);
+    this.isLoading = false;
+    this.loadedDataset = this.datastores.find(ds => ds.Id === datastore_id)?.Name;
   }
 
 }
