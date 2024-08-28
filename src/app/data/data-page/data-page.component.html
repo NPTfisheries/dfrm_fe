@@ -4,7 +4,13 @@
 
 <div class="container my-5">
     <h1 class="dfrm-page-title text-center">CDMS Data Access</h1>
-    <app-button [label]="'Login!'" (click)="login()"></app-button>
-    <app-button [label]="'Datastores!'" (click)="datastores()"></app-button>
-    <app-button [label]="'getDatastore!'" (click)="getDatastore()"></app-button>
+    <div class="row align-items-center">
+        <div class="col-10">
+            <ng-select [items]="datastores" bindLabel="Name" bindValue="Id" placeholder="Select Datastore"
+                (change)="handleChange(selectedDatastore)" [(ngModel)]="selectedDatastore"></ng-select>
+        </div>
+        <div class="col-2">
+            <app-button [label]="'Retrieve Data'" (click)="retrieveData()"></app-button>
+        </div>
+    </div>
 </div>

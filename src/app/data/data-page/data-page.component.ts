@@ -7,16 +7,21 @@ import { CdmsService } from 'src/_services/cdms.service';
   styleUrls: ['./data-page.component.css']
 })
 export class DataPageComponent {
-  
+
   data!: any[];
   bannerImage: any | undefined = "./assets/images/Clearwater_River_Home_Page.jpg";
+  datastores: any[] = [];
+  selectedDatastore!: string;
+  value!: string;
+
 
   constructor(
     private cdmsService: CdmsService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    
+    this.login();
+    this.getDatastores();
   }
 
   ngOnDestroy(): void {
@@ -24,17 +29,36 @@ export class DataPageComponent {
 
   login() {
     console.log('CDMS Login!');
-    this.cdmsService.login('tylers', '15Platypus!').subscribe(response => {
+    // check for isLoggedIn??
+    this.cdmsService.login('api_user', 'api_user').subscribe(response => {
       console.log(response);
     });
   }
 
-  datastores() {
-    console.log('Datastores!');
+  getDatastores() {
+    console.log('getDatastores!');
+    this.cdmsService.getDatastores().subscribe((datastores: any) => {
+      console.log(datastores);
+      this.datastores = datastores;
+    });
   }
 
-  
-  getDatastore() {
-    console.log('getDatastore!');
+  getDatastoreView(datastore_id: string) {
+    console.log(`getDatastoreView: ${datastore_id}`);
+    this.cdmsService.getDatastoreView(datastore_id).subscribe(data => {
+      console.log(data);
+    });
   }
+
+  retrieveData() {
+    if (this.selectedDatastore) {
+      this.getDatastoreView(this.selectedDatastore)
+    }
+  }
+
+  handleChange(value: string) {
+    console.log(value);
+    this.selectedDatastore = value;
+  }
+
 }
