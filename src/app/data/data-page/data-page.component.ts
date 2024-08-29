@@ -13,7 +13,6 @@ import { Observable } from 'rxjs';
 export class DataPageComponent {
 
   data!: any[];
-  bannerImage: any | undefined = "./assets/images/Clearwater_River_Home_Page.jpg";
   datastores: any[] = [];
   selectedDatastore!: number;
   value!: string;
@@ -37,8 +36,8 @@ export class DataPageComponent {
   ) { }
 
   ngOnInit(): void {
-    this.login();
-    this.getDatastores();
+    this.cdmsService.login('api_user', 'api_user').subscribe(response => console.log(response));
+    this.cdmsService.getDatastores().subscribe((datastores: any) => this.datastores = datastores);
   }
 
   ngOnDestroy(): void {
@@ -55,20 +54,6 @@ export class DataPageComponent {
     );
   }
 
-  login() {
-    console.log('CDMS Login!');
-    // check for isLoggedIn??
-    this.cdmsService.login('api_user', 'api_user').subscribe(response => {
-      console.log(response);
-    });
-  }
-
-  getDatastores() {
-    this.cdmsService.getDatastores().subscribe((datastores: any) => {
-      this.datastores = datastores;
-    });
-  }
-
   retrieveData() {
     if (this.selectedDatastore) {
       this.data = [];
@@ -77,6 +62,10 @@ export class DataPageComponent {
       this.loadedDataset = null;
       this.querySelector(this.selectedDatastore);
     }
+  }
+
+  getDataFilters(value: any) {
+    console.log(`getDataFilters: ${value}`);
   }
 
   handleChange(value: number) {
@@ -149,12 +138,6 @@ export class DataPageComponent {
     this.columnDefs = buildColumnDefs(data);
     this.isLoading = false;
     this.loadedDataset = this.datastores.find(ds => ds.Id === datastore_id)?.Name;
-  }
-
-  getOptions() {
-    this.cdmsService.options('npt/getsgscarcassdata').subscribe(response => {
-      console.log(`Options response ${response}`);
-    });
   }
 
 }

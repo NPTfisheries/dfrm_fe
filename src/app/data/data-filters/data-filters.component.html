@@ -1,0 +1,12 @@
+<br>
+<div class="container">
+    <h3 class="text-center">Filters</h3>
+    <!-- <app-project-filter (projectValue)="setFilters($event)"></app-project-filter>
+    <app-filter [filterOptions]="filterOptions" (filterValue)="setFilters($event)"></app-filter> -->
+    <div *ngFor="let options of filterOptions">
+        <div [ngSwitch]="options.argName">
+            <app-filter *ngSwitchDefault [filterOptions]="options" (filterValue)="setFilters($event)"></app-filter>
+            <app-project-filter *ngSwitchCase="'project'" (projectValue)="setFilters($event)"></app-project-filter>
+        </div>
+    </div>
+</div>

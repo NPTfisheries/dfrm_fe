@@ -143,14 +143,14 @@ export class CdmsService {
         );
     }
 
-    options(endpoint: string) {
-        const reqUrl = `${this.apiUrl}${this.apiVersion}${endpoint}`;
+    // options(endpoint: string) {
+    //     const reqUrl = `${this.apiUrl}${this.apiVersion}${endpoint}`;
 
-        return this.http.options(reqUrl).pipe(
-            map((response: any) => {
-                return response;
-            })
-        );
-    }
+    //     return this.http.options(reqUrl).pipe(
+    //         map((response: any) => {
+    //             return response;
+    //         })
+    //     );
+    // }
 
 }

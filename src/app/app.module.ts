@@ -57,6 +57,9 @@ import { FormInputComponent } from './forms/form-input/form-input.component';
 import { FileInputComponent } from './forms/file-input/file-input.component';
 import { BooleanRendererComponent } from '../_renderers/boolean-renderer/boolean-renderer.component';
 import { DataPageComponent } from './data/data-page/data-page.component';
+import { DataFiltersComponent } from './data/data-filters/data-filters.component';
+import { ProjectFilterComponent } from './data/_filters/project-filter/project-filter.component';
+import { FilterComponent } from './data/_filters/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +107,9 @@ import { DataPageComponent } from './data/data-page/data-page.component';
     FileInputComponent,
     BooleanRendererComponent,
     DataPageComponent,
+    DataFiltersComponent,
+    ProjectFilterComponent,
+    FilterComponent,
   ],
   imports: [
     BrowserModule,
