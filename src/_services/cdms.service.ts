@@ -34,6 +34,32 @@ export class CdmsService {
         );
     }
 
+    getDataset(datased_id: number) {
+        return this.get('dataset/getdataset').pipe(
+            map((dataset: any[]) => {
+                console.log(dataset);
+                return dataset
+            })
+        );
+    }
+
+    getDatasetsList(datastoreId?: number) {
+        // get full list
+        return this.get('dataset/getdatasetslist').pipe(
+            map((datasets: any[]) => {
+                // console.log(datasets);
+                return datasets
+                    .filter((dataset:any) => datastoreId? dataset.DatastoreId === datastoreId : true)
+                    .map((dataset:any) => ({
+                        'datasetId': dataset.Id,
+                        'projectName': dataset.ProjectName,
+                        'projectId': dataset.ProjectId,
+                        'datastoreName': dataset.DatastoreName,
+                        'datastoreId': dataset.DatastoreId
+                    }));
+            })
+        );
+    }
 
     getDatastores() {
         return this.get('datastore/getdatastores').pipe(
@@ -61,6 +87,12 @@ export class CdmsService {
         );
     }
 
+    getProjectDatasets(projectId: number) {
+        let params = {'id':  projectId};
+
+        return this.get('project/getprojectdatasets', params);
+    }
+
     // CDMS queries
     getDatastoreView(datastoreId: number, projectId?: string): Observable<any> {
         const reqUrl = `${this.apiUrl}${this.apiVersion}npt/getfulldatasetview`;
@@ -76,73 +108,94 @@ export class CdmsService {
     }
 
     // PIKUN queries
-    getCarcassData(surveyYear?: number, project?: string, locationLabel?: string) {
+    // getCarcassData(surveyYear?: number, project?: string, locationLabel?: string) {
+    getCarcassData(params: { [key: string]: any}) {
         console.log('getCarcassData');
         return this.get('npt/getsgscarcassdata')
     }
 
-    getCarcassDataNEOR(surveyYear?: number, grsmeOnly: boolean = true) {
+    // getCarcassDataNEOR(surveyYear?: number, grsmeOnly: boolean = true) {
+    getCarcassDataNEOR(params: { [key: string]: any}) {
         console.log('getCarcassDataNEOR');
         return this.get('npt/getsgscarcassdataneor')
     }
 
-    getFallRR(broodYear?: number, returnYear?: number) {
+    // getFallRR(broodYear?: number, returnYear?: number) {
+    getFallRR(params: { [key: string]: any}) {
         console.log('getFallRR');
         return this.get('npt/getfcrrdata')
     }
 
-    getJuvAbundance(rst?: string, speciesRun?: string, migratoryYear?: number, broodYear?: number, origin?: string) {
+    // getJuvAbundance(rst?: string, speciesRun?: string, migratoryYear?: number, broodYear?: number, origin?: string) {
+    getJuvAbundance(params: { [key: string]: any}) {
         console.log('getJuvAbundance');
         return this.get('npt/getjuvabundancedata')
     }
 
-    getJuvSurvival(rst?: string, speciesRun?: string, migratoryYear?: number, broodYear?: number, origin?: string) {
+    // getJuvSurvival(rst?: string, speciesRun?: string, migratoryYear?: number, broodYear?: number, origin?: string) {
+    getJuvSurvival(params: { [key: string]: any}) {
         console.log('getJuvSurvival');
         return this.get('npt/getjuvsurvivaldata')
     }
 
-    getP4data(mrrProject?: string, eventSite?: string, eventType?: string, captureMethod?: string, srrCode?: string,
-        migrationYear?: number, broodYear?: number, calendarYear?: number) {
+    // getP4data(mrrProject?: string, eventSite?: string, eventType?: string, captureMethod?: string, srrCode?: string, 
+    getP4data(params: { [key: string]: any}) {
         console.log('getP4data');
         return this.get('npt/getp4data')
     }
 
-    getReddData(surveyYear?: number, project?: string, locationLabel?: string) {
-        console.log('getReddData');
-        return this.get('npt/getsgsredddata')
+    // getReddData(surveyYear?: number, datasetId?: number, locationLabel?: string) {
+    getReddData(params: { [key: string]: any}) {
+        console.log(`getReddData, params: ${params}`);
+        return this.get('npt/getsgsredddata', params)
     }
 
-    getReddDataNEOR(surveyYear?: number, grsmeOnly: boolean = true) {
+    // getReddDataNEOR(surveyYear?: number, grsmeOnly: boolean = true) {
+    getReddDataNEOR(params: { [key: string]: any}) {
         console.log('getReddDataNEOR');
         return this.get('npt/getsgsredddataneor')
     }
 
-    getSpawningData(spawnLocation?: string, stock?: string, species?: string, run?: string, sex?: string, origin?: string) {
+    // getSpawningData(spawnLocation?: string, stock?: string, species?: string, run?: string, sex?: string, origin?: string) {
+    getSpawningData(params: { [key: string]: any}) {
         console.log('getSpawningData');
         return this.get('npt/getfinsspawningdata')
     }
-    getWaterTempData(year: number, location_id?: string) {
+
+    // getWaterTempData(year: number, location_id?: string) {
+    getWaterTempData(params: { [key: string]: any}) {
         console.log('getWaterTempData');
         return this.get('npt/getwatertempdata')
     }
 
-    getWeirData(facility?: string, species?: string, run?: string, sex?: string, origin?: string) {
+    // getWeirData(facility?: string, species?: string, run?: string, sex?: string, origin?: string) {
+    getWeirData(params: { [key: string]: any}) {
         console.log('getWeirData');
         return this.get('npt/getfinsweirdata')
     }
 
 
     // helper
-    get(endpoint: string) {
+    get(endpoint: string, params?: { [key: string]: any }) {
         const reqUrl = `${this.apiUrl}${this.apiVersion}${endpoint}`;
 
-        return this.http.get(reqUrl).pipe(
+        let requestParams = new HttpParams();
+        if(params) {
+            Object.keys(params).forEach((key) => {
+                if(params[key] !== undefined && params[key] !== null) {
+                    requestParams = requestParams.append(key, params[key].toString());
+                }
+            });
+        }
+
+        return this.http.get(reqUrl, {params: requestParams}).pipe(
             map((response: any) => {
                 return response;
             })
         );
     }
 
+    // CDMS doesn't allow Options requests
     // options(endpoint: string) {
     //     const reqUrl = `${this.apiUrl}${this.apiVersion}${endpoint}`;
 

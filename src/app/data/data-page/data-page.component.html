@@ -1,4 +1,5 @@
 <div class="container my-5">
+    <app-button [label]="'test'" (click)="test()"></app-button>
     <h1 class="dfrm-page-title text-center">CDMS Data Access</h1>
     <div class="row align-items-center">
         <div class="col-9 offset-1">
@@ -9,7 +10,7 @@
             <app-button [label]="'Retrieve Data'" (click)="retrieveData()" [loading]="isLoading"></app-button>
         </div>
     </div>
-    <app-data-filters (dataFilters)="getDataFilters($event)"></app-data-filters>
+    <app-data-filters (dataFilters)="getDataFilters($event)" [selectedDatastore]="selectedDatastore"></app-data-filters>
 
     <br>
 

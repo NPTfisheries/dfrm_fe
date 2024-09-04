@@ -19,6 +19,7 @@ export class DataPageComponent {
   btnStyle = { 'float': 'right', 'margin-right': '30px' }
   loadedDataset?: string | null;
   isLoading = false;
+  filters: { [key: string]: any } = {};
 
   private gridApi!: GridApi;
   columnDefs: ColDef[] | undefined;
@@ -36,6 +37,7 @@ export class DataPageComponent {
   ) { }
 
   ngOnInit(): void {
+    // we need to make sure the login happens before querying anything else from CDMS, which didn't happen 9/4/24
     this.cdmsService.login('api_user', 'api_user').subscribe(response => console.log(response));
     this.cdmsService.getDatastores().subscribe((datastores: any) => this.datastores = datastores);
   }
@@ -65,7 +67,9 @@ export class DataPageComponent {
   }
 
   getDataFilters(value: any) {
-    console.log(`getDataFilters: ${value}`);
+    // console.log(`Active Filters: ${value}`)
+    // value.forEach((val:any) => console.log(val));
+    this.filters=value;
   }
 
   handleChange(value: number) {
@@ -89,38 +93,39 @@ export class DataPageComponent {
 
     switch (datastore_id) {
       case 78:
-        dataObservable = this.cdmsService.getReddData();
+        // dataObservable = this.cdmsService.getReddData();
+        dataObservable = this.cdmsService.getReddData(this.filters); // surveyYear datasetId locationLabel
         break;
-      case 79:
-        dataObservable = this.cdmsService.getCarcassData();
-        break;
-      case 85:
-        dataObservable = this.cdmsService.getJuvAbundance();
-        break;
-      case 86:
-        dataObservable = this.cdmsService.getJuvSurvival();
-        break;
-      case 99:
-        dataObservable = this.cdmsService.getWeirData();
-        break;
-      case 100:
-        dataObservable = this.cdmsService.getFallRR();
-        break;
-      case 107:
-        dataObservable = this.cdmsService.getP4data();
-        break;
-      case 110:
-        dataObservable = this.cdmsService.getSpawningData();
-        break;
-      case 111:
-        dataObservable = this.cdmsService.getReddDataNEOR();
-        break;
-      case 113:
-        dataObservable = this.cdmsService.getCarcassDataNEOR();
-        break;
-      case 122:
-        dataObservable = this.cdmsService.getWaterTempData(2024);
-        break;
+      // case 79:
+      //   dataObservable = this.cdmsService.getCarcassData();''
+      //   break;
+      // case 85:
+      //   dataObservable = this.cdmsService.getJuvAbundance();
+      //   break;
+      // case 86:
+      //   dataObservable = this.cdmsService.getJuvSurvival();
+      //   break;
+      // case 99:
+      //   dataObservable = this.cdmsService.getWeirData();
+      //   break;
+      // case 100:
+      //   dataObservable = this.cdmsService.getFallRR();
+      //   break;
+      // case 107:
+      //   dataObservable = this.cdmsService.getP4data();
+      //   break;
+      // case 110:
+      //   dataObservable = this.cdmsService.getSpawningData();
+      //   break;
+      // case 111:
+      //   dataObservable = this.cdmsService.getReddDataNEOR();
+      //   break;
+      // case 113:
+      //   dataObservable = this.cdmsService.getCarcassDataNEOR();
+      //   break;
+      // case 122:
+      //   dataObservable = this.cdmsService.getWaterTempData(2024);
+      //   break;
       default:
         dataObservable = this.cdmsService.getDatastoreView(datastore_id);
     }
@@ -138,6 +143,19 @@ export class DataPageComponent {
     this.columnDefs = buildColumnDefs(data);
     this.isLoading = false;
     this.loadedDataset = this.datastores.find(ds => ds.Id === datastore_id)?.Name;
+  }
+
+  test() {
+    // this.cdmsService.getProjectDatasets(11052).subscribe(response => {
+    //   console.log(response);
+    //   this.data = response;
+    //   this.columnDefs = buildColumnDefs(response);
+    // });
+    this.cdmsService.getDatasetsList().subscribe(response => {
+      console.log(response);
+      this.data = response;
+      this.columnDefs = buildColumnDefs(response);
+    });
   }
 
 }

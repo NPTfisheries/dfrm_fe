@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 // import { CdmsService } from 'src/_services/cdms.service';
 
 interface filterOptions {
@@ -13,12 +13,13 @@ interface filterOptions {
   styleUrls: ['./data-filters.component.css']
 })
 export class DataFiltersComponent {
+  @Input() selectedDatastore!: number;
   @Output() dataFilters = new EventEmitter<any>(); // pass filter args back to data-page
 
   // filterOptions!: any; // Passed to filter components. Adjust to array eventually for looping through.
 
   filterOptions!: filterOptions[];
-  filters: any[] = [];
+  filters: { [key: string]: any } = {};
 
   constructor(
     // private cdmsService: CdmsService,
@@ -42,8 +43,8 @@ export class DataFiltersComponent {
           { 'value': '2023', 'label': '2023' },
           { 'value': '2024', 'label': '2024' }
         ],
-        placeholder: 'Brood Year',
-        argName: 'broodYear'
+        placeholder: 'Survey Year',
+        argName: 'SurveyYear'
       },
       {
         options: [
@@ -61,24 +62,9 @@ export class DataFiltersComponent {
   }
 
   setFilters(value: any) {
-
-    console.log('INITIAL findIndex:', this.filters.findIndex(filter => filter.argName === value.argName));
-    console.log('INITIAL find:', this.filters.find((filter) => filter.argName === value.argName));
-      
-    if (this.filters.find(filter => filter.argName === value.argName)) {
-      this.filters.splice(this.filters.findIndex(filter => filter.argName === value.argName), 1, value);
-    } else {
-      this.filters.push(value);
-    }
-
-    if (value.value === null) {
-      this.filters.splice(this.filters.findIndex(filter => filter.argName === value.argName), 1);
-    }
-
-    // console.log(`data-filters: ${this.filters}`)
-    console.log('AFTER findIndex:', this.filters.findIndex(filter => filter.argName === value.argName));
-    console.log('AFTER find:', this.filters.find((filter) => filter.argName === value.argName));
-
+    this.filters[Object.keys(value)[0]] = Object.values(value)[0];
+    console.log(this.filters);
+    
     this.dataFilters.emit(this.filters);
   }
 

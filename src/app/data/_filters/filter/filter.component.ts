@@ -18,15 +18,13 @@ export class FilterComponent {
   ) { }
 
   ngOnInit(): void {
-    this.setOptions()
+    this.setOptions();
   }
 
   handleChange(value: string) {
-    var filter = { 'argName': this.filterOptions.argName, 'value': value };
-
-    console.log('Filter:', filter, typeof (filter));
+    var filter = { [this.filterOptions.argName]: value };
+    // console.log('Filter:', filter);
     this.selectedOption = value;
-
     this.filterValue.emit(filter);
   }
 
