@@ -6,7 +6,7 @@
     <div *ngFor="let options of filterOptions">
         <div [ngSwitch]="options.argName">
             <app-filter *ngSwitchDefault [filterOptions]="options" (filterValue)="setFilters($event)"></app-filter>
-            <app-project-filter *ngSwitchCase="'project'" (projectValue)="setFilters($event)" [selectedDatastore]="selectedDatastore"></app-project-filter>
+            <app-project-filter *ngSwitchCase="'DatasetID'" (projectValue)="setFilters($event)" [selectedDatastore]="selectedDatastore"></app-project-filter>
         </div>
     </div>
 </div>

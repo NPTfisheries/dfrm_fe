@@ -54,6 +54,8 @@ export interface FacilityProperties {
     is_active?: boolean;
 }
 
+
+
 export interface Geometry {
     type?: string;
     coordinates?: number[];
@@ -71,3 +73,11 @@ export interface Lookup {
     object_type?: string;
     name?: string;
 }
+
+// cdms filtering
+export interface filterOptions {
+    options?: Object[];
+    placeholder?: string;
+    argName?: string;
+    required?: boolean;
+  }

@@ -1,11 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-// import { CdmsService } from 'src/_services/cdms.service';
-
-interface filterOptions {
-  options?: Object[];
-  placeholder?: string;
-  argName?: string;
-}
+import { FilterOptionsService } from 'src/_services/filter-options.service';
+import { filterOptions } from 'src/_models/interfaces';
 
 @Component({
   selector: 'app-data-filters',
@@ -22,7 +17,7 @@ export class DataFiltersComponent {
   filters: { [key: string]: any } = {};
 
   constructor(
-    // private cdmsService: CdmsService,
+    private filterOptionsService: FilterOptionsService,
   ) { }
 
   ngOnInit(): void {
@@ -31,34 +26,35 @@ export class DataFiltersComponent {
 
   // build options to pass necessary info to filter components
   buildFilterOptions() {
-    this.filterOptions = [
-      {
-        argName: 'project'
-      },
-      {
-        options: [
-          { 'value': '2020', 'label': '2020' },
-          { 'value': '2021', 'label': '2021' },
-          { 'value': '2022', 'label': '2022' },
-          { 'value': '2023', 'label': '2023' },
-          { 'value': '2024', 'label': '2024' }
-        ],
-        placeholder: 'Survey Year',
-        argName: 'SurveyYear'
-      },
-      {
-        options: [
-          { 'value': 'All', 'label': 'All' },
-          { 'value': 'Recapture', 'label': 'Recapture' },
-          { 'value': 'Mark', 'label': 'Mark' },
-          { 'value': 'Recovery', 'label': 'Recovery' },
-          { 'value': 'Tally', 'label': 'Tally' },
-          { 'value': 'Passive Recapture', 'label': 'Passive Recapture' }
-        ],
-        placeholder: 'Event Type',
-        argName: 'eventType'
-      }
-    ];
+    this.filterOptions = this.filterOptionsService.reddData()
+    // this.filterOptions = [
+    //   {
+    //     argName: 'project'
+    //   },
+    //   {
+    //     options: [
+    //       { 'value': '2020', 'label': '2020' },
+    //       { 'value': '2021', 'label': '2021' },
+    //       { 'value': '2022', 'label': '2022' },
+    //       { 'value': '2023', 'label': '2023' },
+    //       { 'value': '2024', 'label': '2024' }
+    //     ],
+    //     placeholder: 'Survey Year',
+    //     argName: 'SurveyYear'
+    //   },
+    //   {
+    //     options: [
+    //       { 'value': 'All', 'label': 'All' },
+    //       { 'value': 'Recapture', 'label': 'Recapture' },
+    //       { 'value': 'Mark', 'label': 'Mark' },
+    //       { 'value': 'Recovery', 'label': 'Recovery' },
+    //       { 'value': 'Tally', 'label': 'Tally' },
+    //       { 'value': 'Passive Recapture', 'label': 'Passive Recapture' }
+    //     ],
+    //     placeholder: 'Event Type',
+    //     argName: 'eventType'
+    //   }
+    // ];
   }
 
   setFilters(value: any) {

@@ -94,37 +94,37 @@ export class DataPageComponent {
     switch (datastore_id) {
       case 78:
         // dataObservable = this.cdmsService.getReddData();
-        dataObservable = this.cdmsService.getReddData(this.filters); // surveyYear datasetId locationLabel
+        dataObservable = this.cdmsService.getReddData(this.filters);
         break;
       // case 79:
-      //   dataObservable = this.cdmsService.getCarcassData();''
+      //   dataObservable = this.cdmsService.getCarcassData(this.filters);''
       //   break;
       // case 85:
-      //   dataObservable = this.cdmsService.getJuvAbundance();
+      //   dataObservable = this.cdmsService.getJuvAbundance(this.filters);
       //   break;
       // case 86:
-      //   dataObservable = this.cdmsService.getJuvSurvival();
+      //   dataObservable = this.cdmsService.getJuvSurvival(this.filters);
       //   break;
       // case 99:
-      //   dataObservable = this.cdmsService.getWeirData();
+      //   dataObservable = this.cdmsService.getWeirData(this.filters);
       //   break;
       // case 100:
-      //   dataObservable = this.cdmsService.getFallRR();
+      //   dataObservable = this.cdmsService.getFallRR(this.filters);
       //   break;
       // case 107:
-      //   dataObservable = this.cdmsService.getP4data();
+      //   dataObservable = this.cdmsService.getP4data(this.filters);
       //   break;
       // case 110:
-      //   dataObservable = this.cdmsService.getSpawningData();
+      //   dataObservable = this.cdmsService.getSpawningData(this.filters);
       //   break;
       // case 111:
-      //   dataObservable = this.cdmsService.getReddDataNEOR();
+      //   dataObservable = this.cdmsService.getReddDataNEOR(this.filters);
       //   break;
       // case 113:
-      //   dataObservable = this.cdmsService.getCarcassDataNEOR();
+      //   dataObservable = this.cdmsService.getCarcassDataNEOR(this.filters);
       //   break;
       // case 122:
-      //   dataObservable = this.cdmsService.getWaterTempData(2024);
+      //   dataObservable = this.cdmsService.getWaterTempData(this.filters);
       //   break;
       default:
         dataObservable = this.cdmsService.getDatastoreView(datastore_id);
