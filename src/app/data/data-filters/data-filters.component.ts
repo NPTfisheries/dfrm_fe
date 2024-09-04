@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { filterOptions } from 'src/_models/interfaces';
-import { getFilterOptions } from 'src/_services/filter-options.service';
+import { filterOptionsService } from 'src/_services/filter-options.service';
 
 @Component({
   selector: 'app-data-filters',
@@ -17,11 +17,12 @@ export class DataFiltersComponent implements OnChanges {
   filters: { [key: string]: any } = {};
 
   constructor(
+    private filterOptionsService: filterOptionsService,
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['selectedDatastore'] && this.selectedDatastore) {
-      this.filterOptions = getFilterOptions(this.selectedDatastore);
+      this.filterOptions = this.filterOptionsService.getFilterOptions(this.selectedDatastore);
     } else {
       this.filterOptions = [];
     }

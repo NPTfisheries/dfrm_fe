@@ -60,6 +60,7 @@ import { DataPageComponent } from './data/data-page/data-page.component';
 import { DataFiltersComponent } from './data/data-filters/data-filters.component';
 import { ProjectFilterComponent } from './data/_filters/project-filter/project-filter.component';
 import { FilterComponent } from './data/_filters/filter/filter.component';
+import { LocationFilterComponent } from './location-filter/location-filter.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { FilterComponent } from './data/_filters/filter/filter.component';
     DataFiltersComponent,
     ProjectFilterComponent,
     FilterComponent,
+    LocationFilterComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,33 +1,45 @@
+import { Injectable, Inject } from '@angular/core';
 import { filterOptions } from 'src/_models/interfaces';
+import { CdmsService } from './cdms.service';
 
-// the argName's here need to match those in NPTController.cs
-export function getFilterOptions(datastore_id: number): filterOptions[] {
+@Injectable ({
+  providedIn: 'root'
+})
+export class filterOptionsService {
+
+  constructor(@Inject(CdmsService) private cdmsService: CdmsService) {}
+
+  // the argName's here need to match those in NPTController.cs
+getFilterOptions(datastore_id: number): filterOptions[] {
   console.log('getFilterOptions');
 
   switch (datastore_id) {
-    case 78 || 79:
-      return sgsData();
-    case 85 || 86:
-      return juvSummaries();
+    case 78:
+    case 79:
+      return this.sgsData();
+    case 85:
+    case 86:
+      return this.juvSummaries();
     case 99:
-      return weirData();
+      return this.weirData();
     case 100:
-      return fallRR();
+      return this.fallRR();
     case 107:
-      return p4data();
+      return this.p4data();
     case 110:
-      return spawningData();
-    case 111 || 113:
-      return sgsNEOR();
+      return this.spawningData();
+    case 111:
+    case 113:
+      return this.sgsNEOR();
     case 122:
-      return waterTempData();
+      return this.waterTempData();
     default:
       return [];
   }
 }
 
 // carcass and redds
-function sgsData(): filterOptions[] {
+sgsData(): filterOptions[] {
   return [{
     options: [
       { 'value': 2001, 'label': '2001' },
@@ -67,7 +79,7 @@ function sgsData(): filterOptions[] {
   ]
 }
 
-function sgsNEOR(): filterOptions[] {
+sgsNEOR(): filterOptions[] {
   return [{
     options: [],
     placeholder: 'Survey Year',
@@ -76,7 +88,7 @@ function sgsNEOR(): filterOptions[] {
   ]
 }
 
-function fallRR(): filterOptions[] {
+fallRR(): filterOptions[] {
   return [{
     options: [],
     placeholder: 'Return Year',
@@ -90,7 +102,7 @@ function fallRR(): filterOptions[] {
   ]
 }
 // same as survival
-function juvSummaries(): filterOptions[] {
+juvSummaries(): filterOptions[] {
   return [{
     options: [],
     placeholder: 'Species',
@@ -119,7 +131,7 @@ function juvSummaries(): filterOptions[] {
   ]
 }
 
-function p4data(): filterOptions[] {
+p4data(): filterOptions[] {
   return [{
     options: [],
     placeholder: 'MRR Project',
@@ -164,7 +176,7 @@ function p4data(): filterOptions[] {
 }
 
 
-function reddDataNEOR(): filterOptions[] {
+reddDataNEOR(): filterOptions[] {
   return [{
     options: [],
     placeholder: '',
@@ -173,7 +185,7 @@ function reddDataNEOR(): filterOptions[] {
   ]
 }
 
-function spawningData(): filterOptions[] {
+spawningData(): filterOptions[] {
   return [{
     options: [],
     placeholder: 'Spawn Location',
@@ -207,7 +219,7 @@ function spawningData(): filterOptions[] {
   ]
 }
 
-function waterTempData(): filterOptions[] {
+waterTempData(): filterOptions[] {
   return [{
     options: [],
     placeholder: 'Year',
@@ -222,7 +234,7 @@ function waterTempData(): filterOptions[] {
   ]
 }
 
-function weirData(): filterOptions[] {
+weirData(): filterOptions[] {
   return [{
     options: [],
     placeholder: 'FINS Facility',
@@ -251,3 +263,4 @@ function weirData(): filterOptions[] {
   ]
 }
 
+}
