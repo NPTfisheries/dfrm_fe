@@ -27,6 +27,12 @@ export class filterOptionsService {
         return this.weirData();
       case 100:
         return this.fallRR();
+      case 102:
+        return this.iptdsEsc();
+      case 103:
+        return this.iptdsLgr();
+      case 104:
+        return this.iptdsRecruits();
       case 107:
         return this.p4data();
       case 110:
@@ -77,6 +83,170 @@ export class filterOptionsService {
       placeholder: 'Brood Year',
       argName: 'BroodYear'
     }
+    ]
+  }
+
+  iptdsEsc(): filterOptions[] {
+    return [
+      {
+        options: [
+          { 'value': 'Age Escapement', 'label': 'Age Escapement' },
+          { 'value': 'Age Proportion', 'label': 'Age Proportion' },
+          { 'value': 'Detection Efficiency', 'label': 'Detection Efficiency' },
+          { 'value': 'Female Escapement', 'label': 'Female Escapement' },
+          { 'value': 'Female Proportion', 'label': 'Female Proportion' },
+          { 'value': 'Population Escapement', 'label': 'Population Escapement' },
+          { 'value': 'Site Escapement', 'label': 'Site Escapement' }
+        ],
+        placeholder: 'Variable',
+        argName: 'Variable'
+      },
+      {
+        options: this.buildIntArray(2010, this.current_year), // 2010-
+        placeholder: 'Spawn Year',
+        argName: 'SpawnYear'
+      },
+      {
+        options: [
+          { 'value': 'Chinook salmon', 'label': 'Chinook salmon' },
+          { 'value': 'Steelhead', 'label': 'Steelhead' }
+        ],
+        placeholder: 'Species',
+        argName: 'Species'
+      },
+      {
+        options: [
+          { 'value': 'Spring/Summer', 'label': 'Spring/Summer' },
+          { 'value': 'Summer', 'label': 'Summer' }
+        ],
+        placeholder: 'Run',
+        argName: 'Run'
+      },
+      {
+        options: [
+          { 'value': 'CRLAP', 'label': 'CRLAP' },
+          { 'value': 'CRLMA-s', 'label': 'CRLMA-s' },
+          { 'value': 'CRLOC', 'label': 'CRLOC' },
+          { 'value': 'CRLOC-s', 'label': 'CRLOC-s' },
+          { 'value': 'CRLOL', 'label': 'CRLOL' },
+          { 'value': 'CRLOL-s', 'label': 'CRLOL-s' },
+          { 'value': 'CRPOT', 'label': 'CRPOT' },
+          { 'value': 'CRSEL-s', 'label': 'CRSEL-s' },
+          { 'value': 'CRSFC-s', 'label': 'CRSFC-s' },
+          { 'value': 'GRCAT', 'label': 'GRCAT' },
+          { 'value': 'GRJOS-s', 'label': 'GRJOS-s' },
+          { 'value': 'GRLMT-s', 'label': 'GRLMT-s' },
+          { 'value': 'GRLOO', 'label': 'GRLOO' },
+          { 'value': 'GRLOS', 'label': 'GRLOS' },
+          { 'value': 'GRLOS/GRMIN', 'label': 'GRLOS/GRMIN' },
+          { 'value': 'GRMIN', 'label': 'GRMIN' },
+          { 'value': 'GRUMA', 'label': 'GRUMA' },
+          { 'value': 'GRUMA-s', 'label': 'GRUMA-s' },
+          { 'value': 'GRWAL-s', 'label': 'GRWAL-s' },
+          { 'value': 'GRWEN', 'label': 'GRWEN' },
+          { 'value': 'IRBSH', 'label': 'IRBSH' },
+          { 'value': 'IRMAI', 'label': 'IRMAI' },
+          { 'value': 'IRMAI-s', 'label': 'IRMAI-s' },
+          { 'value': 'MFBEA', 'label': 'MFBEA' },
+          { 'value': 'MFBIG', 'label': 'MFBIG' },
+          { 'value': 'MFBIG-s', 'label': 'MFBIG-s' },
+          { 'value': 'MFUMA-s', 'label': 'MFUMA-s' },
+          { 'value': 'SCLAW', 'label': 'SCLAW' },
+          { 'value': 'SCUMA', 'label': 'SCUMA' },
+          { 'value': 'SEMEA', 'label': 'SEMEA' },
+          { 'value': 'SEUMA/SEMEA/SEMOO', 'label': 'SEUMA/SEMEA/SEMOO' },
+          { 'value': 'SFEFS', 'label': 'SFEFS' },
+          { 'value': 'SFMAI', 'label': 'SFMAI' },
+          { 'value': 'SFMAI-s', 'label': 'SFMAI-s' },
+          { 'value': 'SFSEC', 'label': 'SFSEC' },
+          { 'value': 'SFSEC-s', 'label': 'SFSEC-s' },
+          { 'value': 'SNASO', 'label': 'SNASO' },
+          { 'value': 'SNASO-s', 'label': 'SNASO-s' },
+          { 'value': 'SNTUC', 'label': 'SNTUC' },
+          { 'value': 'SNTUC-s', 'label': 'SNTUC-s' },
+          { 'value': 'SREFS', 'label': 'SREFS' },
+          { 'value': 'SREFS-s', 'label': 'SREFS-s' },
+          { 'value': 'SRLEM', 'label': 'SRLEM' },
+          { 'value': 'SRLEM-s', 'label': 'SRLEM-s' },
+          { 'value': 'SRLMA', 'label': 'SRLMA' },
+          { 'value': 'SRLSR', 'label': 'SRLSR' },
+          { 'value': 'SRLSR-s', 'label': 'SRLSR-s' },
+          { 'value': 'SRNFS', 'label': 'SRNFS' },
+          { 'value': 'SRNFS-s', 'label': 'SRNFS-s' },
+          { 'value': 'SRPAH', 'label': 'SRPAH' },
+          { 'value': 'SRPAH-s', 'label': 'SRPAH-s' },
+          { 'value': 'SRPAN', 'label': 'SRPAN' },
+          { 'value': 'SRPAN-s', 'label': 'SRPAN-s' },
+          { 'value': 'SRUMA', 'label': 'SRUMA' },
+          { 'value': 'SRUMA-s', 'label': 'SRUMA-s' },
+          { 'value': 'SRVAL', 'label': 'SRVAL' },
+          { 'value': 'SRYFS', 'label': 'SRYFS' }
+        ],
+        placeholder: 'TRT Population ID',
+        argName: 'TRT_POPID'
+      }
+    ]
+  }
+
+  iptdsLgr(): filterOptions[] {
+    return [
+      {
+        options: this.buildIntArray(2010, this.current_year), // 2010-
+        placeholder: 'Spawn Year',
+        argName: 'SpawnYear'
+      },
+      {
+        options: [
+          { 'value': 'Chinook', 'label': 'Chinook' },
+          { 'value': 'Chinook Salmon', 'label': 'Chinook Salmon' },
+          { 'value': 'Steelhead', 'label': 'Steelhead' }
+        ],
+        placeholder: 'Species',
+        argName: 'Species'
+      },
+      {
+        options: [
+          { 'value': 'Spring/Summer', 'label': 'Spring/Summer' },
+          { 'value': 'Summer', 'label': 'Summer' },
+        ],
+        placeholder: 'Run',
+        argName: 'Run'
+      }
+    ]
+  }
+
+  iptdsRecruits(): filterOptions[] {
+    return [
+      {
+        options: [
+          { 'value': 'Recruits', 'label': 'Recruits' },
+          { 'value': 'Spawners', 'label': 'Spawners' },
+          { 'value': 'lambda', 'label': 'lambda' }
+        ],
+        placeholder: 'Variable',
+        argName: 'Variable'
+      },
+      {
+        options: this.buildIntArray(2010, this.current_year), // 2010-
+        placeholder: 'Brood Year',
+        argName: 'BroodYear'
+      },
+      {
+        options: [
+          { 'value': 'Chinook Salmon', 'label': 'Chinook Salmon' },
+          { 'value': 'Steelhead', 'label': 'Steelhead' }
+        ],
+        placeholder: 'Species',
+        argName: 'Species'
+      },
+      {
+        options: [
+          { 'value': 'Spring/Summer', 'label': 'Spring/Summer' },
+          { 'value': 'Summer', 'label': 'Summer' }
+        ],
+        placeholder: 'Run',
+        argName: 'Run'
+      }
     ]
   }
 
@@ -196,12 +366,12 @@ export class filterOptionsService {
       options: this.buildIntArray(1997, this.current_year),
       placeholder: 'Brood Year',
       argName: 'BroodYear'
-    },
-    {
-      options: this.buildIntArray(1997, this.current_year),
-      placeholder: 'Calendar Year',
-      argName: 'CalendarYear'
-    }
+    }//,
+    // {
+    //   options: this.buildIntArray(1997, this.current_year),
+    //   placeholder: 'Calendar Year',
+    //   argName: 'CalendarYear'
+    // }
     ]
   }
 

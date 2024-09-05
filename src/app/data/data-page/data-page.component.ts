@@ -110,6 +110,15 @@ export class DataPageComponent {
       case 100:
         dataObservable = this.cdmsService.getFallRR(this.filters);
         break;
+      case 102:
+        dataObservable = this.cdmsService.getIPTDSesc(this.filters);
+        break;
+      case 103:
+        dataObservable = this.cdmsService.getIPTDSlgr(this.filters);
+        break;
+      case 104:
+        dataObservable = this.cdmsService.getIPTDSrecruits(this.filters);
+        break;
       case 107:
         dataObservable = this.cdmsService.getP4data(this.filters);
         break;
