@@ -13,7 +13,7 @@ export class filterOptionsService {
 
   // the argName's here need to match those in NPTController.cs
   getFilterOptions(datastore_id: number): filterOptions[] {
-    console.log('getFilterOptions');
+    // console.log('getFilterOptions');
 
     switch (datastore_id) {
       case 78:

@@ -78,6 +78,6 @@ export interface Lookup {
 export interface filterOptions {
     options?: Object[];
     placeholder?: string;
-    argName?: string;
+    argName: string;
     required?: boolean;
   }
