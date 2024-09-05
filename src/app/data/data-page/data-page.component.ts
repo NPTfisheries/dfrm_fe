@@ -38,8 +38,10 @@ export class DataPageComponent {
 
   ngOnInit(): void {
     // we need to make sure the login happens before querying anything else from CDMS, which didn't happen 9/4/24
-    this.cdmsService.login('api_user', 'api_user').subscribe(response => console.log(response));
-    this.cdmsService.getDatastores().subscribe((datastores: any) => this.datastores = datastores);
+    this.cdmsService.login('api_user', 'api_user').subscribe(response => {
+      console.log(response);
+      this.cdmsService.getDatastores().subscribe((datastores: any) => this.datastores = datastores);
+    });
   }
 
   ngOnDestroy(): void {
@@ -67,13 +69,10 @@ export class DataPageComponent {
   }
 
   getDataFilters(value: any) {
-    // console.log(`Active Filters: ${value}`)
-    // value.forEach((val:any) => console.log(val));
     this.filters=value;
   }
 
   handleChange(value: number) {
-    // console.log(value, typeof (value));
     this.selectedDatastore = value;
   }
 

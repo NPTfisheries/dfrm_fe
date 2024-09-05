@@ -61,20 +61,6 @@ export class CdmsService {
         );
     }
 
-    datasetOptionsByProject(datastoreId?: number): Observable<any[]> {
-        return this.get('dataset/getdatasetslist').pipe(
-            map((datasets: any[]) => {
-                return datasets
-                    .filter((dataset: any) => datastoreId ? dataset.DatastoreId === datastoreId : true)
-                    .map((dataset: any) => ({
-                        'value': dataset.id,
-                        'label': dataset.projectName
-                    }));
-            })
-        );
-    }
-
-
     getDatastores() {
         return this.get('datastore/getdatastores').pipe(
             map((datastores: any[]) => {
@@ -84,21 +70,10 @@ export class CdmsService {
                     .map((datastore: any) => ({
                         'Id': datastore.Id,
                         'Name': datastore.Name
-                    }));
+                    }))
+                    .sort((a: any, b: any) => a.Name.localeCompare(b.Name));
             })
 
-        );
-    }
-
-    getLocations() {
-        return this.get('').pipe(
-            map((locations: any[]) => {
-                console.log(locations);
-                return locations.map((location: any) => ({
-                    'Id': location.Id,
-                    'Name': location.Name
-                }));
-            })
         );
     }
 

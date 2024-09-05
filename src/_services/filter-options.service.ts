@@ -51,15 +51,15 @@ export class filterOptionsService {
   sgsData(): filterOptions[] {
     return [{
       options: this.buildIntArray(2001, this.current_year),
-      placeholder: 'Select Survey Year',
+      placeholder: 'Survey Year',
       argName: 'SurveyYear'
     },
     {
       argName: 'DatasetID'  // via project name
     },
-    {
-      argName: 'LocationLabel'
-    }
+    // {
+    //   argName: 'LocationLabel'
+    // }
     ]
   }
 
@@ -333,45 +333,135 @@ export class filterOptionsService {
 
   p4data(): filterOptions[] {
     return [{
-      options: [],
+      options: [
+        { 'value': 'BDA', 'label': 'BDA' },
+        { 'value': 'CDR', 'label': 'CDR' },
+        { 'value': 'IMN', 'label': 'IMN' },
+        { 'value': 'JLV', 'label': 'JLV' },
+        { 'value': 'NPC', 'label': 'NPC' },
+        { 'value': 'PAK', 'label': 'PAK' },
+        { 'value': 'SCS', 'label': 'SCS' }
+      ],
       placeholder: 'MRR Project',
       argName: 'MRRProject'
     },
     {
-      options: [],
+      options: [
+        { 'value': 'CLWR', 'label': 'CLWR' },
+        { 'value': 'CLWRSF', 'label': 'CLWRSF' },
+        { 'value': 'IMNTRP', 'label': 'IMNTRP' },
+        { 'value': 'JACKSC', 'label': 'JACKSC' },
+        { 'value': 'JOHNSC', 'label': 'JOHNSC' },
+        { 'value': 'JOHTRP', 'label': 'JOHTRP' },
+        { 'value': 'LOLOC', 'label': 'LOLOC' },
+        { 'value': 'LOLTRP', 'label': 'LOLTRP' },
+        { 'value': 'LSFTRP', 'label': 'LSFTRP' },
+        { 'value': 'MCCA', 'label': 'MCCA' },
+        { 'value': 'NEWSOC', 'label': 'NEWSOC' },
+        { 'value': 'NPTH', 'label': 'NPTH' },
+        { 'value': 'SECTRP', 'label': 'SECTRP' },
+        { 'value': 'SFCTRP', 'label': 'SFCTRP' },
+        { 'value': 'SIXMIC', 'label': 'SIXMIC' }
+      ],
       placeholder: 'Event Site',
       argName: 'EventSite'
     },
     {
-      options: [],
+      options: [
+        { 'value': 'Mark', 'label': 'Mark' },
+        { 'value': 'Passive Recapture', 'label': 'Passive Recapture' },
+        { 'value': 'Recapture', 'label': 'Recapture' },
+        { 'value': 'Recovery', 'label': 'Recovery' },
+        { 'value': 'Tally', 'label': 'Tally' }
+      ],
       placeholder: 'Event Type',
       argName: 'EventType'
     },
     {
-      options: [],
+      options: [
+        { 'value': 'BSEINE', 'label': 'Beach Seine' },
+        { 'value': 'DIPNET', 'label': 'Dip Net' },
+        { 'value': 'FYKNET', 'label': 'Fyke Net' },
+        { 'value': 'HOOK', 'label': 'Hook and Line' },
+        { 'value': 'SCREWT', 'label': 'Screw Trap' },
+        { 'value': 'SHOCK', 'label': 'Electro-Shock' },
+        { 'value': 'WTRAP', 'label': 'Weir Trap' }
+      ],
       placeholder: 'Capture Method',
       argName: 'CaptureMethod'
     },
     {
-      options: [],
-      placeholder: 'SRR Code',
-      argName: 'SRRCode'
+      options: [
+      { 'value': '00U', 'label': '00U' },
+      { 'value': '05U', 'label': '05U' },
+      { 'value': '11H', 'label': '11H' },
+      { 'value': '11U', 'label': '11U' },
+      { 'value': '11W', 'label': '11W' },
+      { 'value': '12H', 'label': '12H' },
+      { 'value': '12U', 'label': '12U' },
+      { 'value': '12W', 'label': '12W' },
+      { 'value': '13H', 'label': '13H' },
+      { 'value': '13U', 'label': '13U' },
+      { 'value': '13W', 'label': '13W' },
+      { 'value': '15U', 'label': '15U' },
+      { 'value': '15W', 'label': '15W' },
+      { 'value': '25H', 'label': '25H' },
+      { 'value': '25W', 'label': '25W' },
+      { 'value': '30W', 'label': '30W' },
+      { 'value': '32H', 'label': '32H' },
+      { 'value': '32U', 'label': '32U' },
+      { 'value': '32W', 'label': '32W' },
+      { 'value': '34W', 'label': '34W' },
+      { 'value': '35H', 'label': '35H' },
+      { 'value': '35U', 'label': '35U' },
+      { 'value': '3RU', 'label': '3RU' },
+      { 'value': '3RW', 'label': '3RW' },
+      { 'value': '45W', 'label': '45W' },
+      { 'value': '7RW', 'label': '7RW' },
+      { 'value': '85W', 'label': '85W' },
+      { 'value': '8RW', 'label': '8RW' },
+      { 'value': '90U', 'label': '90U' },
+      { 'value': 'A0W', 'label': 'A0W' },
+      { 'value': 'BH', 'label': 'BH' },
+      { 'value': 'BL', 'label': 'BL' },
+      { 'value': 'BM', 'label': 'BM' },
+      { 'value': 'BU', 'label': 'BU' },
+      { 'value': 'CM', 'label': 'CM' },
+      { 'value': 'D0W', 'label': 'D0W' },
+      { 'value': 'DA', 'label': 'DA' },
+      { 'value': 'ERU', 'label': 'ERU' },
+      { 'value': 'G0W', 'label': 'G0W' },
+      { 'value': 'I0W', 'label': 'I0W' },
+      { 'value': 'J0W', 'label': 'J0W' },
+      { 'value': 'L0W', 'label': 'L0W' },
+      { 'value': 'LD', 'label': 'LD' },
+      { 'value': 'LU', 'label': 'LU' },
+      { 'value': 'MS', 'label': 'MS' },
+      { 'value': 'NFD', 'label': 'NFD' },
+      { 'value': 'PM', 'label': 'PM' },
+      { 'value': 'RS', 'label': 'RS' },
+      { 'value': 'SC', 'label': 'SC' },
+      { 'value': 'SD', 'label': 'SD' },
+      { 'value': 'SS', 'label': 'SS' }
+    ],
+      placeholder: 'SRR Code', // SpeciesRunRearType
+      argName: 'SRRcode'
     },
     {
-      options: this.buildIntArray(1997, this.current_year),
+      options: this.buildIntArray(2002, this.current_year),
       placeholder: 'Migration Year',
       argName: 'MigrationYear'
     },
     {
-      options: this.buildIntArray(1997, this.current_year),
+      options: this.buildIntArray(2000, this.current_year),
       placeholder: 'Brood Year',
       argName: 'BroodYear'
     }//,
-    // {
-    //   options: this.buildIntArray(1997, this.current_year),
-    //   placeholder: 'Calendar Year',
-    //   argName: 'CalendarYear'
-    // }
+      // {
+      //   options: this.buildIntArray(2002, this.current_year),
+      //   placeholder: 'Calendar Year',
+      //   argName: 'CalendarYear'
+      // }
     ]
   }
 
@@ -487,16 +577,16 @@ export class filterOptionsService {
 
   waterTempData(): filterOptions[] {
     return [{
-      options: [],
+      options: this.buildIntArray(1999, this.current_year),
       placeholder: 'Year',
       argName: 'Year',
       required: true,
     },
-    {
-      options: [],
-      placeholder: 'Location',
-      argName: 'LocationId'
-    },
+    // {
+    //   options: [],
+    //   placeholder: 'Location',
+    //   argName: 'LocationId'
+    // },
     ]
   }
 

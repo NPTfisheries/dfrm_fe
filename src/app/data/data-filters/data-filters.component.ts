@@ -21,6 +21,7 @@ export class DataFiltersComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['selectedDatastore'] && this.selectedDatastore) {
       this.filterOptions = this.filterOptionsService.getFilterOptions(this.selectedDatastore);
+      this.filters = {};
     } else {
       this.filterOptions = [];
     }
