@@ -6,7 +6,7 @@
                 (change)="handleChange(selectedDatastore)" [(ngModel)]="selectedDatastore"></ng-select>
         </div>
         <div class="col-2">
-            <app-button [label]="'Retrieve Data'" (click)="retrieveData()" [loading]="isLoading"></app-button>
+            <app-button [label]="'Retrieve Data'" (click)="retrieveData()" [loading]="isLoading" [disabled]="invalidForm"></app-button>
         </div>
     </div>
     <app-data-filters (dataFilters)="getDataFilters($event)" [selectedDatastore]="selectedDatastore"></app-data-filters>

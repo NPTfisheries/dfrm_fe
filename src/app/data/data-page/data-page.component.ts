@@ -20,6 +20,7 @@ export class DataPageComponent {
   loadedDataset?: string | null;
   isLoading = false;
   filters: { [key: string]: any } = {};
+  invalidForm = false;
 
   private gridApi!: GridApi;
   columnDefs: ColDef[] | undefined;
@@ -69,11 +70,23 @@ export class DataPageComponent {
   }
 
   getDataFilters(value: any) {
-    this.filters=value;
+    console.log('data page received filters...', value);
+    this.invalidForm = false;
+    this.filters = value;
+
+    if (this.selectedDatastore === 122 && this.filters.hasOwnProperty('Year') && this.filters['Year']) {
+      console.log('inside the if');
+      this.invalidForm = false;
+    }
+
   }
 
   handleChange(value: number) {
     this.selectedDatastore = value;
+    this.invalidForm = false;
+    if (this.selectedDatastore === 122) {
+      this.invalidForm = true; // force selection of Year
+    };
   }
 
   buildFilename(): string {
@@ -95,7 +108,7 @@ export class DataPageComponent {
         dataObservable = this.cdmsService.getReddData(this.filters);
         break;
       case 79:
-        dataObservable = this.cdmsService.getCarcassData(this.filters);''
+        dataObservable = this.cdmsService.getCarcassData(this.filters); ''
         break;
       case 85:
         dataObservable = this.cdmsService.getJuvAbundance(this.filters);
