@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
+import { environment } from "src/environments/environment";
 
 @Injectable({ providedIn: 'root' })
 export class CdmsService {
 
-    // apiUrl: string = 'https://npt-cdms.nezperce.org';
-    apiUrl: string = ''; // necessary for proxy to function (dev)
+    apiUrl: string = 'https://npt-cdms.nezperce.org';
+    // apiUrl: string = ''; // necessary for proxy to function (dev)
     apiVersion: string = '/services/api/v1/';
 
     allowed_datastores = [78, 79, 85, 86, 92, 97, 99, 100, 102, 103, 104, 107, 110, 111, 113, 122] // Age: 80
@@ -24,7 +25,7 @@ export class CdmsService {
             'Content-Type': 'application/json'
         });
 
-        return this.http.post(reqUrl, body, { headers, observe: 'response' }).pipe(
+        return this.http.post(reqUrl, body, { headers, observe: 'response', withCredentials: true }).pipe(
             map((response: any) => {
                 if (response.status === 200) {
                     console.log(`Logged in as: ${response.body.User['Fullname']}`);
@@ -193,7 +194,7 @@ export class CdmsService {
             });
         }
 
-        return this.http.get(reqUrl, { params: requestParams }).pipe(
+        return this.http.get(reqUrl, { params: requestParams, withCredentials: true }).pipe(
             map((response: any) => {
                 return response;
             })
