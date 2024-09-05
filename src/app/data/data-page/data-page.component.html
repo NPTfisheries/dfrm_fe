@@ -1,17 +1,16 @@
 <div class="container my-5">
-    <app-button [label]="'test'" (click)="test()"></app-button>
     <h1 class="dfrm-page-title text-center">CDMS Data Access</h1>
     <div class="row align-items-center">
-        <div class="col-9 offset-1">
+        <div class="col-10 offset-1">
             <ng-select [items]="datastores" bindLabel="Name" bindValue="Id" placeholder="Select Datastore"
                 (change)="handleChange(selectedDatastore)" [(ngModel)]="selectedDatastore"></ng-select>
         </div>
-        <div class="col-2">
-            <app-button [label]="'Retrieve Data'" (click)="retrieveData()" [loading]="isLoading"></app-button>
-        </div>
+
     </div>
     <app-data-filters (dataFilters)="getDataFilters($event)" [selectedDatastore]="selectedDatastore"></app-data-filters>
-
+    <div class="row">
+        <app-button [label]="'Retrieve Data'" (click)="retrieveData()" [loading]="isLoading" [style]="btnStyle"></app-button>
+    </div>
     <br>
 
     <div class="container my-5" style="height: 600px;">

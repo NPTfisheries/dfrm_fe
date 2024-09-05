@@ -49,8 +49,8 @@ export class CdmsService {
             map((datasets: any[]) => {
                 // console.log(datasets);
                 return datasets
-                    .filter((dataset:any) => datastoreId? dataset.DatastoreId === datastoreId : true)
-                    .map((dataset:any) => ({
+                    .filter((dataset: any) => datastoreId ? dataset.DatastoreId === datastoreId : true)
+                    .map((dataset: any) => ({
                         'datasetId': dataset.Id,
                         'projectName': dataset.ProjectName,
                         'projectId': dataset.ProjectId,
@@ -60,6 +60,20 @@ export class CdmsService {
             })
         );
     }
+
+    datasetOptionsByProject(datastoreId?: number): Observable<any[]> {
+        return this.get('dataset/getdatasetslist').pipe(
+            map((datasets: any[]) => {
+                return datasets
+                    .filter((dataset: any) => datastoreId ? dataset.DatastoreId === datastoreId : true)
+                    .map((dataset: any) => ({
+                        'value': dataset.id,
+                        'label': dataset.projectName
+                    }));
+            })
+        );
+    }
+
 
     getDatastores() {
         return this.get('datastore/getdatastores').pipe(
@@ -76,6 +90,18 @@ export class CdmsService {
         );
     }
 
+    getLocations() {
+        return this.get('').pipe(
+            map((locations: any[]) => {
+                console.log(locations);
+                return locations.map((location: any) => ({
+                    'Id': location.Id,
+                    'Name': location.Name
+                }));
+            })
+        );
+    }
+
     getProjects() {
         return this.get('project/getprojects').pipe(
             map((projects: any[]) => {
@@ -88,7 +114,7 @@ export class CdmsService {
     }
 
     getProjectDatasets(projectId: number) {
-        let params = {'id':  projectId};
+        let params = { 'id': projectId };
 
         return this.get('project/getprojectdatasets', params);
     }
@@ -108,70 +134,74 @@ export class CdmsService {
     }
 
     // PIKUN queries
-    // getCarcassData(surveyYear?: number, project?: string, locationLabel?: string) {
-    getCarcassData(params: { [key: string]: any}) {
+    getCarcassData(params: { [key: string]: any }) {
         console.log('getCarcassData');
-        return this.get('npt/getsgscarcassdata')
+        return this.get('npt/getsgscarcassdata', params)
     }
 
-    // getCarcassDataNEOR(surveyYear?: number, grsmeOnly: boolean = true) {
-    getCarcassDataNEOR(params: { [key: string]: any}) {
+    getCarcassDataNEOR(params: { [key: string]: any }) {
         console.log('getCarcassDataNEOR');
-        return this.get('npt/getsgscarcassdataneor')
+        return this.get('npt/getsgscarcassdataneor', params)
     }
 
-    // getFallRR(broodYear?: number, returnYear?: number) {
-    getFallRR(params: { [key: string]: any}) {
+    getFallRR(params: { [key: string]: any }) {
         console.log('getFallRR');
-        return this.get('npt/getfcrrdata')
+        return this.get('npt/getfcrrdata', params)
     }
 
-    // getJuvAbundance(rst?: string, speciesRun?: string, migratoryYear?: number, broodYear?: number, origin?: string) {
-    getJuvAbundance(params: { [key: string]: any}) {
+    getIPTDSesc(params: { [key: string]: any }) {
+        console.log('getIPTDSesc');
+        return this.get('npt/getiptdsescdata', params)
+    }
+
+    getIPTDSlgr(params: { [key: string]: any }) {
+        console.log('getIPTDSlgr');
+        return this.get('npt/getiptdslgrdata', params)
+    }
+
+    getIPTDSrecruits(params: { [key: string]: any }) {
+        console.log('getIPTDSrecruits');
+        return this.get('npt/getiptdsrecruitsdata', params)
+    }
+
+    getJuvAbundance(params: { [key: string]: any }) {
         console.log('getJuvAbundance');
-        return this.get('npt/getjuvabundancedata')
+        return this.get('npt/getjuvabundancedata', params)
     }
 
-    // getJuvSurvival(rst?: string, speciesRun?: string, migratoryYear?: number, broodYear?: number, origin?: string) {
-    getJuvSurvival(params: { [key: string]: any}) {
+    getJuvSurvival(params: { [key: string]: any }) {
         console.log('getJuvSurvival');
-        return this.get('npt/getjuvsurvivaldata')
+        return this.get('npt/getjuvsurvivaldata', params)
     }
 
-    // getP4data(mrrProject?: string, eventSite?: string, eventType?: string, captureMethod?: string, srrCode?: string, 
-    getP4data(params: { [key: string]: any}) {
+    getP4data(params: { [key: string]: any }) {
         console.log('getP4data');
-        return this.get('npt/getp4data')
+        return this.get('npt/getp4data', params)
     }
 
-    // getReddData(surveyYear?: number, datasetId?: number, locationLabel?: string) {
-    getReddData(params: { [key: string]: any}) {
+    getReddData(params: { [key: string]: any }) {
         console.log(`getReddData, params: ${params}`);
         return this.get('npt/getsgsredddata', params)
     }
 
-    // getReddDataNEOR(surveyYear?: number, grsmeOnly: boolean = true) {
-    getReddDataNEOR(params: { [key: string]: any}) {
+    getReddDataNEOR(params: { [key: string]: any }) {
         console.log('getReddDataNEOR');
-        return this.get('npt/getsgsredddataneor')
+        return this.get('npt/getsgsredddataneor', params)
     }
 
-    // getSpawningData(spawnLocation?: string, stock?: string, species?: string, run?: string, sex?: string, origin?: string) {
-    getSpawningData(params: { [key: string]: any}) {
+    getSpawningData(params: { [key: string]: any }) {
         console.log('getSpawningData');
-        return this.get('npt/getfinsspawningdata')
+        return this.get('npt/getfinsspawningdata', params)
     }
 
-    // getWaterTempData(year: number, location_id?: string) {
-    getWaterTempData(params: { [key: string]: any}) {
+    getWaterTempData(params: { [key: string]: any }) {
         console.log('getWaterTempData');
-        return this.get('npt/getwatertempdata')
+        return this.get('npt/getwatertempdata', params)
     }
 
-    // getWeirData(facility?: string, species?: string, run?: string, sex?: string, origin?: string) {
-    getWeirData(params: { [key: string]: any}) {
+    getWeirData(params: { [key: string]: any }) {
         console.log('getWeirData');
-        return this.get('npt/getfinsweirdata')
+        return this.get('npt/getfinsweirdata', params)
     }
 
 
@@ -180,15 +210,15 @@ export class CdmsService {
         const reqUrl = `${this.apiUrl}${this.apiVersion}${endpoint}`;
 
         let requestParams = new HttpParams();
-        if(params) {
+        if (params) {
             Object.keys(params).forEach((key) => {
-                if(params[key] !== undefined && params[key] !== null) {
+                if (params[key] !== undefined && params[key] !== null) {
                     requestParams = requestParams.append(key, params[key].toString());
                 }
             });
         }
 
-        return this.http.get(reqUrl, {params: requestParams}).pipe(
+        return this.http.get(reqUrl, { params: requestParams }).pipe(
             map((response: any) => {
                 return response;
             })

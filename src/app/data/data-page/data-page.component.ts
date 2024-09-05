@@ -144,17 +144,4 @@ export class DataPageComponent {
     this.loadedDataset = this.datastores.find(ds => ds.Id === datastore_id)?.Name;
   }
 
-  test() {
-    // this.cdmsService.getProjectDatasets(11052).subscribe(response => {
-    //   console.log(response);
-    //   this.data = response;
-    //   this.columnDefs = buildColumnDefs(response);
-    // });
-    this.cdmsService.getDatasetsList().subscribe(response => {
-      console.log(response);
-      this.data = response;
-      this.columnDefs = buildColumnDefs(response);
-    });
-  }
-
 }

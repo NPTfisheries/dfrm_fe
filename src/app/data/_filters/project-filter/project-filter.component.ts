@@ -9,10 +9,10 @@ import { CdmsService } from 'src/_services/cdms.service';
 export class ProjectFilterComponent implements OnChanges {
   @Input() selectedDatastore!: number;
 
-  @Output() projectValue = new EventEmitter<any>();
+  @Output() datasetValue = new EventEmitter<any>();
 
   projects: any = [];
-  selectedProject!: number | null; // this isn't project id, it will end up as dataset id b/c of cdms schema
+  selectedProject!: number | null; // select a project, return a dataset id
   filter: any = {};
 
   constructor(
@@ -33,7 +33,7 @@ export class ProjectFilterComponent implements OnChanges {
     var filter = { 'DatasetID': value };
     // console.log('Project Filter:', value);
     this.selectedProject = value;
-    this.projectValue.emit(filter);
+    this.datasetValue.emit(filter);
   }
 
   getOptions() {

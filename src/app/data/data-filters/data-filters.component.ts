@@ -11,8 +11,6 @@ export class DataFiltersComponent implements OnChanges {
   @Input() selectedDatastore!: number;
   @Output() dataFilters = new EventEmitter<any>(); // pass filter args back to data-page
 
-  // filterOptions!: any; // Passed to filter components. Adjust to array eventually for looping through.
-
   filterOptions!: filterOptions[];
   filters: { [key: string]: any } = {};
 
