@@ -27,6 +27,7 @@ export class CdmsService {
 
         return this.http.post(reqUrl, body, { headers, observe: 'response', withCredentials: true }).pipe(
             map((response: any) => {
+                console.log('Login Response:', response);
                 if (response.status === 200) {
                     console.log(`Logged in as: ${response.body.User['Fullname']}`);
                 }
@@ -200,16 +201,5 @@ export class CdmsService {
             })
         );
     }
-
-    // CDMS doesn't allow Options requests
-    // options(endpoint: string) {
-    //     const reqUrl = `${this.apiUrl}${this.apiVersion}${endpoint}`;
-
-    //     return this.http.options(reqUrl).pipe(
-    //         map((response: any) => {
-    //             return response;
-    //         })
-    //     );
-    // }
 
 }
