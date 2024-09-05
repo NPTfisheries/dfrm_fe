@@ -25,7 +25,7 @@
           </ul>
         </li>
         <button class="nav-link me-auto" aria-current="page" routerLink="documents" routerLinkActive="active">Documents</button>
-        <button class="nav-link me-auto" aria-current="page" routerLink="data" routerLinkActive="active">Data</button>
+        <button *ngIf="isLoggedIn"class="nav-link me-auto" aria-current="page" routerLink="data" routerLinkActive="active">Data</button>
       </ul>
       <ul class="navbar-nav">
         <button *ngIf="!isLoggedIn; else profileNav" class="nav-link me-auto" (click)="openLoginModal()">Login</button>

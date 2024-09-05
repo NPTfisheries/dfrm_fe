@@ -23,7 +23,7 @@ const routes: Routes = [
     { path: 'documents', component: DocumentsComponent},
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-    { path: 'data', component: DataPageComponent}, //, canActivate: [AuthGuard]},
+    { path: 'data', component: DataPageComponent, canActivate: [AuthGuard]},
     
 
     // plural is for the public-facing card pages

@@ -578,7 +578,7 @@ export class filterOptionsService {
   waterTempData(): filterOptions[] {
     return [{
       options: this.buildIntArray(1999, this.current_year),
-      placeholder: 'Year',
+      placeholder: 'Year (required)',
       argName: 'Year',
       required: true,
     },
