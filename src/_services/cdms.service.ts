@@ -6,15 +6,20 @@ import { environment } from "src/environments/environment";
 @Injectable({ providedIn: 'root' })
 export class CdmsService {
 
-    apiUrl: string = 'https://npt-cdms.nezperce.org';
-    // apiUrl: string = ''; // necessary for proxy to function (dev)
+    // apiUrl: string = 'https://npt-cdms.nezperce.org';
+    apiUrl: string = ''; // necessary for proxy to function (dev)
     apiVersion: string = '/services/api/v1/';
+    authCookie!: string;
 
     allowed_datastores = [78, 79, 85, 86, 92, 97, 99, 100, 102, 103, 104, 107, 110, 111, 113, 122] // Age: 80
 
     constructor(
         private http: HttpClient,
     ) { }
+
+    whoami(){
+        return this.get('account/whoami')
+    }
 
     login(username: string, api_key: string) {
         const endpoint = 'account/login';
@@ -30,6 +35,8 @@ export class CdmsService {
                 console.log('Login Response:', response);
                 if (response.status === 200) {
                     console.log(`Logged in as: ${response.body.User['Fullname']}`);
+                    this.authCookie = response.headers.get('Set-Cookie');
+                    console.log('Set-Cookie:', this.authCookie);
                 }
                 return response;
             })
@@ -195,8 +202,10 @@ export class CdmsService {
             });
         }
 
+        // return this.http.get(reqUrl, { params: requestParams, observe: 'response', withCredentials: true }).pipe(
+        // observe:'response' breaks localhost for some reason. 
         return this.http.get(reqUrl, { params: requestParams, withCredentials: true }).pipe(
-            map((response: any) => {
+                map((response: any) => {
                 return response;
             })
         );

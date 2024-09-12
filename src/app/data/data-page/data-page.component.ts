@@ -4,6 +4,7 @@ import { GridApi, ColDef } from 'ag-grid-community';
 
 import { buildColumnDefs } from 'src/_utilities/buildColumnDefs';
 import { Observable } from 'rxjs';
+import { HtmlSanitizerComponent } from 'src/_components/html-sanitizer/html-sanitizer.component';
 
 @Component({
   selector: 'app-data-page',
@@ -39,10 +40,10 @@ export class DataPageComponent {
 
   ngOnInit(): void {
     // we need to make sure the login happens before querying anything else from CDMS, which didn't happen 9/4/24
-    this.cdmsService.login('api_user', 'api_user').subscribe(response => {
-      console.log(response);
-      this.cdmsService.getDatastores().subscribe((datastores: any) => this.datastores = datastores);
-    });
+    // this.cdmsService.login('api_user', 'api_user').subscribe(response => {
+    //   console.log('cdmsLogin:', response);
+    //   this.cdmsService.getDatastores().subscribe((datastores: any) => this.datastores = datastores);
+    // });
   }
 
   ngOnDestroy(): void {
@@ -163,6 +164,12 @@ export class DataPageComponent {
     this.columnDefs = buildColumnDefs(data);
     this.isLoading = false;
     this.loadedDataset = this.datastores.find(ds => ds.Id === datastore_id)?.Name;
+  }
+
+  test() {
+    // this.cdmsService.whoami().subscribe(response => console.log(response));
+    
+    // this.cdmsService.getDatastores().subscribe(response => console.log(response));
   }
 
 }
