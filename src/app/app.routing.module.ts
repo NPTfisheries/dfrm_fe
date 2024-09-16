@@ -15,6 +15,7 @@ import { FacilityDetailComponent } from './facility-detail/facility-detail.compo
 import { DivisionDetailComponent } from './division-detail/division-detail.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { DataPageComponent } from 'src/app/data/data-page/data-page.component';
+import { DataEntryComponent } from './data/data-entry/data-entry.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch:'full' },
@@ -24,6 +25,7 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
     { path: 'data', component: DataPageComponent, canActivate: [AuthGuard]},
+    { path: 'data-entry', component: DataEntryComponent, canActivate: [AuthGuard]},
     
 
     // plural is for the public-facing card pages

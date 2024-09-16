@@ -4,7 +4,7 @@
         <div *ngFor="let options of filterOptions">
         <div [ngSwitch]="options.argName" class="py-2">
             <app-filter *ngSwitchDefault [filterOptions]="options" (filterValue)="setFilters($event)"></app-filter>
-            <app-project-filter *ngSwitchCase="'DatasetID'" (datasetValue)="setFilters($event)" [selectedDatastore]="selectedDatastore"></app-project-filter>
+            <app-project-filter *ngSwitchCase="'DatasetID'" (datasetValue)="setFilters($event)" [selectedDataset]="selectedDataset"></app-project-filter>
             <!-- <app-location-filter *ngSwitchCase="'LocationLabel'" (locationValue)="setFilters($event)" [selectedDatastore]="selectedDatastore"></app-location-filter> -->
         </div>
     </div>

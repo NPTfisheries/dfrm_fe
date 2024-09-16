@@ -8,7 +8,7 @@ import { filterOptionsService } from 'src/_services/filter-options.service';
   styleUrls: ['./data-filters.component.css']
 })
 export class DataFiltersComponent implements OnChanges {
-  @Input() selectedDatastore!: number;
+  @Input() selectedDataset!: number;
   @Output() dataFilters = new EventEmitter<any>(); // pass filter args back to data-page
 
   filterOptions!: filterOptions[];
@@ -19,8 +19,8 @@ export class DataFiltersComponent implements OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['selectedDatastore'] && this.selectedDatastore) {
-      this.filterOptions = this.filterOptionsService.getFilterOptions(this.selectedDatastore);
+    if (changes['selectedDataset'] && this.selectedDataset) {
+      this.filterOptions = this.filterOptionsService.getFilterOptions(this.selectedDataset);
       this.filters = {};
     } else {
       this.filterOptions = [];

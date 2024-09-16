@@ -5,6 +5,7 @@ import { GridApi, ColDef } from 'ag-grid-community';
 import { buildColumnDefs } from 'src/_utilities/buildColumnDefs';
 import { Observable } from 'rxjs';
 import { HtmlSanitizerComponent } from 'src/_components/html-sanitizer/html-sanitizer.component';
+import { ActivityService } from 'src/_services/activity.service';
 
 @Component({
   selector: 'app-data-page',
@@ -14,11 +15,10 @@ import { HtmlSanitizerComponent } from 'src/_components/html-sanitizer/html-sani
 export class DataPageComponent {
 
   data!: any[];
-  datastores: any[] = [];
-  selectedDatastore!: number;
+  datasets: any[] = [];
+  selectedDataset!: number;
   value!: string;
   btnStyle = { 'float': 'right', 'margin-right': '30px' }
-  loadedDataset?: string | null;
   isLoading = false;
   filters: { [key: string]: any } = {};
   invalidForm = false;
@@ -36,14 +36,20 @@ export class DataPageComponent {
 
   constructor(
     private cdmsService: CdmsService,
+    private activityService: ActivityService
   ) { }
 
   ngOnInit(): void {
     // we need to make sure the login happens before querying anything else from CDMS, which didn't happen 9/4/24
     // this.cdmsService.login('api_user', 'api_user').subscribe(response => {
     //   console.log('cdmsLogin:', response);
-    //   this.cdmsService.getDatastores().subscribe((datastores: any) => this.datastores = datastores);
+    //   this.cdmsService.getDatastores().subscribe((datastores: any) => this.datasets = datastores);
     // });
+    this.activityService.getDatasets().subscribe(datasets => {
+      console.log('Datasets:', datasets);
+      this.datasets = datasets;
+    });
+
   }
 
   ngOnDestroy(): void {
@@ -61,12 +67,16 @@ export class DataPageComponent {
   }
 
   retrieveData() {
-    if (this.selectedDatastore) {
+    if (this.selectedDataset) {
       this.data = [];
       this.columnDefs = [];
       this.isLoading = true;
-      this.loadedDataset = null;
-      this.querySelector(this.selectedDatastore);
+      // this.querySelector(this.selectedDataset);
+      this.activityService.getFields(this.selectedDataset).subscribe(fields => {
+        console.log(fields);
+        this.columnDefs = fields;
+        this.isLoading = false;
+      });
     }
   }
 
@@ -75,7 +85,7 @@ export class DataPageComponent {
     this.invalidForm = false;
     this.filters = value;
 
-    if (this.selectedDatastore === 122 && this.filters.hasOwnProperty('Year') && this.filters['Year']) {
+    if (this.selectedDataset === 122 && this.filters.hasOwnProperty('Year') && this.filters['Year']) {
       console.log('inside the if');
       this.invalidForm = false;
     }
@@ -83,22 +93,23 @@ export class DataPageComponent {
   }
 
   handleChange(value: number) {
-    this.selectedDatastore = value;
+    this.selectedDataset = value;
     this.invalidForm = false;
-    if (this.selectedDatastore === 122) {
+    if (this.selectedDataset === 122) {
       this.invalidForm = true; // force selection of Year
     };
   }
 
   buildFilename(): string {
-    const formattedName = this.loadedDataset?.replace(/\s+/g, '_');
-    const currentDate = new Date().toLocaleDateString('en-US', {
-      year: '2-digit',
-      month: '2-digit',
-      day: '2-digit'
-    }).replace(/\//g, '');
+    // const formattedName = this.loadedDataset?.replace(/\s+/g, '_');
+    // const currentDate = new Date().toLocaleDateString('en-US', {
+    //   year: '2-digit',
+    //   month: '2-digit',
+    //   day: '2-digit'
+    // }).replace(/\//g, '');
 
-    return `${formattedName}_${currentDate}.csv`;
+    // return `${formattedName}_${currentDate}.csv`;
+    return 'test.csv'
   }
 
   querySelector(datastore_id: number) {
@@ -163,13 +174,11 @@ export class DataPageComponent {
     this.data = data;
     this.columnDefs = buildColumnDefs(data);
     this.isLoading = false;
-    this.loadedDataset = this.datastores.find(ds => ds.Id === datastore_id)?.Name;
+    // this.loadedDataset = this.datasets.find(ds => ds.Id === datastore_id)?.Name;
   }
 
   test() {
-    // this.cdmsService.whoami().subscribe(response => console.log(response));
-    
-    // this.cdmsService.getDatastores().subscribe(response => console.log(response));
+    this.activityService.getFields(this.selectedDataset).subscribe(fields => console.log(fields));
   }
 
 }

@@ -7,7 +7,7 @@ import { CdmsService } from 'src/_services/cdms.service';
   styleUrls: ['./project-filter.component.css']
 })
 export class ProjectFilterComponent implements OnChanges {
-  @Input() selectedDatastore!: number;
+  @Input() selectedDataset!: number;
 
   @Output() datasetValue = new EventEmitter<any>();
 
@@ -20,11 +20,11 @@ export class ProjectFilterComponent implements OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['selectedDatastore'] && this.selectedDatastore) {
+    if (changes['selectedDataset'] && this.selectedDataset) {
       this.getOptions();
       this.selectedProject = null;
     } else {
-      // Clear projects if selectedDatastore is not set
+      // Clear projects if selectedDataset is not set
       this.projects = [];
     }
   }
@@ -37,7 +37,7 @@ export class ProjectFilterComponent implements OnChanges {
   }
 
   getOptions() {
-    this.cdmsService.getDatasetsList(this.selectedDatastore).subscribe(datasets => {
+    this.cdmsService.getDatasetsList(this.selectedDataset).subscribe(datasets => {
       let datasetsByProjects: any = []
       datasets.forEach(dataset => {
         // console.log('adding dataset...', dataset);
