@@ -2,7 +2,7 @@ import { Component, OnInit, } from '@angular/core';
 import { GridApi, ColDef } from 'ag-grid-community';
 import { ActivityService } from 'src/_services/activity.service';
 import { ProjectService } from 'src/_services/project.service';
-import { FormGroup, FormBuilder, Form } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 interface Activity {
   user?: number;
@@ -30,9 +30,9 @@ export class DataEntryComponent implements OnInit {
     data: {}
   };
   datasets!: any[];
+  lock: boolean = false;
   projects!: any[];
   rowData: any[] = [{}]; // This will represent the rows in your AG Grid
-  selectedDataset!: number;
   btnStyle = { 'float': 'right', 'margin-right': '30px' }
   isLoading = false;
 
@@ -64,20 +64,9 @@ export class DataEntryComponent implements OnInit {
     });
   }
 
-  ngOnDestroy(): void {
-  }
-
   onGridReady(params: any) {
     this.gridApi = params.api;
     params.api.sizeColumnsToFit();
-  }
-
-  updateValues(value: any, key: keyof Activity) {
-    if (key === 'dataset') {
-      this.activityService.getFields(value.id).subscribe(fields => this.columnDefs = fields);
-      this.selectedDataset = value.name;
-    }
-    this.activity[key] = value.id; // General case for project and dataset
   }
 
   addRow() {
@@ -87,6 +76,11 @@ export class DataEntryComponent implements OnInit {
     this.activity.data = this.rowData;
   }
 
+  // editRow(rowIndex: number, updatedData: Activity) {
+  //   const rowNode = this.gridApi.getDisplayedRowAtIndex(rowIndex);
+  //   rowNode.setData(updatedData);
+  // }
+
   removeSelectedRows() {
     const selectedRows = this.gridApi.getSelectedRows();
     this.gridApi.applyTransaction({ remove: selectedRows });
@@ -94,17 +88,28 @@ export class DataEntryComponent implements OnInit {
     this.activity.data = this.rowData;
   }
 
-  // editRow(rowIndex: number, updatedData: Activity) {
-  //   const rowNode = this.gridApi.getDisplayedRowAtIndex(rowIndex);
-  //   rowNode.setData(updatedData);
-  // }
-
-  printData() {
+  printActivity() {
     console.log('Activity:', this.activity);
+    console.log(this.rowData);
+  }
+
+  datasetChange(value: any) {
+    if (value === undefined) {
+      this.columnDefs = undefined;
+      this.activityForm.get('dataset')?.enable()
+    } else {
+      this.activityService.getFields(value.id).subscribe(fields => this.columnDefs = fields);
+      this.activityForm.get('dataset')?.disable()
+    }
   }
 
   submit() {
     console.log('Data Entry: SUBMIT.');
+  }
+
+  resetForm() {
+    this.columnDefs = undefined;
+    this.activityForm.get('dataset')?.enable()
   }
 
 }

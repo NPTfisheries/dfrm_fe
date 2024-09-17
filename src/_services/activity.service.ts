@@ -23,8 +23,8 @@ export class ActivityService {
     }
 
     getFields(dataset_id: number): Observable<any[]> {
-        console.log('getFields');
-        let params = { 'dataset': dataset_id };
+        console.log('getFields for dataset_id:', dataset_id);
+        let params = { 'dataset_id': dataset_id };
 
         return this.get('fields', params);
     }
@@ -46,6 +46,7 @@ export class ActivityService {
         // observe:'response' breaks localhost for some reason. 
         return this.http.get(reqUrl, { params: requestParams, withCredentials: true }).pipe(
             map((response: any) => {
+                console.log(response);
                 return response;
             })
         );

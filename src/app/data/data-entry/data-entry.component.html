@@ -1,19 +1,22 @@
 <div class="container my-5">
     <h1 class="dfrm-page-title text-center">CDMS Data Entry</h1>
     <form [formGroup]="activityForm">
-        <app-button [label]="'test'" (click)="printData()"></app-button>
+        <app-button [label]="'test'" (click)="printActivity()"></app-button>
+        <app-button [label]="'resetForm'" (click)="resetForm()"></app-button>
         <div class="row align-items-center">
-            <app-data-select formControlName='dataset' [options]="datasets" [key]="'datasets'"
-                (inputValue)="updateValues($event, 'dataset')"></app-data-select>
-            <app-data-select formControlName='project' [options]="projects" [key]="'projects'"
-                (inputValue)="updateValues($event, 'project')"></app-data-select>
-            <div class="col-9 offset-1">
-                <input formControlName='date' [type]="'date'" class="form-control form-control-date"
-                    [required]="true" [max]="today" />
+            <div class="col-6 offset-3">
+                <ng-select formControlName='dataset' [items]="datasets" bindLabel="name" bindValue="id" 
+                [required]="true" [placeholder]="'NEW DATASETS'" (change)="datasetChange($event)">
+                </ng-select>
+                <ng-select formControlName='project' [items]="projects" bindLabel="name"
+                    bindValue="id" [required]="true" [placeholder]="'NEW PROJECTS'">
+                </ng-select>
+                <input formControlName='date' [type]="'date'" class="form-control form-control-date" [required]="true"
+                    [max]="today" />
             </div>
         </div>
     </form>
-    <div *ngIf="selectedDataset">
+    <div *ngIf="columnDefs">
         <br>
         <app-button [label]="'Add Row'" (click)="addRow()"></app-button>
         <app-button [label]="'Remove Selected Rows'" (click)="removeSelectedRows()"></app-button>
