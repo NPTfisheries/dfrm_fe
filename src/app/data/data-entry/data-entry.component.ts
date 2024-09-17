@@ -65,32 +65,18 @@ export class DataEntryComponent implements OnInit {
   }
 
   onGridReady(params: any) {
-    this.gridApi = params.api;
+    this.gridApi = params.api; // allows access to grid API
     params.api.sizeColumnsToFit();
   }
 
   addRow() {
-    const newRow: Activity = { date: new Date() }; // Customize default values
-    this.gridApi.applyTransaction({ add: [newRow] });
-    this.rowData.push(newRow);
-    this.activity.data = this.rowData;
+    this.gridApi.applyTransaction({ add: [{}] });
   }
-
-  // editRow(rowIndex: number, updatedData: Activity) {
-  //   const rowNode = this.gridApi.getDisplayedRowAtIndex(rowIndex);
-  //   rowNode.setData(updatedData);
-  // }
 
   removeSelectedRows() {
     const selectedRows = this.gridApi.getSelectedRows();
     this.gridApi.applyTransaction({ remove: selectedRows });
     this.rowData = this.rowData.filter(row => !selectedRows.includes(row));
-    this.activity.data = this.rowData;
-  }
-
-  printActivity() {
-    console.log('Activity:', this.activity);
-    console.log(this.rowData);
   }
 
   datasetChange(value: any) {
@@ -103,8 +89,18 @@ export class DataEntryComponent implements OnInit {
     }
   }
 
+  captureGridData() {
+    let rowData: any[] = [];
+    this.gridApi.forEachNode((node) => {
+      console.log(node);
+      rowData.push(node.data); // node.data contains the data for each row
+    });
+    this.activity.data = rowData; // Assign the captured data to activity.data // comes as [{},{},{}]
+  }
+
   submit() {
-    console.log('Data Entry: SUBMIT.');
+    this.captureGridData();
+    console.log('submit button clicked');
   }
 
   resetForm() {
@@ -114,5 +110,8 @@ export class DataEntryComponent implements OnInit {
     }
     this.activityForm.get('dataset')?.enable()
   }
+
+  printActivity() { console.log('Activity:', this.activity) }
+
 
 }
