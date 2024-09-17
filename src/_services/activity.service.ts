@@ -3,12 +3,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { DataService } from './data.service';
 import { map, Observable } from 'rxjs';
 import { environment } from "src/environments/environment";
+import { Activity } from 'src/_models/interfaces';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ActivityService {
-    //   private readonly endpoint = 'activity';
     apiUrl = environment.apiUrl
     apiVersion = environment.apiVersion
 
@@ -27,6 +27,18 @@ export class ActivityService {
         let params = { 'dataset_id': dataset_id };
 
         return this.get('fields', params);
+    }
+
+    saveActivity(activity: Activity ) {
+        const reqUrl = `${this.apiUrl}${this.apiVersion}activities/`;
+
+        return this.http.post(reqUrl, activity)
+            .pipe(
+                map((response) => {
+                    console.log(`${reqUrl} response:`, response);
+                    return response;
+                })
+            );
     }
 
     // helper

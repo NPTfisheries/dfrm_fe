@@ -1,8 +1,8 @@
 <div class="container my-5">
     <h1 class="dfrm-page-title text-center">CDMS Data Entry</h1>
     <form [formGroup]="activityForm">
-        <app-button [label]="'test'" (click)="printActivity()"></app-button>
-        <app-button [label]="'resetForm'" (click)="resetForm()"></app-button>
+        <app-button [label]="'printActivity'" (click)="printActivity()"></app-button>
+        <app-button [label]="'RESET FORM'" (click)="resetForm()" [style]="btnStyle"></app-button>
         <div class="row align-items-center">
             <div class="col-6 offset-3">
                 <ng-select formControlName='dataset' [items]="datasets" bindLabel="name" bindValue="id" 

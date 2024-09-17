@@ -3,16 +3,7 @@ import { GridApi, ColDef } from 'ag-grid-community';
 import { ActivityService } from 'src/_services/activity.service';
 import { ProjectService } from 'src/_services/project.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
-
-interface Activity {
-  user?: number;
-  // location?: number;
-  project?: number;
-  dataset?: number;
-  instrument?: number;
-  date?: Date;
-  data?: {};
-}
+import { Activity } from 'src/_models/interfaces';
 
 @Component({
   selector: 'app-data-entry',
@@ -101,6 +92,7 @@ export class DataEntryComponent implements OnInit {
   submit() {
     this.captureGridData();
     console.log('submit button clicked');
+    this.activityService.saveActivity(this.activity).subscribe();
   }
 
   resetForm() {
@@ -109,6 +101,7 @@ export class DataEntryComponent implements OnInit {
       this.activityForm.get(field)?.reset()
     }
     this.activityForm.get('dataset')?.enable()
+    this.rowData = [{}];
   }
 
   printActivity() { console.log('Activity:', this.activity) }

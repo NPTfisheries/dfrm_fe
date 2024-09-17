@@ -28,6 +28,14 @@ export interface Image {
     image?: string;
 }
 
+export interface Activity {
+    user?: number | User;
+    project?: number;
+    dataset?: number;
+    date?: Date;
+    data?: {};
+  }
+
 export interface FacilityType {
     id?: number;
     object_type?: string;
