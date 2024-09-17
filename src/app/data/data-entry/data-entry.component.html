@@ -1,38 +1,33 @@
 <div class="container my-5">
     <h1 class="dfrm-page-title text-center">CDMS Data Entry</h1>
-    <app-button [label]="'test'" (click)="test()"></app-button>
-    <div class="row align-items-center">
-        <div class="col-9 offset-1">
-            <ng-select [items]="datasets" bindLabel="name" bindValue="id" placeholder="Select Dataset"
-                [(ngModel)]="selectedDataset"></ng-select>
+    <form [formGroup]="activityForm">
+        <app-button [label]="'test'" (click)="printData()"></app-button>
+        <div class="row align-items-center">
+            <app-data-select formControlName='dataset' [options]="datasets" [key]="'datasets'"
+                (inputValue)="updateValues($event, 'dataset')"></app-data-select>
+            <app-data-select formControlName='project' [options]="projects" [key]="'projects'"
+                (inputValue)="updateValues($event, 'project')"></app-data-select>
+            <div class="col-9 offset-1">
+                <input formControlName='date' [type]="'date'" class="form-control form-control-date"
+                    [required]="true" [max]="today" />
+            </div>
         </div>
-        <div class="col-2">
-            <app-button [label]="'Populate Form'" (click)="selectDataset()" [loading]="isLoading"></app-button>
-        </div>
-    </div>
+    </form>
     <div *ngIf="selectedDataset">
-        <div class="col-9 offset-1">
-            <ng-select [items]="projects" bindLabel="name" bindValue="id" placeholder="Select Project"
-                [(ngModel)]="selectedProject"></ng-select>
-        </div>
-        <!-- <div class="col-9 offset-1">
-        <ng-select [items]="instruments" bindLabel="name" bindValue="id" placeholder="Select Instrument"
-            (change)="handleChange($event, 'instrument')" [(ngModel)]="selectedInstrument"></ng-select>
-    </div> -->
         <br>
         <app-button [label]="'Add Row'" (click)="addRow()"></app-button>
         <app-button [label]="'Remove Selected Rows'" (click)="removeSelectedRows()"></app-button>
         <div class="container my-5" style="height: 600px;">
             <ag-grid-angular style="width: 100%; height: 100%;" class="ag-theme-alpine" [columnDefs]="columnDefs"
-                [defaultColDef]="defaultColDef" [rowData]="data" [rowSelection]="'multiple'" [suppressCellFocus]="true"
-                (gridReady)="onGridReady($event)" [animateRows]="true">
+                [defaultColDef]="defaultColDef" [rowData]="rowData" [rowSelection]="'multiple'"
+                [suppressCellFocus]="true" (gridReady)="onGridReady($event)" [animateRows]="true">
             </ag-grid-angular>
         </div>
         <br>
         <div class="row align-items-center">
             <div class="col-3 offset-1">
                 <app-button [label]="'Submit Activity'" (click)="submit()" [style]="btnStyle"
-                    [disabled]="isLoading || !data"></app-button>
+                    [disabled]="isLoading || !rowData"></app-button>
             </div>
         </div>
     </div>

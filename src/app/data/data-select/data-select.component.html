@@ -1,0 +1,5 @@
+<div class="col-9 offset-1 py-2">
+    <ng-select [(ngModel)]="selectedOption" [items]="options" bindLabel="name" bindValue="id" (change)="emitValue($event)"
+        [required]="required" [placeholder]="placeholder">
+    </ng-select>
+</div>
