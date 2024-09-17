@@ -109,6 +109,9 @@ export class DataEntryComponent implements OnInit {
 
   resetForm() {
     this.columnDefs = undefined;
+    for(let field of ['dataset', 'project', 'date']) {
+      this.activityForm.get(field)?.reset()
+    }
     this.activityForm.get('dataset')?.enable()
   }
 

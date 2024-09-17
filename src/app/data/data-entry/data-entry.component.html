@@ -6,13 +6,13 @@
         <div class="row align-items-center">
             <div class="col-6 offset-3">
                 <ng-select formControlName='dataset' [items]="datasets" bindLabel="name" bindValue="id" 
-                [required]="true" [placeholder]="'NEW DATASETS'" (change)="datasetChange($event)">
+                [required]="true" [placeholder]="'Select Dataset'" (change)="datasetChange($event)" [ngClass]="'my-2'" >
                 </ng-select>
                 <ng-select formControlName='project' [items]="projects" bindLabel="name"
-                    bindValue="id" [required]="true" [placeholder]="'NEW PROJECTS'">
+                    bindValue="id" [required]="true" [placeholder]="'Select Project'" [ngClass]="'my-2'" >
                 </ng-select>
                 <input formControlName='date' [type]="'date'" class="form-control form-control-date" [required]="true"
-                    [max]="today" />
+                    [max]="today" [ngClass]="'my-2'" />
             </div>
         </div>
     </form>
