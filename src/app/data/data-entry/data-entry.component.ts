@@ -113,5 +113,4 @@ export class DataEntryComponent implements OnInit {
 
   printActivity() { console.log('Activity:', this.activity) }
 
-
 }
