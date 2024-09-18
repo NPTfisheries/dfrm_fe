@@ -21,16 +21,21 @@
         <app-button [label]="'Add Row'" (click)="addRow()"></app-button>
         <app-button [label]="'Remove Selected Rows'" (click)="removeSelectedRows()"></app-button>
         <div class="container my-5" style="height: 600px;">
-            <ag-grid-angular style="width: 100%; height: 100%;" class="ag-theme-alpine" [columnDefs]="columnDefs"
-                [defaultColDef]="defaultColDef" [rowData]="rowData" [rowSelection]="'multiple'"
-                [suppressCellFocus]="true" (gridReady)="onGridReady($event)" [animateRows]="true">
+            <ag-grid-angular style="width: 100%; height: 100%;" class="ag-theme-quartz-dark" [columnDefs]="columnDefs"
+                [defaultColDef]="defaultColDef" [rowData]="rowData" [rowSelection]="'multiple'" (gridReady)="onGridReady($event)"
+                >
+                <!-- singleClickEdit 
+                 supressRowHoverHighlight
+                 columnHoverHighlight 
+                 animateRows
+                 suppressCellFocus-->
             </ag-grid-angular>
         </div>
         <br>
         <div class="row align-items-center">
             <div class="col-3 offset-1">
                 <app-button [label]="'Submit Activity'" (click)="submit()" [style]="btnStyle"
-                    [disabled]="isLoading || !rowData"></app-button>
+                    [disabled]="false"></app-button>
             </div>
         </div>
     </div>
