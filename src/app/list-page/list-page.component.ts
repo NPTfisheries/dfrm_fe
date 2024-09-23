@@ -34,7 +34,7 @@ export class ListPageComponent implements OnInit, OnDestroy {
   @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
 
 
-  private gridApi = GridApi;
+  private gridApi!: GridApi;
   columnDefs: ColDef[] | undefined;
 
   // default settings for all columns.

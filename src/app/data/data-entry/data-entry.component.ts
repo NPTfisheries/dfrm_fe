@@ -132,11 +132,6 @@ export class DataEntryComponent implements OnInit {
   printActivity() {
     console.log('Activity:', this.activity);
     console.log('isGridValid():', this.isGridValid());
-    this.columnDefs =  [{
-      headerName: 'Static Array of Classes',
-      field: 'staticArray',
-      cellClass: ['grid-required'],
-  }]
   }
 
 }

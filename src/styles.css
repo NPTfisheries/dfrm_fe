@@ -258,5 +258,11 @@ p {
 
 /* AG GRID  */
 .grid-required {
-    background-color: blue ;
+    /* border: dashed green; */
+    background: radial-gradient(rgba(145, 145, 236, 0.808), rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,0));
+    /* background: radial-gradient(rgba(0,0,0,0), rgba(0,0,0,0),rgba(0,0,0,0), rgba(0,0,0,0), rgba(145, 145, 236, 0.808), rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,0)); */
 }
+
+/* .grid-error {
+    border: ;
+} */

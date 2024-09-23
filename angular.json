@@ -30,7 +30,7 @@
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "node_modules/ag-grid-community/styles/ag-grid.css",
-              "src/assets/styles/ag-theme-quartz.css",
+              "node_modules/ag-grid-community/styles/ag-theme-quartz.css",
               "src/styles.css"
             ],
             "scripts": [
