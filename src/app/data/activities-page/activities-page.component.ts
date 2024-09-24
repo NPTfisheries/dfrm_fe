@@ -44,7 +44,7 @@ export class ActivitiesPageComponent {
 
   onGridReady(params: any) {
     this.gridApi = params.api;
-    params.api.sizeColumnsToFit(params);
+    params.api.sizeColumnsToFit();
   }
 
   viewActivity() {
