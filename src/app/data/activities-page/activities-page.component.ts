@@ -34,6 +34,8 @@ export class ActivitiesPageComponent {
     private router: Router,
   ) { }
 
+  // should we add a refresh activities button?
+
   ngOnInit(): void {
     this.getActivities();
   }
@@ -47,11 +49,12 @@ export class ActivitiesPageComponent {
 
   viewActivity() {
     console.log('viewActivity');
-    var selected_id = this.gridApi.getSelectedRows()[0].id
-    this.router.navigate([`activities/${selected_id}`]); // this may be a cheat, not quite correct.
+    var selectedActivity = this.gridApi.getSelectedRows()[0]
+    this.router.navigate([`activities/${selectedActivity.id}`]); // this may be a cheat, not quite correct.
   }
 
   getActivities() {
+    // 9/24/24 We are receiving the data{} but probably not necessary.
     this.activityService.getActivities().subscribe((activities: Activity[]) => {
       console.log(activities);
       this.activities = activities;

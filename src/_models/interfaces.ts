@@ -1,3 +1,5 @@
+import { Project } from "./project";
+
 export interface Profile {
     title?: string;
     work_phone?: string;
@@ -28,10 +30,18 @@ export interface Image {
     image?: string;
 }
 
+export interface Dataset {
+    id?: number;
+    name?: string;
+    description?: string;
+    summary_dataset?: boolean;
+}
+
 export interface Activity {
+    id?: number;
     user?: number | User;
-    project?: number;
-    dataset?: number;
+    project?: Project | number;
+    dataset?: Dataset | number;
     date?: Date;
     data?: {};
   }

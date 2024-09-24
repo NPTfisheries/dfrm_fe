@@ -23,6 +23,11 @@ export class ActivityService {
         return this.dataService.getData(this.endpoint);
     }
 
+    getActivity(id: number) {
+        console.log('getActivity:', id);
+        return this.get(`${this.endpoint}/${id}`);
+    }
+
     refreshActivities(): Observable<Activity[]> {
         return this.dataService.refreshData(this.endpoint);
     }
