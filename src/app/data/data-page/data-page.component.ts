@@ -26,13 +26,7 @@ export class DataPageComponent {
   private gridApi!: GridApi;
   columnDefs: ColDef[] | undefined;
 
-  defaultColDef: ColDef = {
-    sortable: true,
-    filter: true,
-    resizable: true,
-    cellStyle: { fontSize: '20px' },
-    // cellDataType: false,
-  };
+  defaultColDef: ColDef = { cellStyle: { fontSize: '12px' } };
 
   constructor(
     private cdmsService: CdmsService,
