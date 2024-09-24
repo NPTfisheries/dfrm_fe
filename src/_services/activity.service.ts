@@ -17,8 +17,13 @@ export class ActivityService {
         private http: HttpClient,
     ) { }
 
+    getActivities(): Observable<any[]> {
+        console.log('getActivities');
+        return this.dataService.getData('activities');
+    }
+
     getDatasets(): Observable<any[]> {
-        console.log('getDepartments');
+        console.log('getDatasets');
         return this.dataService.getData('datasets');
     }
 

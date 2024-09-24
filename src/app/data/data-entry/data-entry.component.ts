@@ -131,7 +131,7 @@ export class DataEntryComponent implements OnInit {
     if (this.isGridValid()) {
       console.log('Grid data valid')
       this.captureGridData();
-      // this.activityService.saveActivity(this.activity).subscribe();
+      this.activityService.saveActivity(this.activity).subscribe();
     } else {
       console.log('Grid invalid')
     }

@@ -14,8 +14,8 @@ import { FacilitiesComponent } from './facilities/facilities.component';
 import { FacilityDetailComponent } from './facility-detail/facility-detail.component';
 import { DivisionDetailComponent } from './division-detail/division-detail.component';
 import { DocumentsComponent } from './documents/documents.component';
-import { DataPageComponent } from 'src/app/data/data-page/data-page.component';
 import { DataEntryComponent } from './data/data-entry/data-entry.component';
+import { ActivityPageComponent } from './data/activity-page/activity-page.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch:'full' },
@@ -24,7 +24,7 @@ const routes: Routes = [
     { path: 'documents', component: DocumentsComponent},
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-    { path: 'data', component: DataPageComponent, canActivate: [AuthGuard]},
+    { path: 'activities', component: ActivityPageComponent, canActivate: [AuthGuard]},
     { path: 'data-entry', component: DataEntryComponent, canActivate: [AuthGuard]},
     
 

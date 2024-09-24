@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CdmsService } from 'src/_services/cdms.service';
-import { GridApi, ColDef } from 'ag-grid-community';
+import { GridApi, ColDef, SelectionColumnDef, SelectionOptions } from 'ag-grid-community';
 
 import { buildColumnDefs } from 'src/_utilities/buildColumnDefs';
 import { Observable } from 'rxjs';
@@ -9,8 +9,7 @@ import { ActivityService } from 'src/_services/activity.service';
 
 @Component({
   selector: 'app-data-page',
-  templateUrl: './data-page.component.html',
-  styleUrls: ['./data-page.component.css']
+  templateUrl: './data-page.component.html'
 })
 export class DataPageComponent {
 
@@ -27,6 +26,13 @@ export class DataPageComponent {
   columnDefs: ColDef[] | undefined;
 
   defaultColDef: ColDef = { cellStyle: { fontSize: '12px' } };
+
+  public selection: SelectionOptions = { mode: 'singleRow' }
+  public selectionColumnDef: SelectionColumnDef = {
+    sortable: false,
+    suppressHeaderMenuButton: false,
+    pinned: 'left',
+  }
 
   constructor(
     private cdmsService: CdmsService,
