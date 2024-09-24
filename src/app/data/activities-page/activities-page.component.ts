@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { GridApi, ColDef, SelectionColumnDef, SelectionOptions } from 'ag-grid-community';
 import { ActivityService } from 'src/_services/activity.service';
 import { Activity } from 'src/_models/interfaces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-activities-page',
@@ -12,7 +13,7 @@ export class ActivitiesPageComponent {
   activities!: any[];
   btnStyle = { 'float': 'right', 'margin-right': '30px' }
   isLoading = false;
-  activitySelected = false;
+  disabled: boolean = true;
 
   private gridApi!: GridApi;
   columnDefs: ColDef[] = [
@@ -29,7 +30,8 @@ export class ActivitiesPageComponent {
   public selectionColumnDef: SelectionColumnDef = { pinned: 'left' }
 
   constructor(
-    private activityService: ActivityService
+    private activityService: ActivityService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -45,7 +47,8 @@ export class ActivitiesPageComponent {
 
   viewActivity() {
     console.log('viewActivity');
-    console.log(this.gridApi.getSelectedRows());
+    var selected_id = this.gridApi.getSelectedRows()[0].id
+    this.router.navigate([`activities/${selected_id}`]); // this may be a cheat, not quite correct.
   }
 
   getActivities() {
@@ -53,6 +56,11 @@ export class ActivitiesPageComponent {
       console.log(activities);
       this.activities = activities;
     });
+  }
+
+  onSelectionChanged() {
+    const selected = this.gridApi.getSelectedRows();
+    this.disabled = selected.length === 0;  // if nothing selected, disabled=True
   }
 
   test() {

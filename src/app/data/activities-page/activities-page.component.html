@@ -3,17 +3,18 @@
     <app-button [label]="'test'" (click)="test()" ></app-button>
     <br>
     <div class="container my-5" style="height: 600px;">
-        <ag-grid-angular style="width: 100%; height: 100%; font-size:20px" class="ag-theme-quartz-dark"
+        <ag-grid-angular style="width: 100%; height: 100%;" class="ag-theme-quartz-dark"
             [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [rowData]="activities" [selection]="selection" 
             [selectionColumnDef]="selectionColumnDef" [suppressCellFocus]="true" (gridReady)="onGridReady($event)" 
-            [animateRows]="true">
+            [animateRows]="true" (selectionChanged)="onSelectionChanged()"
+            >
         </ag-grid-angular>
     </div>
     <br>
     <div class="row align-items-center">
         <div class="col-3 offset-1">
             <app-button [label]="'View Selected Activity'" (click)="viewActivity()" [style]="btnStyle"
-                [disabled]="activitySelected"></app-button>
+                [disabled]="disabled"></app-button>
         </div>
     </div>
 </div>
