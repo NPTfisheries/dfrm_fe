@@ -12,8 +12,8 @@
     <br>
     <div class="row align-items-center">
         <div class="col-3 offset-1">
-            <app-button [label]="'View Selected Activity'" (click)="loadActivity()" [style]="btnStyle"
-                [disabled]="isLoading || !activities"></app-button>
+            <app-button [label]="'View Selected Activity'" (click)="viewActivity()" [style]="btnStyle"
+                [disabled]="activitySelected"></app-button>
         </div>
     </div>
 </div>

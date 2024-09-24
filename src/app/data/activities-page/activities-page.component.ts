@@ -4,15 +4,15 @@ import { ActivityService } from 'src/_services/activity.service';
 import { Activity } from 'src/_models/interfaces';
 
 @Component({
-  selector: 'app-activity-page',
-  templateUrl: './activity-page.component.html'
+  selector: 'app-activities-page',
+  templateUrl: './activities-page.component.html'
 })
-export class ActivityPageComponent {
+export class ActivitiesPageComponent {
 
   activities!: any[];
   btnStyle = { 'float': 'right', 'margin-right': '30px' }
   isLoading = false;
-  invalidForm = false;
+  activitySelected = false;
 
   private gridApi!: GridApi;
   columnDefs: ColDef[] = [
@@ -43,8 +43,8 @@ export class ActivityPageComponent {
     params.api.sizeColumnsToFit(params);
   }
 
-  loadActivity() {
-    console.log('loading activity');
+  viewActivity() {
+    console.log('viewActivity');
     console.log(this.gridApi.getSelectedRows());
   }
 

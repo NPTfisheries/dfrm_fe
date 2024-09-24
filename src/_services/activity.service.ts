@@ -9,17 +9,22 @@ import { Activity } from 'src/_models/interfaces';
     providedIn: 'root'
 })
 export class ActivityService {
-    apiUrl = environment.apiUrl
-    apiVersion = environment.apiVersion
+    apiUrl = environment.apiUrl;
+    apiVersion = environment.apiVersion;
+    endpoint = 'activities';
 
     constructor(
         private dataService: DataService<any>,
         private http: HttpClient,
     ) { }
 
-    getActivities(): Observable<any[]> {
+    getActivities(): Observable<Activity[]> {
         console.log('getActivities');
-        return this.dataService.getData('activities');
+        return this.dataService.getData(this.endpoint);
+    }
+
+    refreshActivities(): Observable<Activity[]> {
+        return this.dataService.refreshData(this.endpoint);
     }
 
     getDatasets(): Observable<any[]> {
@@ -34,12 +39,13 @@ export class ActivityService {
         return this.get('fields', params);
     }
 
-    saveActivity(activity: Activity ) {
-        const reqUrl = `${this.apiUrl}${this.apiVersion}activities/`;
+    saveActivity(activity: Activity) {
+        const reqUrl = `${this.apiUrl}${this.apiVersion}${this.endpoint}/`;
 
         return this.http.post(reqUrl, activity)
             .pipe(
                 map((response) => {
+                    console.log('Saved new Activity.');
                     console.log(`${reqUrl} response:`, response);
                     return response;
                 })
@@ -59,8 +65,6 @@ export class ActivityService {
             });
         }
 
-        // return this.http.get(reqUrl, { params: requestParams, observe: 'response', withCredentials: true }).pipe(
-        // observe:'response' breaks localhost for some reason. 
         return this.http.get(reqUrl, { params: requestParams, withCredentials: true }).pipe(
             map((response: any) => {
                 console.log(response);
