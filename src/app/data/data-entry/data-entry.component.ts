@@ -1,9 +1,11 @@
-import { Component, OnInit, } from '@angular/core';
-import { GridApi, ColDef } from 'ag-grid-community';
+import { Component, OnInit } from '@angular/core';
+import { GridApi, ColDef, SelectionOptions, SelectionColumnDef } from 'ag-grid-community';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivityService } from 'src/_services/activity.service';
 import { ProjectService } from 'src/_services/project.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Activity } from 'src/_models/interfaces';
+import { AddColumnComponent } from '../add-column/add-column.component';
 
 @Component({
   selector: 'app-data-entry',
@@ -33,11 +35,26 @@ export class DataEntryComponent implements OnInit {
     wrapHeaderText: true,
     autoHeaderHeight: true,
   };
+  public selection: SelectionOptions = {
+    mode: 'multiRow',
+    // selectAll: true, 
+    headerCheckbox: true,
+    // enableClickSelection: 'enableSelection',
+    // checkboxes: true, 
+    // hideDisabledCheckboxes: true, 
+    copySelectedRows: true
+  }
+  public selectionColumnDef: SelectionColumnDef = {
+    sortable: false,
+    suppressHeaderMenuButton: false,
+    pinned: 'left',
+  }
 
   constructor(
     private fb: FormBuilder,
     private activityService: ActivityService,
     private projectService: ProjectService,
+    private modalService: NgbModal,
   ) {
     this.activityForm = this.fb.group({
       dataset: [null],
@@ -68,8 +85,9 @@ export class DataEntryComponent implements OnInit {
 
   removeSelectedRows() {
     const selectedRows = this.gridApi.getSelectedRows();
+    console.log(selectedRows);
     this.gridApi.applyTransaction({ remove: selectedRows });
-    this.rowData = this.rowData.filter(row => !selectedRows.includes(row));
+    // this.rowData = this.rowData.filter(row => !selectedRows.includes(row));
   }
 
   datasetChange(value: any) {
@@ -94,7 +112,7 @@ export class DataEntryComponent implements OnInit {
   isGridValid(): boolean {
     let isValid = true;
     this.gridApi.forEachNode((node) => {
-      this.columnDefs?.forEach((col:any) => {
+      this.columnDefs?.forEach((col: any) => {
         if (col.required && !node.data[col.field]) {
           isValid = false; // A required cell is missing data
         }
@@ -110,7 +128,7 @@ export class DataEntryComponent implements OnInit {
 
   submit() {
     console.log('Activity Submitted!');
-    if(this.isGridValid()) {
+    if (this.isGridValid()) {
       console.log('Grid data valid')
       this.captureGridData();
       // this.activityService.saveActivity(this.activity).subscribe();
@@ -129,9 +147,20 @@ export class DataEntryComponent implements OnInit {
     // this.updateSubmitButtonState(); // Ensure validation re-checks on reset
   }
 
-  printActivity() {
+  print() {
+    this.captureGridData();
     console.log('Activity:', this.activity);
-    console.log('isGridValid():', this.isGridValid());
+    // console.log('isGridValid():', this.isGridValid());
+    // console.log(this.columnDefs);
+  }
+
+  addColumn() {
+    const modalRef = this.modalService.open(AddColumnComponent);
+    modalRef.result.then((newColDef) => {
+      // console.log('MODAL CLOSED', newColDef);
+      this.columnDefs?.push(newColDef);
+      this.gridApi.setGridOption('columnDefs', this.columnDefs);
+    });
   }
 
 }

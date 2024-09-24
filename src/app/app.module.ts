@@ -61,6 +61,7 @@ import { DataFiltersComponent } from './data/data-filters/data-filters.component
 import { ProjectFilterComponent } from './data/_filters/project-filter/project-filter.component';
 import { FilterComponent } from './data/_filters/filter/filter.component';
 import { DataEntryComponent } from './data/data-entry/data-entry.component';
+import { AddColumnComponent } from './data/add-column/add-column.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +113,7 @@ import { DataEntryComponent } from './data/data-entry/data-entry.component';
     ProjectFilterComponent,
     FilterComponent,
     DataEntryComponent,
+    AddColumnComponent,
   ],
   imports: [
     BrowserModule,

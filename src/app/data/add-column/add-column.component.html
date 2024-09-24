@@ -1,0 +1,13 @@
+<div>
+    <div class="modal-header">
+        <h2 class="modal-title text-center">Enter New Column Name</h2>
+    </div>
+    <br>
+    <div class="container">
+        <input [(ngModel)]="newColumn" class="form-control" />
+    </div>
+    <div class="modal-body d-flex justify-content-around">
+        <app-button [label]="'Add Column'" (click)="addColumn()"></app-button>
+        <button class="flex dfrm-button-invert" (click)="cancel()" [disabled]="isSubmitting">Cancel</button>
+    </div>
+</div>
