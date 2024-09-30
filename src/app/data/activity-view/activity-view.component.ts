@@ -20,7 +20,7 @@ export class ActivityViewComponent {
   private gridApi!: GridApi;
   columnDefs!: ColDef[];
 
-  defaultColDef: ColDef = { editable: false, filter: false, cellStyle: { fontSize: '12px' } };
+  defaultColDef: ColDef = { editable: false, filter: false, cellStyle: { fontSize: '12px' }, wrapHeaderText: true };
 
   constructor(
     private route: ActivatedRoute,
@@ -63,7 +63,8 @@ export class ActivityViewComponent {
             field: field.field,
             headerName: field.headerName,
             minWidth: field.minWidth,
-            maxWidth: field.maxWidth
+            maxWidth: field.maxWidth,
+            cellClass: field.cellClass ? field.cellClass.filter((c:string) => c !== 'grid-required') : []
           };
         });
 
