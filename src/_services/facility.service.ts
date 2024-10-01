@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { map, Observable } from 'rxjs';
 import { Facility } from 'src/_models/interfaces';
+import { LookUp } from 'src/_models/interfaces';
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +15,12 @@ export class FacilityService {
     getFacilities(): Observable<Facility[]> {
         console.log('getFacilities');
         return this.dataService.getData(this.endpoint);
+    }
+
+    getFacilityTypes(): Observable<LookUp[]> {
+        return this.dataService.getData('lookup').pipe(
+            map((lookups: LookUp[]) => lookups.filter(lookup => lookup.object_type == 'Facility'))
+        );
     }
 
     getFacilityBySlug(slug: string): Observable<Facility | undefined> {

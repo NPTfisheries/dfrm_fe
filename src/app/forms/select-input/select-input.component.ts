@@ -3,8 +3,9 @@ import { UserService } from 'src/_services/user.service';
 import { FormGroup } from '@angular/forms';
 
 import { InputBase } from 'src/_inputs/input-base';
-import { LookupService } from 'src/_services/lookup.service';
 import { DivisionService } from 'src/_services/division.service';
+import { FacilityService } from 'src/_services/facility.service';
+import { TaskService } from 'src/_services/task.service';
 
 @Component({
   selector: 'app-select-input',
@@ -22,7 +23,8 @@ export class SelectInputComponent implements OnInit {
   multiple: boolean = false;
 
   constructor(
-    private lookupService: LookupService,
+    private facilityService: FacilityService,
+    private taskService: TaskService,
     private userService: UserService,
     private divisionService: DivisionService,
   ) { }
@@ -39,13 +41,13 @@ export class SelectInputComponent implements OnInit {
 
     switch (this.input.key) {
       case 'facility_type':
-        this.options$ = this.lookupService.getLookupsByObjectType('Facility').subscribe(ftypes => {
+        this.options$ = this.facilityService.getFacilityTypes().subscribe(ftypes => {
           this.labels = 'name';
           this.options$ = ftypes;
         });
         break;
       case 'task_type':
-        this.options$ = this.lookupService.getLookupsByObjectType('Task').subscribe(ttypes => {
+        this.options$ = this.taskService.getTaskTypes().subscribe(ttypes => {
           this.labels = 'name';
           this.options$ = ttypes;
         });

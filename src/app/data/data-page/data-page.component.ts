@@ -4,8 +4,8 @@ import { GridApi, ColDef, SelectionColumnDef, SelectionOptions } from 'ag-grid-c
 
 import { buildColumnDefs } from 'src/_utilities/buildColumnDefs';
 import { Observable } from 'rxjs';
-import { HtmlSanitizerComponent } from 'src/_components/html-sanitizer/html-sanitizer.component';
 import { ActivityService } from 'src/_services/activity.service';
+import { TaskService } from 'src/_services/task.service';
 
 @Component({
   selector: 'app-data-page',
@@ -14,8 +14,8 @@ import { ActivityService } from 'src/_services/activity.service';
 export class DataPageComponent {
 
   data!: any[];
-  datasets: any[] = [];
-  selectedDataset!: number;
+  tasks: any[] = [];
+  selectedTaskType!: number;
   value!: string;
   btnStyle = { 'float': 'right', 'margin-right': '30px' }
   isLoading = false;
@@ -36,7 +36,8 @@ export class DataPageComponent {
 
   constructor(
     private cdmsService: CdmsService,
-    private activityService: ActivityService
+    private activityService: ActivityService,
+    private taskService: TaskService,
   ) { }
 
   ngOnInit(): void {
@@ -45,9 +46,9 @@ export class DataPageComponent {
     //   console.log('cdmsLogin:', response);
     //   this.cdmsService.getDatastores().subscribe((datastores: any) => this.datasets = datastores);
     // });
-    this.activityService.getDatasets().subscribe(datasets => {
-      console.log('Datasets:', datasets);
-      this.datasets = datasets;
+    this.taskService.getTasks().subscribe(tasks => {
+      console.log('Tasks:', tasks);
+      this.tasks = tasks;
     });
 
   }
@@ -67,16 +68,16 @@ export class DataPageComponent {
   }
 
   retrieveData() {
-    if (this.selectedDataset) {
+    if (this.selectedTaskType) {
       this.data = [];
       this.columnDefs = [];
       this.isLoading = true;
-      // this.querySelector(this.selectedDataset);
-      this.activityService.getFields(this.selectedDataset).subscribe(fields => {
-        console.log(fields);
-        this.columnDefs = fields;
-        this.isLoading = false;
-      });
+      // this.querySelector(this.selectedTaskType);
+      // this.activityService.getFields(this.selectedTaskType).subscribe(fields => {
+      //   console.log(fields);
+      //   this.columnDefs = fields;
+      //   this.isLoading = false;
+      // });
     }
   }
 
@@ -84,20 +85,11 @@ export class DataPageComponent {
     console.log('data page received filters...', value);
     this.invalidForm = false;
     this.filters = value;
-
-    if (this.selectedDataset === 122 && this.filters.hasOwnProperty('Year') && this.filters['Year']) {
-      console.log('inside the if');
-      this.invalidForm = false;
-    }
-
   }
 
   handleChange(value: number) {
-    this.selectedDataset = value;
+    this.selectedTaskType = value;
     this.invalidForm = false;
-    if (this.selectedDataset === 122) {
-      this.invalidForm = true; // force selection of Year
-    };
   }
 
   buildFilename(): string {
@@ -178,7 +170,7 @@ export class DataPageComponent {
   }
 
   test() {
-    this.activityService.getFields(this.selectedDataset).subscribe(fields => console.log(fields));
+    // this.activityService.getFields(this.selectedTaskType).subscribe(fields => console.log(fields));
   }
 
 }

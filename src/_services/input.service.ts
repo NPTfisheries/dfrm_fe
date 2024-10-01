@@ -16,7 +16,7 @@ import { InputNumber } from 'src/_inputs/input-number';
 import { InputRichText } from 'src/_inputs/input-richtext';
 import { InputCheckbox } from 'src/_inputs/input-checkbox';
 import { InputRadio } from 'src/_inputs/input-radio';
-import { LookupService } from './lookup.service';
+import { LookUpService } from './lookup.service';
 import { ImageService } from './image.service';
 
 @Injectable({ providedIn: 'root' })
@@ -26,7 +26,7 @@ export class InputService {
   defaultCardId = 4;
 
   constructor(
-    private lookupService: LookupService,
+    private lookUpService: LookUpService,
     private imageService: ImageService,
   ) { }
 
@@ -652,7 +652,7 @@ export class InputService {
   getObjects(object_type: string) {
     let options: { key: string, value: string }[] = [];
 
-    this.lookupService.getLookupsByObjectType(object_type).subscribe((list: any) => {
+    this.lookUpService.getLookUpsByObjectType(object_type).subscribe((list: any) => {
       for (let item of list) {
         options.push({ key: item.id, value: item.name })
       }

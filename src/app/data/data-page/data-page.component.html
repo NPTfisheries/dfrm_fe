@@ -3,14 +3,14 @@
     <app-button [label]="'test'" (click)="test()" ></app-button>
     <div class="row align-items-center">
         <div class="col-9 offset-1">
-            <ng-select [items]="datasets" bindLabel="name" bindValue="id" placeholder="Select Dataset"
-                (change)="handleChange(selectedDataset)" [(ngModel)]="selectedDataset"></ng-select>
+            <ng-select [items]="tasks" bindLabel="name" bindValue="id" placeholder="Select Dataset"
+                (change)="handleChange(selectedTaskType)" [(ngModel)]="selectedTaskType"></ng-select>
         </div>
         <div class="col-2">
             <app-button [label]="'Retrieve Data'" (click)="retrieveData()" [loading]="isLoading" [disabled]="invalidForm"></app-button>
         </div>
     </div>
-    <app-data-filters (dataFilters)="getDataFilters($event)" [selectedDataset]="selectedDataset"></app-data-filters>
+    <!-- <app-data-filters (dataFilters)="getDataFilters($event)" [selectedTaskType]="selectedTaskType"></app-data-filters> -->
 
     <br>
 

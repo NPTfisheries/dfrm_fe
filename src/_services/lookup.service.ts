@@ -1,32 +1,32 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { map, Observable } from 'rxjs';
-import { Lookup } from 'src/_models/interfaces';
+import { LookUp } from 'src/_models/interfaces';
 
 @Injectable({
     providedIn: 'root'
 })
-export class LookupService {
-    private readonly endpoint = 'lookup';
+export class LookUpService {
+    private readonly endpoint = 'LookUp';
 
-    constructor(private dataService: DataService<Lookup>) { }
+    constructor(private dataService: DataService<LookUp>) { }
 
-    getLookups(): Observable<Lookup[]> {
-        console.log('getLookups');
+    getLookUps(): Observable<LookUp[]> {
+        console.log('getLookUps');
         return this.dataService.getData(this.endpoint);
     }
 
-    getLookupsByObjectType(object_type: string) {
-        return this.getLookups().pipe(
-            map((lookups: Lookup[]) => lookups.filter(lookup => lookup.object_type == object_type))
+    getLookUpsByObjectType(object_type: string) {
+        return this.getLookUps().pipe(
+            map((LookUps: LookUp[]) => LookUps.filter(LookUp => LookUp.object_type == object_type))
         );
     }
 
-    refreshLookups(): Observable<Lookup[]> {
+    refreshLookUps(): Observable<LookUp[]> {
         return this.dataService.refreshData(this.endpoint);
     }
 
-    clearLookupsCache(): void {
+    clearLookUpsCache(): void {
         this.dataService.clearCache(this.endpoint);
     }
 }

@@ -1,4 +1,5 @@
 import { Project } from "./project";
+import { Task } from "./task";
 
 export interface Profile {
     title?: string;
@@ -40,10 +41,10 @@ export interface Dataset {
 export interface Activity {
     id?: number;
     user?: number | User;
-    project?: Project | number;
-    dataset?: Dataset | number;
-    date?: Date;
-    data?: {};
+    task?: Task | number;
+    header?: {};
+    detail?: {};
+    effective_date?: Date;
   }
 
 export interface FacilityType {
@@ -72,8 +73,6 @@ export interface FacilityProperties {
     is_active?: boolean;
 }
 
-
-
 export interface Geometry {
     type?: string;
     coordinates?: number[];
@@ -86,7 +85,7 @@ export interface Facility {
     properties?: FacilityProperties;
 }
 
-export interface Lookup {
+export interface LookUp {
     id?: number;
     object_type?: string;
     name?: string;

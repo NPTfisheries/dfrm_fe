@@ -32,14 +32,9 @@ export class ActivityService {
         return this.dataService.refreshData(this.endpoint);
     }
 
-    getDatasets(): Observable<any[]> {
-        console.log('getDatasets');
-        return this.dataService.getData('datasets');
-    }
-
-    getFields(dataset_id: number): Observable<any[]> {
-        console.log('getFields for dataset_id:', dataset_id);
-        let params = { 'dataset_id': dataset_id };
+    getFields(task_type: string): Observable<any[]> {
+        console.log('getFields for task_type:', task_type);
+        let params = { 'task_type': task_type };
 
         return this.get('fields', params);
     }

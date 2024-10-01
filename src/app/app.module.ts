@@ -61,7 +61,6 @@ import { DataFiltersComponent } from './data/data-filters/data-filters.component
 import { ProjectFilterComponent } from './data/_filters/project-filter/project-filter.component';
 import { FilterComponent } from './data/_filters/filter/filter.component';
 import { DataEntryComponent } from './data/data-entry/data-entry.component';
-import { AddColumnComponent } from './data/add-column/add-column.component';
 import { ActivitiesPageComponent } from './data/activities-page/activities-page.component';
 import { ActivityViewComponent } from './data/activity-view/activity-view.component';
 
@@ -115,7 +114,6 @@ import { ActivityViewComponent } from './data/activity-view/activity-view.compon
     ProjectFilterComponent,
     FilterComponent,
     DataEntryComponent,
-    AddColumnComponent,
     ActivitiesPageComponent,
     ActivityViewComponent,
   ],

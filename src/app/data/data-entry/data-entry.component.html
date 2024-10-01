@@ -5,26 +5,43 @@
         <app-button [label]="'RESET FORM'" (click)="resetForm()" [style]="btnStyle"></app-button>
         <div class="row align-items-center">
             <div class="col-6 offset-3">
-                <ng-select formControlName='dataset' [items]="datasets" bindLabel="name" bindValue="id"
-                    [required]="true" [placeholder]="'Select Dataset'" (change)="datasetChange($event)"
-                    [ngClass]="'my-2'">
+                <ng-select formControlName='task' [items]="tasks" bindLabel="name" bindValue="task_type.name"
+                    [required]="true" [placeholder]="'Select Task'" (change)="taskChange($event)" [ngClass]="'my-2'">
                 </ng-select>
-                <ng-select formControlName='project' [items]="projects" bindLabel="name" bindValue="id"
-                    [required]="true" [placeholder]="'Select Project'" [ngClass]="'my-2'">
-                </ng-select>
-                <input formControlName='date' [type]="'date'" class="form-control form-control-date" [required]="true"
-                    [max]="today" [ngClass]="'my-2'" />
+            </div>
+            <div *ngIf="headerFields" formGroupName='header' class="col-6 offset-3">
+                <div *ngFor="let header of headerFields">
+                    <label [attr.for]="header.field" class="form-label">{{header.headerName}}</label>
+                    <div [ngSwitch]="header.cellEditor">
+                        --NUMBER
+                        <input *ngSwitchCase="'agNumberCellEditor'" [formControlName]="header.field" [id]="header.field"
+                            [type]="'number'" class="form-control" [required]="header.required"
+                            [min]="header.cellEditorParams.min" [max]="header.cellEditorParams.max">
+                        --TEXT
+                        <input *ngSwitchCase="null" [formControlName]="header.field" [id]="header.field"
+                            [type]="header.type" class="form-control" [required]="header.required">
+                        --TEXTAREA
+                        <textarea *ngSwitchCase="'agLargeTextCellEditor'" rows="5" [formControlName]="header.field"
+                            [id]="header.field" class="form-control" [required]="header.required"></textarea>
+                        --DATE
+                        <input *ngSwitchCase="'agDateCellEditor'" [type]="'date'" [formControlName]="header.field"
+                            class="form-control form-control-date" [required]="header.required" [min]="header.min"
+                            [max]="today" />
+                        --SELECT
+                        <ng-select *ngSwitchCase="'agSelectCellEditor'" [formControlName]='header.field'
+                            [items]="header.cellEditorParams.values" [required]="header.required" [ngClass]="'my-2'">
+                        </ng-select>
+                    </div>
+                </div>
             </div>
         </div>
-        <div *ngIf="columnDefs">
-            <br>
+        <div *ngIf="colDefs">
             <app-button [label]="'Add Row'" (click)="addRow()"></app-button>
             <app-button [label]="'Remove Selected Rows'" (click)="removeSelectedRows()"></app-button>
-            <app-button [label]="'Add Column'" (click)="addColumn()"></app-button>
             <div class="container my-5" style="height: 600px;">
-                <ag-grid-angular style="width: 100%; height: 100%;" class="ag-theme-quartz-dark"
-                    [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [rowData]="rowData"
-                    [selection]="selection" [selectionColumnDef]="selectionColumnDef" (gridReady)="onGridReady($event)">
+                <ag-grid-angular style="width: 100%; height: 100%;" class="ag-theme-quartz-dark" [columnDefs]="colDefs"
+                    [defaultColDef]="defaultColDef" [rowData]="detailData" [selection]="selection"
+                    [selectionColumnDef]="selectionColumnDef" (gridReady)="onGridReady($event)">
                     <!-- singleClickEdit 
                  supressRowHoverHighlight
                  columnHoverHighlight 

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { GridApi, ColDef, SelectionOptions, SelectionColumnDef } from 'ag-grid-community';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivityService } from 'src/_services/activity.service';
-import { ProjectService } from 'src/_services/project.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { TaskService } from 'src/_services/task.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Activity } from 'src/_models/interfaces';
-import { AddColumnComponent } from '../add-column/add-column.component';
 
 @Component({
   selector: 'app-data-entry',
@@ -13,23 +11,22 @@ import { AddColumnComponent } from '../add-column/add-column.component';
 })
 export class DataEntryComponent implements OnInit {
 
-  today = new Date().toISOString().slice(0, 10); // max value for date input
+  today = new Date().toISOString().slice(0, 10); // max value for date inputs
   activity: Activity = {
-    dataset: undefined,
-    project: undefined,
+    task: undefined,
     // instrument: undefined,
-    date: undefined,
-    data: {}
+    header: {},
+    detail: {}
   };
-  datasets!: any[];
-  projects!: any[];
-  rowData: any[] = [{}]; // This will represent the rows in your AG Grid
+  tasks!: any[]; // Task[]
+  headerFields: any[] | undefined;
+  detailData: any[] = [{}]; // This will represent the rows in your AG Grid
   btnStyle = { 'float': 'right', 'margin-right': '30px' }
 
   activityForm: FormGroup;
 
   private gridApi!: GridApi;
-  columnDefs: ColDef[] | undefined;
+  colDefs: ColDef[] | undefined;
   defaultColDef: ColDef = {
     cellStyle: { fontSize: '12px' },
     wrapHeaderText: true,
@@ -37,11 +34,8 @@ export class DataEntryComponent implements OnInit {
   };
   public selection: SelectionOptions = {
     mode: 'multiRow',
-    // selectAll: true, 
+    // selectAll: true, enableClickSelection: 'enableSelection',checkboxes: true, hideDisabledCheckboxes: true, 
     headerCheckbox: true,
-    // enableClickSelection: 'enableSelection',
-    // checkboxes: true, 
-    // hideDisabledCheckboxes: true, 
     copySelectedRows: true
   }
   public selectionColumnDef: SelectionColumnDef = {
@@ -53,20 +47,19 @@ export class DataEntryComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private activityService: ActivityService,
-    private projectService: ProjectService,
-    private modalService: NgbModal,
+    private taskService: TaskService,
   ) {
     this.activityForm = this.fb.group({
-      dataset: [null],
-      project: [null],
+      task: [null], // task should have project, protocol, contract
+      // location: null,
+      header: fb.group({}),
       date: [null]
     });
   }
 
 
   ngOnInit(): void {
-    this.activityService.getDatasets().subscribe(datasets => this.datasets = datasets);
-    this.projectService.getProjects().subscribe(projects => this.projects = projects);
+    this.taskService.getTasks().subscribe(tasks => this.tasks = tasks); // project doesnt come with Task currently 10/01/24
 
     // Sync form changes with activity
     this.activityForm.valueChanges.subscribe(value => {
@@ -87,16 +80,29 @@ export class DataEntryComponent implements OnInit {
     const selectedRows = this.gridApi.getSelectedRows();
     console.log(selectedRows);
     this.gridApi.applyTransaction({ remove: selectedRows });
-    // this.rowData = this.rowData.filter(row => !selectedRows.includes(row));
   }
 
-  datasetChange(value: any) {
+  taskChange(value: any) {
+    console.log('taskChange value:', value);
     if (value === undefined) {
-      this.columnDefs = undefined;
-      this.activityForm.get('dataset')?.enable()
+      this.colDefs = undefined;
+      this.headerFields = undefined;
+      this.activityForm.get('task')?.enable(); // task input returns task_type
     } else {
-      this.activityService.getFields(value.id).subscribe(fields => this.columnDefs = fields);
-      this.activityForm.get('dataset')?.disable()
+      // Fetch fields based on selected task type
+      this.activityService.getFields(value.task_type.id).subscribe(fields => {
+        // Filter header and detail fields
+        this.headerFields = fields.filter(field => field.field_for === 'header');
+        this.colDefs = fields.filter(field => field.field_for === 'detail');
+
+        // Create form controls for header fields
+        const headerGroup = this.activityForm.get('header') as FormGroup;
+        this.headerFields.forEach((field: any) => {
+          headerGroup.addControl(field.field, this.fb.control(null, field.required ? Validators.required : null));
+        });
+      });
+      
+      this.activityForm.get('task')?.disable();
     }
   }
 
@@ -106,14 +112,14 @@ export class DataEntryComponent implements OnInit {
       console.log(node);
       rowData.push(node.data); // node.data contains the data for each row
     });
-    this.activity.data = rowData; // Assign the captured data to activity.data [{},{},{}]
+    this.activity.detail = rowData; // Assign the captured data to activity.data [{},{},{}]
   }
 
   isGridValid(): boolean {
     let isValid = true;
     this.gridApi.forEachNode((node) => {
-      this.columnDefs?.forEach((col: any) => {
-        if (col.required && !node.data[col.field]) {
+      this.colDefs?.forEach((col: any) => {
+        if (col.required && !node.data[col.field]) {    // if we update this to CONTEXT, change.
           isValid = false; // A required cell is missing data
         }
       });
@@ -121,10 +127,6 @@ export class DataEntryComponent implements OnInit {
     console.log('Grid Valid??: ', isValid);
     return isValid;
   }
-
-  // updateSubmitButtonState() {
-  //   this.isLoading = !(this.activityForm.valid && this.isGridValid());
-  // }
 
   submit() {
     console.log('Activity Submitted!');
@@ -139,29 +141,22 @@ export class DataEntryComponent implements OnInit {
   }
 
   resetForm() {
-    this.columnDefs = undefined;
-    for (let field of ['dataset', 'project', 'date']) {
+    this.colDefs = undefined;
+    this.headerFields = undefined;
+    for (let field of ['task', 'project', 'date']) {   // this probably wrong.
       this.activityForm.get(field)?.reset()
     }
-    this.activityForm.get('dataset')?.enable()
-    this.rowData = [{}];
-    // this.updateSubmitButtonState(); // Ensure validation re-checks on reset
+    this.activityForm.get('task')?.enable()
+    this.detailData = [{}];
   }
 
   print() {
-    this.captureGridData();
+    // this.captureGridData();
     console.log('Activity:', this.activity);
     // console.log('isGridValid():', this.isGridValid());
-    // console.log(this.columnDefs);
-  }
-
-  addColumn() {
-    const modalRef = this.modalService.open(AddColumnComponent);
-    modalRef.result.then((newColDef) => {
-      // console.log('MODAL CLOSED', newColDef);
-      this.columnDefs?.push(newColDef);
-      this.gridApi.setGridOption('columnDefs', this.columnDefs);
-    });
+    // console.log(this.colDefs);
+    // console.log(this.headerFields);
+    console.log(this.activityForm.get('header'));
   }
 
 }

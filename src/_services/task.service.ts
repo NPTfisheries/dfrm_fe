@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { Observable, map } from 'rxjs';
 import { Task } from 'src/_models/task';
+import { LookUp } from 'src/_models/interfaces';
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +15,12 @@ export class TaskService {
     getTasks(): Observable<Task[]> {
         console.log('getTasks');
         return this.dataService.getData(this.endpoint);
+    }
+
+    getTaskTypes(): Observable<LookUp[]> {
+        return this.dataService.getData('lookup').pipe(
+            map((lookups: LookUp[]) => lookups.filter(lookup => lookup.object_type == 'Task'))
+        );
     }
 
     getTasksBySubprojectId(subproject_id: number | string): Observable<Task[] | undefined> {
