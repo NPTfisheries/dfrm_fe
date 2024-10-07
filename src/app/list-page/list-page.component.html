@@ -6,6 +6,7 @@
     <app-button *ngIf="routeType === 'facility' && managerAccess(permissionGroup)" [label]="'Add Facility'" (click)="add(routeType)" [style]="btnStyle"></app-button>
     <app-button *ngIf="routeType === 'image' && projectleaderAccess(permissionGroup)" [label]="'Upload Image'" (click)="uploadImage()" [style]="btnStyle"></app-button>
     <app-button *ngIf="routeType === 'project' && projectleaderAccess(permissionGroup)" [label]="'Add New ' + routeType | titlecase" (click)="add(routeType)" [style]="btnStyle"></app-button>
+    <app-button *ngIf="routeType === 'task' && projectleaderAccess(permissionGroup)" [label]="'Add New ' + routeType | titlecase" (click)="add(routeType)" [style]="btnStyle"></app-button>
 
     <br><br><br>
     <div class="container" style="height: 600px;">

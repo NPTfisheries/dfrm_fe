@@ -39,16 +39,17 @@ const routes: Routes = [
     // singular is for the list page, similar to django return for API
     { path: 'department', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'division', component: ListPageComponent, canActivate: [AuthGuard]},
-    { path: 'project', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'facility', component: ListPageComponent, canActivate: [AuthGuard]},
+    { path: 'project', component: ListPageComponent, canActivate: [AuthGuard]},
+    { path: 'task', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'users', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'image', component: ListPageComponent, canActivate: [AuthGuard]},
 
     // wildcard for detail pages
     { path: 'department/:slug', component: DetailPageComponent},
     { path: 'division/:slug', component: DivisionDetailComponent},
-    { path: 'project/:slug', component: DetailPageComponent},
     { path: 'facility/:slug', component: FacilityDetailComponent},
+    { path: 'project/:slug', component: DetailPageComponent},
     { path: 'users/:id', component: ProfileComponent},
 
 ];

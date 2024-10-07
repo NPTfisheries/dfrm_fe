@@ -21,6 +21,8 @@ export function getColumnDefs(routeType: string, context: any) {
             return divisionColDefs(routeType, context);
         case 'project':
             return projectColDefs(routeType, context);
+        case 'task':
+            return taskColDefs(routeType, context);
         case 'users':
             return usersColDefs(routeType, context);
         case 'image':
@@ -39,13 +41,13 @@ const buttonProps = {
     filter: false,
     sortable: false,
     maxWidth: 80,
-    minWidth: 80    
+    minWidth: 80
 }
 
 const isActiveProps = {
     filter: false,
     maxWidth: 105,
-    minWidth:105
+    minWidth: 105
 }
 
 function departmentColDefs(routeType: string, context: any) {
@@ -90,9 +92,9 @@ function departmentColDefs(routeType: string, context: any) {
             headerName: 'View',
             cellRenderer: LinkButtonRendererComponent,
             cellRendererParams: {},
-            valueGetter: function(params: any) {
+            valueGetter: function (params: any) {
                 // this will return all departments to the divisions list, but while it's only Fisheries that is fine.
-                return '/divisions'; 
+                return '/divisions';
             },
             ...buttonProps
         }
@@ -223,6 +225,62 @@ function projectColDefs(routeType: string, context: any) {
 
 }
 
+function taskColDefs(routeType: string, context: any) {
+    const columns: (ColDef | ColGroupDef)[] = [
+        {
+            field: 'name',
+            headerName: 'Name'
+        },
+        {
+            field: 'description',
+            headerName: 'Description'
+        },
+        {
+            field: 'division.name',
+            headerName: 'Division'
+        },
+        {
+            field: 'project.name',
+            headerName: 'Project'
+        },
+        {
+            field: 'supervisor',
+            headerName: 'Supervisor',
+            valueGetter: getStaffNames
+        },
+        {
+            field: 'is_active',
+            headerName: 'Active?',
+            cellRenderer: BooleanRendererComponent,
+            cellRendererParams: {},
+            ...isActiveProps
+        },
+        {
+            headerName: 'View',
+            field: 'slug',
+            cellRenderer: LinkButtonRendererComponent,
+            cellRendererParams: {},
+            ...buttonProps
+        }
+    ];
+
+    if (projectleaderAccess(context.permissionGroup)) {
+        columns.push({
+            headerName: 'Edit',
+            field: 'slug',
+            cellRenderer: EditButtonRendererComponent,
+            cellRendererParams: {
+                routeType: routeType,
+                context: context
+            },
+            ...buttonProps
+        });
+    }
+
+    return columns;
+
+}
+
 function usersColDefs(routeType: string, context: any) {
     const columns: (ColDef | ColGroupDef)[] = [
         {
@@ -310,20 +368,20 @@ function imageColDefs(routeType: string, context: any) {
             },
             ...buttonProps
         },
-        {
-            headerName: 'Delete',
-            field: 'id',
-            cellRenderer: DeleteButtonRendererComponent,
-            cellRendererParams: {
-                routeType: routeType,
-                context: context
-            },
-            filter: false,
-            sortable: false,
-            maxWidth: 90,
-            minWidth: 90,
+            {
+                headerName: 'Delete',
+                field: 'id',
+                cellRenderer: DeleteButtonRendererComponent,
+                cellRendererParams: {
+                    routeType: routeType,
+                    context: context
+                },
+                filter: false,
+                sortable: false,
+                maxWidth: 90,
+                minWidth: 90,
 
-        });
+            });
     }
 
     return columns;
@@ -390,19 +448,19 @@ function documentColDefs(routeType: string, context: any) {
             ...buttonProps
 
         },
-        {
-            headerName: 'Delete',
-            field: 'id',
-            cellRenderer: DeleteButtonRendererComponent,
-            cellRendererParams: {
-                routeType: routeType,
-                context: context
-            },
-            filter: false,
-            sortable: false,
-            maxWidth: 90,
-            minWidth: 90
-        });
+            {
+                headerName: 'Delete',
+                field: 'id',
+                cellRenderer: DeleteButtonRendererComponent,
+                cellRendererParams: {
+                    routeType: routeType,
+                    context: context
+                },
+                filter: false,
+                sortable: false,
+                maxWidth: 90,
+                minWidth: 90
+            });
     }
 
     return columns;

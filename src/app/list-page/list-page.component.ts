@@ -21,6 +21,7 @@ import { DivisionService } from 'src/_services/division.service';
 import { DepartmentService } from 'src/_services/department.service';
 import { FacilityService } from 'src/_services/facility.service';
 import { ImageService } from 'src/_services/image.service';
+import { TaskService } from 'src/_services/task.service';
 
 @Component({
   selector: 'app-list-page',
@@ -62,6 +63,7 @@ export class ListPageComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private userService: UserService,
     private projectService: ProjectService,
+    private taskService: TaskService,
     private divisionService: DivisionService,
     private departmentService: DepartmentService,
     private facilityService: FacilityService,
@@ -111,6 +113,11 @@ export class ListPageComponent implements OnInit, OnDestroy {
           this.data = projects;
         });
         break;
+        case 'task':
+          this.taskService.getTasks().subscribe((tasks) => {
+            this.data = tasks;
+          });
+          break;
       case 'users':
         this.userService.getUsers().subscribe((users) => {
           this.data = users;

@@ -155,8 +155,8 @@ export class DataEntryComponent implements OnInit {
     console.log('Activity:', this.activity);
     // console.log('isGridValid():', this.isGridValid());
     // console.log(this.colDefs);
-    // console.log(this.headerFields);
-    console.log(this.activityForm.get('header'));
+    console.log(this.headerFields);
+    // console.log(this.activityForm.get('header'));
   }
 
 }
