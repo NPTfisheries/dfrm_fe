@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { Observable, map } from 'rxjs';
-import { Project } from 'src/_models/project';
+import { Project } from 'src/_models/interfaces';
 
 @Injectable({
     providedIn: 'root'

@@ -1,5 +1,3 @@
-import { Project } from "./project";
-import { Task } from "./task";
 
 export interface Profile {
     title?: string;
@@ -31,11 +29,45 @@ export interface Image {
     image?: string;
 }
 
-export interface Dataset {
-    id?: number;
-    name?: string;
+export interface Department {
+    assistant?: number | User;
+    deputy?: number | User;
     description?: string;
-    summary_dataset?: boolean;
+    id?: string;
+    img_banner?: number | Image;
+    img_card?: number | Image;    
+    is_active?: boolean;
+    manager?: number | User;
+    name?: string;
+    slug?: string;
+    staff?: number[] | User[];
+}
+
+export interface Division {
+    assistant?: number | User;
+    department?: number| Department;
+    deputy?: number | User;
+    description?: string;
+    id: number;
+    img_banner?: number | Image;
+    img_card?: number | Image;
+    is_active?: boolean;
+    manager?: number | User;
+    name?: string;
+    slug?: string;
+    staff?: number[] | User[];
+}
+
+export interface Project {
+    department?: number | Department;
+    description?: string;
+    id?: number;
+    img_banner?: number | Image;
+    img_card?: number | Image;
+    is_active?: boolean;
+    name?: string;
+    project_leader?: number[] | User[];
+    slug?: string;
 }
 
 export interface Activity {
@@ -85,10 +117,37 @@ export interface Facility {
     properties?: FacilityProperties;
 }
 
+export interface Task {
+    task_type?: number;
+    project?: number | string | Project;
+    division?: number | string | Division;
+    id?: number;
+    description?: string;
+    supervisor: number | User;
+    name?: string;
+    slug?: string;
+    is_active?: boolean;
+    sort_order?: number;
+    img_card: number | Image;
+    img_banner: number | Image;
+}
+
 export interface LookUp {
     id?: number;
     object_type?: string;
     name?: string;
+}
+
+export interface Document {
+    id?: number;
+    title?: string;
+    description?: string;
+    primary_author?: string;
+    employee_authors?: string;
+    publish_date?: string;
+    document_type?: string;
+    citation?: string; 
+    keywords?: string;
 }
 
 // cdms filtering

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { Observable, map } from 'rxjs';
-import { Task } from 'src/_models/task';
-import { LookUp } from 'src/_models/interfaces';
+import { Task, LookUp } from 'src/_models/interfaces';
 
 @Injectable({
     providedIn: 'root'
@@ -23,17 +22,18 @@ export class TaskService {
         );
     }
 
-    getTasksBySubprojectId(subproject_id: number | string): Observable<Task[] | undefined> {
-        console.log(`getTasksBySubprojectId: ${subproject_id}`);
+    // FIXX X X X --- show_on_website or whatever
+    getTasksByProjectId(project_id: number | string): Observable<Task[] > {
+        console.log(`getTasksByProjectId: ${project_id}`);
         return this.getTasks().pipe(
-            map((tasks: Task[]) => tasks.filter(task => task.subproject == String(subproject_id) && task.is_active))
+            map((tasks: any[]) => tasks.filter(task => task.project.id == String(project_id) && task.is_active))
         );
     }
 
-    refreshTasksBySubprojectId(subproject_id: number | string): Observable<Task[] | undefined> {
+    refreshTasksByProjectId(subproject_id: number | string): Observable<Task[] | undefined> {
         console.log(`getTasksBySubprojectId: ${subproject_id}`);
         return this.refreshTasks().pipe(
-            map((tasks: Task[]) => tasks.filter(task => task.subproject == String(subproject_id) && task.is_active))
+            map((tasks: Task[]) => tasks.filter(task => task.project == String(subproject_id) && task.is_active))
         );
     }
 

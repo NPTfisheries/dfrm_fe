@@ -298,56 +298,72 @@ export class InputService {
   getTaskInputs(data?: any) {
     // console.log('Getting Task Inputs...');
     const inputs: InputBase<string>[] = [
+      new InputText({
+        key: 'name',
+        label: 'Task Name',
+        value: data?.name || '',
+        required: true,
+        order: 1
+      }),
       new InputSelect({
         key: 'task_type',
         label: 'Task Type',
         value: data?.task_type?.id || '',
+        options: this.getObjects('Task'),
         required: true,
-        order: 1
+        order: 2
       }),
       new InputRichText({
         key: 'description',
         label: 'Description',
         value: data?.description || '',
         required: true,
-        order: 2
+        order: 3
       }),
-      new InputHidden({
-        key: 'subproject',
-        value: data?.subproject || [],
+      new InputSelect({
+        key: 'project_id',
+        label: 'Project',
+        value: data?.project?.id || [],
         required: true,
-        order: 99
+        order: 4
+      }),
+      new InputSelect({
+        key: 'division_id',
+        label: 'Division',
+        value: data?.division?.id || [],
+        required: true,
+        order: 5
       }),
       new InputSelect({
         key: 'supervisor',
         label: 'Task Supervisor',
-        value: data?.supervisor.id || [],
+        value: data?.supervisor?.id || [],
         required: true,
-        order: 4
+        order: 6
       }),
       new InputCheckbox({
         key: 'is_active',
         value: data?.is_active,
-        order: 5
+        order: 7
       }),
-      new InputHidden({
-        key: 'img_banner',
-        value: data?.img_card.id || this.defaultCardId,
-        order: 99
-      }),
-      // new InputImage({
+      // new InputHidden({
       //   key: 'img_banner',
-      //   label: 'Choose Banner Image',
-      //   value: data?.img_banner.id || this.defaultBannerId,
-      //   options: this.buildImageOptions(),
-      //   order: 7
+      //   value: data?.img_card.id || this.defaultCardId,
+      //   order: 99
       // }),
+      new InputImage({
+        key: 'img_banner',
+        label: 'Choose Banner Image',
+        value: data?.img_banner.id || this.defaultBannerId,
+        options: this.buildImageOptions(),
+        order: 8
+      }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.img_card.id || this.defaultCardId,
         options: this.buildImageOptions(),
-        order: 7
+        order: 8
       }),
       new InputNumber({
         key: 'sort_order',

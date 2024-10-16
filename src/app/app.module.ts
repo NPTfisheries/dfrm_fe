@@ -31,7 +31,6 @@ import { DynamicFormInputComponent } from './forms/dynamic-form-input/dynamic-fo
 import { FormContainerComponent } from './forms/form-container/form-container.component';
 import { EmployeeCardComponent } from './cards/employee-card/employee-card.component';
 import { DetailTaskComponent } from './detail-page/detail-task/detail-task.component';
-import { DetailSubprojectComponent } from './detail-page/detail-subproject/detail-subproject.component';
 import { LinkButtonRendererComponent } from '../_renderers/link-button-renderer/link-button-renderer.component';
 import { EditButtonRendererComponent } from '../_renderers/edit-button-renderer/edit-button-renderer.component';
 import { DeleteButtonRendererComponent } from 'src/_renderers/delete-button-renderer/delete-button-renderer.component';
@@ -85,7 +84,6 @@ import { ActivityViewComponent } from './data/activity-view/activity-view.compon
     FormContainerComponent,
     EmployeeCardComponent,
     DetailTaskComponent,
-    DetailSubprojectComponent,
     LinkButtonRendererComponent,
     EditButtonRendererComponent,
     DeleteButtonRendererComponent,

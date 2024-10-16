@@ -6,6 +6,7 @@ import { InputBase } from 'src/_inputs/input-base';
 import { DivisionService } from 'src/_services/division.service';
 import { FacilityService } from 'src/_services/facility.service';
 import { TaskService } from 'src/_services/task.service';
+import { ProjectService } from 'src/_services/project.service';
 
 @Component({
   selector: 'app-select-input',
@@ -27,6 +28,7 @@ export class SelectInputComponent implements OnInit {
     private taskService: TaskService,
     private userService: UserService,
     private divisionService: DivisionService,
+    private projectService: ProjectService
   ) { }
 
   ngOnInit(): void {
@@ -53,14 +55,22 @@ export class SelectInputComponent implements OnInit {
         });
         break;
       case 'division':
-        this.options$ =this.divisionService.getDivisions().subscribe(divisions => {
+      case 'division_id':
+        this.options$ = this.divisionService.getDivisions().subscribe(divisions => {
           this.labels = 'name';
-          this.options$ = divisions;          
+          this.options$ = divisions;
+        });
+        break;
+      case 'project':
+      case 'project_id':
+        this.options$ = this.projectService.getProjects().subscribe(projects => {
+          this.labels = 'name';
+          this.options$ = projects;
         });
         break;
       case 'document_type':
         this.labels = 'document_type';
-        this.options$ = ["Annual Report", "Journal Article", "Technical Memo","Presentation Slides","Other"];
+        this.options$ = ["Annual Report", "Journal Article", "Technical Memo", "Presentation Slides", "Other"];
         break;
       default:
         this.userService.getUsers().subscribe(users => {

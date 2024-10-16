@@ -6,7 +6,7 @@
     <h1 class="text-center">{{ data?.name }}</h1>
 </div>
 <h2 class="divider gradient-hr"></h2>
-<div class="container my-5" >
+<div class="container my-5">
     <!-- <pre><p>{{ data?.description }}</p></pre> -->
     <app-html-sanitizer [html]="data?.description"></app-html-sanitizer>
 </div>
@@ -14,14 +14,17 @@
 <div class="employee-bar">
     <app-employee-card *ngIf="data?.manager && data?.manager.email !== ''" [data]="data?.manager"></app-employee-card>
     <app-employee-card *ngIf="data?.deputy && data?.deputy.email !== ''" [data]="data?.deputy"></app-employee-card>
-    <app-employee-card *ngIf="data?.deputy && data?.assistant.email !== ''" [data]="data?.assistant"></app-employee-card>
+    <app-employee-card *ngIf="data?.deputy && data?.assistant.email !== ''"
+        [data]="data?.assistant"></app-employee-card>
     <div *ngFor="let pl of data?.project_leader">
         <app-employee-card *ngIf="pl" [data]="pl"></app-employee-card>
     </div>
 </div>
 
-<h2  *ngIf="routeType === 'project'"  class="divider gradient-hr"></h2>
+<h2 *ngIf="routeType === 'project'" class="divider gradient-hr"></h2>
 
 <div *ngIf="routeType === 'project'">
-    <app-detail-subproject [projectId]="data?.id"></app-detail-subproject>
+    <div *ngFor="let division of divisions">
+        <app-detail-task [projectId]="data?.id" [division]="division"></app-detail-task>
+    </div>
 </div>

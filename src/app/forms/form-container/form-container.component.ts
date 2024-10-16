@@ -7,7 +7,6 @@ import { InputService } from 'src/_services/input.service';
 import { AlertService } from 'src/_services/alert.service';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 import { ListPageComponent } from 'src/app/list-page/list-page.component';
-import { DetailSubprojectComponent } from 'src/app/detail-page/detail-subproject/detail-subproject.component';
 import { DetailTaskComponent } from 'src/app/detail-page/detail-task/detail-task.component';
 
 @Component({
@@ -16,12 +15,10 @@ import { DetailTaskComponent } from 'src/app/detail-page/detail-task/detail-task
 })
 export class FormContainerComponent implements OnInit {
 
-  @Input() context!: ListPageComponent | DetailSubprojectComponent | DetailTaskComponent | undefined;
+  @Input() context!: ListPageComponent |  DetailTaskComponent | undefined;
 
   @Input() routeType!: string;  // always provided.
   @Input() data?: any | undefined;
-  @Input() projectId: string | null = null;  // provided only for refreshing subprojects.
-  @Input() subprojectId: string | null = null;  // povided only for refreshing tasks.
   @Input() identifier!: string;  // slug || id for update api --> passed to dynamic form.  
   @Input() addOrEdit!: string
 
@@ -62,8 +59,6 @@ export class FormContainerComponent implements OnInit {
         return this.inputService.getDivisionInputs(data);
       case 'project':
         return this.inputService.getProjectInputs(data);
-      case 'subproject':
-        return this.inputService.getSubprojectInputs(data);
       case 'task':
         return this.inputService.getTaskInputs(data);
       case 'profile':

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Department } from 'src/_models/department';
+import { Department } from 'src/_models/interfaces';
 
 @Component({
   selector: 'app-home',

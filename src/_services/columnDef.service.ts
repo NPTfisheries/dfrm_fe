@@ -236,6 +236,10 @@ function taskColDefs(routeType: string, context: any) {
             headerName: 'Description'
         },
         {
+            field: 'task_type.name',
+            headerName: 'Task Type'
+        },
+        {
             field: 'division.name',
             headerName: 'Division'
         },
@@ -248,6 +252,7 @@ function taskColDefs(routeType: string, context: any) {
             headerName: 'Supervisor',
             valueGetter: getStaffNames
         },
+        // sort order?
         {
             field: 'is_active',
             headerName: 'Active?',
