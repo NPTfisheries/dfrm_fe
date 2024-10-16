@@ -33,3 +33,16 @@
     padding-left: 0px;
     padding-right: 0px;
 }
+
+.banner-container-div {
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 1em;
+}
+
+.banner-image-div {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

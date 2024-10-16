@@ -1,4 +1,8 @@
-<div *ngIf="data.length > 0" class="container rounded-border bg-dark my-5 pt-3">
+<div *ngIf="data.length > 0" class="container rounded-border bg-dark my-5">
+    <div class="col-md-4 banner-container-div">
+        <img [src]="getImageUrl(division.img_banner.image)" alt="Image"
+            class="banner-image-div rounded-top">
+    </div>
     <h2 class="text-yellow text-center">{{division.name}}</h2>
     <div class="container">
         <div *ngFor="let item of data; let i = index">

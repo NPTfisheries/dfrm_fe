@@ -321,14 +321,14 @@ export class InputService {
         order: 3
       }),
       new InputSelect({
-        key: 'project_id',
+        key: 'project',
         label: 'Project',
         value: data?.project?.id || [],
         required: true,
         order: 4
       }),
       new InputSelect({
-        key: 'division_id',
+        key: 'division',
         label: 'Division',
         value: data?.division?.id || [],
         required: true,
@@ -341,10 +341,17 @@ export class InputService {
         required: true,
         order: 6
       }),
+      new InputMultiSelect({
+        key: 'editors',
+        label: 'Editors',
+        idArray: this.getIdArray(data?.editors) || [],
+        required: true,
+        order: 7
+      }),
       new InputCheckbox({
         key: 'is_active',
-        value: data?.is_active,
-        order: 7
+        value: data?.is_active || true,
+        order: 8
       }),
       // new InputHidden({
       //   key: 'img_banner',
@@ -356,20 +363,20 @@ export class InputService {
         label: 'Choose Banner Image',
         value: data?.img_banner.id || this.defaultBannerId,
         options: this.buildImageOptions(),
-        order: 8
+        order: 9
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.img_card.id || this.defaultCardId,
         options: this.buildImageOptions(),
-        order: 8
+        order: 9
       }),
       new InputNumber({
         key: 'sort_order',
         label: 'Sort Order',
         value: data?.sort_order || 1,
-        order: 8
+        order: 9
       })
     ]
 

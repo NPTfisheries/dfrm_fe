@@ -4,10 +4,8 @@ import { Observable } from 'rxjs';
 
 import { InputBase } from 'src/_inputs/input-base';
 import { InputService } from 'src/_services/input.service';
-import { AlertService } from 'src/_services/alert.service';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 import { ListPageComponent } from 'src/app/list-page/list-page.component';
-import { DetailTaskComponent } from 'src/app/detail-page/detail-task/detail-task.component';
 
 @Component({
   selector: 'app-form-container',
@@ -15,7 +13,7 @@ import { DetailTaskComponent } from 'src/app/detail-page/detail-task/detail-task
 })
 export class FormContainerComponent implements OnInit {
 
-  @Input() context!: ListPageComponent |  DetailTaskComponent | undefined;
+  @Input() context!: ListPageComponent |  undefined;
 
   @Input() routeType!: string;  // always provided.
   @Input() data?: any | undefined;
@@ -31,7 +29,6 @@ export class FormContainerComponent implements OnInit {
   constructor(
     private inputService: InputService,
     private activeModal: NgbActiveModal,
-    private alertService: AlertService,
   ) { }
 
   ngOnInit(): void {

@@ -92,7 +92,7 @@ export class ListPageComponent implements OnInit, OnDestroy {
   }
 
   getList() {
-    switch(this.routeType){
+    switch (this.routeType) {
       case 'department':
         this.departmentService.getDepartments().subscribe((departments) => {
           this.data = departments;
@@ -113,11 +113,11 @@ export class ListPageComponent implements OnInit, OnDestroy {
           this.data = projects;
         });
         break;
-        case 'task':
-          this.taskService.getTasks().subscribe((tasks) => {
-            this.data = tasks;
-          });
-          break;
+      case 'task':
+        this.taskService.getTasks().subscribe((tasks) => {
+          this.data = tasks;
+        });
+        break;
       case 'users':
         this.userService.getUsers().subscribe((users) => {
           this.data = users;
@@ -173,7 +173,7 @@ export class ListPageComponent implements OnInit, OnDestroy {
   }
 
   refreshList() {
-    switch(this.routeType){
+    switch (this.routeType) {
       case 'department':
         this.departmentService.refreshDepartments().subscribe((departments) => {
           this.data = departments;
@@ -194,16 +194,21 @@ export class ListPageComponent implements OnInit, OnDestroy {
           this.data = projects;
         });
         break;
+      case 'task':
+        this.taskService.refreshTasks().subscribe((tasks) => {
+          this.data = tasks;
+        });
+        break;
       case 'users':
         this.userService.refreshUsers().subscribe((users) => {
           this.data = users;
         });
         break;
       case 'image':
-          this.imageService.refreshImages().subscribe((images) => {
-            this.data = images;
-          });
-          break;
+        this.imageService.refreshImages().subscribe((images) => {
+          this.data = images;
+        });
+        break;
       default:
         console.log('Did not capture routeType.');
         break;

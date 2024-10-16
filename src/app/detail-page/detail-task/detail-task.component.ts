@@ -12,7 +12,7 @@ import { Division } from 'src/_models/interfaces';
 export class DetailTaskComponent implements OnInit, OnChanges {
 
   @Input() projectId!: number;
-  @Input() division!: Division;
+  @Input() division!: Division | any;
 
   data: any[] = [];
 
