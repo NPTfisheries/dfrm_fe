@@ -12,6 +12,7 @@ import { DepartmentService } from 'src/_services/department.service';
 import { DivisionService } from 'src/_services/division.service';
 import { UserService } from 'src/_services/user.service';
 import { FacilityService } from 'src/_services/facility.service';
+import { TaskService } from 'src/_services/task.service';
 
 @Component({
   selector: 'app-edit-button-renderer',
@@ -34,7 +35,8 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
     private departmentService: DepartmentService,
     private divisionService: DivisionService,
     private userService: UserService,
-    private facilityService: FacilityService
+    private facilityService: FacilityService,
+    private taskService: TaskService
   ) {
     this.permissionGroupSubscription = this.authService.permissionGroup$.subscribe(group => {
       this.permissionGroup = group;
@@ -47,6 +49,11 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
       case 'project':
         this.authService.projectPerms$.subscribe(projectPerms => {
           this.objectPerms = projectPerms;
+        });
+        break;
+      case 'task':
+        this.authService.taskPerms$.subscribe(taskPerms => {
+          this.objectPerms = taskPerms;
         });
         break;
       case 'document':
@@ -67,7 +74,7 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
   }
 
   onEditClick() {
-    // console.log('edit:', this.params.routeType, this.params.value);
+    console.log('edit:', this.params.routeType, this.params.value);
     // console.log(this.params);
 
     const modalRef = this.modalService.open(FormContainerComponent, { size: 'xl' });
@@ -104,6 +111,9 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
       case 'project':
         this.projectService.refreshProjects().subscribe();
         break;
+        case 'task':
+          this.taskService.refreshTasks().subscribe();
+          break;
       case 'users':
         this.userService.refreshUsers().subscribe();
         break;

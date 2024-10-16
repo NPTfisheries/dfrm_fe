@@ -25,10 +25,7 @@ export class AuthService {
 
     private projectPermsSubject = new BehaviorSubject<object>([]);
     public projectPerms$ = this.projectPermsSubject.asObservable();
-
-    private subprojectPermsSubject = new BehaviorSubject<object>([]);
-    public subprojectPerms$ = this.subprojectPermsSubject.asObservable();
-    
+  
     private taskPermsSubject = new BehaviorSubject<object>([]);
     public taskPerms$ = this.taskPermsSubject.asObservable();
 
@@ -66,7 +63,6 @@ export class AuthService {
 
                     this.permissionGroupSubject.next(response.groups[0])
                     this.projectPermsSubject.next(response.project_objects);
-                    this.subprojectPermsSubject.next(response.subproject_objects);
                     this.taskPermsSubject.next(response.task_objects);
                     this.imagePermsSubject.next(response.image_objects);
                     this.documentPermsSubject.next(response.document_objects);
@@ -83,7 +79,6 @@ export class AuthService {
 
         this.permissionGroupSubject.next('Guest')
         this.projectPermsSubject.next([]);
-        this.subprojectPermsSubject.next([]);
         this.taskPermsSubject.next([]);
         this.imagePermsSubject.next([]);
         this.documentPermsSubject.next([]);
@@ -106,7 +101,6 @@ export class AuthService {
             map((response: any) => {
                 // console.log("REFRESH PERMS:", response);
                 this.projectPermsSubject.next(response.project_objects);
-                this.subprojectPermsSubject.next(response.subproject_objects);
                 this.taskPermsSubject.next(response.task_objects);
                 this.imagePermsSubject.next(response.image_objects);
                 this.documentPermsSubject.next(response.document_objects);

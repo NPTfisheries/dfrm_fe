@@ -248,9 +248,8 @@ function taskColDefs(routeType: string, context: any) {
             headerName: 'Project'
         },
         {
-            field: 'supervisor',
-            headerName: 'Supervisor',
-            valueGetter: getStaffNames
+            field: 'supervisor.full_name',
+            headerName: 'Supervisor'
         },
         // sort order?
         {
@@ -262,7 +261,7 @@ function taskColDefs(routeType: string, context: any) {
         },
         {
             headerName: 'View',
-            field: 'slug',
+            field: 'project.slug',
             cellRenderer: LinkButtonRendererComponent,
             cellRendererParams: {},
             ...buttonProps
@@ -272,7 +271,7 @@ function taskColDefs(routeType: string, context: any) {
     if (projectleaderAccess(context.permissionGroup)) {
         columns.push({
             headerName: 'Edit',
-            field: 'slug',
+            field: 'id',
             cellRenderer: EditButtonRendererComponent,
             cellRendererParams: {
                 routeType: routeType,
@@ -565,3 +564,12 @@ function getAuthorNames(params: any) {
     }
     return '';
 }
+
+// ..  or editors
+// function getEditorNames(params: any) {
+//     if (params.data.editors && Array.isArray(params.data.editors)) {
+//         const editorNames = params.data.editors.map((editor: any) => editor.full_name);
+//         return editorNames.join('; ');
+//     }
+//     return '';
+// }
