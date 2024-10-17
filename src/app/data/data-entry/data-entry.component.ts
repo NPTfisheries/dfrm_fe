@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GridApi, ColDef, SelectionOptions, SelectionColumnDef } from 'ag-grid-community';
 import { ActivityService } from 'src/_services/activity.service';
 import { TaskService } from 'src/_services/task.service';
+import { LookUpService } from 'src/_services/lookup.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Activity } from 'src/_models/interfaces';
 
@@ -18,13 +19,15 @@ export class DataEntryComponent implements OnInit {
     header: {},
     detail: {}
   };
+  task_types!: any[];
+  selectedTaskType = undefined;
+  disableTaskType: boolean = false;
   tasks!: any[]; // Task[]
   headerFields: any[] | undefined;
   detailData: any[] = [{}]; // This will represent the rows in your AG Grid
-  btnStyle = { 'float': 'right', 'margin-right': '30px' }
+  // btnStyle = { 'float': 'right', 'margin-right': '30px' }
 
   activityForm: FormGroup;
-
   private gridApi!: GridApi;
   colDefs: ColDef[] | undefined;
   defaultColDef: ColDef = {
@@ -46,6 +49,7 @@ export class DataEntryComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private lookUpService: LookUpService,
     private activityService: ActivityService,
     private taskService: TaskService,
   ) {
@@ -57,9 +61,8 @@ export class DataEntryComponent implements OnInit {
     });
   }
 
-
   ngOnInit(): void {
-    this.taskService.getTasks().subscribe(tasks => this.tasks = tasks);
+    this.lookUpService.getLookUpsByObjectType('Task').subscribe(task_types => this.task_types = task_types);
 
     // Sync form changes with activity
     this.activityForm.valueChanges.subscribe(value => {
@@ -72,9 +75,7 @@ export class DataEntryComponent implements OnInit {
     params.api.sizeColumnsToFit();
   }
 
-  addRow() {
-    this.gridApi.applyTransaction({ add: [{}] });
-  }
+  addRow() { this.gridApi.applyTransaction({ add: [{}] }); }
 
   removeSelectedRows() {
     const selectedRows = this.gridApi.getSelectedRows();
@@ -82,16 +83,12 @@ export class DataEntryComponent implements OnInit {
     this.gridApi.applyTransaction({ remove: selectedRows });
   }
 
-  taskChange(value: any) {
-    console.log('taskChange value:', value);
-    if (value === undefined) {
-      this.colDefs = undefined;
-      this.headerFields = undefined;
-      this.activityForm.get('task')?.enable(); // task input returns task_type
-      this.activityForm.get('task')?.setValue(null);
-    } else {
+  taskTypeChange(value: any) { // value = task_type{}
+    console.log('taskTypeChange value:', value);
+    if (value != undefined) {
       // Fetch fields based on selected task type
-      this.activityService.getFields(value.task_type.id).subscribe(fields => {
+      this.taskService.getTasks().subscribe(tasks => this.tasks = tasks.filter((task: any) => task?.task_type?.id === value.id));
+      this.activityService.getFields(value.id).subscribe(fields => {
         // Filter header and detail fields
         this.headerFields = fields.filter(field => field.field_for === 'header');
         this.colDefs = fields.filter(field => field.field_for === 'detail');
@@ -102,9 +99,8 @@ export class DataEntryComponent implements OnInit {
           headerGroup.addControl(field.field, this.fb.control(null, field.required ? Validators.required : null));
         });
       });
-      
-      this.activityForm.get('task')?.setValue(value.id);
-      this.activityForm.get('task')?.disable();
+
+      this.disableTaskType = true;
     }
   }
 
@@ -133,23 +129,22 @@ export class DataEntryComponent implements OnInit {
   submit() {
     console.log('Activity Submitted!');
     // if (this.isGridValid()) {
-      console.log('Grid data valid')
-      this.captureGridData();
-      console.log(this.activity);
-      // this.activityService.saveActivity(this.activity).subscribe();
-      // this.activityService.refreshActivities().subscribe();
+    console.log('Grid data valid')
+    this.captureGridData();
+    console.log(this.activity);
+    // this.activityService.saveActivity(this.activity).subscribe();
+    // this.activityService.refreshActivities().subscribe();
     // } else {
     //   console.log('Grid invalid')
     // }
   }
 
   resetForm() {
+    this.selectedTaskType = undefined;
+    this.disableTaskType = false;
     this.colDefs = undefined;
     this.headerFields = undefined;
-    for (let field of ['task', 'project', 'date']) {   // this probably wrong.
-      this.activityForm.get(field)?.reset()
-    }
-    this.activityForm.get('task')?.enable()
+    this.activityForm.reset();
     this.detailData = [{}];
   }
 

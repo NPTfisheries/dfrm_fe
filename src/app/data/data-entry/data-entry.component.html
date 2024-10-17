@@ -1,15 +1,27 @@
 <div class="container my-5">
     <h1 class="dfrm-page-title text-center">CDMS Data Entry</h1>
-    <form [formGroup]="activityForm">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-6 offset-1">
+            <ng-select [(ngModel)]="selectedTaskType" [items]="task_types" bindLabel="name" bindValue="id"
+                [readonly]="disableTaskType" [id]="'task_types'" [placeholder]="'Select Data Type'"
+                (change)="taskTypeChange($event)" [ngClass]="'my-2'">
+            </ng-select>
+        </div>
+        <div class="col-2">
+            <app-button [label]="'Reset Form'" (click)="resetForm()"></app-button>
+        </div>
+    </div>
+    <h2 class="divider gradient-hr"></h2>
+
+    <form *ngIf="headerFields" [formGroup]="activityForm">
         <app-button [label]="'print'" (click)="print()"></app-button>
-        <app-button [label]="'RESET FORM'" (click)="resetForm()" [style]="btnStyle"></app-button>
         <div class="row d-flex justify-content-between align-items-center">
-            <div class="col-6 offset-3">
-                <ng-select [formControlName]="'task'" [items]="tasks" bindLabel="name" bindValue="task.name" [id]="'task'"
-                    [required]="true" [placeholder]="'Select Task'" (change)="taskChange($event)" [ngClass]="'my-2'">
+            <div class="col-md-6 offset-3">
+                <ng-select [formControlName]="'task'" [items]="tasks" bindLabel="name" bindValue="id" [id]="'task'"
+                    [required]="true" [placeholder]="'Select Task'" [ngClass]="'my-2'">
                 </ng-select>
             </div>
-            <div class='d-flex flex-wrap row row-cols-4' *ngIf="headerFields" formGroupName='header'>
+            <div class='d-flex flex-wrap row row-cols-4' formGroupName='header'>
                 <div *ngFor="let header of headerFields">
                     <div class="col-md-12 d-flex">
                         <div class="col-md-4 d-flex align-items-center">
@@ -67,8 +79,7 @@
             <br>
             <div class="row align-items-center">
                 <div class="col-3 offset-1">
-                    <app-button [label]="'Submit Activity'" (click)="submit()" [style]="btnStyle"
-                        [disabled]="false"></app-button>
+                    <app-button [label]="'Submit Activity'" (click)="submit()" [disabled]="false"></app-button>
                 </div>
             </div>
         </div>
