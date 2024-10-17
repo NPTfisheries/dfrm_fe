@@ -59,7 +59,7 @@ export class DataEntryComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.taskService.getTasks().subscribe(tasks => this.tasks = tasks); // project doesnt come with Task currently 10/01/24
+    this.taskService.getTasks().subscribe(tasks => this.tasks = tasks);
 
     // Sync form changes with activity
     this.activityForm.valueChanges.subscribe(value => {
@@ -88,6 +88,7 @@ export class DataEntryComponent implements OnInit {
       this.colDefs = undefined;
       this.headerFields = undefined;
       this.activityForm.get('task')?.enable(); // task input returns task_type
+      this.activityForm.get('task')?.setValue(null);
     } else {
       // Fetch fields based on selected task type
       this.activityService.getFields(value.task_type.id).subscribe(fields => {
@@ -102,6 +103,7 @@ export class DataEntryComponent implements OnInit {
         });
       });
       
+      this.activityForm.get('task')?.setValue(value.id);
       this.activityForm.get('task')?.disable();
     }
   }
@@ -130,14 +132,15 @@ export class DataEntryComponent implements OnInit {
 
   submit() {
     console.log('Activity Submitted!');
-    if (this.isGridValid()) {
+    // if (this.isGridValid()) {
       console.log('Grid data valid')
       this.captureGridData();
-      this.activityService.saveActivity(this.activity).subscribe();
-      this.activityService.refreshActivities().subscribe();
-    } else {
-      console.log('Grid invalid')
-    }
+      console.log(this.activity);
+      // this.activityService.saveActivity(this.activity).subscribe();
+      // this.activityService.refreshActivities().subscribe();
+    // } else {
+    //   console.log('Grid invalid')
+    // }
   }
 
   resetForm() {

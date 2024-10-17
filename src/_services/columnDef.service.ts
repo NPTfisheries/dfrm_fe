@@ -258,14 +258,16 @@ function taskColDefs(routeType: string, context: any) {
             cellRenderer: BooleanRendererComponent,
             cellRendererParams: {},
             ...isActiveProps
-        },
-        {
-            headerName: 'View',
-            field: 'project.slug',
-            cellRenderer: LinkButtonRendererComponent,
-            cellRendererParams: {},
-            ...buttonProps
-        }
+        }//,
+        // {
+        //     headerName: 'View',
+        //     field: 'project.slug',
+        //     cellRenderer: LinkButtonRendererComponent,
+        //     cellRendererParams: {
+        //         routeType: routeType
+        //     },
+        //     ...buttonProps
+        // }
     ];
 
     if (projectleaderAccess(context.permissionGroup)) {
