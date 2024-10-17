@@ -23,6 +23,8 @@ export class DataEntryComponent implements OnInit {
   selectedTaskType = undefined;
   disableTaskType: boolean = false;
   tasks!: any[]; // Task[]
+  locations!: any[];
+  instruments!: any[];
   headerFields: any[] | undefined;
   detailData: any[] = [{}]; // This will represent the rows in your AG Grid
   // btnStyle = { 'float': 'right', 'margin-right': '30px' }
@@ -55,7 +57,8 @@ export class DataEntryComponent implements OnInit {
   ) {
     this.activityForm = this.fb.group({
       task: [null], // task should have project, protocol, contract
-      // location: null,
+      location: [null],
+      instrument: [null],
       header: fb.group({}),
       date: [null]
     });
