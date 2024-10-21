@@ -14,7 +14,10 @@ export class DetailTaskComponent implements OnInit, OnChanges {
   @Input() projectId!: number;
   @Input() division!: Division | any;
 
-  data: any[] = [];
+  buildImageUrl = buildImageUrl;
+
+  tasks: any[] = [];
+  imageUrl: string | undefined;
 
   constructor(
     private taskService: TaskService,
@@ -32,7 +35,7 @@ export class DetailTaskComponent implements OnInit, OnChanges {
 
   getList() {
     this.taskService.getTasksByProjectId(this.projectId).subscribe(tasks => {
-      this.data = tasks.filter((task: Task) => {
+      this.tasks = tasks.filter((task: Task) => {
         if (typeof task.division === 'object' && 'id' in task.division) {
           return task.division.id === this.division.id;
         } else if (typeof task.division === 'number') {
@@ -41,10 +44,6 @@ export class DetailTaskComponent implements OnInit, OnChanges {
         return false;
       });
     });
-  }
-
-  getImageUrl(imagePath: string) {
-    return buildImageUrl(imagePath);
   }
 
 }
