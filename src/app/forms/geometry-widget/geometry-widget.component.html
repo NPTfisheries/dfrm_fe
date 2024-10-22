@@ -2,8 +2,8 @@
     <ng-select [ngClass]="'col-md-2'" [(ngModel)]="selectedGeom" [items]="['Point', 'LineString', 'Polygon']"
         (change)="updateGeom($event)" >
     </ng-select>
-        <button (click)="reset()">Reset</button>
-        <button (click)="removeLastPoint()" >Remove Last Point</button>
-        <button (click)="print()">Print</button>
+        <!-- <button (click)="reset($event)">Reset</button> -->
+        <button (click)="removeLastPoint($event)" >Remove Last Point</button>
+        <button (click)="print($event)">Print</button>
 </div>
 <div id="ol-map" class="openlayers-map" ></div>

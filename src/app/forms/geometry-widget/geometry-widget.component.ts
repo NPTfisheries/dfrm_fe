@@ -38,17 +38,7 @@ export class GeometryWidgetComponent implements OnInit {
   feature = Collection<Feature>;
 
   ngOnInit(): void {
-    console.log('GeometryWidget:', this.input.value);
-    if (this.input.value !== '') {
-      const format = new GeoJSON();
-      const geometry = format.readGeometry(this.input.value, {
-        featureProjection: 'EPSG:4326'
-      });
-      const feature = new Feature({geometry});
-      this.source.addFeature(feature);
-
-      // this.map.getView().fit(geometry.getExtent(), {size: this.map.getSize(), maxZoom: 18});
-    }
+    // console.log('GeometryWidget:', this.input.value);
 
     this.map = new Map({
       view: new View({
@@ -60,6 +50,19 @@ export class GeometryWidgetComponent implements OnInit {
       controls: defaultControls().extend([this.scalebar]),
       target: 'ol-map'
     });
+
+    // edit
+    if (this.input.value && this.input.value !== '') {
+      this.selectedGeom = Object(this.input.value).type;
+      const format = new GeoJSON();
+      const geometry = format.readGeometry(this.input.value, {
+        featureProjection: 'EPSG:4326'
+      });
+      const feature = new Feature({geometry});
+      this.source.addFeature(feature);
+
+      this.map.getView().fit(geometry.getExtent(), {size: this.map.getSize(), maxZoom: 14});
+    }
   }
 
   updateGeom(value: any) {
@@ -90,16 +93,19 @@ export class GeometryWidgetComponent implements OnInit {
 
   }
 
-  removeLastPoint() {
+  removeLastPoint(event: any) {
+    event.preventDefault();
     this.draw.removeLastPoint();
   }
 
-  reset() {
-    this.source.clear();
-    this.map.addInteraction(this.draw);
-  }
+  // reset(event: any) {
+  //   event.preventDefault();
+  //   this.source.clear();
+  //   this.map.addInteraction(this.draw);
+  // }
 
-  print() {
+  print(event: any) {
+    event.preventDefault();
     console.log(this.draw);
     // console.log(this.draw.sketchCoords_);
     // we only allow a single feature to be drawn. always [0]
