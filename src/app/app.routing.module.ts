@@ -44,6 +44,8 @@ const routes: Routes = [
     { path: 'task', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'users', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'image', component: ListPageComponent, canActivate: [AuthGuard]},
+    { path: 'location', component: ListPageComponent, canActivate: [AuthGuard]},
+
 
     // wildcard for detail pages
     { path: 'department/:slug', component: DetailPageComponent},

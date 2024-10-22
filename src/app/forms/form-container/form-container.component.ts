@@ -13,7 +13,7 @@ import { ListPageComponent } from 'src/app/list-page/list-page.component';
 })
 export class FormContainerComponent implements OnInit {
 
-  @Input() context!: ListPageComponent |  undefined;
+  @Input() context!: ListPageComponent | undefined;
 
   @Input() routeType!: string;  // always provided.
   @Input() data?: any | undefined;
@@ -66,6 +66,8 @@ export class FormContainerComponent implements OnInit {
         return this.inputService.getDocumentInputs(data);
       case 'facility':
         return this.inputService.getFacilityInputs(data);
+      case 'location':
+        return this.inputService.getLocationInputs(data);
       default:
         return
     }

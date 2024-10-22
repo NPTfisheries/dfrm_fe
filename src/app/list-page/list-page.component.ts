@@ -22,6 +22,7 @@ import { DepartmentService } from 'src/_services/department.service';
 import { FacilityService } from 'src/_services/facility.service';
 import { ImageService } from 'src/_services/image.service';
 import { TaskService } from 'src/_services/task.service';
+import { LocationService } from 'src/_services/location.service';
 
 @Component({
   selector: 'app-list-page',
@@ -67,7 +68,8 @@ export class ListPageComponent implements OnInit, OnDestroy {
     private divisionService: DivisionService,
     private departmentService: DepartmentService,
     private facilityService: FacilityService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private locationService: LocationService
   ) {
     this.permissionGroupSubscription = this.authService.permissionGroup$.subscribe(group => {
       this.permissionGroup = group;
@@ -126,6 +128,11 @@ export class ListPageComponent implements OnInit, OnDestroy {
       case 'image':
         this.imageService.getImages().subscribe((images) => {
           this.data = images;
+        });
+        break;
+      case 'location':
+        this.locationService.getLocations().subscribe((locations) => {
+          this.data = locations;
         });
         break;
       default:
@@ -207,6 +214,11 @@ export class ListPageComponent implements OnInit, OnDestroy {
       case 'image':
         this.imageService.refreshImages().subscribe((images) => {
           this.data = images;
+        });
+        break;
+      case 'location':
+        this.locationService.refreshLocations().subscribe((locations) => {
+          this.data = locations;
         });
         break;
       default:

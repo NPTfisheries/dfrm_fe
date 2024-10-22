@@ -587,6 +587,52 @@ export class InputService {
     return of(inputs.sort((a, b) => a.order - b.order));
   }
 
+  getLocationInputs(data?: any) {
+    // console.log('Getting Location Inputs...');
+    const inputs: InputBase<string>[] = [
+      new InputText({
+        key: 'name',
+        label: 'Name',
+        value: data?.properties?.name || '',
+        required: true,
+        order: 1
+      }),
+      new InputRichText({
+        key: 'description',
+        label: 'Description',
+        value: data?.properties?.description || '',
+        required: true,
+        order: 2
+      }),
+      // new InputNumber({
+      //   key: 'elevation',
+      //   label: 'Elevation',
+      //   value: data?.properties?.elevation || undefined,
+      //   order: 3
+      // }),
+      // new InputNumber({
+      //   key: 'river_kilometer',
+      //   label: 'RKM',
+      //   value: data?.properties?.river_kilometer || undefined,
+      //   order: 4
+      // }),
+      new InputCoordinates({
+        key: 'geometry',
+        label: 'Geometry',
+        value: data?.geometry.coordinates || '',
+        // required: true, // ????
+        order: 5
+      })//,
+      // new InputCheckbox({
+      //   key: 'is_active',
+      //   value: data?.is_active,
+      //   order: 6
+      // }),
+    ]
+
+    return of(inputs.sort((a, b) => a.order - b.order));
+  }
+
   // helpers
   private buildImageOptions() {
     let options: { key: string, value: string }[] = [];

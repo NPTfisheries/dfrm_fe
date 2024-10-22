@@ -3,6 +3,7 @@ import { GridApi, ColDef, SelectionOptions, SelectionColumnDef } from 'ag-grid-c
 import { ActivityService } from 'src/_services/activity.service';
 import { TaskService } from 'src/_services/task.service';
 import { LookUpService } from 'src/_services/lookup.service';
+import { LocationService } from 'src/_services/location.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Activity } from 'src/_models/interfaces';
 
@@ -54,6 +55,7 @@ export class DataEntryComponent implements OnInit {
     private lookUpService: LookUpService,
     private activityService: ActivityService,
     private taskService: TaskService,
+    private locationService: LocationService
   ) {
     this.activityForm = this.fb.group({
       task: [null], // task should have project, protocol, contract
@@ -66,6 +68,11 @@ export class DataEntryComponent implements OnInit {
 
   ngOnInit(): void {
     this.lookUpService.getLookUpsByObjectType('Task').subscribe(task_types => this.task_types = task_types);
+
+    this.locationService.getLocations().subscribe(locations => {
+      console.log('locations!', locations);
+      this.locations = locations;
+    });
 
     // Sync form changes with activity
     this.activityForm.valueChanges.subscribe(value => {
@@ -87,7 +94,7 @@ export class DataEntryComponent implements OnInit {
   }
 
   taskTypeChange(value: any) { // value = task_type{}
-    console.log('taskTypeChange value:', value);
+    // console.log('taskTypeChange value:', value);
     if (value != undefined) {
       // Fetch fields based on selected task type
       this.taskService.getTasks().subscribe(tasks => this.tasks = tasks.filter((task: any) => task?.task_type?.id === value.id));

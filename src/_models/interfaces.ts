@@ -150,6 +150,16 @@ export interface Document {
     keywords?: string;
 }
 
+export interface Location {
+    id?: number;
+    name?: string;
+    description?: string;
+    // elevation?: number;
+    // river_kilometer?: number;
+    geometry?: Geometry;
+    
+}
+
 // cdms filtering
 export interface filterOptions {
     options?: Object[];
