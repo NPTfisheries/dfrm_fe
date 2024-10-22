@@ -619,7 +619,7 @@ export class InputService {
       new InputCoordinates({
         key: 'geometry',
         label: 'Geometry',
-        value: data?.geometry.coordinates || '',
+        value: data?.geometry || '',
         // required: true, // ????
         order: 5
       })//,

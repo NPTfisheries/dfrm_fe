@@ -62,6 +62,7 @@ import { FilterComponent } from './data/_filters/filter/filter.component';
 import { DataEntryComponent } from './data/data-entry/data-entry.component';
 import { ActivitiesPageComponent } from './data/activities-page/activities-page.component';
 import { ActivityViewComponent } from './data/activity-view/activity-view.component';
+import { GeometryWidgetComponent } from './forms/geometry-widget/geometry-widget.component';
 
 @NgModule({
   declarations: [
@@ -114,6 +115,7 @@ import { ActivityViewComponent } from './data/activity-view/activity-view.compon
     DataEntryComponent,
     ActivitiesPageComponent,
     ActivityViewComponent,
+    GeometryWidgetComponent,
   ],
   imports: [
     BrowserModule,

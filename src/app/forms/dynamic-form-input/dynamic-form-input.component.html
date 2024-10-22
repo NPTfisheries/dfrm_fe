@@ -11,7 +11,8 @@
         </div>
 
         <!-- GEOMETRY -->
-        <app-geometry-input *ngSwitchCase="'coordinates'" [input]="input" [form]="form"></app-geometry-input>
+        <!-- <app-geometry-input *ngSwitchCase="'coordinates'" [input]="input" [form]="form"></app-geometry-input> -->
+        <app-geometry-widget *ngSwitchCase="'coordinates'" [input]="input" [form]="form"></app-geometry-widget>
 
         <!-- FILE -->
         <input *ngSwitchCase="'file'" type="file" [formControlName]="input.key" [value]="input.key" [id]="input.key"

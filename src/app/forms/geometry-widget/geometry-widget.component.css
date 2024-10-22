@@ -1,0 +1,5 @@
+.openlayers-map {
+    width: 100%;
+    height: 600px;
+    flex-grow: 1;
+}

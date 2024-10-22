@@ -33,7 +33,7 @@ export class DynamicFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('submitang');
+    console.log('submitang', this.form.value);
     // dealing with empty arrays - cannot present data as [""] which is the default value for no selection in html.
     if (Array.isArray(this.form.value.staff) && this.form.value.staff.length === 1 && this.form.value.staff[0] === "") {
       this.form.value.staff=[];

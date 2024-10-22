@@ -96,7 +96,7 @@ export class DataEntryComponent implements OnInit {
   taskTypeChange(value: any) { // value = task_type{}
     // console.log('taskTypeChange value:', value);
     if (value != undefined) {
-      // Fetch fields based on selected task type
+      // Fetch fields based on selected task (i.e., task type)
       this.taskService.getTasks().subscribe(tasks => this.tasks = tasks.filter((task: any) => task?.task_type?.id === value.id));
       this.activityService.getFields(value.id).subscribe(fields => {
         // Filter header and detail fields
