@@ -160,6 +160,16 @@ export interface Location {
     
 }
 
+export interface Instrument {
+    id?: number;
+    description?: string;
+    name?: string;
+    instrument_type?: number;
+    model?: string;
+    serial_number?: string;
+    manufacturer?: string;
+}
+
 // cdms filtering
 export interface filterOptions {
     options?: Object[];

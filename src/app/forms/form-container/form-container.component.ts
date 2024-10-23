@@ -68,6 +68,8 @@ export class FormContainerComponent implements OnInit {
         return this.inputService.getFacilityInputs(data);
       case 'location':
         return this.inputService.getLocationInputs(data);
+      case 'instrument':
+        return this.inputService.getInstrumentInputs(data);
       default:
         return
     }

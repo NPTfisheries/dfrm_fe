@@ -6,6 +6,7 @@ import { LookUpService } from 'src/_services/lookup.service';
 import { LocationService } from 'src/_services/location.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Activity } from 'src/_models/interfaces';
+import { InstrumentService } from 'src/_services/instrument.service';
 
 @Component({
   selector: 'app-data-entry',
@@ -55,14 +56,15 @@ export class DataEntryComponent implements OnInit {
     private lookUpService: LookUpService,
     private activityService: ActivityService,
     private taskService: TaskService,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private instrumentService: InstrumentService
   ) {
     this.activityForm = this.fb.group({
       task: [null], // task should have project, protocol, contract
       location: [null],
       instrument: [null],
       header: fb.group({}),
-      date: [null]
+      // date: [null] // date should be part of the header - activity will record dates for itself more for effDt.
     });
   }
 
@@ -72,6 +74,11 @@ export class DataEntryComponent implements OnInit {
     this.locationService.getLocations().subscribe(locations => {
       console.log('locations!', locations);
       this.locations = locations;
+    });
+    
+    this.instrumentService.getInstruments().subscribe(instruments => {
+      console.log('instruments!', instruments);
+      this.instruments = instruments;
     });
 
     // Sync form changes with activity
@@ -138,15 +145,15 @@ export class DataEntryComponent implements OnInit {
 
   submit() {
     console.log('Activity Submitted!');
-    // if (this.isGridValid()) {
-    console.log('Grid data valid')
-    this.captureGridData();
-    console.log(this.activity);
-    // this.activityService.saveActivity(this.activity).subscribe();
-    // this.activityService.refreshActivities().subscribe();
-    // } else {
-    //   console.log('Grid invalid')
-    // }
+    if (this.isGridValid()) {
+      console.log('Grid data valid')
+      this.captureGridData();
+      console.log(this.activity);
+      this.activityService.saveActivity(this.activity).subscribe();
+      this.activityService.refreshActivities().subscribe();
+    } else {
+      console.log('Grid invalid')
+    }
   }
 
   resetForm() {

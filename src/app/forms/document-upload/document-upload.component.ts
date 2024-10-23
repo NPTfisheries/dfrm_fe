@@ -8,6 +8,7 @@ import { AuthService } from 'src/_services/auth.service';
 import { DocumentsComponent } from '../../documents/documents.component';
 import { UserService } from 'src/_services/user.service';
 import { DocumentService } from 'src/_services/document.service';
+import { LookUp } from 'src/_models/interfaces';
 
 @Component({
   selector: 'app-document-upload',
@@ -23,13 +24,7 @@ export class DocumentUploadComponent implements OnInit {
   selectedDocument: File | undefined;
 
   // options for select menus
-  document_types = [
-    { key: "Annual Report", value: "Annual Report" },
-    { key: "Journal Article", value: "Journal Article" },
-    { key: "Technical Memo", value: "Technical Memo" },
-    { key: "Presentation Slides", value: "Presentation Slides" },
-    { key: 'Other', value: 'Other' }
-  ]
+  document_types: any[] = [];
   author_choices!: any;
 
   constructor(
@@ -43,6 +38,13 @@ export class DocumentUploadComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.documentService.getDocumentTypes().subscribe(document_types => {
+      let options: { key: any, value: any }[] = []; // should be strings, but did any to get rid of error.
+      for (let type of document_types) {
+        options.push({ key: type.id, value: type.name })
+      }
+      this.document_types = options;
+    })
 
     this.author_choices = this.buildEmployeeOptions();
 
@@ -62,7 +64,7 @@ export class DocumentUploadComponent implements OnInit {
 
   onFileChange(selectedFile: File | undefined): void {
     this.selectedDocument = selectedFile;
-  } 
+  }
 
   onSubmit(): void {
     if (this.form.invalid || !this.selectedDocument) {

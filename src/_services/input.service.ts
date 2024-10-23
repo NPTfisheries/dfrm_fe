@@ -633,14 +633,65 @@ export class InputService {
     return of(inputs.sort((a, b) => a.order - b.order));
   }
 
+  getInstrumentInputs(data?: any) {
+    // console.log('Getting Instrument Inputs...');
+    const inputs: InputBase<string>[] = [
+      new InputText({
+        key: 'name',
+        label: 'Name',
+        value: data?.name || '',
+        required: true,
+        order: 1
+      }),
+      new InputRichText({
+        key: 'description',
+        label: 'Description',
+        value: data?.description || '',
+        order: 2
+      }),
+      new InputSelect({
+        key: 'instrument_type',
+        label: 'Type',
+        value: data?.instrument_type || '',
+        required: true,
+        order: 1
+      }),
+      new InputText({
+        key: 'model',
+        label: 'Model',
+        value: data?.model || '',
+        order: 1
+      }),
+      new InputText({
+        key: 'serial_number',
+        label: 'Serial Number',
+        value: data?.serial_number || '',
+        order: 1
+      }),
+      new InputText({
+        key: 'manufacturer',
+        label: 'Manufacturer',
+        value: data?.manufacturer || '',
+        order: 1
+      })//,
+      // new InputCheckbox({
+      //   key: 'is_active',
+      //   value: data?.is_active,
+      //   order: 6
+      // }),
+    ]
+
+    return of(inputs.sort((a, b) => a.order - b.order));
+  }
+
   // helpers
   private buildImageOptions() {
     let options: { key: string, value: string }[] = [];
 
     this.imageService.getImages().subscribe(images => {
-        for (let image of images) {
-          options.push({ key: String(image.id), value: String(image.name) })
-        }
+      for (let image of images) {
+        options.push({ key: String(image.id), value: String(image.name) })
+      }
 
     });
     return options;

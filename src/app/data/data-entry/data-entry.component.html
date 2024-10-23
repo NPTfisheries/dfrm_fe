@@ -33,7 +33,7 @@
                     <label [attr.for]="'location'" class="form-label">Location</label>
                 </div>
                 <div class="col-md-8">
-                    <ng-select [formControlName]="'location'" [items]="locations" bindLabel="name" bindValue="id"
+                    <ng-select [formControlName]="'location'" [items]="locations" bindLabel="properties.name" bindValue="id"
                         [id]="'location'" [required]="true" [placeholder]="'Select Location'" [ngClass]="'my-2'">
                     </ng-select>
                 </div>
@@ -43,7 +43,7 @@
                     <label [attr.for]="'instrument'" class="form-label">Instrument</label>
                 </div>
                 <div class="col-md-8">
-                    <ng-select [formControlName]="'instrument'" [items]="instruments" bindLabel="name"
+                    <ng-select [formControlName]="'instrument'" [items]="instruments" bindLabel="display_name"
                         bindValue="id" [id]="'instrument'" [required]="true" [placeholder]="'Select Instrument'"
                         [ngClass]="'my-2'">
                     </ng-select>

@@ -33,6 +33,8 @@ export function getColumnDefs(routeType: string, context: any) {
             return facilityColDefs(routeType, context);
         case 'location':
             return locationColDefs(routeType, context);
+        case 'instrument':
+            return instrumentColDefs(routeType, context);
         default:
             let emptylist: ColDef[] = []
             return emptylist;
@@ -560,6 +562,52 @@ function locationColDefs(routeType: string, context: any) {
         {
             field: 'geometry.type',
             headerName: 'Type'
+        },
+    ];
+
+    if (projectleaderAccess(context.permissionGroup)) {
+        columns.push({
+            headerName: 'Edit',
+            field: 'id',
+            cellRenderer: EditButtonRendererComponent,
+            cellRendererParams: {
+                routeType: routeType,
+                context: context
+            },
+            ...buttonProps
+        });
+    }
+
+    return columns;
+
+}
+
+function instrumentColDefs(routeType: string, context: any) {
+    const columns: (ColDef | ColGroupDef)[] = [
+        {
+            field: 'name',
+            headerName: 'Name',
+            tooltipField: 'description'
+        },
+        {
+            field: 'description',
+            headerName: 'Description'
+        },
+        {
+            field: 'type',
+            headerName: 'Type'
+        },
+        {
+            field: 'model',
+            headerName: 'Model'
+        },
+        {
+            field: 'serial_number',
+            headerName: 'Serial Number'
+        },
+        {
+            field: 'manufacturer',
+            headerName: 'Manufacturer'
         },
     ];
 
