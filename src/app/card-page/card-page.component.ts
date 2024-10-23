@@ -28,10 +28,10 @@ export class CardPageComponent implements OnInit {
   }
 
   getList() {
-    this.routeType = getRouteType(this.route).slice(0, -1);  // remove trailing 's'
+    this.routeType = getRouteType(this.route);
 
     switch (this.routeType) {
-      case 'division':
+      case 'divisions':
         this.divisionService.getDivisions().subscribe(divisions => {
           var active_divisions: any = [];
           divisions.filter(division => {
@@ -43,7 +43,7 @@ export class CardPageComponent implements OnInit {
           this.department = departments[0];
         });
         break;
-      case 'project':
+      case 'projects':
         this.projectService.getProjects().subscribe(projects => {
           var active_projects: any = [];
           projects.filter(project => {

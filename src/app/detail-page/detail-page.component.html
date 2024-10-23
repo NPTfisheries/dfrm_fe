@@ -10,7 +10,7 @@
     <!-- <pre><p>{{ data?.description }}</p></pre> -->
     <app-html-sanitizer [html]="data?.description"></app-html-sanitizer>
 </div>
-<h2 *ngIf="routeType === 'project'" class="bar-title">Project Leaders</h2>
+<h2 *ngIf="routeType === 'projects'" class="bar-title">Project Leaders</h2>
 <div class="employee-bar">
     <app-employee-card *ngIf="data?.manager && data?.manager.email !== ''" [data]="data?.manager"></app-employee-card>
     <app-employee-card *ngIf="data?.deputy && data?.deputy.email !== ''" [data]="data?.deputy"></app-employee-card>
@@ -21,9 +21,9 @@
     </div>
 </div>
 
-<h2 *ngIf="routeType === 'project'" class="divider gradient-hr"></h2>
+<h2 *ngIf="routeType === 'projects'" class="divider gradient-hr"></h2>
 
-<div *ngIf="routeType === 'project'">
+<div *ngIf="routeType === 'projects'">
     <div *ngFor="let division of divisions">
         <app-detail-task [projectId]="data?.id" [division]="division"></app-detail-task>
     </div>
