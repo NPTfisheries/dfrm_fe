@@ -8,7 +8,7 @@ import { LookUp } from 'src/_models/interfaces';
     providedIn: 'root'
 })
 export class DocumentService {
-    private readonly endpoint = 'document';
+    private readonly endpoint = 'documents';
 
     constructor(private dataService: DataService<Document>) { }
 

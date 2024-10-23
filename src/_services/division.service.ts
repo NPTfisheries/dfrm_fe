@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class DivisionService {
-  private readonly endpoint = 'division';
+  private readonly endpoint = 'divisions';
 
   constructor(
     private dataService: DataService<Division>,

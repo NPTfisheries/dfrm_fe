@@ -7,7 +7,7 @@ import { Image } from 'src/_models/interfaces';
     providedIn: 'root'
 })
 export class ImageService {
-    private readonly endpoint = 'image';
+    private readonly endpoint = 'images';
 
     constructor(private dataService: DataService<Image>) { }
 

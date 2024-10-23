@@ -82,7 +82,7 @@ export class InputService {
       }),
       new InputCheckbox({
         key: 'is_active',
-        value: data?.is_active,
+        value: data?.is_active !== undefined ? data.is_active : true,
         order: 8
       }),
       new InputImage({
@@ -155,7 +155,7 @@ export class InputService {
       }),
       new InputCheckbox({
         key: 'is_active',
-        value: data?.is_active,
+        value: data?.is_active !== undefined ? data.is_active : true,
         order: 8
       }),
       new InputHidden({
@@ -209,7 +209,7 @@ export class InputService {
       }),
       new InputCheckbox({
         key: 'is_active',
-        value: data?.is_active,
+        value: data?.is_active !== undefined ? data.is_active : true,
         order: 8
       }),
       new InputHidden({
@@ -278,7 +278,7 @@ export class InputService {
       }),
       new InputCheckbox({
         key: 'is_active',
-        value: data?.is_active || true,
+        value: data?.is_active !== undefined ? data.is_active : true,
         order: 8
       }),
       // new InputHidden({
@@ -579,7 +579,7 @@ export class InputService {
       }),
       new InputCheckbox({
         key: 'is_active',
-        value: data?.properties?.is_active,
+        value: data?.properties?.is_active !== undefined ? data.properties.is_active : true,
         order: 17
       }),
     ]
@@ -625,7 +625,7 @@ export class InputService {
       })//,
       // new InputCheckbox({
       //   key: 'is_active',
-      //   value: data?.is_active,
+      //   value: data?.is_active !== undefined ? data.is_active : true,
       //   order: 6
       // }),
     ]
@@ -676,7 +676,7 @@ export class InputService {
       })//,
       // new InputCheckbox({
       //   key: 'is_active',
-      //   value: data?.is_active,
+      //   value: data?.is_active !== undefined ? data.is_active : true,
       //   order: 6
       // }),
     ]

@@ -7,7 +7,7 @@ import { Task, LookUp } from 'src/_models/interfaces';
     providedIn: 'root'
 })
 export class TaskService {
-    private readonly endpoint = 'task';
+    private readonly endpoint = 'tasks';
 
     constructor(private dataService: DataService<Task>) { }
 

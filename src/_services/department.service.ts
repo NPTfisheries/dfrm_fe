@@ -7,7 +7,7 @@ import { Department } from 'src/_models/interfaces';
   providedIn: 'root'
 })
 export class DepartmentService {
-  private readonly endpoint = 'department';
+  private readonly endpoint = 'departments';
 
   constructor(private dataService: DataService<Department>) { }
 

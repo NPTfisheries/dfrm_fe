@@ -13,7 +13,7 @@ export class InstrumentService {
     constructor(private dataService: DataService<Instrument>) { }
 
     getInstruments(): Observable<Instrument[]> {
-        console.log('getLocations');
+        console.log('getInstruments');
         return this.dataService.getData(this.endpoint);
     }
 

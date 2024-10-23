@@ -7,7 +7,7 @@ import { LookUp } from 'src/_models/interfaces';
     providedIn: 'root'
 })
 export class LookUpService {
-    private readonly endpoint = 'lookup';
+    private readonly endpoint = 'lookups';
 
     constructor(private dataService: DataService<LookUp>) { }
 

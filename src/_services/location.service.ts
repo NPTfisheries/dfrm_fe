@@ -7,7 +7,7 @@ import { Location } from 'src/_models/interfaces';
     providedIn: 'root'
 })
 export class LocationService {
-    private readonly endpoint = 'location';
+    private readonly endpoint = 'locations';
 
     constructor(private dataService: DataService<Location>) { }
 

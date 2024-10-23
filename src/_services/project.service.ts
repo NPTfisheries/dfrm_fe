@@ -7,7 +7,7 @@ import { Project } from 'src/_models/interfaces';
     providedIn: 'root'
 })
 export class ProjectService {
-    private readonly endpoint = 'project';
+    private readonly endpoint = 'projects';
 
     constructor(private dataService: DataService<Project>) { }
 
