@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
+import { LookUpService } from './lookup.service';
 import { Observable, map } from 'rxjs';
 import { Task, LookUp } from 'src/_models/interfaces';
 
@@ -9,7 +10,10 @@ import { Task, LookUp } from 'src/_models/interfaces';
 export class TaskService {
     private readonly endpoint = 'tasks';
 
-    constructor(private dataService: DataService<Task>) { }
+    constructor(
+        private dataService: DataService<Task>,
+        private lookupService: LookUpService
+    ) { }
 
     getTasks(): Observable<Task[]> {
         console.log('getTasks');
@@ -17,13 +21,11 @@ export class TaskService {
     }
 
     getTaskTypes(): Observable<LookUp[]> {
-        return this.dataService.getData('lookup').pipe(
-            map((lookups: LookUp[]) => lookups.filter(lookup => lookup.object_type == 'Task'))
-        );
+        return this.lookupService.getLookUpsByObjectType('Task')
     }
 
     // FIXX X X X --- show_on_website or whatever
-    getTasksByProjectId(project_id: number | string): Observable<Task[] > {
+    getTasksByProjectId(project_id: number | string): Observable<Task[]> {
         console.log(`getTasksByProjectId: ${project_id}`);
         return this.getTasks().pipe(
             map((tasks: any[]) => tasks.filter(task => task.project.id == String(project_id) && task.is_active))

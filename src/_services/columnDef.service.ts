@@ -15,25 +15,25 @@ import { BooleanRendererComponent } from "src/_renderers/boolean-renderer/boolea
 export function getColumnDefs(routeType: string, context: any) {
     // console.log('GetColumnDefs routeType:', routeType);
     switch (routeType) {
-        case 'department':
+        case 'departments':
             return departmentColDefs(routeType, context);
-        case 'division':
+        case 'divisions':
             return divisionColDefs(routeType, context);
-        case 'project':
+        case 'projects':
             return projectColDefs(routeType, context);
-        case 'task':
+        case 'tasks':
             return taskColDefs(routeType, context);
         case 'users':
             return usersColDefs(routeType, context);
-        case 'image':
+        case 'images':
             return imageColDefs(routeType, context);
-        case 'document':
+        case 'documents':
             return documentColDefs(routeType, context);
-        case 'facility':
+        case 'facilities':
             return facilityColDefs(routeType, context);
-        case 'location':
+        case 'locations':
             return locationColDefs(routeType, context);
-        case 'instrument':
+        case 'instruments':
             return instrumentColDefs(routeType, context);
         default:
             let emptylist: ColDef[] = []

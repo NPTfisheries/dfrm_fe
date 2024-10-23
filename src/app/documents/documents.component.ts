@@ -22,7 +22,7 @@ export class DocumentsComponent implements OnInit {
 
   private gridApi: GridApi | undefined;
   professionalAccess=professionalAccess;
-  routeType: string = 'document';
+  routeType: string = 'documents';
 
   defaultColDef: ColDef = {
     sortable: true,

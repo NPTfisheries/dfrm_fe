@@ -30,29 +30,29 @@ const routes: Routes = [
     { path: 'data-entry', component: DataEntryComponent, canActivate: [AuthGuard]},
     
 
-    // plural is for the public-facing card pages
+    // public-facing card pages
     { path: 'departments', component: CardPageComponent },
     { path: 'divisions', component: CardPageComponent },
     { path: 'projects', component: CardPageComponent },
     { path: 'facilities', component: FacilitiesComponent },
     
-    // singular is for the list page, similar to django return for API
-    { path: 'department', component: ListPageComponent, canActivate: [AuthGuard]},
-    { path: 'division', component: ListPageComponent, canActivate: [AuthGuard]},
-    { path: 'facility', component: ListPageComponent, canActivate: [AuthGuard]},
-    { path: 'project', component: ListPageComponent, canActivate: [AuthGuard]},
-    { path: 'task', component: ListPageComponent, canActivate: [AuthGuard]},
-    { path: 'users', component: ListPageComponent, canActivate: [AuthGuard]},
-    { path: 'image', component: ListPageComponent, canActivate: [AuthGuard]},
-    { path: 'location', component: ListPageComponent, canActivate: [AuthGuard]},
-    { path: 'instrument', component: ListPageComponent, canActivate: [AuthGuard]},
+    // 
+    { path: 'department-list', component: ListPageComponent, canActivate: [AuthGuard]},
+    { path: 'division-list', component: ListPageComponent, canActivate: [AuthGuard]},
+    { path: 'facility-list', component: ListPageComponent, canActivate: [AuthGuard]},
+    { path: 'project-list', component: ListPageComponent, canActivate: [AuthGuard]},
+    { path: 'task-list', component: ListPageComponent, canActivate: [AuthGuard]},
+    { path: 'user-list', component: ListPageComponent, canActivate: [AuthGuard]},
+    { path: 'image-list', component: ListPageComponent, canActivate: [AuthGuard]},
+    { path: 'location-list', component: ListPageComponent, canActivate: [AuthGuard]},
+    { path: 'instrument-list', component: ListPageComponent, canActivate: [AuthGuard]},
 
 
     // wildcard for detail pages
-    { path: 'department/:slug', component: DetailPageComponent},
-    { path: 'division/:slug', component: DivisionDetailComponent},
-    { path: 'facility/:slug', component: FacilityDetailComponent},
-    { path: 'project/:slug', component: DetailPageComponent},
+    { path: 'departments/:slug', component: DetailPageComponent},
+    { path: 'divisions/:slug', component: DivisionDetailComponent},
+    { path: 'facilities/:slug', component: FacilityDetailComponent},
+    { path: 'projects/:slug', component: DetailPageComponent},
     { path: 'users/:id', component: ProfileComponent},
 
 ];

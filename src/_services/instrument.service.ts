@@ -3,6 +3,7 @@ import { DataService } from './data.service';
 import { map, Observable } from 'rxjs';
 import { Instrument } from 'src/_models/interfaces';
 import { LookUp } from 'src/_models/interfaces';
+import { LookUpService } from './lookup.service';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +11,10 @@ import { LookUp } from 'src/_models/interfaces';
 export class InstrumentService {
     private readonly endpoint = 'instruments';
 
-    constructor(private dataService: DataService<Instrument>) { }
+    constructor(
+        private dataService: DataService<Instrument>,
+        private lookupService: LookUpService,
+    ) { }
 
     getInstruments(): Observable<Instrument[]> {
         console.log('getInstruments');
@@ -26,10 +30,9 @@ export class InstrumentService {
 
     getInstrumentTypes(): Observable<LookUp[]> {
         console.log('getInstrumentTypes');
-        return this.dataService.getData('lookup').pipe(
-            map((lookups: LookUp[]) => lookups.filter(lookup => lookup.object_type == 'Instrument'))
-        );
+        return this.lookupService.getLookUpsByObjectType('Instrument')
     }
+
 
     refreshInstruments(): Observable<Instrument[]> {
         return this.dataService.refreshData(this.endpoint);

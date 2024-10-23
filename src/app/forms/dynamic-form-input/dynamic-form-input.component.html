@@ -74,7 +74,11 @@
         </div>
 
         <!-- SELECT -->
-        <app-select-input *ngSwitchCase="'select'" [input]="input" [form]="form"></app-select-input>
+        <!-- <app-select-input *ngSwitchCase="'select'" [input]="input" [form]="form"></app-select-input> -->
+        <select *ngSwitchCase="'select'" [formControlName]="input.key" [id]="input.key" class="form-control form-select"
+            [required]="input.required"> 
+            <option *ngFor="let option of input.options" [value]="option.key">{{option.value}}</option>
+        </select>
 
         <!-- SELECT MULTIPLE -->
         <app-select-input *ngSwitchCase="'multi-select'" [input]="input" [form]="form"></app-select-input>

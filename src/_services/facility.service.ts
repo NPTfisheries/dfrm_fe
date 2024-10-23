@@ -3,6 +3,7 @@ import { DataService } from './data.service';
 import { map, Observable } from 'rxjs';
 import { Facility } from 'src/_models/interfaces';
 import { LookUp } from 'src/_models/interfaces';
+import { LookUpService } from './lookup.service';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +11,10 @@ import { LookUp } from 'src/_models/interfaces';
 export class FacilityService {
     private readonly endpoint = 'facilities';
 
-    constructor(private dataService: DataService<Facility>) { }
+    constructor(
+        private dataService: DataService<Facility>,
+        private lookupService: LookUpService
+    ) { }
 
     getFacilities(): Observable<Facility[]> {
         console.log('getFacilities');
@@ -18,9 +22,7 @@ export class FacilityService {
     }
 
     getFacilityTypes(): Observable<LookUp[]> {
-        return this.dataService.getData('lookup').pipe(
-            map((lookups: LookUp[]) => lookups.filter(lookup => lookup.object_type == 'Facility'))
-        );
+        return this.lookupService.getLookUpsByObjectType('Facility')
     }
 
     getFacilityBySlug(slug: string): Observable<Facility | undefined> {

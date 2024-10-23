@@ -3,6 +3,7 @@ import { DataService } from './data.service';
 import { Observable, map } from 'rxjs';
 import { Document } from 'src/_models/interfaces';
 import { LookUp } from 'src/_models/interfaces';
+import { LookUpService } from './lookup.service';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +11,10 @@ import { LookUp } from 'src/_models/interfaces';
 export class DocumentService {
     private readonly endpoint = 'documents';
 
-    constructor(private dataService: DataService<Document>) { }
+    constructor(
+        private dataService: DataService<Document>,
+        private lookupService: LookUpService
+    ) { }
 
     getDocuments(): Observable<Document[]> {
         console.log('getDocuments');
@@ -30,11 +34,15 @@ export class DocumentService {
         );
     }
 
+    // getDocumentTypes(): Observable<LookUp[]> {
+    //     console.log('getDocumentTypes');
+    //     return this.dataService.getData('lookup').pipe(
+    //         map((lookups: LookUp[]) => lookups.filter(lookup => lookup.object_type == 'Document'))
+    //     );
+    // }
+
     getDocumentTypes(): Observable<LookUp[]> {
-        console.log('getDocumentTypes');
-        return this.dataService.getData('lookup').pipe(
-            map((lookups: LookUp[]) => lookups.filter(lookup => lookup.object_type == 'Document'))
-        );
+        return this.lookupService.getLookUpsByObjectType('Document')
     }
 
     refreshDocuments(): Observable<Document[]> {

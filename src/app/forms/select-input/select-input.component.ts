@@ -45,51 +45,57 @@ export class SelectInputComponent implements OnInit {
 
     // if (this.input.key === 'project_leader') { console.log('XXX', this.input) };
 
-    switch (this.input.key) {
-      case 'facility_type':
-        this.options$ = this.facilityService.getFacilityTypes().subscribe(ftypes => {
-          this.labels = 'name';
-          this.options$ = ftypes;
-        });
-        break;
-      case 'task_type':
-        this.options$ = this.taskService.getTaskTypes().subscribe(ttypes => {
-          this.labels = 'name';
-          this.options$ = ttypes;
-        });
-        break;
-      case 'instrument_type':
-        this.options$ = this.instrumentService.getInstrumentTypes().subscribe(itypes => {
-          this.labels = 'name';
-          this.options$ = itypes;
-        });
-        break;
-      case 'division':
-      case 'division_id':
-        this.options$ = this.divisionService.getDivisions().subscribe(divisions => {
-          this.labels = 'name';
-          this.options$ = divisions;
-        });
-        break;
-      case 'project':
-      case 'project_id':
-        this.options$ = this.projectService.getProjects().subscribe(projects => {
-          this.labels = 'name';
-          this.options$ = projects;
-        });
-        break;
-      case 'document_type':
-        this.documentService.getDocumentTypes().subscribe(dtypes => {
-          this.labels = 'document_type';
-          this.options$ = dtypes;
-        })
-        break;
-      default:
-        this.userService.getUsers().subscribe(users => {
-          this.options$ = users;
-          this.labels = 'full_name';
-        })
-    }
+    this.options$ = this.input.options;
+    console.log(this.input.key, 'selectcomponent', this.input.value, this.input.options);
+    // console.log(this.input.key);
+    // switch (this.input.key) {
+    //   case 'facility_type':
+    //     this.options$ = this.facilityService.getFacilityTypes().subscribe(ftypes => {
+    //       console.log('facility_types:', ftypes);
+    //       this.labels = 'name';
+    //       this.options$ = ftypes;
+    //     });
+    //     break;
+    //   case 'task_type':
+    //     this.options$ = this.taskService.getTaskTypes().subscribe(ttypes => {
+    //       console.log('task_types:', ttypes);
+    //       this.labels = 'name';
+    //       this.options$ = ttypes;
+    //     });
+    //     break;
+    //   case 'instrument_type':
+    //     this.options$ = this.instrumentService.getInstrumentTypes().subscribe(itypes => {
+    //       console.log('instrument_types:', itypes);
+    //       this.labels = 'name';
+    //       this.options$ = itypes;
+    //     });
+    //     break;
+    //   case 'division':
+    //     this.options$ = this.divisionService.getDivisions().subscribe(divisions => {
+    //       this.labels = 'name';
+    //       this.options$ = divisions;
+    //     });
+    //     break;
+    //   case 'project':
+    //     this.options$ = this.projectService.getProjects().subscribe(projects => {
+    //       this.labels = 'name';
+    //       this.options$ = projects;
+    //     });
+    //     break;
+    //   case 'document_type':
+    //     this.documentService.getDocumentTypes().subscribe(dtypes => {
+    //       console.log('document_types:', dtypes);
+    //       this.labels = 'document_type';
+    //       this.options$ = dtypes;
+    //     })
+    //     break;
+    //   default:
+    //     this.userService.getUsers().subscribe(users => {
+    //       console.log('user select', users);
+    //       this.options$ = users;
+    //       this.labels = 'full_name';
+    //     })
+    // }
 
   }
 

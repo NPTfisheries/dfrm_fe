@@ -35,7 +35,7 @@ export class DynamicFormInputComponent implements OnInit {
   }
 
 
-  // ONLY for Image Preview
+  // ONLY for Image Preview  **************************************************
   onSelectChange(event: any): void {
     if (this.input.controlType !== 'image') { return; }
     // console.log(event.target.options[event.target.selectedIndex].text);
@@ -51,5 +51,6 @@ export class DynamicFormInputComponent implements OnInit {
     });
 
   }
+  // **************************************************************************
 
 }
