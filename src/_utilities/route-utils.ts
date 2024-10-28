@@ -20,6 +20,8 @@ export function getRouteType(route: ActivatedRoute) {
         case 'images':
         case 'image-list':
             return 'images';
+        case 'profile':
+            return 'profile';
         case 'project':
         case 'projects':
         case 'project-list':
@@ -31,7 +33,7 @@ export function getRouteType(route: ActivatedRoute) {
         case 'user':
         case 'users':
         case 'user-list':
-            return 'instruments';
+            return 'users';
         case 'document':
         case 'documents':
         case 'document-list':

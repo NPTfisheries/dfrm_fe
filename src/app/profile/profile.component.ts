@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   formatPhone = formatPhone;
-  data!: User | null | undefined; 
+  data!: User | null | undefined;
   imageUrl!: string | undefined;
   routeType!: string;
 
@@ -45,16 +45,16 @@ export class ProfileComponent implements OnInit {
     // profile component is for user info and also user profile.
     this.routeType = getRouteType(this.route);
 
-    if (this.routeType === 'users') {
-      const slug = getRouteSlug(this.route);  // user slug is actually 'id'
-      this.userService.getUserById(slug).subscribe(user => {
-        this.data = user;
-        this.imageUrl = buildImageUrl(user?.profile?.photo);
-      });
-    } else {
+    if (this.routeType === 'profile') {
       this.userService.getCurrentUser().subscribe(currentUser => {
         this.data = currentUser;
         this.imageUrl = buildImageUrl(currentUser?.profile?.photo);
+      });
+    } else {
+      const slug = getRouteSlug(this.route);  // user slug is actually 'id'  .../users/15
+      this.userService.getUserById(slug).subscribe(user => {
+        this.data = user;
+        this.imageUrl = buildImageUrl(user?.profile?.photo);
       });
     }
   }
@@ -64,8 +64,8 @@ export class ProfileComponent implements OnInit {
     modalRef.componentInstance.context = this;
     modalRef.componentInstance.routeType = 'profile';
     modalRef.componentInstance.data = this.data?.profile; // pass profile info to modal
-    modalRef.componentInstance.addOrEdit ='edit';
-    
+    modalRef.componentInstance.addOrEdit = 'edit';
+
     modalRef.result.then(() => {
       this.refreshProfile();
     });
@@ -93,10 +93,10 @@ export class ProfileComponent implements OnInit {
   }
 
   refreshProfile() {
-      this.userService.refreshCurrentUser().subscribe(currentUser => {
-        this.data = currentUser;
-        this.imageUrl = buildImageUrl(currentUser?.profile?.photo);
-      });  
+    this.userService.refreshCurrentUser().subscribe(currentUser => {
+      this.data = currentUser;
+      this.imageUrl = buildImageUrl(currentUser?.profile?.photo);
+    });
   }
 
 }

@@ -50,26 +50,26 @@ export class FormContainerComponent implements OnInit {
 
   getInputs(routeType: any, data?: any) {
     switch (routeType) {
-      case 'department':
+      case 'departments':
         return this.inputService.getDepartmentInputs(data);
-      case 'division':
+      case 'divisions':
         return this.inputService.getDivisionInputs(data);
-      case 'project':
-        return this.inputService.getProjectInputs(data);
-      case 'task':
-        return this.inputService.getTaskInputs(data);
+      case 'documents':
+        return this.inputService.getDocumentInputs(data);
+      case 'facilities':
+        return this.inputService.getFacilityInputs(data);
+      case 'images':
+        return this.inputService.getImageInputs(data);
+      case 'instruments':
+        return this.inputService.getInstrumentInputs(data);
+      case 'locations':
+        return this.inputService.getLocationInputs(data);
       case 'profile':
         return this.inputService.getProfileInputs(data);
-      case 'image':
-        return this.inputService.getImageInputs(data);
-      case 'document':
-        return this.inputService.getDocumentInputs(data);
-      case 'facility':
-        return this.inputService.getFacilityInputs(data);
-      case 'location':
-        return this.inputService.getLocationInputs(data);
-      case 'instrument':
-        return this.inputService.getInstrumentInputs(data);
+      case 'projects':
+        return this.inputService.getProjectInputs(data);
+      case 'tasks':
+        return this.inputService.getTaskInputs(data);
       default:
         return
     }

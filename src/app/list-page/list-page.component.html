@@ -1,14 +1,14 @@
 <div class="container" style="padding-top: 75px; padding-bottom: 50px;">
     <h2 class="text-center">{{ routeType | titlecase }} List</h2>
 
+    <app-button *ngIf="routeType === 'divisions' && managerAccess(permissionGroup)" [label]="'Add New ' + routeType | titlecase" (click)="add(routeType)" [style]="btnStyle"></app-button>
+    <app-button *ngIf="routeType === 'facilities' && managerAccess(permissionGroup)" [label]="'Add Facility'" (click)="add(routeType)" [style]="btnStyle"></app-button>
+    <app-button *ngIf="routeType === 'images' && projectleaderAccess(permissionGroup)" [label]="'Upload Image'" (click)="uploadImage()" [style]="btnStyle"></app-button>
+    <app-button *ngIf="routeType === 'instruments' && projectleaderAccess(permissionGroup)" [label]="'Add New ' + routeType | titlecase" (click)="add(routeType)" [style]="btnStyle"></app-button>
+    <app-button *ngIf="routeType === 'locations' && projectleaderAccess(permissionGroup)" [label]="'Add New ' + routeType | titlecase" (click)="add(routeType)" [style]="btnStyle"></app-button>
+    <app-button *ngIf="routeType === 'projects' && projectleaderAccess(permissionGroup)" [label]="'Add New ' + routeType | titlecase" (click)="add(routeType)" [style]="btnStyle"></app-button>
+    <app-button *ngIf="routeType === 'tasks' && projectleaderAccess(permissionGroup)" [label]="'Add New ' + routeType | titlecase" (click)="add(routeType)" [style]="btnStyle"></app-button>
     <app-button *ngIf="routeType === 'users' && adminAccess(permissionGroup)" [label]="'Register User'" (click)="registerUser()" [style]="btnStyle"></app-button>
-    <app-button *ngIf="routeType === 'division' && managerAccess(permissionGroup)" [label]="'Add New ' + routeType | titlecase" (click)="add(routeType)" [style]="btnStyle"></app-button>
-    <app-button *ngIf="routeType === 'facility' && managerAccess(permissionGroup)" [label]="'Add Facility'" (click)="add(routeType)" [style]="btnStyle"></app-button>
-    <app-button *ngIf="routeType === 'image' && projectleaderAccess(permissionGroup)" [label]="'Upload Image'" (click)="uploadImage()" [style]="btnStyle"></app-button>
-    <app-button *ngIf="routeType === 'instrument' && projectleaderAccess(permissionGroup)" [label]="'Add New ' + routeType | titlecase" (click)="add(routeType)" [style]="btnStyle"></app-button>
-    <app-button *ngIf="routeType === 'location' && projectleaderAccess(permissionGroup)" [label]="'Add New ' + routeType | titlecase" (click)="add(routeType)" [style]="btnStyle"></app-button>
-    <app-button *ngIf="routeType === 'project' && projectleaderAccess(permissionGroup)" [label]="'Add New ' + routeType | titlecase" (click)="add(routeType)" [style]="btnStyle"></app-button>
-    <app-button *ngIf="routeType === 'task' && projectleaderAccess(permissionGroup)" [label]="'Add New ' + routeType | titlecase" (click)="add(routeType)" [style]="btnStyle"></app-button>
 
     <br><br><br>
     <div class="container" style="height: 600px;">

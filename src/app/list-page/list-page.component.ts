@@ -188,27 +188,27 @@ export class ListPageComponent implements OnInit, OnDestroy {
 
   refreshList() {
     switch (this.routeType) {
-      case 'department':
+      case 'departments':
         this.departmentService.refreshDepartments().subscribe((departments) => {
           this.data = departments;
         });
         break;
-      case 'facility':
+      case 'facilities':
         this.facilityService.refreshFacilities().subscribe((facilities) => {
           this.data = facilities;
         });
         break;
-      case 'division':
+      case 'divisions':
         this.divisionService.refreshDivisions().subscribe((divisions) => {
           this.data = divisions;
         });
         break;
-      case 'project':
+      case 'projects':
         this.projectService.refreshProjects().subscribe((projects) => {
           this.data = projects;
         });
         break;
-      case 'task':
+      case 'tasks':
         this.taskService.refreshTasks().subscribe((tasks) => {
           this.data = tasks;
         });
@@ -218,17 +218,17 @@ export class ListPageComponent implements OnInit, OnDestroy {
           this.data = users;
         });
         break;
-      case 'image':
+      case 'images':
         this.imageService.refreshImages().subscribe((images) => {
           this.data = images;
         });
         break;
-      case 'instrument':
+      case 'instruments':
         this.instrumentService.refreshInstruments().subscribe((instruments) => {
           this.data = instruments;
         });
         break;
-      case 'location':
+      case 'locations':
         this.locationService.refreshLocations().subscribe((locations) => {
           this.data = locations;
         });
