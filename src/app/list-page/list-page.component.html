@@ -1,11 +1,13 @@
 <div class="container" style="padding-top: 75px; padding-bottom: 50px;">
-    <h2 class="text-center">{{ routeType | titlecase }} List</h2>
+    <h2 class="text-center">{{ routeType | titlecase }}</h2>
 
     <app-button *ngIf="['divisions', 'facilities'].includes(routeType)  && managerAccess(permissionGroup)"
         [label]="'Add New'" (click)="add(routeType)" [style]="btnStyle"></app-button>
     <app-button
-        *ngIf="['images', 'instruments', 'locations', 'projects', 'tasks'].includes(routeType) && projectleaderAccess(permissionGroup)"
-        [label]="'Add New'" (click)="uploadImage()" [style]="btnStyle"></app-button>
+        *ngIf="['instruments', 'locations', 'projects', 'tasks'].includes(routeType) && projectleaderAccess(permissionGroup)"
+        [label]="'Add New'" (click)="add(routeType)" [style]="btnStyle"></app-button>
+    <app-button *ngIf="routeType === 'images' && projectleaderAccess(permissionGroup)" [label]="'Add New'"
+        (click)="uploadImage()" [style]="btnStyle"></app-button>
     <app-button *ngIf="routeType === 'users' && adminAccess(permissionGroup)" [label]="'Register User'"
         (click)="registerUser()" [style]="btnStyle"></app-button>
 

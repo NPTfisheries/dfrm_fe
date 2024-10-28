@@ -92,16 +92,16 @@ function departmentColDefs(routeType: string, context: any) {
             cellRendererParams: {},
             ...isActiveProps
         },
-        {
-            headerName: 'View',
-            cellRenderer: LinkButtonRendererComponent,
-            cellRendererParams: {},
-            valueGetter: function (params: any) {
-                // this will return all departments to the divisions list, but while it's only Fisheries that is fine.
-                return '/divisions';
-            },
-            ...buttonProps
-        }
+        // {
+        //     headerName: 'View',
+        //     cellRenderer: LinkButtonRendererComponent,
+        //     cellRendererParams: {},
+        //     valueGetter: function (params: any) {
+        //         // this will return all departments to the divisions list, but while it's only Fisheries that is fine.
+        //         return '/divisions';
+        //     },
+        //     ...buttonProps
+        // }
     ];
 
     if (managerAccess(context.permissionGroup)) {

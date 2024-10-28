@@ -10,16 +10,11 @@ import { InputMultiSelect } from 'src/_inputs/input-multi-select';
 import { InputHidden } from 'src/_inputs/input-hidden';
 import { InputImage } from 'src/_inputs/input-image';
 import { InputPhone } from 'src/_inputs/input-phone';
-import { InputFile } from 'src/_inputs/input-file';
 import { InputCoordinates } from 'src/_inputs/input-geometry';
 import { InputNumber } from 'src/_inputs/input-number';
 import { InputRichText } from 'src/_inputs/input-richtext';
 import { InputCheckbox } from 'src/_inputs/input-checkbox';
-import { LookUpService } from './lookup.service';
 import { ImageService } from './image.service';
-import { UserService } from './user.service';
-import { ProjectService } from './project.service';
-import { DivisionService } from './division.service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -29,11 +24,7 @@ export class InputService {
   defaultCardId = 4;
 
   constructor(
-    private divisionService: DivisionService,
-    private lookUpService: LookUpService,
     private imageService: ImageService,
-    private projectService: ProjectService,
-    private userService: UserService
   ) { }
 
   // TODO: get from a remote source of question metadata
@@ -58,7 +49,7 @@ export class InputService {
         key: 'manager',
         label: 'Manager',
         value: data?.manager.id || '',
-        options: this.buildUserOptions(),
+        selectType: 'users',
         required: true,
         order: 3
       }),
@@ -66,21 +57,21 @@ export class InputService {
         key: 'deputy',
         label: 'Deputy',
         value: data?.deputy.id || '',
-        options: this.buildUserOptions(),
+        selectType: 'users',
         order: 4
       }),
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
         value: data?.assistant.id || '',
-        options: this.buildUserOptions(),
+        selectType: 'users',
         order: 5
       }),
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
         idArray: this.getIdArray(data?.staff) || [],
-        options: this.buildUserOptions(),
+        selectType: 'users',
         order: 6
       }),
       new InputImage({
@@ -128,7 +119,7 @@ export class InputService {
         key: 'manager',
         label: 'Manager',
         value: data?.manager.id || '',
-        options: this.buildUserOptions(),
+        selectType: 'users',
         required: true,
         order: 3
       }),
@@ -136,21 +127,21 @@ export class InputService {
         key: 'deputy',
         label: 'Deputy',
         value: data?.deputy.id || '',
-        options: this.buildUserOptions(),
+        selectType: 'users',
         order: 4
       }),
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
         value: data?.assistant.id || '',
-        options: this.buildUserOptions(),
+        selectType: 'users',
         order: 5
       }),
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
         idArray: this.getIdArray(data?.staff) || [],
-        options: this.buildUserOptions(),
+        selectType: 'users',
         order: 6
       }),
       new InputImage({
@@ -204,7 +195,7 @@ export class InputService {
         key: 'project_leader',
         label: 'Project Leaders',
         idArray: this.getIdArray(data?.project_leader) || [],
-        options: this.buildUserOptions(),
+        selectType: 'users',
         required: true,
         order: 3
       }),
@@ -252,7 +243,7 @@ export class InputService {
         key: 'task_type',
         label: 'Task Type',
         value: data?.task_type?.id || '',
-        options: this.getObjects('Task'),
+        selectType: 'task types',
         required: true,
         order: 2
       }),
@@ -267,7 +258,7 @@ export class InputService {
         key: 'project',
         label: 'Project',
         value: data?.project?.id || [],
-        options: this.buildProjectOptions(),
+        selectType: 'projects',
         required: true,
         order: 4
       }),
@@ -275,7 +266,7 @@ export class InputService {
         key: 'division',
         label: 'Division',
         value: data?.division?.id || [],
-        options: this.buildDivisionOptions(),
+        selectType: 'divisions',
         required: true,
         order: 5
       }),
@@ -283,7 +274,7 @@ export class InputService {
         key: 'supervisor',
         label: 'Task Supervisor',
         value: data?.supervisor?.id || [],
-        options: this.buildUserOptions(),
+        selectType: 'users',
         required: true,
         order: 6
       }),
@@ -291,7 +282,7 @@ export class InputService {
         key: 'editors',
         label: 'Editors',
         idArray: this.getIdArray(data?.editors) || [],
-        options: this.buildUserOptions(),
+        selectType: 'users',
         required: true,
         order: 7
       }),
@@ -449,7 +440,7 @@ export class InputService {
         key: 'employee_authors',
         label: 'Employee Authors',
         idArray: this.getIdArray(data?.employee_authors) || [],
-        options: this.buildUserOptions(),
+        selectType: 'users',
         order: 4
       }),
       new InputDate({
@@ -463,7 +454,7 @@ export class InputService {
         key: 'document_type',
         label: 'Document Type',
         value: data?.document_type || '',
-        options: this.getObjects('Document'),
+        selectType: 'document types',
         required: true,
         order: 6
       }),
@@ -505,7 +496,7 @@ export class InputService {
         key: 'facility_type',
         label: 'Facility Type',
         value: data?.properties?.facility_type?.id || '',
-        options: this.getObjects('Facility'),
+        selectType: 'facility types',
         required: true,
         order: 3
       }),
@@ -513,7 +504,7 @@ export class InputService {
         key: 'manager',
         label: 'Manager',
         value: data?.properties?.manager.id || '',
-        options: this.buildUserOptions(),
+        selectType: 'users',
         required: true,
         order: 4
       }),
@@ -521,21 +512,21 @@ export class InputService {
         key: 'deputy',
         label: 'Deputy',
         value: data?.properties?.deputy.id || '',
-        options: this.buildUserOptions(),
+        selectType: 'users',
         order: 5
       }),
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
         value: data?.properties?.assistant.id || '',
-        options: this.buildUserOptions(),
+        selectType: 'users',
         order: 6
       }),
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
         idArray: this.getIdArray(data?.properties?.staff) || [],
-        options: this.buildUserOptions(),
+        selectType: 'users',
         order: 7
       }),
       new InputImage({
@@ -678,7 +669,7 @@ export class InputService {
         key: 'instrument_type',
         label: 'Type',
         value: data?.instrument_type || '',
-        options: this.getObjects('Instrument'),
+        selectType: 'instrument types',
         required: true,
         order: 1
       }),
@@ -721,57 +712,6 @@ export class InputService {
 
     });
     // console.log('buildImageOptions', options);
-    return options;
-  }
-
-  private buildUserOptions() {
-    let options: { key: string, value: string }[] = [];
-
-    this.userService.getUsers().subscribe(users => {
-      for (let user of users) {
-        options.push({ key: String(user.id), value: String(user.full_name) })
-      }
-
-    });
-    // console.log('buildUserOptions', options);
-    return options;
-  }
-
-  private buildProjectOptions() {
-    let options: { key: string, value: string }[] = [];
-
-    this.projectService.getProjects().subscribe(projects => {
-      for (let project of projects) {
-        options.push({ key: String(project.id), value: String(project.name) })
-      }
-
-    });
-    // console.log('buildProjectOptions', options);
-    return options;
-  }
-
-  private buildDivisionOptions() {
-    let options: { key: string, value: string }[] = [];
-
-    this.divisionService.getDivisions().subscribe(divisions => {
-      for (let division of divisions) {
-        options.push({ key: String(division.id), value: String(division.name) })
-      }
-
-    });
-    // console.log('buildDivisionOptions', options);
-    return options;
-  }
-
-  getObjects(object_type: string) {
-    let options: { key: string, value: string }[] = [];
-
-    this.lookUpService.getLookUpsByObjectType(object_type).subscribe((list: any) => {
-      for (let item of list) {
-        options.push({ key: item.id, value: item.name })
-      }
-    });
-
     return options;
   }
 

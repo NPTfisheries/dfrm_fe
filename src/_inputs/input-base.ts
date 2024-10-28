@@ -8,6 +8,7 @@ export class InputBase<T> {
   controlType: string;
   type: string;
   options: { key: string, value: string }[] | undefined;
+  selectType: string;
 
   // validators https://angular.io/api/forms/Validators#description
   required: boolean;
@@ -28,6 +29,7 @@ export class InputBase<T> {
     controlType?: string;
     type?: string;
     options?: { key: string, value: string }[];
+    selectType?: string;
     // validators
     required?: boolean;
     min?: number;
@@ -47,6 +49,7 @@ export class InputBase<T> {
     this.controlType = options.controlType || '';
     this.type = options.type || '';
     this.options = options.options || [];
+    this.selectType = options.selectType || '';
     // validators
     this.required = !!options.required;
     this.min = options.min || null;

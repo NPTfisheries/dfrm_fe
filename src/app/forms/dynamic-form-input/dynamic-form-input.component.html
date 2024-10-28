@@ -66,21 +66,16 @@
             <app-rich-text-input [input]="input" [form]="form"></app-rich-text-input>
         </div>
 
-        <!-- SELECT -->
-        <select *ngSwitchCase="'select'" [formControlName]="input.key" [id]="input.key" class="form-control form-select"
-            [required]="input.required">
-            <option *ngFor="let option of input.options" [value]="option.key">{{option.value}}</option>
-        </select>
+        <!-- SELECT SINGLE -->
+        <ng-select *ngSwitchCase="'select'" [formControlName]="input.key" [bindLabel]="bind_label" bindValue="id"
+            [items]="items"></ng-select>
 
         <!-- SELECT MULTIPLE -->
-        <select *ngSwitchCase="'multi-select'" [formControlName]="input.key" [id]="input.key"
-            class="form-control form-select" [required]="input.required" [multiple]="true" size='10'>
-            <option *ngFor="let option of input.options" [value]="option.key">{{option.value}}</option>
-        </select>
-        <div *ngSwitchCase="'multi-select'"><small><em>Ctrl+Click to add multiple.</em></small></div>
+        <ng-select *ngSwitchCase="'multi-select'" [formControlName]="input.key" [bindLabel]="bind_label" bindValue="id"
+        [items]="items" [multiple]="true" ></ng-select>
 
         <!-- DATE -->
-        <input *ngSwitchCase="'date'" [type]="input.type" [formControlName]="input.key"
+        <input *ngSwitchCase="'date'" [type]="'date'" [formControlName]="input.key"
             class="form-control form-control-date" [ngClass]="getInputClasses(input)" [required]="input.required"
             [min]="input.min" [max]="input.max" [minlength]="input.minlength" [maxlength]="input.maxlength" />
 

@@ -25,18 +25,20 @@ const routes: Routes = [
     { path: 'documents', component: DocumentsComponent},
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+
+
+    // data
     { path: 'activities', component: ActivitiesPageComponent, canActivate: [AuthGuard]},
     { path: 'activities/:id', component: ActivityViewComponent, canActivate: [AuthGuard]},
     { path: 'data-entry', component: DataEntryComponent, canActivate: [AuthGuard]},
     
 
     // public-facing card pages
-    { path: 'departments', component: CardPageComponent },
     { path: 'divisions', component: CardPageComponent },
     { path: 'projects', component: CardPageComponent },
     { path: 'facilities', component: FacilitiesComponent },
     
-    // 
+    // lists
     { path: 'department-list', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'division-list', component: ListPageComponent, canActivate: [AuthGuard]},
     { path: 'facility-list', component: ListPageComponent, canActivate: [AuthGuard]},
