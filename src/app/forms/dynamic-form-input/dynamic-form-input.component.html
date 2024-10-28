@@ -81,7 +81,12 @@
         </select>
 
         <!-- SELECT MULTIPLE -->
-        <app-select-input *ngSwitchCase="'multi-select'" [input]="input" [form]="form"></app-select-input>
+        <!-- <app-select-input *ngSwitchCase="'multi-select'" [input]="input" [form]="form"></app-select-input> -->
+        <select *ngSwitchCase="'multi-select'" [formControlName]="input.key" [id]="input.key" class="form-control form-select"
+            [required]="input.required" [multiple]="true"> 
+            <option *ngFor="let option of input.options" [value]="option.key">{{option.value}}</option>
+        </select>
+
 
         <!-- DATE -->
         <input *ngSwitchCase="'date'" [type]="input.type" [formControlName]="input.key"

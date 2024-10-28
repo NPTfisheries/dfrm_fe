@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit, Input, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
-import { Event } from '@angular/router';
-import { Validators, Editor, Toolbar } from 'ngx-editor';
+import { Component, OnDestroy, OnInit, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Editor, Toolbar } from 'ngx-editor';
 
 import { InputBase } from 'src/_inputs/input-base';
 
@@ -11,7 +10,6 @@ import { InputBase } from 'src/_inputs/input-base';
   selector: 'app-rich-text-input',
   templateUrl: './rich-text-input.component.html',
   styleUrls: ['./rich-text-input.component.css'],
-  // encapsulation: ViewEncapsulation.None,
 })
 export class RichTextInputComponent implements OnInit, OnDestroy {
   @Input() input!: InputBase<string>;
@@ -25,7 +23,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy {
 
   toolbar: Toolbar = [
     ['bold', 'italic', 'underline'],
-    ['code', 'blockquote', 'link'],
+    ['blockquote', 'link'], // 'code',
     ['ordered_list', 'bullet_list'],
     // [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
     // ['image', 'code'],
@@ -45,13 +43,6 @@ export class RichTextInputComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.editor.destroy();
-  }
-
-  onChange(event: any) {
-    // console.log(event);
-    // console.log(event.target.innerHTML);
-    // console.log(this.editor.view);
-    this.form.get(this.input.key)?.patchValue(event.target.innerHTML);
   }
 
 }
