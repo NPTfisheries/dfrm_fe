@@ -5,7 +5,7 @@
 
         <!-- CHECKBOX (currently only built to use is_active 8/22/24)-->
         <div *ngSwitchCase="'checkbox'" class="form-check">
-            <input type="checkbox" [id]="input.key" [formControlName]="input.key" [value]="input.value" 
+            <input type="checkbox" [id]="input.key" [formControlName]="input.key" [value]="input.value"
                 class="form-check-input" [ngClass]="getInputClasses(input)" [required]="input.required">
             <label class="form-check-label" [for]="input.key"> Display on website?</label>
         </div>
@@ -42,63 +42,61 @@
 
         <!-- NUMBER -->
         <input *ngSwitchCase="'number'" [formControlName]="input.key" [id]="input.key" [type]="input.type"
-            class="form-control" [ngClass]="getInputClasses(input)" [required]="input.required"
-            [min]="input.min" [max]="input.max" [minlength]="input.minlength" [maxlength]="input.maxlength"
-            [pattern]="input.pattern">
+            class="form-control" [ngClass]="getInputClasses(input)" [required]="input.required" [min]="input.min"
+            [max]="input.max" [minlength]="input.minlength" [maxlength]="input.maxlength" [pattern]="input.pattern">
 
         <!-- PHONE -->
         <input *ngSwitchCase="'phone'" [formControlName]="input.key" [id]="input.key" [type]="input.type"
-            class="form-control" [ngClass]="getInputClasses(input)" [required]="input.required"
-            [min]="input.min" [max]="input.max" [minlength]="input.minlength" [maxlength]="input.maxlength"
-            [pattern]="input.pattern">
+            class="form-control" [ngClass]="getInputClasses(input)" [required]="input.required" [min]="input.min"
+            [max]="input.max" [minlength]="input.minlength" [maxlength]="input.maxlength" [pattern]="input.pattern">
 
         <!-- TEXT -->
         <input *ngSwitchCase="'text'" [formControlName]="input.key" [id]="input.key" [type]="input.type"
-            class="form-control" [ngClass]="getInputClasses(input)" [required]="input.required"
-            [min]="input.min" [max]="input.max" [minlength]="input.minlength" [maxlength]="input.maxlength"
-            [pattern]="input.pattern">
+            class="form-control" [ngClass]="getInputClasses(input)" [required]="input.required" [min]="input.min"
+            [max]="input.max" [minlength]="input.minlength" [maxlength]="input.maxlength" [pattern]="input.pattern">
 
         <!-- TEXTAREA -->
         <textarea *ngSwitchCase="'textarea'" rows="5" [formControlName]="input.key" [id]="input.key"
             class="form-control" [ngClass]="getInputClasses(input)" [required]="input.required"
             [minlength]="input.minlength" [maxlength]="input.maxlength"></textarea>
-        
-        <!-- RADIO -->
-        <!-- <input *ngSwitchCase="'radio'"> -->
 
         <!-- RICH TEXT -->
-        <div *ngSwitchCase="'richtext'" > 
+        <div *ngSwitchCase="'richtext'">
             <app-rich-text-input [input]="input" [form]="form"></app-rich-text-input>
         </div>
 
         <!-- SELECT -->
         <select *ngSwitchCase="'select'" [formControlName]="input.key" [id]="input.key" class="form-control form-select"
-            [required]="input.required"> 
+            [required]="input.required">
             <option *ngFor="let option of input.options" [value]="option.key">{{option.value}}</option>
         </select>
 
         <!-- SELECT MULTIPLE -->
-        <select *ngSwitchCase="'multi-select'" [formControlName]="input.key" [id]="input.key" class="form-control form-select"
-            [required]="input.required" [multiple]="true" size = '10'> 
+        <select *ngSwitchCase="'multi-select'" [formControlName]="input.key" [id]="input.key"
+            class="form-control form-select" [required]="input.required" [multiple]="true" size='10'>
             <option *ngFor="let option of input.options" [value]="option.key">{{option.value}}</option>
         </select>
-        <div *ngSwitchCase="'multi-select'"><small><em>Ctrl+Click to add multiple.</em></small></div>        
+        <div *ngSwitchCase="'multi-select'"><small><em>Ctrl+Click to add multiple.</em></small></div>
 
         <!-- DATE -->
         <input *ngSwitchCase="'date'" [type]="input.type" [formControlName]="input.key"
-            class="form-control form-control-date" [ngClass]="getInputClasses(input)"
-            [required]="input.required" [min]="input.min" [max]="input.max" [minlength]="input.minlength"
-            [maxlength]="input.maxlength" />
+            class="form-control form-control-date" [ngClass]="getInputClasses(input)" [required]="input.required"
+            [min]="input.min" [max]="input.max" [minlength]="input.minlength" [maxlength]="input.maxlength" />
 
     </div>
 
-    <div class="errorMessage validationErrorMessage" *ngIf="form.get(input.key)?.hasError('required')">{{input.label}} is required</div>
-    <div class="errorMessage validationErrorMessage" *ngIf="form.get(input.key)?.hasError('min')">{{input.label}} must be {{input.min}} or
+    <div class="errorMessage validationErrorMessage" *ngIf="form.get(input.key)?.hasError('required')">{{input.label}}
+        is required</div>
+    <div class="errorMessage validationErrorMessage" *ngIf="form.get(input.key)?.hasError('min')">{{input.label}} must
+        be {{input.min}} or
         greater.</div>
-    <div class="errorMessage validationErrorMessage" *ngIf="form.get(input.key)?.hasError('max')">{{input.label}} must be {{input.max}} or
+    <div class="errorMessage validationErrorMessage" *ngIf="form.get(input.key)?.hasError('max')">{{input.label}} must
+        be {{input.max}} or
         less.</div>
-    <div class="errorMessage validationErrorMessage" *ngIf="form.get(input.key)?.hasError('minlength')">{{input.label}} must be at least
+    <div class="errorMessage validationErrorMessage" *ngIf="form.get(input.key)?.hasError('minlength')">{{input.label}}
+        must be at least
         {{input.minlength}} characters long.</div>
-    <div class="errorMessage validationErrorMessage" *ngIf="form.get(input.key)?.hasError('pattern')">{{input.patternMessage}}</div>
+    <div class="errorMessage validationErrorMessage" *ngIf="form.get(input.key)?.hasError('pattern')">
+        {{input.patternMessage}}</div>
 
 </div>

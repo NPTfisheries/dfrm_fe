@@ -23,7 +23,7 @@ export class DataService<T> {
     getData(endpoint: string): Observable<T[]> {
         // If the observable for this endpoint already exists, return it
         if (this.dataObservables[endpoint]) {
-            console.log('Returned existing list!');
+            // console.log('Returned existing list!');
             return this.dataObservables[endpoint];
         }
 

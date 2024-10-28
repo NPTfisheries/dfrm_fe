@@ -15,7 +15,6 @@ import { InputCoordinates } from 'src/_inputs/input-geometry';
 import { InputNumber } from 'src/_inputs/input-number';
 import { InputRichText } from 'src/_inputs/input-richtext';
 import { InputCheckbox } from 'src/_inputs/input-checkbox';
-import { InputRadio } from 'src/_inputs/input-radio';
 import { LookUpService } from './lookup.service';
 import { ImageService } from './image.service';
 import { UserService } from './user.service';
@@ -170,7 +169,8 @@ export class InputService {
       }),
       new InputCheckbox({
         key: 'is_active',
-        value: data?.is_active !== undefined ? data.is_active : true,
+        // the checkbox input will show a check for any truthy value. for unchecked/false - pass undefined.
+        value: [false, undefined].includes(data?.is_active) ? undefined : "true",
         order: 8
       }),
       new InputHidden({
@@ -721,6 +721,7 @@ export class InputService {
       }
 
     });
+    // console.log('buildImageOptions', options);
     return options;
   }
 
@@ -733,7 +734,7 @@ export class InputService {
       }
 
     });
-    console.log('buildUserOptions', options);
+    // console.log('buildUserOptions', options);
     return options;
   }
 
@@ -746,7 +747,7 @@ export class InputService {
       }
 
     });
-    console.log('buildUserOptions', options);
+    // console.log('buildProjectOptions', options);
     return options;
   }
 
@@ -759,7 +760,7 @@ export class InputService {
       }
 
     });
-    console.log('buildUserOptions', options);
+    // console.log('buildDivisionOptions', options);
     return options;
   }
 
@@ -771,7 +772,7 @@ export class InputService {
         options.push({ key: item.id, value: item.name })
       }
     });
-    
+
     return options;
   }
 

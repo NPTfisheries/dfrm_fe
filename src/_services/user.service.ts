@@ -12,7 +12,7 @@ export class UserService {
   constructor(private dataService: DataService<User>) { }
 
   getUsers(): Observable<User[]> {
-    console.log('getUsers');
+    // console.log('getUsers');
     return this.dataService.getData(this.endpoint);
   }
 

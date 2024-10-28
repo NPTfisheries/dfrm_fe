@@ -98,49 +98,31 @@ export class ListPageComponent implements OnInit, OnDestroy {
   getList() {
     switch (this.routeType) {
       case 'departments':
-        this.departmentService.getDepartments().subscribe((departments) => {
-          this.data = departments;
-        });
+        this.departmentService.getDepartments().subscribe((departments) => this.data = departments);
         break;
       case 'facilities':
-        this.facilityService.getFacilities().subscribe((facilities) => {
-          this.data = facilities;
-        });
+        this.facilityService.getFacilities().subscribe((facilities) => this.data = facilities);
         break;
       case 'divisions':
-        this.divisionService.getDivisions().subscribe((divisions) => {
-          this.data = divisions;
-        });
+        this.divisionService.getDivisions().subscribe((divisions) => this.data = divisions);
         break;
       case 'projects':
-        this.projectService.getProjects().subscribe((projects) => {
-          this.data = projects;
-        });
+        this.projectService.getProjects().subscribe((projects) => this.data = projects);
         break;
       case 'tasks':
-        this.taskService.getTasks().subscribe((tasks) => {
-          this.data = tasks;
-        });
+        this.taskService.getTasks().subscribe((tasks) => this.data = tasks);
         break;
       case 'users':
-        this.userService.getUsers().subscribe((users) => {
-          this.data = users;
-        });
+        this.userService.getUsers().subscribe((users) => this.data = users);
         break;
       case 'images':
-        this.imageService.getImages().subscribe((images) => {
-          this.data = images;
-        });
+        this.imageService.getImages().subscribe((images) => this.data = images);
         break;
       case 'instruments':
-        this.instrumentService.getInstruments().subscribe((instruments) => {
-          this.data = instruments;
-        });
+        this.instrumentService.getInstruments().subscribe((instruments) => this.data = instruments);
         break;
       case 'locations':
-        this.locationService.getLocations().subscribe((locations) => {
-          this.data = locations;
-        });
+        this.locationService.getLocations().subscribe((locations) => this.data = locations);
         break;
       default:
         console.log('Did not capture routeType.');
@@ -183,55 +165,37 @@ export class ListPageComponent implements OnInit, OnDestroy {
   }
 
   getModalOptions(): NgbModalOptions {
-    return { size: 'xl', };
+    return { size: 'xl', backdrop: 'static'};
   }
 
   refreshList() {
     switch (this.routeType) {
       case 'departments':
-        this.departmentService.refreshDepartments().subscribe((departments) => {
-          this.data = departments;
-        });
+        this.departmentService.refreshDepartments().subscribe((departments) => this.data = departments);
         break;
       case 'facilities':
-        this.facilityService.refreshFacilities().subscribe((facilities) => {
-          this.data = facilities;
-        });
+        this.facilityService.refreshFacilities().subscribe((facilities) => this.data = facilities);
         break;
       case 'divisions':
-        this.divisionService.refreshDivisions().subscribe((divisions) => {
-          this.data = divisions;
-        });
+        this.divisionService.refreshDivisions().subscribe((divisions) => this.data = divisions);
         break;
       case 'projects':
-        this.projectService.refreshProjects().subscribe((projects) => {
-          this.data = projects;
-        });
+        this.projectService.refreshProjects().subscribe((projects) => this.data = projects);
         break;
       case 'tasks':
-        this.taskService.refreshTasks().subscribe((tasks) => {
-          this.data = tasks;
-        });
+        this.taskService.refreshTasks().subscribe((tasks) => this.data = tasks);
         break;
       case 'users':
-        this.userService.refreshUsers().subscribe((users) => {
-          this.data = users;
-        });
+        this.userService.refreshUsers().subscribe((users) => this.data = users);
         break;
       case 'images':
-        this.imageService.refreshImages().subscribe((images) => {
-          this.data = images;
-        });
+        this.imageService.refreshImages().subscribe((images) => this.data = images);
         break;
       case 'instruments':
-        this.instrumentService.refreshInstruments().subscribe((instruments) => {
-          this.data = instruments;
-        });
+        this.instrumentService.refreshInstruments().subscribe((instruments) => this.data = instruments);
         break;
       case 'locations':
-        this.locationService.refreshLocations().subscribe((locations) => {
-          this.data = locations;
-        });
+        this.locationService.refreshLocations().subscribe((locations) => this.data = locations);
         break;
       default:
         console.log('Did not capture routeType.');

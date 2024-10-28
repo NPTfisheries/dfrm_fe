@@ -101,22 +101,22 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
 
   refreshList() {
     switch (this.params.routeType) {
-      case 'department':
+      case 'departments':
         this.departmentService.refreshDepartments().subscribe();
         break;
-      case 'division':
+      case 'divisions':
         this.divisionService.refreshDivisions().subscribe();
         break;
-      case 'facility':
+      case 'facilities':
         this.facilityService.refreshFacilities().subscribe();
         break;
-      case 'location':
+      case 'locations':
         this.locationService.refreshLocations().subscribe();
         break;
-      case 'project':
+      case 'projects':
         this.projectService.refreshProjects().subscribe();
         break;
-      case 'task':
+      case 'tasks':
         this.taskService.refreshTasks().subscribe();
         break;
       case 'users':

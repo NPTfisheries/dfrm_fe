@@ -16,7 +16,7 @@ export class DivisionService {
   ) { }
 
   getDivisions(): Observable<Division[]> {
-    console.log('getDivisions');
+    // console.log('getDivisions');
     return this.dataService.getData(this.endpoint); // is_active??
   }
 

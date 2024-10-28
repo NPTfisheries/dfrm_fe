@@ -24,6 +24,10 @@ export class DynamicFormInputComponent implements OnInit {
       // load initial preview.
       this.updatePreview(Number(this.input.value));
     }
+    if (this.input.controlType === 'checkbox') {
+      console.log('checkbox', this.input, typeof(this.input.value));
+      console.log(Boolean(this.input.value), typeof(Boolean(this.input.value)))
+    }
   }
 
   get isValid() { return this.form.controls[this.input.key].valid; }

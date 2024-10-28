@@ -1,14 +1,13 @@
 <div class="container" style="padding-top: 75px; padding-bottom: 50px;">
     <h2 class="text-center">{{ routeType | titlecase }} List</h2>
 
-    <app-button *ngIf="routeType === 'divisions' && managerAccess(permissionGroup)" [label]="'Add New ' + routeType | titlecase" (click)="add(routeType)" [style]="btnStyle"></app-button>
-    <app-button *ngIf="routeType === 'facilities' && managerAccess(permissionGroup)" [label]="'Add Facility'" (click)="add(routeType)" [style]="btnStyle"></app-button>
-    <app-button *ngIf="routeType === 'images' && projectleaderAccess(permissionGroup)" [label]="'Upload Image'" (click)="uploadImage()" [style]="btnStyle"></app-button>
-    <app-button *ngIf="routeType === 'instruments' && projectleaderAccess(permissionGroup)" [label]="'Add New ' + routeType | titlecase" (click)="add(routeType)" [style]="btnStyle"></app-button>
-    <app-button *ngIf="routeType === 'locations' && projectleaderAccess(permissionGroup)" [label]="'Add New ' + routeType | titlecase" (click)="add(routeType)" [style]="btnStyle"></app-button>
-    <app-button *ngIf="routeType === 'projects' && projectleaderAccess(permissionGroup)" [label]="'Add New ' + routeType | titlecase" (click)="add(routeType)" [style]="btnStyle"></app-button>
-    <app-button *ngIf="routeType === 'tasks' && projectleaderAccess(permissionGroup)" [label]="'Add New ' + routeType | titlecase" (click)="add(routeType)" [style]="btnStyle"></app-button>
-    <app-button *ngIf="routeType === 'users' && adminAccess(permissionGroup)" [label]="'Register User'" (click)="registerUser()" [style]="btnStyle"></app-button>
+    <app-button *ngIf="['divisions', 'facilities'].includes(routeType)  && managerAccess(permissionGroup)"
+        [label]="'Add New'" (click)="add(routeType)" [style]="btnStyle"></app-button>
+    <app-button
+        *ngIf="['images', 'instruments', 'locations', 'projects', 'tasks'].includes(routeType) && projectleaderAccess(permissionGroup)"
+        [label]="'Add New'" (click)="uploadImage()" [style]="btnStyle"></app-button>
+    <app-button *ngIf="routeType === 'users' && adminAccess(permissionGroup)" [label]="'Register User'"
+        (click)="registerUser()" [style]="btnStyle"></app-button>
 
     <br><br><br>
     <div class="container" style="height: 600px;">
@@ -16,7 +15,7 @@
             [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [rowData]="data" [rowSelection]="'multiple'"
             [suppressCellFocus]="true" (gridReady)="onGridReady($event)" [animateRows]="true">
         </ag-grid-angular>
-        <p *ngIf="routeType == 'image'" ><em>* Hover over image name to see description.</em></p>
+        <p *ngIf="routeType == 'image'"><em>* Hover over image name to see description.</em></p>
     </div>
 
 </div>
