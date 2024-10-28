@@ -4,6 +4,7 @@
     <div [ngSwitch]="input.controlType">
 
         <!-- CHECKBOX (currently only built to use is_active 8/22/24)-->
+        <!-- // Shows a check for any truthy value. For unchecked/false: pass undefined. -->
         <div *ngSwitchCase="'checkbox'" class="form-check">
             <input type="checkbox" [id]="input.key" [formControlName]="input.key" [value]="input.value"
                 class="form-check-input" [ngClass]="getInputClasses(input)" [required]="input.required">

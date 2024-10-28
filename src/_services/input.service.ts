@@ -92,7 +92,7 @@ export class InputService {
       }),
       new InputCheckbox({
         key: 'is_active',
-        value: data?.is_active !== undefined ? data.is_active : true,
+        value: [false, undefined].includes(data?.is_active) ? undefined : "true",
         order: 8
       }),
       new InputImage({
@@ -169,7 +169,6 @@ export class InputService {
       }),
       new InputCheckbox({
         key: 'is_active',
-        // the checkbox input will show a check for any truthy value. for unchecked/false - pass undefined.
         value: [false, undefined].includes(data?.is_active) ? undefined : "true",
         order: 8
       }),
@@ -225,7 +224,7 @@ export class InputService {
       }),
       new InputCheckbox({
         key: 'is_active',
-        value: data?.is_active !== undefined ? data.is_active : true,
+        value: [false, undefined].includes(data?.is_active) ? undefined : "true",
         order: 8
       }),
       new InputHidden({
@@ -298,7 +297,7 @@ export class InputService {
       }),
       new InputCheckbox({
         key: 'is_active',
-        value: data?.is_active !== undefined ? data.is_active : true,
+        value: [false, undefined].includes(data?.is_active) ? undefined : "true",
         order: 8
       }),
       // new InputHidden({
@@ -605,7 +604,7 @@ export class InputService {
       }),
       new InputCheckbox({
         key: 'is_active',
-        value: data?.properties?.is_active !== undefined ? data.properties.is_active : true,
+        value: [false, undefined].includes(data?.properties?.is_active) ? undefined : "true",
         order: 17
       }),
     ]
@@ -651,7 +650,7 @@ export class InputService {
       })//,
       // new InputCheckbox({
       //   key: 'is_active',
-      //   value: data?.is_active !== undefined ? data.is_active : true,
+      // value: [false, undefined].includes(data?.is_active) ? undefined : "true",
       //   order: 6
       // }),
     ]
@@ -703,7 +702,7 @@ export class InputService {
       })//,
       // new InputCheckbox({
       //   key: 'is_active',
-      //   value: data?.is_active !== undefined ? data.is_active : true,
+      // value: [false, undefined].includes(data?.is_active) ? undefined : "true",
       //   order: 6
       // }),
     ]
