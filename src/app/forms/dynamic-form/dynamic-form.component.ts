@@ -33,21 +33,20 @@ export class DynamicFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('submitang', this.form.value);
+    console.log('Dynamic Form submit:', this.routeType, this.form.value);
     // dealing with empty arrays - cannot present data as [""] which is the default value for no selection in html.
-    if (Array.isArray(this.form.value.staff) && this.form.value.staff.length === 1 && this.form.value.staff[0] === "") {
+    if (Array.isArray(this.form.value.staff) && this.form.value.staff.length === 1 && this.form.value.staff[0] === "" || this.form.value.staff === "") {
+      console.log('why did this not work');
       this.form.value.staff=[];
     }
 
-    if (Array.isArray(this.form.value.project_leader) && this.form.value.project_leader.length === 1 && this.form.value.project_leader[0] === "") {
+    if (Array.isArray(this.form.value.project_leader) && this.form.value.project_leader.length === 1 && this.form.value.project_leader[0] === "" || this.form.value.project_leader === "") {
       this.form.value.project_leader=[];
     }
 
-    if (Array.isArray(this.form.value.editors) && this.form.value.editors.length === 1 && this.form.value.editors[0] === "") {
+    if (Array.isArray(this.form.value.editors) && this.form.value.editors.length === 1 && this.form.value.editors[0] === "" ||  this.form.value.editors === "") {
       this.form.value.editors=[];
     }
-
-    // console.log("Dynamic Form Submitted:", this.form.value);
 
     if(this.addOrEdit === 'add') {
       this.backendService.newItem(this.routeType, this.form.value).subscribe({
@@ -61,7 +60,6 @@ export class DynamicFormComponent implements OnInit {
           next: () => {this.formSubmitted.emit();}
         });
       } else {
-        // console.log('Dyanamic Form Submit: ', this.routeType, this.form.value);
         this.backendService.updateItem(this.routeType, this.identifier, this.form.value).subscribe({
           next: () => {this.formSubmitted.emit();}
         });

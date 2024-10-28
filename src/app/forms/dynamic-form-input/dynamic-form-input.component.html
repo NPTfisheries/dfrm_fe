@@ -69,24 +69,20 @@
         <!-- RICH TEXT -->
         <div *ngSwitchCase="'richtext'" > 
             <app-rich-text-input [input]="input" [form]="form"></app-rich-text-input>
-            <div><small><em>*For Hyperlinks, use the entire URL (e.g., https://nezperce.org). Also, make sure to 
-                add a space after adding a link to ensure the link is solidified.</em></small></div>
         </div>
 
         <!-- SELECT -->
-        <!-- <app-select-input *ngSwitchCase="'select'" [input]="input" [form]="form"></app-select-input> -->
         <select *ngSwitchCase="'select'" [formControlName]="input.key" [id]="input.key" class="form-control form-select"
             [required]="input.required"> 
             <option *ngFor="let option of input.options" [value]="option.key">{{option.value}}</option>
         </select>
 
         <!-- SELECT MULTIPLE -->
-        <!-- <app-select-input *ngSwitchCase="'multi-select'" [input]="input" [form]="form"></app-select-input> -->
         <select *ngSwitchCase="'multi-select'" [formControlName]="input.key" [id]="input.key" class="form-control form-select"
-            [required]="input.required" [multiple]="true"> 
+            [required]="input.required" [multiple]="true" size = '10'> 
             <option *ngFor="let option of input.options" [value]="option.key">{{option.value}}</option>
         </select>
-
+        <div *ngSwitchCase="'multi-select'"><small><em>Ctrl+Click to add multiple.</em></small></div>        
 
         <!-- DATE -->
         <input *ngSwitchCase="'date'" [type]="input.type" [formControlName]="input.key"

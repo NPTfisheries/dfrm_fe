@@ -514,6 +514,7 @@ export class InputService {
         key: 'manager',
         label: 'Manager',
         value: data?.properties?.manager.id || '',
+        options: this.buildUserOptions(),
         required: true,
         order: 4
       }),
@@ -521,18 +522,21 @@ export class InputService {
         key: 'deputy',
         label: 'Deputy',
         value: data?.properties?.deputy.id || '',
+        options: this.buildUserOptions(),
         order: 5
       }),
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
         value: data?.properties?.assistant.id || '',
+        options: this.buildUserOptions(),
         order: 6
       }),
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
         idArray: this.getIdArray(data?.properties?.staff) || [],
+        options: this.buildUserOptions(),
         order: 7
       }),
       new InputImage({

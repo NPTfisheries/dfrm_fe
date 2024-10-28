@@ -41,7 +41,6 @@ import { FacilitiesComponent } from './facilities/facilities.component';
 import { MapComponent } from './facilities/map/map.component';
 import { GeometryInputComponent } from './forms/geometry-input/geometry-input.component';
 import { FacilityDetailComponent } from './facility-detail/facility-detail.component';
-import { SelectInputComponent } from './forms/select-input/select-input.component';
 import { DivisionDetailComponent } from './division-detail/division-detail.component';
 import { DetailMapComponent } from './facility-detail/detail-map/detail-map.component';
 import { DocumentsComponent } from './documents/documents.component';
@@ -95,7 +94,6 @@ import { GeometryWidgetComponent } from './forms/geometry-widget/geometry-widget
     MapComponent,
     GeometryInputComponent,
     FacilityDetailComponent,
-    SelectInputComponent,
     DivisionDetailComponent,
     DetailMapComponent,
     DocumentsComponent,
