@@ -90,7 +90,7 @@ export class DocumentUploadComponent implements OnInit {
     formData.append('keywords', this.f['keywords'].value);
     formData.append('document', this.selectedDocument);
 
-    this.backendService.newItem('document', formData).subscribe({
+    this.backendService.newItem('documents', formData).subscribe({
       next: () => {
         this.documentService.refreshDocuments().subscribe((updatedList: any) => {
           this.context.data = updatedList;

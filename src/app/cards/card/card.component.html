@@ -6,12 +6,12 @@
         <h3 class="text-yellow">{{ data.name }}</h3>
         <hr class="card-hr" />
 
-        <div class="card-footer" *ngIf="routeType !== 'project'">
+        <div class="card-footer" *ngIf="routeType !== 'projects'">
             <p class="text-lightgray">Manager: {{ data.manager.first_name }} {{ data.manager.last_name }}</p>
             <!-- <p class="card-text">Deputy: {{ data.deputy.first_name }} {{ data.deputy.last_name }}</p>
             <p class="card-text">Assistant: {{ data.assistant.first_name }} {{ data.assistant.last_name }}</p> -->
         </div>
-        <div class="card-footer" *ngIf="routeType === 'project'">
+        <div class="card-footer" *ngIf="routeType === 'projects'">
             <p class="text-lightgray" *ngFor="let pl of data.project_leader">Project Leader: {{pl.first_name}}
                 {{pl.last_name}}</p>
         </div>
