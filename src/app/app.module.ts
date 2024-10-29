@@ -39,7 +39,6 @@ import { ImagePreviewRendererComponent } from '../_renderers/image-preview-rende
 import { StaffCardComponent } from './cards/staff-card/staff-card.component';
 import { FacilitiesComponent } from './facilities/facilities.component';
 import { MapComponent } from './facilities/map/map.component';
-import { GeometryInputComponent } from './forms/geometry-input/geometry-input.component';
 import { FacilityDetailComponent } from './facility-detail/facility-detail.component';
 import { DivisionDetailComponent } from './division-detail/division-detail.component';
 import { DetailMapComponent } from './facility-detail/detail-map/detail-map.component';
@@ -92,7 +91,6 @@ import { GeometryWidgetComponent } from './forms/geometry-widget/geometry-widget
     StaffCardComponent,
     FacilitiesComponent,
     MapComponent,
-    GeometryInputComponent,
     FacilityDetailComponent,
     DivisionDetailComponent,
     DetailMapComponent,
