@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 import { Subscription } from 'rxjs';
@@ -18,7 +19,8 @@ export class ActivityEditRendererComponent implements ICellRendererAngularComp {
   private permissionGroupSubscription: Subscription;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.permissionGroupSubscription = this.authService.permissionGroup$.subscribe(group => {
       this.permissionGroup = group;
@@ -26,10 +28,11 @@ export class ActivityEditRendererComponent implements ICellRendererAngularComp {
   }
 
   agInit(params: any): void {
+    console.log(params, this.permissionGroup);
     this.params = params;
-        // this.authService.taskPerms$.subscribe(taskPerms => {
-        //   this.taskPerms = taskPerms;
-        // });
+    this.authService.taskPerms$.subscribe(taskPerms => {
+      this.taskPerms = taskPerms;
+    });
   }
 
   refresh(params: ICellRendererParams): boolean {
@@ -37,13 +40,14 @@ export class ActivityEditRendererComponent implements ICellRendererAngularComp {
   }
 
   onEditClick() {
-    console.log('Edit Activity:');
+    this.router.navigate([`/activities/${this.params.data.activity_id}/edit`]);
   }
 
   // true/false logic
   renderButton() {
-    return true
-    // return this.taskPerms.includes(String(this.params.data.id));
+    if(this.permissionGroup === 'admin') return true;
+
+    return this.taskPerms.includes(String(this.params.data.task.id));
   }
 
 }

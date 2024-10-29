@@ -61,6 +61,7 @@ import { DataEntryComponent } from './data/data-entry/data-entry.component';
 import { ActivitiesPageComponent } from './data/activities-page/activities-page.component';
 import { ActivityViewComponent } from './data/activity-view/activity-view.component';
 import { GeometryWidgetComponent } from './forms/geometry-widget/geometry-widget.component';
+import { ActivityEditRendererComponent } from 'src/_renderers/activity-edit-renderer/activity-edit-renderer.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { GeometryWidgetComponent } from './forms/geometry-widget/geometry-widget
     DataEntryComponent,
     ActivitiesPageComponent,
     ActivityViewComponent,
+    ActivityEditRendererComponent,
     GeometryWidgetComponent,
   ],
   imports: [

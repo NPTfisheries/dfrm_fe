@@ -31,6 +31,8 @@ const routes: Routes = [
     { path: 'activities', component: ActivitiesPageComponent, canActivate: [AuthGuard]},
     { path: 'activities/:id', component: ActivityViewComponent, canActivate: [AuthGuard]},
     { path: 'data-entry', component: DataEntryComponent, canActivate: [AuthGuard]},
+    { path: 'activities/:id/edit', component: DataEntryComponent, canActivate: [AuthGuard]},
+
     
 
     // public-facing card pages

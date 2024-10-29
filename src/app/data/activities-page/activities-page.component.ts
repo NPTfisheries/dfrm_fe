@@ -4,7 +4,7 @@ import { ActivityService } from 'src/_services/activity.service';
 import { Activity } from 'src/_models/interfaces';
 import { Router } from '@angular/router';
 import { LinkButtonRendererComponent } from 'src/_renderers/link-button-renderer/link-button-renderer.component';
-import { EditButtonRendererComponent } from 'src/_renderers/edit-button-renderer/edit-button-renderer.component';
+import { ActivityEditRendererComponent } from 'src/_renderers/activity-edit-renderer/activity-edit-renderer.component';
 
 @Component({
   selector: 'app-activities-page',
@@ -24,8 +24,9 @@ export class ActivitiesPageComponent {
     {headerName: 'Project', field: 'task.project.name' },
     {headerName: 'Last Updated', field: 'updated_at', minWidth: 150, maxWidth: 150, resizable: false },
     {headerName: 'Data', field: 'data', hide: true },
-    {headerName: 'View', field: 'id', cellRenderer: LinkButtonRendererComponent, cellRendererParams: {} },
-    // {headerName: 'Edit', field: 'id', cellRenderer: EditButtonRendererComponent, cellRendererParams: {} }
+    {headerName: 'View', field: 'activity_id', cellRenderer: LinkButtonRendererComponent, cellRendererParams: {} },
+    // edit needs the activity_id for routing, and task to check perms & render button.
+    {headerName: 'Edit', field: 'activity_id', cellRenderer: ActivityEditRendererComponent, cellRendererParams: {}}
   ];
 
 
