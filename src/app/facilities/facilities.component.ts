@@ -35,7 +35,7 @@ export class FacilitiesComponent implements OnInit {
 
   navToFacility(slug: string) {
     // console.log('goToFacility!', slug);
-    this.router.navigate([`facility/${slug}`]);
+    this.router.navigate([`facilities/${slug}`]);
   }
 
 }
