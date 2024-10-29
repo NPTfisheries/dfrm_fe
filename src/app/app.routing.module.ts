@@ -17,6 +17,7 @@ import { DocumentsComponent } from './documents/documents.component';
 import { DataEntryComponent } from './data/data-entry/data-entry.component';
 import { ActivitiesPageComponent } from './data/activities-page/activities-page.component';
 import { ActivityViewComponent } from './data/activity-view/activity-view.component';
+import { ActivityEditComponent } from './data/activity-edit/activity-edit.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch:'full' },
@@ -31,9 +32,8 @@ const routes: Routes = [
     { path: 'activities', component: ActivitiesPageComponent, canActivate: [AuthGuard]},
     { path: 'activities/:id', component: ActivityViewComponent, canActivate: [AuthGuard]},
     { path: 'data-entry', component: DataEntryComponent, canActivate: [AuthGuard]},
-    { path: 'activities/:id/edit', component: DataEntryComponent, canActivate: [AuthGuard]},
+    { path: 'activities/:id/edit', component: ActivityEditComponent, canActivate: [AuthGuard]},
 
-    
 
     // public-facing card pages
     { path: 'divisions', component: CardPageComponent },

@@ -40,7 +40,7 @@ export class ActivityEditRendererComponent implements ICellRendererAngularComp {
   }
 
   onEditClick() {
-    this.router.navigate([`/activities/${this.params.data.activity_id}/edit`]);
+    this.router.navigate([`/activities/${this.params.data.activity_id}/edit`, this.params.data]);
   }
 
   // true/false logic

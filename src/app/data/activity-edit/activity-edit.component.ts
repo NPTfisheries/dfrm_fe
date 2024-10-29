@@ -1,49 +1,44 @@
 import { Component } from '@angular/core';
 import { GridApi, ColDef } from 'ag-grid-community';
 import { ActivityService } from 'src/_services/activity.service';
-import { ActivatedRoute } from '@angular/router';
 import { Activity } from 'src/_models/interfaces';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-activity-view',
-  templateUrl: './activity-view.component.html'
+  selector: 'app-activity-edit',
+  templateUrl: './activity-edit.component.html',
+  styleUrls: ['./activity-edit.component.css']
 })
-export class ActivityViewComponent {
-
+export class ActivityEditComponent {
   rowData!: any[];
   activity?: Activity;
-  btnStyle = { 'float': 'right', 'margin-right': '30px' }
 
   private gridApi!: GridApi;
   columnDefs!: ColDef[];
 
-  // defaultColDef: ColDef = { editable: false, filter: false, cellStyle: { fontSize: '12px' }, wrapHeaderText: true };
-  defaultColDef: ColDef = { editable: false, cellStyle: { fontSize: '12px' }, wrapHeaderText: true };
+  defaultColDef: ColDef = { editable: true, cellStyle: { fontSize: '12px' }, wrapHeaderText: true };
 
   constructor(
-    private route: ActivatedRoute,
     private activityService: ActivityService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    console.log(this.route.snapshot);
-
+    this.route.params.subscribe(params => {
+      console.log(params);
+    });
   }
 
   ngOnDestroy(): void { }
 
   onGridReady(params: any) {
-    this.loadActivity();
+    // this.loadActivity();
     this.gridApi = params.api;
     params.api.sizeColumnsToFit();
   }
 
-  saveAsCSV() {
-    console.log('saveAsCSV');
-    console.log(this.buildFilename());
-    this.gridApi.exportDataAsCsv(
-      { 'fileName': this.buildFilename(), 'allColumns': true }
-    );
+  click() {
+    console.log('click');
   }
 
   private buildFilename(): string {
