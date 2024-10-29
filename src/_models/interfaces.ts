@@ -72,11 +72,15 @@ export interface Project {
 
 export interface Activity {
     id?: number;
+    activity_id?: number;
+    updated_at?: Date;
+    updated_by?: User | number;
     user?: number | User;
     task?: Task | number;
-    header?: {};
-    detail?: {};
-    effective_date?: Date;
+    location?: Location | number;
+    instrument?: Instrument | number;
+    header?: any[];
+    detail?: any[];
   }
 
 export interface FacilityType {

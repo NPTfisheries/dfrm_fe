@@ -39,6 +39,15 @@ export class ActivityService {
         return this.get('fields', params);
     }
 
+    getDetailFields(task_type: string): Observable<any[]> {
+        console.log('getFields for task_type:', task_type);
+        let params = { 'task_type': task_type };
+
+        return this.get('fields', params).pipe(
+            map((fields: any[]) => fields.filter(field => field.field_for === 'detail'))
+        );
+    }
+
     saveActivity(activity: Activity) {
         const reqUrl = `${this.apiUrl}${this.apiVersion}${this.endpoint}/`;
 

@@ -11,7 +11,7 @@ import { getRouteType } from 'src/_utilities/route-utils';
 })
 
 export class LinkButtonRendererComponent implements ICellRendererAngularComp {
-  slug: string = '';
+  slug_or_id: string = '';
   routeType!: string;
 
   constructor(
@@ -21,17 +21,17 @@ export class LinkButtonRendererComponent implements ICellRendererAngularComp {
 
   agInit(params: any): void {
     this.routeType = getRouteType(this.route);
-    this.slug = params.value || '';
+    this.slug_or_id = params.value || '';
   }
 
   refresh(params: ICellRendererParams): boolean {
-    this.slug = params.value || '';
+    this.slug_or_id = params.value || '';
     this.routeType = getRouteType(this.route);
     return true;
   }
 
   onClick() {
-    console.log(this.route, this.routeType, this.slug)
-    this.router.navigateByUrl(this.routeType + '/' + this.slug);
+    console.log(this.route, this.routeType, this.slug_or_id)
+    this.router.navigateByUrl(this.routeType + '/' + this.slug_or_id);
   }
 }

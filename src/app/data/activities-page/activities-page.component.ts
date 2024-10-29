@@ -3,6 +3,8 @@ import { GridApi, ColDef, SelectionColumnDef, SelectionOptions } from 'ag-grid-c
 import { ActivityService } from 'src/_services/activity.service';
 import { Activity } from 'src/_models/interfaces';
 import { Router } from '@angular/router';
+import { LinkButtonRendererComponent } from 'src/_renderers/link-button-renderer/link-button-renderer.component';
+import { EditButtonRendererComponent } from 'src/_renderers/edit-button-renderer/edit-button-renderer.component';
 
 @Component({
   selector: 'app-activities-page',
@@ -17,12 +19,15 @@ export class ActivitiesPageComponent {
 
   private gridApi!: GridApi;
   columnDefs: ColDef[] = [
-    {headerName: 'Activity Id', field: 'id', minWidth: 175, maxWidth: 175, resizable: false },
-    {headerName: 'Dataset', field: 'dataset.name' },
-    {headerName: 'Project', field: 'project.name' },
-    {headerName: 'Date', field: 'date', minWidth: 115, maxWidth: 115, resizable: false },
+    {headerName: 'Id', field: 'id', minWidth: 75, maxWidth: 75, resizable: false },
+    {headerName: 'Task Type', field: 'task.task_type.name' },
+    {headerName: 'Project', field: 'task.project.name' },
+    {headerName: 'Last Updated', field: 'updated_at', minWidth: 150, maxWidth: 150, resizable: false },
     {headerName: 'Data', field: 'data', hide: true },
+    {headerName: 'View', field: 'id', cellRenderer: LinkButtonRendererComponent, cellRendererParams: {} },
+    // {headerName: 'Edit', field: 'id', cellRenderer: EditButtonRendererComponent, cellRendererParams: {} }
   ];
+
 
   defaultColDef: ColDef = { filter: true, sortable: true, editable: false, cellStyle: { fontSize: '12px' } };
 

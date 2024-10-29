@@ -7,6 +7,7 @@ import { LocationService } from 'src/_services/location.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Activity } from 'src/_models/interfaces';
 import { InstrumentService } from 'src/_services/instrument.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-data-entry',
@@ -18,8 +19,8 @@ export class DataEntryComponent implements OnInit {
   activity: Activity = {
     task: undefined,
     // instrument: undefined,
-    header: {},
-    detail: {}
+    header: [],
+    detail: []
   };
   task_types!: any[];
   selectedTaskType = undefined;
@@ -57,7 +58,8 @@ export class DataEntryComponent implements OnInit {
     private activityService: ActivityService,
     private taskService: TaskService,
     private locationService: LocationService,
-    private instrumentService: InstrumentService
+    private instrumentService: InstrumentService,
+    private router: Router
   ) {
     this.activityForm = this.fb.group({
       task: [null], // task should have project, protocol, contract
@@ -151,6 +153,8 @@ export class DataEntryComponent implements OnInit {
       console.log(this.activity);
       this.activityService.saveActivity(this.activity).subscribe();
       this.activityService.refreshActivities().subscribe();
+      //route to list
+      this.router.navigate(['activities']);
     } else {
       console.log('Grid invalid')
     }

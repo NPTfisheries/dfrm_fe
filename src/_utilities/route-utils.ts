@@ -4,6 +4,10 @@ export function getRouteType(route: ActivatedRoute) {
     const routeType = route.snapshot.url[0].path;
 
     switch (routeType) {
+        case 'activity':
+        case 'activities':
+        case 'activity-list':
+            return 'activities';
         case 'division':
         case 'divisions':
         case 'division-list':
@@ -50,8 +54,6 @@ export function getRouteType(route: ActivatedRoute) {
             return 'woops';
 
     }
-    // console.log('getRouteType', routeType);
-    // return route.snapshot.url[0].path;
 }
 
 export function getRouteSlug(route: ActivatedRoute) {

@@ -10,10 +10,8 @@ import { Activity } from 'src/_models/interfaces';
 })
 export class ActivityViewComponent {
 
-  data!: any[];
+  rowData!: any[];
   activity?: Activity;
-  dataset_name!: string;
-  project_name!: string;
   btnStyle = { 'float': 'right', 'margin-right': '30px' }
 
   private gridApi!: GridApi;
@@ -29,14 +27,51 @@ export class ActivityViewComponent {
 
   ngOnInit(): void {
     console.log(this.route.snapshot);
+
+  }
+
+  ngOnDestroy(): void { }
+
+  onGridReady(params: any) {
+    this.loadActivity();
+    this.gridApi = params.api;
+    params.api.sizeColumnsToFit();
+  }
+
+  saveAsCSV() {
+    console.log('saveAsCSV');
+    console.log(this.buildFilename());
+    this.gridApi.exportDataAsCsv(
+      { 'fileName': this.buildFilename(), 'allColumns': true }
+    );
+  }
+
+  private buildFilename(): string {
+    const currentDate = new Date().toLocaleDateString('en-US', {
+      year: '2-digit',
+      month: '2-digit',
+      day: '2-digit'
+    }).replace(/\//g, '');
+
+    return `activity_${this.activity?.id}_${currentDate}.csv`;
+  }
+
+  budn() {
+    console.log(this.columnDefs);
+    this.gridApi.sizeColumnsToFit();
+  }
+
+  taskName() {
+    return typeof this.activity?.task !== 'number' ? this.activity?.task?.name : '';
+  }
+
+  loadActivity() {
     this.activityService.getActivity(Number(this.route.snapshot.paramMap.get('id'))).subscribe(activity => {
-      console.log(activity);
       this.activity = activity;
-      // this.dataset_name = activity.dataset.name;
-      // this.project_name = activity.project.name;
-      this.data = activity.data;
-      
-      this.activityService.getFields(activity.dataset.id).subscribe(fields => {
+      // combine each detail with header
+      this.rowData = activity.detail.map((detail:any) => ({...activity.header, ...detail}));
+
+      this.activityService.getFields(activity.task.task_type.id).subscribe(fields => {
         // only include what is necessary for viewing (no validation, editors, etc.)
         this.columnDefs = fields.map((field: any) => {
           return {
@@ -50,36 +85,7 @@ export class ActivityViewComponent {
           };
         });
       });
+
     });
   }
-
-  ngOnDestroy(): void { }
-
-  onGridReady(params: any) {
-    this.gridApi = params.api;
-    params.api.sizeColumnsToFit();
-  }
-
-  saveAsCSV() {
-    console.log('saveAsCSV');
-    console.log(this.buildFilename());
-    this.gridApi.exportDataAsCsv(
-      { 'fileName': this.buildFilename(), 'allColumns': true }
-    );
-  }
-  
-  private buildFilename(): string {
-    const currentDate = new Date().toLocaleDateString('en-US', {
-      year: '2-digit',
-      month: '2-digit',
-      day: '2-digit'
-    }).replace(/\//g, '');
-
-    return `activity_${this.activity?.id}_${currentDate}.csv`;
-  }
-
-  budn() {
-    this.gridApi.sizeColumnsToFit();
-  }
-
 }

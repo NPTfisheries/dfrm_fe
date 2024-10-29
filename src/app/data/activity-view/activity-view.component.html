@@ -1,13 +1,14 @@
 <div class="container my-5">
     <app-button [label]="'budn'" (click)="budn()"></app-button>
-    <h1 *ngIf="activity?.id" class="dfrm-page-title text-center">Activity {{activity?.id}}</h1>
+    <h1 *ngIf="activity?.id" class="dfrm-page-title text-center">
+        Activity {{activity?.id}}: {{ taskName() }}</h1>
     <br>
     
-    <h2 *ngIf="dataset_name">Dataset: {{dataset_name}}</h2>
-    <h2 *ngIf="project_name">Project: {{project_name}}</h2>
+    <!-- <h2 *ngIf="dataset_name">Dataset: {{dataset_name}}</h2>
+    <h2 *ngIf="project_name">Project: {{project_name}}</h2> -->
     <div class="container my-5" style="height: 600px;">
         <ag-grid-angular style="width: 100%; height: 100%;" class="ag-theme-quartz-dark"
-            [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [rowData]="data" 
+            [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [rowData]="rowData" 
             [suppressCellFocus]="true" (gridReady)="onGridReady($event)" 
             [animateRows]="true" 
             >
