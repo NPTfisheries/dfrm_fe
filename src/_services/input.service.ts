@@ -587,9 +587,9 @@ export class InputService {
         order: 15
       }),
       new InputCoordinates({
-        key: 'coordinates',
-        label: 'Coordinates',
-        value: data?.geometry.coordinates || '',
+        key: 'geometry',
+        label: 'Geometry',
+        value: data?.geometry || '',
         required: true,
         order: 16
       }),
