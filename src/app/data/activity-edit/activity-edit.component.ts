@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { GridApi, ColDef } from 'ag-grid-community';
+import { GridApi, ColDef, SelectionOptions, SelectionColumnDef } from 'ag-grid-community';
 import { ActivityService } from 'src/_services/activity.service';
 import { Activity } from 'src/_models/interfaces';
 import { ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-activity-edit',
@@ -10,20 +11,42 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./activity-edit.component.css']
 })
 export class ActivityEditComponent {
+  today = new Date().toISOString().slice(0, 10); // max value for date inputs
   rowData!: any[];
+  activity_id!: number;
   activity?: Activity;
-
+  locations!: any[];
+  instruments!: any[];
+  headerFields: any[] | undefined;
+  detailData: any[] = [{}];
+  activityEditForm: FormGroup;
+  
   private gridApi!: GridApi;
   columnDefs!: ColDef[];
-
   defaultColDef: ColDef = { editable: true, cellStyle: { fontSize: '12px' }, wrapHeaderText: true };
+  public selection: SelectionOptions = {
+    mode: 'multiRow',
+    // selectAll: true, enableClickSelection: 'enableSelection',checkboxes: true, hideDisabledCheckboxes: true, 
+    headerCheckbox: true,
+    copySelectedRows: true
+  }
 
   constructor(
+    private fb: FormBuilder,
     private activityService: ActivityService,
     private route: ActivatedRoute
-  ) { }
+  ) { 
+    this.activityEditForm = this.fb.group({
+      task: [null], 
+      location: [null],
+      instrument: [null],
+      header: fb.group({}),
+    });
+  }
 
   ngOnInit(): void {
+    // this.activity_id = this.route.params
+    console.log(this.route)
     this.route.params.subscribe(params => {
       console.log(params);
     });
@@ -39,21 +62,6 @@ export class ActivityEditComponent {
 
   click() {
     console.log('click');
-  }
-
-  private buildFilename(): string {
-    const currentDate = new Date().toLocaleDateString('en-US', {
-      year: '2-digit',
-      month: '2-digit',
-      day: '2-digit'
-    }).replace(/\//g, '');
-
-    return `activity_${this.activity?.id}_${currentDate}.csv`;
-  }
-
-  budn() {
-    console.log(this.columnDefs);
-    this.gridApi.sizeColumnsToFit();
   }
 
   taskName() {

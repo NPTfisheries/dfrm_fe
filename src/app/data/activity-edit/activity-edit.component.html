@@ -2,6 +2,46 @@
     <h1 *ngIf="activity?.id" class="dfrm-page-title text-center">
         Activity {{activity?.id}}: {{ taskName() }}</h1>
     <br>
+
+    <!-- header -->
+    <div class="row d-flex justify-content-between align-items-center">
+        <div class='d-flex flex-wrap row row-cols-4' formGroupName='header'>
+            <div *ngFor="let header of headerFields">
+                <div class="col-md-12 d-flex">
+                    <div class="col-md-4 d-flex align-items-center">
+                        <label [attr.for]="header.field" class="form-label">{{header.headerName}}</label>
+                    </div>
+                    <div class="col-md-8">
+                        <ng-container [ngSwitch]="header.cellEditor">
+                            <input *ngSwitchCase="'agNumberCellEditor'" [formControlName]="header.field"
+                                [id]="header.field" [type]="'number'" class="form-control"
+                                [required]="header.required" [min]="header.cellEditorParams.min"
+                                [max]="header.cellEditorParams.max" [ngClass]="'my-2'">
+                            <textarea *ngSwitchCase="'agLargeTextCellEditor'" rows="5"
+                                [formControlName]="header.field" [id]="header.field" class="form-control"
+                                [required]="header.required" [ngClass]="'my-2'"></textarea>
+                            <input *ngSwitchCase="'agDateCellEditor'" [type]="'date'"
+                                [formControlName]="header.field" class="form-control form-control-date"
+                                [required]="header.required" [min]="header.min" [max]="today" [ngClass]="'my-2'" />
+                            <ng-select *ngSwitchCase="'agSelectCellEditor'" [formControlName]='header.field'
+                                [items]="header.cellEditorParams.values" [required]="header.required"
+                                [ngClass]="'my-2'"> </ng-select>
+                            <input *ngSwitchCase="'time'" [formControlName]="header.field" [id]="header.field"
+                                [type]="'time'" class="form-control" [required]="header.required"
+                                [ngClass]="'my-2'">
+                            <input *ngSwitchCase="null" [formControlName]="header.field" [id]="header.field"
+                                [type]="header.type" class="form-control" [required]="header.required"
+                                [ngClass]="'my-2'">
+                        </ng-container>
+                        <div *ngIf="activityEditForm.get('header.' + header.field)?.invalid && (activityEditForm.get('header.' + header.field)?.touched || activityEditForm.get('header.' + header.field)?.dirty)"
+                            class="text-danger">
+                            {{ header.headerName }} is required
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- <h2 *ngIf="dataset_name">Dataset: {{dataset_name}}</h2>
     <h2 *ngIf="project_name">Project: {{project_name}}</h2> -->

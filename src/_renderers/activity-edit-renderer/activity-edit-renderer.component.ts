@@ -28,7 +28,7 @@ export class ActivityEditRendererComponent implements ICellRendererAngularComp {
   }
 
   agInit(params: any): void {
-    console.log(params, this.permissionGroup);
+    // console.log(params, this.permissionGroup);
     this.params = params;
     this.authService.taskPerms$.subscribe(taskPerms => {
       this.taskPerms = taskPerms;
@@ -40,7 +40,7 @@ export class ActivityEditRendererComponent implements ICellRendererAngularComp {
   }
 
   onEditClick() {
-    this.router.navigate([`/activities/${this.params.data.activity_id}/edit`, this.params.data]);
+    this.router.navigate([`/activities/${this.params.data.activity_id}/edit`]);
   }
 
   // true/false logic
