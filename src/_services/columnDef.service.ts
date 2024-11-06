@@ -154,11 +154,11 @@ function divisionColDefs(routeType: string, context: any) {
             field: 'assistant.full_name',
             headerName: 'Assistant'
         },
-        {
-            field: 'staff_names',
-            headerName: 'Staff',
-            valueGetter: getStaffNames
-        },
+        // {
+        //     field: 'staff_names',
+        //     headerName: 'Staff',
+        //     valueGetter: getStaffNames
+        // },
         {
             field: 'is_active',
             headerName: 'Active?',
@@ -256,10 +256,10 @@ function taskColDefs(routeType: string, context: any) {
             field: 'name',
             headerName: 'Name'
         },
-        {
-            field: 'description',
-            headerName: 'Description'
-        },
+        // {
+        //     field: 'description',
+        //     headerName: 'Description'
+        // },
         {
             field: 'task_type.name',
             headerName: 'Task Type'

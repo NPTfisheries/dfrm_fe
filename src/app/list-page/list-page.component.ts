@@ -45,7 +45,7 @@ export class ListPageComponent implements OnInit, OnDestroy {
     sortable: true,
     filter: true,
     resizable: true,
-    cellStyle: { fontSize: '20px' },
+    cellStyle: { fontSize: '14px' },
     // cellDataType: false,
   };
 

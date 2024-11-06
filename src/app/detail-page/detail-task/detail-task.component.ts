@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 import { TaskService } from 'src/_services/task.service';
 import { Task } from 'src/_models/interfaces';
@@ -36,12 +36,11 @@ export class DetailTaskComponent implements OnInit, OnChanges {
   getList() {
     this.taskService.getTasksByProjectId(this.projectId).subscribe(tasks => {
       this.tasks = tasks.filter((task: Task) => {
-        if (typeof task.division === 'object' && 'id' in task.division) {
-          return task.division.id === this.division.id;
-        } else if (typeof task.division === 'number') {
-          return task.division === this.division.id;
-        }
-        return false;
+        const isDivisionMatch =
+          (typeof task.division === 'object' && 'id' in task.division && task.division.id === this.division.id) ||
+          (typeof task.division === 'number' && task.division === this.division.id);
+
+        return isDivisionMatch && task.display === true;
       });
     });
   }

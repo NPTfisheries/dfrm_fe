@@ -33,6 +33,7 @@ export interface Department {
     assistant?: number | User;
     deputy?: number | User;
     description?: string;
+    display?: boolean;
     id?: string;
     img_banner?: number | Image;
     img_card?: number | Image;    
@@ -48,6 +49,7 @@ export interface Division {
     department?: number| Department;
     deputy?: number | User;
     description?: string;
+    display?: boolean;
     id: number;
     img_banner?: number | Image;
     img_card?: number | Image;
@@ -61,6 +63,7 @@ export interface Division {
 export interface Project {
     department?: number | Department;
     description?: string;
+    display?: boolean;
     id?: number;
     img_banner?: number | Image;
     img_card?: number | Image;
@@ -107,6 +110,7 @@ export interface FacilityProperties {
     state?: string;
     zipcode?: string;
     is_active?: boolean;
+    display?: boolean;
 }
 
 export interface Geometry {
@@ -125,6 +129,7 @@ export interface Task {
     task_type?: number;
     project?: number | string | Project;
     division?: number | string | Division;
+    display?: boolean;
     id?: number;
     description?: string;
     supervisor: number | User;

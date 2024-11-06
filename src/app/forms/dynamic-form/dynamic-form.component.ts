@@ -50,7 +50,6 @@ export class DynamicFormComponent implements OnInit {
 
     // update booleans - if not adjusted they retain an empty string, non-boolean value.
     if(this.form.value.display === '') { this.form.value.display = false; }
-
     if(this.form.value.is_active === '') { this.form.value.is_active = false; }
 
     if(this.addOrEdit === 'add') {

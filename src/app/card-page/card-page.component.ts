@@ -33,11 +33,11 @@ export class CardPageComponent implements OnInit {
     switch (this.routeType) {
       case 'divisions':
         this.divisionService.getDivisions().subscribe(divisions => {
-          var active_divisions: any = [];
+          var display_divisions: any = [];
           divisions.filter(division => {
-            if (division.is_active) { active_divisions.push(division) }
+            if (division.display) { display_divisions.push(division) }
           });
-          this.list = active_divisions;
+          this.list = display_divisions;
         });
         this.departmentService.getDepartments().subscribe(departments => {
           this.department = departments[0];
@@ -45,11 +45,11 @@ export class CardPageComponent implements OnInit {
         break;
       case 'projects':
         this.projectService.getProjects().subscribe(projects => {
-          var active_projects: any = [];
+          var display_projects: any = [];
           projects.filter(project => {
-            if (project.is_active) { active_projects.push(project) }
+            if (project.display) { display_projects.push(project) }
           });
-          this.list = active_projects;
+          this.list = display_projects;
         });
         break;
     }

@@ -25,7 +25,7 @@ export class FacilitiesComponent implements OnInit {
     this.facilityService.getFacilities().subscribe(facilities => {
       var active_facilities: any = [];
       facilities.filter((facility: any) => {
-        if (facility.properties.is_active) {
+        if (facility.properties.display) {
           active_facilities.push(facility);
         }
       });

@@ -29,7 +29,7 @@ export class DocumentsComponent implements OnInit {
     filter: true,
     // flex: 1,
     resizable: true,
-    cellStyle: { fontSize: '12px' },
+    cellStyle: { fontSize: '14px' },
   };
 
   data!: any[];
