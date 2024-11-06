@@ -17,7 +17,8 @@
 
                     <div class="col-md-8 py-4">
                         <div>
-                            <h3>{{ task.task_type.name }}</h3>
+                            <h3>{{task.name}}</h3>
+                            <h5>{{ task.task_type.name }}</h5>
                             <hr>
                             <div class="d-flex justify-content-between py-0 my-0">
                                 <p>Supervisor: <a style="color:black" [routerLink]="'/users/' + task.supervisor.id">{{
