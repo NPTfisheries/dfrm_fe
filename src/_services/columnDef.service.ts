@@ -160,26 +160,19 @@ function divisionColDefs(routeType: string, context: any) {
             valueGetter: getStaffNames
         },
         {
-            field: 'display',
-            headerName: 'Display?',
-            cellRenderer: BooleanRendererComponent,
-            cellRendererParams: {},
-            ...isActiveProps
-        },
-        {
             field: 'is_active',
             headerName: 'Active?',
             cellRenderer: BooleanRendererComponent,
             cellRendererParams: {},
             ...isActiveProps
         },
-        // {
-        //     field: 'display',
-        //     headerName: 'Display?',
-        //     cellRenderer: BooleanRendererComponent,
-        //     cellRendererParams: {},
-        //     ...isActiveProps
-        // },
+        {
+            field: 'display',
+            headerName: 'Display?',
+            cellRenderer: BooleanRendererComponent,
+            cellRendererParams: {},
+            ...isActiveProps
+        },
         {
             headerName: 'View',
             field: 'slug',

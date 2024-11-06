@@ -48,6 +48,11 @@ export class DynamicFormComponent implements OnInit {
       this.form.value.editors=[];
     }
 
+    // update booleans - if not adjusted they retain an empty string, non-boolean value.
+    if(this.form.value.display === '') { this.form.value.display = false; }
+
+    if(this.form.value.is_active === '') { this.form.value.is_active = false; }
+
     if(this.addOrEdit === 'add') {
       this.backendService.newItem(this.routeType, this.form.value).subscribe({
         next: () => {this.formSubmitted.emit();}

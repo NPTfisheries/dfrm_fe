@@ -29,7 +29,7 @@ export class DynamicFormInputComponent implements OnInit {
     private lookUpService: LookUpService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     if (this.input.controlType === 'image') {
       // load initial preview.
       this.updatePreview(Number(this.input.value));

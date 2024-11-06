@@ -74,24 +74,31 @@ export class InputService {
         selectType: 'users',
         order: 6
       }),
+      new InputCheckbox({
+        key: 'is_active',
+        label: 'Active Department',
+        value: [false, undefined].includes(data?.is_active) ? undefined : "true",
+        order: 7
+      }),
+      // new InputCheckbox({
+      //   key: 'display',
+      //   label: 'Display on Website',
+      //   value: [false, undefined].includes(data?.display) ? undefined : "true",
+      //   order: 8
+      // }),
       new InputImage({
         key: 'img_banner',
         label: 'Choose Banner Image',
         value: data?.img_banner.id || this.defaultBannerId,
         options: this.buildImageOptions(),
-        order: 7
-      }),
-      new InputCheckbox({
-        key: 'is_active',
-        value: [false, undefined].includes(data?.is_active) ? undefined : "true",
-        order: 8
+        order: 9
       }),
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
         value: data?.img_card.id || this.defaultCardId,
         options: this.buildImageOptions(),
-        order: 7
+        order: 9
       })
     ]
 
@@ -160,7 +167,14 @@ export class InputService {
       }),
       new InputCheckbox({
         key: 'is_active',
+        label: 'Active Division',
         value: [false, undefined].includes(data?.is_active) ? undefined : "true",
+        order: 8
+      }),
+      new InputCheckbox({
+        key: 'display',
+        label: 'Display on Website',
+        value: [false, undefined].includes(data?.display) ? undefined : "true",
         order: 8
       }),
       new InputHidden({
@@ -215,7 +229,14 @@ export class InputService {
       }),
       new InputCheckbox({
         key: 'is_active',
+        label: 'Active Project',
         value: [false, undefined].includes(data?.is_active) ? undefined : "true",
+        order: 8
+      }),
+      new InputCheckbox({
+        key: 'display',
+        label: 'Display on Website',
+        value: [false, undefined].includes(data?.display) ? undefined : "true",
         order: 8
       }),
       new InputHidden({
@@ -288,7 +309,14 @@ export class InputService {
       }),
       new InputCheckbox({
         key: 'is_active',
+        label: 'Active Task',
         value: [false, undefined].includes(data?.is_active) ? undefined : "true",
+        order: 8
+      }),
+      new InputCheckbox({
+        key: 'display',
+        label: 'Display on Website',
+        value: [false, undefined].includes(data?.display) ? undefined : "true",
         order: 8
       }),
       // new InputHidden({
@@ -595,8 +623,16 @@ export class InputService {
       }),
       new InputCheckbox({
         key: 'is_active',
+        label: 'Active Facility',
         value: [false, undefined].includes(data?.properties?.is_active) ? undefined : "true",
         order: 17
+      }),
+      
+      new InputCheckbox({
+        key: 'display',
+        label: 'Display on Website',
+        value: [false, undefined].includes(data?.properties?.display) ? undefined : "true",
+        order: 18
       }),
     ]
 
@@ -641,6 +677,7 @@ export class InputService {
       })//,
       // new InputCheckbox({
       //   key: 'is_active',
+      //   label: 'Active Location',
       // value: [false, undefined].includes(data?.is_active) ? undefined : "true",
       //   order: 6
       // }),
@@ -693,6 +730,7 @@ export class InputService {
       })//,
       // new InputCheckbox({
       //   key: 'is_active',
+      // label: 'Active Instrument',
       // value: [false, undefined].includes(data?.is_active) ? undefined : "true",
       //   order: 6
       // }),
