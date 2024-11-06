@@ -424,8 +424,8 @@ function documentColDefs(routeType: string, context: any) {
             type: 'dateColumn'
         },
         {
-            field: 'document_type',
-            headerName: 'Document Type'
+            field: 'document_type.name',
+            headerName: 'Type'
         },
         {
             field: 'citation',
