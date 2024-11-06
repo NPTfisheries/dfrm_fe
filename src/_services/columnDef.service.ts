@@ -85,6 +85,13 @@ function departmentColDefs(routeType: string, context: any) {
             headerName: 'Staff',
             valueGetter: getStaffNames
         },
+        // {
+        //     field: 'display',
+        //     headerName: 'Display?',
+        //     cellRenderer: BooleanRendererComponent,
+        //     cellRendererParams: {},
+        //     ...isActiveProps
+        // },
         {
             field: 'is_active',
             headerName: 'Active?',
@@ -153,12 +160,26 @@ function divisionColDefs(routeType: string, context: any) {
             valueGetter: getStaffNames
         },
         {
+            field: 'display',
+            headerName: 'Display?',
+            cellRenderer: BooleanRendererComponent,
+            cellRendererParams: {},
+            ...isActiveProps
+        },
+        {
             field: 'is_active',
             headerName: 'Active?',
             cellRenderer: BooleanRendererComponent,
             cellRendererParams: {},
             ...isActiveProps
         },
+        // {
+        //     field: 'display',
+        //     headerName: 'Display?',
+        //     cellRenderer: BooleanRendererComponent,
+        //     cellRendererParams: {},
+        //     ...isActiveProps
+        // },
         {
             headerName: 'View',
             field: 'slug',
@@ -199,6 +220,13 @@ function projectColDefs(routeType: string, context: any) {
         {
             field: 'is_active',
             headerName: 'Active?',
+            cellRenderer: BooleanRendererComponent,
+            cellRendererParams: {},
+            ...isActiveProps
+        },
+        {
+            field: 'display',
+            headerName: 'Display?',
             cellRenderer: BooleanRendererComponent,
             cellRendererParams: {},
             ...isActiveProps
@@ -262,7 +290,14 @@ function taskColDefs(routeType: string, context: any) {
             cellRenderer: BooleanRendererComponent,
             cellRendererParams: {},
             ...isActiveProps
-        }//,
+        },
+        {
+            field: 'display',
+            headerName: 'Display?',
+            cellRenderer: BooleanRendererComponent,
+            cellRendererParams: {},
+            ...isActiveProps
+        },
         // {
         //     headerName: 'View',
         //     field: 'project.slug',
@@ -510,6 +545,13 @@ function facilityColDefs(routeType: string, context: any) {
         {
             field: 'properties.is_active',
             headerName: 'Active?',
+            cellRenderer: BooleanRendererComponent,
+            cellRendererParams: {},
+            ...isActiveProps
+        },
+        {
+            field: 'properties.display',
+            headerName: 'Display?',
             cellRenderer: BooleanRendererComponent,
             cellRendererParams: {},
             ...isActiveProps
