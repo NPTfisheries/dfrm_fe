@@ -291,6 +291,16 @@ function taskColDefs(routeType: string, context: any) {
             cellRendererParams: {},
             ...isActiveProps
         },
+        {
+            headerName: 'Edit',
+            field: 'id',
+            cellRenderer: EditButtonRendererComponent,
+            cellRendererParams: {
+                routeType: routeType,
+                context: context
+            },
+            ...buttonProps
+        }
         // {
         //     headerName: 'View',
         //     field: 'project.slug',
@@ -302,18 +312,18 @@ function taskColDefs(routeType: string, context: any) {
         // }
     ];
 
-    if (projectleaderAccess(context.permissionGroup)) {
-        columns.push({
-            headerName: 'Edit',
-            field: 'id',
-            cellRenderer: EditButtonRendererComponent,
-            cellRendererParams: {
-                routeType: routeType,
-                context: context
-            },
-            ...buttonProps
-        });
-    }
+    // if (projectleaderAccess(context.permissionGroup)) {
+    //     columns.push({
+    //         headerName: 'Edit',
+    //         field: 'id',
+    //         cellRenderer: EditButtonRendererComponent,
+    //         cellRendererParams: {
+    //             routeType: routeType,
+    //             context: context
+    //         },
+    //         ...buttonProps
+    //     });
+    // }
 
     return columns;
 

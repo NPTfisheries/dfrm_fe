@@ -48,22 +48,22 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
   agInit(params: any): void {
     this.params = params;
     switch (this.params.routeType) {
-      case 'project':
+      case 'projects':
         this.authService.projectPerms$.subscribe(projectPerms => {
           this.objectPerms = projectPerms;
         });
         break;
-      case 'task':
+      case 'tasks':
         this.authService.taskPerms$.subscribe(taskPerms => {
           this.objectPerms = taskPerms;
         });
         break;
-      case 'document':
+      case 'documents':
         this.authService.documentPerms$.subscribe(documentPerms => {
           this.objectPerms = documentPerms;
         });
         break;
-      case 'image':
+      case 'images':
         this.authService.imagePerms$.subscribe(imagePerms => {
           this.objectPerms = imagePerms;
         });
@@ -94,7 +94,7 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
 
   // true/false logic
   renderButton() {
-    if (!['project', 'document', 'image'].includes(this.params.routeType)) { return true }
+    if (!['projects', 'tasks', 'documents', 'images'].includes(this.params.routeType)) { return true }
     //object level permissions for project edit buttons.
     return this.objectPerms.includes(String(this.params.data.id));
   }
