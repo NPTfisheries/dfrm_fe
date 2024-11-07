@@ -47,28 +47,7 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
 
   agInit(params: any): void {
     this.params = params;
-    switch (this.params.routeType) {
-      case 'projects':
-        this.authService.projectPerms$.subscribe(projectPerms => {
-          this.objectPerms = projectPerms;
-        });
-        break;
-      case 'tasks':
-        this.authService.taskPerms$.subscribe(taskPerms => {
-          this.objectPerms = taskPerms;
-        });
-        break;
-      case 'documents':
-        this.authService.documentPerms$.subscribe(documentPerms => {
-          this.objectPerms = documentPerms;
-        });
-        break;
-      case 'images':
-        this.authService.imagePerms$.subscribe(imagePerms => {
-          this.objectPerms = imagePerms;
-        });
-        break;
-    }
+    this.getObjPerms();
   }
 
   refresh(params: ICellRendererParams): boolean {
@@ -88,6 +67,8 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
 
     modalRef.result.then(() => {
       this.refreshList();
+      this.authService.refreshPermissions().subscribe(); 
+      this.getObjPerms();
     });
 
   }
@@ -125,4 +106,30 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
     }
   }
 
+
+  // WE need to refresh obj perms.
+  getObjPerms(){
+    switch (this.params.routeType) {
+      case 'projects':
+        this.authService.projectPerms$.subscribe(projectPerms => {
+          this.objectPerms = projectPerms;
+        });
+        break;
+      case 'tasks':
+        this.authService.taskPerms$.subscribe(taskPerms => {
+          this.objectPerms = taskPerms;
+        });
+        break;
+      case 'documents':
+        this.authService.documentPerms$.subscribe(documentPerms => {
+          this.objectPerms = documentPerms;
+        });
+        break;
+      case 'images':
+        this.authService.imagePerms$.subscribe(imagePerms => {
+          this.objectPerms = imagePerms;
+        });
+        break;
+    }
+  }
 }
