@@ -1,9 +1,16 @@
-<div class="container d-flex justify-content-center">
-    <ng-select [ngClass]="'col-md-2'" [(ngModel)]="selectedGeom" [items]="['Point', 'LineString', 'Polygon']"
-        (change)="updateGeom($event)" >
+<div class="container d-flex justify-content-center align-items-center">
+    <ng-select [ngClass]="'col-md-2 px-3'" [(ngModel)]="selectedGeom" [items]="['Point', 'LineString', 'Polygon']"
+        (change)="updateGeom($event)" placeholder="Select Type">
     </ng-select>
-        <!-- <button (click)="reset($event)">Reset</button> -->
-        <button (click)="removeLastPoint($event)" >Remove Last Point</button>
-        <button (click)="print($event)">Print</button>
+    <app-button (click)="removeLastPoint($event)" [label]="'Remove Last Point'" [disabled]="disableButton()"></app-button>
 </div>
-<div id="ol-map" class="openlayers-map" ></div>
+<div class="container d-flex justify-content-center align-items-center">
+    <small *ngIf="selectedGeom === undefined || !['Point', 'LineString', 'Polygon'].includes(selectedGeom)"><em>Choose a geometry type to begin drawing.</em></small>
+    <small *ngIf="selectedGeom === 'Point'"><em>To reset your Point, clear the select and choose Point again.</em></small>
+    <small *ngIf="selectedGeom === 'LineString'"><em>Click on the final point twice to complete drawing a
+            LineString.</em></small>
+    <small *ngIf="selectedGeom === 'Polygon'"><em>Click again on the first point to complete drawing a
+            polygon.</em></small>
+</div>
+<br>
+<div id="ol-map" class="openlayers-map"></div>

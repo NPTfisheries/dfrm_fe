@@ -10,10 +10,10 @@ import OSM from 'ol/source/OSM';
 import { Vector as VectorSource } from 'ol/source'
 import { Vector as VectorLayer } from 'ol/layer'
 import { fromLonLat } from 'ol/proj';
-import { boundingExtent } from 'ol/extent';
+// import { boundingExtent } from 'ol/extent';
 import Collection from 'ol/Collection';
 import { Feature } from 'ol';
-import { Geometry } from 'ol/geom';
+// import { Geometry } from 'ol/geom';
 import { ScaleLine, defaults as defaultControls } from 'ol/control'
 import GeoJSON from 'ol/format/GeoJSON'
 
@@ -51,7 +51,7 @@ export class GeometryWidgetComponent implements OnInit {
       target: 'ol-map'
     });
 
-    // edit
+    // edit (targets existing geom)
     if (this.input.value && this.input.value !== '') {
       this.selectedGeom = Object(this.input.value).type;
       const format = new GeoJSON();
@@ -98,19 +98,9 @@ export class GeometryWidgetComponent implements OnInit {
     this.draw.removeLastPoint();
   }
 
-  // reset(event: any) {
-  //   event.preventDefault();
-  //   this.source.clear();
-  //   this.map.addInteraction(this.draw);
-  // }
-
-  print(event: any) {
-    event.preventDefault();
-    console.log(this.draw);
-    // console.log(this.draw.sketchCoords_);
-    // we only allow a single feature to be drawn. always [0]
-    console.log(this.source.getFeatures()[0]);
-
+  disableButton():boolean {
+    if(this.selectedGeom === undefined || !['LineString', 'Polygon'].includes(this.selectedGeom)) { return true }
+    return false;
   }
 
 }
