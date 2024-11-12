@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   
   username?: string | null = null; 
   isLoggedIn: boolean | null = false;
+  admin:boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -24,6 +25,10 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.authService.username$.subscribe(username => {
       this.username = username;
+
+      if(username && ['Tyler Stright', 'Ryan Kinzer'].includes(username)) {
+        this.admin = true;
+      }
     });
 
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
