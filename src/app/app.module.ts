@@ -63,6 +63,7 @@ import { ActivityViewComponent } from './data/activity-view/activity-view.compon
 import { GeometryWidgetComponent } from './forms/geometry-widget/geometry-widget.component';
 import { ActivityEditRendererComponent } from 'src/_renderers/activity-edit-renderer/activity-edit-renderer.component';
 import { ActivityEditComponent } from './data/activity-edit/activity-edit.component';
+import { OlMapComponent } from './ol-map/ol-map.component';
 
 @NgModule({
   declarations: [
@@ -116,6 +117,7 @@ import { ActivityEditComponent } from './data/activity-edit/activity-edit.compon
     ActivityEditRendererComponent,
     GeometryWidgetComponent,
     ActivityEditComponent,
+    OlMapComponent,
   ],
   imports: [
     BrowserModule,

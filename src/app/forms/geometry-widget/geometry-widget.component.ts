@@ -42,7 +42,7 @@ export class GeometryWidgetComponent implements OnInit {
 
     this.map = new Map({
       view: new View({
-        center: fromLonLat([-116.087802, 45.25], 'EPSG:4326'),  // this needs to focus on the geometry, if exists.
+        center: fromLonLat([-116.087802, 45.25], 'EPSG:4326'), 
         projection: 'EPSG:4326',
         zoom: 6,
       }),
@@ -51,7 +51,7 @@ export class GeometryWidgetComponent implements OnInit {
       target: 'ol-map'
     });
 
-    // edit (targets existing geom)
+    // edit (focus existing geom)
     if (this.input.value && this.input.value !== '') {
       this.selectedGeom = Object(this.input.value).type;
       const format = new GeoJSON();
