@@ -165,7 +165,9 @@ export class ListPageComponent implements OnInit, OnDestroy {
   }
 
   getModalOptions(): NgbModalOptions {
-    return { size: 'xl', backdrop: 'static'};
+    // return { size: 'xl', backdrop: 'static'};
+    return { size: 'xl'};
+
   }
 
   refreshList() {
