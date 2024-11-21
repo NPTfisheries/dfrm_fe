@@ -24,18 +24,17 @@ export class TaskService {
         return this.lookupService.getLookUpsByObjectType('Task')
     }
 
-    // FIXX X X X --- show_on_website or whatever
     getTasksByProjectId(project_id: number | string): Observable<Task[]> {
         console.log(`getTasksByProjectId: ${project_id}`);
         return this.getTasks().pipe(
-            map((tasks: any[]) => tasks.filter(task => task.project.id == String(project_id) && task.is_active))
+            map((tasks: any[]) => tasks.filter(task => task.project.id == String(project_id) && task.display))
         );
     }
 
-    refreshTasksByProjectId(subproject_id: number | string): Observable<Task[] | undefined> {
-        console.log(`getTasksBySubprojectId: ${subproject_id}`);
+    refreshTasksByProjectId(project_id: number | string): Observable<Task[] | undefined> {
+        console.log(`getTasksByProjectId: ${project_id}`);
         return this.refreshTasks().pipe(
-            map((tasks: Task[]) => tasks.filter(task => task.project == String(subproject_id) && task.is_active))
+            map((tasks: Task[]) => tasks.filter(task => task.project == String(project_id) && task.display))
         );
     }
 
