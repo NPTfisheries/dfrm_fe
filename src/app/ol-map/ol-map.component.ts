@@ -1,4 +1,7 @@
-import { Component, AfterViewInit, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, AfterViewInit, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { formatPhone } from 'src/_utilities/formatPhone';
+import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 
 import Map from 'ol/Map';
 import View from 'ol/View';
@@ -25,19 +28,21 @@ export class OlMapComponent implements OnInit, AfterViewInit {
   public map!: Map;
   scalebar = new ScaleLine({ units: 'metric', bar: true, minWidth: 140 });
 
+  constructor(private router: Router) { }
+
   ngOnInit(): void {
     this.initializeMap();
   }
 
   ngAfterViewInit(): void {
-      this.addPoints();
+    this.addPoints();
   }
 
   initializeMap() {
     this.map = new Map({
       target: 'ol-map',
       view: new View({
-        center: [-116.087802, 45.25],  
+        center: [-116.087802, 45.25],
         projection: 'EPSG:4326',
         zoom: 7,
         minZoom: 7
@@ -50,46 +55,125 @@ export class OlMapComponent implements OnInit, AfterViewInit {
   }
 
   addPoints() {
+    // console.log('addPoints:', this.facilities);
+    if (!this.facilities || !Array.isArray(this.facilities)) {
+      console.error('Facilities data is not in the expected format');
+      return;
+    }
+
     const vectorSource = new VectorSource();
 
-    console.log(this.facilities); // this isn't ready - probably ngOnChanges.
-    const point1 = new Feature({
-      geometry: new Point([-116.0060, 45.7128]),
-    });
-    const point2 = new Feature({
-      geometry: new Point([-117.1278, 44.5074]), 
-    });
+    // Loop through the facilities array
+    this.facilities.forEach((facility: any) => {
+      // Ensure the geometry and coordinates exist
+      if (facility.geometry && facility.geometry.type === 'Point' && facility.geometry.coordinates) {
+        const coordinates = facility.geometry.coordinates;
 
-    vectorSource.addFeatures([point1, point2]);
+        // Create a feature for each facility
+        const feature = new Feature({
+          geometry: new Point(coordinates),
+          properties: facility.properties, // Optionally attach other properties
+        });
+
+        feature.set('name', facility.properties.name);
+
+        vectorSource.addFeature(feature);
+      } else {
+        console.warn(`Facility ${facility.id} does not have valid geometry.`);
+      }
+    });
 
     const vectorLayer = new VectorLayer({
       source: vectorSource,
       style: new Style({
-        // image: new Icon({
-        //   src: '../assets/location-dot-solid.svg',
-        //   scale: 0.1,
-        //   anchorOrigin: 'bottom-right'
-        // })
         image: new Circle({
-          radius: 5,
-          fill: new Fill({color: 'rgba(0,0,255,1)'}),
-          stroke: new Stroke({color: 'red', width: 1}),
-        })
-      })
+          radius: 8,
+          fill: new Fill({ color: 'rgba(0,0,255,0.5)' }),
+          stroke: new Stroke({ color: 'black', width: 1.25 }),
+        }),
+      }),
     });
-    
-    console.log('I am here', vectorLayer);
+
     this.map.addLayer(vectorLayer);
-    // const ftrs = {
-    //   "type": "FeatureCollection",
-    //   "crs": {
-    //     'type': 'name',
-    //     'properties': {
-    //       'name': 'EPSG:4326',
-    //     }
-    //   },
-    //   "features": this.facilities
-    // };
+
+    // tooltips
+    this.addTooltipInteraction(vectorSource);
+  }
+
+  addTooltipInteraction(vectorSource: VectorSource) {
+    // Create an overlay for the tooltip
+    const popupElement = document.createElement('div');
+    popupElement.style.position = 'absolute';
+    popupElement.style.background = 'white';
+    popupElement.style.border = '1px solid black';
+    popupElement.style.borderRadius = '4px';
+    popupElement.style.padding = '10px';
+    popupElement.style.pointerEvents = 'auto'; // Allow interaction with the popup
+    popupElement.style.display = 'none'; // Initially hidden
+
+    document.body.appendChild(popupElement);
+
+    this.map.on('singleclick', (event) => {
+      // Hide tooltip initially
+      popupElement.style.display = 'none';
+
+      // Get the features at the clicked location
+      this.map.forEachFeatureAtPixel(event.pixel, (feature) => {
+        const facility = feature.get('properties'); // Get the name or title property
+        if (facility) {
+          // Position the tooltip near the clicked point
+          popupElement.innerHTML = this.facilityPopup(facility);
+          popupElement.style.left = `${event.originalEvent.pageX}px`;
+          popupElement.style.top = `${event.originalEvent.pageY}px`;
+          popupElement.style.display = 'block';
+        }
+      });
+    });
+
+    // Listen for button clicks within the popup
+    popupElement.addEventListener('click', (event: Event) => {
+      const target = event.target as HTMLElement;
+      console.log(event);
+      if (target.tagName === 'BUTTON' && target.dataset['slug']) {
+        const slug = target.dataset['slug'];
+        this.router.navigate([`/facilities/${slug}`]); // Navigate to the desired route
+        popupElement.style.display = 'none';
+      }
+    });
+
+    // Hide the tooltip when clicking on map (no feature)
+    this.map.on('click', (event) => {
+      const clickedOnFeature = this.map.forEachFeatureAtPixel(event.pixel, () => true);
+      if (!clickedOnFeature) {
+        popupElement.style.display = 'none';
+      }
+    });
+
+    // Hide the popup when clicking elsewhere in the application
+    document.addEventListener('click', (event: MouseEvent) => {
+      if (!(event.target as HTMLElement).closest('div')) {
+        popupElement.style.display = 'none';
+      }
+    });
+
+  }
+
+  // HTML for the popup
+  facilityPopup(facility: any) {
+    console.log('facility popup?', facility);
+    return `<div style="height:200px; width:250px; overflow:hidden; margin: 0 auto">
+    <img style="width: 100%; height: 100%; object-fit: cover;" src="${buildImageUrl(facility.img_card.image)}" >
+    </div> <br>
+    <div style="text-align:center;">
+    <h3>${facility.name}</h3>
+    <hr>
+    <h5>${facility.street_address}</h5>
+    <h5>${facility.city}, ${facility.state} ${facility.zipcode}</h5>
+    <h5>${formatPhone(facility.phone_number)}</h5>
+    <br>
+    <button id="myb" class="dfrm-button-small" data-slug="${facility.slug}"> Facility Details </button>
+    </div>
+    `
   }
 
 }
