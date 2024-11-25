@@ -28,11 +28,10 @@ export class DetailTaskComponent implements OnInit {
       this.divisions = divisions;
       this.organizeTasksByDivision();
     });
-    console.log('on init tasks:', this.tasks);
   }
 
   private organizeTasksByDivision(): void {
-    console.log('organizeTasksByDivision');
+
     // Clear the previous grouping
     this.tasksByDivision = {};
 
@@ -52,7 +51,8 @@ export class DetailTaskComponent implements OnInit {
         }
       });
     }
-    console.log(this.tasksByDivision);
+    // console.log('organizeTasksByDivision');
+    // console.log(this.tasksByDivision);
   }
 
 }
