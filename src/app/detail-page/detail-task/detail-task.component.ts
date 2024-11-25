@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { buildImageUrl } from 'src/_utilities/buildImageUrl';
-import { TaskService } from 'src/_services/task.service';
 import { Task } from 'src/_models/interfaces';
+import { DivisionService } from 'src/_services/division.service';
 import { Division } from 'src/_models/interfaces';
 
 @Component({
@@ -9,40 +9,50 @@ import { Division } from 'src/_models/interfaces';
   templateUrl: './detail-task.component.html',
   styleUrls: ['./detail-task.component.css']
 })
-export class DetailTaskComponent implements OnInit, OnChanges {
+export class DetailTaskComponent implements OnInit {
 
-  @Input() projectId!: number;
-  @Input() division!: Division | any;
+  @Input() tasks!: Task[] | any;
 
   buildImageUrl = buildImageUrl;
 
-  tasks: any[] = [];
+  divisions: Division[] | any = [];
   imageUrl: string | undefined;
+  tasksByDivision: { [divisionId: number]: Task[] | any[] } = {};
 
   constructor(
-    private taskService: TaskService,
+    private divisionService: DivisionService
   ) { }
 
   ngOnInit(): void {
-    this.getList();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['projectId'] && !changes['projectId'].isFirstChange()) {
-      this.getList();
-    }
-  }
-
-  getList() {
-    this.taskService.getTasksByProjectId(this.projectId).subscribe(tasks => {
-      this.tasks = tasks.filter((task: Task) => {
-        const isDivisionMatch =
-          (typeof task.division === 'object' && 'id' in task.division && task.division.id === this.division.id) ||
-          (typeof task.division === 'number' && task.division === this.division.id);
-
-        return isDivisionMatch && task.display === true;
-      });
+    this.divisionService.getDivisions().subscribe(divisions => {
+      this.divisions = divisions;
+      this.organizeTasksByDivision();
     });
+    console.log('on init tasks:', this.tasks);
+  }
+
+  private organizeTasksByDivision(): void {
+    console.log('organizeTasksByDivision');
+    // Clear the previous grouping
+    this.tasksByDivision = {};
+
+    this.divisions.forEach((division: Division) => {
+      this.tasksByDivision[division.id] = [];
+    });
+
+    if (this.tasks && Array.isArray(this.tasks)) {
+      this.tasks.forEach((task: Task) => {
+        const divisionId = (typeof task.division === 'object' && 'id' in task.division)
+          ? Number(task.division.id)
+          : Number(task.division);
+
+        // Make sure the divisionId is valid and matches an existing division
+        if (!isNaN(divisionId) && this.tasksByDivision[divisionId] !== undefined) {
+          this.tasksByDivision[divisionId].push(task);
+        }
+      });
+    }
+    console.log(this.tasksByDivision);
   }
 
 }

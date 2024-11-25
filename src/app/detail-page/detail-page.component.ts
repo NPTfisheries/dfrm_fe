@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { getRouteType, getRouteSlug } from 'src/_utilities/route-utils';
 import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 import { ProjectService } from 'src/_services/project.service';
-import { DivisionService } from 'src/_services/division.service';
-import { Division } from 'src/_models/interfaces';
+import { TaskService } from 'src/_services/task.service';
+import { Task } from 'src/_models/interfaces';
 
 // Project Detail
 @Component({
@@ -16,18 +16,18 @@ export class DetailPageComponent implements OnInit {
   data: any | null = null;
   bannerImage!: string | null;
   routeType: string | null = null;
-  divisions: Division[] = []
+  tasks: Task[] = [];
+  loadingTasks: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
-    private divisionService: DivisionService
+    private taskService: TaskService
   ) { }
 
   ngOnInit(): void {
     this.getDetail();
     window.scrollTo(0, 0);
-    this.divisionService.getDivisions().subscribe(divisions => this.divisions = divisions);
   }
 
   getDetail() {
@@ -37,6 +37,13 @@ export class DetailPageComponent implements OnInit {
     this.projectService.getProjectBySlug(slug).subscribe((project: any) => {
       this.data = project;
       this.bannerImage = buildImageUrl(project?.img_banner?.image);
+
+      this.loadingTasks = true;
+      this.taskService.getTasksByProjectId(project.id).subscribe(tasks => {
+        this.tasks = tasks;
+        this.loadingTasks = false;
+        console.log(tasks.length);
+      });
     });
   }
 

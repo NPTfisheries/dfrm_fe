@@ -1,43 +1,46 @@
-<div *ngIf="tasks.length > 0" class="container rounded-border bg-dark my-5">
-    <div class="col-md-4 banner-container-div">
-        <!-- <img [src]="getImageUrl(division.img_banner.image)" alt="Image" -->
-        <img [src]="buildImageUrl(division.img_banner.image)" alt="Image"
-        class="banner-image-div rounded-top">
-    </div>
-    <h2 class="text-yellow text-center">{{division.name}}</h2>
-    <div class="container">
-        <div *ngFor="let task of tasks; let i = index">
-            <br>
-            <div class="container task-container-light">
-                <div class="row">
-
-                    <div *ngIf="i % 2 === 1" class="col-md-4 overflow-hidden">
-                        <img [src]="buildImageUrl(task.img_card.image)" alt="Image" class="rounded-left image-task">
-                    </div>
-
-                    <div class="col-md-8 py-4">
-                        <div>
-                            <h3>{{task.name}}</h3>
-                            <h5>{{ task.task_type.name }}</h5>
-                            <hr>
-                            <div class="d-flex justify-content-between py-0 my-0">
-                                <p>Supervisor: <a style="color:black" [routerLink]="'/users/' + task.supervisor.id">{{
-                                        task.supervisor.first_name }} {{ task.supervisor.last_name }}</a></p>
-                            </div>
-                            <br>
-
-                            <app-html-sanitizer [html]="task.description"></app-html-sanitizer>
-                        </div>
-                    </div>
-
-                    <div *ngIf="i % 2 === 0" class="col-md-4 overflow-hidden">
-                        <img [src]="buildImageUrl(task.img_card.image)" alt="Image" class="rounded-right image-task">
-                    </div>
-
-                </div>
-            </div>
-            <br>
+<div *ngFor="let division of divisions">
+    <div *ngIf="tasksByDivision[division.id] && tasksByDivision[division.id].length > 0"
+        class="container rounded-border bg-dark my-5">
+        <div class="col-md-4 banner-container-div">
+            <img [src]="buildImageUrl(division?.img_banner?.image)" alt="Image" class="banner-image-div rounded-top">
         </div>
+        <h2 class="text-yellow text-center">{{division.name}}</h2>
+        <div class="container">
+            <div *ngFor="let task of tasksByDivision[division.id]; let i = index">
+                <br>
+                <div class="container task-container-light">
+                    <div class="row">
+
+                        <div *ngIf="i % 2 === 1" class="col-md-4 overflow-hidden">
+                            <img [src]="buildImageUrl(task.img_card.image)" alt="Image" class="rounded-left image-task">
+                        </div>
+
+                        <div class="col-md-8 py-4">
+                            <div>
+                                <h3>{{task.name}}</h3>
+                                <h5>{{ task?.task_type?.name }}</h5>
+                                <hr>
+                                <div class="d-flex justify-content-between py-0 my-0">
+                                    <p>Supervisor: <a style="color:black"
+                                            [routerLink]="'/users/' + task.supervisor.id">{{
+                                            task.supervisor.first_name }} {{ task.supervisor.last_name }}</a></p>
+                                </div>
+                                <br>
+
+                                <app-html-sanitizer [html]="task.description"></app-html-sanitizer>
+                            </div>
+                        </div>
+
+                        <div *ngIf="i % 2 === 0" class="col-md-4 overflow-hidden">
+                            <img [src]="buildImageUrl(task.img_card.image)" alt="Image"
+                                class="rounded-right image-task">
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+        <br>
     </div>
-    <br>
 </div>

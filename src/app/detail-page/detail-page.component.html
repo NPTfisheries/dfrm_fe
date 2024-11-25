@@ -24,7 +24,14 @@
 <h2 *ngIf="routeType === 'projects'" class="divider gradient-hr"></h2>
 
 <div *ngIf="routeType === 'projects'">
-    <div *ngFor="let division of divisions">
-        <app-detail-task [projectId]="data?.id" [division]="division"></app-detail-task>
+    <div *ngIf="loadingTasks" class="d-flex justify-content-center align-items-center">
+        <app-loading-spinner></app-loading-spinner>
     </div>
+    <div *ngIf="!loadingTasks && tasks.length !== 0">
+        <app-detail-task [tasks]="tasks" ></app-detail-task>
+    </div>
+    <div class="container justify-content-center" *ngIf="!loadingTasks && tasks.length === 0">
+        <p class="text-center">There are currently no loaded tasks for this project.</p>
+    </div>
+        
 </div>
