@@ -12,10 +12,13 @@ export class HtmlSanitizerComponent {
   @Input() class!: String | undefined;
 
   constructor(
-    public sanitizer: DomSanitizer, 
+    public sanitizer: DomSanitizer,
   ) { }
 
   transformHTML(html: any) {
+    if (html === undefined || html === null) {
+      return '';
+    }
     return this.sanitizer.bypassSecurityTrustHtml(String(html))
   }
 
