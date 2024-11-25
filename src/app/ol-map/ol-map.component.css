@@ -3,11 +3,3 @@
     height: 600px;
     flex-grow: 1;
 }
-
-.ol-popup {
-    font-size: 14px;
-    font-family: Arial, sans-serif;
-    max-width: 300px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-  }

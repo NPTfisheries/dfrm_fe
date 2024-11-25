@@ -5,8 +5,11 @@ import { buildImageUrl } from 'src/_utilities/buildImageUrl';
 
 import Map from 'ol/Map';
 import View from 'ol/View';
+
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
+import XYZ from 'ol/source/XYZ';
+
 import { Vector as VectorSource } from 'ol/source';
 import { Vector as VectorLayer } from 'ol/layer';
 import { fromLonLat } from 'ol/proj';
@@ -27,6 +30,11 @@ export class OlMapComponent implements OnInit, AfterViewInit {
 
   public map!: Map;
   scalebar = new ScaleLine({ units: 'metric', bar: true, minWidth: 140 });
+  facilityTypeColors: { [key: string]: string } = {
+    Office: 'blue',
+    Hatchery: 'green',
+    Other: 'red'
+  };
 
   constructor(private router: Router) { }
 
@@ -48,50 +56,72 @@ export class OlMapComponent implements OnInit, AfterViewInit {
         minZoom: 7
       }),
       layers: [
-        new TileLayer({ source: new OSM() })
+        // new TileLayer({ source: new OSM() })
+        // new TileLayer({
+        //   source: new XYZ({
+        //     url: 'https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg',
+        //     attributions: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>',
+        //   }),
+        // }),
+        // new TileLayer({
+        //   source: new XYZ({
+        //     url: 'http://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', // Replace "r" with "s" for satellite, "h" for hybrid
+        //   }),
+        // }),
+        // new TileLayer({
+        //   source: new XYZ({
+        //     url: 'https://{1-4}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+        //     attributions:
+        //       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> &copy; <a href="https://carto.com/">CARTO</a>',
+        //   }),
+        // }),
+        // new TileLayer({
+        //   source: new TileArcGISRest({
+        //     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
+        //   }),
+        // }),
+        new TileLayer({
+          source: new XYZ({
+            url: 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}',
+            attributions: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>',
+            maxZoom: 20,
+            minZoom: 7,
+          }),
+        }),
+        // new TileLayer({
+        //   source: new XYZ({
+        //     url: 'https://tiles.maps.eox.at/eox-basemap/{z}/{x}/{y}.png',
+        //     attributions: 'Map tiles by <a href="https://eox.at/">EOX</a>',
+        //     maxZoom: 10,
+        //   }),
+        // }),
       ],
       controls: defaultControls().extend([this.scalebar])
     });
   }
 
   addPoints() {
-    // console.log('addPoints:', this.facilities);
-    if (!this.facilities || !Array.isArray(this.facilities)) {
-      console.error('Facilities data is not in the expected format');
-      return;
-    }
-
     const vectorSource = new VectorSource();
 
-    // Loop through the facilities array
-    this.facilities.forEach((facility: any) => {
-      // Ensure the geometry and coordinates exist
-      if (facility.geometry && facility.geometry.type === 'Point' && facility.geometry.coordinates) {
+    if (this.facilities && Array.isArray(this.facilities)) {
+      this.facilities.forEach((facility: any) => {
         const coordinates = facility.geometry.coordinates;
+        const facilityType = facility.properties.facility_type.name;
 
-        // Create a feature for each facility
-        const feature = new Feature({
+        const pointFeature = new Feature({
           geometry: new Point(coordinates),
-          properties: facility.properties, // Optionally attach other properties
+          properties: facility.properties,
         });
 
-        feature.set('name', facility.properties.name);
+        // Apply style based on facility type
+        pointFeature.setStyle(this.getStyleForFacility(facilityType));
 
-        vectorSource.addFeature(feature);
-      } else {
-        console.warn(`Facility ${facility.id} does not have valid geometry.`);
-      }
-    });
+        vectorSource.addFeature(pointFeature);
+      });
+    }
 
     const vectorLayer = new VectorLayer({
       source: vectorSource,
-      style: new Style({
-        image: new Circle({
-          radius: 8,
-          fill: new Fill({ color: 'rgba(0,0,255,0.5)' }),
-          stroke: new Stroke({ color: 'black', width: 1.25 }),
-        }),
-      }),
     });
 
     this.map.addLayer(vectorLayer);
@@ -160,7 +190,7 @@ export class OlMapComponent implements OnInit, AfterViewInit {
 
   // HTML for the popup
   facilityPopup(facility: any) {
-    console.log('facility popup?', facility);
+    // console.log('facility popup:', facility);
     return `<div style="height:200px; width:250px; overflow:hidden; margin: 0 auto">
     <img style="width: 100%; height: 100%; object-fit: cover;" src="${buildImageUrl(facility.img_card.image)}" >
     </div> <br>
@@ -174,6 +204,26 @@ export class OlMapComponent implements OnInit, AfterViewInit {
     <button id="myb" class="dfrm-button-small" data-slug="${facility.slug}"> Facility Details </button>
     </div>
     `
+  }
+
+  getStyleForFacility(facilityType: string): Style {
+    const color = this.facilityTypeColors[facilityType] || this.getRandomColor();
+    return new Style({
+      image: new Circle({
+        radius: 8,
+        fill: new Fill({ color: color }),
+        stroke: new Stroke({ color: 'white', width: 2 }), // Optional white border
+      }),
+    });
+  }
+
+  getRandomColor(): string {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
   }
 
 }
