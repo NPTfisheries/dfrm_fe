@@ -7,6 +7,7 @@ import Draw from 'ol/interaction/Draw'
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
+import XYZ from 'ol/source/XYZ';
 import { Vector as VectorSource } from 'ol/source'
 import { Vector as VectorLayer } from 'ol/layer'
 import { fromLonLat } from 'ol/proj';
@@ -31,7 +32,15 @@ export class GeometryWidgetComponent implements OnInit {
   selectedGeom: string | undefined;
   draw: any;
   source = new VectorSource({});
-  tile_layer = new TileLayer({ source: new OSM() });   // basemap tiles
+  // tile_layer = new TileLayer({ source: new OSM() });   // basemap tiles
+  tile_layer = new TileLayer({
+    source: new XYZ({
+      url: 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}',
+      attributions: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>',
+      maxZoom: 20,
+      minZoom: 7,
+    }),
+  });
   vector_layer = new VectorLayer({ source: this.source }) // layer for this.draw
   scalebar = new ScaleLine({ units: 'metric', bar: true, minWidth: 140, });
 

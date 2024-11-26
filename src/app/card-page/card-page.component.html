@@ -25,6 +25,9 @@
     <h1 class="dfrm-page-title text-center">{{ routeType | titlecase }}</h1>
     <div class="container">
     </div>
+
+    <app-loading-spinner *ngIf="!list"></app-loading-spinner>
+
     <div class="card-container justify-content-md-between justify-content-center">
         <ng-container *ngFor="let item of list; let i = index">
             <app-card *ngIf="item" [routeType]="routeType ? routeType : ''" [data]="item"></app-card>
