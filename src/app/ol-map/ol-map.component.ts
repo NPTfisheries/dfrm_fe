@@ -40,6 +40,7 @@ export class OlMapComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.initializeMap();
+    this.createLegend();
   }
 
   ngAfterViewInit(): void {
@@ -224,6 +225,30 @@ export class OlMapComponent implements OnInit, AfterViewInit {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
+  }
+
+  createLegend() {
+    const legendContainer = document.getElementById('legend-items');
+  
+    if (!legendContainer) return;
+  
+    // Clear existing legend items
+    legendContainer.innerHTML = '';
+  
+    // Get unique facility types from facilities data
+    const uniqueFacilityTypes = [...new Set(this.facilities.map((facility: any) => facility.properties.facility_type.name))];
+  
+    uniqueFacilityTypes.forEach((type) => {
+      const color = this.facilityTypeColors[String(type)] || this.getRandomColor();
+      console.log(`Legend color for ${type}: ${color}`); // Debug log
+
+      // Create legend item
+      const legendItem = document.createElement('div');
+      legendItem.className = 'legend-item';
+      legendItem.innerHTML = `<div class="legend-item" style="margin-bottom: 5px;"><span style="background: ${color}; border: 1px solid black; border-radius: 50%; width: 16px; height: 16px; display: inline-block;"></span><span class="legend-item"> ${type}</span></div>`;
+  
+      legendContainer.appendChild(legendItem);
+    });
   }
 
 }
