@@ -1,32 +1,37 @@
-<div class="banner-container">
-    <img class="banner-image" [src]="bannerImage" />
-</div>
-<br>
-<div class="container my-5">
-    <h1 class="dfrm-page-title text-center">{{ division?.name }}</h1>
+<app-loading-spinner *ngIf="!division"></app-loading-spinner>
+
+<div *ngIf="division">
+    <div class="banner-container">
+        <img class="banner-image" [src]="bannerImage" />
+    </div>
+    <br>
+    <div class="container my-5">
+        <h1 class="dfrm-page-title text-center">{{ division?.name }}</h1>
 
 
-</div>
-<h2 class="divider gradient-hr"></h2>
+    </div>
+    <h2 class="divider gradient-hr"></h2>
 
-<div class="container">
-    <!-- <pre><p>{{ division.description }}</p></pre> -->
-    <app-html-sanitizer [html]="division?.description"></app-html-sanitizer>
-</div>
-<h2 class="bar-title">Management Staff</h2>
-<div class="employee-bar">
-    <app-employee-card *ngIf="division?.manager?.id" [data]="division?.manager"></app-employee-card>
-    <app-employee-card *ngIf="division?.deputy?.id" [data]="division?.deputy"></app-employee-card>
-    <app-employee-card *ngIf="division?.assistant?.id" [data]="division?.assistant"></app-employee-card>
-</div>
+    <div class="container">
+        <!-- <pre><p>{{ division.description }}</p></pre> -->
+        <app-html-sanitizer [html]="division?.description"></app-html-sanitizer>
+    </div>
+    <h2 class="bar-title">Management Staff</h2>
+    <div class="employee-bar">
+        <app-employee-card *ngIf="division?.manager?.id" [data]="division?.manager"></app-employee-card>
+        <app-employee-card *ngIf="division?.deputy?.id" [data]="division?.deputy"></app-employee-card>
+        <app-employee-card *ngIf="division?.assistant?.id" [data]="division?.assistant"></app-employee-card>
+    </div>
 
-<h2 class="divider gradient-hr my-5"></h2>
+    <h2 class="divider gradient-hr my-5"></h2>
 
-<div class="container my-5">
-    <h1 class="text-center">Projects</h1>
-    <div class="card-container justify-content-md-between justify-content-center">
-        <ng-container *ngFor="let project of division?.projects; let i = index">
-            <app-card *ngIf="project" [routeType]="'projects'" [data]="project"></app-card>
-        </ng-container>
+
+    <div class="container my-5">
+        <h1 class="text-center">Projects</h1>
+        <div class="card-container justify-content-md-between justify-content-center">
+            <ng-container *ngFor="let project of division?.projects; let i = index">
+                <app-card *ngIf="project" [routeType]="'projects'" [data]="project"></app-card>
+            </ng-container>
+        </div>
     </div>
 </div>
