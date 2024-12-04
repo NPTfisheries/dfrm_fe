@@ -11,12 +11,18 @@ export class DocumentInfoComponent {
 
   @Input() document!: Document | any | undefined;
 
+  employee_authors: string = '';
+
   constructor(
     private activeModal: NgbActiveModal,
   ) { }
 
   ngOnInit(): void {
     // console.log('Document:', this.document);
+    console.log(this.document.employee_authors);
+    this.employee_authors = this.document.employee_authors
+      .map((author:any) => author.full_name)
+      .join('; ');
   }
 
   download() {

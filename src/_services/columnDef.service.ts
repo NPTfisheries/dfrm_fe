@@ -439,11 +439,12 @@ function imageColDefs(routeType: string, context: any) {
 
 function documentColDefs(routeType: string, context: any) {
     const columns: (ColDef | ColGroupDef)[] = [
-        // {
-        //     field: 'title',
-        //     headerName: 'Title *',
-        //     tooltipField: 'description' // display desc. on hover
-        // },
+        {
+            field: 'title',
+            headerName: 'Title',
+            // tooltipField: 'description' // display desc. on hover
+            flex: 2,
+        },
         // {
         //     field: 'description',
         //     headerName: 'Description'

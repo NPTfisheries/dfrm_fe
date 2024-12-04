@@ -12,6 +12,16 @@
                 <h4>{{this.document?.primary_author}}</h4>
             </div>
         </div>
+
+        <div *ngIf="this.document.employee_authors && this.document.employee_authors.length > 0" class="row">
+            <div class="col-md-3">
+                <h4 class="fw-bold">Employee Authors: </h4>
+            </div>
+            <div class="col-md-9">
+                <h4>{{ this.employee_authors }}</h4>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-3">
                 <h4 class="fw-bold">Document Type: </h4>
@@ -52,10 +62,6 @@
                 <h4>{{this.document?.keywords}}</h4>
             </div>
         </div>
-        <div *ngFor="let author in this.document?.employee_authors">
-            <h4>{{author.full_name}}</h4>
-        </div>
-
         <hr>
         <div class="row">
             <div class="col d-flex justify-content-end">
