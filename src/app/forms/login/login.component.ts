@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs';
 
@@ -20,11 +19,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
     private authService: AuthService,
     private alertService: AlertService,
-    public activeModal: NgbActiveModal,
+    private activeModal: NgbActiveModal,
   ) { }
 
   ngOnInit() {
@@ -54,7 +51,6 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: () => {
           this.activeModal.close();
-          // this.router.navigate([this.router.url]);
         },
         error: response => {
           console.log('Error response: ', response);
