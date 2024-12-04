@@ -9,6 +9,7 @@ import { ColDef, ColGroupDef } from "ag-grid-community";
 import { professionalAccess, managerAccess, projectleaderAccess } from "src/_utilities/permission-util";
 import { formatPhone } from "src/_utilities/formatPhone";
 import { BooleanRendererComponent } from "src/_renderers/boolean-renderer/boolean-renderer.component";
+import TextAlign from "ngx-editor/lib/commands/TextAlign";
 
 // COLUMN DEFINITIONS ARE FOR AG GRID
 
@@ -438,50 +439,61 @@ function imageColDefs(routeType: string, context: any) {
 
 function documentColDefs(routeType: string, context: any) {
     const columns: (ColDef | ColGroupDef)[] = [
-        {
-            field: 'title',
-            headerName: 'Title *',
-            tooltipField: 'description' // display desc. on hover
-        },
+        // {
+        //     field: 'title',
+        //     headerName: 'Title *',
+        //     tooltipField: 'description' // display desc. on hover
+        // },
         // {
         //     field: 'description',
         //     headerName: 'Description'
         // },
+        // {
+        //     field: 'primary_author',
+        //     headerName: 'Primary Author'
+        // },
+        // {
+        //     field: 'employee_author_names',
+        //     headerName: 'Employee Authors',
+        //     valueGetter: getAuthorNames
+        // },
         {
-            field: 'primary_author',
-            headerName: 'Primary Author'
+            field: 'citation',
+            headerName: 'Citation',
+            tooltipField: 'citation',
+            flex: 2,
         },
         {
-            field: 'employee_author_names',
-            headerName: 'Employee Authors',
-            valueGetter: getAuthorNames
+            field: 'document_type.name',
+            headerName: 'Type',
+            minWidth: 160,
+            maxWidth: 160,
+            initialWidth: 160,
+        },
+        
+        {
+            field: 'keywords',
+            headerName: 'Keywords',
+            tooltipField: 'keywords',
+            flex: 1
         },
         {
             field: 'publish_date',
             headerName: 'Publish Date',
-            type: 'dateColumn'
+            type: 'dateColumn',
+            maxWidth: 140,
+            minWidth: 140,
+            resizable: false,
         },
         {
-            field: 'document_type.name',
-            headerName: 'Type'
-        },
-        {
-            field: 'citation',
-            headerName: 'Citation',
-            tooltipField: 'citation'
-        },
-        {
-            field: 'keywords',
-            headerName: 'Keywords',
-            tooltipField: 'keywords'
-        },
-        {
-            headerName: 'View',
-            field: 'document',
+            headerName: 'Info',
+            field: 'id',
             cellRenderer: DocumentPreviewRendererComponent,
             cellRendererParams: {},
+            resizable: false,
+            cellStyle: {textAlign: 'center'},
             ...buttonProps
-        }
+        },
     ];
 
     if (professionalAccess(context.permissionGroup)) {

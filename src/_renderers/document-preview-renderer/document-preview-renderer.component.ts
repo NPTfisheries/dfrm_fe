@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DocumentInfoComponent } from 'src/app/documents/document-info/document-info.component';
 
 @Component({
   selector: 'app-document-preview',
@@ -10,6 +12,10 @@ import { ICellRendererParams } from 'ag-grid-community';
 export class DocumentPreviewRendererComponent implements ICellRendererAngularComp {
   private params: any;
 
+  constructor(
+    private modalService: NgbModal,
+   ) {}
+
   agInit(params: any): void {
     this.params = params;
   }
@@ -18,10 +24,10 @@ export class DocumentPreviewRendererComponent implements ICellRendererAngularCom
     return true;
   }
 
+  // open document info modal
   previewDocument() {
-    // console.log(`Previewing document: ${this.params.data.document}`);
-    const documentUrl = this.params.data.document.replace('backend:8000', 'localhost:8000');
-    window.open(documentUrl, '_blank');
+    const modalRef = this.modalService.open(DocumentInfoComponent, { size: 'xl', centered: true });
+    modalRef.componentInstance.document = this.params.data;
   }
 
 }
