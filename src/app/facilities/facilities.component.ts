@@ -33,9 +33,9 @@ export class FacilitiesComponent implements OnInit {
     });
   }
 
-  navToFacility(slug: string) {
-    // console.log('goToFacility!', slug);
-    this.router.navigate([`facilities/${slug}`]);
-  }
+  // navToFacility(slug: string) {
+  //   // console.log('goToFacility!', slug);
+  //   this.router.navigate([`facilities/${slug}`]);
+  // }
 
 }
