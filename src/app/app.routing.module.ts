@@ -18,12 +18,14 @@ import { DataEntryComponent } from './data/data-entry/data-entry.component';
 import { ActivitiesPageComponent } from './data/activities-page/activities-page.component';
 import { ActivityViewComponent } from './data/activity-view/activity-view.component';
 import { ActivityEditComponent } from './data/activity-edit/activity-edit.component';
+import { InvasivesComponent } from './invasives/invasives.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch:'full' },
     { path: 'login', component: LoginComponent},
     { path: 'home', component: HomeComponent},
     { path: 'documents', component: DocumentsComponent},
+    { path: 'invasives', component: InvasivesComponent},
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
 
