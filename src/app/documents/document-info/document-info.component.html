@@ -2,7 +2,7 @@
     <div class="modal-header">
         <h1 class="modal-title text-center">{{this.document?.title}}</h1>
     </div>
-    <alert id="alert-modal"></alert>
+
     <div class="modal-body">
         <div class="row">
             <div class="col-md-3">
@@ -53,9 +53,14 @@
             </div>
         </div>
         <div *ngFor="let author in this.document?.employee_authors">
-            <h4></h4>
+            <h4>{{author.full_name}}</h4>
         </div>
-        
-        <app-button [label]="'Download'" (click)="download()"></app-button>
+
+        <hr>
+        <div class="row">
+            <div class="col d-flex justify-content-end">
+                <app-button [label]="'Download'" (click)="download()"></app-button>
+            </div>
+        </div>
     </div>
 </div>

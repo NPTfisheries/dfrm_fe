@@ -4,10 +4,16 @@
     <div class="card-body">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-            <app-form-input [form]="form" label="Email" controlName="username" [customErrors]="{ required: 'Email is required'}"></app-form-input>
-            <app-form-input [form]="form" label="Password" controlName="password" type="password" [customErrors]="{ required: 'Password is required', minlength: 'Password must be at least 8 characters', maxlength: 'Password cannot be more than 255 characters' }"></app-form-input>
+            <app-form-input [form]="form" label="Email" controlName="username"
+                [customErrors]="{ required: 'Email is required'}"></app-form-input>
+            <app-form-input [form]="form" label="Password" controlName="password" type="password"
+                [customErrors]="{ required: 'Password is required', minlength: 'Password must be at least 8 characters', maxlength: 'Password cannot be more than 255 characters' }"></app-form-input>
 
-            <app-button [label]="'Login'" [loading]="loading" [style]="{'float':'right'}"></app-button>
+            <div class="row">
+                <div class="col d-flex justify-content-end">
+                    <app-button [label]="'Login'" [loading]="loading"></app-button>
+                </div>
+            </div>
         </form>
     </div>
 </div>
