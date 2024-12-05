@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input, OnInit } from '@angular/core';
+import { Component, AfterViewInit, Input, OnInit, ElementRef } from '@angular/core';
 import { FacilityPopupComponent } from '../facilities/facility-popup/facility-popup.component';
 
 import Map from 'ol/Map';
@@ -7,6 +7,7 @@ import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 // import OSM from 'ol/source/OSM';
 import XYZ from 'ol/source/XYZ';
+import { Overlay } from 'ol';
 
 import { Vector as VectorSource } from 'ol/source';
 import { Vector as VectorLayer } from 'ol/layer';
@@ -15,6 +16,19 @@ import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import { Style, Stroke, Fill, Icon, Circle } from 'ol/style';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+const colors = [
+  "rgba(255, 255, 0, 0.35)",   // yellow
+  "rgba(255, 0, 0, 0.35)",     // red
+  "rgba(0, 0, 255, 0.35)",     // blue
+  "rgba(0, 128, 0, 0.35)",     // green
+  "rgba(255, 165, 0, 0.35)",   // orange
+  "rgba(165, 42, 42, 0.35)",   // brown
+  "rgba(128, 128, 128, 0.35)", // gray
+  "rgba(255, 192, 203, 0.35)", // pink
+  "rgba(0, 255, 255, 0.35)",   // cyan
+  "rgba(255, 0, 255, 0.35)"    // magenta
+];
 
 @Component({
   selector: 'app-ol-map',
@@ -27,20 +41,22 @@ export class OlMapComponent implements OnInit, AfterViewInit {
 
   public map!: Map;
   scalebar = new ScaleLine({ units: 'metric', bar: true, minWidth: 140 });
-  alpha = 0.35; // for points - only need to adjust this value.
-  facilityTypeColors: { [key: string]: string } = {
-    Office: `rgba(0,0,255,${this.alpha})`,
-    Hatchery: `rgba(0,255,0,${this.alpha})`,
-    Other: `rgba(255,0,0,${this.alpha})`
-  };
+  facilityTypeColors: { [key: string]: string } = {};
+  colorIndex = 0;
   public selectedFacility: any | null = null;
 
+  private tooltip!: HTMLElement;
+  private tooltipOverlay!: Overlay;
+
   constructor(
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private elRef: ElementRef
   ) { }
 
   ngOnInit(): void {
     this.initializeMap();
+    this.createTooltipOverlay();
+    this.tooltip = this.elRef.nativeElement.querySelector('.ol-tooltip');
   }
 
   ngAfterViewInit(): void {
@@ -85,7 +101,7 @@ export class OlMapComponent implements OnInit, AfterViewInit {
 
         // Assign color if not already assigned
         if (!this.facilityTypeColors[facilityType]) {
-          this.facilityTypeColors[facilityType] = this.getRandomColor();
+          this.facilityTypeColors[facilityType] = this.getNextColor();
         }
 
         pointFeature.setStyle(this.getStyleForFacility(facilityType));
@@ -104,7 +120,34 @@ export class OlMapComponent implements OnInit, AfterViewInit {
     this.addTooltipInteraction(vectorSource);
   }
 
+  private createTooltipOverlay() {
+    this.tooltipOverlay = new Overlay({
+      element: this.tooltip,
+      autoPan: true,
+      positioning: 'bottom-center',
+    });
+    this.map.addOverlay(this.tooltipOverlay);
+  }
+
   addTooltipInteraction(vectorSource: VectorSource) {
+    // tooltip on hover.
+    this.map.on('pointermove', (event) => {
+      const features = this.map.getFeaturesAtPixel(event.pixel);
+
+      if (features.length > 0) {
+        const names = features.map(feature => feature.get('properties').name);
+        this.tooltip.innerHTML = names.join('<br>');
+        this.tooltip.style.display = 'block';
+
+        // Use map.getCoordinateFromPixel for accurate positioning
+        const coordinate = this.map.getCoordinateFromPixel(event.pixel);
+        this.tooltipOverlay.setPosition(coordinate); // Set position of the overlay
+      } else {
+        this.tooltip.style.display = 'none';
+      }
+    });
+
+    // clicka point to open modal
     this.map.on('singleclick', (event) => {
       this.map.forEachFeatureAtPixel(event.pixel, (feature) => {
         const facility = feature.get('properties');
@@ -134,12 +177,9 @@ export class OlMapComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getRandomColor(): string {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
+  getNextColor(): string {
+    const color = colors[this.colorIndex];
+    this.colorIndex = (this.colorIndex + 1) % colors.length;
     return color;
   }
 
