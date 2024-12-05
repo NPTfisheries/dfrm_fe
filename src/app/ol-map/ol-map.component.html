@@ -1,8 +1,9 @@
 <app-map-legend [facilityTypeColors]="facilityTypeColors"></app-map-legend>
 
-<div id="ol-map" class="openlayers-map"></div>
+<div id="ol-map" class="openlayers-map">
+  <div class="ol-tooltip" style="display:none;"></div>
+</div>
 
-<div class="ol-tooltip" style="display:none;"></div>
 
 <app-facility-popup
   *ngIf="selectedFacility"

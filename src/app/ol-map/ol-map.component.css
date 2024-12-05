@@ -6,13 +6,14 @@
 
 .ol-tooltip {
     position: absolute !important;
-    display: none; /* Initially hidden */
+    display: none; 
     height: auto !important;
     width: auto !important;
     z-index: 100 !important;
-    background-color: rgba(51, 51, 51, 0.8) !important; /* Slightly transparent */
+    background-color: rgba(51, 51, 51, 0.8) !important; 
     color: #fff !important;
     text-align: center !important;
     border-radius: 4px !important;
     padding: 5px !important;
+    white-space: nowrap;
 }

@@ -8,7 +8,7 @@ import TileLayer from 'ol/layer/Tile';
 // import OSM from 'ol/source/OSM';
 import XYZ from 'ol/source/XYZ';
 import { Overlay } from 'ol';
-
+import { fromLonLat } from 'ol/proj';
 import { Vector as VectorSource } from 'ol/source';
 import { Vector as VectorLayer } from 'ol/layer';
 import { ScaleLine, defaults as defaultControls } from 'ol/control';
@@ -46,7 +46,7 @@ export class OlMapComponent implements OnInit, AfterViewInit {
   public selectedFacility: any | null = null;
 
   private tooltip!: HTMLElement;
-  private tooltipOverlay!: Overlay;
+  private hoverText!: Overlay;
 
   constructor(
     private modalService: NgbModal,
@@ -55,11 +55,10 @@ export class OlMapComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.initializeMap();
-    this.createTooltipOverlay();
-    this.tooltip = this.elRef.nativeElement.querySelector('.ol-tooltip');
   }
 
   ngAfterViewInit(): void {
+    this.tooltip = this.elRef.nativeElement.querySelector('.ol-tooltip');
     this.addPoints();
   }
 
@@ -120,13 +119,14 @@ export class OlMapComponent implements OnInit, AfterViewInit {
     this.addTooltipInteraction(vectorSource);
   }
 
-  private createTooltipOverlay() {
-    this.tooltipOverlay = new Overlay({
+  private createHoverText(coordinates: any) {
+    this.hoverText = new Overlay({
       element: this.tooltip,
       autoPan: true,
       positioning: 'bottom-center',
+      position: coordinates
     });
-    this.map.addOverlay(this.tooltipOverlay);
+    this.map.addOverlay(this.hoverText);
   }
 
   addTooltipInteraction(vectorSource: VectorSource) {
@@ -140,8 +140,10 @@ export class OlMapComponent implements OnInit, AfterViewInit {
         this.tooltip.style.display = 'block';
 
         // Use map.getCoordinateFromPixel for accurate positioning
-        const coordinate = this.map.getCoordinateFromPixel(event.pixel);
-        this.tooltipOverlay.setPosition(coordinate); // Set position of the overlay
+        const coordinates = this.map.getCoordinateFromPixel(event.pixel); // this returns lat/long
+
+        this.createHoverText(coordinates);
+
       } else {
         this.tooltip.style.display = 'none';
       }
