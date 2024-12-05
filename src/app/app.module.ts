@@ -67,6 +67,7 @@ import { OlMapComponent } from './ol-map/ol-map.component';
 import { LoadingSpinnerComponent } from '../_components/loading-spinner/loading-spinner.component';
 import { DocumentInfoComponent } from './documents/document-info/document-info.component';
 import { FacilityPopupComponent } from './facilities/facility-popup/facility-popup.component';
+import { MapLegendComponent } from './ol-map/map-legend/map-legend.component';
 
 @NgModule({
   declarations: [
@@ -124,6 +125,7 @@ import { FacilityPopupComponent } from './facilities/facility-popup/facility-pop
     LoadingSpinnerComponent,
     DocumentInfoComponent,
     FacilityPopupComponent,
+    MapLegendComponent,
   ],
   imports: [
     BrowserModule,

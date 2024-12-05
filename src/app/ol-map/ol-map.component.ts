@@ -27,14 +27,13 @@ export class OlMapComponent implements OnInit, AfterViewInit {
 
   public map!: Map;
   scalebar = new ScaleLine({ units: 'metric', bar: true, minWidth: 140 });
+  alpha = 0.35; // for points - only need to adjust this value.
   facilityTypeColors: { [key: string]: string } = {
-    Office: 'rgba(0,0,255,0.5)',
-    Hatchery: 'rgba(0,255,0,0.5)',
-    Other: 'rgba(255,0,0,0.5)'
+    Office: `rgba(0,0,255,${this.alpha})`,
+    Hatchery: `rgba(0,255,0,${this.alpha})`,
+    Other: `rgba(255,0,0,${this.alpha})`
   };
   public selectedFacility: any | null = null;
-  public popupPosition: { x: number; y: number } | null = null;
-
 
   constructor(
     private modalService: NgbModal
@@ -42,7 +41,6 @@ export class OlMapComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.initializeMap();
-    this.createLegend();
   }
 
   ngAfterViewInit(): void {
@@ -85,7 +83,11 @@ export class OlMapComponent implements OnInit, AfterViewInit {
           properties: facility.properties,
         });
 
-        // Apply style based on facility type
+        // Assign color if not already assigned
+        if (!this.facilityTypeColors[facilityType]) {
+          this.facilityTypeColors[facilityType] = this.getRandomColor();
+        }
+
         pointFeature.setStyle(this.getStyleForFacility(facilityType));
 
         vectorSource.addFeature(pointFeature);
@@ -107,31 +109,27 @@ export class OlMapComponent implements OnInit, AfterViewInit {
       this.map.forEachFeatureAtPixel(event.pixel, (feature) => {
         const facility = feature.get('properties');
         if (facility) {
-          const [x, y] = event.pixel;
-          this.openFacilityPopup(facility, { x, y });
+          this.openFacilityPopup(facility);
         }
       });
     });
   }
 
-  openFacilityPopup(facility: any, position: { x: number; y: number }) {
+  openFacilityPopup(facility: any) {
     const modalRef = this.modalService.open(FacilityPopupComponent, {
-      // backdrop: 'static', // prevents closing by clicking outside modal
       keyboard: true, // can exit via Esc
       centered: true,
     });
-  
     modalRef.componentInstance.facility = facility;
   }
 
   // point styling
   getStyleForFacility(facilityType: string): Style {
-    const color = this.facilityTypeColors[facilityType] || this.getRandomColor();
     return new Style({
       image: new Circle({
         radius: 8,
-        fill: new Fill({ color: color }),
-        stroke: new Stroke({ color: 'white', width: 2 }), // Optional white border
+        fill: new Fill({ color: this.facilityTypeColors[facilityType] }),
+        stroke: new Stroke({ color: 'black', width: 1.5 }), //border
       }),
     });
   }
@@ -143,30 +141,6 @@ export class OlMapComponent implements OnInit, AfterViewInit {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
-  }
-
-  createLegend() {
-    const legendContainer = document.getElementById('legend-items');
-
-    if (!legendContainer) return;
-
-    // Clear existing legend items
-    legendContainer.innerHTML = '';
-
-    // Get unique facility types from facilities data
-    const uniqueFacilityTypes = [...new Set(this.facilities.map((facility: any) => facility.properties.facility_type.name))];
-
-    uniqueFacilityTypes.forEach((type) => {
-      const color = this.facilityTypeColors[String(type)] || this.getRandomColor();
-      console.log(`Legend color for ${type}: ${color}`); // Debug log
-
-      // Create legend item
-      const legendItem = document.createElement('div');
-      legendItem.className = 'legend-item';
-      legendItem.innerHTML = `<div class="legend-item" style="margin-bottom: 5px;"><span style="background: ${color}; border: 1px solid black; border-radius: 50%; width: 16px; height: 16px; display: inline-block;"></span><span class="legend-item"> ${type}</span></div>`;
-
-      legendContainer.appendChild(legendItem);
-    });
   }
 
 }

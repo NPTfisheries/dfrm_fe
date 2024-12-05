@@ -23,7 +23,7 @@ export class FacilityPopupComponent {
 
 
   onClick() {
-    console.log('onClick', this.facility.slug);
+    // console.log('onClick', this.facility.slug);
     this.router.navigate(['facilities/' + this.facility.slug]);
     this.activeModal.close();
   }
