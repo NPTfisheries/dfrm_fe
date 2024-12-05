@@ -66,6 +66,7 @@ import { ActivityEditComponent } from './data/activity-edit/activity-edit.compon
 import { OlMapComponent } from './ol-map/ol-map.component';
 import { LoadingSpinnerComponent } from '../_components/loading-spinner/loading-spinner.component';
 import { DocumentInfoComponent } from './documents/document-info/document-info.component';
+import { FacilityPopupComponent } from './facilities/facility-popup/facility-popup.component';
 
 @NgModule({
   declarations: [
@@ -122,6 +123,7 @@ import { DocumentInfoComponent } from './documents/document-info/document-info.c
     OlMapComponent,
     LoadingSpinnerComponent,
     DocumentInfoComponent,
+    FacilityPopupComponent,
   ],
   imports: [
     BrowserModule,
