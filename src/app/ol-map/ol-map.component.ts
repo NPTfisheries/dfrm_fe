@@ -66,9 +66,9 @@ export class OlMapComponent implements OnInit, AfterViewInit {
     this.map = new Map({
       target: 'ol-map',
       view: new View({
-        center: [-116.087802, 45.25],
+        center: [-116.5, 45.75],
         projection: 'EPSG:4326',
-        zoom: 7,
+        zoom: 9,
         minZoom: 7
       }),
       layers: [
@@ -111,6 +111,7 @@ export class OlMapComponent implements OnInit, AfterViewInit {
 
     const vectorLayer = new VectorLayer({
       source: vectorSource,
+      // declutter: true //doesn't work as desired.
     });
 
     this.map.addLayer(vectorLayer);
@@ -151,12 +152,16 @@ export class OlMapComponent implements OnInit, AfterViewInit {
 
     // clicka point to open modal
     this.map.on('singleclick', (event) => {
-      this.map.forEachFeatureAtPixel(event.pixel, (feature) => {
+      const features = this.map.getFeaturesAtPixel(event.pixel);
+      // if stacked dots, only opens one.
+      if (features.length > 0) {
+        // Get the first feature
+        const feature = features[0];
         const facility = feature.get('properties');
-        if (facility) {
-          this.openFacilityPopup(facility);
-        }
-      });
+
+        // Open the popup with the first feature's properties
+        this.openFacilityPopup(facility);
+      }
     });
   }
 
