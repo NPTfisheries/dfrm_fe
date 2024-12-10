@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input, OnInit, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, Input, OnInit, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { FacilityPopupComponent } from '../facilities/facility-popup/facility-popup.component';
 
 import Map from 'ol/Map';
@@ -50,7 +50,8 @@ export class OlMapComponent implements OnInit, AfterViewInit {
 
   constructor(
     private modalService: NgbModal,
-    private elRef: ElementRef
+    private elRef: ElementRef,
+    private cdr: ChangeDetectorRef,
   ) { }
 
   ngOnInit(): void {
@@ -101,6 +102,7 @@ export class OlMapComponent implements OnInit, AfterViewInit {
         // Assign color if not already assigned
         if (!this.facilityTypeColors[facilityType]) {
           this.facilityTypeColors[facilityType] = this.getNextColor();
+          this.cdr.detectChanges(); // prevents error when passing values to legend component
         }
 
         pointFeature.setStyle(this.getStyleForFacility(facilityType));
