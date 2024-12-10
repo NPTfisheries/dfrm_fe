@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, HostListener } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DocumentsComponent } from '../documents/documents.component';
 
@@ -36,4 +36,10 @@ export class ModalConfirmComponent {
     console.log('Delete operation cancelled. Closing modal.');
     this.activeModal.close();
   }
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event: PopStateEvent) {
+    this.activeModal.close();
+  }
+  
 }
