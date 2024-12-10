@@ -5,7 +5,7 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
             <app-form-input [form]="form" label="Email" controlName="username"
-                [customErrors]="{ required: 'Email is required'}"></app-form-input>
+                [customErrors]="{ required: 'Email is required', pattern: 'Only DFRM employee emails are accepted' }"></app-form-input>
             <app-form-input [form]="form" label="Password" controlName="password" type="password"
                 [customErrors]="{ required: 'Password is required', minlength: 'Password must be at least 8 characters', maxlength: 'Password cannot be more than 255 characters' }"></app-form-input>
 
