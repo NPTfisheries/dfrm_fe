@@ -487,7 +487,7 @@ function documentColDefs(routeType: string, context: any) {
             resizable: false,
         },
         {
-            headerName: 'Info',
+            headerName: 'Info*',
             field: 'id',
             cellRenderer: DocumentPreviewRendererComponent,
             cellRendererParams: {},
