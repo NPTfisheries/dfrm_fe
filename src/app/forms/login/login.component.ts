@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs';
 
@@ -59,5 +59,10 @@ export class LoginComponent implements OnInit {
         }
       });
   }
+
+    @HostListener('window:popstate', ['$event'])
+    onPopState(event: PopStateEvent) {
+      this.activeModal.close();
+    }
 
 }

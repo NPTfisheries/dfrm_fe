@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService } from 'src/_services/alert.service';
@@ -122,6 +122,11 @@ export class DocumentUploadComponent implements OnInit {
   updateAuthors() {
     console.log('updating selectedAuthors to:', this.form.get(`employee_authors`));
     this.form.get(`employee_authors`)?.patchValue(this.selectedAuthors);
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event: PopStateEvent) {
+    this.activeModal.close();
   }
 
 }

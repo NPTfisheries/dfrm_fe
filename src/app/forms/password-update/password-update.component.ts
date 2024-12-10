@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
@@ -42,11 +42,16 @@ export class PasswordUpdateComponent {
     });
   }
 
-    // Custom validator to check if passwords match
-    passwordMatchValidator(control: AbstractControl): { [key: string]: any } | null {
-      const password = control.root.get('password')?.value;
-      const password2 = control.value;
-      return password === password2 ? null : { passwordMismatch: true };
-    }
+  // Custom validator to check if passwords match
+  passwordMatchValidator(control: AbstractControl): { [key: string]: any } | null {
+    const password = control.root.get('password')?.value;
+    const password2 = control.value;
+    return password === password2 ? null : { passwordMismatch: true };
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event: PopStateEvent) {
+    this.activeModal.close();
+  }
 
 }
