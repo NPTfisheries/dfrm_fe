@@ -1,6 +1,7 @@
 .openlayers-map {
     width: 100%;
-    height: 824px;
+    /* height: 824px; */
+    height: calc(100vh - 106px - 360px);
     flex-grow: 1;
 }
 
