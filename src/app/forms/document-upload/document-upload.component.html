@@ -3,7 +3,14 @@
     <h2 style="text-align: center;">Document Upload</h2>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-        <app-file-input (fileSelected)="onFileChange($event)" [validationErrorMessage]="'A file must be selected.'"></app-file-input>
+        <app-file-input 
+            [form]="form"
+            controlName="document"
+            [maxFileSizeMB]="10"
+            [customErrors]="{
+                required: 'Please select a file.',
+                fileSize: 'The selected file is too large. Maximum size allowed is 10 MB.'
+              }"></app-file-input>
 
         <app-form-input [form]="form" label="Document Title" controlName="title"
             [customErrors]="{ required: 'Document title is required.' }"></app-form-input>
@@ -13,9 +20,8 @@
             [customErrors]="{ required: 'Primary author is required.' }"></app-form-input>
 
         <label for="employee_authors" class="form-label">Employee Authors</label>
-        <ng-select formControlName="employee_authors" [multiple]="true">
-            <ng-option *ngFor="let author of author_choices" [value]="author.key">{{author.value}}</ng-option>
-        </ng-select> 
+        <ng-select formControlName="employee_authors" bindLabel="full_name" bindValue="id"
+            [items]="author_choices" [multiple]="true" ></ng-select>
         
         <app-form-input [form]="form" label="Publish Date" controlName="publish_date" type="date"
             [minDate]="'01/01/1900'" [customErrors]="{ required: 'Publish date is required.' }"></app-form-input>
@@ -27,7 +33,7 @@
 
 
         <app-button [label]="'Upload Document'" [loading]="isSubmitting"
-            [disabled]="form.invalid || !selectedDocument || isSubmitting"></app-button>
+            [disabled]="form.invalid || isSubmitting"></app-button>
 
     </form>
 </div>
