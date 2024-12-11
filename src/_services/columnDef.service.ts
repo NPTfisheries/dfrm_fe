@@ -386,7 +386,6 @@ function imageColDefs(routeType: string, context: any) {
         {
             field: 'photo_date',
             headerName: 'Photo Date',
-            type: 'dateColumn',
             maxWidth: 150,
             minWidth: 150
         },
@@ -481,7 +480,6 @@ function documentColDefs(routeType: string, context: any) {
         {
             field: 'publish_date',
             headerName: 'Publish Date',
-            type: 'dateColumn',
             maxWidth: 140,
             minWidth: 140,
             resizable: false,

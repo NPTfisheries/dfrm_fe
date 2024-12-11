@@ -26,7 +26,7 @@
         </li>
         <button class="nav-link me-auto" aria-current="page" routerLink="documents"
           routerLinkActive="active">Documents</button>
-        <!-- <li class="nav-item dropdown" ngbDropdown>
+        <li class="nav-item dropdown" ngbDropdown>
           <a *ngIf="isLoggedIn && admin" class="nav-link dropdown-toggle" ngbDropdownToggle id="navbarData" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">
             Data
@@ -37,7 +37,7 @@
             <button *ngIf="isLoggedIn" class="dropdown-item" aria-current="page" routerLink="activities"
               routerLinkActive="active">Activities</button>
           </ul>
-        </li> -->
+        </li>
       </ul>
       <ul class="navbar-nav">
         <button *ngIf="!isLoggedIn; else profileNav" class="nav-link me-auto" (click)="openLoginModal()">Login</button>

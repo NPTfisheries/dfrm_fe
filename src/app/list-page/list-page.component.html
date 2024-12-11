@@ -14,7 +14,7 @@
     <br><br><br>
     <div class="container grid-container">
         <ag-grid-angular style="width: 100%; height: 100%; font-size:20px" class="ag-theme-quartz-dark"
-            [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [rowData]="data" [rowSelection]="'multiple'"
+            [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [rowData]="data"
             [suppressCellFocus]="true" (gridReady)="onGridReady($event)" [animateRows]="true">
         </ag-grid-angular>
         <p *ngIf="routeType == 'image'"><em>* Hover over image name to see description.</em></p>

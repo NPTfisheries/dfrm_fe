@@ -72,7 +72,7 @@ export class ActivitiesPageComponent {
     this.disabled = selected.length === 0;  // if nothing selected, disabled=True
   }
 
-  test() {
+  consoleLog() {
     console.log('testing.');
   }
 

@@ -1,6 +1,6 @@
 <div class="container my-5">
     <h1 class="dfrm-page-title text-center">CDMS Data Entry</h1>
-    <app-button [label]="'print'" (click)="print()" [style]="{'position': 'absolute'}"></app-button>
+    <app-button [label]="'Test'" (click)="consoleLog()" [style]="{'position': 'absolute'}"></app-button>
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-6 offset-1">
             <ng-select [(ngModel)]="selectedTaskType" [items]="task_types" bindLabel="name" bindValue="id"

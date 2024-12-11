@@ -40,7 +40,7 @@ export class DataService<T> {
 
         // If data is not already fetched, make the HTTP request
         if (!this.dataSubjects[endpoint].value) {
-            console.log(`HTTP request for ${endpoint}`);
+            console.log(`HTTP request: ${endpoint}`);
             this.http.get<any>(`${this.apiUrl}${this.apiVersion}${endpoint}`).pipe(
                 tap(data => this.dataSubjects[endpoint].next(data))
             ).subscribe();

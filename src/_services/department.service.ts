@@ -12,7 +12,7 @@ export class DepartmentService {
   constructor(private dataService: DataService<Department>) { }
 
   getDepartments(): Observable<Department[]> {
-    console.log('getDepartments called');
+    // console.log('getDepartments');
     return this.dataService.getData(this.endpoint);
   }
 

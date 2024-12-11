@@ -16,7 +16,7 @@ export class TaskService {
     ) { }
 
     getTasks(): Observable<Task[]> {
-        console.log('getTasks');
+        // console.log('getTasks');
         return this.dataService.getData(this.endpoint);
     }
 

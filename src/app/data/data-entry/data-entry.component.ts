@@ -169,7 +169,7 @@ export class DataEntryComponent implements OnInit {
     this.detailData = [{}];
   }
 
-  print() {
+  consoleLog() {
     // this.captureGridData();
     console.log('Activity:', this.activity);
     // console.log('isGridValid():', this.isGridValid());
