@@ -3,15 +3,24 @@
     <h2 style="text-align: center;">Upload an Image</h2>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-        <app-file-input (fileSelected)="onFileChange($event)" [validationErrorMessage]="'A file must be selected.'"></app-file-input>
+        <app-file-input [form]="form" controlName="image" [maxFileSizeMB]="30" [customErrors]="{
+            required: 'Please select an image.',
+            fileSize: 'The selected image is too large. Maximum size allowed is 30 MB.'
+          }"></app-file-input>
 
-        <app-form-input [form]="form" label="Image Name" controlName="name" [customErrors]="{ required: 'Image name is required.' }"></app-form-input>
-        <app-form-input [form]="form" label="Description" controlName="description" type="textarea" [customErrors]="{ required: 'Description is required.' }"></app-form-input>
-        <app-form-input [form]="form" label="Photographer" controlName="photographer" [customErrors]="{ required: 'Photographer is required.' }"></app-form-input>
-        <app-form-input [form]="form" label="Source" controlName="source" [customErrors]="{ required: 'Source is required.' }"></app-form-input>
-        <app-form-input [form]="form" label="Photo Date" controlName="photo_date" type="date" [customErrors]="{ required: 'Photo date is required.' }"></app-form-input>
+        <app-form-input [form]="form" label="Image Name" controlName="name"
+            [customErrors]="{ required: 'Image name is required.' }"></app-form-input>
+        <app-form-input [form]="form" label="Description" controlName="description" type="textarea"
+            [customErrors]="{ required: 'Description is required.' }"></app-form-input>
+        <app-form-input [form]="form" label="Photographer" controlName="photographer"
+            [customErrors]="{ required: 'Photographer is required.' }"></app-form-input>
+        <app-form-input [form]="form" label="Source" controlName="source"
+            [customErrors]="{ required: 'Source is required.' }"></app-form-input>
+        <app-form-input [form]="form" label="Photo Date" controlName="photo_date" type="date"
+            [customErrors]="{ required: 'Photo date is required.' }"></app-form-input>
 
-        <app-button [label]="'Upload Image'" [loading]="isSubmitting" [disabled]="form.invalid || !selectedImage || isSubmitting"></app-button>
+        <app-button [label]="'Upload Image'" [loading]="isSubmitting"
+            [disabled]="form.invalid || isSubmitting"></app-button>
 
     </form>
     <br />
@@ -39,11 +48,5 @@
                 </p>
             </li>
         </ol>
-    </div>
-
-    <!-- image preview -->
-    <div *ngIf="selectedImage" class="mb-3">
-        <label class="form-label text-center">Image Preview</label>
-        <img [src]="imagePreview" alt="Image Preview" class="img-thumbnail">
     </div>
 </div>

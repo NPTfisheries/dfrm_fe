@@ -6,10 +6,10 @@
         <app-file-input 
             [form]="form"
             controlName="document"
-            [maxFileSizeMB]="10"
+            [maxFileSizeMB]="30"
             [customErrors]="{
                 required: 'Please select a file.',
-                fileSize: 'The selected file is too large. Maximum size allowed is 10 MB.'
+                fileSize: 'The selected file is too large. Maximum size allowed is 30 MB.'
               }"></app-file-input>
 
         <app-form-input [form]="form" label="Document Title" controlName="title"

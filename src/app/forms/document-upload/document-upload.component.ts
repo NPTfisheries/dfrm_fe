@@ -7,6 +7,9 @@ import { DocumentsComponent } from '../../documents/documents.component';
 import { UserService } from 'src/_services/user.service';
 import { DocumentService } from 'src/_services/document.service';
 import { User } from 'src/_models/interfaces';
+import { BackendService } from 'src/_services/backend.service';
+import { AlertService } from 'src/_services/alert.service';
+import { AuthService } from 'src/_services/auth.service';
 
 @Component({
   selector: 'app-document-upload',
@@ -27,8 +30,11 @@ export class DocumentUploadComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private backendService: BackendService,
     private userService: UserService,
+    private authService: AuthService,
     private documentService: DocumentService,
+    private alertService: AlertService,
     private activeModal: NgbActiveModal,
   ) { }
 
@@ -51,13 +57,13 @@ export class DocumentUploadComponent implements OnInit {
       citation: [''],
       keywords: [''],
       document: [null, Validators.required]
-    })
+    });
 
     // subscribe to form changes
-    this.form.valueChanges.subscribe(() => {
-      console.log('Form Valid:', this.form.valid);
-      console.log('Form Value:', this.form.value);
-    });
+    // this.form.valueChanges.subscribe(() => {
+    //   console.log('Form Valid:', this.form.valid);
+    //   console.log('Form Value:', this.form.value);
+    // });
   }
 
   get f() { return this.form.controls; }
@@ -69,32 +75,31 @@ export class DocumentUploadComponent implements OnInit {
 
     this.isSubmitting = true;
 
-    // const formData = new FormData();
-    // formData.append('title', this.f['title'].value);
-    // formData.append('description', this.f['description'].value);
-    // formData.append('primary_author', this.f['primary_author'].value);
-    // const chosenAuthors = this.f['employee_authors'].value;
-    // chosenAuthors.forEach((author: any) => formData.append('employee_authors', author));
-    // formData.append('publish_date', this.f['publish_date'].value);
-    // formData.append('document_type', this.f['document_type'].value);
-    // formData.append('citation', this.f['citation'].value);
-    // formData.append('keywords', this.f['keywords'].value);
-    // formData.append('document', this.f['document'].value);
+    const formData = new FormData();
+    Object.keys(this.form.controls).forEach(key => {
+      const value = this.form.get(key)?.value;
+      if (value instanceof FileList) {
+        // Handle file inputs
+        formData.append(key, value[0]);
+      } else {
+        formData.append(key, value);
+      }
+    });
 
-    // this.backendService.newItem('documents', formData).subscribe({
-    //   next: () => {
-    //     this.documentService.refreshDocuments().subscribe((updatedList: any) => {
-    //       this.context.data = updatedList;
-    //       this.authService.refreshPermissions().subscribe();
-    //       this.activeModal.close('success');
-    //     });
-    //   },
-    //   error: (err) => {
-    //     this.alertService.error('Failed to upload document.', { autoClose: true })
-    //     console.log(err);
-    //     this.isSubmitting = false;
-    //   }
-    // });
+    this.backendService.newItem('documents', formData).subscribe({
+      next: () => {
+        this.documentService.refreshDocuments().subscribe((updatedList: any) => {
+          this.context.data = updatedList;
+          this.authService.refreshPermissions().subscribe();
+          this.activeModal.close('success');
+        });
+      },
+      error: (err) => {
+        this.alertService.error('Failed to upload document.', { autoClose: true })
+        console.log(err);
+        this.isSubmitting = false;
+      }
+    });
   }
 
   ngOnDestroy(): void {

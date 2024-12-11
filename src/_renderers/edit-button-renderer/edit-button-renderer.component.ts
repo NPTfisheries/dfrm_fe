@@ -14,6 +14,7 @@ import { UserService } from 'src/_services/user.service';
 import { FacilityService } from 'src/_services/facility.service';
 import { TaskService } from 'src/_services/task.service';
 import { LocationService } from 'src/_services/location.service';
+import { ImageService } from 'src/_services/image.service';
 
 @Component({
   selector: 'app-edit-button-renderer',
@@ -38,7 +39,8 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
     private userService: UserService,
     private facilityService: FacilityService,
     private taskService: TaskService,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private imageService: ImageService,
   ) {
     this.permissionGroupSubscription = this.authService.permissionGroup$.subscribe(group => {
       this.permissionGroup = group;
@@ -81,6 +83,7 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
   }
 
   refreshList() {
+    console.log(this.params.routeType);
     switch (this.params.routeType) {
       case 'departments':
         this.departmentService.refreshDepartments().subscribe();
@@ -90,6 +93,9 @@ export class EditButtonRendererComponent implements ICellRendererAngularComp {
         break;
       case 'facilities':
         this.facilityService.refreshFacilities().subscribe();
+        break;
+      case 'images':
+        this.imageService.refreshImages().subscribe();
         break;
       case 'locations':
         this.locationService.refreshLocations().subscribe();
