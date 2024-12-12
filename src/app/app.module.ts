@@ -66,6 +66,7 @@ import { LoadingSpinnerComponent } from '../_components/loading-spinner/loading-
 import { DocumentInfoComponent } from './documents/document-info/document-info.component';
 import { FacilityPopupComponent } from './facilities/facility-popup/facility-popup.component';
 import { MapLegendComponent } from './ol-map/map-legend/map-legend.component';
+import { DataQueryComponent } from './data/data-query/data-query.component';
 
 @NgModule({
   declarations: [
@@ -122,6 +123,7 @@ import { MapLegendComponent } from './ol-map/map-legend/map-legend.component';
     DocumentInfoComponent,
     FacilityPopupComponent,
     MapLegendComponent,
+    DataQueryComponent,
   ],
   imports: [
     BrowserModule,

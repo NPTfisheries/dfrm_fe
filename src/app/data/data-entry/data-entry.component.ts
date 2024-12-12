@@ -30,7 +30,6 @@ export class DataEntryComponent implements OnInit {
   instruments!: any[];
   headerFields: any[] | undefined;
   detailData: any[] = [{}]; // This will represent the rows in your AG Grid
-  // btnStyle = { 'float': 'right', 'margin-right': '30px' }
 
   activityForm: FormGroup;
   private gridApi!: GridApi;
