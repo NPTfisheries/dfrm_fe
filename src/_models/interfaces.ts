@@ -142,9 +142,9 @@ export interface Task {
 }
 
 export interface LookUp {
-    id?: number;
-    object_type?: string;
-    name?: string;
+    id: number;
+    object_type: string;
+    name: string;
 }
 
 export interface Document {
@@ -190,6 +190,6 @@ export interface InvasiveSpecies {
     shape?: string;
     habitat?: string;
     native_to?: string;
-    invasive_type: number;
+    invasive_type: number | LookUp;
     sort_order?: number;
 }

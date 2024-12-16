@@ -1,1 +1,19 @@
-<p>invasive-species works!</p>
+<div class="container rounded-border bg-dark my-5">
+    <div class="row justify-content-center text-yellow my-4">
+        <h2 class="text-center">{{invasive.common_name}}</h2>
+        <h3 class="text-center"><em>{{invasive.species_name}}</em></h3>
+    </div>
+    <div class="invasive-img-container">
+        <img [src]="imageUrl" class="invasive-img" alt="`Image of a {{invasive.common_name}}`">
+        <a href="{{invasive.image_attribution}}" class="img-attrib" style="font-size: 10pt;"
+            target="_blank">{{invasive.image_attribution}}</a>
+    </div>
+
+    <div class="col-md-8 offset-2 text-lightgray">
+        <p>{{invasive.description}}</p>
+        <p>{{invasive.size}}</p>
+        <p>{{invasive.shape}}</p>
+        <p>{{invasive.habitat}}</p>
+        <p>{{invasive.native_to}}</p>
+    </div>
+</div>

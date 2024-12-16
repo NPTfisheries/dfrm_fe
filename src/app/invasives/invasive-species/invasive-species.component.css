@@ -1,0 +1,27 @@
+.invasive-img-container {
+    position: relative;
+    display: inline-block;
+    height: 450px;
+    width: 100%;
+}
+
+.invasive-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.img-attrib {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0 .5em .5em 0;
+    padding: .25em;
+    color: white;
+    background-color: none
+}
+
+.rounded-top {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
