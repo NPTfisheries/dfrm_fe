@@ -179,10 +179,17 @@ export interface Instrument {
     manufacturer?: string;
 }
 
-// cdms filtering
-export interface filterOptions {
-    options?: Object[];
-    placeholder?: string;
-    argName: string;
-    required?: boolean;
-  }
+export interface InvasiveSpecies {
+    common_name?: string;
+    species_name?: string;
+    species_image: string;
+    image_attribution?: string;
+    description?: string;
+    size?: string;
+    color?: string;
+    shape?: string;
+    habitat?: string;
+    native_to?: string;
+    invasive_type: number;
+    sort_order?: number;
+}
