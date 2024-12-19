@@ -18,6 +18,7 @@
     </div>
     <h2 class="divider gradient-hr"></h2>
 
+    <h1 *ngIf="selectedType" class="text-center">{{selectedType}}</h1>
     <app-invasive-species *ngFor="let invasive of filteredInvasives()" [invasive]="invasive">
     </app-invasive-species>
 </div>

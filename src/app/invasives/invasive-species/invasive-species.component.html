@@ -1,19 +1,37 @@
 <div class="container rounded-border bg-dark my-5">
     <div class="row justify-content-center text-yellow my-4">
         <h2 class="text-center">{{invasive.common_name}}</h2>
-        <h3 class="text-center"><em>{{invasive.species_name}}</em></h3>
+        <h4 class="text-center"><em>{{invasive.species_name}}</em></h4>
     </div>
+
     <div class="invasive-img-container">
         <img [src]="imageUrl" class="invasive-img" alt="`Image of a {{invasive.common_name}}`">
         <a href="{{invasive.image_attribution}}" class="img-attrib" style="font-size: 10pt;"
             target="_blank">{{invasive.image_attribution}}</a>
     </div>
 
-    <div class="col-md-8 offset-2 text-lightgray">
-        <p>{{invasive.description}}</p>
-        <p>{{invasive.size}}</p>
-        <p>{{invasive.shape}}</p>
-        <p>{{invasive.habitat}}</p>
-        <p>{{invasive.native_to}}</p>
+    <div class="row">
+        <div class="col-md-6 text-lightgray p-5">
+            <p *ngIf="invasive.description"><strong>Description: </strong>{{invasive.description}}</p>
+            <p *ngIf="invasive.size"><strong>Size: </strong>{{invasive.size}}</p>
+            <p *ngIf="invasive.shape"><strong>Shape: </strong>{{invasive.shape}}</p>
+            <p *ngIf="invasive.habitat"><strong>Habitat: </strong>{{invasive.habitat}}</p>
+            <p *ngIf="invasive.native_to"><strong>Native to: </strong>{{invasive.native_to}}</p>
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="text-center text-lightgray">Distribution Map</h4>
+            <div class="invasive-map-container bg-dark">
+                <img [src]="mapUrl" class="invasive-map"
+                    alt="Invasive species distribution map for the {{invasive.common_name}}">
+                <a href="https://nas.er.usgs.gov/viewer/omap.aspx" class="map-attrib" target="_blank">
+                    https://nas.er.usgs.gov/viewer/omap.aspx
+                </a>
+            </div>
+        </div>
+    </div>
+
+
 </div>

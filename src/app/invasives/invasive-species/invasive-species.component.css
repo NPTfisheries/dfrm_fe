@@ -25,3 +25,35 @@
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
+
+/* map */
+.invasive-map-container {
+    position: relative;
+    width: 100%;
+    height: auto; /* Fixed height, adjust as needed */
+    overflow: hidden; /* Ensures content doesn't spill outside the container */
+    background-color: #f0f0f0; /* Optional background color for contrast */
+    border-radius: 0 0 8px 8px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+  }
+  
+  .invasive-map {
+    width: 100%;           /* Ensure the map fills the width */
+    height: 100%;          /* Ensure the map fills the height */
+    object-fit: contain;   /* Keep the entire image visible while maintaining its aspect ratio */
+    display: block;        /* Remove any inline spacing */
+  }
+  
+  .map-attrib {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0 1em 0.5em 0;
+    padding: 0.25em;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.7); /* Light background for readability */
+    border-radius: 4px;
+    font-size: 10pt;
+  }
