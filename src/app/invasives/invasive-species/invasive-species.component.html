@@ -11,12 +11,14 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6 text-lightgray p-5">
+        <div class="col-md-7 text-lightgray p-5">
             <p *ngIf="invasive.description"><strong>Description: </strong>{{invasive.description}}</p>
+            <p *ngIf="invasive.native_to"><strong>Native to: </strong>{{invasive.native_to}}</p>
+        </div>
+        <div class="col-md-5 text-lightgray p-5">
             <p *ngIf="invasive.size"><strong>Size: </strong>{{invasive.size}}</p>
             <p *ngIf="invasive.shape"><strong>Shape: </strong>{{invasive.shape}}</p>
             <p *ngIf="invasive.habitat"><strong>Habitat: </strong>{{invasive.habitat}}</p>
-            <p *ngIf="invasive.native_to"><strong>Native to: </strong>{{invasive.native_to}}</p>
         </div>
     </div>
 
