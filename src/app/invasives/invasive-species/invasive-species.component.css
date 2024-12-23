@@ -1,9 +1,12 @@
-.invasive-img-container {
+/* species image */
+.species-img-container {
     position: relative;
     display: inline-block;
     height: 450px;
     width: 100%;
 }
+
+
 
 .invasive-img {
     width: 100%;
@@ -26,11 +29,11 @@
     border-top-right-radius: 8px;
 }
 
-/* map */
-.invasive-map-container {
+/* secondary images */
+.secondary-container {
     position: relative;
     width: 100%;
-    height: auto; /* Fixed height, adjust as needed */
+    height: 300px; 
     overflow: hidden; /* Ensures content doesn't spill outside the container */
     background-color: #f0f0f0; /* Optional background color for contrast */
     border-radius: 0 0 8px 8px;
@@ -39,14 +42,15 @@
     padding-bottom: 5px;
   }
   
-  .invasive-map {
+  .secondary-img {
     width: 100%;           /* Ensure the map fills the width */
     height: 100%;          /* Ensure the map fills the height */
-    object-fit: contain;   /* Keep the entire image visible while maintaining its aspect ratio */
+    object-fit: cover;   /* Keep the entire image visible while maintaining its aspect ratio */
     display: block;        /* Remove any inline spacing */
+    border-radius: 3px;
   }
   
-  .map-attrib {
+  .secondary-attrib {
     position: absolute;
     bottom: 0;
     right: 0;

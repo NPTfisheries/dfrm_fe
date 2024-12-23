@@ -4,13 +4,13 @@
         <h4 class="text-center"><em>{{invasive.species_name}}</em></h4>
     </div>
 
-    <div class="invasive-img-container">
-        <img [src]="imageUrl" class="invasive-img" alt="`Image of a {{invasive.common_name}}`">
+    <div class="species-img-container">
+        <img [src]="speciesImageUrl" class="invasive-img" alt="`Image of a {{invasive.common_name}}`">
         <a href="{{invasive.image_attribution}}" class="img-attrib" style="font-size: 10pt;"
             target="_blank">{{invasive.image_attribution}}</a>
     </div>
 
-    <div class="row">
+    <div class="row d-flex">
         <div class="col-md-7 text-lightgray p-5">
             <p *ngIf="invasive.description"><strong>Description: </strong>{{invasive.description}}</p>
             <p *ngIf="invasive.native_to"><strong>Native to: </strong>{{invasive.native_to}}</p>
@@ -23,13 +23,20 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
-            <h4 class="text-center text-lightgray">Distribution Map</h4>
-            <div class="invasive-map-container bg-dark">
-                <img [src]="mapUrl" class="invasive-map"
-                    alt="Invasive species distribution map for the {{invasive.common_name}}">
-                <a href="https://nas.er.usgs.gov/viewer/omap.aspx" class="map-attrib" target="_blank">
-                    https://nas.er.usgs.gov/viewer/omap.aspx
+        <div class="col-md-6">
+            <div class="secondary-container bg-dark">
+                <img [src]="image1Url" class="secondary-img">
+                <a href="{{invasive.image1_attribution}}" class="secondary-attrib" target="_blank">
+                    {{invasive.image1_attribution}}
+                </a>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="secondary-container bg-dark">
+                <img [src]="image2Url" class="secondary-img">
+                <a href="{{invasive.image2_attribution}}" class="secondary-attrib" target="_blank">
+                    {{invasive.image2_attribution}}
                 </a>
             </div>
         </div>

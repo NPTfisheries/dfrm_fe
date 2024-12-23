@@ -10,14 +10,16 @@ export class InvasiveSpeciesComponent implements OnInit {
 
   @Input() invasive: any | undefined;
 
-  imageUrl!: string | undefined;
-  mapUrl!: string | undefined;
+  speciesImageUrl!: string | undefined;
+  image1Url!: string | undefined;
+  image2Url!: string | undefined;
   
   constructor() {}
 
   ngOnInit(): void {
-    this.imageUrl = buildImageUrl(this.invasive.species_image);
-    this.mapUrl = buildImageUrl(this.invasive.map_image);
+    this.speciesImageUrl = buildImageUrl(this.invasive.species_image);
+    this.image1Url = buildImageUrl(this.invasive.image1);
+    this.image2Url = buildImageUrl(this.invasive.image2);
   }
   
 }
