@@ -27,7 +27,6 @@ export class ActivityViewComponent {
 
   ngOnInit(): void {
     console.log(this.route.snapshot);
-
   }
 
   ngOnDestroy(): void { }
@@ -38,6 +37,33 @@ export class ActivityViewComponent {
     params.api.sizeColumnsToFit();
   }
 
+  loadActivity() {
+    this.activityService.getActivity(Number(this.route.snapshot.paramMap.get('id'))).subscribe(activity => {
+      this.activity = activity;
+      console.log('Activity Loaded:', activity);
+
+      // combine each detail with header
+      this.rowData = activity.detail.map((detail: any) => ({ ...activity.header, ...detail }));
+
+      this.activityService.getFields(activity.task.task_type).subscribe(fields => {
+        // only include what is necessary for viewing (no validation, editors, etc.)
+        this.columnDefs = fields.map((field: any) => {
+          return {
+            field: field.field,
+            context: { required: field.required },  // capture non-colDefs
+            headerName: field.headerName,
+            filter: field.filter,
+            minWidth: field.minWidth,
+            maxWidth: field.maxWidth,
+            cellClass: field.cellClass ? field.cellClass.filter((c: string) => c !== 'grid-required') : []
+          };
+        });
+      });
+
+    });
+  }
+
+  // CSV EXPORT
   saveAsCSV() {
     console.log('saveAsCSV');
     console.log(this.buildFilename());
@@ -56,36 +82,12 @@ export class ActivityViewComponent {
     return `activity_${this.activity?.id}_${currentDate}.csv`;
   }
 
+  // used in HTML
+  taskName() {return typeof this.activity?.task !== 'number' ? this.activity?.task?.name : ''; }
+
+  // testing
   budn() {
     console.log(this.columnDefs);
     this.gridApi.sizeColumnsToFit();
-  }
-
-  taskName() {
-    return typeof this.activity?.task !== 'number' ? this.activity?.task?.name : '';
-  }
-
-  loadActivity() {
-    this.activityService.getActivity(Number(this.route.snapshot.paramMap.get('id'))).subscribe(activity => {
-      this.activity = activity;
-      // combine each detail with header
-      this.rowData = activity.detail.map((detail:any) => ({...activity.header, ...detail}));
-
-      this.activityService.getFields(activity.task.task_type.id).subscribe(fields => {
-        // only include what is necessary for viewing (no validation, editors, etc.)
-        this.columnDefs = fields.map((field: any) => {
-          return {
-            field: field.field,
-            context: { required: field.required },  // capture non-colDefs
-            headerName: field.headerName,
-            filter: field.filter,
-            minWidth: field.minWidth,
-            maxWidth: field.maxWidth,
-            cellClass: field.cellClass ? field.cellClass.filter((c: string) => c !== 'grid-required') : []
-          };
-        });
-      });
-
-    });
   }
 }

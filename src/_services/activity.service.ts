@@ -33,7 +33,9 @@ export class ActivityService {
     }
 
     getFields(task_type: string): Observable<any[]> {
+        // services will always return activity fields - which have their own task_type.
         console.log('getFields for task_type:', task_type);
+
         let params = { 'task_type': task_type };
 
         return this.get('fields', params);
