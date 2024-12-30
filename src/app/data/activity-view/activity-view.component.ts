@@ -42,8 +42,12 @@ export class ActivityViewComponent {
       this.activity = activity;
       console.log('Activity Loaded:', activity);
 
+      const activity_data = Object.fromEntries(
+        Object.entries(activity).filter(([key]) => !['detail', 'header'].includes(key))
+      );
+
       // combine each detail with header
-      this.rowData = activity.detail.map((detail: any) => ({ ...activity.header, ...detail }));
+      this.rowData = activity.detail.map((detail: any) => ({...activity_data, ...activity.header, ...detail }));
 
       this.activityService.getFields(activity.task.task_type).subscribe(fields => {
         // only include what is necessary for viewing (no validation, editors, etc.)
@@ -55,7 +59,9 @@ export class ActivityViewComponent {
             filter: field.filter,
             minWidth: field.minWidth,
             maxWidth: field.maxWidth,
-            cellClass: field.cellClass ? field.cellClass.filter((c: string) => c !== 'grid-required') : []
+            cellClass: field.cellClass ? field.cellClass.filter((c: string) => c !== 'grid-required') : [],
+            valueGetter: field.valueGetter,
+            valueFormatter: field.valueFormatter
           };
         });
       });
@@ -86,8 +92,8 @@ export class ActivityViewComponent {
   taskName() {return typeof this.activity?.task !== 'number' ? this.activity?.task?.name : ''; }
 
   // testing
-  budn() {
-    console.log(this.columnDefs);
-    this.gridApi.sizeColumnsToFit();
+  print() {
+    console.log('columnDefs:', this.columnDefs);
+    // this.gridApi.sizeColumnsToFit();
   }
 }
