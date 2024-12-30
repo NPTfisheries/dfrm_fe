@@ -42,7 +42,7 @@ export class ActivityService {
     }
 
     getDetailFields(task_type: string): Observable<any[]> {
-        console.log('getFields for task_type:', task_type);
+        console.log('getDetailFields for task_type:', task_type);
         let params = { 'task_type': task_type };
 
         return this.get('fields', params).pipe(
