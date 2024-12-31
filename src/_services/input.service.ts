@@ -656,31 +656,13 @@ export class InputService {
         required: true,
         order: 2
       }),
-      // new InputNumber({
-      //   key: 'elevation',
-      //   label: 'Elevation',
-      //   value: data?.properties?.elevation || undefined,
-      //   order: 3
-      // }),
-      // new InputNumber({
-      //   key: 'river_kilometer',
-      //   label: 'RKM',
-      //   value: data?.properties?.river_kilometer || undefined,
-      //   order: 4
-      // }),
       new InputCoordinates({
         key: 'geometry',
         label: 'Geometry',
         value: data?.geometry || '',
         // required: true, // ????
         order: 5
-      })//,
-      // new InputCheckbox({
-      //   key: 'is_active',
-      //   label: 'Active Location',
-      // value: [false, undefined].includes(data?.is_active) ? undefined : "true",
-      //   order: 6
-      // }),
+      })
     ]
 
     return of(inputs.sort((a, b) => a.order - b.order));

@@ -159,10 +159,7 @@ export interface Location {
     id?: number;
     name?: string;
     description?: string;
-    // elevation?: number;
-    // river_kilometer?: number;
     geometry?: Geometry;
-    
 }
 
 export interface Instrument {
@@ -174,11 +171,3 @@ export interface Instrument {
     serial_number?: string;
     manufacturer?: string;
 }
-
-// cdms filtering
-export interface filterOptions {
-    options?: Object[];
-    placeholder?: string;
-    argName: string;
-    required?: boolean;
-  }
