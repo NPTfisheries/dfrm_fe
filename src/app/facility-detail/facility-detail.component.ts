@@ -30,7 +30,7 @@ export class FacilityDetailComponent implements OnInit {
     this.facilityService.getFacilityBySlug(slug).subscribe(facility => {
       console.log('facility', facility);
       this.data = facility;
-      this.bannerImage = buildImageUrl(facility?.properties?.img_banner?.image);
+      this.bannerImage = buildImageUrl(facility?.img_banner?.image);
     });
 
   }

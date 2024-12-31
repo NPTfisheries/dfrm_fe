@@ -91,12 +91,12 @@ export class OlMapComponent implements OnInit, AfterViewInit {
 
     if (this.facilities && Array.isArray(this.facilities)) {
       this.facilities.forEach((facility: any) => {
-        const coordinates = facility.geometry.coordinates;
-        const facilityType = facility.properties.facility_type.name;
+        const coordinates = facility.location.geometry.coordinates;
+        const facilityType = facility.facility_type.name;
 
         const pointFeature = new Feature({
           geometry: new Point(coordinates),
-          properties: facility.properties,
+          properties: facility,
         });
 
         // Assign color if not already assigned
@@ -168,6 +168,7 @@ export class OlMapComponent implements OnInit, AfterViewInit {
   }
 
   openFacilityPopup(facility: any) {
+    console.log('openFacilityPopup:', facility);
     const modalRef = this.modalService.open(FacilityPopupComponent, {
       keyboard: true, // can exit via Esc
       centered: true,

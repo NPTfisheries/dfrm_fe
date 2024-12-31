@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+// import { ActivatedRoute, Router } from '@angular/router';
 import { FacilityService } from 'src/_services/facility.service';
 
 @Component({
@@ -12,9 +12,9 @@ export class FacilitiesComponent implements OnInit {
   list: any | undefined;
 
   constructor(
-    private route: ActivatedRoute,
+    // private route: ActivatedRoute,
     private facilityService: FacilityService,
-    private router: Router,
+    // private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class FacilitiesComponent implements OnInit {
     this.facilityService.getFacilities().subscribe(facilities => {
       var active_facilities: any = [];
       facilities.filter((facility: any) => {
-        if (facility.properties.display) {
+        if (facility.display) {
           active_facilities.push(facility);
         }
       });

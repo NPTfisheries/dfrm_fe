@@ -44,7 +44,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['facilities'] && !changes['facilities'].firstChange) {
       if (this.facilities) {
-        this.addMarkers();
+        // this.addMarkers();
       }
     }
   }
@@ -60,93 +60,93 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     L.control.scale({ position: 'topright' }).addTo(this.map);
 
-    this.addMarkers();
-    this.addLegend();
+    // this.addMarkers();
+    // this.addLegend();
   }
 
-  addMarkers() {
-    L.geoJSON(this.facilities, {
-      style: function (feature) {
-        // https://leafletjs.com/examples/geojson/
-        switch (feature?.properties.facility_type.name) {
-          case "Office": return { fillColor: 'blue' };
-          case "Hatchery": return { fillColor: 'red' };
-          default: return { fillColor: 'green' };  // Other
-        }
-      },
-      pointToLayer: (feature, latlng) => {
-        // Create a marker with the custom icon
-        // return L.marker(latlng, {
-        //   icon: this.customIcon,
-        // });
+//   addMarkers() {
+//     L.geoJSON(this.facilities, {
+//       style: function (feature) {
+//         // https://leafletjs.com/examples/geojson/
+//         switch (feature?.properties.facility_type.name) {
+//           case "Office": return { fillColor: 'blue' };
+//           case "Hatchery": return { fillColor: 'red' };
+//           default: return { fillColor: 'green' };  // Other
+//         }
+//       },
+//       pointToLayer: (feature, latlng) => {
+//         // Create a marker with the custom icon
+//         // return L.marker(latlng, {
+//         //   icon: this.customIcon,
+//         // });
 
-        // circle markers
-        return L.circleMarker(latlng, this.geojsonMarkerOptions);
-      },
-      onEachFeature: (feature: any, layer) => {
-        const customPopupContent = this.facilityPopup(feature);
-        layer.bindPopup(customPopupContent);
+//         // circle markers
+//         return L.circleMarker(latlng, this.geojsonMarkerOptions);
+//       },
+//       onEachFeature: (feature: any, layer) => {
+//         const customPopupContent = this.facilityPopup(feature);
+//         layer.bindPopup(customPopupContent);
 
-        layer.on('popupopen', () => {
-          // set popup-card-img
-          this.imageUrl = buildImageUrl(feature.properties.img_card.image);
+//         layer.on('popupopen', () => {
+//           // set popup-card-img
+//           this.imageUrl = buildImageUrl(feature.properties.img_card.image);
 
-          // Get the popup and update its content only if it exists
-          const popup = layer.getPopup();
-          if (popup) {
-            popup.setContent(this.facilityPopup(feature));
+//           // Get the popup and update its content only if it exists
+//           const popup = layer.getPopup();
+//           if (popup) {
+//             popup.setContent(this.facilityPopup(feature));
 
-            const button = document.getElementById('myb');
-            if (button) {
-              // set click listener
-              button.addEventListener('click', () => {
-                // console.log('button clicked', feature.id);
-                this.facilitySlug.emit(feature.properties.slug);
-              });
-            }
-          }
-        });
-      }
-    }).addTo(this.map);
-  }
+//             const button = document.getElementById('myb');
+//             if (button) {
+//               // set click listener
+//               button.addEventListener('click', () => {
+//                 // console.log('button clicked', feature.id);
+//                 this.facilitySlug.emit(feature.properties.slug);
+//               });
+//             }
+//           }
+//         });
+//       }
+//     }).addTo(this.map);
+//   }
 
-  addLegend() {
-    const legend = new (L.Control.extend({
-      options: { position: 'bottomleft' },
+//   addLegend() {
+//     const legend = new (L.Control.extend({
+//       options: { position: 'bottomleft' },
 
-      onAdd: function (map: L.Map) {
-        console.log('Legend On Add!');
-        const div = L.DomUtil.create('div', 'legend');
-        const labels = ['Hatchery', 'Office', 'Other'];
-        const colors = ['red', 'blue', 'green'];
-        let legendContent = '<div style="background-color: white; padding: 10px; border-radius: 6px;">';
-        for (let i = 0; i < labels.length; i++) {
-          legendContent += '<div style="margin-bottom: 5px;"><span style="background:' + colors[i] + '; border: 1px solid black; border-radius: 50%; width: 16px; height: 16px; display: inline-block;"></span>&nbsp;&nbsp;' + '<span style="font-size: 18px;">' + labels[i] + '</span></div>';
-        }
-        legendContent += '</div>';
-        div.innerHTML = legendContent;
-        // console.log(div);
-        return div;
-      }
-    }));
-    legend.addTo(this.map);
+//       onAdd: function (map: L.Map) {
+//         console.log('Legend On Add!');
+//         const div = L.DomUtil.create('div', 'legend');
+//         const labels = ['Hatchery', 'Office', 'Other'];
+//         const colors = ['red', 'blue', 'green'];
+//         let legendContent = '<div style="background-color: white; padding: 10px; border-radius: 6px;">';
+//         for (let i = 0; i < labels.length; i++) {
+//           legendContent += '<div style="margin-bottom: 5px;"><span style="background:' + colors[i] + '; border: 1px solid black; border-radius: 50%; width: 16px; height: 16px; display: inline-block;"></span>&nbsp;&nbsp;' + '<span style="font-size: 18px;">' + labels[i] + '</span></div>';
+//         }
+//         legendContent += '</div>';
+//         div.innerHTML = legendContent;
+//         // console.log(div);
+//         return div;
+//       }
+//     }));
+//     legend.addTo(this.map);
 
-  }
+//   }
 
-  facilityPopup(facility: any) {
-    return `<div style="height:200px; width:250px; overflow:hidden; margin: 0 auto">
-    <img style="width: 100%; height: 100%; object-fit: cover;" src="${this.imageUrl}" >
-    </div> <br>
-    <div style="text-align:center;">
-    <h3>${facility.properties.name}</h3>
-    <hr>
-    <h5>${facility.properties.street_address}</h5>
-    <h5>${facility.properties.city}, ${facility.properties.state} ${facility.properties.zipcode}</h5>
-    <h5>${formatPhone(facility.properties.phone_number)}</h5>
-    <br>
-    <button id="myb" class="dfrm-button-small" > Facility Details </button>
-    </div>
-    `
-  }
+//   facilityPopup(facility: any) {
+//     return `<div style="height:200px; width:250px; overflow:hidden; margin: 0 auto">
+//     <img style="width: 100%; height: 100%; object-fit: cover;" src="${this.imageUrl}" >
+//     </div> <br>
+//     <div style="text-align:center;">
+//     <h3>${facility.properties.name}</h3>
+//     <hr>
+//     <h5>${facility.properties.street_address}</h5>
+//     <h5>${facility.properties.city}, ${facility.properties.state} ${facility.properties.zipcode}</h5>
+//     <h5>${formatPhone(facility.properties.phone_number)}</h5>
+//     <br>
+//     <button id="myb" class="dfrm-button-small" > Facility Details </button>
+//     </div>
+//     `
+//   }
 
 }
