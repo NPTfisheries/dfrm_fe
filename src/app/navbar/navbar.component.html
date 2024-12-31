@@ -61,8 +61,8 @@
       <button ngbDropdownItem routerLink="task-list" routerLinkActive="active">Task List</button>
       <button ngbDropdownItem routerLink="user-list" routerLinkActive="active">User List</button>
       <button ngbDropdownItem routerLink="image-list" routerLinkActive="active">Images</button>
-      <!-- <button ngbDropdownItem *ngIf="admin" routerLink="location-list" routerLinkActive="active">Locations</button>
-      <button ngbDropdownItem *ngIf="admin" routerLink="instrument-list" routerLinkActive="active">Instruments</button> -->
+      <button ngbDropdownItem *ngIf="admin" routerLink="location-list" routerLinkActive="active">Locations</button>
+      <!-- <button ngbDropdownItem *ngIf="admin" routerLink="instrument-list" routerLinkActive="active">Instruments</button>  -->
 
       <div class="dropdown-divider"></div>
       <button ngbDropdownItem (click)="authService.logout()">Logout</button>
