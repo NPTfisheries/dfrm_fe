@@ -38,7 +38,6 @@ import { ImagePreviewComponent } from './image-preview/image-preview.component';
 import { ImagePreviewRendererComponent } from '../_renderers/image-preview-renderer/image-preview-renderer.component';
 import { StaffCardComponent } from './cards/staff-card/staff-card.component';
 import { FacilitiesComponent } from './facilities/facilities.component';
-import { MapComponent } from './facilities/map/map.component';
 import { FacilityDetailComponent } from './facility-detail/facility-detail.component';
 import { DivisionDetailComponent } from './division-detail/division-detail.component';
 import { DetailMapComponent } from './facility-detail/detail-map/detail-map.component';
@@ -97,7 +96,6 @@ import { MapLegendComponent } from './ol-map/map-legend/map-legend.component';
     ImagePreviewRendererComponent,
     StaffCardComponent,
     FacilitiesComponent,
-    MapComponent,
     FacilityDetailComponent,
     DivisionDetailComponent,
     DetailMapComponent,
