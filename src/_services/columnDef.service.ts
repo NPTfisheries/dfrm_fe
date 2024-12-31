@@ -531,42 +531,42 @@ function documentColDefs(routeType: string, context: any) {
 function facilityColDefs(routeType: string, context: any) {
     const columns: (ColDef | ColGroupDef)[] = [
         {
-            field: 'properties.name',
+            field: 'name',
             headerName: 'Name'
         },
         // {
-        //     field: 'properties.description',
+        //     field: 'description',
         //     headerName: 'Description'
         // },
         {
-            field: 'properties.facility_type.name',
+            field: 'facility_type.name',
             headerName: 'Facility Type'
         },
         {
-            field: 'properties.street_address',
+            field: 'street_address',
             headerName: 'Street Addresss'
         },
         {
-            field: 'properties.mailing_address',
+            field: 'mailing_address',
             headerName: 'Mailing Address'
         },
         {
-            field: 'properties.city',
+            field: 'city',
             headerName: 'City'
         },
         {
-            field: 'properties.state',
+            field: 'state',
             headerName: 'State'
         },
         {
-            field: 'properties.is_active',
+            field: 'is_active',
             headerName: 'Active?',
             cellRenderer: BooleanRendererComponent,
             cellRendererParams: {},
             ...isActiveProps
         },
         {
-            field: 'properties.display',
+            field: 'display',
             headerName: 'Display?',
             cellRenderer: BooleanRendererComponent,
             cellRendererParams: {},
@@ -574,7 +574,7 @@ function facilityColDefs(routeType: string, context: any) {
         },
         {
             headerName: 'View',
-            field: 'properties.slug',
+            field: 'slug',
             cellRenderer: LinkButtonRendererComponent,
             cellRendererParams: {},
             ...buttonProps
@@ -584,7 +584,7 @@ function facilityColDefs(routeType: string, context: any) {
     if (managerAccess(context.permissionGroup)) {
         columns.push({
             headerName: 'Edit',
-            field: 'properties.slug',
+            field: 'slug',
             cellRenderer: EditButtonRendererComponent,
             cellRendererParams: {
                 routeType: routeType,
