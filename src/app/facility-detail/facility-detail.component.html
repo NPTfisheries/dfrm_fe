@@ -2,36 +2,36 @@
     <img class="banner-image" [src]="bannerImage" />
 </div>
 <div class="container my-5 text-center">
-    <h1>{{ data?.properties.name }}</h1>
+    <h1>{{ data?.name }}</h1>
     <div class="container my-5">
-        <!-- <pre><p>{{ data?.properties.description }}</p></pre> -->
-        <app-html-sanitizer [html]="data?.properties.description"></app-html-sanitizer>
+        <!-- <pre><p>{{ data?.description }}</p></pre> -->
+        <app-html-sanitizer [html]="data?.description"></app-html-sanitizer>
     </div>
     <h2 class="divider gradient-hr my-5"></h2>
-    <p>Street Address: {{ data?.properties.street_address }}</p>
-    <p>Mailing Addresss: {{ data?.properties.mailing_address }}</p>
-    <p>{{ data?.properties.city }}, {{ data?.properties.state }} {{ data?.properties.zipcode }}</p>
+    <p>Street Address: {{ data?.street_address }}</p>
+    <p>Mailing Addresss: {{ data?.mailing_address }}</p>
+    <p>{{ data?.city }}, {{ data?.state }} {{ data?.zipcode }}</p>
 </div>
 <h2 class="bar-title">Facility Management Staff</h2>
 <div class="employee-bar">
-    <app-employee-card *ngIf="data?.properties.manager && data?.properties.manager.email !== ''"
-        [data]="data?.properties.manager"></app-employee-card>
-    <app-employee-card *ngIf="data?.properties.assistant && data?.properties.deputy.email !== ''"
-        [data]="data?.properties.deputy"></app-employee-card>
-    <app-employee-card *ngIf="data?.properties.assistant && data?.properties.assistant.email !== ''"
-        [data]="data?.properties.assistant"></app-employee-card>
+    <app-employee-card *ngIf="data?.manager && data?.manager.email !== ''"
+        [data]="data?.manager"></app-employee-card>
+    <app-employee-card *ngIf="data?.assistant && data?.deputy.email !== ''"
+        [data]="data?.deputy"></app-employee-card>
+    <app-employee-card *ngIf="data?.assistant && data?.assistant.email !== ''"
+        [data]="data?.assistant"></app-employee-card>
 </div>
 
 <!-- <h2 class="divider gradient-hr my-5"></h2> -->
 
 <app-detail-map *ngIf="data" [facility]="data" ></app-detail-map>
 
-<!-- <div *ngIf="data?.properties.staff.length > 0 ">
+<!-- <div *ngIf="data?.staff.length > 0 ">
     <h2 class="divider gradient-hr my-5"></h2>
     <h2 class="bar-title">Facility Staff</h2>
     <div>
         <div  class="staff-bar mb-5">
-            <app-staff-card *ngFor="let staff of data?.properties.staff" [data]="staff"></app-staff-card>
+            <app-staff-card *ngFor="let staff of data?.staff" [data]="staff"></app-staff-card>
         </div>
     </div>
 </div> -->

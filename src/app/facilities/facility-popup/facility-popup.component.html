@@ -1,0 +1,15 @@
+<div class="card text-white bg-dark" style="border-radius: 6px; border-color: #5492b4; border-width: 2px;">
+    <div class="card-image-container" style= "border-radius: 6px 6px 0 0;">
+        <img class="card-image" style= "border-radius: 6px 6px 0 0;" [src]="buildImageUrl(facility.img_card.image)">
+    </div>
+    <div class="card-body text-center">
+        <h3 class="text-yellow">{{ facility.name }}</h3>
+        <hr class="card-hr">
+        <h5>{{ facility.street_address }}</h5>
+        <h5>{{ facility.city }}, {{ facility.state }} {{ facility.zipcode }}</h5>
+        <h5>{{ formatPhone(facility.phone_number) }}</h5>
+    </div>
+    <div class="card-footer d-flex justify-content-center align-items-center">
+        <button (click)="onClick()" class="dfrm-button-small">Facility Details</button>
+    </div>
+</div>

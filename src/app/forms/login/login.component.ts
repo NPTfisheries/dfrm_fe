@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs';
 
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      username: ['', Validators.required],
+      username: ['', [Validators.required, Validators.pattern(/^[\w-]+(\.[\w-]+)*@nezperce\.org$/)]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(255)]]
     });
   }
@@ -59,5 +59,10 @@ export class LoginComponent implements OnInit {
         }
       });
   }
+
+    @HostListener('window:popstate', ['$event'])
+    onPopState(event: PopStateEvent) {
+      this.activeModal.close();
+    }
 
 }

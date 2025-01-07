@@ -1,0 +1,9 @@
+<div class="legend">
+    <div *ngFor="let entry of facilityTypeColors | keyvalue" class="legend-item">
+      <span 
+        [style.background]="entry.value"
+        class="legend-icon">
+      </span>
+      <span class="legend-label">{{ entry.key }}</span>
+    </div>
+  </div>

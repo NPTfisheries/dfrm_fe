@@ -8,6 +8,7 @@ import { UserService } from 'src/_services/user.service';
 import { DivisionService } from 'src/_services/division.service';
 import { ProjectService } from 'src/_services/project.service';
 import { LookUpService } from 'src/_services/lookup.service';
+import { LocationService } from 'src/_services/location.service';
 
 @Component({
   selector: 'app-dynamic-form-input',
@@ -26,10 +27,11 @@ export class DynamicFormInputComponent implements OnInit {
     private divisionService: DivisionService,
     private projectService: ProjectService,
     private userService: UserService,
-    private lookUpService: LookUpService
+    private lookUpService: LookUpService,
+    private locationService: LocationService
   ) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     if (this.input.controlType === 'image') {
       // load initial preview.
       this.updatePreview(Number(this.input.value));
@@ -55,6 +57,10 @@ export class DynamicFormInputComponent implements OnInit {
       case 'instrument types':
         this.lookUpService.getLookUpsByObjectType('Instrument').subscribe(itypes => this.items = itypes);
         break;
+      case 'locations':
+        this.locationService.getLocations().subscribe(locations => this.items = locations);
+        this.bind_label = 'properties.name';
+        break;
       case 'projects':
         this.projectService.getProjects().subscribe(projects => this.items = projects);
         break;
@@ -78,7 +84,6 @@ export class DynamicFormInputComponent implements OnInit {
       'validationError': this.form.get(input.key)?.errors !== null,
     };
   }
-
 
   // ONLY for Image Preview  **************************************************
   onSelectChange(event: any): void {

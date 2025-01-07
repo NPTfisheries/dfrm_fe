@@ -38,7 +38,6 @@ import { ImagePreviewComponent } from './image-preview/image-preview.component';
 import { ImagePreviewRendererComponent } from '../_renderers/image-preview-renderer/image-preview-renderer.component';
 import { StaffCardComponent } from './cards/staff-card/staff-card.component';
 import { FacilitiesComponent } from './facilities/facilities.component';
-import { MapComponent } from './facilities/map/map.component';
 import { FacilityDetailComponent } from './facility-detail/facility-detail.component';
 import { DivisionDetailComponent } from './division-detail/division-detail.component';
 import { DetailMapComponent } from './facility-detail/detail-map/detail-map.component';
@@ -65,6 +64,8 @@ import { ActivityEditComponent } from './data/activity-edit/activity-edit.compon
 import { OlMapComponent } from './ol-map/ol-map.component';
 import { LoadingSpinnerComponent } from '../_components/loading-spinner/loading-spinner.component';
 import { DocumentInfoComponent } from './documents/document-info/document-info.component';
+import { FacilityPopupComponent } from './facilities/facility-popup/facility-popup.component';
+import { MapLegendComponent } from './ol-map/map-legend/map-legend.component';
 import { InvasivesComponent } from './invasives/invasives.component';
 import { InvasiveSpeciesComponent } from './invasives/invasive-species/invasive-species.component';
 
@@ -96,7 +97,6 @@ import { InvasiveSpeciesComponent } from './invasives/invasive-species/invasive-
     ImagePreviewRendererComponent,
     StaffCardComponent,
     FacilitiesComponent,
-    MapComponent,
     FacilityDetailComponent,
     DivisionDetailComponent,
     DetailMapComponent,
@@ -122,6 +122,8 @@ import { InvasiveSpeciesComponent } from './invasives/invasive-species/invasive-
     OlMapComponent,
     LoadingSpinnerComponent,
     DocumentInfoComponent,
+    FacilityPopupComponent,
+    MapLegendComponent,
     InvasivesComponent,
     InvasiveSpeciesComponent,
   ],

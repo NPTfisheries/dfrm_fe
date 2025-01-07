@@ -1,23 +1,34 @@
-import { Component, AfterViewInit, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { formatPhone } from 'src/_utilities/formatPhone';
-import { buildImageUrl } from 'src/_utilities/buildImageUrl';
+import { Component, AfterViewInit, Input, OnInit, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { FacilityPopupComponent } from '../facilities/facility-popup/facility-popup.component';
 
 import Map from 'ol/Map';
 import View from 'ol/View';
 
 import TileLayer from 'ol/layer/Tile';
-import OSM from 'ol/source/OSM';
+// import OSM from 'ol/source/OSM';
 import XYZ from 'ol/source/XYZ';
-
+import { Overlay } from 'ol';
+import { fromLonLat } from 'ol/proj';
 import { Vector as VectorSource } from 'ol/source';
 import { Vector as VectorLayer } from 'ol/layer';
-import { fromLonLat } from 'ol/proj';
 import { ScaleLine, defaults as defaultControls } from 'ol/control';
-import GeoJSON from 'ol/format/GeoJSON';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import { Style, Stroke, Fill, Icon, Circle } from 'ol/style';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+const colors = [
+  "rgba(255, 255, 0, 0.35)",   // yellow
+  "rgba(255, 0, 0, 0.35)",     // red
+  "rgba(0, 0, 255, 0.35)",     // blue
+  "rgba(0, 128, 0, 0.35)",     // green
+  "rgba(255, 165, 0, 0.35)",   // orange
+  "rgba(165, 42, 42, 0.35)",   // brown
+  "rgba(128, 128, 128, 0.35)", // gray
+  "rgba(255, 192, 203, 0.35)", // pink
+  "rgba(0, 255, 255, 0.35)",   // cyan
+  "rgba(255, 0, 255, 0.35)"    // magenta
+];
 
 @Component({
   selector: 'app-ol-map',
@@ -30,20 +41,25 @@ export class OlMapComponent implements OnInit, AfterViewInit {
 
   public map!: Map;
   scalebar = new ScaleLine({ units: 'metric', bar: true, minWidth: 140 });
-  facilityTypeColors: { [key: string]: string } = {
-    Office: 'blue',
-    Hatchery: 'green',
-    Other: 'red'
-  };
+  facilityTypeColors: { [key: string]: string } = {};
+  colorIndex = 0;
+  public selectedFacility: any | null = null;
 
-  constructor(private router: Router) { }
+  private tooltip!: HTMLElement;
+  private hoverText!: Overlay;
+
+  constructor(
+    private modalService: NgbModal,
+    private elRef: ElementRef,
+    private cdr: ChangeDetectorRef,
+  ) { }
 
   ngOnInit(): void {
     this.initializeMap();
-    this.createLegend();
   }
 
   ngAfterViewInit(): void {
+    this.tooltip = this.elRef.nativeElement.querySelector('.ol-tooltip');
     this.addPoints();
   }
 
@@ -51,36 +67,12 @@ export class OlMapComponent implements OnInit, AfterViewInit {
     this.map = new Map({
       target: 'ol-map',
       view: new View({
-        center: [-116.087802, 45.25],
+        center: [-116.5, 45.75],
         projection: 'EPSG:4326',
-        zoom: 7,
+        zoom: 9,
         minZoom: 7
       }),
       layers: [
-        // new TileLayer({ source: new OSM() })
-        // new TileLayer({
-        //   source: new XYZ({
-        //     url: 'https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg',
-        //     attributions: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>',
-        //   }),
-        // }),
-        // new TileLayer({
-        //   source: new XYZ({
-        //     url: 'http://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', // Replace "r" with "s" for satellite, "h" for hybrid
-        //   }),
-        // }),
-        // new TileLayer({
-        //   source: new XYZ({
-        //     url: 'https://{1-4}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-        //     attributions:
-        //       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> &copy; <a href="https://carto.com/">CARTO</a>',
-        //   }),
-        // }),
-        // new TileLayer({
-        //   source: new TileArcGISRest({
-        //     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
-        //   }),
-        // }),
         new TileLayer({
           source: new XYZ({
             url: 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}',
@@ -89,13 +81,6 @@ export class OlMapComponent implements OnInit, AfterViewInit {
             minZoom: 7,
           }),
         }),
-        // new TileLayer({
-        //   source: new XYZ({
-        //     url: 'https://tiles.maps.eox.at/eox-basemap/{z}/{x}/{y}.png',
-        //     attributions: 'Map tiles by <a href="https://eox.at/">EOX</a>',
-        //     maxZoom: 10,
-        //   }),
-        // }),
       ],
       controls: defaultControls().extend([this.scalebar])
     });
@@ -106,15 +91,20 @@ export class OlMapComponent implements OnInit, AfterViewInit {
 
     if (this.facilities && Array.isArray(this.facilities)) {
       this.facilities.forEach((facility: any) => {
-        const coordinates = facility.geometry.coordinates;
-        const facilityType = facility.properties.facility_type.name;
+        const coordinates = facility.location.geometry.coordinates;
+        const facilityType = facility.facility_type.name;
 
         const pointFeature = new Feature({
           geometry: new Point(coordinates),
-          properties: facility.properties,
+          properties: facility,
         });
 
-        // Apply style based on facility type
+        // Assign color if not already assigned
+        if (!this.facilityTypeColors[facilityType]) {
+          this.facilityTypeColors[facilityType] = this.getNextColor();
+          this.cdr.detectChanges(); // prevents error when passing values to legend component
+        }
+
         pointFeature.setStyle(this.getStyleForFacility(facilityType));
 
         vectorSource.addFeature(pointFeature);
@@ -123,6 +113,7 @@ export class OlMapComponent implements OnInit, AfterViewInit {
 
     const vectorLayer = new VectorLayer({
       source: vectorSource,
+      // declutter: true //doesn't work as desired.
     });
 
     this.map.addLayer(vectorLayer);
@@ -131,124 +122,75 @@ export class OlMapComponent implements OnInit, AfterViewInit {
     this.addTooltipInteraction(vectorSource);
   }
 
+  private createHoverText(coordinates: any) {
+    this.hoverText = new Overlay({
+      element: this.tooltip,
+      autoPan: true,
+      positioning: 'bottom-center',
+      position: coordinates
+    });
+    this.map.addOverlay(this.hoverText);
+  }
+
   addTooltipInteraction(vectorSource: VectorSource) {
-    // Create an overlay for the tooltip
-    const popupElement = document.createElement('div');
-    popupElement.style.position = 'absolute';
-    popupElement.style.background = 'white';
-    popupElement.style.border = '1px solid black';
-    popupElement.style.borderRadius = '4px';
-    popupElement.style.padding = '10px';
-    popupElement.style.pointerEvents = 'auto'; // Allow interaction with the popup
-    popupElement.style.display = 'none'; // Initially hidden
+    // tooltip on hover.
+    this.map.on('pointermove', (event) => {
+      const features = this.map.getFeaturesAtPixel(event.pixel);
 
-    document.body.appendChild(popupElement);
+      if (features.length > 0) {
+        const names = features.map(feature => feature.get('properties').name);
+        this.tooltip.innerHTML = names.join('<br>');
+        this.tooltip.style.display = 'block';
 
+        // Use map.getCoordinateFromPixel for accurate positioning
+        const coordinates = this.map.getCoordinateFromPixel(event.pixel); // this returns lat/long
+
+        this.createHoverText(coordinates);
+
+      } else {
+        this.tooltip.style.display = 'none';
+      }
+    });
+
+    // clicka point to open modal
     this.map.on('singleclick', (event) => {
-      // Hide tooltip initially
-      popupElement.style.display = 'none';
+      const features = this.map.getFeaturesAtPixel(event.pixel);
+      // if stacked dots, only opens one.
+      if (features.length > 0) {
+        // Get the first feature
+        const feature = features[0];
+        const facility = feature.get('properties');
 
-      // Get the features at the clicked location
-      this.map.forEachFeatureAtPixel(event.pixel, (feature) => {
-        const facility = feature.get('properties'); // Get the name or title property
-        if (facility) {
-          // Position the tooltip near the clicked point
-          popupElement.innerHTML = this.facilityPopup(facility);
-          popupElement.style.left = `${event.originalEvent.pageX}px`;
-          popupElement.style.top = `${event.originalEvent.pageY}px`;
-          popupElement.style.display = 'block';
-        }
-      });
-    });
-
-    // Listen for button clicks within the popup
-    popupElement.addEventListener('click', (event: Event) => {
-      const target = event.target as HTMLElement;
-      console.log(event);
-      if (target.tagName === 'BUTTON' && target.dataset['slug']) {
-        const slug = target.dataset['slug'];
-        this.router.navigate([`/facilities/${slug}`]); // Navigate to the desired route
-        popupElement.style.display = 'none';
+        // Open the popup with the first feature's properties
+        this.openFacilityPopup(facility);
       }
     });
-
-    // Hide the tooltip when clicking on map (no feature)
-    this.map.on('click', (event) => {
-      const clickedOnFeature = this.map.forEachFeatureAtPixel(event.pixel, () => true);
-      if (!clickedOnFeature) {
-        popupElement.style.display = 'none';
-      }
-    });
-
-    // Hide the popup when clicking elsewhere in the application
-    document.addEventListener('click', (event: MouseEvent) => {
-      if (!(event.target as HTMLElement).closest('div')) {
-        popupElement.style.display = 'none';
-      }
-    });
-
   }
 
-  // HTML for the popup
-  facilityPopup(facility: any) {
-    // console.log('facility popup:', facility);
-    return `<div style="height:200px; width:250px; overflow:hidden; margin: 0 auto">
-    <img style="width: 100%; height: 100%; object-fit: cover;" src="${buildImageUrl(facility.img_card.image)}" >
-    </div> <br>
-    <div style="text-align:center;">
-    <h3>${facility.name}</h3>
-    <hr>
-    <h5>${facility.street_address}</h5>
-    <h5>${facility.city}, ${facility.state} ${facility.zipcode}</h5>
-    <h5>${formatPhone(facility.phone_number)}</h5>
-    <br>
-    <button id="myb" class="dfrm-button-small" data-slug="${facility.slug}"> Facility Details </button>
-    </div>
-    `
+  openFacilityPopup(facility: any) {
+    console.log('openFacilityPopup:', facility);
+    const modalRef = this.modalService.open(FacilityPopupComponent, {
+      keyboard: true, // can exit via Esc
+      centered: true,
+    });
+    modalRef.componentInstance.facility = facility;
   }
 
+  // point styling
   getStyleForFacility(facilityType: string): Style {
-    const color = this.facilityTypeColors[facilityType] || this.getRandomColor();
     return new Style({
       image: new Circle({
         radius: 8,
-        fill: new Fill({ color: color }),
-        stroke: new Stroke({ color: 'white', width: 2 }), // Optional white border
+        fill: new Fill({ color: this.facilityTypeColors[facilityType] }),
+        stroke: new Stroke({ color: 'black', width: 1.5 }), //border
       }),
     });
   }
 
-  getRandomColor(): string {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
+  getNextColor(): string {
+    const color = colors[this.colorIndex];
+    this.colorIndex = (this.colorIndex + 1) % colors.length;
     return color;
-  }
-
-  createLegend() {
-    const legendContainer = document.getElementById('legend-items');
-  
-    if (!legendContainer) return;
-  
-    // Clear existing legend items
-    legendContainer.innerHTML = '';
-  
-    // Get unique facility types from facilities data
-    const uniqueFacilityTypes = [...new Set(this.facilities.map((facility: any) => facility.properties.facility_type.name))];
-  
-    uniqueFacilityTypes.forEach((type) => {
-      const color = this.facilityTypeColors[String(type)] || this.getRandomColor();
-      console.log(`Legend color for ${type}: ${color}`); // Debug log
-
-      // Create legend item
-      const legendItem = document.createElement('div');
-      legendItem.className = 'legend-item';
-      legendItem.innerHTML = `<div class="legend-item" style="margin-bottom: 5px;"><span style="background: ${color}; border: 1px solid black; border-radius: 50%; width: 16px; height: 16px; display: inline-block;"></span><span class="legend-item"> ${type}</span></div>`;
-  
-      legendContainer.appendChild(legendItem);
-    });
   }
 
 }

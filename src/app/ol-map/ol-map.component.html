@@ -1,4 +1,11 @@
-<div id="legend" class="legend">
-    <div id="legend-items" ></div>
+<app-map-legend [facilityTypeColors]="facilityTypeColors"></app-map-legend>
+
+<div id="ol-map" class="openlayers-map">
+  <div class="ol-tooltip" style="display:none;"></div>
 </div>
-<div id="ol-map" class="openlayers-map"></div>
+
+
+<app-facility-popup
+  *ngIf="selectedFacility"
+  [facility]="selectedFacility">
+</app-facility-popup>

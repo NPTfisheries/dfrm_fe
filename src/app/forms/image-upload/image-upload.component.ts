@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService } from 'src/_services/alert.service';
 import { BackendService } from 'src/_services/backend.service';
 import { ImageService } from 'src/_services/image.service';
-
+import { Subscription } from 'rxjs';
 import { ListPageComponent } from 'src/app/list-page/list-page.component';
 
 @Component({
@@ -16,9 +16,9 @@ export class ImageUploadComponent implements OnInit {
   @Input() context!: ListPageComponent
 
   form!: FormGroup;
-  selectedImage: File | undefined;
-  imagePreview: string | undefined;
   isSubmitting: boolean = false;
+
+  private formChangesSubscription!: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,38 +34,38 @@ export class ImageUploadComponent implements OnInit {
       description: ['', Validators.required],
       photographer: ['', Validators.required],
       source: ['', Validators.required],
-      photo_date: ['', Validators.required]
-    })
+      photo_date: ['', Validators.required],
+      image: [null, Validators.required]
+    });
+
+    // subscribe to form changes (good debugger)
+    // this.form.valueChanges.subscribe(() => {
+    //   console.log('Form Valid:', this.form.valid);
+    //   console.log('Form Value:', this.form.value);
+    // });
   }
 
   get f() { return this.form.controls; }
 
-  onFileChange(selectedFile: File | undefined): void {
-    this.selectedImage = selectedFile;
-    if (this.selectedImage) {
-      this.imagePreview = URL.createObjectURL(this.selectedImage);
-    } else {
-      this.imagePreview = undefined;
-    }
-  }
-
-
   onSubmit(): void {
-    if (this.form.invalid || !this.selectedImage) {
+    if (this.form.invalid) {
       return;
     }
 
     this.isSubmitting = true;
 
     const formData = new FormData();
-    formData.append('name', this.f['name'].value);
-    formData.append('description', this.f['description'].value);
-    formData.append('photographer', this.f['photographer'].value);
-    formData.append('source', this.f['source'].value);
-    formData.append('photo_date', this.f['photo_date'].value);
-    formData.append('image', this.selectedImage);
+    Object.keys(this.form.controls).forEach(key => {
+      const value = this.form.get(key)?.value;
+      if (value instanceof FileList) {
+        // Handle file inputs
+        formData.append(key, value[0]);
+      } else {
+        formData.append(key, value);
+      }
+    });
 
-    this.backendService.newItem('image', formData).subscribe({
+    this.backendService.newItem('images', formData).subscribe({
       next: () => {
         this.imageService.refreshImages().subscribe((updatedList: any) => {
           this.context.data = updatedList;
@@ -78,6 +78,17 @@ export class ImageUploadComponent implements OnInit {
         this.isSubmitting = false;
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.formChangesSubscription) {
+      this.formChangesSubscription.unsubscribe();
+    }
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event: PopStateEvent) {
+    this.activeModal.close();
   }
 
 }

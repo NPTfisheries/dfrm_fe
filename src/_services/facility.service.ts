@@ -28,7 +28,7 @@ export class FacilityService {
     getFacilityBySlug(slug: string): Observable<Facility | undefined> {
         // console.log('getFacilityBySlug');
         return this.getFacilities().pipe(
-            map((facilities: Facility[]) => facilities.find(facility => facility?.properties?.slug == slug))
+            map((facilities: Facility[]) => facilities.find(facility => facility?.slug == slug))
         )
     }
 

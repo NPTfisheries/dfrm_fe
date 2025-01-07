@@ -26,7 +26,7 @@ export class DetailMapComponent implements AfterViewInit {
   }
 
   private initMap(): void {
-    this.map = L.map('map', {scrollWheelZoom:false}).setView([this.facility.geometry.coordinates[1], this.facility.geometry.coordinates[0]], 10);
+    this.map = L.map('map', {scrollWheelZoom:false}).setView([this.facility.location.geometry.coordinates[1], this.facility.location.geometry.coordinates[0]], 10);
 
     L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
       attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>',
@@ -40,7 +40,7 @@ export class DetailMapComponent implements AfterViewInit {
   }
 
   addMarkers() {
-    L.geoJSON(this.facility.geometry, {
+    L.geoJSON(this.facility.location.geometry, {
       pointToLayer: (feature, latlng) => {
         // Create a marker with the custom icon
         return L.marker(latlng, {
@@ -54,11 +54,11 @@ export class DetailMapComponent implements AfterViewInit {
   addressPopup(facility: any) {
     return `
     <div style="text-align:center;">
-    <h3>${facility.properties.name}</h3>
+    <h3>${facility.name}</h3>
     <hr>
-    <h5>${facility.properties.street_address}</h5>
-    <h5>${facility.properties.city}, ${facility.properties.state} ${facility.properties.zipcode}</h5>
-    <h5>${formatPhone(facility.properties.phone_number)}</h5>
+    <h5>${facility.street_address}</h5>
+    <h5>${facility.city}, ${facility.state} ${facility.zipcode}</h5>
+    <h5>${formatPhone(facility.phone_number)}</h5>
     </div>
     `
   }  

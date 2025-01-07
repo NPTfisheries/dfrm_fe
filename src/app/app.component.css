@@ -1,3 +1,5 @@
 .router-content {
     min-height: calc(100vh - 106px - 360px);
+    display: flex;
+    flex-direction: column;
 }

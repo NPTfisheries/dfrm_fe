@@ -1,4 +1,4 @@
-import { Component,  OnInit, Input } from '@angular/core';
+import { Component,  OnInit, Input, HostListener } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 
@@ -87,6 +87,11 @@ export class RegisterComponent implements OnInit {
     // the validation message for the password2 mismatch isn't functioning 7/18/24
     // but RK and TS are the only ones who can do this, so whatever. 
     return password === password2 ? null : { passwordMismatch: true };
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event: PopStateEvent) {
+    this.activeModal.close();
   }
 
 }

@@ -509,21 +509,21 @@ export class InputService {
       new InputText({
         key: 'name',
         label: 'Name',
-        value: data?.properties?.name || '',
+        value: data?.name || '',
         required: true,
         order: 1
       }),
       new InputRichText({
         key: 'description',
         label: 'Description',
-        value: data?.properties?.description || '',
+        value: data?.description || '',
         required: true,
         order: 2
       }),
       new InputSelect({
         key: 'facility_type',
         label: 'Facility Type',
-        value: data?.properties?.facility_type?.id || '',
+        value: data?.facility_type?.id || '',
         selectType: 'facility types',
         required: true,
         order: 3
@@ -531,7 +531,7 @@ export class InputService {
       new InputSelect({
         key: 'manager',
         label: 'Manager',
-        value: data?.properties?.manager.id || '',
+        value: data?.manager.id || '',
         selectType: 'users',
         required: true,
         order: 4
@@ -539,28 +539,28 @@ export class InputService {
       new InputSelect({
         key: 'deputy',
         label: 'Deputy',
-        value: data?.properties?.deputy.id || '',
+        value: data?.deputy.id || '',
         selectType: 'users',
         order: 5
       }),
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
-        value: data?.properties?.assistant.id || '',
+        value: data?.assistant.id || '',
         selectType: 'users',
         order: 6
       }),
       new InputMultiSelect({
         key: 'staff',
         label: 'Staff',
-        idArray: this.getIdArray(data?.properties?.staff) || [],
+        idArray: this.getIdArray(data?.staff) || [],
         selectType: 'users',
         order: 7
       }),
       new InputImage({
         key: 'img_banner',
         label: 'Choose Banner Image',
-        value: data?.properties?.img_banner.id || this.defaultBannerId,
+        value: data?.img_banner.id || this.defaultBannerId,
         options: this.buildImageOptions(),
         required: true,
         order: 8
@@ -568,14 +568,14 @@ export class InputService {
       new InputImage({
         key: 'img_card',
         label: 'Choose Card Image',
-        value: data?.properties?.img_card.id || this.defaultCardId,
+        value: data?.img_card.id || this.defaultCardId,
         options: this.buildImageOptions(),
         order: 9
       }),
       new InputPhone({
         key: 'phone_number',
         label: 'Phone Number',
-        value: data?.properties?.phone_number || '',
+        value: data?.phone_number || '',
         pattern: "\\+1\\s?\\d{3}\\s?\\d{3}\\s?\\d{4}",
         patternMessage: 'Phone numbers must be provided as "+1 123 456 7890", spaces optional.',
         order: 10
@@ -583,55 +583,55 @@ export class InputService {
       new InputText({
         key: 'street_address',
         label: 'Street Address',
-        value: data?.properties?.street_address || '',
+        value: data?.street_address || '',
         required: true,
         order: 11
       }),
       new InputText({
         key: 'mailing_address',
         label: 'Mailing Address',
-        value: data?.properties?.mailing_address || '',
+        value: data?.mailing_address || '',
         order: 12
       }),
       new InputText({
         key: 'city',
         label: 'City',
-        value: data?.properties?.city || '',
+        value: data?.city || '',
         required: true,
         order: 13
       }),
       new InputText({
         key: 'state',
         label: 'State',
-        value: data?.properties?.state || '',
+        value: data?.state || '',
         required: true,
         order: 14
       }),
       new InputNumber({
         key: 'zipcode',
         label: 'Zipcode',
-        value: data?.properties?.zipcode || '',
+        value: data?.zipcode || '',
         required: true,
         order: 15
       }),
-      new InputCoordinates({
-        key: 'geometry',
-        label: 'Geometry',
-        value: data?.geometry || '',
-        required: true,
+      new InputSelect({
+        key: 'location',
+        label: 'Location',
+        value: data?.location.id || '',
+        selectType: 'locations',
         order: 16
       }),
       new InputCheckbox({
         key: 'is_active',
         label: 'Active Facility',
-        value: [false, undefined].includes(data?.properties?.is_active) ? undefined : "true",
+        value: [false, undefined].includes(data?.is_active) ? undefined : "true",
         order: 17
       }),
       
       new InputCheckbox({
         key: 'display',
         label: 'Display on Website',
-        value: [false, undefined].includes(data?.properties?.display) ? undefined : "true",
+        value: [false, undefined].includes(data?.display) ? undefined : "true",
         order: 18
       }),
     ]
@@ -656,31 +656,13 @@ export class InputService {
         required: true,
         order: 2
       }),
-      // new InputNumber({
-      //   key: 'elevation',
-      //   label: 'Elevation',
-      //   value: data?.properties?.elevation || undefined,
-      //   order: 3
-      // }),
-      // new InputNumber({
-      //   key: 'river_kilometer',
-      //   label: 'RKM',
-      //   value: data?.properties?.river_kilometer || undefined,
-      //   order: 4
-      // }),
       new InputCoordinates({
         key: 'geometry',
         label: 'Geometry',
         value: data?.geometry || '',
         // required: true, // ????
         order: 5
-      })//,
-      // new InputCheckbox({
-      //   key: 'is_active',
-      //   label: 'Active Location',
-      // value: [false, undefined].includes(data?.is_active) ? undefined : "true",
-      //   order: 6
-      // }),
+      })
     ]
 
     return of(inputs.sort((a, b) => a.order - b.order));

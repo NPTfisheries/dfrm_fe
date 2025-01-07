@@ -92,7 +92,15 @@ export interface FacilityType {
     name?: string;
 }
 
-export interface FacilityProperties {
+export interface Geometry {
+    type?: string;
+    coordinates?: number[];
+}
+
+export interface Facility {
+    id?: number;
+    type?: string;
+    location?: Location;
     slug?: string;
     facility_type?: FacilityType;
     name?: string;
@@ -111,18 +119,6 @@ export interface FacilityProperties {
     zipcode?: string;
     is_active?: boolean;
     display?: boolean;
-}
-
-export interface Geometry {
-    type?: string;
-    coordinates?: number[];
-}
-
-export interface Facility {
-    id?: number;
-    type?: string;
-    geometry?: Geometry;
-    properties?: FacilityProperties;
 }
 
 export interface Task {
@@ -163,10 +159,7 @@ export interface Location {
     id?: number;
     name?: string;
     description?: string;
-    // elevation?: number;
-    // river_kilometer?: number;
     geometry?: Geometry;
-    
 }
 
 export interface Instrument {

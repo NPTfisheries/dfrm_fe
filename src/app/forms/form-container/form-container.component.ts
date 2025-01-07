@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, HostListener } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 
@@ -73,6 +73,11 @@ export class FormContainerComponent implements OnInit {
       default:
         return
     }
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event: PopStateEvent) {
+    this.activeModal.close();
   }
 
 }
