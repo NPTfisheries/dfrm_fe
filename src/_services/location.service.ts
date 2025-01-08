@@ -16,11 +16,32 @@ export class LocationService {
         return this.dataService.getData(this.endpoint);
     }
 
-    // getLocationsByGeomType(object_type: string) {
-    //     return this.getLocations().pipe(
-    //         map((locations: Location[]) => locations.filter(location => location.object_type == object_type))
-    //     );
-    // }
+    // Filter for Points
+    getPoints(): Observable<any[]> {
+        return this.getLocations().pipe(
+            map(locations =>
+                locations.filter(location => location?.geometry?.type === 'Point')
+            )
+        );
+    }
+
+    // Filter for LineStrings
+    getLineStrings(): Observable<any[]> {
+        return this.getLocations().pipe(
+            map(locations =>
+                locations.filter(location => location?.geometry?.type === 'LineString')
+            )
+        );
+    }
+
+    // Filter for Polygons
+    getPolygons(): Observable<any[]> {
+        return this.getLocations().pipe(
+            map(locations =>
+                locations.filter(location => location?.geometry?.type === 'Polygon')
+            )
+        );
+    }
 
     refreshLocations(): Observable<Location[]> {
         return this.dataService.refreshData(this.endpoint);

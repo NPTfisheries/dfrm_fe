@@ -57,8 +57,21 @@ export class DynamicFormInputComponent implements OnInit {
       case 'instrument types':
         this.lookUpService.getLookUpsByObjectType('Instrument').subscribe(itypes => this.items = itypes);
         break;
+      // Locations = all geom types.
       case 'locations':
         this.locationService.getLocations().subscribe(locations => this.items = locations);
+        this.bind_label = 'properties.name';
+        break;
+      case 'points':
+        this.locationService.getPoints().subscribe(points => this.items = points);
+        this.bind_label = 'properties.name';
+        break;
+      case 'linestrings':
+        this.locationService.getLineStrings().subscribe(linestrings => this.items = linestrings);
+        this.bind_label = 'properties.name';
+        break;
+      case 'polygons':
+        this.locationService.getPolygons().subscribe(polygons => this.items = polygons);
         this.bind_label = 'properties.name';
         break;
       case 'projects':

@@ -618,7 +618,7 @@ export class InputService {
         key: 'location',
         label: 'Location',
         value: data?.location.id || '',
-        selectType: 'locations',
+        selectType: 'points',
         order: 16
       }),
       new InputCheckbox({
