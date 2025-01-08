@@ -28,9 +28,9 @@
           routerLinkActive="active">Documents</button>
         <button class="nav-link me-auto" aria-current="page" routerLink="invasives"
           routerLinkActive="active">Invasives</button>
-        <!-- <li class="nav-item dropdown" ngbDropdown>
-          <a *ngIf="isLoggedIn && admin" class="nav-link dropdown-toggle" ngbDropdownToggle id="navbarData" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
+        <li class="nav-item dropdown" ngbDropdown>
+          <a *ngIf="isLoggedIn && admin" class="nav-link dropdown-toggle" ngbDropdownToggle id="navbarData"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Data
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarData">
@@ -66,7 +66,7 @@
       <button ngbDropdownItem routerLink="user-list" routerLinkActive="active">User List</button>
       <button ngbDropdownItem routerLink="image-list" routerLinkActive="active">Images</button>
       <button ngbDropdownItem *ngIf="admin" routerLink="location-list" routerLinkActive="active">Locations</button>
-      <!-- <button ngbDropdownItem *ngIf="admin" routerLink="instrument-list" routerLinkActive="active">Instruments</button>  -->
+      <button ngbDropdownItem *ngIf="admin" routerLink="instrument-list" routerLinkActive="active">Instruments</button>
 
       <div class="dropdown-divider"></div>
       <button ngbDropdownItem (click)="authService.logout()">Logout</button>
