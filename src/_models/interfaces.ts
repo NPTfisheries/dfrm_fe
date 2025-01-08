@@ -138,9 +138,9 @@ export interface Task {
 }
 
 export interface LookUp {
-    id?: number;
-    object_type?: string;
-    name?: string;
+    id: number;
+    object_type: string;
+    name: string;
 }
 
 export interface Document {
@@ -170,4 +170,19 @@ export interface Instrument {
     model?: string;
     serial_number?: string;
     manufacturer?: string;
+}
+
+export interface InvasiveSpecies {
+    common_name?: string;
+    species_name?: string;
+    species_image: string;
+    image_attribution?: string;
+    description?: string;
+    size?: string;
+    color?: string;
+    shape?: string;
+    habitat?: string;
+    native_to?: string;
+    invasive_type: number | LookUp;
+    sort_order?: number;
 }

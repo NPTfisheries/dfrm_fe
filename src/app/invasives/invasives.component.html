@@ -1,0 +1,37 @@
+
+<div class="container d-flex justify-content-around my-3">
+<!-- AIS Campaigns -->
+    <div class="col-md-5">
+        <a href="https://www.cleandraindry.org/" title="https://www.cleandraindry.org/" target="_blank">
+            <img class="img-campaign" src="../../assets/images/clean_drain_dry.png">
+        </a>
+    </div>
+    <div class="col-md-2">
+        <img class="img-campaign" src="../../assets/images/CKR.png">
+    </div>
+    <div class="col-md-3">
+        <a href="https://stopaquatichitchhikers.org/" title="https://stopaquatichitchhikers.org/" target="_blank">
+            <img class="img-campaign" src="../../assets/images/stop_hitchhikers.webp">
+        </a>
+    </div>
+
+</div>
+
+
+<div class="container py-5">
+    <h1 class="text-center">Aquatic Invasive Species</h1>
+    <!-- <app-button (click)="print()" [label]="'print'"></app-button> -->
+    <!-- <p>Placeholder for future description</p> -->
+
+    <h2 class="divider gradient-hr"></h2>
+    <div class="container">
+        <div class="col-md-8 offset-2 d-flex justify-content-around">
+            <app-button *ngFor="let type of types" [label]="type.name" (click)="selectType(type.name)"></app-button>
+        </div>
+    </div>
+    <h2 class="divider gradient-hr"></h2>
+
+    <h1 *ngIf="selectedType" class="text-center">{{selectedType}}</h1>
+    <app-invasive-species *ngFor="let invasive of filteredInvasives()" [invasive]="invasive">
+    </app-invasive-species>
+</div>

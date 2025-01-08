@@ -66,6 +66,8 @@ import { LoadingSpinnerComponent } from '../_components/loading-spinner/loading-
 import { DocumentInfoComponent } from './documents/document-info/document-info.component';
 import { FacilityPopupComponent } from './facilities/facility-popup/facility-popup.component';
 import { MapLegendComponent } from './ol-map/map-legend/map-legend.component';
+import { InvasivesComponent } from './invasives/invasives.component';
+import { InvasiveSpeciesComponent } from './invasives/invasive-species/invasive-species.component';
 import { DataQueryComponent } from './data/data-query/data-query.component';
 
 @NgModule({
@@ -123,6 +125,8 @@ import { DataQueryComponent } from './data/data-query/data-query.component';
     DocumentInfoComponent,
     FacilityPopupComponent,
     MapLegendComponent,
+    InvasivesComponent,
+    InvasiveSpeciesComponent,
     DataQueryComponent,
   ],
   imports: [
