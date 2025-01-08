@@ -48,7 +48,7 @@ export class InputService {
       new InputSelect({
         key: 'manager',
         label: 'Manager',
-        value: data?.manager.id || '',
+        value: data?.manager?.id || '',
         selectType: 'users',
         required: true,
         order: 3
@@ -56,14 +56,14 @@ export class InputService {
       new InputSelect({
         key: 'deputy',
         label: 'Deputy',
-        value: data?.deputy.id || '',
+        value: data?.deputy?.id || '',
         selectType: 'users',
         order: 4
       }),
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
-        value: data?.assistant.id || '',
+        value: data?.assistant?.id || '',
         selectType: 'users',
         order: 5
       }),
@@ -125,7 +125,7 @@ export class InputService {
       new InputSelect({
         key: 'manager',
         label: 'Manager',
-        value: data?.manager.id || '',
+        value: data?.manager?.id || '',
         selectType: 'users',
         required: true,
         order: 3
@@ -133,14 +133,14 @@ export class InputService {
       new InputSelect({
         key: 'deputy',
         label: 'Deputy',
-        value: data?.deputy.id || '',
+        value: data?.deputy?.id || '',
         selectType: 'users',
         order: 4
       }),
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
-        value: data?.assistant.id || '',
+        value: data?.assistant?.id || '',
         selectType: 'users',
         order: 5
       }),
@@ -531,7 +531,7 @@ export class InputService {
       new InputSelect({
         key: 'manager',
         label: 'Manager',
-        value: data?.manager.id || '',
+        value: data?.manager?.id || '',
         selectType: 'users',
         required: true,
         order: 4
