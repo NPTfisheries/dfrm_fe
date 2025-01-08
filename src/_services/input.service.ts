@@ -539,14 +539,14 @@ export class InputService {
       new InputSelect({
         key: 'deputy',
         label: 'Deputy',
-        value: data?.deputy.id || '',
+        value: data?.deputy?.id || '',
         selectType: 'users',
         order: 5
       }),
       new InputSelect({
         key: 'assistant',
         label: 'Assistant',
-        value: data?.assistant.id || '',
+        value: data?.assistant?.id || '',
         selectType: 'users',
         order: 6
       }),
